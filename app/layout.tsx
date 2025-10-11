@@ -97,7 +97,7 @@ const footerData = {
       content: "ul. Przykładowa 123, Warszawa",
     },
   ],
-  logo: { src: "/logo.svg", alt: "CoreLTB Builders" },
+  logo: { src: "/logo.webp", alt: "CoreLTB Builders" },
   about: "Budujemy marzenia i konstruujemy przyszłość. Jesteśmy zobowiązani do dostarczania wyjątkowych usług budowlanych.",
   linkGroups: [
     {
