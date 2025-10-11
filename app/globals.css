@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Swiper core styles */
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
+@layer base {
+  body {
+    background-color: #eeeeee;
+    @apply text-text-primary antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+}
+
+@layer components {
+  /* TEST: Gradient 1 - Subtelny pionowy (jasny → lekko ciemniejszy) */
+  .section-test-gradient1 {
+    background: linear-gradient(
+      to bottom,
+      #fafaf9 0%,      /* Jasny góra */
+      #f0f0ee 100%     /* Lekko ciemniejszy dół */
+    );
+  }
+
+  /* TEST: Gradient 2 - Z płynnymi przejściami (jasny → ciemny → jasny) */
+  .section-test-gradient2 {
+    background: linear-gradient(
+      to bottom,
+      #fafaf9 0%,        /* Jasny góra (łączy się z sekcją wyżej) */
+      #e8e8e6 30%,       /* Ciemnieje */
+      #e0e0de 50%,       /* Najciemniejszy środek */
+      #e8e8e6 70%,       /* Rozjaśnia się */
+      #fafaf9 100%       /* Jasny dół (łączy się z sekcją niżej) */
+    );
+  }
+
+  /* TEST: Gradient 3 - Radialny z centrum (najjaśniejszy środek) */
+  .section-test-gradient3 {
+    background: radial-gradient(
+      ellipse at center,
+      #ffffff 0%,
+      #f5f5f3 50%,
+      #eeeeec 100%
+    );
+  }
+
+  /* TEST: Gradient 4 - Ciemniejszy ze złotym akcentem */
+  .section-test-gradient4 {
+    background: linear-gradient(
+      to bottom right,
+      #f0f0ee 0%,
+      #e8e6e0 50%,
+      #dedad2 100%
+    );
+  }
+
+  /* Oryginalna klasa - zostaje bez zmian */
+  .section-with-bg {
+    position: relative;
+    background-color: #fafaf9;
+  }
+
+  .section-with-bg > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Swiper custom styles */
+  .services-swiper {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+    overflow: hidden !important;
+    width: 100%;
+  }
+
+  .services-swiper .swiper-wrapper {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .services-swiper .swiper-slide {
+    height: auto;
+    display: flex;
+  }
+
+  /* Make ServiceCard fill the slide */
+  .services-swiper .swiper-slide > * {
+    width: 100%;
+  }
+
+  /* Hide default Swiper navigation arrows (using custom SliderArrow) */
+  .services-swiper .swiper-button-next,
+  .services-swiper .swiper-button-prev {
+    display: none;
+  }
+
+  /* Prevent FOUC - hide swiper until initialized */
+  .services-swiper:not(.swiper-initialized) {
+    opacity: 0;
+  }
+
+  .services-swiper.swiper-initialized {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Projects Swiper custom styles */
+  .projects-swiper {
+    padding-top: 2rem !important;
+    padding-bottom: 4rem !important;
+    overflow: hidden !important;
+    width: 100%;
+  }
+
+  .projects-swiper .swiper-wrapper {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .projects-swiper .swiper-slide {
+    height: auto;
+    display: flex;
+  }
+
+  /* Make ProjectCard fill the slide */
+  .projects-swiper .swiper-slide > * {
+    width: 100%;
+  }
+
+  /* Prevent FOUC */
+  .projects-swiper:not(.swiper-initialized) {
+    opacity: 0;
+  }
+
+  .projects-swiper.swiper-initialized {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Custom pagination bullets for projects */
+  .projects-bullet {
+    width: 12px !important;
+    height: 12px !important;
+    background: #d1d5db !important;
+    opacity: 0.5 !important;
+    border-radius: 50% !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .projects-bullet-active {
+    width: 32px !important;
+    background: #dfbb68 !important;
+    opacity: 1 !important;
+    border-radius: 6px !important;
+  }
+
+  .projects-swiper .swiper-pagination {
+    bottom: 0 !important;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Fade in from right animation */
+  @keyframes fadeInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fade-in-right {
+    animation: fadeInRight 0.8s ease-out forwards;
+    animation-delay: 0.3s;
+    opacity: 0;
+  }
+
+  /* Stagger animations for child elements */
+  .animate-fade-in-right > *:nth-child(1) {
+    animation: fadeInRight 0.6s ease-out forwards;
+    animation-delay: 0.4s;
+    opacity: 0;
+  }
+
+  .animate-fade-in-right > *:nth-child(2) {
+    animation: fadeInRight 0.6s ease-out forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
+  }
+
+  .animate-fade-in-right > *:nth-child(3) {
+    animation: fadeInRight 0.6s ease-out forwards;
+    animation-delay: 0.6s;
+    opacity: 0;
+  }
+}
+

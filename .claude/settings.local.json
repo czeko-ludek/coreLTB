@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/CORE LTB/**)",
+      "Bash(npm run dev:*)",
+      "WebSearch",
+      "WebFetch(domain:dev.to)",
+      "Bash(npm install:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
