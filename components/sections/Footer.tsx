@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Icon, InputField, Button } from '@/components/ui';
+import { Icon } from '@/components/ui';
 
 export interface FooterProps {
   contactInfo: Array<{

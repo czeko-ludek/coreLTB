@@ -35,37 +35,37 @@ const headerData = {
   ctaButton: { text: "Wycena", href: "/contact" },
   megaMenuItems: [
     {
-      icon: "home",
+      icon: "home" as const,
       title: "Budowa Domów",
       description: "Kompleksowa realizacja domów jednorodzinnych pod klucz, od projektu aż po finalne wykończenie.",
       href: "/oferta/budowa-domow",
     },
     {
-      icon: "pencil",
+      icon: "pencil" as const,
       title: "Projektowanie",
       description: "Tworzymy nowoczesne i funkcjonalne projekty budowlane oraz aranżacje wnętrz dopasowane do Twoich potrzeb.",
       href: "/oferta/projektowanie",
     },
     {
-      icon: "clipboard",
+      icon: "clipboard" as const,
       title: "Nadzór i Doradztwo",
       description: "Profesjonalny nadzór inwestorski i doradztwo techniczne na każdym etapie realizacji Twojej inwestycji.",
       href: "/oferta/nadzor-i-doradztwo",
     },
     {
-      icon: "settings",
+      icon: "settings" as const,
       title: "Usługi Techniczne",
       description: "Zapewniamy pełen zakres usług technicznych, w tym instalacje sanitarne, elektryczne oraz systemy smart home.",
       href: "/oferta/uslugi-techniczne",
     },
     {
-      icon: "paintBrush",
+      icon: "paintBrush" as const,
       title: "Wykończenia i Aranżacje",
       description: "Precyzyjne prace wykończeniowe i stylowe aranżacje wnętrz, które nadadzą Twojemu domowi unikalny charakter.",
       href: "/oferta/wykonczenia-i-aranzacje",
     },
     {
-      icon: "tree",
+      icon: "tree" as const,
       title: "Zagospodarowanie Terenu",
       description: "Przekształcamy przestrzeń wokół budynków w funkcjonalne i estetyczne otoczenie, realizując ogrody, drogi i ogrodzenia.",
       href: "/oferta/zagospodarowanie-terenu",

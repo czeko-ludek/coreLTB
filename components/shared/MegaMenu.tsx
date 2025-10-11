@@ -2,10 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Icon } from '@/components/ui';
+import { Icon, IconName } from '@/components/ui';
 
 export interface MegaMenuItem {
-  icon: string;
+  icon: IconName;
   title: string;
   description: string;
   href: string;

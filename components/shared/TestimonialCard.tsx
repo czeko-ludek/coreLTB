@@ -20,7 +20,7 @@ export function TestimonialCard({ quote, author, rating }: TestimonialCardProps)
       
       {/* Quote text */}
       <p className="text-body-lg text-text-primary leading-relaxed">
-        "{quote}"
+        &ldquo;{quote}&rdquo;
       </p>
       
       {/* Separator */}
