@@ -51,7 +51,7 @@ export function AboutCompanySection({
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Left: Image with Stats Overlay */}
-          <div className={`relative w-full aspect-square rounded-xl overflow-hidden lg:max-w-[590px] mx-auto lg:mx-0 shadow-2xl ring-1 ring-black/5 ${isVisible ? 'animate-curtain-reveal' : ''}`}>
+          <div className={`relative w-full aspect-square rounded-xl overflow-hidden lg:max-w-[590px] mx-auto lg:mx-0 shadow-2xl ring-1 ring-black/5 animate-curtain-reveal ${isVisible ? 'curtain-animate' : ''}`}>
             {/* Background Image */}
             <Image
               src={image.src}

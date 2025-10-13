@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import { Icon, IconName } from '@/components/ui';
+import { CountingNumber } from './CountingNumber';
 
 export interface NumberedListItemProps {
   number: number;
@@ -7,6 +10,7 @@ export interface NumberedListItemProps {
   title: string;
   description: string;
   isLast?: boolean;
+  isVisible?: boolean; // For triggering animation
 }
 
 export function NumberedListItem({
@@ -15,6 +19,7 @@ export function NumberedListItem({
   title,
   description,
   isLast = false,
+  isVisible = true,
 }: NumberedListItemProps) {
   return (
     <div className="flex gap-6 relative">
@@ -29,10 +34,10 @@ export function NumberedListItem({
           <Icon name={iconName} size="xl" className="text-white" />
         </div>
 
-        {/* Number badge on top right */}
+        {/* Number badge on top right with counting animation */}
         <div className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-primary border-2 border-white shadow-lg flex items-center justify-center">
           <span className="text-sm font-bold text-white">
-            {number}
+            {isVisible ? <CountingNumber end={number} duration={800} /> : number}
           </span>
         </div>
       </div>
