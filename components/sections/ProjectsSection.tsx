@@ -24,13 +24,12 @@ export function ProjectsSection({ header, projects }: ProjectsSectionProps) {
 
   return (
     <section className="relative section-with-bg py-20 overflow-hidden">
-      {/* Wider container - 30% bigger than original (1400px + 30% = 1820px) */}
-      <div className="mx-auto px-4 max-w-[1820px]">
+      <div className="mx-auto px-4 lg:px-8 max-w-[1400px]">
         <SectionHeader {...header} align="center" theme="light" />
 
-        {/* Slider - wider than services section */}
-        <div className="mt-16 relative px-16 lg:px-20">
-          {/* Navigation Arrows - Desktop only outside */}
+        {/* Slider Container */}
+        <div className="mt-16 relative">
+          {/* Desktop Navigation Arrows - Outside slider, only on lg+ */}
           <div className="hidden lg:block absolute -left-4 top-1/2 -translate-y-1/2 z-10">
             <SliderArrow
               direction="left"
@@ -48,31 +47,12 @@ export function ProjectsSection({ header, projects }: ProjectsSectionProps) {
             />
           </div>
 
-          {/* Mobile Navigation Arrows - Inside container */}
-          <div className="lg:hidden absolute left-0 top-1/2 -translate-y-1/2 z-10">
-            <SliderArrow
-              direction="left"
-              onClick={handlePrev}
-              disabled={false}
-              variant="light"
-            />
-          </div>
-          <div className="lg:hidden absolute right-0 top-1/2 -translate-y-1/2 z-10">
-            <SliderArrow
-              direction="right"
-              onClick={handleNext}
-              disabled={false}
-              variant="light"
-            />
-          </div>
-
-          {/* Projects Slider with Swiper - 3 projects visible, center one active */}
+          {/* Projects Slider with Swiper */}
           <Swiper
             modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={3}
+            spaceBetween={24}
+            slidesPerView={1}
             slidesPerGroup={1}
-            centeredSlides={true}
             loop={true}
             speed={600}
             onSwiper={setSwiperInstance}
@@ -81,30 +61,21 @@ export function ProjectsSection({ header, projects }: ProjectsSectionProps) {
               bulletClass: 'swiper-pagination-bullet projects-bullet',
               bulletActiveClass: 'swiper-pagination-bullet-active projects-bullet-active',
             }}
-            className="projects-swiper py-8"
+            className="projects-swiper pb-12"
             breakpoints={{
               320: {
                 slidesPerView: 1,
-                spaceBetween: 12,
-                centeredSlides: true,
-              },
-              768: {
-                slidesPerView: 2,
                 spaceBetween: 16,
-                centeredSlides: false,
               },
               1024: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-                centeredSlides: true,
+                slidesPerView: 2,
+                spaceBetween: 24,
               },
             }}
           >
             {projects.map((project, index) => (
               <SwiperSlide key={`${project.title}-${index}`}>
-                {({ isActive }) => (
-                  <ProjectCard {...project} isActive={isActive} />
-                )}
+                <ProjectCard {...project} />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -113,4 +84,3 @@ export function ProjectsSection({ header, projects }: ProjectsSectionProps) {
     </section>
   );
 }
-

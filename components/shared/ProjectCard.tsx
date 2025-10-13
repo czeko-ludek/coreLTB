@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Icon } from '@/components/ui';
 
 export interface ProjectCardProps {
@@ -9,7 +8,7 @@ export interface ProjectCardProps {
   category: string;
   location: string;
   details: Array<{ label: string; value: string }>;
-  isActive: boolean;
+  isActive?: boolean; // Optional now since we show all cards equally
 }
 
 export function ProjectCard({
@@ -18,76 +17,56 @@ export function ProjectCard({
   category,
   location,
   details,
-  isActive,
 }: ProjectCardProps) {
   return (
-    <div
-      className={`relative transition-all duration-500 ${
-        isActive
-          ? 'scale-100 opacity-100'
-          : 'scale-90 opacity-50 brightness-75'
-      }`}
-    >
-      {/* Project image - much taller for better info box display */}
-      <div className="relative aspect-[1/1] rounded-xl overflow-hidden">
+    <div className="relative group h-full">
+      {/* Project image with overlay */}
+      <div className="relative aspect-[4/5] rounded-xl overflow-hidden h-full">
         <Image
           src={image.src}
           alt={image.alt}
           fill
           className="object-cover"
+          sizes="(max-width: 768px) 100vw, 50vw"
         />
-      </div>
 
-      {/* Info box - animated fade-in from right - wider with tighter spacing */}
-      {isActive && (
-        <div className="absolute right-4 bottom-4 top-4 w-[52%] bg-surface-light rounded-xl shadow-2xl p-6 space-y-3 animate-fade-in-right"
-        >
-          {/* Title and category with subtle background */}
-          <div className="bg-gray-50 p-3 rounded-lg border border-gray-100">
-            <h3 className="text-2xl font-bold text-text-dark mb-2 leading-tight">
+        {/* Dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
+
+        {/* Content on image */}
+        <div className="absolute inset-0 p-6 flex flex-col justify-between">
+          {/* Top section - Title, category, location */}
+          <div className="space-y-3">
+            <h3 className="text-3xl lg:text-4xl font-bold text-white leading-tight">
               {title}
             </h3>
-            <p className="text-sm text-text-secondary flex items-center gap-1.5">
-              <Icon name="building" size="sm" />
+            <p className="text-sm lg:text-base text-white/90 flex items-center gap-2">
               {category}
             </p>
+            <div className="flex items-center gap-2 text-white/80">
+              <Icon name="mapPin" size="sm" className="text-primary" />
+              <span className="text-sm lg:text-base">{location}</span>
+            </div>
           </div>
 
-          {/* Location with subtle background */}
-          <div className="flex items-center gap-2 text-text-secondary bg-primary/5 p-2.5 rounded-lg border border-primary/10">
-            <Icon name="mapPin" size="sm" className="text-primary" />
-            <span className="text-sm font-medium">{location}</span>
-          </div>
-
-          {/* Details grid with individual backgrounds */}
-          <div className="grid grid-cols-2 gap-2.5 pt-1">
+          {/* Bottom section - Details grid */}
+          <div className="grid grid-cols-2 gap-3">
             {details.map((detail, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-gray-50 to-white p-2.5 rounded-lg border border-gray-100 hover:border-primary/20 transition-colors duration-300"
+                className="bg-white/95 backdrop-blur-sm p-3 lg:p-4 rounded-lg"
               >
-                <p className="text-xs text-text-secondary uppercase mb-1 tracking-wide font-semibold">
+                <p className="text-xs text-text-secondary uppercase mb-1 tracking-wide font-medium">
                   {detail.label}
                 </p>
-                <p className="text-base font-bold text-text-dark leading-tight">
+                <p className="text-sm lg:text-base font-bold text-text-dark">
                   {detail.value}
                 </p>
               </div>
             ))}
           </div>
-
-          {/* Call to action button */}
-          <Link
-            href="/projekty"
-            className="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg mt-2"
-          >
-            Zobacz realizację
-            <Icon name="arrowRight" size="sm" />
-          </Link>
         </div>
-      )}
+      </div>
     </div>
   );
 }
-
-

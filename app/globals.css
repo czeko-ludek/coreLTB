@@ -167,6 +167,13 @@
   .projects-swiper .swiper-pagination {
     bottom: 0 !important;
   }
+
+  /* Show pagination only on mobile (< 1024px) */
+  @media (min-width: 1024px) {
+    .projects-swiper .swiper-pagination {
+      display: none !important;
+    }
+  }
 }
 
 @layer utilities {
