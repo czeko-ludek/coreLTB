@@ -1,6 +1,0 @@
-# wrangler.toml - OpenNext Cloudflare Pages Configuration
-name = "coreltb-v2"
-compatibility_date = "2025-03-25"
-
-# Pages-specific configuration (cały folder .open-next)
-pages_build_output_dir = ".open-next"
