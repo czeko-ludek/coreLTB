@@ -6,7 +6,7 @@ export interface SliderArrowProps {
   direction: 'left' | 'right';
   onClick: () => void;
   disabled?: boolean;
-  variant?: 'light' | 'dark';
+  variant?: 'light' | 'dark' | 'gold';
 }
 
 export function SliderArrow({
@@ -28,6 +28,7 @@ export function SliderArrow({
           'hover:scale-110': !disabled,
           'bg-white shadow-lg': variant === 'light',
           'bg-surface-dark shadow-lg': variant === 'dark',
+          'bg-white border-2 border-primary/30 shadow-md hover:border-primary hover:shadow-lg': variant === 'gold',
         }
       )}
     >
@@ -37,6 +38,7 @@ export function SliderArrow({
         className={clsx({
           'text-text-dark': variant === 'light',
           'text-white': variant === 'dark',
+          'text-primary': variant === 'gold',
         })}
       />
     </button>

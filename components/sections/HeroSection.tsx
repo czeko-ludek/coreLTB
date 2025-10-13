@@ -33,7 +33,7 @@ export function HeroSection({
         </div>
 
         {/* Content */}
-        <div className="container mx-auto px-12 relative z-10 py-20">
+        <div className="container mx-auto px-4 md:px-8 lg:px-12 md:pr-24 relative z-10 py-20">
           <div className="max-w-3xl space-y-6">
             <SectionLabel>{tagline}</SectionLabel>
             
@@ -58,8 +58,8 @@ export function HeroSection({
           </div>
         </div>
 
-        {/* Slider Navigation - Right Side */}
-        <div className="absolute right-8 top-1/2 -translate-y-1/2 z-10 flex flex-col items-center gap-4">
+        {/* Slider Navigation - Right Side (Hidden on Mobile) */}
+        <div className="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 z-10 flex-col items-center gap-4">
           <button className="w-12 h-12 rounded-full bg-primary text-white font-bold hover:bg-primary-dark transition-colors">
             01
           </button>

@@ -9,7 +9,7 @@
 
 @layer base {
   body {
-    background-color: #eeeeee;
+    background-color: #efebe7;
     @apply text-text-primary antialiased;
   }
 
@@ -100,6 +100,34 @@
   .services-swiper .swiper-button-next,
   .services-swiper .swiper-button-prev {
     display: none;
+  }
+
+  /* Custom pagination bullets for services */
+  .services-bullet {
+    width: 12px !important;
+    height: 12px !important;
+    background: #d1d5db !important;
+    opacity: 0.5 !important;
+    border-radius: 50% !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .services-bullet-active {
+    width: 32px !important;
+    background: #dfbb68 !important;
+    opacity: 1 !important;
+    border-radius: 6px !important;
+  }
+
+  .services-swiper .swiper-pagination {
+    bottom: 0 !important;
+  }
+
+  /* Show pagination only on mobile (< 1024px) */
+  @media (min-width: 1024px) {
+    .services-swiper .swiper-pagination {
+      display: none !important;
+    }
   }
 
   /* Prevent FOUC - hide swiper until initialized */
