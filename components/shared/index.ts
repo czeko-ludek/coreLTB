@@ -40,4 +40,7 @@ export type { PageHeaderProps } from './PageHeader';
 export { MegaMenu } from './MegaMenu';
 export type { MegaMenuProps, MegaMenuItem } from './MegaMenu';
 
+export { CountingNumber } from './CountingNumber';
+export type { CountingNumberProps } from './CountingNumber';
+
 

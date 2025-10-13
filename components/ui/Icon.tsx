@@ -34,6 +34,9 @@ import {
   Settings,
   PaintBucket,
   TreeDeciduous,
+  FileText,
+  Files,
+  FileCheck,
 } from 'lucide-react';
 
 const iconMap = {
@@ -73,6 +76,9 @@ const iconMap = {
   settings: Settings,
   paintBrush: PaintBucket,
   tree: TreeDeciduous,
+  fileText: FileText,
+  files: Files,
+  fileCheck: FileCheck,
 };
 
 export type IconName = keyof typeof iconMap;

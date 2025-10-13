@@ -31,7 +31,7 @@ export function ProjectsSection({ header, projects }: ProjectsSectionProps) {
   // Render nothing on server, wait for client mount
   if (!isMounted) {
     return (
-      <section className="relative section-with-bg py-20 overflow-hidden">
+      <section style={{ backgroundColor: '#efebe7' }} className="relative py-20 overflow-hidden">
         <div className="mx-auto px-4 lg:px-8 max-w-[1400px]">
           <SectionHeader {...header} align="center" theme="light" />
           <div className="mt-16 min-h-[400px] flex items-center justify-center">
@@ -43,7 +43,7 @@ export function ProjectsSection({ header, projects }: ProjectsSectionProps) {
   }
 
   return (
-    <section className="relative section-with-bg py-20 overflow-visible">
+    <section style={{ backgroundColor: '#efebe7' }} className="relative py-20 overflow-visible">
       <div className="container mx-auto px-4">
         {/* Custom header - left aligned with button on right */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">

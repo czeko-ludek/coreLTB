@@ -71,6 +71,16 @@
     z-index: 1;
   }
 
+  /* Blueprint pattern background - subtelny wzór architektoniczny */
+  .section-pattern {
+    background-color: #fafaf9;
+    background-image:
+      linear-gradient(to right, #f0f0ee 1px, transparent 1px),
+      linear-gradient(to bottom, #f0f0ee 1px, transparent 1px),
+      linear-gradient(45deg, transparent 48%, #f0f0ee 49%, #f0f0ee 51%, transparent 52%);
+    background-size: 80px 80px, 80px 80px, 40px 40px;
+  }
+
   /* Swiper custom styles */
   .services-swiper {
     padding-top: 2rem !important;
@@ -207,6 +217,71 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Fade in from bottom - elegant and subtle */
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* Curtain reveal animation - gold paper slides revealing gray, then gray slides revealing image */
+  @keyframes curtainSlideGold {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes curtainSlideGray {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-curtain-reveal {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .animate-curtain-reveal::before,
+  .animate-curtain-reveal::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Gray curtain - second layer (z-index: 11) - slides away second */
+  .animate-curtain-reveal::after {
+    background: #1a1a1a;
+    z-index: 11;
+    animation: curtainSlideGray 0.8s ease-in-out 0.9s forwards;
+  }
+
+  /* Gold curtain - top layer (z-index: 12) - slides away first */
+  .animate-curtain-reveal::before {
+    background: #dfbb68;
+    z-index: 12;
+    animation: curtainSlideGold 0.8s ease-in-out 0.2s forwards;
   }
 
   /* Fade in from right animation */

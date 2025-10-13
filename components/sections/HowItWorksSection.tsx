@@ -20,9 +20,9 @@ export function HowItWorksSection({ header, steps, video }: HowItWorksSectionPro
   return (
     <section className="section-with-bg py-20">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
           {/* Left: Video Placeholder */}
-          <div className="relative aspect-video bg-black rounded-xl overflow-hidden">
+          <div className="relative h-full min-h-[400px] bg-black rounded-xl overflow-hidden">
             <Image
               src={video.placeholderImage}
               alt="Video placeholder"

@@ -19,26 +19,25 @@ export function ServiceCard({
 }: ServiceCardProps) {
   return (
     <div className="group relative bg-white hover:bg-gray-50 rounded-xl p-8 border-t-2 border-primary/20 hover:border-t-primary border-x border-b border-transparent hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 shadow-md hover:shadow-xl">
-      {/* Icon in top left */}
-      <div className="mb-6">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors duration-300">
-          <Icon name={iconName} size="lg" className="text-primary" />
+      {/* Icon and Title - horizontal on desktop, vertical on mobile */}
+      <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6 mb-6">
+        {/* Icon */}
+        <div className="flex-shrink-0">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors duration-300">
+            <Icon name={iconName} size="xl" className="text-primary" />
+          </div>
         </div>
-      </div>
 
-      {/* Service number watermark */}
-      <div className="absolute top-8 right-8 text-8xl font-bold text-gray-100 select-none">
-        {serviceNumber}
-      </div>
-
-      {/* Content */}
-      <div className="relative space-y-4">
-        <Link href={href}>
+        {/* Title - next to icon on desktop */}
+        <Link href={href} className="lg:flex-1">
           <h3 className="text-h3 font-semibold text-text-primary group-hover:text-primary transition-colors duration-300 cursor-pointer">
             {title}
           </h3>
         </Link>
+      </div>
 
+      {/* Content */}
+      <div className="relative space-y-4">
         <p className="text-body-md text-text-secondary leading-relaxed">
           {description}
         </p>

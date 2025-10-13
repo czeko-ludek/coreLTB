@@ -23,17 +23,17 @@ export function NumberedListItem({
         <div className="absolute left-10 top-20 bottom-0 w-[2px] border-l-2 border-dashed border-gray-300"></div>
       )}
 
-      {/* Number circle with icon */}
+      {/* Icon circle with number badge */}
       <div className="relative flex-shrink-0">
-        <div className="w-20 h-20 rounded-full bg-white border-2 border-border-light shadow-md flex items-center justify-center">
-          <span className="text-4xl font-bold text-text-secondary">
+        <div className="w-20 h-20 rounded-full bg-primary shadow-md flex items-center justify-center">
+          <Icon name={iconName} size="xl" className="text-white" />
+        </div>
+
+        {/* Number badge on top right */}
+        <div className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-primary border-2 border-white shadow-lg flex items-center justify-center">
+          <span className="text-sm font-bold text-white">
             {number}
           </span>
-        </div>
-        
-        {/* Icon badge on the circle */}
-        <div className="absolute bottom-0 right-0 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
-          <Icon name={iconName} size="md" className="text-primary" />
         </div>
       </div>
 

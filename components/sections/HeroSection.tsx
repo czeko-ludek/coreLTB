@@ -35,17 +35,19 @@ export function HeroSection({
         {/* Content */}
         <div className="container mx-auto px-4 md:px-8 lg:px-12 md:pr-24 relative z-10 py-20">
           <div className="max-w-3xl space-y-6">
-            <SectionLabel>{tagline}</SectionLabel>
-            
-                    <h1 className="text-4xl md:text-5xl lg:text-hero font-extrabold text-white leading-tight">
-                      {title}
-                    </h1>
-            
-                    <p className="text-base md:text-body-lg text-white max-w-2xl">
-                      {subtitle}
-                    </p>
-            
-            <div className="pt-4">
+            <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+              <SectionLabel>{tagline}</SectionLabel>
+            </div>
+
+            <h1 className="text-4xl md:text-5xl lg:text-hero font-extrabold text-white leading-tight animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+              {title}
+            </h1>
+
+            <p className="text-base md:text-body-lg text-white max-w-2xl animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+              {subtitle}
+            </p>
+
+            <div className="pt-4 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
               <Button
                 variant="secondary"
                 size="lg"

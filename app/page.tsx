@@ -8,7 +8,7 @@ import {
   TestimonialsSection,
   CtaSection,
   BlogSection,
-  PartnersSection,
+  // PartnersSection, // Disabled - missing images
 } from "@/components/sections";
 
 export default function Home() {
@@ -142,7 +142,7 @@ export default function Home() {
       },
       {
         number: 2,
-        iconName: "construction" as const,
+        iconName: "fileCheck" as const,
         title: "Projekt i Zatwierdzenie",
         description:
           "Nasi eksperci opracowują szczegółowe projekty i plany, pracując ściśle z Tobą nad zatwierdzeniem i udoskonaleniem.",
@@ -382,16 +382,16 @@ export default function Home() {
     ],
   };
 
-  // Partners Section Data
-  const partnersData = {
-    logos: [
-      { name: "Partner 1", image: "/partners/partner1.svg" },
-      { name: "Partner 2", image: "/partners/partner2.svg" },
-      { name: "Partner 3", image: "/partners/partner3.svg" },
-      { name: "Partner 4", image: "/partners/partner4.svg" },
-      { name: "Partner 5", image: "/partners/partner5.svg" },
-    ],
-  };
+  // Partners Section Data - Disabled (missing images)
+  // const partnersData = {
+  //   logos: [
+  //     { name: "Partner 1", image: "/partners/partner1.svg" },
+  //     { name: "Partner 2", image: "/partners/partner2.svg" },
+  //     { name: "Partner 3", image: "/partners/partner3.svg" },
+  //     { name: "Partner 4", image: "/partners/partner4.svg" },
+  //     { name: "Partner 5", image: "/partners/partner5.svg" },
+  //   ],
+  // };
 
   return (
     <main>
@@ -404,7 +404,7 @@ export default function Home() {
       <TestimonialsSection {...testimonialsData} />
       <CtaSection {...ctaData} />
       <BlogSection {...blogData} />
-      <PartnersSection {...partnersData} />
+      {/* <PartnersSection {...partnersData} /> */}
     </main>
   );
 }
