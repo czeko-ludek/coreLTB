@@ -38,9 +38,6 @@ const nextConfig = {
   // ✅ Powered by header - wyłączony dla bezpieczeństwa
   poweredByHeader: false,
 
-  // ✅ Optymalizacja fontów Google Fonts
-  optimizeFonts: true,
-
   // ✅ Swiper CSS inlining (dla lepszego LCP)
   transpilePackages: ['swiper'],
 
