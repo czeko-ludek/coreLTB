@@ -1,0 +1,7 @@
+# wrangler.toml - OpenNext Cloudflare Configuration
+name = "coreltb-v2"
+main = ".open-next/worker.js"
+compatibility_date = "2025-03-25"
+
+[site]
+bucket = ".open-next/assets"
