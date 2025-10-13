@@ -1,7 +1,13 @@
-# wrangler.toml - OpenNext Cloudflare Configuration
+# wrangler.toml - OpenNext Cloudflare Pages Configuration
 name = "coreltb-v2"
-main = ".open-next/worker.js"
 compatibility_date = "2025-03-25"
 
+# Pages-specific configuration
+pages_build_output_dir = ".open-next/assets"
+
+# Worker configuration
+main = ".open-next/worker.js"
+
+# Assets bucket
 [site]
 bucket = ".open-next/assets"
