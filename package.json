@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx open-next@latest build --cloudflare",
+    "build": "next build",
+    "build:cf": "npx open-next@latest build --cloudflare",
     "start": "next start",
     "lint": "eslint .",
     "deploy": "wrangler pages deploy .open-next/assets"
