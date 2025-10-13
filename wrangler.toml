@@ -2,12 +2,5 @@
 name = "coreltb-v2"
 compatibility_date = "2025-03-25"
 
-# Pages-specific configuration
-pages_build_output_dir = ".open-next/assets"
-
-# Worker configuration
-main = ".open-next/worker.js"
-
-# Assets bucket
-[site]
-bucket = ".open-next/assets"
+# Pages-specific configuration (cały folder .open-next)
+pages_build_output_dir = ".open-next"
