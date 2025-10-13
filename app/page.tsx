@@ -1,6 +1,5 @@
 import {
   HeroSection,
-  StatsSection,
   AboutCompanySection,
   ServicesSection,
   HowItWorksSection,
@@ -397,7 +396,6 @@ export default function Home() {
   return (
     <main>
       <HeroSection {...heroData} />
-      <StatsSection stats={heroData.stats!} />
       <AboutCompanySection {...aboutData} />
       <ServicesSection {...servicesData} />
       <HowItWorksSection {...howItWorksData} />

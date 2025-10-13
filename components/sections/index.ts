@@ -4,9 +4,6 @@ export type { HeaderProps } from './Header';
 export { HeroSection } from './HeroSection';
 export type { HeroSectionProps } from './HeroSection';
 
-export { StatsSection } from './StatsSection';
-export type { StatsSectionProps } from './StatsSection';
-
 export { AboutCompanySection } from './AboutCompanySection';
 export type { AboutCompanySectionProps } from './AboutCompanySection';
 
