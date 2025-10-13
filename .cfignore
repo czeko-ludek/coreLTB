@@ -1,0 +1,10 @@
+# Cloudflare Pages - Ignoruj folder cache
+.next/cache/
+.next/cache/**
+
+# Inne niepotrzebne pliki
+node_modules/
+.git/
+.env*
+*.log
+.DS_Store
