@@ -48,12 +48,50 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount }: ProjectGall
 
   return (
     <>
-      {/* Gallery Grid */}
-      <section className="py-8 px-[50px]">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      {/* Gallery - Mobile: Slider, Desktop: Grid */}
+      <section className="py-6 md:py-8 px-4 md:px-8 lg:px-[50px]">
+        {/* Mobile: Swiper Slider (1 image at a time) */}
+        <div className="lg:hidden">
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={16}
+            slidesPerView={1}
+            loop={allImages.length > 1}
+            className="rounded-xl overflow-hidden"
+          >
+            {allImages.slice(0, 3).map((src, index) => (
+              <SwiperSlide key={index}>
+                <div
+                  className="relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
+                  onClick={() => openLightbox(index)}
+                >
+                  <Image
+                    src={src}
+                    alt={`${alt} - zdjęcie ${index + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="100vw"
+                    priority={index === 0}
+                  />
+                  {/* Badge on last slide */}
+                  {index === 2 && galleryImageCount > 3 && (
+                    <div className="absolute bottom-4 right-4 bg-primary px-3 py-1.5 rounded-lg shadow-lg z-10">
+                      <span className="text-white font-medium text-xs">
+                        +{galleryImageCount - 3} zdjęć
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
+        {/* Desktop: Grid Layout */}
+        <div className="hidden lg:grid grid-cols-3 gap-4">
           {/* Main Large Image - Left (2 columns on desktop) */}
           <div
-            className="lg:col-span-2 relative h-[576px] rounded-xl overflow-hidden cursor-pointer group"
+            className="col-span-2 relative h-[576px] rounded-xl overflow-hidden cursor-pointer group"
             onClick={() => openLightbox(0)}
           >
             <Image
@@ -61,14 +99,14 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount }: ProjectGall
               alt={alt}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 1024px) 100vw, 66vw"
+              sizes="66vw"
               priority
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
           </div>
 
           {/* Right Side - 2 Smaller Images */}
-          <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 h-[576px]">
+          <div className="grid grid-cols-1 gap-4 h-[576px]">
             {allImages.slice(1, 3).map((src, index) => (
               <div
                 key={index}
@@ -80,7 +118,7 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount }: ProjectGall
                   alt={`${alt} - zdjęcie ${index + 2}`}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 50vw, 33vw"
+                  sizes="33vw"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
 
@@ -104,14 +142,14 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount }: ProjectGall
           {/* Close Button */}
           <button
             onClick={closeLightbox}
-            className="absolute top-6 right-6 z-[10000] w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors duration-300"
+            className="absolute top-4 right-4 md:top-6 md:right-6 z-[10000] w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors duration-300"
             aria-label="Zamknij galerię"
           >
-            <Icon name="x" size="lg" className="text-white" />
+            <Icon name="x" size="md" className="text-white md:w-6 md:h-6" />
           </button>
 
           {/* Swiper Slider */}
-          <div className="w-full h-full flex items-center justify-center px-16">
+          <div className="w-full h-full flex items-center justify-center px-4 md:px-16">
             <Swiper
               modules={[Navigation]}
               spaceBetween={20}
@@ -144,24 +182,24 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount }: ProjectGall
             {allImages.length > 1 && (
               <>
                 <button
-                  className="lightbox-prev absolute left-6 top-1/2 -translate-y-1/2 z-[10000] w-14 h-14 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all duration-300"
+                  className="lightbox-prev absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-[10000] w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all duration-300"
                   aria-label="Poprzednie zdjęcie"
                 >
-                  <Icon name="chevronLeft" size="lg" className="text-white" />
+                  <Icon name="chevronLeft" size="md" className="text-white md:w-6 md:h-6" />
                 </button>
                 <button
-                  className="lightbox-next absolute right-6 top-1/2 -translate-y-1/2 z-[10000] w-14 h-14 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all duration-300"
+                  className="lightbox-next absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-[10000] w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all duration-300"
                   aria-label="Następne zdjęcie"
                 >
-                  <Icon name="chevronRight" size="lg" className="text-white" />
+                  <Icon name="chevronRight" size="md" className="text-white md:w-6 md:h-6" />
                 </button>
               </>
             )}
           </div>
 
           {/* Image Counter */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/10 px-4 py-2 rounded-lg">
-            <span className="text-white font-medium text-sm">
+          <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 bg-white/10 px-3 py-1.5 md:px-4 md:py-2 rounded-lg">
+            <span className="text-white font-medium text-xs md:text-sm">
               {(swiperInstance?.realIndex ?? activeIndex) + 1} / {allImages.length}
             </span>
           </div>

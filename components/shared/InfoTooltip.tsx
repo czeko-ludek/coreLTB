@@ -9,11 +9,22 @@ export interface InfoTooltipProps {
 
 export function InfoTooltip({ definition }: InfoTooltipProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
   const buttonRef = useRef<HTMLButtonElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    e.preventDefault();
+
+    if (!isOpen && buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setPosition({
+        top: rect.bottom + window.scrollY + 8,
+        left: rect.left + rect.width / 2,
+      });
+    }
+
     setIsOpen(!isOpen);
   };
 
@@ -59,24 +70,29 @@ export function InfoTooltip({ definition }: InfoTooltipProps) {
         <Icon name="info" size="sm" className="text-primary hover:text-primary-dark" />
       </button>
 
-      {/* Tooltip - positioned relative to button, moves with scroll, 20% wider, hides under header */}
+      {/* Tooltip - positioned with fixed positioning to avoid parent overflow clipping */}
       {isOpen && (
         <div
           ref={tooltipRef}
-          className="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-40 bg-white rounded-xl shadow-2xl border border-primary/20 p-6 w-[29rem] max-w-[90vw]"
+          className="fixed z-[100] bg-white rounded-xl shadow-2xl border border-primary/20 p-4 md:p-6 w-[calc(100vw-2rem)] md:w-[29rem] max-w-[90vw]"
+          style={{
+            left: `${position.left}px`,
+            top: `${position.top}px`,
+            transform: 'translateX(-50%)',
+          }}
         >
           {/* Close Button */}
           <button
             onClick={() => setIsOpen(false)}
-            className="absolute top-3 right-3 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors duration-200"
+            className="absolute top-2 right-2 md:top-3 md:right-3 w-7 h-7 md:w-8 md:h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors duration-200"
             aria-label="Zamknij"
           >
             <Icon name="x" size="sm" className="text-text-primary" />
           </button>
 
           {/* Content */}
-          <div className="pr-8">
-            <p className="text-sm text-text-primary leading-relaxed whitespace-pre-line">
+          <div className="pr-6 md:pr-8">
+            <p className="text-xs md:text-sm text-text-primary leading-relaxed whitespace-pre-line">
               {definition}
             </p>
           </div>

@@ -38,12 +38,12 @@ export function RelatedProjectsSection({
 
   if (!isMounted) {
     return (
-      <section className="py-16 bg-background-light">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl lg:text-4xl font-bold text-text-primary text-center mb-12">
+      <section className="py-12 md:py-16 bg-background-light">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary text-center mb-8 md:mb-12">
             Zobacz również inne projekty
           </h2>
-          <div className="min-h-[400px] flex items-center justify-center">
+          <div className="min-h-[300px] md:min-h-[400px] flex items-center justify-center">
             <div className="animate-pulse text-text-secondary">Ładowanie...</div>
           </div>
         </div>
@@ -52,14 +52,14 @@ export function RelatedProjectsSection({
   }
 
   return (
-    <section className="py-16" style={{ backgroundColor: '#efebe7' }}>
-      <div className="container mx-auto px-4">
+    <section className="py-12 md:py-16" style={{ backgroundColor: '#efebe7' }}>
+      <div className="container mx-auto px-4 md:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary mb-3 md:mb-4">
             Zobacz również inne projekty
           </h2>
-          <p className="text-lg text-text-secondary">
+          <p className="text-base md:text-lg text-text-secondary">
             Sprawdź nasze inne realizacje, które mogą Cię zainteresować
           </p>
         </div>
@@ -105,34 +105,34 @@ export function RelatedProjectsSection({
                     </div>
 
                     {/* Project Info */}
-                    <div className="p-5">
+                    <div className="p-4 md:p-5">
                       {/* Title */}
-                      <h3 className="text-lg font-bold text-text-primary mb-3 line-clamp-2 group-hover:text-primary transition-colors duration-300">
+                      <h3 className="text-base md:text-lg font-bold text-text-primary mb-2 md:mb-3 line-clamp-2 group-hover:text-primary transition-colors duration-300">
                         {project.title}
                       </h3>
 
                       {/* Details */}
-                      <div className="flex items-center justify-between gap-4 mb-4">
+                      <div className="flex items-center justify-between gap-3 md:gap-4 mb-3 md:mb-4">
                         {/* Surface Area */}
-                        <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+                        <div className="flex items-center gap-1.5 md:gap-2">
+                          <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
                             <Icon name="building" size="sm" className="text-primary" />
                           </div>
                           <div>
-                            <p className="text-xs text-text-secondary">Powierzchnia</p>
-                            <p className="text-sm font-bold text-text-primary">{project.surfaceArea}</p>
+                            <p className="text-[0.65rem] md:text-xs text-text-secondary">Powierzchnia</p>
+                            <p className="text-xs md:text-sm font-bold text-text-primary">{project.surfaceArea}</p>
                           </div>
                         </div>
 
                         {/* Price */}
                         <div className="text-right">
-                          <p className="text-xs text-text-secondary">Cena projektu</p>
-                          <p className="text-lg font-bold text-primary">{project.price}</p>
+                          <p className="text-[0.65rem] md:text-xs text-text-secondary">Cena projektu</p>
+                          <p className="text-base md:text-lg font-bold text-primary">{project.price}</p>
                         </div>
                       </div>
 
                       {/* CTA Link */}
-                      <div className="flex items-center justify-center gap-2 text-primary font-medium text-sm group-hover:gap-3 transition-all duration-300">
+                      <div className="flex items-center justify-center gap-2 text-primary font-medium text-xs md:text-sm group-hover:gap-3 transition-all duration-300">
                         <span>Zobacz projekt</span>
                         <Icon name="arrowRight" size="sm" />
                       </div>
