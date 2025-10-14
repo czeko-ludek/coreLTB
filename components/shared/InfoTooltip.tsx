@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Icon } from '@/components/ui';
 
 export interface InfoTooltipProps {
@@ -10,12 +11,16 @@ export interface InfoTooltipProps {
 export function InfoTooltip({ definition }: InfoTooltipProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
+  const [isMounted, setIsMounted] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    e.preventDefault();
 
     if (!isOpen && buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
@@ -70,15 +75,16 @@ export function InfoTooltip({ definition }: InfoTooltipProps) {
         <Icon name="info" size="sm" className="text-primary hover:text-primary-dark" />
       </button>
 
-      {/* Tooltip - positioned with fixed positioning to avoid parent overflow clipping */}
-      {isOpen && (
+      {/* Tooltip - rendered via portal with fixed positioning */}
+      {isOpen && isMounted && createPortal(
         <div
           ref={tooltipRef}
-          className="fixed z-[100] bg-white rounded-xl shadow-2xl border border-primary/20 p-4 md:p-6 w-[calc(100vw-2rem)] md:w-[29rem] max-w-[90vw]"
+          className="fixed z-40 bg-white rounded-xl shadow-2xl border border-primary/20 p-4 md:p-6 w-[calc(100vw-2rem)] md:w-[29rem]"
           style={{
-            left: `${position.left}px`,
             top: `${position.top}px`,
+            left: `${position.left}px`,
             transform: 'translateX(-50%)',
+            maxWidth: '90vw',
           }}
         >
           {/* Close Button */}
@@ -99,7 +105,8 @@ export function InfoTooltip({ definition }: InfoTooltipProps) {
 
           {/* Arrow pointing up */}
           <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-l border-t border-primary/20 transform rotate-45" />
-        </div>
+        </div>,
+        document.body
       )}
     </span>
   );
