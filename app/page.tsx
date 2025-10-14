@@ -10,6 +10,7 @@ import {
   BlogSection,
   // PartnersSection, // Disabled - missing images
 } from "@/components/sections";
+import { allProjects } from "@/data/projects";
 
 export default function Home() {
   // Hero Section Data
@@ -156,100 +157,32 @@ export default function Home() {
       },
     ],
     video: {
-      placeholderImage: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800",
+      placeholderImage: "/images/howitworks.webp",
       videoUrl: "https://www.youtube.com/watch?v=example",
     },
   };
 
-  // Projects Section Data
+  // Projects Section Data - Using real projects from database
   const projectsData = {
     header: {
       label: "NASZE ZREALIZOWANE PROJEKTY",
       title: "Odkryj Nasze Portfolio Wyjątkowych Projektów",
       theme: "light" as const,
     },
-    projects: [
-      {
-        image: {
-          src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200",
-          alt: "Rezydencja Lux",
-        },
-        title: "Rezydencja Lux",
-        category: "Budynek Mieszkalny",
-        location: "Warszawa, Polska",
-        details: [
-          { label: "Powierzchnia", value: "2,500 m²" },
-          { label: "Ukończenie", value: "2024" },
-          { label: "Budżet", value: "10M PLN" },
-          { label: "Czas", value: "18 miesięcy" },
-        ],
-        isActive: true,
-      },
-      {
-        image: {
-          src: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200",
-          alt: "Villa Moderna",
-        },
-        title: "Villa Moderna",
-        category: "Dom Jednorodzinny",
-        location: "Gdańsk, Polska",
-        details: [
-          { label: "Powierzchnia", value: "450 m²" },
-          { label: "Ukończenie", value: "2024" },
-          { label: "Budżet", value: "3.5M PLN" },
-          { label: "Czas", value: "14 miesięcy" },
-        ],
-        isActive: true,
-      },
-      {
-        image: {
-          src: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1200",
-          alt: "Centrum Handlowe Park",
-        },
-        title: "Centrum Handlowe Park",
-        category: "Komercyjny",
-        location: "Wrocław, Polska",
-        details: [
-          { label: "Powierzchnia", value: "8,500 m²" },
-          { label: "Ukończenie", value: "2023" },
-          { label: "Budżet", value: "35M PLN" },
-          { label: "Czas", value: "30 miesięcy" },
-        ],
-        isActive: true,
-      },
-      {
-        image: {
-          src: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200",
-          alt: "Apartamenty Riverside",
-        },
-        title: "Apartamenty Riverside",
-        category: "Mieszkalny",
-        location: "Poznań, Polska",
-        details: [
-          { label: "Powierzchnia", value: "6,200 m²" },
-          { label: "Ukończenie", value: "2023" },
-          { label: "Budżet", value: "18M PLN" },
-          { label: "Czas", value: "22 miesiące" },
-        ],
-        isActive: true,
-      },
-      {
-        image: {
-          src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200",
-          alt: "Dom Rodzinny Green",
-        },
-        title: "Dom Rodzinny Green",
-        category: "Dom Jednorodzinny",
-        location: "Łódź, Polska",
-        details: [
-          { label: "Powierzchnia", value: "320 m²" },
-          { label: "Ukończenie", value: "2024" },
-          { label: "Budżet", value: "2.2M PLN" },
-          { label: "Czas", value: "12 miesięcy" },
-        ],
-        isActive: true,
-      },
-    ],
+    projects: allProjects.map((project, index) => ({
+      slug: project.slug,
+      alt: project.alt,
+      title: project.title,
+      category: "Projekt", // All are projects
+      location: project.price, // Price shown as location
+      details: [
+        { label: "Powierzchnia", value: project.surfaceArea },
+        { label: "Technologia", value: project.technology },
+        { label: "Działka", value: project.specifications[0]?.items.find(item => item.label === "Minimalne wymiary działki")?.value || "N/A" },
+        { label: "Szacowany koszt", value: project.estimatedBuildCost },
+      ],
+      isActive: index === 0, // First project is active in slider
+    })),
   };
 
   // Team Section Data

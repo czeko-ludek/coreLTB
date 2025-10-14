@@ -37,6 +37,7 @@ import {
   FileText,
   Files,
   FileCheck,
+  Info,
 } from 'lucide-react';
 
 const iconMap = {
@@ -70,6 +71,7 @@ const iconMap = {
   calendar: Calendar,
   menu: Menu,
   close: X,
+  x: X,
   home: Home,
   pencil: Pencil,
   clipboard: Clipboard,
@@ -79,6 +81,7 @@ const iconMap = {
   fileText: FileText,
   files: Files,
   fileCheck: FileCheck,
+  info: Info,
 };
 
 export type IconName = keyof typeof iconMap;

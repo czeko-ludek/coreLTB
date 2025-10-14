@@ -332,3 +332,38 @@
   }
 }
 
+
+  /* Related Projects Swiper custom styles */
+  .related-projects-swiper {
+    padding-top: 1rem !important;
+    padding-bottom: 3rem !important;
+    overflow: visible !important;
+    width: 100%;
+  }
+
+  .related-projects-swiper .swiper-slide {
+    height: auto;
+    display: flex;
+  }
+
+  .related-bullet {
+    width: 12px !important;
+    height: 12px !important;
+    background: #d1d5db !important;
+    opacity: 0.5 !important;
+    border-radius: 50% !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .related-bullet-active {
+    width: 32px !important;
+    background: #dfbb68 !important;
+    opacity: 1 !important;
+    border-radius: 6px !important;
+  }
+
+  @media (min-width: 1024px) {
+    .related-projects-swiper .swiper-pagination {
+      display: none !important;
+    }
+  }

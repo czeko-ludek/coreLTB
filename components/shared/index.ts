@@ -43,4 +43,26 @@ export type { MegaMenuProps, MegaMenuItem } from './MegaMenu';
 export { CountingNumber } from './CountingNumber';
 export type { CountingNumberProps } from './CountingNumber';
 
+export { ProjectGalleryHero } from './ProjectGalleryHero';
+export type { ProjectGalleryHeroProps } from './ProjectGalleryHero';
+
+export { ProjectIntroduction } from './ProjectIntroduction';
+export type { ProjectIntroductionProps } from './ProjectIntroduction';
+
+export { ProjectTabs } from './ProjectTabs';
+export type { ProjectTabsProps } from './ProjectTabs';
+
+export { ProjectFloorPlans } from './ProjectFloorPlans';
+export type { ProjectFloorPlansProps } from './ProjectFloorPlans';
+
+export { ProjectCostTable } from './ProjectCostTable';
+export type { ProjectCostTableProps } from './ProjectCostTable';
+
+export { ProjectModificationCTA } from './ProjectModificationCTA';
+
+export { RelatedProjectsSection } from './RelatedProjectsSection';
+export type { RelatedProjectsSectionProps, RelatedProject } from './RelatedProjectsSection';
+
+export { InfoTooltip } from './InfoTooltip';
+export type { InfoTooltipProps } from './InfoTooltip';
 

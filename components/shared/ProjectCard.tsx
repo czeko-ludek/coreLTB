@@ -1,9 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
-import { Icon } from '@/components/ui';
+import Link from 'next/link';
 
 export interface ProjectCardProps {
-  image: { src: string; alt: string };
+  slug: string;
+  alt: string;
   title: string;
   category: string;
   location: string;
@@ -12,19 +13,22 @@ export interface ProjectCardProps {
 }
 
 export function ProjectCard({
-  image,
+  slug,
+  alt,
   title,
   category,
   location,
   details,
 }: ProjectCardProps) {
+  // Dynamically build the thumbnail path based on slug
+  const thumbnailPath = `/images/projekty/${slug}/thumbnail.webp`;
   return (
-    <div className="relative group h-full bg-white rounded-xl shadow-md overflow-hidden">
+    <Link href={`/projekty/${slug}`} className="relative group h-full bg-white rounded-xl shadow-md overflow-hidden block hover:shadow-xl transition-shadow duration-300">
       {/* Project image - 10% shorter height with zoom contained inside */}
       <div className="relative aspect-[16/10] overflow-hidden">
         <Image
-          src={image.src}
-          alt={image.alt}
+          src={thumbnailPath}
+          alt={alt}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 50vw"
@@ -43,10 +47,10 @@ export function ProjectCard({
           </p>
         </div>
 
-        {/* Bottom left - Location badge (gold box with icon) */}
+        {/* Bottom left - Price badge (gold box with "cena" text) */}
         <div className="absolute bottom-6 left-6 z-10">
           <div className="flex items-center gap-2 bg-primary px-4 py-2.5 rounded-lg shadow-lg">
-            <Icon name="mapPin" size="sm" className="text-white" />
+            <span className="text-xs font-semibold text-white uppercase tracking-wide">cena</span>
             <span className="text-sm lg:text-base font-medium text-white">{location}</span>
           </div>
         </div>
@@ -60,16 +64,16 @@ export function ProjectCard({
               key={index}
               className="bg-gray-50 border border-primary/20 p-3 rounded-lg hover:border-primary/40 transition-colors duration-300"
             >
-              <p className="text-sm text-text-secondary uppercase mb-1 tracking-wide font-medium">
+              <p className="text-[0.775rem] text-text-secondary uppercase mb-1 tracking-wide font-medium">
                 {detail.label}
               </p>
-              <p className="text-base lg:text-lg font-bold text-text-dark">
+              <p className="text-[0.9rem] lg:text-[1rem] font-bold text-text-dark">
                 {detail.value}
               </p>
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

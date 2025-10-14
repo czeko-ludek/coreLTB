@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { clsx } from 'clsx';
 
 export interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'outline-white';
   size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
   onClick?: () => void;
@@ -38,6 +38,7 @@ export function Button({
       'bg-primary text-white border-2 border-primary hover:bg-white hover:text-primary': variant === 'secondary',
       'bg-primary text-white border-2 border-primary hover:bg-transparent hover:text-text-dark hover:border-text-dark': variant === 'outline',
       'bg-transparent text-primary hover:bg-primary/10': variant === 'ghost',
+      'bg-transparent text-white border-2 border-white hover:bg-white hover:text-primary': variant === 'outline-white',
     },
     className
   );
