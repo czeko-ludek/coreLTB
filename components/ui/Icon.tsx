@@ -38,6 +38,8 @@ import {
   Files,
   FileCheck,
   Info,
+  Plus,
+  Minus,
 } from 'lucide-react';
 
 const iconMap = {
@@ -82,6 +84,8 @@ const iconMap = {
   files: Files,
   fileCheck: FileCheck,
   info: Info,
+  plus: Plus,
+  minus: Minus,
 };
 
 export type IconName = keyof typeof iconMap;

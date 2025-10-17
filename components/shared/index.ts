@@ -66,3 +66,6 @@ export type { RelatedProjectsSectionProps, RelatedProject } from './RelatedProje
 export { InfoTooltip } from './InfoTooltip';
 export type { InfoTooltipProps } from './InfoTooltip';
 
+export { ProjectOptimalPrice } from './ProjectOptimalPrice';
+export type { ProjectOptimalPriceProps } from './ProjectOptimalPrice';
+

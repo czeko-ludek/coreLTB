@@ -14,7 +14,8 @@
       "Bash(npm run build)",
       "Bash(git checkout:*)",
       "Bash(npm i:*)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(npx tsc:*)"
     ],
     "deny": [],
     "ask": []

@@ -68,10 +68,11 @@ export function RelatedProjectsSection({
         <div className="relative">
           <Swiper
             modules={[Navigation, Pagination]}
-            spaceBetween={24}
+            spaceBetween={16}
             slidesPerView={1}
-            loop={relatedProjects.length > 2}
+            loop={relatedProjects.length > 1}
             speed={600}
+            centeredSlides={false}
             navigation={{
               prevEl: '.related-prev',
               nextEl: '.related-next',
@@ -82,8 +83,18 @@ export function RelatedProjectsSection({
               bulletActiveClass: 'swiper-pagination-bullet-active related-bullet-active',
             }}
             breakpoints={{
-              640: { slidesPerView: 2, spaceBetween: 20 },
-              1024: { slidesPerView: 4, spaceBetween: 24 },
+              320: {
+                slidesPerView: 1,
+                spaceBetween: 16
+              },
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 24
+              },
             }}
             onSwiper={setSwiperInstance}
             className="related-projects-swiper pb-12"

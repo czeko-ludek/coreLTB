@@ -10,4 +10,4 @@ export type { IconProps, IconName } from './Icon';
 export { InputField } from './InputField';
 export type { InputFieldProps } from './InputField';
 
-
+export { Portal } from './Portal';

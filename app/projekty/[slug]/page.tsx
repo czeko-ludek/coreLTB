@@ -6,7 +6,7 @@ import {
   ProjectIntroduction,
   ProjectTabs,
   ProjectFloorPlans,
-  ProjectCostTable,
+  ProjectOptimalPrice,
   ProjectModificationCTA,
   RelatedProjectsSection,
 } from '@/components/shared';
@@ -88,8 +88,12 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       {/* Floor Plans with Modal */}
       <ProjectFloorPlans slug={project.slug} floorPlans={project.floorPlans} />
 
-      {/* Cost Calculation Table */}
-      <ProjectCostTable costCalculation={project.costCalculation} />
+      {/* Optimal Price Display */}
+      <ProjectOptimalPrice
+        title={project.costCalculation.title}
+        stageName="Stan surowy zamknięty"
+        price={project.costCalculation.items.find(item => item.name === 'Stan surowy zamknięty')?.prices.min || 'N/A'}
+      />
 
       {/* CTA for Project Modifications */}
       <ProjectModificationCTA />
