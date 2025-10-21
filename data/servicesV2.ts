@@ -173,7 +173,7 @@ philosophyTimeline: {
   // Nagłówek jest teraz bardziej bezpośredni i skupiony na korzyściach
   header: {
     label: 'DLACZEGO WARTO NAS WYBRAĆ?',
-    title: 'Budujemy tak, jak sami chcielibyśmy mieszkać.',
+    title: 'Budujemy tak, jak sami chcielibyśmy mieszkać',
     description:
       'Na rynku jest wielu wykonawców. My nie konkurujemy ceną – konkurujemy spokojem, który dajemy naszym klientom. Wybierając CoreLTB Builders, wybierasz partnera, który bierze pełną odpowiedzialność za Twoje marzenie i Twoje pieniądze.',
   },

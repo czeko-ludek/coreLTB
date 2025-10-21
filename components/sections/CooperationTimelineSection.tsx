@@ -77,7 +77,7 @@ export function CooperationTimelineSection({
           />
 
           {/* Kroki timeline */}
-          <div className="space-y-0">
+          <div className="space-y-6 md:space-y-0">
             {steps.map((step, index) => (
               <TimelineStep
                 key={step.id}

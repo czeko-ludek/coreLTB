@@ -103,7 +103,7 @@ export function TimelineStep({
   };
 
   return (
-    <section id={id} ref={setRefs} className="scroll-mt-24 md:mb-0 mb-8">
+    <section id={id} ref={setRefs} className="scroll-mt-24">
       {/* Layout Mobile (pionowy stack) - w białym kontenerze */}
       <div className={`md:hidden bg-white rounded-xl shadow-lg p-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
         {/* Nagłówek z numerem */}
