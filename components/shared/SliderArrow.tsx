@@ -7,6 +7,7 @@ export interface SliderArrowProps {
   onClick: () => void;
   disabled?: boolean;
   variant?: 'light' | 'dark' | 'gold';
+  className?: string;
 }
 
 export function SliderArrow({
@@ -14,6 +15,7 @@ export function SliderArrow({
   onClick,
   disabled = false,
   variant = 'light',
+  className,
 }: SliderArrowProps) {
   return (
     <button
@@ -29,7 +31,8 @@ export function SliderArrow({
           'bg-white shadow-lg': variant === 'light',
           'bg-surface-dark shadow-lg': variant === 'dark',
           'bg-white border-2 border-primary/30 shadow-md hover:border-primary hover:shadow-lg': variant === 'gold',
-        }
+        },
+        className
       )}
     >
       <Icon

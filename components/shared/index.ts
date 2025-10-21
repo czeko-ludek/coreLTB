@@ -69,3 +69,21 @@ export type { InfoTooltipProps } from './InfoTooltip';
 export { ProjectOptimalPrice } from './ProjectOptimalPrice';
 export type { ProjectOptimalPriceProps } from './ProjectOptimalPrice';
 
+// Service page components
+export { ServiceFeatureCard } from './ServiceFeatureCard';
+export { FlexibilityOptionCard } from './FlexibilityOptionCard';
+export { ProcessStepCard } from './ProcessStepCard';
+export { ProofStatCard } from './ProofStatCard';
+
+// Service page V2 components
+export { CaseStudyCard } from './CaseStudyCard';
+export type { CaseStudyCardProps } from './CaseStudyCard';
+export { ProcessStepDetailed } from './ProcessStepDetailed';
+export type { ProcessStepDetailedProps } from './ProcessStepDetailed';
+export { AccordionItem } from './AccordionItem';
+export type { AccordionItemProps } from './AccordionItem';
+export { TimelineNav } from './TimelineNav';
+export type { TimelineNavProps, TimelineNavItem } from './TimelineNav';
+export { TimelineStep } from './TimelineStep';
+export type { TimelineStepProps } from './TimelineStep';
+

@@ -10,6 +10,8 @@ export interface ButtonProps {
   href?: string;
   rightIcon?: React.ReactNode;
   className?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
 }
 
 export function Button({
@@ -20,6 +22,8 @@ export function Button({
   href,
   rightIcon,
   className,
+  type = 'button',
+  disabled = false,
 }: ButtonProps) {
   const baseClasses = clsx(
     'inline-flex items-center justify-center gap-2',
@@ -59,7 +63,7 @@ export function Button({
   }
 
   return (
-    <button onClick={onClick} className={clsx(baseClasses, 'group')}>
+    <button onClick={onClick} type={type} disabled={disabled} className={clsx(baseClasses, 'group', disabled && 'opacity-50 cursor-not-allowed')}>
       {content}
     </button>
   );

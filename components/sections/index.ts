@@ -34,3 +34,56 @@ export type { PartnersSectionProps } from './PartnersSection';
 export { Footer } from './Footer';
 export type { FooterProps } from './Footer';
 
+// Service page sections
+export { ServiceHeroSection } from './ServiceHeroSection';
+export type { ServiceHeroSectionProps } from './ServiceHeroSection';
+
+export { IconicFeaturesSection } from './IconicFeaturesSection';
+export type { IconicFeaturesSectionProps, Feature } from './IconicFeaturesSection';
+
+export { FlexibilitySection } from './FlexibilitySection';
+export type { FlexibilitySectionProps, FlexibilityOption } from './FlexibilitySection';
+
+export { ProcessTimelineSection } from './ProcessTimelineSection';
+export type { ProcessTimelineSectionProps, ProcessStep } from './ProcessTimelineSection';
+
+export { ServiceAreaSection } from './ServiceAreaSection';
+export type { ServiceAreaSectionProps } from './ServiceAreaSection';
+
+export { ProofSection } from './ProofSection';
+export type { ProofSectionProps, ProofItem } from './ProofSection';
+
+export { ContentSection } from './ContentSection';
+export type { ContentSectionProps, ContentBlock } from './ContentSection';
+
+export { RealizationsGallery } from './RealizationsGallery';
+export type { RealizationsGalleryProps, Realization } from './RealizationsGallery';
+
+// Service page V2 sections
+export { EmotionalHeroSection } from './EmotionalHeroSection';
+export type { EmotionalHeroSectionProps } from './EmotionalHeroSection';
+
+export { ServiceIntroSection } from './ServiceIntroSection';
+export type { ServiceIntroSectionProps } from './ServiceIntroSection';
+
+export { PhilosophyTimelineSection } from './PhilosophyTimelineSection';
+export type { PhilosophyTimelineSectionProps } from './PhilosophyTimelineSection';
+
+export { CaseStudiesSection } from './CaseStudiesSection';
+export type { CaseStudiesSectionProps } from './CaseStudiesSection';
+
+export { ProcessInfographicSection } from './ProcessInfographicSection';
+export type { ProcessInfographicSectionProps } from './ProcessInfographicSection';
+
+export { ServicesAccordionSection } from './ServicesAccordionSection';
+export type { ServicesAccordionSectionProps } from './ServicesAccordionSection';
+
+export { ClientTestimonialsSection } from './ClientTestimonialsSection';
+export type { ClientTestimonialsSectionProps } from './ClientTestimonialsSection';
+
+export { ContactCTASection } from './ContactCTASection';
+export type { ContactCTASectionProps, ContactInfo, FAQ } from './ContactCTASection';
+
+export { CooperationTimelineSection } from './CooperationTimelineSection';
+export type { CooperationTimelineSectionProps, TimelineStepData } from './CooperationTimelineSection';
+

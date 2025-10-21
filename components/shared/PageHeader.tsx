@@ -34,13 +34,13 @@ export function PageHeader({
         }}></div>
 
         {/* Title - Left Aligned */}
-        <div className="absolute inset-0 flex items-center z-10 px-4 md:px-8 left-0">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+        <div className="absolute inset-0 flex items-center z-10 px-4 md:px-8 left-0 overflow-hidden">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-[400px] md:max-w-[600px]">
             {title}
           </h2>
-          {/* Watermark Text - Stroke Only, Next to Title */}
+          {/* Watermark Text - Stroke Only, Next to Title - Single line */}
           <h1
-            className="text-[80px] md:text-[120px] lg:text-[150px] font-bold uppercase select-none pointer-events-none ml-4 md:ml-8"
+            className="text-[50px] md:text-[70px] lg:text-[90px] font-bold uppercase select-none pointer-events-none ml-4 md:ml-8 whitespace-nowrap"
             style={{
               WebkitTextStroke: '1px rgba(255, 255, 255, 0.4)',
               color: 'transparent'

@@ -40,6 +40,18 @@ import {
   Info,
   Plus,
   Minus,
+  Zap,
+  Briefcase,
+  ShieldCheck,
+  PenTool,
+  MapPin as MapPinIcon,
+  DraftingCompass,
+  Plug,
+  Stamp,
+  Landmark,
+  Construction,
+  Shovel,
+  KeyRound,
 } from 'lucide-react';
 
 const iconMap = {
@@ -86,6 +98,16 @@ const iconMap = {
   info: Info,
   plus: Plus,
   minus: Minus,
+  zap: Zap,
+  briefcase: Briefcase,
+  shieldCheck: ShieldCheck,
+  penTool: PenTool,
+  draftingCompass: DraftingCompass,
+  plug: Plug,
+  stamp: Stamp,
+  landmark: Landmark,
+  shovel: Shovel,
+  keyRound: KeyRound,
 };
 
 export type IconName = keyof typeof iconMap;

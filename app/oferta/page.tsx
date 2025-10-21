@@ -11,10 +11,10 @@ export default function OfferPage() {
   const offerData = [
     {
       image: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=800',
-      title: 'Budowa Domów',
+      title: 'Kompleksowa Budowa Domów',
       description: 'Kompleksowa realizacja domów jednorodzinnych pod klucz, od projektu aż po finalne wykończenie.',
       features: ['Indywidualne projekty architektoniczne', 'Gwarancja jakości i terminowości'],
-      href: '/oferta/budowa-domow',
+      href: '/oferta/kompleksowa-budowa-domow',
     },
     {
       image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800',

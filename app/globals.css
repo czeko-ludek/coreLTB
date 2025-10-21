@@ -212,6 +212,68 @@
       display: none !important;
     }
   }
+
+  /* Testimonials Swiper custom styles */
+  .testimonials-swiper {
+    padding-top: 2rem !important;
+    padding-bottom: 4rem !important;
+    overflow: hidden !important;
+    width: 100%;
+  }
+
+  .testimonials-swiper .swiper-wrapper {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .testimonials-swiper .swiper-slide {
+    height: auto;
+    display: flex;
+  }
+
+  .testimonials-swiper .swiper-slide > * {
+    width: 100%;
+  }
+
+  /* Prevent FOUC */
+  .testimonials-swiper:not(.swiper-initialized) {
+    opacity: 0;
+  }
+
+  .testimonials-swiper.swiper-initialized {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Custom pagination bullets for testimonials */
+  .testimonials-bullet {
+    width: 12px !important;
+    height: 12px !important;
+    background: #d1d5db !important;
+    opacity: 0.5 !important;
+    border-radius: 50% !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .testimonials-bullet-active {
+    width: 32px !important;
+    background: #dfbb68 !important;
+    opacity: 1 !important;
+    border-radius: 6px !important;
+  }
+
+  .testimonials-swiper .swiper-pagination {
+    bottom: 0 !important;
+  }
+
+  /* Show pagination only on mobile (< 1024px) */
+  @media (min-width: 1024px) {
+    .testimonials-swiper .swiper-pagination {
+      display: none !important;
+    }
+  }
 }
 
 @layer utilities {
@@ -400,4 +462,74 @@
     .related-projects-swiper .swiper-pagination {
       display: none !important;
     }
+  }
+
+  /* Accordion content - gold bullets for lists */
+  .accordion-content ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .accordion-content ul li {
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .accordion-content ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #dfbb68;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    font-weight: bold;
+  }
+
+  /* Case Studies Swiper custom styles */
+  .case-studies-swiper {
+    padding-top: 1rem !important;
+    padding-bottom: 3rem !important;
+    overflow: hidden !important;
+    width: 100%;
+  }
+
+  .case-studies-swiper .swiper-wrapper {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .case-studies-swiper .swiper-slide {
+    height: auto;
+    display: flex;
+  }
+
+  .case-studies-swiper .swiper-slide > * {
+    width: 100%;
+  }
+
+  .case-studies-swiper:not(.swiper-initialized) {
+    opacity: 0;
+  }
+
+  .case-studies-swiper.swiper-initialized {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Custom pagination for case studies */
+  .case-studies-pagination .swiper-pagination-bullet {
+    width: 12px !important;
+    height: 12px !important;
+    background: #d1d5db !important;
+    opacity: 0.5 !important;
+    border-radius: 50% !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .case-studies-pagination .swiper-pagination-bullet-active {
+    width: 32px !important;
+    background: #dfbb68 !important;
+    opacity: 1 !important;
+    border-radius: 6px !important;
   }

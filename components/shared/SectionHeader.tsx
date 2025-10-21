@@ -20,7 +20,7 @@ export function SectionHeader({
   return (
     <div
       className={clsx(
-        'space-y-4 max-w-2xl',
+        'space-y-4 max-w-4xl',
         {
           'text-left': align === 'left',
           'text-center mx-auto': align === 'center',

@@ -36,9 +36,9 @@ const headerData = {
   megaMenuItems: [
     {
       icon: "home" as const,
-      title: "Budowa Domów",
+      title: "Kompleksowa Budowa Domów",
       description: "Kompleksowa realizacja domów jednorodzinnych pod klucz, od projektu aż po finalne wykończenie.",
-      href: "/oferta/budowa-domow",
+      href: "/oferta/kompleksowa-budowa-domow",
     },
     {
       icon: "pencil" as const,
@@ -146,7 +146,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pl">
+    <html lang="pl" data-scroll-behavior="smooth">
       <body className={inter.className}>
         <Header {...headerData} />
         {children}
