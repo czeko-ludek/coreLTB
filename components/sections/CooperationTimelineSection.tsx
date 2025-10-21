@@ -5,13 +5,18 @@ import { useInView } from 'react-intersection-observer';
 import { TimelineNav, TimelineNavItem, TimelineStep, SectionHeader, SectionHeaderProps } from '@/components/shared';
 import { IconName } from '@/components/ui';
 
+// Content Blocks dla elastycznego formatowania
+type ContentBlock =
+  | { type: 'paragraph'; value: string }
+  | { type: 'list'; items: string[] };
+
 export interface TimelineStepData {
   id: string;
   number: number;
   icon: IconName;
   label: string;
   title: string;
-  content: string;
+  content: ContentBlock[];
   imageSrc: string;
   imageAlt: string;
 }

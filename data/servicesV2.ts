@@ -24,6 +24,10 @@ export interface ServiceIntroData {
 export interface PhilosophyTimelineData {
   header: SectionHeaderProps;
   items: NumberedListItemProps[];
+  image: {
+    src: string;
+    alt: string;
+  };
 }
 
 export interface ProcessStepDetailed {
@@ -39,8 +43,9 @@ export interface ProcessInfographicData {
 }
 
 export interface ServiceAccordionItem {
+  iconName?: IconName;
   title: string;
-  content: string;
+  content: ContentBlock[];
 }
 
 export interface ServicesAccordionData {
@@ -61,7 +66,7 @@ export interface ContactInfo {
 
 export interface ContactCTAData {
   header: SectionHeaderProps;
-  faqs: FAQ[];
+  faqs?: FAQ[];
   contactInfo: ContactInfo;
 }
 
