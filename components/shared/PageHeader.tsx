@@ -18,13 +18,14 @@ export function PageHeader({
   return (
     <div className="px-0 md:px-[50px] mt-8">
       <section className="relative h-[300px] md:h-[400px] overflow-hidden rounded-lg shadow-lg">
-        {/* Background Image */}
+        {/* Background Image - LCP optimized */}
         <Image
           src={backgroundImage}
           alt={title}
           fill
           className="object-cover rounded-lg"
           priority
+          fetchPriority="high"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
         />
 
