@@ -21,13 +21,10 @@ export function TimelineNav({ items, activeStep }: TimelineNavProps) {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      const offset = 100; // Offset dla sticky header
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
+      // Używamy scrollIntoView zamiast getBoundingClientRect (unikamy forced reflow)
+      element.scrollIntoView({
         behavior: 'smooth',
+        block: 'start',
       });
     }
   };
