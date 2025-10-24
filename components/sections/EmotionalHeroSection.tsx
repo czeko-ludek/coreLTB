@@ -27,8 +27,8 @@ export const EmotionalHeroSection: React.FC<EmotionalHeroSectionProps> = ({
               {/* Label (złoty akcent) */}
               <SectionLabel className="mb-4">{label}</SectionLabel>
 
-              {/* Headline (H1 - główny nagłówek strony) */}
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-4 md:mb-6 leading-tight">
+              {/* Headline (H2 - główny nagłówek sekcji, H1 jest w PageHeader) */}
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-4 md:mb-6 leading-tight">
                 {Array.isArray(headline) ? (
                   headline.map((line, index) => (
                     <React.Fragment key={index}>
@@ -39,7 +39,7 @@ export const EmotionalHeroSection: React.FC<EmotionalHeroSectionProps> = ({
                 ) : (
                   headline
                 )}
-              </h1>
+              </h2>
 
               {/* Subtitle */}
               <p className="text-lg md:text-xl text-text-secondary leading-relaxed">

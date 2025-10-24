@@ -1,16 +1,17 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { getServiceV2BySlug, allServicesV2 } from '@/data/servicesV2';
-import { PageHeader } from '@/components/shared';
+import { PageHeader } from '@/components/shared'; // ✅ Centralized import
 import {
   EmotionalHeroSection,
   PhilosophyTimelineSection,
   ServicesAccordionSection,
   TestimonialsSection,
   CooperationTimelineSection,
+  CooperationTimelineSectionNoLine,
   ContactCTASection,
-} from '@/components/sections';
-import { FloatingCTA } from '@/components/ui';
+} from '@/components/sections'; // ✅ Centralized import
+import { FloatingCTA } from '@/components/ui'; // ✅ Centralized import
 
 // Generate static params for all services
 export async function generateStaticParams() {
@@ -80,8 +81,15 @@ export default async function ServicePageV2({
         <CooperationTimelineSection {...service.cooperationTimeline} />
       )}
 
+      {/* Sekcja 3 (alternatywna): Timeline bez linii (dla Projektowanie) */}
+      {service.cooperationTimelineNoLine && (
+        <CooperationTimelineSectionNoLine {...service.cooperationTimelineNoLine} />
+      )}
+
       {/* Sekcja 4: Treść dla Zainteresowanych (Accordion) */}
-      <ServicesAccordionSection {...service.servicesAccordion} />
+      {service.servicesAccordion && (
+        <ServicesAccordionSection {...service.servicesAccordion} />
+      )}
 
       {/* Sekcja 5: Opinie Klientów */}
       <TestimonialsSection {...service.testimonials} />

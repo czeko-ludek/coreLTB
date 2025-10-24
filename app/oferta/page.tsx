@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageHeader, ServiceCardSimple } from '@/components/shared';
+import { PageHeader, ServiceCardSimple } from '@/components/shared'; // ✅ Centralized import from index.ts
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

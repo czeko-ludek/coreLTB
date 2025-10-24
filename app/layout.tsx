@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Header, Footer } from "@/components/sections";
+import { Header, Footer } from "@/components/sections"; // ✅ Centralized import from index.ts
 
 const inter = Inter({ subsets: ["latin"] });
 

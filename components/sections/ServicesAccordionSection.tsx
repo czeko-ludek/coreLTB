@@ -14,7 +14,7 @@ export const ServicesAccordionSection: React.FC<ServicesAccordionSectionProps> =
   services,
 }) => {
   return (
-    <section className="py-16 sm:py-20 lg:py-24" style={{ backgroundColor: '#efebe7' }}>
+    <section id="faq-projektowanie" className="py-16 sm:py-20 lg:py-24 scroll-mt-24" style={{ backgroundColor: '#efebe7' }}>
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <SectionHeader {...header} align="center" theme="light" />
 

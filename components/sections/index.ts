@@ -1,6 +1,18 @@
+// Centralized exports for Section components (Organisms)
+// This file provides a single entry point for all section components
+
+// ============================================
+// ACTIVE SECTIONS (Currently used in project)
+// ============================================
+
+// Global Layout
 export { Header } from './Header';
 export type { HeaderProps } from './Header';
 
+export { Footer } from './Footer';
+export type { FooterProps } from './Footer';
+
+// Homepage Sections
 export { HeroSection } from './HeroSection';
 export type { HeroSectionProps } from './HeroSection';
 
@@ -28,62 +40,29 @@ export type { CtaSectionProps } from './CtaSection';
 export { BlogSection } from './BlogSection';
 export type { BlogSectionProps } from './BlogSection';
 
-export { PartnersSection } from './PartnersSection';
-export type { PartnersSectionProps } from './PartnersSection';
-
-export { Footer } from './Footer';
-export type { FooterProps } from './Footer';
-
-// Service page sections
-export { ServiceHeroSection } from './ServiceHeroSection';
-export type { ServiceHeroSectionProps } from './ServiceHeroSection';
-
-export { IconicFeaturesSection } from './IconicFeaturesSection';
-export type { IconicFeaturesSectionProps, Feature } from './IconicFeaturesSection';
-
-export { FlexibilitySection } from './FlexibilitySection';
-export type { FlexibilitySectionProps, FlexibilityOption } from './FlexibilitySection';
-
-export { ProcessTimelineSection } from './ProcessTimelineSection';
-export type { ProcessTimelineSectionProps, ProcessStep } from './ProcessTimelineSection';
-
-export { ServiceAreaSection } from './ServiceAreaSection';
-export type { ServiceAreaSectionProps } from './ServiceAreaSection';
-
-export { ProofSection } from './ProofSection';
-export type { ProofSectionProps, ProofItem } from './ProofSection';
-
-export { ContentSection } from './ContentSection';
-export type { ContentSectionProps, ContentBlock } from './ContentSection';
-
-export { RealizationsGallery } from './RealizationsGallery';
-export type { RealizationsGalleryProps, Realization } from './RealizationsGallery';
-
-// Service page V2 sections
+// Service Pages V2 Sections
 export { EmotionalHeroSection } from './EmotionalHeroSection';
 export type { EmotionalHeroSectionProps } from './EmotionalHeroSection';
-
-export { ServiceIntroSection } from './ServiceIntroSection';
-export type { ServiceIntroSectionProps } from './ServiceIntroSection';
 
 export { PhilosophyTimelineSection } from './PhilosophyTimelineSection';
 export type { PhilosophyTimelineSectionProps } from './PhilosophyTimelineSection';
 
-export { CaseStudiesSection } from './CaseStudiesSection';
-export type { CaseStudiesSectionProps } from './CaseStudiesSection';
+export { CooperationTimelineSection } from './CooperationTimelineSection';
+export type { CooperationTimelineSectionProps } from './CooperationTimelineSection';
 
-export { ProcessInfographicSection } from './ProcessInfographicSection';
-export type { ProcessInfographicSectionProps } from './ProcessInfographicSection';
+export { CooperationTimelineSectionNoLine } from './CooperationTimelineSectionNoLine';
+export type { CooperationTimelineSectionNoLineProps } from './CooperationTimelineSectionNoLine';
 
 export { ServicesAccordionSection } from './ServicesAccordionSection';
 export type { ServicesAccordionSectionProps } from './ServicesAccordionSection';
 
-export { ClientTestimonialsSection } from './ClientTestimonialsSection';
-export type { ClientTestimonialsSectionProps } from './ClientTestimonialsSection';
-
 export { ContactCTASection } from './ContactCTASection';
-export type { ContactCTASectionProps, ContactInfo, FAQ } from './ContactCTASection';
+export type { ContactCTASectionProps } from './ContactCTASection';
 
-export { CooperationTimelineSection } from './CooperationTimelineSection';
-export type { CooperationTimelineSectionProps, TimelineStepData } from './CooperationTimelineSection';
+// Stats Section (available but not currently used)
+export { StatsSection } from './StatsSection';
+export type { StatsSectionProps } from './StatsSection';
 
+// Partners Section (available but currently disabled - missing images)
+export { PartnersSection } from './PartnersSection';
+export type { PartnersSectionProps } from './PartnersSection';

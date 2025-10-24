@@ -35,19 +35,20 @@ export function PageHeader({
 
         {/* Title - Left Aligned */}
         <div className="absolute inset-0 flex items-center z-10 px-4 md:px-8 left-0 overflow-hidden">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-[400px] md:max-w-[600px]">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-[400px] md:max-w-[600px]">
             {title}
-          </h2>
+          </h1>
           {/* Watermark Text - Stroke Only, Next to Title - Single line */}
-          <h1
+          <div
             className="text-[50px] md:text-[70px] lg:text-[90px] font-bold uppercase select-none pointer-events-none ml-4 md:ml-8 whitespace-nowrap"
             style={{
               WebkitTextStroke: '1px rgba(255, 255, 255, 0.4)',
               color: 'transparent'
             }}
+            aria-hidden="true"
           >
             {watermarkText}
-          </h1>
+          </div>
         </div>
 
         {/* Breadcrumbs - Bottom Edge of Header */}

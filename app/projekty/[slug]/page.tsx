@@ -9,7 +9,7 @@ import {
   ProjectOptimalPrice,
   ProjectModificationCTA,
   RelatedProjectsSection,
-} from '@/components/shared';
+} from '@/components/shared'; // ✅ Centralized import from index.ts
 
 // Generate static params for all projects
 export async function generateStaticParams() {

@@ -52,6 +52,15 @@ import {
   Construction,
   Shovel,
   KeyRound,
+  PiggyBank,
+  ClipboardCheck,
+  Lightbulb,
+  Shield,
+  Edit,
+  Coins,
+  HelpCircle,
+  Wallet,
+  Mountain,
 } from 'lucide-react';
 
 const iconMap = {
@@ -108,6 +117,16 @@ const iconMap = {
   landmark: Landmark,
   shovel: Shovel,
   keyRound: KeyRound,
+  piggyBank: PiggyBank,
+  clipboardCheck: ClipboardCheck,
+  lightbulb: Lightbulb,
+  shield: Shield,
+  edit: Edit,
+  coins: Coins,
+  helpCircle: HelpCircle,
+  wallet: Wallet,
+  mountain: Mountain,
+  checkCircle: CheckCircle2,
 };
 
 export type IconName = keyof typeof iconMap;

@@ -9,7 +9,7 @@ import {
   CtaSection,
   BlogSection,
   // PartnersSection, // Disabled - missing images
-} from "@/components/sections";
+} from "@/components/sections"; // ✅ Centralized import from index.ts
 import { allProjects } from "@/data/projects";
 
 export default function Home() {
