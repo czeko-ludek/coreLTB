@@ -61,6 +61,10 @@ import {
   HelpCircle,
   Wallet,
   Mountain,
+  AlertTriangle,
+  AlertCircle,
+  XCircle,
+  Map,
 } from 'lucide-react';
 
 const iconMap = {
@@ -127,6 +131,10 @@ const iconMap = {
   wallet: Wallet,
   mountain: Mountain,
   checkCircle: CheckCircle2,
+  alertTriangle: AlertTriangle,
+  alertCircle: AlertCircle,
+  xCircle: XCircle,
+  map: Map,
 };
 
 export type IconName = keyof typeof iconMap;
