@@ -23,7 +23,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({ iconName, title, c
       return (
         <p
           key={index}
-          className="mb-4 text-base md:text-lg leading-relaxed text-text/80"
+          className="mb-3 text-sm md:text-base leading-relaxed text-text/80"
           dangerouslySetInnerHTML={{
             __html: block.value.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'),
           }}
@@ -33,11 +33,11 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({ iconName, title, c
 
     if (block.type === 'list') {
       return (
-        <ul key={index} className="mb-4 space-y-2">
+        <ul key={index} className="mb-3 space-y-1.5">
           {block.items.map((item, itemIndex) => (
             <li
               key={itemIndex}
-              className="text-base md:text-lg leading-relaxed text-text/80"
+              className="text-sm md:text-base leading-relaxed text-text/80"
               dangerouslySetInnerHTML={{
                 __html: item.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'),
               }}
@@ -55,16 +55,16 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({ iconName, title, c
       {/* Header */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between p-6 md:p-7 text-left transition-colors hover:bg-gray-50/50"
+        className="flex w-full items-center justify-between p-4 md:p-5 text-left transition-colors hover:bg-gray-50/50"
         aria-expanded={isOpen}
       >
-        <div className="flex items-center gap-4 pr-4">
+        <div className="flex items-center gap-3 pr-3">
           {iconName && (
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10">
-              <Icon name={iconName} size="md" className="text-primary" />
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
+              <Icon name={iconName} size="sm" className="text-primary" />
             </div>
           )}
-          <span className={`text-lg font-semibold sm:text-xl md:text-2xl transition-colors ${
+          <span className={`text-base font-semibold sm:text-lg md:text-xl transition-colors ${
             isOpen ? 'text-primary' : 'text-text'
           }`}>
             {title}
@@ -72,7 +72,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({ iconName, title, c
         </div>
         <Icon
           name="chevronDown"
-          size="lg"
+          size="md"
           className={`shrink-0 text-primary transition-transform duration-300 ${
             isOpen ? 'rotate-180' : ''
           }`}
@@ -86,7 +86,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({ iconName, title, c
         }`}
       >
         <div className="overflow-hidden">
-          <div className="border-t border-gray-100 px-6 md:px-7 py-6 accordion-content">
+          <div className="border-t border-gray-100 px-4 md:px-5 py-4 accordion-content">
             {content.map((block, index) => renderContentBlock(block, index))}
           </div>
         </div>

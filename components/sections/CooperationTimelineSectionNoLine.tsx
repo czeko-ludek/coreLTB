@@ -43,7 +43,7 @@ export function CooperationTimelineSectionNoLine({
     triggerOnce: true,
   });
 
-  // Tworzenie navItems z kroków + dodatkowy 8. element FAQ (bez odpowiadającego kroku timeline)
+  // Tworzenie navItems z kroków + dodatkowy element FAQ (bez odpowiadającego kroku timeline)
   const navItems: TimelineNavItem[] = [
     ...steps.map((step) => ({
       id: step.id,
@@ -51,10 +51,10 @@ export function CooperationTimelineSectionNoLine({
       icon: step.icon,
       label: step.label,
     })),
-    // 8. element nawigacji - scrolluje do ServicesAccordionSection (NIE renderuje kroku timeline)
+    // Ostatni element nawigacji FAQ - scrolluje do ServicesAccordionSection (NIE renderuje kroku timeline)
     {
-      id: 'faq-projektowanie',
-      number: 8,
+      id: 'faq-section', // Ogólne ID dla FAQ (działa dla wszystkich usług)
+      number: steps.length + 1, // Dynamiczny number (5 dla 4 kroków, 8 dla 7 kroków)
       icon: 'helpCircle' as const,
       label: 'FAQ',
     }

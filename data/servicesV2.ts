@@ -68,6 +68,14 @@ export interface ContactCTAData {
   header: SectionHeaderProps;
   faqs?: FAQ[];
   contactInfo: ContactInfo;
+  ctaTitle?: string; // Opcjonalny tytuł CTA Box (np. "☎ Umów Konsultację (30 min)")
+  ctaBenefits?: string[]; // Opcjonalne 4 bullet points benefitów konsultacji
+  ctaSubtext?: string; // Opcjonalny tekst pod benefitami
+  ctaButtons?: Array<{
+    text: string;
+    href?: string;
+    variant?: 'primary' | 'secondary';
+  }>;
 }
 
 // Content Blocks dla elastycznego formatowania
@@ -95,8 +103,17 @@ export interface EmotionalHeroData {
   label: string;
   headline: string | string[];
   subtitle: string;
-  ctaText: string;
-  ctaLink: string;
+  benefits?: string[]; // Opcjonalne 2-3 bullet points z kluczowymi benefitami
+
+  // CTA Box (REQUIRED dla wszystkich stron usług)
+  ctaBoxTitle: string; // np. "☎ Umów Konsultację (30 min)"
+  ctaBoxBenefits: string[]; // 4 bullet points wartości
+  ctaBoxSubtext: string; // np. "Konsultacja bezpłatna..."
+  ctaBoxButtons: Array<{
+    text: string;
+    href?: string;
+    variant?: 'primary' | 'secondary';
+  }>;
 }
 
 // Timeline bez linii (dla strony Projektowanie)
@@ -189,8 +206,32 @@ export const allServicesV2: ServiceV2[] = [
     ],
       subtitle:
         'W CoreLTB Builders rozumiemy, że budowa domu to jedna z najważniejszych podróży w życiu. Dlatego jako firma rodzinna z wieloletnią tradycją, jesteśmy Twoim przewodnikiem i partnerem na każdym jej etapie – od pierwszej kreski na projekcie, aż po moment, w którym przekręcasz klucz w drzwiach swojego wymarzonego domu.',
-      ctaText: 'Umów bezpłatną konsultację',
-      ctaLink: '/kontakt',
+      benefits: [
+        '500+ domów zbudowanych od A do Z – każdy etap pod kontrolą',
+        'Jedna umowa, jedna odpowiedzialność – Ty odpoczywasz, my budujemy',
+        'Gwarancja stałej ceny i terminu – żadnych niespodzianek',
+      ],
+      // CTA Box
+      ctaBoxTitle: '☎ Umów Bezpłatną Konsultację',
+      ctaBoxBenefits: [
+        'Przeanalizujemy Twoją sytuację i wymagania',
+        'Przedstawimy realny harmonogram i budżet budowy',
+        'Wycenimy kompleksową realizację od projektu do odbioru',
+        'Odpowiemy na wszystkie Twoje pytania i wątpliwości',
+      ],
+      ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
+      ctaBoxButtons: [
+        {
+          text: 'Zadzwoń do Nas',
+          href: 'tel:+48123456789',
+          variant: 'primary',
+        },
+        {
+          text: 'Napisz do Nas',
+          href: '#kontakt',
+          variant: 'secondary',
+        },
+      ],
     },
 
 // Sekcja 2: Filozofia (Budujemy zaufanie)
@@ -670,9 +711,33 @@ servicesAccordion: {
       label: 'PROJEKTOWANIE DOMU',
       headline: 'Od Marzenia do Projektu',
       subtitle:
-        'Budowa domu zaczyna się od marzenia, ale szybko pojawiają się pytania. Jaki projekt wybrać? Jak uniknąć kosztownych błędów? Jak sprawić, by plan na papierze stał się funkcjonalnym i tanim w utrzymaniu domem na lata? W CoreLTB Builders wiemy, że projekt to fundament finansowego i funkcjonalnego sukcesu całej inwestycji. Ten przewodnik pokaże Ci, jak zaprojektować dom mądrze, unikając pułapek, w które wpadają inni.',
-      ctaText: 'Umów bezpłatną konsultację',
-      ctaLink: '/kontakt',
+        'Budowa domu zaczyna się od projektu. Dobry projekt to spokojny sen przez całą budowę i lata mieszkania. Zły projekt to przepalony budżet, frustracja na budowie i kosztowne poprawki. W CoreLTB Builders tworzymy projekty, które działają – zarówno na papierze, jak i w realnym życiu.',
+      benefits: [
+        '500+ zrealizowanych projektów domów – znamy każdą pułapkę',
+        'Projekt zintegrowany z budżetem budowy od pierwszej linii',
+        'Architekci + inżynierowie w jednym zespole – zero niespodzianek na budowie',
+      ],
+      // CTA Box zamiast prostego buttona
+      ctaBoxTitle: '☎ Umów Konsultację (30 min, online/stacjonarnie)',
+      ctaBoxBenefits: [
+        'Przeanalizujemy Twoją działkę i warunki prawne',
+        'Polecimy optymalny rodzaj projektu (gotowy vs. indywidualny)',
+        'Wycenimy projekt i szacunkowy koszt budowy',
+        'Odpowiemy na wszystkie Twoje pytania i wątpliwości',
+      ],
+      ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
+      ctaBoxButtons: [
+        {
+          text: 'Zadzwoń do Nas',
+          href: 'tel:+48123456789',
+          variant: 'primary',
+        },
+        {
+          text: 'Napisz do Nas',
+          href: '#kontakt',
+          variant: 'secondary',
+        },
+      ],
     },
 
     // Sekcja 2: PhilosophyTimeline - Dlaczego warto nam zlecić projekt
@@ -681,7 +746,7 @@ servicesAccordion: {
         label: 'DLACZEGO WARTO NAM ZLECIĆ PROJEKT?',
         title: 'Projekt to coś więcej niż wizja – to plan budowy',
         description:
-          'Na rynku jest wielu architektów. My nie oferujemy tylko estetycznych wizualizacji. Oferujemy coś cenniejszego: spokój ducha i projekt w 100% zintegrowany z realiami budowy i Twoim budżetem.',
+          'Znamy problem: architekt projektuje piękny dom, a potem wykonawca mówi "To będzie kosztować 100 000 zł więcej". U nas tego nie ma. Nasz zespół projektowy pracuje z inżynierami budowy od pierwszej kreski. Każde rozwiązanie jest sprawdzone pod kątem kosztów przed trafieniem do projektu.',
       },
 
       items: [
@@ -916,44 +981,44 @@ servicesAccordion: {
           id: 'trendy-2026',
           number: 6,
           icon: 'lightbulb',
-          label: 'Trendy',
-          title: 'Trendy i Inteligentne Rozwiązania na 2026 Rok',
+          label: 'Rozwiązania',
+          title: 'Praktyczne Rozwiązania, Które Oszczędzają Pieniądze',
           content: [
             {
               type: 'paragraph',
-              value: 'Projekt domu to decyzja na dekady, dlatego warto, by uwzględniał nie tylko dzisiejsze potrzeby, ale i przyszłe trendy. W CoreLTB Builders nie podążamy ślepo za modą. Wybieramy **inteligentne rozwiązania**, które podnoszą komfort, obniżają koszty utrzymania i sprawiają, że wartość Twojego domu będzie rosła z czasem. Oto kierunki, które dominują w nowoczesnej architekturze i które z sukcesem realizujemy dla naszych klientów.'
+              value: 'Projekt domu to decyzja na dekady. W CoreLTB Builders nie podążamy ślepo za modą. Wdrażamy **sprawdzone rozwiązania**, które zwracają się w konkretnych liczbach i podnoszą komfort życia. Oto 3 najważniejsze kierunki, które warto uwzględnić już na etapie projektu.'
             },
             {
               type: 'paragraph',
-              value: '**Ekologia i Energooszczędność jako Standard, Nie Luksus**'
+              value: '**1. Dom Energooszczędny – Oszczędzaj 6 000 zł Rocznie**'
             },
             {
               type: 'paragraph',
-              value: 'To już nie trend, a fundament nowoczesnego budownictwa. Rosnące ceny energii sprawiają, że inwestycja w technologie takie jak **pompy ciepła, rekuperacja (wentylacja z odzyskiem ciepła) i fotowoltaika** zwraca się znacznie szybciej niż kiedykolwiek. Projektując dom w 2026 roku, myślimy o jego **całkowitych kosztach życia (TCO)**, a nie tylko o kosztach budowy.'
+              value: '**Przykład:** Dom 150m² z tradycyjnym ogrzewaniem gazowym to koszt **~8 000 zł rocznie**. Ten sam dom z **pompą ciepła + fotowoltaiką + rekuperacją** to **~2 000 zł rocznie**.'
             },
             {
               type: 'paragraph',
-              value: '**Design Biofilny – Dom w Harmonii z Naturą**'
+              value: '**Kalkulacja:** Przez 20 lat to różnica **120 000 zł**. Koszt wdrożenia tych technologii to dodatkowe **~30 000 zł** w projekcie. **Zwrot inwestycji: 5 lat**. Przez kolejne 15 lat to czysta oszczędność w Twoim portfelu.'
             },
             {
               type: 'paragraph',
-              value: 'Zacieramy granice między wnętrzem a ogrodem. **Ogromne przeszklenia, naturalne materiały** (drewno, kamień, beton) i płynne przejście na taras to kluczowe elementy. Taki projekt nie tylko pięknie wygląda, ale też poprawia samopoczucie, wpuszczając do środka maksimum naturalnego światła i zieleni.'
+              value: 'W CoreLTB Builders projektujemy domy energooszczędne jako standard, bo to się po prostu **opłaca**.'
             },
             {
               type: 'paragraph',
-              value: '**Wielofunkcyjność Przestrzeni – Dom, Który Adaptuje się do Ciebie**'
+              value: '**2. Prosta Bryła – Taniej w Budowie, Cieplej w Użytkowaniu**'
             },
             {
               type: 'paragraph',
-              value: 'Praca zdalna i zmieniający się styl życia wymagają elastyczności. Projektujemy **przestrzenie, które łatwo można adaptować** – gabinet, który może stać się pokojem gościnnym, czy otwartą strefę dzienną z inteligentnie wydzielonymi strefami do pracy, relaksu i zabawy. Koniec ze sztywnym podziałem pomieszczeń.'
+              value: 'Skomplikowana bryła (wykusze, balkony, załamania dachu) to **wyższe koszty budowy** (+15-20%) i **wyższe straty ciepła** (więcej mostków termicznych). Prosta, zwarta bryła w stylu **"nowoczesnej stodoły"** to elegancja, oszczędność i funkcjonalność. Siłę projektu budujemy przez **jakość materiałów elewacyjnych**, nie przez skomplikowaną formę.'
             },
             {
               type: 'paragraph',
-              value: '**Prosta Bryła, Szlachetne Materiały – Siła Minimalizmu**'
+              value: '**3. Wielofunkcyjność Przestrzeni – Dom Gotowy na Przyszłość**'
             },
             {
               type: 'paragraph',
-              value: 'Najpopularniejsze projekty to te oparte na prostych, zwartych bryłach (często w stylu **"nowoczesnej stodoły"**). Taka forma jest nie tylko elegancka i ponadczasowa, ale przede wszystkim **tańsza w budowie i cieplejsza w eksploatacji** (mniej mostków termicznych). Siłę projektu buduje się poprzez jakość materiałów elewacyjnych, a nie skomplikowaną formę.'
+              value: 'Projektujemy przestrzenie, które **łatwo się adaptują** do zmieniających się potrzeb: gabinet może stać się pokojem gościnnym, otwarta strefa dzienna z elastycznym podziałem to miejsce do pracy, relaksu i zabawy. To rozwiązanie sprawdza się szczególnie w pracy zdalnej i gdy dzieci dorastają i opuszczają dom.'
             }
           ],
           imageSrc: '/images/uslugi/projektowanie/etapy/trendy.webp',
@@ -1001,9 +1066,10 @@ servicesAccordion: {
       header: {
         label: 'NAJCZĘŚCIEJ ZADAWANE PYTANIA',
         title: 'Odpowiedzi na Kluczowe Pytania o Projektowanie',
-        description: 'Sprawdź najważniejsze informacje, które pomogą Ci podjąć świadomą decyzję.',
+        description: 'Sprawdź najważniejsze informacje, które pomogą Ci podjąć świadomą decyzję. Podzieliliśmy pytania na kategorie, aby łatwiej znaleźć to, czego szukasz.',
       },
       services: [
+        // PODSTAWY PROJEKTOWANIA
         {
           iconName: 'clock',
           title: 'Ile trwa przygotowanie projektu indywidualnego?',
@@ -1019,44 +1085,20 @@ servicesAccordion: {
           ]
         },
         {
-          iconName: 'edit',
-          title: 'Czy mogę wprowadzić zmiany w projekcie w trakcie budowy?',
+          iconName: 'fileText',
+          title: 'Jaka jest różnica między projektem budowlanym a wykonawczym?',
           content: [
             {
               type: 'paragraph',
-              value: 'Tak, ale zmiany istotne (np. zmiana wielkości budynku) wymagają stworzenia projektu zamiennego. **Dlatego tak duży nacisk kładziemy na dopracowanie projektu do perfekcji, zanim ruszy budowa.**'
+              value: '**Projekt budowlany** to dokumentacja, którą składasz do urzędu, aby uzyskać pozwolenie na budowę. Zawiera rzuty, przekroje, elewacje i podstawowe rozwiązania konstrukcyjne.'
             },
             {
               type: 'paragraph',
-              value: 'Naszym celem jest minimalizacja zmian na budowie, co eliminuje stres, przestoje i dodatkowe koszty. **Projekt to mapa – im lepsza, tym spokojniejsza droga.**'
-            }
-          ]
-        },
-        {
-          iconName: 'edit',
-          title: 'Czy mogę wprowadzić zmiany w projekcie w trakcie budowy?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Tak, ale zmiany istotne (np. zmiana wielkości budynku) wymagają stworzenia projektu zamiennego. **Dlatego tak duży nacisk kładziemy na dopracowanie projektu do perfekcji, zanim ruszy budowa.**'
+              value: '**Projekt wykonawczy (techniczny)** to znacznie bardziej szczegółowa instrukcja dla ekipy budowlanej. Zawiera dokładne detale konstrukcyjne, specyfikacje materiałów i wszystkie niezbędne informacje do wykonania prac.'
             },
             {
               type: 'paragraph',
-              value: 'Naszym celem jest minimalizacja zmian na budowie, co eliminuje stres, przestoje i dodatkowe koszty. **Projekt to mapa – im lepsza, tym spokojniejsza droga.**'
-            }
-          ]
-        },
-        {
-          iconName: 'checkCircle',
-          title: 'Czy mogę sam kupić projekt i zlecić Wam tylko adaptację?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Oczywiście, świadczymy taką usługę. Co więcej, rekomendujemy skonsultowanie z nami wyboru projektu gotowego **jeszcze przed jego zakupem**.'
-            },
-            {
-              type: 'paragraph',
-              value: 'Nasz zespół budowlany zweryfikuje, czy projekt jest optymalny dla Twojej działki i nie zawiera kosztownych w realizacji rozwiązań. Dzięki temu **unikniesz pułapki zakupu pięknego, ale problematycznego projektu.**'
+              value: '**Wniosek:** Projekt budowlany to "przepustka" do urzędu, projekt wykonawczy to "instrukcja obsługi" dla budowlańców.'
             }
           ]
         },
@@ -1075,16 +1117,102 @@ servicesAccordion: {
           ]
         },
         {
-          iconName: 'mountain',
-          title: 'Co jeśli działka jest na skarpie lub to trudny teren?',
+          iconName: 'shieldCheck',
+          title: 'Czy projekt z internetu jest legalny?',
           content: [
             {
               type: 'paragraph',
-              value: 'To idealna sytuacja, w której **projekt indywidualny pokazuje swoją największą siłę**. Trudny teren to dla nas nie problem, a wyzwanie projektowe, które pozwala stworzyć unikalną i spektakularną architekturę.'
+              value: '**Tak, ale z warunkami.** Projekty z internetu (katalogowe) są legalne, ale podlegają **prawom autorskim**. Kupujesz **licencję na realizację**, a nie pełne prawa do projektu.'
             },
             {
               type: 'paragraph',
-              value: 'Adaptacja projektu gotowego na taką działkę jest często bardzo kosztowna i kompromisowa. W CoreLTB Builders **specjalizujemy się w projektach na wymagających działkach**, w pełni wykorzystując ich potencjał.'
+              value: '**Ważne:** Każdy projekt gotowy **wymaga adaptacji** do Twojej działki (zgodność z MPZP, dostosowanie fundamentów do geologii, itp.). Nie możesz wprowadzać zmian samodzielnie – **każda modyfikacja musi być pieczętowana przez uprawnionego architekta**.'
+            },
+            {
+              type: 'paragraph',
+              value: 'W CoreLTB Builders pomagamy wybrać projekt i przeprowadzamy pełną, legalną adaptację.'
+            }
+          ]
+        },
+
+        // ZMIANY I ADAPTACJE
+        {
+          iconName: 'edit',
+          title: 'Czy mogę wprowadzić zmiany w projekcie w trakcie budowy?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Tak, ale zmiany istotne (np. zmiana wielkości budynku, przebudowa konstrukcji) wymagają **projektu zamiennego** i zgłoszenia do urzędu. Drobne zmiany (np. przesunięcie ścianki działowej) można wykonać bez formalności.'
+            },
+            {
+              type: 'paragraph',
+              value: '**Dlatego tak duży nacisk kładziemy na dopracowanie projektu do perfekcji, zanim ruszy budowa.** Projekt to mapa – im lepsza, tym spokojniejsza droga. Naszym celem jest minimalizacja zmian na budowie, co eliminuje stres, przestoje i dodatkowe koszty.'
+            }
+          ]
+        },
+        {
+          iconName: 'alertCircle',
+          title: 'Czy mogę samodzielnie wprowadzić zmiany w kupionym projekcie?',
+          content: [
+            {
+              type: 'paragraph',
+              value: '**NIE.** To częsty błąd inwestorów. Każda zmiana w projekcie budowlanym **musi być zatwierdzona i opieczętowana przez architekta z odpowiednimi uprawnieniami**.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Samowolne zmiany mogą skutkować: **odmową odbioru przez nadzór budowlany**, **karami finansowymi** lub nawet **nakazem rozbiórki**.'
+            },
+            {
+              type: 'paragraph',
+              value: 'W CoreLTB Builders zajmujemy się **profesjonalnymi modyfikacjami projektów**, dbając o ich zgodność z prawem i normami technicznymi.'
+            }
+          ]
+        },
+        {
+          iconName: 'coins',
+          title: 'Ile kosztuje każda zmiana w projekcie po jego zatwierdzeniu?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Koszt zależy od zakresu zmiany. **Drobne modyfikacje** (np. przesunięcie okna) to **500 - 1 500 zł**. **Średnie zmiany** (np. przebudowa układu pomieszczeń) to **2 000 - 5 000 zł**. **Duże zmiany konstrukcyjne** (np. zmiana wielkości budynku) to **projekt zamiennych od 5 000 zł wzwyż**.'
+            },
+            {
+              type: 'paragraph',
+              value: '**Wniosek:** Warto dokładnie przemyśleć projekt przed jego zatwierdzeniem. W CoreLTB Builders poświęcamy czas na **szczegółowe konsultacje**, aby projekt był idealny od razu.'
+            }
+          ]
+        },
+        {
+          iconName: 'checkCircle',
+          title: 'Czy mogę sam kupić projekt i zlecić Wam tylko adaptację?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Oczywiście, świadczymy taką usługę. Co więcej, rekomendujemy skonsultowanie z nami wyboru projektu gotowego **jeszcze przed jego zakupem**.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Nasz zespół budowlany zweryfikuje, czy projekt jest optymalny dla Twojej działki i nie zawiera kosztownych w realizacji rozwiązań. Dzięki temu **unikniesz pułapki zakupu pięknego, ale problematycznego projektu.**'
+            }
+          ]
+        },
+
+        // PROCEDURY I PRAWO
+        {
+          iconName: 'map',
+          title: 'Czy projekt musi być sprawdzony przez geodetę?',
+          content: [
+            {
+              type: 'paragraph',
+              value: '**Tak.** Projekt zagospodarowania działki (część projektu budowlanego) wymaga **mapy do celów projektowych**, którą sporządza uprawniony geodeta.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Geodeta nanosi na mapę aktualny stan działki (granice, ukształtowanie terenu, istniejące budynki, drzewa). Ta mapa jest **podstawą do zaprojektowania usytuowania domu** i wymaganym załącznikiem do wniosku o pozwolenie na budowę.'
+            },
+            {
+              type: 'paragraph',
+              value: 'W CoreLTB Builders **koordynujemy współpracę z geodetą**, aby cały proces przebiegł sprawnie.'
             }
           ]
         },
@@ -1117,19 +1245,99 @@ servicesAccordion: {
           ]
         },
         {
-          iconName: 'coins',
-          title: 'Czy projekt gotowy z adaptacją to naprawdę oszczędność?',
+          iconName: 'home',
+          title: 'Czy mogę budować dom bez pozwolenia?',
           content: [
             {
               type: 'paragraph',
-              value: 'To zależy. **Koszt projektu gotowego (3 000 - 8 000 zł) + adaptacja (3 000 - 7 000 zł)** to finalnie **6 000 - 15 000 zł**. Jest to porównywalne z projektem indywidualnym (150 - 300 zł/m²), który jednak jest **idealnie dopasowany do Twojej działki i potrzeb.**'
+              value: '**Tak, ale tylko do 70m²**. Od lipca 2023 roku obowiązują nowe przepisy: domy **do 70m² powierzchni użytkowej** można budować **bez pozwolenia na budowę**, wystarczy zgłoszenie w urzędzie.'
             },
             {
               type: 'paragraph',
-              value: 'W CoreLTB Builders **pomagamy Ci podjąć najlepszą decyzję**, analizując wszystkie aspekty: budżet, oczekiwania i specyfikę działki.'
+              value: '**Warunki:** Dom musi być **parterowy** (bez poddasza użytkowego), na działce objętej **Miejscowym Planem Zagospodarowania Przestrzennego (MPZP)** lub z decyzją o **Warunkach Zabudowy (WZ)**. Odległość od granic działki min. **3 metry**.'
+            },
+            {
+              type: 'paragraph',
+              value: 'W CoreLTB Builders przygotowujemy **projekty kompaktowych domów do 70m²**, które spełniają wszystkie wymogi nowych przepisów.'
             }
           ]
-        }
+        },
+
+        // TRUDNE PRZYPADKI
+        {
+          iconName: 'mountain',
+          title: 'Co jeśli działka jest na skarpie lub to trudny teren?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'To idealna sytuacja, w której **projekt indywidualny pokazuje swoją największą siłę**. Trudny teren to dla nas nie problem, a wyzwanie projektowe, które pozwala stworzyć unikalną i spektakularną architekturę.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Adaptacja projektu gotowego na taką działkę jest często bardzo kosztowna i kompromisowa. W CoreLTB Builders **specjalizujemy się w projektach na wymagających działkach**, w pełni wykorzystując ich potencjał (np. podpiwniczenie częściowe, taras na poziomie parteru od południa, garaż wbudowany w skarpy).'
+            }
+          ]
+        },
+        {
+          iconName: 'alertTriangle',
+          title: 'Co jeśli w trakcie projektowania zmienią się warunki zabudowy?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Zdarza się rzadko, ale to możliwe (np. uchwalenie nowego MPZP). Jeśli zmiana nastąpi **przed złożeniem wniosku o pozwolenie**, musimy dostosować projekt do nowych przepisów (dodatkowy koszt zależny od zakresu zmian).'
+            },
+            {
+              type: 'paragraph',
+              value: 'Jeśli zmiana nastąpi **po uzyskaniu pozwolenia**, Twoje pozwolenie **pozostaje ważne** (prawo nabyte). W CoreLTB Builders **monitorujemy lokalną sytuację prawną** i informujemy Cię o ewentualnych zmianach na bieżąco.'
+            }
+          ]
+        },
+        {
+          iconName: 'users',
+          title: 'Co jeśli sąsiad się sprzeciwi mojemu projektowi?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Sąsiad ma prawo **złożyć uwagi** do projektu w ciągu **21 dni** od wywieszenia obwieszczenia w urzędzie. Urząd bada te uwagi i może: **odrzucić je** (jeśli są nieuzasadnione), **nakazać modyfikację projektu** (jeśli są uzasadnione).'
+            },
+            {
+              type: 'paragraph',
+              value: '**Jak się bronić:** Najlepszą obroną jest **projekt zgodny z prawem** (odległości od granic, wysokość budynku, architektura zgodna z MPZP). W CoreLTB Builders dbamy o to, by projekty były **prawnie niepodważalne**, co minimalizuje ryzyko skutecznych protestów sąsiadów.'
+            }
+          ]
+        },
+        {
+          iconName: 'xCircle',
+          title: 'Co jeśli projekt gotowy nie przejdzie w urzędzie?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Najczęstsze przyczyny odmowy: **niezgodność z MPZP/WZ** (np. przekroczenie wysokości budynku), **błędy formalne** (brak wymaganych uzgodnień), **nieprawidłowa dokumentacja**.'
+            },
+            {
+              type: 'paragraph',
+              value: '**Nasze rozwiązanie:** Przed zakupem projektu gotowego **weryfikujemy jego zgodność** z warunkami Twojej działki. Dzięki temu eliminujemy ryzyko odmowy. Jeśli mimo to urząd zgłosi uwagi, **szybko wprowadzamy poprawki** i ponownie składamy wniosek.'
+            }
+          ]
+        },
+        {
+          iconName: 'trendingUp',
+          title: 'Co jeśli projekt będę chciał rozbudować za 5 lat?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Doskonałe pytanie! To często pomijany aspekt. Jeśli planujesz **przyszłą rozbudowę** (np. dodanie garażu, powiększenie salonu), warto to uwzględnić już na etapie projektu.'
+            },
+            {
+              type: 'paragraph',
+              value: '**Nasze rozwiązanie:** Projektujemy dom z "zapasem" – fundamenty i konstrukcja przygotowane na przyszłą rozbudowę (dodatkowe zbrojenie, rezerwa w instalacjach). To kosztuje **niewiele na etapie budowy**, ale oszczędza **dziesiątki tysięcy złotych** przy rozbudowie w przyszłości.'
+            },
+            {
+              type: 'paragraph',
+              value: 'W CoreLTB Builders rozmawiamy z klientami o **długoterminowych planach** i projektujemy domy gotowe na przyszłość.'
+            }
+          ]
+        },
       ]
     },
 
@@ -1171,13 +1379,13 @@ servicesAccordion: {
       ],
     },
 
-// Sekcja 6: ContactCTA - 
+// Sekcja 6: ContactCTA - dane kontaktowe + formularz (CTA Box przeniesiony do EmotionalHero)
 
 contactCTA: {
   header: {
-    label: 'POROZMAWIAJMY O TWOIM PROJEKCIE',
-    title: 'Zmień Marzenie w Realny, Bezpieczny Plan',
-    description: 'Niezależnie od etapu, na którym jesteś, nasza bezpłatna i niezobowiązująca konsultacja to najlepszy pierwszy krok. Pomożemy Ci ocenić możliwości, wybrać optymalną drogę i stworzyć solidny fundament dla budowy Twojego wymarzonego domu.',
+    label: 'SKONTAKTUJ SIĘ Z NAMI',
+    title: 'Masz pytania? Napisz lub zadzwoń',
+    description: 'Wypełnij formularz, a odezwiemy się w ciągu 24 godzin.',
   },
   contactInfo: {
     phone: '+48 123 456 789',
@@ -1193,6 +1401,411 @@ contactCTA: {
 
     createdAt: '2025-01-24T10:00:00Z',
     updatedAt: '2025-01-24T10:00:00Z',
+  },
+
+  // ============================================
+  // 3. NADZÓR BUDOWLANY I DORADZTWO
+  // ============================================
+  {
+    slug: 'nadzor-i-doradztwo',
+    id: 'nadzor-i-doradztwo',
+    category: 'Nadzór i Doradztwo',
+    title: 'Nadzór Budowlany i Doradztwo',
+
+    // PageHeader
+    pageHeader: {
+      title: 'Nadzór Budowlany i Doradztwo',
+      watermarkText: 'NADZÓR',
+      backgroundImage: '/images/uslugi/nadzor-i-doradztwo/hero.webp',
+      breadcrumbs: [
+        { label: 'Strona główna', href: '/' },
+        { label: 'Oferta', href: '/oferta' },
+        { label: 'Nadzór i Doradztwo', href: '/oferta/nadzor-i-doradztwo' },
+      ],
+    },
+
+    // Sekcja 1: Emotional Hero
+    emotionalHero: {
+      label: 'NADZÓR BUDOWLANY I DORADZTWO',
+      headline: 'Twoja Budowa, Twoje Pieniądze, Nasza Ochrona',
+      subtitle:
+        'Aż 7 na 10 kosztownych błędów na budowie to efekt pominięcia fachowego nadzoru. Najczęstsze z nich to źle dobrany rodzaj fundamentu do warunków gruntu, zbyt płytkie posadowienie, użycie słabej jakości materiałów czy brak odpowiedniej izolacji przeciwwilgociowej. Takie błędy mogą prowadzić do pękania ścian, zawilgoceń i dużych kosztów napraw. Dlatego warto mieć zaufanego specjalistę na każdym etapie budowy.',
+      benefits: [
+        'Inspektor jako Twój osobisty adwokat na budowie',
+        'Wykrywamy błędy zanim staną się kosztownym problemem',
+        'Doświadczenie z 500+ realizacji – znamy każdą pułapkę',
+      ],
+      // CTA Box
+      ctaBoxTitle: '☎ Umów Bezpłatną Konsultację',
+      ctaBoxBenefits: [
+        'Ocenimy bieżący stan Twojej budowy (jeśli trwa)',
+        'Określimy zakres nadzoru dopasowany do Twoich potrzeb',
+        'Wycenimy usługę nadzoru inwestorskiego',
+        'Odpowiemy na wszystkie Twoje pytania i wątpliwości',
+      ],
+      ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca. Możemy dołączyć na każdym etapie budowy.',
+      ctaBoxButtons: [
+        {
+          text: 'Zadzwoń do Nas',
+          href: 'tel:+48123456789',
+          variant: 'primary',
+        },
+        {
+          text: 'Napisz do Nas',
+          href: '#kontakt',
+          variant: 'secondary',
+        },
+      ],
+    },
+
+    // Sekcja 2: Philosophy Timeline - CZEKA NA DANE
+    philosophyTimeline: {
+      header: {
+        label: 'NASZA FILOZOFIA NADZORU',
+        title: 'Nadzór Budowlany, Który Jest Po Twojej Stronie',
+        description: 'W CoreLTB Builders wierzymy, że dobry inspektor to nie tylko kontroler, ale Twój partner na każdym etapie budowy. Nasza rola nie kończy się na formalnym „odhaczaniu” kolejnych etapów i podpisywaniu protokołów. Działamy dla Ciebie — czuwając nad jakością, doradzając w trudnych decyzjach, reagując na nieścisłości i nagłe sytuacje.',
+      },
+      items: [
+        {
+          number: 1,
+          iconName: 'shield',
+          title: 'Pełne wsparcie i reprezentacja interesów inwestora',
+          description: 'Jesteśmy z Tobą. Pilnujemy, by wykonawcy stosowali właściwe materiały, rozwiązania i nie szli na skróty. Chętnie wyjaśniamy techniczne zagadnienia i jesteśmy obecni w rozmowach z ekipą budowlaną.'
+        },
+        {
+          number: 2,
+          iconName: 'trendingUp',
+          title: 'Realna kontrola kosztów',
+          description: 'Dobry nadzór nie tylko chroni przed błędami, ale pozwala uniknąć niepotrzebnych wydatków. Pilnujemy budżetu i doradzamy, gdzie można zaoszczędzić bez ryzyka dla bezpieczeństwa i jakości.'
+        },
+        {
+          number: 3,
+          iconName: 'award',
+          title: 'Doświadczenie poparte realizacjami',
+          description: 'Znamy najczęstsze problemy i wiemy, gdzie mogą pojawić się nieoczekiwane trudności. Dzięki praktycznemu doświadczeniu szybko wykrywamy potencjalne zagrożenia – zanim staną się kosztownym problemem.'
+        }
+      ],
+    
+      image: {
+        src: '/images/uslugi/nadzor-i-doradztwo/filozofia-nadzoru.webp',
+        alt: 'Inspektor nadzoru CoreLTB Builders omawia plan z inwestorem na placu budowy',
+      },
+    },
+
+    // Sekcja 3: Cooperation Timeline NoLine - CZEKA NA DANE (7 kroków)
+    cooperationTimelineNoLine: {
+      header: {
+        label: 'ZAKRES NADZORU',
+        title: 'Nasze Usługi Nadzoru',
+        description: 'Poznaj kluczowe elementy profesjonalnego nadzoru budowlanego.',
+      },
+      steps: [
+        // PLACEHOLDER - 7 kroków czeka na dane
+        {
+          id: 'kierownik-vs-inspektor',
+          number: 1,
+          icon: 'users',
+          label: 'Kierownik vs Inspektor',
+          title: 'Kierownik Budowy vs Inspektor Nadzoru',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'To jedna z najważniejszych, a zarazem najbardziej mylących kwestii na starcie budowy. Choć obie role brzmią podobnie, ich cele są fundamentalnie różne. Zrozumienie tej różnicy to pierwszy krok do świadomego i bezpiecznego prowadzenia inwestycji.'
+            },
+            {
+              type: 'list',
+              items: [
+                '**Kierownik Budowy:** Jest obowiązkowym zarządcą budowy, odpowiedzialnym za organizację i harmonogram prac. Najczęściej reprezentuje interes generalnego wykonawcy.',
+                '**Inspektor Nadzoru Inwestorskiego:** Jest Twoim prywatnym ekspertem i strażnikiem na budowie. Reprezentuje **wyłącznie Ciebie** i ma za zadanie kontrolować jakość prac oraz chronić Twój budżet.'
+              ]
+            },
+            {
+              type: 'paragraph',
+              value: 'W CoreLTB Builders oferujemy obie usługi, doskonale rozumiejąc specyfikę każdej z ról. Zapewniamy profesjonalnego Kierownika Budowy, który jest Twoim partnerem i doradcą, a także niezależnego Inspektora Nadzoru, który staje się Twoją gwarancją najwyższej jakości.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Chcesz poznać wszystkie szczegóły i dowiedzieć się, które rozwiązanie jest najlepsze dla Twojej budowy? **Przeczytaj nasz szczegółowy artykuł porównawczy.**' // <<-- TUTAJ BĘDZIE LINK DO KLASTRA
+            }
+          ],
+          imageSrc: '/images/uslugi/nadzor-i-doradztwo/etapy/kierownik-vs-inspektor.webp',
+          imageAlt: 'Kierownik Budowy vs Inspektora Nadzoru Inwestorskiego'
+        },
+        {
+          id: 'kierownik-budowy',
+          number: 2,
+          icon: 'hardHat',
+          label: 'Kierownik Budowy',
+          title: 'Usługa Kierownika Budowy',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Zatrudnienie Kierownika Budowy to **ustawowy obowiązek każdego inwestora**. To on formalnie prowadzi budowę, odpowiada za jej zgodność z projektem i przepisami. Niestety, rynkowa praktyka często sprowadza tę kluczową rolę do minimum. W CoreLTB Builders podchodzimy do tego zupełnie inaczej.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Dla nas Kierownik Budowy to nie tylko formalność, ale **Twój najważniejszy partner i doradca techniczny na placu budowy.** Oprócz pełnienia wszystkich obowiązków wynikających z Prawa Budowlanego, nasz Kierownik zapewnia:'
+            },
+            {
+              type: 'list',
+              items: [
+                '**Aktywną Obecność i Kontrolę:** Regularne wizyty na budowie w kluczowych momentach (np. przed zalaniem fundamentów, przy montażu zbrojenia), aby osobiście zweryfikować jakość prac.',
+                '**Proaktywne Doradztwo Techniczne:** Nie tylko reagujemy na problemy, ale im zapobiegamy. Doradzamy w kwestii doboru materiałów i technologii, często znajdując rozwiązania, które generują realne oszczędności.',
+                '**Stały Kontakt i Transparentną Komunikację:** Jesteśmy do Twojej dyspozycji. Regularnie informujemy o postępach, wyjaśniamy skomplikowane kwestie techniczne i zapewniamy pełną dokumentację fotograficzną.',
+                '**Pełną Obsługę Formalną:** Bierzemy na siebie cały ciężar prowadzenia dokumentacji, w tym dziennika budowy, protokołów i przygotowania dokumentów do odbioru końcowego.'
+              ]
+            },
+            {
+              type: 'paragraph',
+              value: 'Wybierając Kierownika Budowy z CoreLTB Builders, wybierasz **spokój ducha i pewność**, że Twoja inwestycja jest w rękach zaangażowanego profesjonalisty, który dba o Twój interes.'
+            }
+          ],
+          imageSrc: '/images/uslugi/nadzor-i-doradztwo/etapy/kierownik-budowy.webp',
+          imageAlt: 'Kierownik Budowy CoreLTB Builders omawia postępy prac z inwestorem na budowie'
+        },
+        {
+          id: 'inspektor-nadzoru',
+          number: 3,
+          icon: 'users',
+          label: 'Inspektor Nadzoru',
+          title: 'Inspektor Nadzoru Inwestorskiego',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Zatrudnienie Inspektora Nadzoru to **Twoja strategiczna decyzja o maksymalnym zabezpieczeniu inwestycji**. To usługa dla tych, którzy nie godzą się na żadne kompromisy i chcą mieć 100% pewności, że każdy detal ich przyszłego domu jest wykonany perfekcyjnie. Nasz Inspektor to Twój osobisty strażnik jakości na placu budowy.'
+            },
+            {
+              type: 'paragraph',
+              value: '**Kiedy szczególnie warto zainwestować w Inspektora Nadzoru?**'
+            },
+            {
+              type: 'list',
+              items: [
+                '**Gdy budujesz zdalnie:** Jesteśmy Twoimi oczami i uszami na miejscu, regularnie kontrolując każdy etap.',
+                '**Gdy nie masz wiedzy technicznej:** Zdejmujemy z Ciebie ciężar oceny skomplikowanych prac budowlanych.',
+                '**Przy skomplikowanych projektach:** Pilnujemy, by nawet najtrudniejsze detale architektoniczne były wykonane zgodnie z projektem.',
+                '**Gdy chcesz uniknąć konfrontacji:** Bierzemy na siebie wszystkie rozmowy techniczne i ewentualne spory z wykonawcą.'
+              ]
+            },
+            {
+              type: 'paragraph',
+              value: '**Zakres kontroli naszego Inspektora obejmuje m.in.:**'
+            },
+            {
+              type: 'list',
+              items: [
+                '**Weryfikację jakości materiałów:** Sprawdzamy, czy na budowę trafiają materiały zgodne z projektem i posiadające wymagane atesty.',
+                '**Kontrolę prac zanikających:** Drobiazgowo sprawdzamy zbrojenia, izolacje fundamentów i hydroizolacje, zanim zostaną zakryte.',
+                '**Odbiory kluczowych etapów:** Uczestniczymy w odbiorach stanu surowego, instalacji, tynków i posadzek, wyłapując wszelkie usterki.',
+                '**Reprezentowanie Cię przed wykonawcą:** W Twoim imieniu wydajemy polecenia i egzekwujemy najwyższą jakość wykonania.'
+              ]
+            }
+          ],
+          imageSrc: '/images/uslugi/nadzor-i-doradztwo/etapy/inspektor-nadzoru.webp',
+          imageAlt: 'Inspektor Nadzoru CoreLTB Builders kontroluje zbrojenie fundamentów na budowie'
+        },
+        {
+          id: 'odbiory-techniczne',
+          number: 4,
+          icon: 'clipboardCheck',
+          label: 'Odbiory Techniczne',
+          title: 'Odbiory Techniczne',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Odbiór techniczny to moment prawdy – finalny etap, który formalnie kończy budowę i pozwala Ci bezpiecznie zamieszkać w swoim wymarzonym domu. To także ostatnia szansa na bezkosztowe usunięcie wszelkich usterek i niedociągnięć przez wykonawcę. Przeprowadzony bez fachowej wiedzy, może stać się źródłem przyszłych problemów. Z nami, jest gwarancją Twojego spokoju.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Nasz inspektor, wyposażony w profesjonalny sprzęt, przeprowadza drobiazgowy audyt techniczny, sprawdzając m.in.:'
+            },
+            {
+              type: 'list',
+              items: [
+                '**Jakość tynków i wylewek:** Kontrola pionów, poziomów, kątów prostych i gładkości powierzchni.',
+                '**Stolarkę okienną i drzwiową:** Sprawdzenie prawidłowości montażu, szczelności, regulacji oraz ewentualnych uszkodzeń.',
+                '**Instalacje:** Weryfikacja rozmieszczenia i działania punktów elektrycznych, podejść wodno-kanalizacyjnych oraz wydajności wentylacji.',
+                '**Zgodność z projektem:** Porównanie stanu faktycznego z dokumentacją projektową co do milimetra.',
+                '**Elementy zewnętrzne:** Kontrola elewacji, parapetów, rynien i obróbek blacharskich.'
+              ]
+            },
+            {
+              type: 'paragraph',
+              value: 'Wynikiem naszej pracy jest **szczegółowy protokół odbioru** z listą ewentualnych usterek i terminem ich usunięcia przez wykonawcę. Dzięki temu masz pewność, że odbierasz dom wykonany **zgodnie z najwyższymi standardami sztuki budowlanej.**'
+            }
+          ],
+          imageSrc: '/images/uslugi/nadzor-i-doradztwo/etapy/odbiory-techniczne.webp',
+          imageAlt: 'Inspektor CoreLTB Builders sprawdza piony ścian podczas odbioru technicznego domu z Porothermu'
+        },
+      ],
+    },
+
+    // Sekcja 4: Services Accordion (FAQ) - CZEKA NA DANE
+    servicesAccordion: {
+      header: {
+        label: 'NAJCZĘŚCIEJ ZADAWANE PYTANIA',
+        title: 'Odpowiedzi na Kluczowe Pytania',
+        description: 'Sprawdź najważniejsze informacje, które pomogą Ci podjąć świadomą i bezpieczną decyzję. Podzieliliśmy pytania na kategorie, aby łatwiej znaleźć to, czego szukasz.',
+      },
+      services: [
+        // PODSTAWY NADZORU
+        {
+          iconName: 'wallet',
+          title: 'Ile kosztuje profesjonalny nadzór budowlany?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Koszt jest zawsze indywidualny i zależy od złożoności projektu, ale kompleksowa usługa **Inspektora Nadzoru** dla domu jednorodzinnego to zazwyczaj inwestycja rzędu **1-2% wartości całej budowy**.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Pojedyncza wizyta kontrolna to koszt od **300 do 500 zł**. Biorąc pod uwagę potencjalne oszczędności wynikające z eliminacji błędów, jest to jedna z najbardziej opłacalnych decyzji w całym procesie.'
+            }
+          ]
+        },
+        {
+          iconName: 'users',
+          title: 'Czy kierownik budowy i inspektor nadzoru to może być ta sama osoba?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Absolutnie nie. **Polskie prawo budowlane zabrania łączenia tych dwóch funkcji** na jednej budowie. Co więcej, ich cele są często sprzeczne.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Kierownik budowy dba o sprawną realizację, a Inspektor Nadzoru o **najwyższą jakość**, nawet jeśli wymaga to dodatkowego czasu. Rozdzielenie tych ról jest fundamentem prawidłowej i niezależnej kontroli na budowie.'
+            }
+          ]
+        },
+        {
+          iconName: 'fileText',
+          title: 'Co to jest dziennik budowy i kto za niego odpowiada?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Dziennik budowy to **najważniejszy dokument urzędowy na placu budowy**, w którym odnotowuje się cały przebieg prac. Jest dowodem w ewentualnych sporach.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Za jego prowadzenie formalnie odpowiada **Kierownik Budowy**. Nasz Inspektor Nadzoru ma prawo i obowiązek dokonywania w nim wpisów dotyczących kontroli, wykrytych usterek i zaleceń, co stanowi oficjalny ślad jego działań.'
+            }
+          ]
+        },
+    
+        // PRZEBIEG WSPÓŁPRACY
+        {
+          iconName: 'calendar',
+          title: 'Jak często inspektor powinien być na budowie?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Częstotliwość zależy od etapu prac. Kluczowa jest obecność w momentach krytycznych i przy tzw. **pracach zanikających**, takich jak:'
+            },
+            {
+                type: 'list',
+                items: [
+                    'Przed zalaniem fundamentów (kontrola zbrojenia i szalunków).',
+                    'Przy montażu konstrukcji dachu.',
+                    'Przed zakryciem instalacji.',
+                    'Podczas odbiorów poszczególnych etapów (stan surowy, tynki).'
+                ]
+            },
+            {
+              type: 'paragraph',
+              value: 'W CoreLTB Builders ustalamy harmonogram wizyt indywidualnie, gwarantując **kontrolę nad wszystkimi najważniejszymi etapami budowy**.'
+            }
+          ]
+        },
+        {
+          iconName: 'alertTriangle',
+          title: 'Co jeśli inspektor znajdzie poważny błąd?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'To jest właśnie sedno naszej pracy. W takiej sytuacji inspektor natychmiast **wstrzymuje prace i wydaje Kierownikowi Budowy polecenie usunięcia usterki**, co jest odnotowywane w dzienniku budowy.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Reprezentując Twój interes, dopilnowujemy, aby wszystko zostało naprawione **zgodnie ze sztuką i na koszt wykonawcy**, chroniąc Cię przed finansowymi konsekwencjami błędu.'
+            }
+          ]
+        },
+        {
+          iconName: 'fileCheck',
+          title: 'Czy inspektor może pomóc mi zweryfikować umowę z wykonawcą?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Tak. To jedna z usług doradczych, którą świadczymy. **Przed podpisaniem umowy warto ją z nami skonsultować.**'
+            },
+            {
+              type: 'paragraph',
+              value: 'Pomożemy Ci zidentyfikować potencjalne "haczyki", nieprecyzyjne zapisy i upewnić się, że Twoje interesy są w pełni zabezpieczone na papierze, jeszcze przed rozpoczęciem prac. **Dobra umowa to podstawa spokojnej budowy.**'
+            }
+          ]
+        }
+      ]
+    },
+
+    // Sekcja 5: Testimonials
+    testimonials: {
+      header: {
+        label: 'CO MÓWIĄ NASI KLIENCI',
+        title: 'Opinie o naszym nadzorze budowlanym',
+        description: 'Przekonaj się, jak nadzór uratował inwestycje naszych klientów.',
+        theme: 'light' as const,
+      },
+      testimonials: [
+        {
+          quote:
+            'Nadzór CoreLTB wykrył poważny błąd w izolacji fundamentów, który mógł kosztować nas 50 000 zł w przyszłości. To była najlepsza decyzja w całej budowie.',
+          author: {
+            image: {
+              src: '/images/testimonials/marek-kasia.jpg',
+              alt: 'Marek i Kasia',
+            },
+            name: 'Marek i Kasia',
+            role: 'Inwestorzy prywatni',
+          },
+          rating: 5.0,
+        },
+        {
+          quote:
+            'Bez nadzoru byśmy tego nie zauważyli. Kierownik budowy z CoreLTB na bieżąco kontrolował każdy etap i trzymał wykonawcę w ryzach. Spokój ducha bezcenny.',
+          author: {
+            image: {
+              src: '/images/testimonials/piotr-nowicki.jpg',
+              alt: 'Piotr Nowicki',
+            },
+            name: 'Piotr Nowicki',
+            role: 'Właściciel domu jednorodzinnego',
+          },
+          rating: 5.0,
+        },
+      ],
+    },
+
+    // Sekcja 6: ContactCTA
+    contactCTA: {
+      header: {
+        label: 'ZABEZPIECZ SWOJĄ INWESTYCJĘ',
+        title: 'Każdy Dzień bez Nadzoru to Ryzyko',
+        description: 'Umów bezpłatną konsultację i dowiedz się, jak chronimy Twoją budowę przed kosztownymi błędami.',
+      },
+      contactInfo: {
+        phone: '+48 123 456 789',
+        email: 'kontakt@coreltb.pl',
+        address: 'ul. Przykładowa 123, Warszawa',
+      },
+    },
+
+    // SEO
+    metaTitle: 'Nadzór Budowlany | CoreLTB Builders - Ochrona Twojej Inwestycji',
+    metaDescription:
+      'Profesjonalny nadzór budowlany chroni Twoją inwestycję. 15 lat doświadczenia. Kontrola jakości, budżetu i harmonogramu. Unikaj kosztownych błędów. Bezpłatna konsultacja.',
+
+    createdAt: '2025-10-24T10:00:00Z',
+    updatedAt: '2025-10-24T10:00:00Z',
   },
 ];
 

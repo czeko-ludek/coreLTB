@@ -29,6 +29,32 @@ export function TimelineNav({ items, activeStep }: TimelineNavProps) {
     }
   };
 
+  // Dynamiczny grid w zależności od liczby elementów
+  const itemCount = items.length;
+  const getGridClasses = () => {
+    if (itemCount === 1) {
+      return 'grid grid-cols-1 gap-3 md:gap-4 justify-items-center max-w-xs mx-auto';
+    } else if (itemCount === 2) {
+      return 'grid grid-cols-2 gap-3 md:gap-4 justify-items-center max-w-md mx-auto';
+    } else if (itemCount === 3) {
+      return 'grid grid-cols-3 gap-3 md:gap-4 justify-items-center max-w-lg mx-auto';
+    } else if (itemCount === 4) {
+      return 'grid grid-cols-4 gap-3 md:gap-4 justify-items-center max-w-2xl mx-auto';
+    } else if (itemCount === 5) {
+      // 5 elementów - wyśrodkowany grid 5 kolumn (mobile: 3 + 2)
+      return 'grid grid-cols-3 md:grid-cols-5 gap-3 md:gap-4 justify-items-center max-w-3xl mx-auto';
+    } else if (itemCount === 6) {
+      // 6 elementów - grid 3/6 kolumn
+      return 'grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-4 justify-items-center max-w-4xl mx-auto';
+    } else if (itemCount === 7) {
+      // 7 elementów - grid 4/7 kolumn
+      return 'grid grid-cols-4 md:grid-cols-7 gap-3 md:gap-4';
+    } else {
+      // 8 elementów - klasyczny grid 4/8 kolumn
+      return 'grid grid-cols-4 md:grid-cols-8 gap-3 md:gap-4';
+    }
+  };
+
   return (
     <nav
       className="mb-16 md:mb-20"
@@ -42,8 +68,8 @@ export function TimelineNav({ items, activeStep }: TimelineNavProps) {
           <div className="hidden md:block absolute top-6 md:top-7 left-0 right-0 h-0.5 bg-primary/30"
                style={{ margin: '0 7%' }} />
 
-          {/* Desktop & Mobile - grid with labels below */}
-          <div className="relative grid grid-cols-4 md:grid-cols-8 gap-3 md:gap-4">
+          {/* Desktop & Mobile - dynamiczny grid */}
+          <div className={`relative ${getGridClasses()}`}>
             {items.map((item) => (
               <a
                 key={item.id}

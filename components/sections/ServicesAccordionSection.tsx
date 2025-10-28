@@ -14,14 +14,21 @@ export const ServicesAccordionSection: React.FC<ServicesAccordionSectionProps> =
   services,
 }) => {
   return (
-    <section id="faq-projektowanie" className="py-16 sm:py-20 lg:py-24 scroll-mt-24" style={{ backgroundColor: '#efebe7' }}>
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <SectionHeader {...header} align="center" theme="light" />
+    <section id="faq-section" className="py-16 sm:py-20 lg:py-24 scroll-mt-24" style={{ backgroundColor: '#efebe7' }}>
+      <div className="container mx-auto px-4">
+        {/* 2-kolumnowy layout: Header (lewo) + Pytania (prawo) */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-12">
+          {/* Lewa kolumna - Header */}
+          <div>
+            <SectionHeader {...header} align="left" theme="light" />
+          </div>
 
-        <div className="mt-12 space-y-5">
-          {services.map((service, index) => (
-            <AccordionItem key={index} {...service} />
-          ))}
+          {/* Prawa kolumna - Pytania */}
+          <div className="space-y-4">
+            {services.map((service, index) => (
+              <AccordionItem key={index} {...service} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
