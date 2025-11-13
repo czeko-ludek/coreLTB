@@ -65,6 +65,7 @@ import {
   AlertCircle,
   XCircle,
   Map,
+  Ruler,
 } from 'lucide-react';
 
 const iconMap = {
@@ -135,6 +136,7 @@ const iconMap = {
   alertCircle: AlertCircle,
   xCircle: XCircle,
   map: Map,
+  ruler: Ruler,
 };
 
 export type IconName = keyof typeof iconMap;

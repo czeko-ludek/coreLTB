@@ -1807,6 +1807,156 @@ contactCTA: {
     createdAt: '2025-10-24T10:00:00Z',
     updatedAt: '2025-10-24T10:00:00Z',
   },
+
+  // === USŁUGI TECHNICZNE (Ekspertyzy i Pomiary) ===
+  {
+    slug: 'uslugi-techniczne',
+    id: 'uslugi-techniczne',
+    category: 'Usługi Techniczne',
+    title: 'Ekspertyzy i Pomiary Budowlane',
+
+    // PageHeader
+    pageHeader: {
+      title: 'Ekspertyzy i Pomiary Budowlane',
+      watermarkText: 'USŁUGI TECHNICZNE',
+      backgroundImage: '/images/uslugi/uslugi-techniczne/hero.webp',
+      breadcrumbs: [
+        { label: 'Strona główna', href: '/' },
+        { label: 'Oferta', href: '/oferta' },
+        { label: 'Usługi Techniczne', href: '' },
+      ],
+    },
+
+    // Sekcja 1: EmotionalHero
+    emotionalHero: {
+      label: 'EKSPERTYZY I POMIARY BUDOWLANE',
+      headline: 'Co Kryje Się Pod Ziemią? Co Mówią Liczby? Co Widzi Ekspert?',
+      subtitle:
+        'Fundamentem każdej udanej budowy są twarde dane, które pozwalają uniknąć najdroższych błędów – pękających ścian, przekroczonego budżetu czy problemów prawnych. W CoreLTB Builders działamy jak system wczesnego ostrzegania dla Twojej inwestycji. Dostarczamy precyzyjne pomiary, rzetelne ekspertyzy i zrozumiałe kosztorysy, które zamieniają niewiadome w pewność.',
+      benefits: [
+        'Precyzyjne dane, które eliminują ryzyko kosztownych błędów',
+        'Jeden zespół ekspertów – od geologii po kosztorys budowlany',
+        'Raporty i analizy w zrozumiałym języku, bez technicznego żargonu',
+      ],
+      // CTA Box
+      ctaBoxTitle: '☎ Umów Konsultację Techniczną (30 min, online/stacjonarnie)',
+      ctaBoxBenefits: [
+        'Określimy, jakich badań i pomiarów potrzebuje Twoja działka',
+        'Wycenimy niezbędne ekspertyzy i usługi geodezyjne',
+        'Wskażemy potencjalne ryzyka techniczne i prawne',
+        'Odpowiemy na wszystkie Twoje pytania i wątpliwości',
+      ],
+      ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
+      ctaBoxButtons: [
+        {
+          text: 'Zadzwoń do Nas',
+          href: 'tel:+48123456789',
+        },
+        {
+          text: 'Napisz do Nas',
+          href: '#kontakt',
+        },
+      ],
+    },
+
+    // Sekcja 2: PhilosophyTimeline
+    philosophyTimeline: {
+      header: {
+        label: 'NASZA FILOZOFIA',
+        title: 'Dane, Które Budują Pewność',
+        description: 'Nie zgadujemy. Mierzymy, badamy i sprawdzamy. Bo budowa to nie miejsce na domysły.',
+        theme: 'light' as const,
+      },
+      items: [
+        {
+          number: 1,
+          iconName: 'search',
+          title: 'Precyzyjne Badania Gruntu',
+          description:
+            'Każda działka skrywa tajemnice. Badania geologiczne ujawniają nośność gruntu, poziom wód gruntowych i potencjalne zagrożenia, zanim wbijesz pierwszą łopatę.',
+        },
+        {
+          number: 2,
+          iconName: 'ruler',
+          title: 'Geodezja i Pomiary Wykonawcze',
+          description:
+            'Tyczenie budynku, inwentaryzacje powykonawcze, mapa do celów prawnych – geodeta to kluczowy gracz w każdej budowie. Bez niego możesz zbudować dom 30 cm za blisko granicy.',
+        },
+        {
+          number: 3,
+          iconName: 'fileText',
+          title: 'Kosztorysy i Audyty Techniczne',
+          description:
+            'Ile naprawdę kosztuje Twój dom? Profesjonalny kosztorys chroni Cię przed zawyżonymi ofertami wykonawców i pozwala negocjować z pozycji wiedzy.',
+        },
+      ],
+      image: {
+        src: '/images/uslugi/uslugi-techniczne/filozofia-pomiary.webp',
+        alt: 'Zespół CoreLTB podczas pomiarów geodezyjnych',
+      },
+    },
+
+    // Sekcja 5: Testimonials
+    testimonials: {
+      header: {
+        label: 'CO MÓWIĄ NASI KLIENCI',
+        title: 'Opinie o naszych usługach technicznych',
+        description: 'Przekonaj się, jak dokładne dane uratowały inwestycje naszych klientów.',
+        theme: 'light' as const,
+      },
+      testimonials: [
+        {
+          quote:
+            'Badania gruntu wykazały, że nasz grunt wymaga pali fundamentowych. Gdybyśmy tego nie wiedzieli i zbudowali dom na standardowych fundamentach, moglibyśmy mieć pęknięcia i koszty napraw rzędu 100 000 zł. CoreLTB uratowało nasze marzenie o domu.',
+          author: {
+            image: {
+              src: '/images/testimonials/marek-kasia.jpg',
+              alt: 'Marek i Kasia Nowak',
+            },
+            name: 'Marek i Kasia Nowak',
+            role: 'Inwestorzy prywatni',
+          },
+          rating: 5.0,
+        },
+        {
+          quote:
+            'Kosztorys wykonany przez CoreLTB pozwolił nam odkryć, że oferta jednego z wykonawców była zawyżona o 120 000 zł. Mając twarde dane, negocjowaliśmy z pozycji siły i znaleźliśmy uczciwego wykonawcę.',
+          author: {
+            image: {
+              src: '/images/testimonials/anna-kowalczyk.jpg',
+              alt: 'Anna Kowalczyk',
+            },
+            name: 'Anna Kowalczyk',
+            role: 'Właścicielka domu jednorodzinnego',
+          },
+          rating: 5.0,
+        },
+      ],
+    },
+
+    // Sekcja 6: ContactCTA
+    contactCTA: {
+      header: {
+        label: 'ZBUDUJ NA PEWNYCH FUNDAMENTACH',
+        title: 'Każdy Dom Zaczyna Się od Danych',
+        description:
+          'Umów bezpłatną konsultację i dowiedz się, jakie badania i pomiary są kluczowe dla Twojej inwestycji.',
+      },
+      contactInfo: {
+        phone: '+48 123 456 789',
+        email: 'kontakt@coreltb.pl',
+        address: 'ul. Przykładowa 123, Warszawa',
+      },
+    },
+
+    // SEO
+    metaTitle: 'Usługi Techniczne - Ekspertyzy i Pomiary | CoreLTB Builders',
+    metaDescription:
+      'Profesjonalne badania gruntu, pomiary geodezyjne i kosztorysy budowlane. Chronimy Twoją inwestycję przed kosztownymi błędami. 15 lat doświadczenia. Bezpłatna konsultacja.',
+
+    createdAt: '2025-10-28T10:00:00Z',
+    updatedAt: '2025-10-28T10:00:00Z',
+  },
 ];
 
 export const getServiceV2BySlug = (slug: string): ServiceV2 | undefined =>
