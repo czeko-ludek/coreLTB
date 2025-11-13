@@ -34,7 +34,8 @@
       "Bash(git log:*)",
       "Bash(del NUL)",
       "Bash(del sectionsServiceHeroSection.tsx sectionsIconicFeaturesSection.tsx sectionsFlexibilitySection.tsx sectionsProcessTimelineSection.tsx sectionsProcessInfographicSection.tsx sectionsProofSection.tsx sectionsContentSection.tsx sectionsServiceAreaSection.tsx sectionsRealizationsGallery.tsx sectionsPhilosophySection.tsx sectionsClientTestimonialsSection.tsx sectionsCaseStudiesSection.tsx sectionsServiceIntroSection.tsx)",
-      "Bash(del ServiceFeatureCard.tsx FlexibilityOptionCard.tsx ProcessStepCard.tsx ProcessStepDetailed.tsx ProofStatCard.tsx CaseStudyCard.tsx)"
+      "Bash(del ServiceFeatureCard.tsx FlexibilityOptionCard.tsx ProcessStepCard.tsx ProcessStepDetailed.tsx ProofStatCard.tsx CaseStudyCard.tsx)",
+      "Bash(git restore:*)"
     ],
     "deny": [],
     "ask": []
