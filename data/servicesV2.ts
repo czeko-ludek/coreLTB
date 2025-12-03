@@ -1830,7 +1830,7 @@ contactCTA: {
     // Sekcja 1: EmotionalHero
     emotionalHero: {
       label: 'EKSPERTYZY I POMIARY BUDOWLANE',
-      headline: 'Co Kryje Się Pod Ziemią? Co Mówią Liczby? Co Widzi Ekspert?',
+      headline: 'Zbuduj na Pewnym Gruncie. I na Twardych Danych',
       subtitle:
         'Fundamentem każdej udanej budowy są twarde dane, które pozwalają uniknąć najdroższych błędów – pękających ścian, przekroczonego budżetu czy problemów prawnych. W CoreLTB Builders działamy jak system wczesnego ostrzegania dla Twojej inwestycji. Dostarczamy precyzyjne pomiary, rzetelne ekspertyzy i zrozumiałe kosztorysy, które zamieniają niewiadome w pewność.',
       benefits: [
@@ -1839,7 +1839,7 @@ contactCTA: {
         'Raporty i analizy w zrozumiałym języku, bez technicznego żargonu',
       ],
       // CTA Box
-      ctaBoxTitle: '☎ Umów Konsultację Techniczną (30 min, online/stacjonarnie)',
+      ctaBoxTitle: '☎ Umów Konsultację Techniczną)',
       ctaBoxBenefits: [
         'Określimy, jakich badań i pomiarów potrzebuje Twoja działka',
         'Wycenimy niezbędne ekspertyzy i usługi geodezyjne',
