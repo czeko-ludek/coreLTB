@@ -53,9 +53,9 @@ const headerData = {
       href: "/oferta/nadzor-i-doradztwo",
     },
     {
-      icon: "settings" as const,
+      icon: "ruler" as const,
       title: "Usługi Techniczne",
-      description: "Zapewniamy pełen zakres usług technicznych, w tym instalacje sanitarne, elektryczne oraz systemy smart home.",
+      description: "Badania gruntu, pomiary geodezyjne i profesjonalne kosztorysy. Twarde dane, które chronią Twoją inwestycję.",
       href: "/oferta/uslugi-techniczne",
     },
     {

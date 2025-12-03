@@ -33,8 +33,8 @@ export default function OfferPage() {
     {
       image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800',
       title: 'Usługi Techniczne',
-      description: 'Zapewniamy pełen zakres usług technicznych, w tym instalacje sanitarne, elektryczne oraz systemy smart home.',
-      features: ['Nowoczesne instalacje', 'Audyty energetyczne'],
+      description: 'Badania gruntu, pomiary geodezyjne i profesjonalne kosztorysy. Twarde dane, które chronią Twoją inwestycję.',
+      features: ['Badania geologiczne i geotechniczne', 'Pomiary geodezyjne i kosztorysy'],
       href: '/oferta/uslugi-techniczne',
     },
     {
