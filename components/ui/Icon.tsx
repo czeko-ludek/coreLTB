@@ -67,6 +67,8 @@ import {
   Map,
   Ruler,
   Layers,
+  FileBadge,
+  UserCheck,
 } from 'lucide-react';
 
 const iconMap = {
@@ -139,6 +141,8 @@ const iconMap = {
   map: Map,
   ruler: Ruler,
   layers: Layers,
+  fileBadge: FileBadge,
+  userCheck: UserCheck,
 };
 
 export type IconName = keyof typeof iconMap;

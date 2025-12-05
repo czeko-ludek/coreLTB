@@ -1895,6 +1895,175 @@ contactCTA: {
         alt: 'Zespół CoreLTB podczas pomiarów geodezyjnych',
       },
     },
+    
+    cooperationTimelineNoLine: {
+      header: {
+        label: 'ZAKRES EKSPERTYZ I POMIARÓW',
+        title: 'Dane, Które Gwarantują Bezpieczeństwo Twojej Inwestycji',
+        description: 'Od właściwości gruntu, przez precyzyjne mapy, aż po rzetelny kosztorys – każda budowa opiera się na danych. Poniżej przedstawiamy kluczowe ekspertyzy i pomiary, które zapewnią bezpieczeństwo i pełną kontrolę nad Twoim projektem.',
+      },
+      steps: [
+        {
+          id: 'uslugi-geodezyjne',
+          number: 1,
+          icon: 'map',
+          label: 'Geodezja',
+          title: 'Usługi Geodezyjne – Wyznaczanie Granic',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Wyobraź sobie, że Twój dom został wybudowany 30 centymetrów za blisko granicy działki. Taki błąd, wynikający z braku geodezyjnej precyzji, może prowadzić do kosztownego sporu z sąsiadem, a w skrajnych przypadkach nawet do nakazu częściowej rozbiórki. Usługi geodezyjne to **prawny i techniczny fundament** całej inwestycji. To one gwarantują, że Twój dom powstanie dokładnie tam, gdzie powinien.'
+            },
+            {
+              type: 'paragraph',
+              value: 'W CoreLTB Builders traktujemy geodezję jak system nawigacji dla Twojej budowy. Dzielimy ten proces na trzy kluczowe etapy:'
+            },
+            {
+              type: 'list',
+              items: [
+                '**Etap Planowania: Mapa dla Architekta.** Zanim powstanie pierwsza kreska projektu, nasz geodeta tworzy **mapę do celów projektowych**. To precyzyjne opracowanie jest fundamentem pracy architekta i niezbędnym dokumentem do uzyskania pozwolenia na budowę.',
+                '**Etap Realizacji: Wytyczenie Budynku w Terenie.** Gdy masz już pozwolenie, geodeta z milimetrową precyzją przenosi projekt z papieru na Twoją działkę. **Wskazuje dokładne miejsce pod fundamenty**, dając gwarancję, że budowa ruszy we właściwym miejscu.',
+                '**Etap Zakończenia: Inwentaryzacja Powykonawcza.** Po zakończeniu budowy, geodeta nanosi gotowy dom i przyłącza na oficjalne mapy. Ta **mapa powykonawcza** jest kluczowym dokumentem, wymaganym do legalnego odbioru budynku.'
+              ]
+            },
+            {
+              type: 'paragraph',
+              value: 'Koordynujemy pracę geodety na każdym z tych etapów, zapewniając płynną komunikację i pewność, że Twoja inwestycja od początku do końca stoi na **solidnym i legalnym gruncie.**'
+            }
+          ],
+          imageSrc: '/images/uslugi/uslugi-techniczne/etapy/geodezja.webp',
+          imageAlt: 'Geodeta wykonujący precyzyjne pomiary na działce budowlanej przy użyciu tachimetru'
+        },
+// Krok 2: Badania Geologiczne Gruntu
+
+{
+  id: 'badania-geologiczne',
+  number: 2,
+  icon: 'layers',
+  label: 'Geologia',
+  title: 'Badania Geologiczne Gruntu',
+  content: [
+    {
+      type: 'paragraph',
+      value: 'Trwałość i bezpieczeństwo Twojego domu zależą bezpośrednio od fundamentów, a ich konstrukcja – od tego, co znajduje się pod powierzchnią ziemi. **Pękające ściany, zalana piwnica czy nierówne osiadanie budynku** to najczęściej skutki niedopasowania projektu posadowienia do realnych warunków gruntowych. Profesjonalne badania geologiczne eliminują to ryzyko u samego źródła.'
+    },
+    {
+      type: 'paragraph',
+      value: 'Choć nie zawsze wymagane prawem, dla odpowiedzialnego architekta badania geologiczne są absolutną podstawą. W Naszej Firmie traktujemy je jako kluczowy element analizy ryzyka inwestycji. Nasz proces badawczy dostarcza **niezbędnych danych dla konstruktora**: '
+    },
+    {
+      type: 'list',
+      items: [
+        '**Określenie rodzaju i nośności gruntu:** Pozwala to dobrać optymalny i ekonomiczny typ fundamentów (ławowe, płytowe), zapobiegając zarówno niepotrzebnym kosztom (przeprojektowanie), jak i ryzyku katastrofy budowlanej (niedoszacowanie).',
+        '**Ustalenie poziomu wód gruntowych:** Ta informacja jest kluczowa dla projektu piwnicy, garażu podziemnego i doboru odpowiedniej hydroizolacji. Chroni budynek przed trwałą wilgocią i zalewaniem.',
+        '**Wykrycie potencjalnych zagrożeń:** Identyfikujemy grunty nienośne (np. torfy), wysadzinowe lub inne ukryte "niespodzianki", które mogą wymagać specjalistycznych i droższych rozwiązań. Wiedza o nich przed budową oszczędza setki tysięcy złotych.'
+      ]
+    },
+    {
+      type: 'paragraph',
+      value: 'Wynikiem naszych badań jest **szczegółowa opinia geotechniczna**, zawierająca konkretne zalecenia projektowe. To niewielka inwestycja, która daje bezcenną pewność, że budujesz na solidnym i bezpiecznym fundamencie.'
+    }
+  ],
+  imageSrc: '/images/uslugi/uslugi-techniczne/etapy/geologia.webp',
+  imageAlt: 'Geolog badający próbkę gruntu pobraną z odwiertu na działce budowlanej'
+},
+{
+  id: 'kosztorysowanie-budowlane',
+  number: 3,
+  icon: 'wallet',
+  label: 'Kosztorysowanie',
+  title: 'Kosztorysowanie Budowlane',
+  content: [
+    {
+      type: 'paragraph',
+      value: 'Budżet to krwiobieg każdej budowy. Niedoszacowany prowadzi do przestojów i stresu; zawyżony – do przepalania pieniędzy. Profesjonalny kosztorys to **najważniejsze narzędzie do zarządzania finansami Twojej inwestycji**. Pozwala on nie tylko zaplanować wydatki, ale także skutecznie weryfikować i negocjować oferty wykonawców.'
+    },
+    {
+      type: 'paragraph',
+      value: 'W CoreLTB Builders specjalizujemy się w tworzeniu dwóch kluczowych rodzajów kosztorysów, które odpowiadają na inne potrzeby na różnych etapach inwestycji:'
+    },
+    {
+      type: 'list',
+      items: [
+        '**Kosztorys Inwestorski (do Banku):** To dokument, którego **wymaga bank do uruchomienia kredytu hipotecznego**. Opracowujemy go na podstawie projektu budowlanego i średnich stawek rynkowych. Jego celem jest precyzyjne oszacowanie całkowitej wartości inwestycji, co jest fundamentem do uzyskania finansowania i stworzenia realistycznego budżetu.',
+        '**Kosztorys Szczegółowy (Ofertowy):** To Twoja **tarcza i miecz w negocjacjach z wykonawcami**. Tworzymy go na podstawie przedmiaru robót, zawierając szczegółowy wykaz materiałów, robocizny i sprzętu. Pozwala on na dokładne porównanie ofert, wyłapanie zawyżonych cen i świadome prowadzenie rozmów handlowych.'
+      ]
+    },
+    {
+      type: 'paragraph',
+      value: 'Nasz kosztorys to nie tylko liczby. To **Twoja mapa finansowa**, która daje Ci pełną kontrolę nad budżetem, chroni przed nieuczciwymi praktykami i pozwala podejmować świadome decyzje. Z nami masz pewność, że każda złotówka na Twojej budowie jest pod kontrolą.'
+    }
+  ],
+  imageSrc: '/images/uslugi/uslugi-techniczne/etapy/kosztorysowanie.webp',
+  imageAlt: 'Kosztorysant CoreLTB Builders analizujący kosztorys budowlany na komputerze w biurze'
+},
+
+{
+  id: 'swiadectwa-energetyczne',
+  number: 4,
+  icon: 'fileBadge',
+  label: 'Świadectwa Energetyczne',
+  title: 'Świadectwa Charakterystyki Energetycznej',
+  content: [
+    {
+      type: 'paragraph',
+      value: 'Od 28 kwietnia 2023 roku świadectwo charakterystyki energetycznej stało się **obowiązkowym dokumentem** dla większości właścicieli nieruchomości. To "dowód osobisty" Twojego budynku, który precyzyjnie określa jego zapotrzebowanie na energię. Brak tego dokumentu w wymaganych sytuacjach grozi wysoką grzywną.'
+    },
+    {
+      type: 'paragraph',
+      value: 'W CoreLTB Builders zapewniamy profesjonalne i zgodne z najnowszymi przepisami sporządzenie certyfikatów w dwóch kluczowych sytuacjach:'
+    },
+    {
+      type: 'list',
+      items: [
+        '**Dla Nowo Wybudowanych Domów:** Świadectwo jest **niezbędnym załącznikiem do zawiadomienia o zakończeniu budowy**. Bez niego nie możesz legalnie zamieszkać w swoim nowym domu. Dbamy o to, by ten ostatni, kluczowy dokument został przygotowany sprawnie i bezbłędnie.',
+        '**Przy Sprzedaży lub Wynajmie Nieruchomości:** Świadectwo musi zostać przekazane nowemu nabywcy lub najemcy. Notariusz ma obowiązek odnotować ten fakt w akcie notarialnym. Zapewniamy certyfikaty, które są w pełni akceptowane przez kancelarie notarialne i urzędy.'
+      ]
+    },
+    {
+      type: 'paragraph',
+      value: 'Nasze świadectwa są sporządzane wyłącznie przez **uprawnionych i wpisanych do centralnego rejestru audytorów**, co daje Ci 100% gwarancję ich poprawności i zgodności z prawem. Z nami masz pewność, że ostatni etap formalności przebiegnie gładko i bez niespodzianek.'
+    }
+  ],
+  imageSrc: '/images/uslugi/uslugi-techniczne/etapy/swiadectwa-energetyczne.webp',
+  imageAlt: 'Audytor energetyczny przekazujący świadectwo charakterystyki energetycznej właścicielowi nowego domu'
+},
+// Krok 5: Ekspertyzy i Doradztwo Techniczne
+
+{
+  id: 'ekspertyzy-techniczne',
+  number: 5,
+  icon: 'search',
+  label: 'Ekspertyzy Techniczne',
+  title: 'Opinie i Ekspertyzy Techniczne',
+  content: [
+    {
+      type: 'paragraph',
+      value: 'Nie każda inwestycja to budowa od zera. Często największym wyzwaniem jest ocena stanu istniejącego budynku – przed zakupem, w trakcie remontu lub gdy pojawią się niepokojące problemy, takie jak pęknięcia czy wilgoć. W takich sytuacjach potrzebna jest nie opinia, a **fachowa ekspertyza techniczna oparta na wiedzy i dowodach.**'
+    },
+    {
+      type: 'paragraph',
+      value: 'Nasi inżynierowie i rzeczoznawcy budowlani działają jak lekarze-diagności dla nieruchomości. Świadczymy usługi eksperckie w kluczowych sytuacjach:'
+    },
+    {
+      type: 'list',
+      items: [
+        '**Audyt Techniczny Przed Zakupem:** Planujesz kupić dom z rynku wtórnego? Nasza szczegółowa ekspertyza to najważniejsza polisa ubezpieczeniowa. Sprawdzimy stan konstrukcji, dachu, instalacji i izolacji, dostarczając Ci raport, który pozwoli **uniknąć zakupu "skarbonki bez dna"** i skutecznie negocjować cenę.',
+        '**Opinie Techniczne i Diagnoza Problemów:** Pojawiły się pęknięcia na ścianach? Czujesz wilgoć w piwnicy? Znajdziemy przyczynę problemu. Nasza opinia techniczna precyzyjnie określa źródło wady i przedstawia zalecenia naprawcze.',
+        '**Wsparcie w Sporach Sądowych:** Nasze ekspertyzy to **oficjalne dokumenty o mocy dowodowej**, które mogą być kluczowym argumentem w sporach z deweloperami, wykonawcami czy w procesach o odszkodowanie.'
+      ]
+    },
+    {
+      type: 'paragraph',
+      value: 'Decyzje dotyczące nieruchomości warte są setki tysięcy złotych. Nie podejmuj ich w oparciu o przypuszczenia. **Zainwestuj w wiedzę ekspercką**, która da Ci pewność, spokój i twarde argumenty.'
+    }
+  ],
+  imageSrc: '/images/uslugi/uslugi-techniczne/etapy/ekspertyzy-techniczne.webp',
+  imageAlt: 'Ekspert budowlany CoreLTB Builders badający pęknięcie na ścianie w istniejącym budynku'
+}
+      ]
+    },
+    
 
     // Sekcja 5: Testimonials
     testimonials: {
@@ -1933,6 +2102,146 @@ contactCTA: {
         },
       ],
     },
+    // Sekcja FAQ dla filaru "Ekspertyzy i Pomiary Budowlane"
+
+servicesAccordion: {
+  header: {
+    label: 'NAJCZĘŚCIEJ ZADAWANE PYTANIA',
+    title: 'Odpowiedzi na Kluczowe Pytania Techniczne',
+    description: 'Sprawdź najważniejsze informacje, które pomogą Ci podjąć świadomą i bezpieczną decyzję. Podzieliliśmy pytania na kategorie, aby łatwiej znaleźć to, czego szukasz.',
+  },
+  services: [
+    // GEODEZJA I GEOLOGIA
+    {
+      iconName: 'map',
+      title: 'Jaki jest cennik usług geodety?',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Koszt usług geodezyjnych zależy od specyfiki zlecenia, w tym wielkości działki, ukształtowania terenu oraz zakresu prac, takich jak mapa do celów projektowych czy wytyczenie budynku. Precyzyjna wycena wymaga analizy potrzeb konkretnej inwestycji.'
+        },
+        {
+          type: 'paragraph',
+          value: 'Zamiast sztywnego cennika, w naszej firmie rekomendujemy indywidualne oszacowanie kosztów podczas bezpłatnej konsultacji technicznej, co pozwala uniknąć niedomówień i błędów w budżecie.'
+        }
+      ]
+    },
+    {
+      iconName: 'coins',
+      title: 'Ile kosztuje wznowienie granic działki?',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Koszt wznowienia granic zależy od stanu dokumentacji w ośrodku geodezyjnym (ODGiK) oraz liczby punktów granicznych. Rynkowe stawki za standardową działkę zazwyczaj zaczynają się od **2000–2500 zł netto** za pierwsze cztery punkty, a każdy kolejny to wydatek rzędu 150–300 zł.'
+        },
+        {
+          type: 'paragraph',
+          value: 'Ostateczna cena jest ustalana indywidualnie po weryfikacji dostępnych materiałów archiwalnych, co pozwala precyzyjnie określić pracochłonność procedury i wyeliminować ryzyko błędów prawnych.'
+        }
+      ]
+    },
+    {
+        iconName: 'users',
+        title: 'Kto płaci za geodetę przy ustalaniu granic?',
+        content: [
+          {
+            type: 'paragraph',
+            value: 'Zgodnie z praktyką rynkową koszt ponosi strona zlecająca usługę, czyli najczęściej inwestor chcący precyzyjnie określić teren inwestycji. W przypadku administracyjnego rozgraniczenia spornych granic, Kodeks Cywilny (art. 152) przewiduje podział kosztów po połowie między sąsiadami.'
+          },
+          {
+            type: 'paragraph',
+            value: 'Zazwyczaj jednak, przy wznowieniu znaków granicznych, płaci wyłącznie inicjator, co pozwala szybko zabezpieczyć proces budowlany przed błędami lokalizacyjnymi.'
+          }
+        ]
+      },
+    {
+      iconName: 'alertCircle',
+      title: 'Czy badanie gruntu przed budową jest obowiązkowe?',
+      content: [
+        {
+          type: 'paragraph',
+          value: '**Tak, opinia geotechniczna jest obecnie obligatoryjnym dokumentem wymaganym przez prawo budowlane do uzyskania pozwolenia na budowę.** Badanie to precyzyjnie określa nośność gruntu oraz poziom wód gruntowych, co pozwala na dobranie odpowiednich fundamentów.'
+        },
+        {
+          type: 'paragraph',
+          value: 'Wykonanie odwiertów przed rozpoczęciem prac eliminuje ryzyko nierównomiernego osiadania budynku i pękania ścian, chroniąc inwestora przed kosztownymi naprawami w przyszłości.'
+        }
+      ]
+    },
+    {
+      iconName: 'clock',
+      title: 'Ile się czeka na badanie gruntu?',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Realizacja badań geotechnicznych to proces dwuetapowy. **Prace terenowe**, czyli wykonanie odwiertów, zajmują zazwyczaj **jeden dzień**.'
+        },
+        {
+          type: 'paragraph',
+          value: 'Kluczowy jest jednak czas na opracowanie kameralne i analizę wyników – standardowo trwa to **od 7 do 14 dni roboczych**. W CoreLTB kładziemy nacisk na ten etap, gdyż jest on niezbędny do precyzyjnego określenia nośności podłoża i poziomu wód gruntowych.'
+        }
+      ]
+    },
+    {
+      iconName: 'coins',
+      title: 'Ile kosztuje badanie gruntu pod budowę?',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Koszt standardowego badania geotechnicznego pod dom jednorodzinny waha się zazwyczaj w przedziale **od 1500 do 2500 zł**. Ostateczna cena zależy od liczby i głębokości odwiertów (zwykle 3-4 punkty badawcze) oraz stopnia skomplikowania warunków gruntowych.'
+        },
+        {
+          type: 'paragraph',
+          value: 'Jest to kluczowa inwestycja, która pozwala precyzyjnie dobrać fundamenty, eliminując ryzyko pękania ścian czy problemów z wodami gruntowymi.'
+        }
+      ]
+    },
+
+    // KOSZTORYSY
+    {
+      iconName: 'fileCheck',
+      title: 'Kiedy wymagany jest kosztorys inwestorski?',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Kosztorys inwestorski jest **prawnie wymagany przy zamówieniach publicznych** oraz **obligatoryjny dla banków** przy ubieganiu się o kredyt budowlany i rozliczaniu transz. W inwestycjach prywatnych pełni kluczową funkcję kontrolną.'
+        },
+        {
+          type: 'paragraph',
+          value: 'W CoreLTB Builders traktujemy ten dokument jako finansowy fundament budowy – pozwala on zweryfikować rynkowość ofert wykonawców, uniknąć przepłacania i zapewnia twarde dane do negocjacji cenowych.'
+        }
+      ]
+    },
+    {
+      iconName: 'wallet',
+      title: 'Ile kosztuje kosztorys do banku?',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Profesjonalne przygotowanie kosztorysu pod kredyt hipoteczny to zazwyczaj wydatek rzędu **500–1500 zł netto**. Ostateczna kwota zależy od metrażu budynku, stopnia skomplikowania projektu oraz specyficznych wymagań banku.'
+        },
+        {
+          type: 'paragraph',
+          value: 'Warto zadbać o rzetelność tego dokumentu, aby uniknąć niedoszacowania budowy, co może skutkować wstrzymaniem wypłaty transz w trakcie realizacji inwestycji.'
+        }
+      ]
+    },
+    {
+        iconName: 'userCheck',
+        title: 'Kto przygotowuje kosztorys inwestorski?',
+        content: [
+          {
+            type: 'paragraph',
+            value: 'Kosztorys inwestorski sporządza **wykwalifikowany kosztorysant**, który łączy wiedzę o technologiach budowlanych z aktualną znajomością cen rynkowych. Opracowanie to powstaje na podstawie projektu budowlanego oraz przedmiaru robót.'
+          },
+          {
+            type: 'paragraph',
+            value: 'Dokument ten precyzyjnie określa wartość prac, stanowiąc fundament do weryfikacji ofert wykonawców. Profesjonalny kosztorys pozwala uniknąć przepłacania, gdyż różnice w ofertach firm mogą sięgać nawet 30% wartości inwestycji.'
+          }
+        ]
+      },
+  ]
+},
 
     // Sekcja 6: ContactCTA
     contactCTA: {
