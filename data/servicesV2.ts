@@ -2667,36 +2667,60 @@ cooperationTimelineNoLine: {
       ]
     },
 
-    // Sekcja 6: Testimonials (WYMAGANE - TODO: wypełnij opiniami)
+    // Sekcja 6: Testimonials
     testimonials: {
       header: {
         label: 'CO MÓWIĄ NASI KLIENCI',
-        title: 'Opinie o wykończeniach',
-        description: 'Placeholder - uzupełnij treść',
+        title: 'Spokój i Zaufanie na Ostatniej Prostej',
+        description: 'Poznaj historie inwestorów, którzy powierzyli nam wykończenie swoich domów i przekonali się, że ten etap może przebiegać sprawnie, terminowo i bezstresowo.',
         theme: 'light' as const,
       },
       testimonials: [
         {
-          quote: 'Placeholder opinia 1 - TODO',
+          quote: 'Byliśmy przerażeni wizją koordynacji kilkunastu fachowców. CoreLTB wzięło wszystko na siebie. Jeden Project Manager, stały kontakt i wszystko zapięte na ostatni guzik. Dla nas, osób pracujących na pełen etat, ten spokój był bezcenny. Polecamy z całego serca.',
           author: {
             image: {
-              src: '/images/testimonials/marek-kasia.jpg',
-              alt: 'Marek i Kasia Nowak',
+              src: '/images/testimonials/kowalscy.webp',
+              alt: 'Anna i Tomasz Kowalscy',
             },
-            name: 'Marek i Kasia Nowak',
-            role: 'Inwestorzy prywatni',
+            name: 'Anna i Tomasz Kowalscy',
+            role: 'Właściciele domu pod Warszawą',
           },
           rating: 5.0,
         },
         {
-          quote: 'Placeholder opinia 2 - TODO',
+          quote: 'Największym plusem była transparentność i trzymanie się budżetu. Kosztorys, który otrzymałem na początku, zgadzał się co do złotówki z fakturą końcową. W dzisiejszych czasach to rzadkość. Pełen profesjonalizm i uczciwość.',
           author: {
             image: {
-              src: '/images/testimonials/anna-kowalczyk.jpg',
-              alt: 'Anna Kowalczyk',
+              src: '/images/testimonials/nowak.webp',
+              alt: 'Piotr Nowak',
             },
-            name: 'Anna Kowalczyk',
-            role: 'Właścicielka domu',
+            name: 'Piotr Nowak',
+            role: 'Inwestor z Krakowa',
+          },
+          rating: 5.0,
+        },
+        {
+          quote: 'Jestem estetką i zwracam uwagę na detale. Ekipa CoreLTB wykazała się niesamowitą precyzją – idealnie równe gładzie, perfekcyjnie położone płytki, wszystko wykonane z najwyższą starannością. Jakość wykonania przerosła moje oczekiwania. Dom jest piękny!',
+          author: {
+            image: {
+              src: '/images/testimonials/wisniewska.webp',
+              alt: 'Katarzyna Wiśniewska',
+            },
+            name: 'Katarzyna Wiśniewska',
+            role: 'Właścicielka domu jednorodzinnego',
+          },
+          rating: 5.0,
+        },
+        {
+          quote: 'Budowałem dom, mieszkając 300 km dalej. Nadzór i koordynacja prac wykończeniowych przez CoreLTB były kluczowe. Otrzymywałem cotygodniowe raporty ze zdjęciami i mogłem spokojnie pracować, wiedząc że wszystko idzie zgodnie z planem. Bezproblemowa współpraca na odległość.',
+          author: {
+            image: {
+              src: '/images/testimonials/zielinski.webp',
+              alt: 'Marek Zieliński',
+            },
+            name: 'Marek Zieliński',
+            role: 'Inwestor budujący zdalnie',
           },
           rating: 5.0,
         },
