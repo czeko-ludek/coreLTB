@@ -2491,7 +2491,183 @@ cooperationTimelineNoLine: {
   ]
 },
 
-    // Sekcja 5: Testimonials (WYMAGANE - TODO: wypełnij opiniami)
+    // Sekcja 5: ServicesAccordion (FAQ)
+    servicesAccordion: {
+      header: {
+        label: 'NAJCZĘŚCIEJ ZADAWANE PYTANIA',
+        title: 'Wykończenie pod Klucz - Odpowiedzi na Kluczowe Pytania',
+        description: 'Znajdź odpowiedzi na najważniejsze pytania dotyczące kosztów, terminów i zakresu prac wykończeniowych.',
+      },
+      services: [
+        {
+          iconName: 'wallet',
+          title: 'Ile kosztuje wykończenie domu pod klucz?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Koszt wykończenia domu pod klucz zależy od wybranego standardu materiałów oraz zakresu prac, dlatego nie istnieje jedna uniwersalna stawka. Ostateczna cena jest ustalana indywidualnie podczas bezpłatnej konsultacji, co pozwala na przygotowanie szczegółowego i wiążącego kosztorysu.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Taki model współpracy **gwarantuje stałość ceny oraz terminu na piśmie**, eliminując ryzyko nieprzewidzianych wydatków i zapewniając pełną kontrolę nad budżetem od samego początku inwestycji.'
+            }
+          ]
+        },
+        {
+          iconName: 'coins',
+          title: 'Jaki jest koszt wykończenia domu 100m²?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Całkowity koszt wykończenia domu o powierzchni 100m² zależy od wybranego standardu materiałów i zakresu prac, zazwyczaj mieszcząc się w rynkowym przedziale **2500–4500 zł za m²**. Oznacza to orientacyjny budżet rzędu **250–450 tys. zł**.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Precyzyjna, wiążąca kwota ustalana jest jednak indywidualnie na podstawie szczegółowego kosztorysu. Takie podejście pozwala zagwarantować stałą cenę przed rozpoczęciem robót i uniknąć nieprzewidzianych wydatków w trakcie realizacji.'
+            }
+          ]
+        },
+        {
+          iconName: 'home',
+          title: 'Jaki jest stan wykończenia pod klucz?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Stan pod klucz to doprowadzenie nieruchomości do momentu **pełnej gotowości do zamieszkania**. Zakres obejmuje wszystkie niezbędne prace wykończeniowe: od wykonania gładzi i malowania, przez ułożenie podłóg i montaż drzwi, aż po kompletne wyposażenie łazienek wraz z armaturą.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Decydując się na ten standard w naszej firmie, zyskujesz pewność koordynacji – inwestor otrzymuje w **100% funkcjonalne wnętrze**, a my bierzemy na siebie pełną logistykę, nadzór nad ekipami i dostawami materiałów.'
+            }
+          ]
+        },
+        {
+          iconName: 'clipboard',
+          title: 'Co wchodzi w prace wykończeniowe?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Prace wykończeniowe to kompleksowy proces przekształcenia surowego budynku w funkcjonalny dom. Obejmują one pełen zakres działań:'
+            },
+            {
+              type: 'list',
+              items: [
+                '**Prace instalacyjne** – hydraulika, elektryka, wentylacja',
+                '**Wykończenie powierzchni** – gładzie, malowanie, układanie płytek i podłóg',
+                '**Montaż końcowy** – armatura, drzwi, zabudowa stolarska'
+              ]
+            },
+            {
+              type: 'paragraph',
+              value: 'W modelu „pod klucz" kluczowym elementem jest także **pełna koordynacja logistyczna** ekip i dostaw materiałów, zapewniająca realizację zgodnie z ustalonym budżetem i harmonogramem.'
+            }
+          ]
+        },
+        {
+          iconName: 'clock',
+          title: 'Ile trwa wykończenie domu od stanu deweloperskiego?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Standardowy czas kompleksowego wykończenia domu wynosi zazwyczaj **od 3 do 6 miesięcy**, w zależności od metrażu i skomplikowania aranżacji. Czas ten obejmuje etap projektowy, kompletację materiałów oraz właściwe prace wykonawcze.'
+            },
+            {
+              type: 'paragraph',
+              value: 'U Nas w modelu współpracy "pod klucz" szczegółowy harmonogram jest ustalany na początku, co pozwala na precyzyjne określenie daty odbioru i zapewnia **pisemną gwarancję dotrzymania terminu**.'
+            }
+          ]
+        },
+        {
+          iconName: 'checkCircle',
+          title: 'Czy wykończenie pod klucz się opłaca?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Wykończenie pod klucz **opłaca się przede wszystkim dla osób ceniących swój czas i spokój**. Eliminuje konieczność samodzielnego szukania i koordynowania wielu ekip, negocjowania cen materiałów oraz ciągłego kontrolowania postępu prac.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Dodatkową wartością jest **gwarancja stałej ceny i terminu** – wiesz dokładnie, ile zapłacisz i kiedy wprowadzisz się do gotowego domu. Skontaktuj się z nami, aby uzyskać szczegółową wycenę dla Twojej inwestycji.'
+            }
+          ]
+        },
+        {
+          iconName: 'fileCheck',
+          title: 'Jaka jest kolejność prac wykończeniowych?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Proces wykończenia pod klucz obejmuje **4 główne etapy** realizowane w ściśle określonej kolejności:'
+            },
+            {
+              type: 'list',
+              items: [
+                '**Etap 1:** Weryfikacja budżetu i przygotowanie projektu aranżacji',
+                '**Etap 2:** Przeróbki instalacyjne i prace mokre (tynki, wylewki)',
+                '**Etap 3:** Wykończenie ścian, podłóg i montaż stolarki',
+                '**Etap 4:** Montaż armatury, oświetlenia i mebli na wymiar'
+              ]
+            },
+            {
+              type: 'paragraph',
+              value: 'Zachowanie tej sekwencji eliminuje błędy logistyczne i pozwala na dotrzymanie stałego terminu zakończenia inwestycji.'
+            }
+          ]
+        },
+        {
+          iconName: 'trendingUp',
+          title: 'Co jest najdroższe w wykończeniu domu?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Najdroższym elementem wykończenia są zazwyczaj **łazienki oraz kuchnia**. Ze względu na kosztowne materiały (płytki, armatura), sprzęt AGD i zabudowę meblową na wymiar, pomieszczenia te mogą pochłonąć nawet **40-50% całego budżetu**.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Znaczącą pozycją jest także profesjonalna robocizna, stanowiąca często około **30-40% kosztów całkowitych**. Ostateczna cena zależy jednak zawsze od wybranego standardu materiałów oraz stopnia skomplikowania projektu aranżacji.'
+            }
+          ]
+        },
+        {
+          iconName: 'coins',
+          title: 'Jak obliczyć koszt wykończenia domu?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Dokładne obliczenie kosztu wymaga sporządzenia **szczegółowego kosztorysu** opartego na projekcie wnętrz i specyfikacji materiałowej. Szacunkowo przyjmuje się stawki za metr kwadratowy powierzchni podłogi:'
+            },
+            {
+              type: 'list',
+              items: [
+                '**Standard ekonomiczny:** od około 1500 zł/m²',
+                '**Standard średni:** 2500–3500 zł/m²',
+                '**Standard premium:** ponad 3500 zł/m²'
+              ]
+            },
+            {
+              type: 'paragraph',
+              value: 'Ostateczna kwota zależy od klasy materiałów oraz zakresu prac, dlatego **najbezpieczniejszym rozwiązaniem jest uzyskanie wiążącej wyceny** od wykonawcy przed rozpoczęciem realizacji.'
+            }
+          ]
+        },
+        {
+          iconName: 'piggyBank',
+          title: 'Czy 300 tys. wystarczy na wykończenie domu?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Tak, **300 tys. zł to realny budżet**, pod warunkiem dopasowania metrażu do standardu. Obecnie średni koszt kompleksowego wykończenia waha się w granicach **2500–3500 zł za m²**.'
+            },
+            {
+              type: 'paragraph',
+              value: 'Dla domu o powierzchni **100–120 m²** taka kwota pozwala na wysoki standard, natomiast przy większych powierzchniach może wymagać kompromisów materiałowych. Ostateczna wycena zawsze wymaga szczegółowego kosztorysu uwzględniającego zakres prac i wybrane materiały.'
+            }
+          ]
+        }
+      ]
+    },
+
+    // Sekcja 6: Testimonials (WYMAGANE - TODO: wypełnij opiniami)
     testimonials: {
       header: {
         label: 'CO MÓWIĄ NASI KLIENCI',
