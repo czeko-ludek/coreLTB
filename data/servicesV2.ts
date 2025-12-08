@@ -2266,7 +2266,291 @@ servicesAccordion: {
     createdAt: '2025-10-28T10:00:00Z',
     updatedAt: '2025-10-28T10:00:00Z',
   },
+    // === WYKOŃCZENIA I ARANŻACJE ===
+  {
+    slug: 'wykonczenia-i-aranzacje',
+    id: 'wykonczenia-i-aranzacje',
+    category: 'Wykończenia',
+    title: 'Wykończenie Domu pod Klucz',
+
+    // PageHeader
+    pageHeader: {
+      title: 'Wykończenie Domu pod Klucz',
+      watermarkText: 'WYKOŃCZENIA',
+      backgroundImage: '/images/uslugi/wykonczenia-i-aranzacje/hero.webp',
+      breadcrumbs: [
+        { label: 'Strona główna', href: '/' },
+        { label: 'Oferta', href: '/oferta' },
+        { label: 'Wykończenie Domu pod Klucz', href: '' },
+      ],
+    },
+
+    // Sekcja 1: EmotionalHero
+    emotionalHero: {
+      label: 'WYKOŃCZENIA I ARANŻACJE',
+      headline: 'Od Pustych Ścian do Domu Pełnego Życia',
+      subtitle:
+        'Etap wykończeniowy to moment, w którym budynek zamienia się w prawdziwy dom – Twój dom. To ekscytujący czas, ale także logistyczne wyzwanie, pełne decyzji i potencjalnych pułapek. W CoreLTB Builders zdejmujemy z Ciebie cały ciężar. Prowadzimy Cię od pustych ścian do w pełni wykończonego, gotowego do zamieszkania wnętrza, gwarantując budżet, termin i bezkompromisową jakość.',
+      benefits: [
+        'Jeden partner i pełna odpowiedzialność za wszystkie etapy prac',
+        'Gwarancja stałej ceny i terminu na samym starcie',
+        'Dostęp do naszych sprawdzonych, wyspecjalizowanych ekip wykonawczych',
+      ],
+      // CTA Box
+      ctaBoxTitle: '☎ Otrzymaj Wstępny Kosztorys Wykończenia',
+      ctaBoxBenefits: [
+        'Oszacujemy budżet potrzebny na wykończenie Twojego domu',
+        'Przedstawimy harmonogram i optymalną kolejność prac',
+        'Doradzimy w kwestii materiałów i najnowszych trendów',
+        'Odpowiemy na wszystkie Twoje pytania i wątpliwości',
+      ],
+      ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
+      ctaBoxButtons: [
+        {
+          text: 'Zadzwoń do Nas',
+          href: 'tel:+48123456789',
+        },
+        {
+          text: 'Napisz do Nas',
+          href: '#kontakt',
+        },
+      ],
+    },
+// Sekcja 2: PhilosophyTimeline (Nowa Wersja)
+
+philosophyTimeline: {
+  header: {
+    label: 'TWOJE SPOKOJNE WYKOŃCZENIE',
+    title: 'Jeden Partner od Projektu po Ostatni Szczegół',
+    description: 'Proces wykończenia domu bywa bardziej stresujący niż cała budowa. Rozumiemy to. Dlatego stworzyliśmy system, w którym jeden, w pełni odpowiedzialny partner bierze na siebie cały ciężar, zapewniając Ci spokój, kontrolę nad budżetem i bezkompromisową jakość.',
+  },
+  items: [
+    {
+      number: 1,
+      iconName: 'users',
+      title: 'Pełna Koordynacja, Twój Całkowity Spokój',
+      description: 'Zapomnij o logistycznym koszmarze. Jeden dedykowany Project Manager z CoreLTB koordynuje pracę wszystkich naszych sprawdzonych ekip – od hydraulika po stolarza. Ty masz jeden numer telefonu, stały wgląd w postępy i zero stresu związanego z umawianiem i pilnowaniem terminów.'
+    },
+    {
+      number: 2,
+      iconName: 'fileCheck',
+      title: 'Gwarancja Budżetu i Terminu na Starcie',
+      description: 'Zanim zaczniemy, otrzymujesz od nas szczegółowy, wiążący kosztorys i harmonogram prac. Cena i termin, które ustalamy, są ostateczne. Koniec z finansowymi niespodziankami na ostatniej prostej. Z nami wiesz dokładnie, ile zapłacisz i kiedy wprowadzisz się do gotowego domu.'
+    },
+    {
+      number: 3,
+      iconName: 'award',
+      title: 'Jakość Potwierdzona Pisemną Gwarancją',
+      description: 'Pracujemy wyłącznie na naszych, wyspecjalizowanych i zaufanych zespołach wykonawczych. Każdy etap – od gładzi po montaż armatury – jest objęty naszą wieloletnią, pisemną gwarancją. Z nami masz pewność, że jakość jest bezkompromisowa i będzie służyć Ci przez lata.'
+    }
+  ],
+  image: {
+    src: '/images/uslugi/wykonczenia-i-aranzacje/dlaczego-warto.webp',
+    alt: 'Wykończenie domu',
+  },
+},
+cooperationTimelineNoLine: {
+  header: {
+    label: 'PROCES "POD KLUCZ"',
+    title: 'Kluczowe Etapy Wykończenia',
+    description: 'Ostatni etap budowy to podróż od surowych, pustych ścian do w pełni funkcjonalnego domu, w którym chcesz żyć. Poniżej przedstawiamy kluczowe etapy naszego procesu "pod klucz" – od precyzyjnego budżetu i spójnej aranżacji, aż po mistrzowską jakość wykonania. Zobacz, jak krok po kroku przekształcamy Twoją wizję w rzeczywistość.',
+  },
+  steps: [
+    {
+      id: 'kosztorys-wykonczeniowy',
+      number: 1,
+      icon: 'fileCheck',
+      label: 'Zakres i Budżet',
+      title: 'Zakres i Szczegółowy Kosztorys',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'To najważniejszy etap, który stanowi fundament naszej współpracy i Twojego bezpieczeństwa finansowego. Zanim rozpoczniemy jakiekolwiek prace, spotykamy się, aby precyzyjnie zdefiniować Twoje oczekiwania i potrzeby. Nie ma tu miejsca na domysły.'
+        },
+        {
+          type: 'paragraph',
+          value: 'Na podstawie szczegółowych ustaleń dotyczących standardu materiałów i zakresu prac, przygotowujemy **transparentny i wiążący kosztorys**. Otrzymujesz od nas dokument, który zawiera m.in.:'
+        },
+        {
+          type: 'list',
+          items: [
+            'Szczegółowy wykaz wszystkich prac wraz z ich wyceną.',
+            'Zestawienie wybranych materiałów wykończeniowych (ilość i cena).',
+            'Ostateczną, gwarantowaną cenę za całość usługi.',
+            'Wiążący harmonogram, określający czas trwania poszczególnych etapów.'
+          ]
+        },
+        {
+          type: 'paragraph',
+          value: 'Dzięki temu już na samym starcie masz **100% pewności co do finalnego kosztu i terminu zakończenia prac.** Koniec z finansowymi niespodziankami na ostatniej prostej.'
+        }
+      ],
+      imageSrc: '/images/uslugi/wykonczenia-i-aranzacje/etapy/kosztorys.webp',
+      imageAlt: 'Projektant CoreLTB Builders omawiający szczegółowy kosztorys wykończenia z klientami'
+    },
+    // Krok 2: Projekt i Aranżacja Wnętrz
+    {
+      id: 'aranzacja-wnetrz',
+      number: 2,
+      icon: 'paintBrush',
+      label: 'Aranżacja',
+      title: 'Projekt i Aranżacja Wnętrz',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'To etap, na którym Twoja wizja nabiera realnych kształtów, kolorów i faktur. Nasz doświadczony projektant wnętrz nie narzuca swojego stylu, lecz staje się Twoim partnerem i przewodnikiem w świecie designu. Pomagamy przekuć setki inspiracji w jeden, spójny i – co najważniejsze – **funkcjonalny projekt, idealnie dopasowany do Twojego stylu życia i budżetu.**'
+        },
+        {
+          type: 'paragraph',
+          value: 'W ramach współpracy projektowej zapewniamy:'
+        },
+        {
+          type: 'list',
+          items: [
+            '**Opracowanie układu funkcjonalnego:** Tworzymy "instrukcję obsługi" dla Twojego domu – optymalizujemy układ pomieszczeń, planujemy ergonomię w kuchni i łazience oraz dbamy o wygodną komunikację.',
+            '**Wspólny dobór stylu i materiałów:** Razem z Tobą tworzymy moodboardy, dobieramy kolorystykę, podłogi, płytki i wszystkie kluczowe elementy wykończenia, dbając o spójność całej koncepcji.',
+            '**Fotorealistyczne wizualizacje 3D:** Nie musisz sobie niczego wyobrażać. Otrzymujesz od nas realistyczne obrazy swoich przyszłych wnętrz. To narzędzie, które pozwala Ci podejmować świadome decyzje i uniknąć kosztownych pomyłek.',
+            '**Pełną dokumentację techniczną:** Przygotowujemy szczegółowe rysunki dla wykonawców – od układu płytek, przez projekt oświetlenia, aż po rozmieszczenie punktów elektrycznych i hydraulicznych.'
+          ]
+        },
+        {
+          type: 'paragraph',
+          value: 'Dobry projekt wnętrza to nie tylko estetyka. To **przemyślana inżynieria przestrzeni**, która sprawia, że dom jest nie tylko piękny, ale przede wszystkim wygodny do życia.'
+        }
+      ],
+      imageSrc: '/images/uslugi/wykonczenia-i-aranzacje/etapy/aranzacja.webp',
+      imageAlt: 'Projektantka wnętrz CoreLTB prezentuje klientom wizualizację 3D salonu na tablecie'
+    },
+    // Krok 3: Harmonogram i Prawidłowa Kolejność Prac
+    {
+      id: 'harmonogram-prac',
+      number: 3,
+      icon: 'calendar',
+      label: 'Harmonogram',
+      title: 'Harmonogram i Prawidłowa Kolejność Prac',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Chaotyczne prace wykończeniowe to prosta droga do zniszczeń, opóźnień i niepotrzebnych kosztów. W CoreLTB Builders każdą realizację opieramy na **szczegółowym harmonogramie i żelaznej zasadzie prawidłowej kolejności prac**. To nasza mapa drogowa, która gwarantuje, że proces przebiega sprawnie, logicznie i bez przykrych niespodzianek.'
+        },
+        {
+          type: 'paragraph',
+          value: 'Nasz proces jest uporządkowany zgodnie z fundamentalną regułą sztuki budowlanej – od prac "mokrych" i "brudnych" do "czystych" i finalnych:'
+        },
+        {
+          type: 'list',
+          items: [
+            '**Instalacje.** Najpierw rozprowadzamy wszystkie ukryte "nerwy" domu: instalacje elektryczne, hydrauliczne, wentylacyjne i teletechniczne.',
+            '**Tynki i Wylewki.** Następnie przechodzimy do prac mokrych. Wykonujemy tynki na ścianach i wylewki na podłogach. Ten etap wymaga odpowiedniego czasu na wyschnięcie.',
+            '**Gładzie i Malowanie.** Po wyschnięciu, przygotowujemy idealnie gładkie powierzchnie ścian i sufitów (gładzie), a następnie wykonujemy pierwsze malowanie gruntujące i kolor.',
+            '**Podłogi, Płytki i Drzwi.** Na czystych i suchych powierzchniach montujemy finalne okładziny: podłogi (panele, parkiety), płytki w łazienkach i kuchni, a na końcu montujemy drzwi wewnętrzne.',
+            '**Biały Montaż i Wykończenia.** Ostatni etap to precyzyjne prace wykończeniowe: montaż gniazdek, oświetlenia, armatury łazienkowej (umywalki, toalety), a także listew przypodłogowych i innych detali.'
+          ]
+        },
+        {
+          type: 'paragraph',
+          value: 'Dzięki ścisłemu przestrzeganiu tej kolejności, **minimalizujemy ryzyko uszkodzenia już wykonanych prac** i gwarantujemy najwyższą jakość finalnego efektu. Z nami wiesz nie tylko CO robimy, ale także KIEDY i DLACZEGO.'
+        }
+      ],
+      imageSrc: '/images/uslugi/wykonczenia-i-aranzacje/etapy/harmonogram.webp',
+      imageAlt: 'Project Manager CoreLTB Builders prezentuje klientom harmonogram prac wykończeniowych na tablecie'
+    },
+    // Krok 4: Realizacja – Prace Wykończeniowe
+    {
+      id: 'realizacja-wykonczeniowa',
+      number: 4,
+      icon: 'hammer',
+      label: 'Realizacja',
+      title: 'Realizacja – Mistrzowska Jakość Wykonania',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'To etap, w którym projekt zamienia się w rzeczywistość, a jakość wykonania staje się kluczowa. Sukces zależy od doświadczenia, precyzji i koordynacji. W CoreLTB Builders opieramy naszą pracę na fundamentalnej zasadzie: **każde zadanie wykonuje wyspecjalizowany w nim zespół.**'
+        },
+        {
+          type: 'paragraph',
+          value: 'Nie wierzymy w "fachowców od wszystkiego". Nasz proces realizacyjny to harmonijna współpraca wyspecjalizowanych ekip pod nadzorem jednego Project Managera:'
+        },
+        {
+          type: 'list',
+          items: [
+            '**Instalatorzy:** Precyzyjnie rozprowadzają instalacje hydrauliczne i elektryczne zgodnie z projektem, gwarantując ich bezawaryjne działanie na lata.',
+            '**Tynkarze i Posadzkarze:** Tworzą idealnie równe i gładkie powierzchnie ścian i podłóg, które są perfekcyjną bazą dla dalszych prac.',
+            '**Malarze i Płytkarze:** Z rzemieślniczą precyzją dbają o każdy detal – od idealnie pomalowanych ścian, po równe fugi i perfekcyjne wykończenie łazienek.',
+            '**Stolarze i Montażyści:** Finalizują dzieło, montując podłogi, drzwi, listwy i inne elementy z najwyższą starannością.'
+          ]
+        },
+        {
+          type: 'paragraph',
+          value: 'Dzięki pracy na **własnych, sprawdzonych zespołach**, mamy pełną kontrolę nad jakością i terminowością na każdym etapie. To nasza gwarancja, że efekt końcowy będzie nie tylko piękny, ale przede wszystkim trwały i wykonany zgodnie z najwyższymi standardami sztuki budowlanej.'
+        }
+      ],
+      imageSrc: '/images/uslugi/wykonczenia-i-aranzacje/etapy/realizacja.webp',
+      imageAlt: 'Ekipa wykończeniowa CoreLTB Builders podczas prac montażowych'
+    }
+  ]
+},
+
+    // Sekcja 5: Testimonials (WYMAGANE - TODO: wypełnij opiniami)
+    testimonials: {
+      header: {
+        label: 'CO MÓWIĄ NASI KLIENCI',
+        title: 'Opinie o wykończeniach',
+        description: 'Placeholder - uzupełnij treść',
+        theme: 'light' as const,
+      },
+      testimonials: [
+        {
+          quote: 'Placeholder opinia 1 - TODO',
+          author: {
+            image: {
+              src: '/images/testimonials/marek-kasia.jpg',
+              alt: 'Marek i Kasia Nowak',
+            },
+            name: 'Marek i Kasia Nowak',
+            role: 'Inwestorzy prywatni',
+          },
+          rating: 5.0,
+        },
+        {
+          quote: 'Placeholder opinia 2 - TODO',
+          author: {
+            image: {
+              src: '/images/testimonials/anna-kowalczyk.jpg',
+              alt: 'Anna Kowalczyk',
+            },
+            name: 'Anna Kowalczyk',
+            role: 'Właścicielka domu',
+          },
+          rating: 5.0,
+        },
+      ],
+    },
+
+    // Sekcja 6: ContactCTA (WYMAGANE - TODO: dostosuj treść)
+    contactCTA: {
+      header: {
+        label: 'SKONTAKTUJ SIĘ Z NAMI',
+        title: 'Gotowy na Wykończenie Marzeń?',
+        description: 'Placeholder - uzupełnij treść',
+      },
+      contactInfo: {
+        phone: '+48 123 456 789',
+        email: 'kontakt@coreltb.pl',
+        address: 'ul. Przykładowa 123, Warszawa',
+      },
+    },
+
+    // SEO
+    metaTitle: 'Wykończenie Domu pod Klucz - Kompleksowe Wykończenia | CoreLTB Builders',
+    metaDescription:
+      'Kompleksowe wykończenie domu od A do Z. Gwarancja stałej ceny i terminu. Sprawdzone ekipy wykonawcze. Bezpłatna konsultacja i wycena wykończenia.',
+
+    createdAt: '2025-12-05T10:00:00Z',
+    updatedAt: '2025-12-05T10:00:00Z',
+  },
 ];
+
 
 export const getServiceV2BySlug = (slug: string): ServiceV2 | undefined =>
   allServicesV2.find((s) => s.slug === slug);
