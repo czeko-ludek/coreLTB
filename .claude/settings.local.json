@@ -36,9 +36,15 @@
       "Bash(del sectionsServiceHeroSection.tsx sectionsIconicFeaturesSection.tsx sectionsFlexibilitySection.tsx sectionsProcessTimelineSection.tsx sectionsProcessInfographicSection.tsx sectionsProofSection.tsx sectionsContentSection.tsx sectionsServiceAreaSection.tsx sectionsRealizationsGallery.tsx sectionsPhilosophySection.tsx sectionsClientTestimonialsSection.tsx sectionsCaseStudiesSection.tsx sectionsServiceIntroSection.tsx)",
       "Bash(del ServiceFeatureCard.tsx FlexibilityOptionCard.tsx ProcessStepCard.tsx ProcessStepDetailed.tsx ProofStatCard.tsx CaseStudyCard.tsx)",
       "Bash(git restore:*)",
-      "Bash(git merge:*)"
+      "Bash(git merge:*)",
+      "Bash(timeout:*)",
+      "Bash(cat:*)",
+      "Bash(clip:*)",
+      "Bash(del dataservicesV2_faq_temp.ts)",
+      "WebFetch(domain:www.semrush.com)"
     ],
     "deny": [],
     "ask": []
-  }
+  },
+  "model": "sonnet"
 }

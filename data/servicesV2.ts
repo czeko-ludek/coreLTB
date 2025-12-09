@@ -859,7 +859,7 @@ servicesAccordion: {
             {
               type: 'list',
               items: [
-                '**Wyższa cena**: Koszt projektu to średnio **150 - 300 zł za m²**.',
+                '**Wyższa cena**: Koszt projektu to średnio **100 - 450 zł za m²**.',
                 '**Dłuższy czas oczekiwania**: Proces projektowy trwa od kilku tygodni do kilku miesięcy.',
                 '**Ryzyko "przerostu formy nad treścią"**: Bez wsparcia doświadczonego wykonawcy, łatwo zaprojektować rozwiązania niepraktyczne lub bardzo drogie w budowie.'
               ]
@@ -931,7 +931,7 @@ servicesAccordion: {
               items: [
                 '**Zakup projektu gotowego (3 000 - 8 000 zł):** Pomoc w wyborze projektu zoptymalizowanego pod Twoją działkę i budżet.',
                 '**Adaptacja projektu gotowego (3 000 - 7 000 zł):** Pełna, profesjonalna adaptacja z uwzględnieniem naszych doświadczeń budowlanych.',
-                '**Projekt indywidualny (150 - 300 zł / m²):** Projekt "szyty na miarę", zintegrowany z realnym kosztorysem budowy.'
+                '**Projekt indywidualny (100 - 450 zł / m²):** Projekt "szyty na miarę", zintegrowany z realnym kosztorysem budowy.'
               ]
             },
             {
@@ -1076,7 +1076,7 @@ servicesAccordion: {
           content: [
             {
               type: 'paragraph',
-              value: 'Średnio proces ten zajmuje **od 8 do 16 tygodni**. Czas ten obejmuje stworzenie koncepcji, przygotowanie projektu budowlanego i uzyskanie wszystkich niezbędnych uzgodnień.'
+              value: 'Średnio proces ten zajmuje **od 24 do 36 tygodni**. Czas ten obejmuje stworzenie koncepcji, przygotowanie projektu budowlanego i uzyskanie wszystkich niezbędnych uzgodnień.'
             },
             {
               type: 'paragraph',
@@ -2730,9 +2730,9 @@ cooperationTimelineNoLine: {
     // Sekcja 6: ContactCTA (WYMAGANE - TODO: dostosuj treść)
     contactCTA: {
       header: {
-        label: 'SKONTAKTUJ SIĘ Z NAMI',
+        label: 'ZACZNIJMY TWORZYĆ TWOJE WNĘTRZE',
         title: 'Gotowy na Wykończenie Marzeń?',
-        description: 'Placeholder - uzupełnij treść',
+        description: 'Umów się na bezpłatną konsultację, a my przygotujemy dla Ciebie wstępny kosztorys i harmonogram prac wykończeniowych dla Twojego domu.',
       },
       contactInfo: {
         phone: '+48 123 456 789',
@@ -2748,6 +2748,556 @@ cooperationTimelineNoLine: {
 
     createdAt: '2025-12-05T10:00:00Z',
     updatedAt: '2025-12-05T10:00:00Z',
+  },
+
+  // ========================================
+  // USŁUGA 4: ZAGOSPODAROWANIE TERENU
+  // ========================================
+  {
+    slug: 'zagospodarowanie-terenu',
+    id: 'zagospodarowanie-terenu',
+    category: 'Prace Zewnętrzne',
+    title: 'Zagospodarowanie Terenu',
+
+    // Sekcja 1: PageHeader (TODO: uzupełnij dane)
+    pageHeader: {
+      title: 'Zagospodarowanie Terenu',
+      watermarkText: 'TEREN',
+      backgroundImage: '/images/uslugi/zagospodarowanie-terenu/hero.webp',
+      breadcrumbs: [
+        { label: 'Strona główna', href: '/' },
+        { label: 'Oferta', href: '/oferta' },
+        { label: 'Zagospodarowanie Terenu', href: '' },
+      ],
+    },
+
+    // Sekcja 2: EmotionalHero
+    emotionalHero: {
+      label: 'ZAGOSPODAROWANIE TERENU',
+      headline: 'Twój Dom Nie Kończy Się Na Drzwiach Wejściowych',
+      subtitle:
+        'Masz już wymarzony dom, ale wokół wciąż panuje budowlany chaos? W CoreLTB Builders zamieniamy błoto i wykopy w funkcjonalną przestrzeń. Zagospodarowanie terenu to dla nas inżynieria spotykająca estetykę. Od niwelacji i odwodnienia, przez solidne podjazdy, aż po taras – tworzymy spójne otoczenie, które podnosi wartość Twojej inwestycji i daje Ci upragniony odpoczynek.',
+      benefits: [
+        'Pełna obsługa: prace ziemne, brukarstwo, ogrodzenia i tarasy',
+        'Prawidłowe odwodnienie terenu chroniące fundamenty',
+        'Projekt wykonawczy spójny ze stylem Twojego domu',
+      ],
+      ctaBoxTitle: '☎ Zamów Bezpłatną Wizję Lokalną i Wycenę',
+      ctaBoxBenefits: [
+        'Ocenimy zakres niezbędnych prac ziemnych i niwelacyjnych',
+        'Zaproponujemy funkcjonalny układ podjazdów i ścieżek',
+        'Doradzimy w kwestii ogrodzenia, tarasu i systemów odwodnienia',
+        'Otrzymasz kosztorys bez ukrytych opłat dodatkowych',
+      ],
+      ctaBoxSubtext: 'Dojeżdżamy do klienta. Rozmowa do niczego nie zobowiązuje.',
+      ctaBoxButtons: [
+        { text: 'Zadzwoń do Nas', href: 'tel:+48123456789', variant: 'primary' as const },
+        { text: 'Napisz do Nas', href: '#kontakt', variant: 'secondary' as const },
+      ],
+    },
+
+    // Sekcja 3: PhilosophyTimeline
+    philosophyTimeline: {
+      header: {
+        label: 'JAKOŚĆ I TECHNOLOGIA',
+        title: 'Fundament, Którego Nie Widać, a Czuć Latami',
+        description:
+          'Efektowny podjazd to tylko wierzchołek góry lodowej. Prawdziwa jakość kryje się pod ziemią. W CoreLTB Builders wyznajemy zasadę: najpierw inżynieria i hydrogeologia, potem estetyka. Dzięki temu Twoje otoczenie jest nie tylko piękną wizytówką domu, ale trwałym systemem odpornym na wodę, mróz i obciążenia.',
+
+      },
+      items: [
+        {
+          number: 1,
+          iconName: 'ruler' as const,
+          title: 'Prace Ziemne i Stabilizacja Gruntu',
+          description:
+            'Zanim położymy pierwszą kostkę, wykonujemy tytaniczną pracę pod powierzchnią. Analizujemy nośność gruntu, wykonujemy niwelację i dbamy o perfekcyjne odwodnienie. Dzięki solidnej podbudowie i zachowaniu spadków, masz 100% pewności, że nawierzchnia nie zapadnie się, a woda opadowa nie zagrozi fundamentom.',
+        },
+        {
+          number: 2,
+          iconName: 'layoutGrid' as const,
+          title: 'Funkcjonalność Przestrzeni na Pierwszym Miejscu',
+          description:
+            'Projektujemy przestrzeń do życia, nie na wystawę. Optymalizujemy szerokość podjazdów dla Twoich aut, planujemy wygodne ciągi piesze i logicznie rozmieszczamy strefy relaksu. Dbamy o to, by układ ścieżek był intuicyjny, a taras zapewniał intymność. Wszystko to dla Twojej wygody.',
+        },
+        {
+          number: 3,
+          iconName: 'checkCircle' as const,
+          title: 'Jeden Partner od Kostki Brukowej po Trawnik',
+          description:
+            'Bierzemy na siebie cały, złożony proces. Od "twardych" prac inżynieryjnych – brukarstwa, ogrodzeń, odwodnienia – aż po "miękkie" wykończenie w postaci niwelacji terenu i założenia trawnika. Jeden partner to jedna odpowiedzialność i gwarancja spójnego, perfekcyjnego efektu końcowego.',
+        },
+      ],
+      image: {
+        src: '/images/uslugi/zagospodarowanie-terenu/filozofia.webp',
+        alt: 'Ekspert CoreLTB Builders omawia z klientami plan zagospodarowania ich działki na tablecie',
+      },
+    },
+
+    // Sekcja 4: CooperationTimelineNoLine (6 kroków)
+    cooperationTimelineNoLine: {
+      header: {
+        label: 'ETAPY PRAC',
+        title: 'Od Projektu do Efektu: Twój Teren w Rękach Prefesionalistów',
+        description:
+          'Przejrzysty harmonogram to podstawa spokoju inwestora. Zobacz, jak zamieniamy surowy plac budowy w uporządkowaną przestrzeń. Nie improwizujemy – stosujemy sprawdzone procedury budowlane, dzięki którym każdy metr kwadratowy Twojej działki zyskuje na funkcjonalności i wartości.',
+      },
+      steps: [
+        {
+          id: 'brukarstwo',
+          number: 1,
+          icon: 'layoutGrid' as const,
+          label: 'Brukarstwo',
+          title: 'Podjazdy, Ścieżki i Tarasy',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Podjazd to wizytówka Twojego domu, a taras to jego serce w letnie dni. Kluczem do ich trwałości nie jest jednak sama kostka, a to, co niewidoczne pod nią. W CoreLTB Builders podchodzimy do brukarstwa jak inżynierowie – naszym priorytetem jest stworzenie solidnej i stabilnej podstawy, która zapobiegnie zapadaniu się nawierzchni przez dekady.',
+            },
+            {
+              type: 'paragraph',
+              value: 'Stawiamy na technologię warstwową i sprawdzone materiały:',
+            },
+            {
+              type: 'list',
+              items: [
+                '**Głębokie Korytowanie i Podbudowa:** Nie oszczędzamy na gruncie. Wykonujemy wykop na odpowiednią głębokość i stosujemy wielowarstwową podbudowę z certyfikowanych kruszyw łamanych, mechanicznie zagęszczanych.',
+                '**Odwodnienie i Spadki:** Laserowo wyznaczamy niwelację terenu. Projektujemy spadki i montujemy odwodnienia liniowe tak, by woda błyskawicznie znikała z nawierzchni, chroniąc ją przed erozją mrozową.',
+                '**Precyzja Układania i Cięcia:** Niezależnie czy wybierasz kostkę betonową, granit, czy wielkoformatowe płyty gresowe – dbamy o idealną geometrię spoin i estetykę docięć przy krawężnikach.',
+                '**Stabilizacja i Fugowanie:** Całość "zamykamy" profesjonalnym wibrowaniem i spoinowaniem (piaskiem lub fugą żywiczną), co blokuje przesuwanie się elementów i ogranicza wyrastanie chwastów.',
+              ],
+            },
+          ],
+          imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/brukarstwo.webp',
+          imageAlt: 'Zespół CoreLTB Builders profesjonalnie układa kostkę brukową na podjeździe',
+        },
+        {
+          id: 'ogrodzenia',
+          number: 2,
+          icon: 'gate' as const,
+          label: 'Ogrodzenia i Bramy',
+          title: 'Ogrodzenia i Bramy',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Ogrodzenie to nie tylko wyznaczenie granic działki – to "rama" dla Twojej architektury i pierwsza linia bezpieczeństwa. Wielu inwestorów martwi się pękającymi murkami czy rdzewiejącymi przęsłami po kilku zimach. W CoreLTB Builders eliminujemy te ryzyka na starcie. Nasze ogrodzenia to konstrukcje inżynierskie: stabilne, zbrojone i idealnie skomponowane z elewacją budynku.',
+            },
+            {
+              type: 'paragraph',
+              value: 'Stawiamy na trwałość i kompleksową obsługę inwestycji:',
+            },
+            {
+              type: 'list',
+              items: [
+                '**Fundamenty Poniżej Strefy Przemarzania:** To klucz do trwałości. Wykonujemy głębokie, zbrojone ławy fundamentowe z dylatacjami, dzięki czemu mróz nie wysadza konstrukcji, a murki nie pękają.',
+                '**Systemy Modułowe i Nowoczesne Przęsła:** Specjalizujemy się w montażu gładkich bloków modułowych, ogrodzeń palisadowych i żaluzjowych. Dbamy o to, by stal była ocynkowana i malowana proszkowo, co gwarantuje spokój od korozji na lata.',
+                '**Bramy i Automatyka (Smart Home):** Montujemy bramy przesuwne i skrzydłowe. Co ważne – przewody pod domofon, oświetlenie i napędy rozprowadzamy na etapie prac ziemnych, więc nie musisz zrywać kostki, by podłączyć wideodomofon.',
+              ],
+            },
+            {
+              type: 'paragraph',
+              value:
+                'Wybierając nas, zyskujesz spójność: podjazd i ogrodzenie powstają w jednej linii stylistycznej i technicznej, bez konfliktów między różnymi ekipami.',
+            },
+          ],
+          imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/ogrodzenia.webp',
+          imageAlt: 'Zespół CoreLTB Builders profesjonalnie montujący nowoczesne ogrodzenie panelowe',
+        },
+        {
+          id: 'odwodnienie',
+          number: 3,
+          icon: 'umbrella' as const,
+          label: 'Gospodarka Wodna',
+          title: 'Ochrona Fundamentów i Suchy Teren',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Woda to cichy zabójca budynków i nawierzchni. Ignorowanie gospodarki wodnej kończy się zawilgoconymi ścianami, zapadającą się kostką i błotem zamiast trawnika. W CoreLTB Builders podchodzimy do tematu hydrotechnicznie. Zanim położymy nawierzchnię, projektujemy system, który skutecznie zarządza każdą kroplą deszczu, chroniąc Twój majątek.',
+            },
+            {
+              type: 'paragraph',
+              value: 'Stosujemy nowoczesne rozwiązania melioracyjne i retencyjne:',
+            },
+            {
+              type: 'list',
+              items: [
+                '**Zagospodarowanie Wody z Dachu (Retencja):** Nie pozwalamy wodzie marnować się ani niszczyć elewacji. Odprowadzamy deszczówkę do studni chłonnych, skrzynek rozsączających lub podziemnych zbiorników retencyjnych. Zyskujesz darmową wodę do ogrodu i suchy teren wokół domu.',
+                '**Drenaż Opaskowy Budynku:** To "polisa ubezpieczeniowa" dla Twoich murów. Jeśli warunki gruntowe tego wymagają, instalujemy system rur drenarskich wokół ław fundamentowych, który obniża poziom wód gruntowych i zapobiega podciąganiu wilgoci kapilarnej.',
+                '**Odwodnienia Liniowe i Punktowe:** Na podjazdach montujemy korytka o odpowiedniej klasie obciążenia (odporne na najazd aut). Zapobiegają one tworzeniu się niebezpiecznych lodowisk zimą i wypłukiwaniu fug, co jest częstą przyczyną degradacji nawierzchni.',
+              ],
+            },
+            {
+              type: 'paragraph',
+              value:
+                'Dobrze zaprojektowane odwodnienie jest niewidoczne dla oka, ale kluczowe dla trwałości inwestycji. Z nami masz pewność, że nawet podczas oberwania chmury, Twój garaż i piwnica pozostaną suche.',
+            },
+          ],
+          imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/odwodnienie.webp',
+          imageAlt: 'Pracownik CoreLTB Builders układa rurę drenażową w wykopie wokół fundamentów',
+        },
+        {
+          id: 'niwelacja-terenu',
+          number: 4,
+          icon: 'areaChart' as const,
+          label: 'Niwelacja Terenu',
+          title: 'Kształtowanie Terenu i Przygotowanie Pod Ogród',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Po zakończeniu budowy działka często przypomina pobojowisko pełne gliny i ukrytego gruzu. W CoreLTB Builders nie tylko wyrównujemy powierzchnię – my przywracamy jej biologiczną użyteczność. Niwelacja to dla nas proces inżynieryjny: modelujemy teren tak, aby był bezpieczny dla budynku (odpływ wody) i gotowy na przyjęcie roślinności.',
+            },
+            {
+              type: 'paragraph',
+              value: 'Działamy kompleksowo, używając ciężkiego sprzętu i precyzyjnej optyki:',
+            },
+            {
+              type: 'list',
+              items: [
+                '**Niwelacja Laserowa i Spadki:** "Na oko" to za mało. Używamy niwelatorów laserowych, aby z milimetrową precyzją ukształtować teren. Tworzymy mikrospadki, które w niewidoczny sposób odprowadzają wodę opadową z dala od elewacji i tarasu, zapobiegając tworzeniu się kałuż.',
+                '**Oczyszczanie i Profilowanie:** Usuwamy pozostałości budowlane i wymieniamy grunt tam, gdzie jest to konieczne. Modelujemy skarpy, nasypy czy wypłaszczenia, tworząc solidną bazę pod przyszłą architekturę ogrodową.',
+                '**Humusowanie (Warstwa Wegetacyjna):** Na odpowiednio ukształtowane podłoże rozścielamy warstwę żyznej ziemi (czarnoziem/humus). To kluczowy etap – bez niego nawet najdroższy trawnik z rolki nie przetrwa. My tworzymy idealne środowisko dla korzeni.',
+              ],
+            },
+            {
+              type: 'paragraph',
+              value:
+                'Efekt? Idealnie równy teren (jak stół), przygotowany pod siew trawy lub nasadzenia, który jest łatwy w koszeniu i nie sprawia problemów z zastoinami wodnymi po ulewach.',
+            },
+          ],
+          imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/niwelacja.webp',
+          imageAlt: 'Spychacz CoreLTB Builders równa teren po zakończeniu budowy domu',
+        },
+        {
+          id: 'trawniki-i-nawadnianie',
+          number: 5,
+          icon: 'leaf' as const,
+          label: 'Trawnik i Nawadnianie',
+          title: 'Inteligentny Ogród i Perfekcyjna Murawa',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Piękny trawnik to w 30% natura, a w 70% inżynieria i woda. Ręczne podlewanie jest nieefektywne i czasochłonne. W CoreLTB Builders wdrażamy rozwiązania "Smart Garden". Tworzymy systemy, które same dbają o kondycję roślin, a Tobie oddają cenne godziny wolnego czasu. Instalujemy technologię pod ziemią, by na powierzchni cieszyć oko idealną zielenią.',
+            },
+            {
+              type: 'paragraph',
+              value: 'Nasze podejście łączy wygodę z biologią roślin:',
+            },
+            {
+              type: 'list',
+              items: [
+                '**Automatyczne Systemy Nawadniania:** Projektujemy sekcje zraszaczy i linii kroplujących dopasowane do nasadzeń. Stosujemy sterowniki i czujniki deszczu. System podlewa ogród wczesnym rankiem – to optymalna pora, która ogranicza parowanie, ale pozwala trawie obeschnąć przed upałem, co zapobiega rozwojowi grzybów.',
+                '**Trawnik z Rolki lub Siewu + Siatka na Krety:** Oferujemy natychmiastowy efekt "zielonego dywanu" (rolka) lub tańsze rozwiązanie z siewu. Co kluczowe – pod trawnikiem montujemy mocną siatkę przeciw kretom, co jest standardem chroniącym Twoją inwestycję przed zniszczeniem.',
+                '**Logiczna Kolejność Prac:** Najpierw rury i kable, potem siatka i ziemia, na końcu trawa. Wykonując to kompleksowo u jednego wykonawcy, masz pewność, że system nawadniania nie zostanie uszkodzony podczas prac ziemnych, a trawa przyjmie się idealnie.',
+              ],
+            },
+            {
+              type: 'paragraph',
+              value:
+                'Inwestycja w automatyczne nawadnianie zwraca się nie tylko w niższych rachunkach za wodę (precyzyjne dawkowanie), ale przede wszystkim w Twoim świętym spokoju. Zapomnij o bieganiu z wężem ogrodowym.',
+            },
+          ],
+          imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/trawniki-nawadnianie.webp',
+          imageAlt: 'Pracownik CoreLTB Builders układa trawę z rolki na przygotowanym terenie',
+        },
+        {
+          id: 'oswietlenie-ogrodowe',
+          number: 6,
+          icon: 'lightbulb' as const,
+          label: 'Oświetlenia Ogrodu',
+          title: 'Bezpieczeństwo i Klimat po Zmroku',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Oświetlenie ogrodu to temat, który inwestorzy często zostawiają "na później". To błąd, który kończy się zrywaniem nowej kostki lub ryciem w gotowym trawniku. W CoreLTB Builders planujemy instalacje elektryczne równolegle z pracami ziemnymi. Traktujemy światło jako element bezpieczeństwa oraz "biżuterię" dla Twojego domu.',
+            },
+            {
+              type: 'paragraph',
+              value: 'Nasze instalacje łączą pragmatyzm z estetyką:',
+            },
+            {
+              type: 'list',
+              items: [
+                '**Okablowanie przed Nawierzchnią:** Kładziemy odpowiednie kable ziemne (YKY) i rury osłonowe jeszcze na etapie podbudowy. Dzięki temu masz gotowe punkty pod lampy, gniazdka zewnętrzne czy napęd bramy, bez niszczenia ogrodu w przyszłości.',
+                '**Bezpieczeństwo i Funkcja:** Projektujemy oświetlenie ciągów komunikacyjnych. Stosujemy wytrzymałe oprawy najazdowe w podjeździe (odporne na ciężar aut) oraz słupki przy ścieżkach, co eliminuje ryzyko potknięcia i skutecznie odstrasza intruzów.',
+                '**Iluminacja i Sceny Świetlne:** Wydobywamy potencjał ogrodu nocą. Podświetlamy korony drzew, elewację budynku czy murki oporowe. Tworzymy głębię widoku, którą możesz podziwiać z salonu przez cały rok.',
+                '**Automatyka i Energooszczędność:** Stosujemy technologię LED i inteligentne sterowanie (zegary astronomiczne, czujniki ruchu). Światło włącza się samo, gdy jest potrzebne, a Ty nie martwisz się o wysokie rachunki za prąd.',
+              ],
+            },
+            {
+              type: 'paragraph',
+              value:
+                'Dobrze dobrane oświetlenie to kropka nad "i". Sprawia, że Twój dom wygląda luksusowo, a powrót z pracy po zmroku staje się przyjemnością, a nie błądzeniem w ciemnościach.',
+            },
+          ],
+          imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/oswietlenie.webp',
+          imageAlt: 'Oświetlenie ogrodowe CoreLTB Builders pięknie podświetlające ogród i dom po zmroku',
+        },
+      ],
+    },
+
+    // Sekcja 5: ServicesAccordion/FAQ
+    servicesAccordion: {
+      header: {
+        label: 'NAJCZĘŚCIEJ ZADAWANE PYTANIA',
+        title: 'Odpowiedzi na Twoje Wątpliwości',
+        description:
+          'Zagospodarowanie terenu to złożony proces inżynieryjny. Zebraliśmy najważniejsze pytania, które pomogą Ci zrozumieć kolejność prac i koszty inwestycji.',
+      },
+      services: [
+        {
+          iconName: 'helpCircle' as const,
+          title: 'Od czego zacząć zagospodarowanie działki?',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Zagospodarowanie działki należy rozpocząć od inżynieryjnych podstaw, czyli precyzyjnej analizy spadków terenu i zaprojektowania systemu odwodnienia. To kluczowy etap, który chroni inwestycję przed zaleganiem wody i zapadaniem się nawierzchni. **W CoreLTB Builders zawsze rozpoczynamy od wizji lokalnej i geodezyjnego pomiaru terenu**, aby precyzyjnie zaprojektować odpływ wód opadowych.',
+            },
+            {
+              type: 'paragraph',
+              value:
+                'W pierwszej kolejności wykonuje się „twarde" prace ziemne, niwelację oraz przygotowanie podbudowy pod podjazdy i ścieżki. Dopiero po stworzeniu stabilnej bazy i funkcjonalnego układu komunikacyjnego można przystąpić do montażu ogrodzenia oraz zakładania trawnika.',
+            },
+          ],
+        },
+        {
+          iconName: 'home' as const,
+          title: 'Jak zagospodarować teren wokół domu?',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Zagospodarowanie terenu najlepiej zacząć od analizy inżynieryjnej, uwzględniającej spadki gruntu i systemy odwodnienia. Priorytetem jest wykonanie solidnej podbudowy pod elementy twarde, takie jak podjazdy, tarasy i ścieżki, co zapobiega ich osiadaniu w przyszłości.',
+            },
+            {
+              type: 'paragraph',
+              value:
+                'Dopiero po zakończeniu prac brukarskich i montażu ogrodzenia należy przejść do precyzyjnej niwelacji terenu i zakładania trawnika. Taka sekwencja, od technicznych podstaw po estetykę, gwarantuje trwałość i spójność całej inwestycji.',
+            },
+          ],
+        },
+        {
+          iconName: 'coins' as const,
+          title: 'Ile kosztuje zagospodarowanie działki?',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Koszt kompleksowego zagospodarowania terenu zależy od skali prac inżynieryjnych i klasy użytych materiałów. Kluczowe czynniki wpływające na cenę to zakres niwelacji terenu, metraż podjazdów i tarasów, rodzaj ogrodzenia oraz stopień skomplikowania systemów odwodnienia.',
+            },
+            {
+              type: 'paragraph',
+              value:
+                'Ze względu na konieczność wykonania trwałych podbudów i unikalny charakter każdej działki, precyzyjny budżet ustala się zawsze po wizji lokalnej. **Warto skorzystać z naszej bezpłatnej konsultacji, która pozwoli oszacować koszty i harmonogram inwestycji.**',
+            },
+          ],
+        },
+        {
+          iconName: 'ruler' as const,
+          title: 'Co to jest niwelacja działki i kiedy jest konieczna?',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Niwelacja działki to inżynieryjne profilowanie terenu polegające na przemieszczaniu mas ziemnych w celu uzyskania pożądanego ukształtowania powierzchni. Jest procesem niezbędnym po zakończeniu budowy, aby zlikwidować nierówności i nadać gruntowi odpowiednie spadki (zazwyczaj 1-2%), które zapewnią skuteczny odpływ wody deszczowej od fundamentów.',
+            },
+            {
+              type: 'paragraph',
+              value:
+                'To kluczowy etap przygotowawczy pod stabilną podbudowę dla podjazdów, tarasów oraz trawnika, zapobiegający powstawaniu zastoisk wodnych.',
+            },
+          ],
+        },
+        {
+          iconName: 'fileText' as const,
+          title: 'Czy niwelacja terenu wymaga zgłoszenia?',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Niwelacja terenu w celu zagospodarowania ogrodu co do zasady nie wymaga zgłoszenia ani pozwolenia na budowę. Należy jednak bezwzględnie przestrzegać przepisów Prawa wodnego – zmiana poziomu gruntu nie może kierować wód opadowych na działki sąsiednie.',
+            },
+            {
+              type: 'paragraph',
+              value:
+                'Jedynie w przypadku wznoszenia murów oporowych powyżej 1,2 m wysokości lub prac ingerujących w infrastrukturę podziemną, procedury administracyjne stają się niezbędne.',
+            },
+          ],
+        },
+        {
+          iconName: 'alertTriangle' as const,
+          title: 'Ile cm można podnieść teren bez pozwolenia?',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Polskie przepisy nie określają sztywnego limitu w centymetrach, do jakiego można podnieść teren bez pozwolenia. Niwelacja działki zazwyczaj nie wymaga formalności budowlanych, jednak kluczowym ograniczeniem jest Prawo wodne (art. 234). Zmiana ukształtowania terenu nie może kierować wód opadowych na sąsiednie nieruchomości ani zakłócać naturalnego spływu.',
+            },
+            {
+              type: 'paragraph',
+              value:
+                'Przy znacznych zmianach poziomu gruntu warto zweryfikować Miejscowy Plan Zagospodarowania Przestrzennego, a budowa murów oporowych powyżej 1,2 m wymaga pozwolenia na budowę.',
+            },
+          ],
+        },
+        {
+          iconName: 'map' as const,
+          title: 'Czy do niwelacji terenu potrzebny jest geodeta?',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Udział geodety nie jest zawsze wymogiem prawnym, jednak jest kluczowy dla zachowania inżynieryjnej precyzji prac. **W CoreLTB Builders zawsze współpracujemy z geodetami**, aby profesjonalnie wyznaczyć granice działki i rzędne wysokościowe. To zapobiega sporom z sąsiadami oraz gwarantuje poprawny spływ wód opadowych.',
+            },
+            {
+              type: 'paragraph',
+              value:
+                'Precyzyjne określenie spadków terenu, zazwyczaj na poziomie 1-2%, jest niezbędne, aby ochronić fundamenty przed zawilgoceniem i stworzyć stabilną bazę pod podjazdy czy tarasy.',
+            },
+          ],
+        },
+        {
+          iconName: 'coins' as const,
+          title: 'Ile kosztuje wyrównanie terenu na działce?',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Koszt maszynowego wyrównania terenu zazwyczaj mieści się w przedziale 5–15 zł za m², jednak ostateczna cena zależy od ukształtowania działki, rodzaju gruntu oraz konieczności wywozu odpadów lub nawiezienia nowej ziemi.',
+            },
+            {
+              type: 'paragraph',
+              value:
+                'Należy pamiętać, że profesjonalna niwelacja to proces inżynieryjny uwzględniający spadki i systemy odwodnienia, co jest kluczowe dla trwałości inwestycji. **Dokładny budżet można ustalić dopiero po wizji lokalnej i ocenie zakresu niezbędnych robót.**',
+            },
+          ],
+        },
+        {
+          iconName: 'layoutGrid' as const,
+          title: 'Ile kosztuje 1 metr ułożenia kostki brukowej?',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Koszt kompleksowego wykonania nawierzchni brukowanej mieści się zazwyczaj w przedziale 250–500 zł za m². Cena zależy od wybranego materiału, skomplikowania wzoru oraz zakresu niezbędnych prac ziemnych.',
+            },
+            {
+              type: 'paragraph',
+              value:
+                '**Wycena w CoreLTB Builders uwzględnia nie tylko samo ułożenie kostki, ale przede wszystkim precyzyjne przygotowanie trwałej podbudowy, niwelację terenu i systemy odwodnienia**, które są kluczowe dla zapewnienia stabilności i estetyki inwestycji przez lata.',
+            },
+          ],
+        },
+        {
+          iconName: 'clipboardCheck' as const,
+          title: 'Jaka jest kolejność prac przy układaniu kostki brukowej?',
+          content: [
+            {
+              type: 'paragraph',
+              value:
+                'Prawidłowy proces rozpoczyna się od korytowania gruntu (zazwyczaj na głębokość 20–50 cm) oraz osadzenia obrzeży, które wyznaczają ramy nawierzchni. Kluczowym etapem inżynieryjnym jest wykonanie solidnej podbudowy z kruszywa, a następnie ułożenie warstwy wyrównawczej z podsypki (ok. 3–5 cm).',
+            },
+            {
+              type: 'paragraph',
+              value:
+                'Dopiero na tak przygotowanym gruncie układa się kostkę. Prace kończy spoinowanie piaskiem oraz mechaniczne zagęszczanie, co gwarantuje stabilność i właściwe odwodnienie przez lata.',
+            },
+          ],
+        },
+      ],
+    },
+
+    // Sekcja 6: Testimonials
+    testimonials: {
+      header: {
+        label: 'OPINIE NASZYCH KLIENTÓW',
+        title: 'Sąsiedzi Już Cieszą Się Swoim Ogrodem',
+        description: 'Zobacz, co mówią inwestorzy, którym pomogliśmy zamknąć temat budowy.',
+      },
+      testimonials: [
+        {
+          quote:
+            'Po budowie domu mieliśmy już szczerze dość ekip i użerania się z terminami. CoreLTB wzięliśmy z polecenia i to była najlepsza decyzja. Chłopaki weszli, zrobili swoje i wyszli. Zero marudzenia, że "się nie da". Podjazd zrobiony pancernie, kostka równiutka, a na koniec wyrównali nam teren pod trawnik. Tak to powinno wyglądać od początku.',
+          author: {
+            image: {
+              src: '/images/testimonials/marek-i-ania.webp',
+              alt: 'Marek i Ania',
+            },
+            name: 'Marek i Ania',
+            role: 'Realizacja w Zabierzowie',
+          },
+          rating: 5.0,
+        },
+        {
+          quote:
+            'Bałem się o wodę na podjeździe, bo działkę mamy gliniastą i u sąsiada po deszczu stoi bajoro. Ekipa z CoreLTB podeszła do tematu bardzo technicznie. Zrobili konkretną podbudowę, drenaż i odpowiednie spadki. Pierwsze ulewy za nami – kostka sucha, nic nie stoi, nic nie siada. Widać, że znają się na inżynierii, a nie tylko na układaniu klocków.',
+          author: {
+            image: {
+              src: '/images/testimonials/tomasz-k.webp',
+              alt: 'Tomasz K.',
+            },
+            name: 'Tomasz K.',
+            role: 'Prace ziemne i brukarstwo',
+          },
+          rating: 5.0,
+        },
+        {
+          quote:
+            'Nie miałam pomysłu na zagospodarowanie wokół domu, wiedziałam tylko, że nie chcę samej "betonozy". Panowie świetnie doradzili, jak połączyć taras z zejściem do ogrodu, żeby to wyglądało lekko. Bardzo kulturalna ekipa, zostawili po sobie idealny porządek. Teraz picie kawy na tarasie to czysta przyjemność. Polecam z czystym sumieniem!',
+          author: {
+            image: {
+              src: '/images/testimonials/pani-katarzyna.webp',
+              alt: 'Pani Katarzyna',
+            },
+            name: 'Pani Katarzyna',
+            role: 'Taras i ścieżki',
+          },
+          rating: 5.0,
+        },
+        {
+          quote:
+            'Konkretna firma. Umówiona cena została dotrzymana, termin też, co w budowlance jest rzadkością. Robili u mnie ogrodzenie frontowe i wjazd. Podobało mi się, że mają własny sprzęt i nie kombinują z podwykonawcami. Wszystko pod kontrolą od początku do końca.',
+          author: {
+            image: {
+              src: '/images/testimonials/krzysztof.webp',
+              alt: 'Krzysztof',
+            },
+            name: 'Krzysztof',
+            role: 'Ogrodzenie i podjazd',
+          },
+          rating: 5.0,
+        },
+      ],
+    },
+
+    // Sekcja 7: ContactCTA
+    contactCTA: {
+      header: {
+        label: 'ZACZNIJMY TWORZYĆ TWÓJ OGRÓD',
+        title: 'Gotowy na Zagospodarowanie Działki?',
+        description:
+          'Umów się na bezpłatną konsultację, a my przygotujemy dla Ciebie wstępną koncepcję zagospodarowania terenu oraz kosztorys prac.',
+      },
+      contactInfo: {
+        phone: '+48 123 456 789',
+        email: 'kontakt@coreltb.pl',
+        address: 'ul. Przykładowa 123, Warszawa',
+      },
+    },
+
+    // SEO
+    metaTitle: 'Zagospodarowanie Terenu - Brukarstwo, Ogrodzenia, Trawniki | CoreLTB Builders',
+    metaDescription:
+      'Kompleksowe zagospodarowanie działki od A do Z. Brukarstwo, ogrodzenia, odwodnienie, trawniki i nawadnianie. Jedna firma, pełna odpowiedzialność. Bezpłatna konsultacja.',
+
+    createdAt: '2025-12-09T10:00:00Z',
+    updatedAt: '2025-12-09T10:00:00Z',
   },
 ];
 

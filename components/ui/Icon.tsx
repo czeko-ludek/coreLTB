@@ -69,6 +69,11 @@ import {
   Layers,
   FileBadge,
   UserCheck,
+  LayoutGrid,
+  Fence,
+  Umbrella,
+  AreaChart,
+  Leaf,
 } from 'lucide-react';
 
 const iconMap = {
@@ -143,6 +148,11 @@ const iconMap = {
   layers: Layers,
   fileBadge: FileBadge,
   userCheck: UserCheck,
+  layoutGrid: LayoutGrid,
+  gate: Fence,
+  umbrella: Umbrella,
+  areaChart: AreaChart,
+  leaf: Leaf,
 };
 
 export type IconName = keyof typeof iconMap;

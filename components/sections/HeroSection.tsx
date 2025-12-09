@@ -28,6 +28,8 @@ export function HeroSection({
             fill
             className="object-cover"
             priority
+            fetchPriority="high"
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
         </div>
