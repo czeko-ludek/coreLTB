@@ -263,9 +263,15 @@ export default function Home() {
 
   // CTA Section Data
   const ctaData = {
-    title: "Gotowy na Budowę Swoich Marzeń? Umów Się na Spotkanie Już Dziś!",
-    primaryButton: { text: "Umów Spotkanie", href: "/contact" },
-    secondaryButton: { text: "Dowiedz Się Więcej", href: "/about" },
+    title: "Gotowy na budowę swoich marzeń?",
+    email: "coreltb@gmail.com",
+    primaryButton: { text: "Umów wizytę", href: "/contact" },
+    socials: [
+      { platform: "facebook" as const, href: "https://facebook.com" },
+      { platform: "instagram" as const, href: "https://instagram.com" },
+      { platform: "linkedin" as const, href: "https://linkedin.com" },
+      { platform: "youtube" as const, href: "https://youtube.com" },
+    ],
   };
 
   // Blog Section Data

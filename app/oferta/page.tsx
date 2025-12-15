@@ -1,5 +1,7 @@
 import React from 'react';
-import { PageHeader, ServiceCardSimple } from '@/components/shared'; // ✅ Centralized import from index.ts
+import { PageHeader, ServiceCardSimple, SectionHeader } from '@/components/shared';
+import { PhilosophyTimelineSection } from '@/components/sections/PhilosophyTimelineSection';
+import { CtaSection } from '@/components/sections/CtaSection';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -55,7 +57,7 @@ export default function OfferPage() {
 
   return (
     <main>
-      {/* Page Header */}
+      {/* 1. Page Header - Hero z obrazem */}
       <PageHeader
         title="Nasza Oferta"
         watermarkText="OFERTA"
@@ -66,8 +68,21 @@ export default function OfferPage() {
         ]}
       />
 
-      {/* Services Grid */}
-      <section className="py-20 px-4 lg:px-[50px] section-pattern">
+      {/* 2. SectionHeader - Krótki intro (40 słów, 5-8 sekund czytania) */}
+      <section className="py-12 px-4 bg-background">
+        <div className="container mx-auto max-w-4xl">
+          <SectionHeader
+            label="KOMPLEKSOWE USŁUGI BUDOWLANE"
+            title="Wszystko Czego Potrzebujesz Do Budowy Domu – W Jednym Miejscu"
+            description="Od projektu przez budowę po odbiór – wszystkie etapy pod jednym dachem. Wybierz usługę, która odpowiada Twojemu etapowi inwestycji."
+            align="center"
+            theme="light"
+          />
+        </div>
+      </section>
+
+      {/* 3. GRID USŁUG - Najważniejsze! User chce zobaczyć opcje NATYCHMIAST */}
+      <section className="py-16 px-4 bg-background">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {offerData.map((item) => (
@@ -76,6 +91,59 @@ export default function OfferPage() {
           </div>
         </div>
       </section>
+
+      {/* 4. PhilosophyTimeline - Trust building (dla users którzy scrollują dalej) */}
+      <PhilosophyTimelineSection
+        header={{
+          label: 'DLACZEGO JEDEN PARTNER?',
+          title: 'Jeden Telefon Zamiast Dziesięciu Podwykonawców',
+          description: 'Koordynacja wielu firm to największy stres w budownictwie. My bierzemy to na siebie – oszczędzając Twój czas, pieniądze i nerwy.',
+          theme: 'light',
+        }}
+        items={[
+          {
+            number: 1,
+            iconName: 'shield',
+            title: 'Jedna Umowa = Jedna Odpowiedzialność',
+            description:
+              'Nie musisz koordynować 10 różnych firm. Nie musisz rozstrzygać sporów między architektem, wykonawcą i geodetą. My odpowiadamy za wszystko – od pierwszej linii projektu po odbiór końcowy. Jeśli coś pójdzie nie tak, nie szukasz winnego – dzwonisz do nas.',
+          },
+          {
+            number: 2,
+            iconName: 'trendingUp',
+            title: 'Lepsza Cena Niż 6 Osobnych Umów',
+            description:
+              'Gdy kupujesz usługi osobno, każda firma ma swoją marżę. Gdy kupujesz pakiet, eliminujesz wielokrotne marże i koszty koordynacji. Typowa oszczędność: 15-20% całkowitego budżetu budowy. To często oznacza różnicę między „musimy zrezygnować z tarasu" a „mieścimy się w budżecie z zapasem".',
+          },
+          {
+            number: 3,
+            iconName: 'clock',
+            title: 'Szybsza Realizacja (Brak Przestojów)',
+            description:
+              '500+ zrealizowanych projektów nauczyło nas, że największe opóźnienia powstają na styku różnych firm. „Geodeta nie przyszedł, więc wykonawca czeka." „Architekt nie odpowiada, więc projekt stoi." Nasz zespół działa jak orkiestra – każdy wie kiedy wchodzi, nikt nie czeka na drugiego.',
+          },
+        ]}
+        image={{
+          src: '/images/uslugi.webp',
+          alt: 'Zespół CoreLTB Builders podczas spotkania projektowego',
+        }}
+      />
+
+      {/* 5. CTA Section - Final push dla undecided users */}
+      <CtaSection
+        title="Nie Wiesz Od Czego Zacząć?"
+        email="coreltb@gmail.com"
+        primaryButton={{
+          text: 'Umów konsultację',
+          href: '/kontakt',
+        }}
+        socials={[
+          { platform: 'facebook' as const, href: 'https://facebook.com' },
+          { platform: 'instagram' as const, href: 'https://instagram.com' },
+          { platform: 'linkedin' as const, href: 'https://linkedin.com' },
+          { platform: 'youtube' as const, href: 'https://youtube.com' },
+        ]}
+      />
     </main>
   );
 }
