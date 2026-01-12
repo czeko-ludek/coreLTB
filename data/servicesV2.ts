@@ -183,41 +183,41 @@ export const allServicesV2: ServiceV2[] = [
   {
     slug: 'kompleksowa-budowa-domow',
     id: 'kompleksowa-budowa-domow',
-    category: 'Kompleksowa Budowa Domów',
-    title: 'Kompleksowa Budowa Domów',
+    category: 'Kompleksowa budowa domów',
+    title: 'Kompleksowa budowa domów',
 
     // PageHeader
     pageHeader: {
-      title: 'Kompleksowa Budowa Domów',
+      title: 'Kompleksowa budowa domów',
       watermarkText: 'BUDOWA DOMÓW',
       backgroundImage: '/images/uslugi/kompleksowa-budowa-domow/hero.webp',
       breadcrumbs: [
         { label: 'Strona główna', href: '/' },
         { label: 'Oferta', href: '/oferta' },
-        { label: 'Kompleksowa Budowa Domów', href: '' },
+        { label: 'Kompleksowa budowa domów', href: '' },
       ],
     },
 
     // Sekcja 1: Dom to więcej niż budynek
     emotionalHero: {
       label: 'KOMPLEKSOWA BUDOWA DOMÓW',
-      headline: ['Dom to więcej niż budynek',
-      'To przestrzeń dla Twojej historii'
+      headline: ['Generalny wykonawca',
+      'nadzór, logistyka i stała cena'
     ],
       subtitle:
-        'W CoreLTB Builders rozumiemy, że budowa domu to jedna z najważniejszych podróży w życiu. Dlatego jako firma rodzinna z wieloletnią tradycją, jesteśmy Twoim przewodnikiem i partnerem na każdym jej etapie – od pierwszej kreski na projekcie, aż po moment, w którym przekręcasz klucz w drzwiach swojego wymarzonego domu.',
+        'Jako generalny wykonawca, zastępujemy chaos "systemu gospodarczego" inżynierskim procesem budowlanym. Przejmujemy 100% odpowiedzialności za logistykę na Śląsku, w Małopolsce i Opolskiem – od analizy gruntu, przez stan surowy, aż po odbiory techniczne.',
       benefits: [
-        '500+ domów zbudowanych od A do Z – każdy etap pod kontrolą',
-        'Jedna umowa, jedna odpowiedzialność – Ty odpoczywasz, my budujemy',
-        'Gwarancja stałej ceny i terminu – żadnych niespodzianek',
+        '15 lat doświadczenia w realizacji budynków jednorodzinnych',
+        'Jeden wykonawca = jedna gwarancja na cały budynek',
+        'Stały koszt budowy wpisany w harmonogram',
       ],
       // CTA Box
       ctaBoxTitle: '☎ Umów Bezpłatną Konsultację',
       ctaBoxBenefits: [
-        'Przeanalizujemy Twoją sytuację i wymagania',
-        'Przedstawimy realny harmonogram i budżet budowy',
-        'Wycenimy kompleksową realizację od projektu do odbioru',
-        'Odpowiemy na wszystkie Twoje pytania i wątpliwości',
+        'Wstępna analiza działki (Szkody górnicze, MPZP, Media)',
+        'Szacunkowy kosztorys budowy domu na rok 2026',
+        'Porównanie kosztów: Stan Surowy vs Deweloperski',
+        'Omówienie technologii (WT2021, Pompy ciepła)',
       ],
       ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
       ctaBoxButtons: [
@@ -227,7 +227,7 @@ export const allServicesV2: ServiceV2[] = [
           variant: 'primary',
         },
         {
-          text: 'Napisz do Nas',
+          text: 'Zamów wycenę online',
           href: '#kontakt',
           variant: 'secondary',
         },
@@ -249,23 +249,23 @@ philosophyTimeline: {
     {
       number: 1,
       iconName: 'fileText', // Sugeruję zmianę ikony na symbolizującą umowę
-      title: 'Jeden Partner, Jedna Umowa, Pełna Odpowiedzialność',
+      title: 'Jeden partner, jedna umowa, pełna odpowiedzialność',
       description:
         'Zapomnij o koordynowaniu dziesiątek podwykonawców. Jako generalny wykonawca, podpisujesz z nami jedną, przejrzystą umowę i to my odpowiadamy za wszystko: od projektu, przez budowę, aż po odbiory.',
     },
     {
       number: 2,
       iconName: 'shieldCheck', // Sugeruję zmianę ikony na symbolizującą bezpieczeństwo
-      title: 'Gwarancja Stałej Ceny i Terminu – Bez Niespodzianek',
+      title: 'Gwarancja stałej ceny i terminu – bez niespodzianek',
       description:
-        'Budżet i czas to świętość. Cena, którą ustalamy w umowie, jest ostateczna i chroni Cię przed nieprzewidzianymi kosztami. Harmonogram prac jest dla nas wiążący, a o postępach informujemy Cię regularnie. Z nami wiesz, na czym stoisz.',
+        'Podpisujesz umowę na kwotę brutto. To my bierzemy na siebie ryzyko, że stal lub styropian zdrożeje w przyszłym miesiącu. Twój kosztorys dla Banku jest "sztywny" i bezpieczny',
     },
     {
       number: 3,
       iconName: 'award', // Sugeruję zmianę ikony na symbolizującą jakość
-      title: 'Doświadczenie i Jakość, Którą Widać i Czuć',
+      title: 'Technologia Dobrana do Gruntu',
       description:
-        'Nie budujemy od wczoraj. Ponad 15 lat na rynku i 500 zrealizowanych projektów to kapitał, który pracuje na Twoją korzyść. Używamy sprawdzonych materiałów i osobiście nadzorujemy każdy detal.',
+        'Zrealizowaliśmy wiele inwestycji na wymagających, gliniastych terenach Południowej Polski. Nie powielamy schematów – dobieramy izolacje i typ fundamentowania (ławy vs płyta) indywidualnie pod wyniki badań geotechnicznych, eliminując ryzyko pękania ścian po latach.',
     },
   ],
   
@@ -292,7 +292,7 @@ servicesAccordion: {
   services: [
     {
       iconName: 'fileText', // Ikona dla pierwszej karty
-      title: 'Etap Przed-Budowlany: Solidne Fundamenty Twojej Inwestycji',
+      title: 'Etap przed-budowlany: solidne fundamenty Twojej inwestycji',
       content: [
         {
           type: 'paragraph',
@@ -310,7 +310,7 @@ servicesAccordion: {
     },
     {
       iconName: 'draftingCompass', // Ikona dla drugiej karty
-      title: 'Projektowanie i Adaptacje: Twoja Wizja w Rękach Ekspertów',
+      title: 'Projektowanie i adaptacje: Twoja wizja w rękach ekspertów',
       content: [
         {
           type: 'paragraph',
@@ -329,7 +329,7 @@ servicesAccordion: {
     },
     {
       iconName: 'hardHat', // Ikona dla trzeciej karty
-      title: 'Generalne Wykonawstwo: Budowa od A do Z pod Pełną Kontrolą',
+      title: 'Generalne wykonawstwo: budowa od A do Z pod pełną kontrolą',
       content: [
         {
           type: 'paragraph',
@@ -348,7 +348,7 @@ servicesAccordion: {
     },
     {
       iconName: 'tree', // Ikona dla czwartej karty (TreeDeciduous)
-      title: 'Prace Zewnętrzne i Finalizacja: Perfekcyjne Zwieńczenie Projektu',
+      title: 'Prace zewnętrzne i finalizacja: perfekcyjne zwieńczenie projektu',
       content: [
         {
           type: 'paragraph',
@@ -371,7 +371,7 @@ servicesAccordion: {
     testimonials: {
       header: {
         label: 'CO MÓWIĄ NASI KLIENCI',
-        title: 'Po Skorzystaniu z Naszych Usług',
+        title: 'Po skorzystaniu z naszych usług',
         theme: 'light' as const,
       },
       testimonials: [
@@ -417,11 +417,11 @@ servicesAccordion: {
       ],
     },
 
-    // Sekcja 7: Etapy Współpracy (Timeline)
-    cooperationTimeline: {
+    // Sekcja 7: Etapy Współpracy (Timeline bez linii)
+    cooperationTimelineNoLine: {
       header: {
         label: 'JAK PRACUJEMY',
-        title: 'Droga do Twojego Wymarzonego Domu',
+        title: 'Droga do Twojego wymarzonego domu',
         description: 'Etapy Współpracy z Nami',
         theme: 'light' as const,
       },
@@ -431,7 +431,7 @@ servicesAccordion: {
           number: 1,
           icon: 'mapPin',
           label: 'Działka',
-          title: 'Działka Budowlana',
+          title: 'Działka budowlana',
           content: [
             {
               type: 'paragraph',
@@ -459,7 +459,7 @@ servicesAccordion: {
           number: 2,
           icon: 'draftingCompass',
           label: 'Projekt',
-          title: 'Projekt Domu',
+          title: 'Projekt domu',
           content: [
             {
               type: 'paragraph',
@@ -485,7 +485,7 @@ servicesAccordion: {
           number: 3,
           icon: 'plug',
           label: 'Przyłącza',
-          title: 'Przyłącza Budowlane',
+          title: 'Przyłącza budowlane',
           content: [
             {
               type: 'paragraph',
@@ -513,7 +513,7 @@ servicesAccordion: {
           number: 4,
           icon: 'stamp',
           label: 'Pozwolenie',
-          title: 'Pozwolenie na Budowę',
+          title: 'Pozwolenie na budowę',
           content: [
             {
               type: 'paragraph',
@@ -541,7 +541,7 @@ servicesAccordion: {
           number: 5,
           icon: 'landmark',
           label: 'Finansowanie',
-          title: 'Wsparcie w Finansowaniu',
+          title: 'Wsparcie w finansowaniu',
           content: [
             {
               type: 'paragraph',
@@ -572,7 +572,7 @@ servicesAccordion: {
           number: 6,
           icon: 'construction',
           label: 'Budowa',
-          title: 'Realizacja Budowy',
+          title: 'Realizacja budowy',
           content: [
             {
               type: 'paragraph',
@@ -600,7 +600,7 @@ servicesAccordion: {
           number: 7,
           icon: 'shovel',
           label: 'Teren',
-          title: 'Zagospodarowanie Terenu',
+          title: 'Zagospodarowanie terenu',
           content: [
             {
               type: 'paragraph',
@@ -632,7 +632,7 @@ servicesAccordion: {
           number: 8,
           icon: 'keyRound',
           label: 'Odbiór',
-          title: 'Odbiór i Gwarancja',
+          title: 'Odbiór i gwarancja',
           content: [
             {
               type: 'paragraph',
@@ -692,11 +692,11 @@ servicesAccordion: {
     slug: 'projektowanie',
     id: 'projektowanie',
     category: 'Projektowanie',
-    title: 'Projektowanie Domu',
+    title: 'Projektowanie domu',
 
     // PageHeader
     pageHeader: {
-      title: 'Projektowanie Domu',
+      title: 'Projektowanie domu',
       watermarkText: 'PROJEKTOWANIE',
       backgroundImage: '/images/uslugi/projektowanie/hero.webp',
       breadcrumbs: [
@@ -709,7 +709,7 @@ servicesAccordion: {
     // Sekcja 1: EmotionalHero - Od Marzenia do Projektu
     emotionalHero: {
       label: 'PROJEKTOWANIE DOMU',
-      headline: 'Od Marzenia do Projektu',
+      headline: 'Od marzenia do projektu',
       subtitle:
         'Budowa domu zaczyna się od projektu. Dobry projekt to spokojny sen przez całą budowę i lata mieszkania. Zły projekt to przepalony budżet, frustracja na budowie i kosztowne poprawki. W CoreLTB Builders tworzymy projekty, które działają – zarówno na papierze, jak i w realnym życiu.',
       benefits: [
@@ -753,21 +753,21 @@ servicesAccordion: {
         {
           number: 1,
           iconName: 'pencil',
-          title: 'Twój Projekt, Nasza Wiedza',
+          title: 'Twój projekt, nasza wiedza',
           description:
             'U nas nie ma konfliktu między wizją architekta a realiami budowy. Nasz zespół projektowy pracuje ramię w ramię z kierownikami budowy. Każda kreska jest weryfikowana pod kątem wykonalności i kosztów, co eliminuje stres i nieprzewidziane wydatki na późniejszym etapie.',
         },
         {
           number: 2,
           iconName: 'landmark',
-          title: 'Twój Budżet, Nasz Priorytet',
+          title: 'Twój budżet, nasz priorytet',
           description:
             'Zaczynamy od Twoich realnych możliwości finansowych. Projektujemy dom, na który Cię stać. Optymalizujemy każde rozwiązanie pod kątem trwałości i ekonomii. Nigdy kosztem jakości. Nie tworzymy drogich fantazji – tworzymy realne, wykonalne plany.',
         },
         {
           number: 3,
           iconName: 'building',
-          title: 'Wiedza Prosto z Budowy',
+          title: 'Wiedza prosto z budowy',
           description:
             'Nasi projektanci znają realia placu budowy. Wiemy, które rozwiązania sprawdzają się w codziennym życiu, a które są tylko efektowne na papierze. To praktyczna wiedza zdobyta na ponad 500 realizacjach, której nie znajdziesz w żadnym katalogu.',
         },
@@ -782,7 +782,7 @@ servicesAccordion: {
     cooperationTimelineNoLine: {
       header: {
         label: 'PROCES PROJEKTOWANIA',
-        title: 'Od Koncepcji do Gotowego Projektu',
+        title: 'Od koncepcji do gotowego projektu',
         description: 'Projekt to najważniejszy etap, który decyduje o kosztach, funkcjonalności i komforcie Twojego przyszłego domu. Zobacz, jak przeprowadzimy Cię przez ten proces, gwarantując spokój i bezpieczeństwo inwestycji.',
       },
       steps: [
@@ -790,8 +790,8 @@ servicesAccordion: {
           id: 'projekt-gotowy',
           number: 1,
           icon: 'fileText',
-          label: 'Projekt Gotowy',
-          title: 'Analiza Projektu Gotowego (Katalogowego)',
+          label: 'Projekt gotowy',
+          title: 'Analiza projektu gotowego (katalogowego)',
           content: [
             {
               type: 'paragraph',
@@ -833,8 +833,8 @@ servicesAccordion: {
           id: 'projekt-indywidualny',
           number: 2,
           icon: 'draftingCompass',
-          label: 'Projekt Indywidualny',
-          title: 'Projekt Indywidualny',
+          label: 'Projekt indywidualny',
+          title: 'Projekt indywidualny',
           content: [
             {
                 type: 'paragraph',
@@ -877,7 +877,7 @@ servicesAccordion: {
           number: 3,
           icon: 'settings',
           label: 'Adaptacja',
-          title: 'Adaptacja Projektu',
+          title: 'Adaptacja projektu',
           content: [
             {
               type: 'paragraph',
@@ -920,7 +920,7 @@ servicesAccordion: {
           number: 4,
           icon: 'piggyBank',
           label: 'Koszty',
-          title: 'Budżet i Koszty',
+          title: 'Budżet i koszty',
           content: [
             {
               type: 'paragraph',
@@ -951,7 +951,7 @@ servicesAccordion: {
           number: 5,
           icon: 'clipboardCheck',
           label: 'Dokumentacja',
-          title: 'Kompletna Dokumentacja Budowlana',
+          title: 'Kompletna dokumentacja budowlana',
           content: [
             {
               type: 'paragraph',
@@ -982,7 +982,7 @@ servicesAccordion: {
           number: 6,
           icon: 'lightbulb',
           label: 'Rozwiązania',
-          title: 'Praktyczne Rozwiązania, Które Oszczędzają Pieniądze',
+          title: 'Praktyczne rozwiązania, które oszczędzają pieniądze',
           content: [
             {
               type: 'paragraph',
@@ -1028,8 +1028,8 @@ servicesAccordion: {
           id: 'unikanie-bledow',
           number: 7,
           icon: 'shield',
-          label: 'Unikanie Błędów',
-          title: 'Eliminacja Najczęstszych Błędów Projektowych',
+          label: 'Unikanie błędów',
+          title: 'Eliminacja najczęstszych błędów projektowych',
           content: [
             {
               type: 'paragraph',
@@ -1065,7 +1065,7 @@ servicesAccordion: {
     servicesAccordion: {
       header: {
         label: 'NAJCZĘŚCIEJ ZADAWANE PYTANIA',
-        title: 'Odpowiedzi na Kluczowe Pytania o Projektowanie',
+        title: 'Odpowiedzi na kluczowe pytania o projektowanie',
         description: 'Sprawdź najważniejsze informacje, które pomogą Ci podjąć świadomą decyzję. Podzieliliśmy pytania na kategorie, aby łatwiej znaleźć to, czego szukasz.',
       },
       services: [
@@ -1409,25 +1409,25 @@ contactCTA: {
   {
     slug: 'nadzor-i-doradztwo',
     id: 'nadzor-i-doradztwo',
-    category: 'Nadzór i Doradztwo',
-    title: 'Nadzór Budowlany i Doradztwo',
+    category: 'Nadzór i doradztwo',
+    title: 'Nadzór budowlany i doradztwo',
 
     // PageHeader
     pageHeader: {
-      title: 'Nadzór Budowlany i Doradztwo',
+      title: 'Nadzór budowlany i doradztwo',
       watermarkText: 'NADZÓR',
       backgroundImage: '/images/uslugi/nadzor-i-doradztwo/hero.webp',
       breadcrumbs: [
         { label: 'Strona główna', href: '/' },
         { label: 'Oferta', href: '/oferta' },
-        { label: 'Nadzór i Doradztwo', href: '/oferta/nadzor-i-doradztwo' },
+        { label: 'Nadzór i doradztwo', href: '/oferta/nadzor-i-doradztwo' },
       ],
     },
 
     // Sekcja 1: Emotional Hero
     emotionalHero: {
       label: 'NADZÓR BUDOWLANY I DORADZTWO',
-      headline: 'Twoja Budowa, Twoje Pieniądze, Nasza Ochrona',
+      headline: 'Twoja budowa, Twoje pieniądze, nasza ochrona',
       subtitle:
         'Aż 7 na 10 kosztownych błędów na budowie to efekt pominięcia fachowego nadzoru. Najczęstsze z nich to źle dobrany rodzaj fundamentu do warunków gruntu, zbyt płytkie posadowienie, użycie słabej jakości materiałów czy brak odpowiedniej izolacji przeciwwilgociowej. Takie błędy mogą prowadzić do pękania ścian, zawilgoceń i dużych kosztów napraw. Dlatego warto mieć zaufanego specjalistę na każdym etapie budowy.',
       benefits: [
@@ -1462,7 +1462,7 @@ contactCTA: {
     philosophyTimeline: {
       header: {
         label: 'NASZA FILOZOFIA NADZORU',
-        title: 'Nadzór Budowlany, Który Jest Po Twojej Stronie',
+        title: 'Nadzór budowlany, który jest po Twojej stronie',
         description: 'W CoreLTB Builders wierzymy, że dobry inspektor to nie tylko kontroler, ale Twój partner na każdym etapie budowy. Nasza rola nie kończy się na formalnym „odhaczaniu” kolejnych etapów i podpisywaniu protokołów. Działamy dla Ciebie — czuwając nad jakością, doradzając w trudnych decyzjach, reagując na nieścisłości i nagłe sytuacje.',
       },
       items: [
@@ -1496,7 +1496,7 @@ contactCTA: {
     cooperationTimelineNoLine: {
       header: {
         label: 'ZAKRES NADZORU',
-        title: 'Nasze Usługi Nadzoru',
+        title: 'Nasze usługi nadzoru',
         description: 'Poznaj kluczowe elementy profesjonalnego nadzoru budowlanego.',
       },
       steps: [
@@ -1505,8 +1505,8 @@ contactCTA: {
           id: 'kierownik-vs-inspektor',
           number: 1,
           icon: 'users',
-          label: 'Kierownik vs Inspektor',
-          title: 'Kierownik Budowy vs Inspektor Nadzoru',
+          label: 'Kierownik vs inspektor',
+          title: 'Kierownik budowy vs inspektor nadzoru',
           content: [
             {
               type: 'paragraph',
@@ -1535,8 +1535,8 @@ contactCTA: {
           id: 'kierownik-budowy',
           number: 2,
           icon: 'hardHat',
-          label: 'Kierownik Budowy',
-          title: 'Usługa Kierownika Budowy',
+          label: 'Kierownik budowy',
+          title: 'Usługa kierownika budowy',
           content: [
             {
               type: 'paragraph',
@@ -1567,8 +1567,8 @@ contactCTA: {
           id: 'inspektor-nadzoru',
           number: 3,
           icon: 'users',
-          label: 'Inspektor Nadzoru',
-          title: 'Inspektor Nadzoru Inwestorskiego',
+          label: 'Inspektor nadzoru',
+          title: 'Inspektor nadzoru inwestorskiego',
           content: [
             {
               type: 'paragraph',

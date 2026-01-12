@@ -25,8 +25,8 @@ export function PhilosophyTimelineSection({ header, items, image }: PhilosophyTi
   });
 
   return (
-    <section ref={ref} className="section-with-bg py-20">
-      <div className="container mx-auto px-4">
+    <section ref={ref} className="py-20 px-4 lg:px-[50px] bg-white">
+      <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
           
           {/* ==================================================================== */}

@@ -76,10 +76,10 @@ export default async function ServicePageV2({
       {/* Sekcja 2: Nasza Filozofia */}
       <PhilosophyTimelineSection {...service.philosophyTimeline} />
 
-      {/* Sekcja 3: Etapy Współpracy (Timeline) */}
-      {service.cooperationTimeline && (
+      {/* Sekcja 3: Etapy Współpracy (Timeline) - USUNIĘTE (brzydki timeline z linią) */}
+      {/* {service.cooperationTimeline && (
         <CooperationTimelineSection {...service.cooperationTimeline} />
-      )}
+      )} */}
 
       {/* Sekcja 3 (alternatywna): Timeline bez linii (dla Projektowanie) */}
       {service.cooperationTimelineNoLine && (

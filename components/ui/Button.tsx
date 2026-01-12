@@ -8,6 +8,7 @@ export interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
   href?: string;
+  leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   className?: string;
   type?: 'button' | 'submit' | 'reset';
@@ -20,6 +21,7 @@ export function Button({
   children,
   onClick,
   href,
+  leftIcon,
   rightIcon,
   className,
   type = 'button',
@@ -49,6 +51,7 @@ export function Button({
 
   const content = (
     <>
+      {leftIcon && <span className="transition-transform group-hover:-translate-x-1">{leftIcon}</span>}
       {children}
       {rightIcon && <span className="transition-transform group-hover:translate-x-1">{rightIcon}</span>}
     </>

@@ -388,6 +388,42 @@
     animation: curtainSlideUp 0.5s ease-in-out 0s forwards;
   }
 
+  /* Service Showcase Scale Down + Fade + Scale Up Animation (Material Design) */
+
+  /* Scale down + fade out */
+  @keyframes serviceExitAnimation {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  /* Scale up + fade in */
+  @keyframes serviceEnterAnimation {
+    0% {
+      opacity: 0;
+      transform: scale(1.05);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Exit animation class */
+  .service-exit-active {
+    animation: serviceExitAnimation 0.25s cubic-bezier(0.4, 0, 1, 1) forwards;
+  }
+
+  /* Enter animation class */
+  .service-enter-active {
+    animation: serviceEnterAnimation 0.35s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+
   /* Fade in from right animation */
   @keyframes fadeInRight {
     0% {

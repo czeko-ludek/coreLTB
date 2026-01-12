@@ -94,3 +94,16 @@ export type { RelatedProjectsSectionProps } from './RelatedProjectsSection';
 // Partners (currently disabled but available)
 export { PartnerLogo } from './PartnerLogo';
 export type { PartnerLogoProps } from './PartnerLogo';
+
+// About Page Components
+export { PhilosophyCard } from './PhilosophyCard';
+export type { PhilosophyCardProps } from './PhilosophyCard';
+
+export { CompetenceCard } from './CompetenceCard';
+export type { CompetenceCardProps } from './CompetenceCard';
+
+export { ResponsibilityPillarsCard } from './ResponsibilityPillarsCard';
+export type { ResponsibilityPillarsCardProps, ResponsibilityPillar } from './ResponsibilityPillarsCard';
+
+export { ResponsibilityCard } from './ResponsibilityCard';
+export type { ResponsibilityCardProps } from './ResponsibilityCard';

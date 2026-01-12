@@ -24,19 +24,19 @@ const headerData = {
   },
   logo: { src: "/logo.webp", alt: "CoreLTB Builders" },
   navLinks: [
-    { label: "Strona Główna", href: "/" },
-    { label: "O Nas", href: "/about" },
+    { label: "Strona główna", href: "/" },
+    { label: "O nas", href: "/o-nas" },
     { label: "Oferta", href: "/oferta" },
     { label: "Projekty", href: "/projects" },
     { label: "Blog", href: "/blog" },
-    { label: "Kontakt", href: "/contact" },
+    { label: "Kontakt", href: "/kontakt" },
   ],
   searchEnabled: true,
-  ctaButton: { text: "Wycena", href: "/contact" },
+  ctaButton: { text: "Wycena", href: "/kontakt" },
   megaMenuItems: [
     {
       icon: "home" as const,
-      title: "Kompleksowa Budowa Domów",
+      title: "Kompleksowa budowa domów",
       description: "Kompleksowa realizacja domów jednorodzinnych pod klucz, od projektu aż po finalne wykończenie.",
       href: "/oferta/kompleksowa-budowa-domow",
     },
@@ -48,25 +48,25 @@ const headerData = {
     },
     {
       icon: "clipboard" as const,
-      title: "Nadzór i Doradztwo",
+      title: "Nadzór i doradztwo",
       description: "Profesjonalny nadzór inwestorski i doradztwo techniczne na każdym etapie realizacji Twojej inwestycji.",
       href: "/oferta/nadzor-i-doradztwo",
     },
     {
       icon: "ruler" as const,
-      title: "Usługi Techniczne",
+      title: "Usługi techniczne",
       description: "Badania gruntu, pomiary geodezyjne i profesjonalne kosztorysy. Twarde dane, które chronią Twoją inwestycję.",
       href: "/oferta/uslugi-techniczne",
     },
     {
       icon: "paintBrush" as const,
-      title: "Wykończenia i Aranżacje",
+      title: "Wykończenia i aranżacje",
       description: "Precyzyjne prace wykończeniowe i stylowe aranżacje wnętrz, które nadadzą Twojemu domowi unikalny charakter.",
       href: "/oferta/wykonczenia-i-aranzacje",
     },
     {
       icon: "tree" as const,
-      title: "Zagospodarowanie Terenu",
+      title: "Zagospodarowanie terenu",
       description: "Przekształcamy przestrzeń wokół budynków w funkcjonalne i estetyczne otoczenie, realizując ogrody, drogi i ogrodzenia.",
       href: "/oferta/zagospodarowanie-terenu",
     },
@@ -83,7 +83,7 @@ const footerData = {
     },
     {
       iconName: "clock" as const,
-      title: "Godziny Otwarcia",
+      title: "Godziny otwarcia",
       content: "Pn - Pt: 8:00 - 18:00",
     },
     {
@@ -94,27 +94,27 @@ const footerData = {
     {
       iconName: "mapPin" as const,
       title: "Adres",
-      content: "ul. Przykładowa 123, Warszawa",
+      content: "Coreltb Builders sp. z o.o., ul. Wałowa 55, 44-300 Wodzisław Śląski",
     },
   ],
   logo: { src: "/logo.webp", alt: "CoreLTB Builders" },
   about: "Budujemy marzenia i konstruujemy przyszłość. Jesteśmy zobowiązani do dostarczania wyjątkowych usług budowlanych.",
   linkGroups: [
     {
-      title: "Przydatne Linki",
+      title: "Przydatne linki",
       links: [
-        { label: "O Nas", href: "/about" },
-        { label: "Nasze Usługi", href: "/services" },
+        { label: "O nas", href: "/o-nas" },
+        { label: "Nasze usługi", href: "/services" },
         { label: "Projekty", href: "/projects" },
-        { label: "Kontakt", href: "/contact" },
+        { label: "Kontakt", href: "/kontakt" },
       ],
     },
     {
-      title: "Szybkie Usługi",
+      title: "Szybkie usługi",
       links: [
-        { label: "Budownictwo Ogólne", href: "/services/general" },
-        { label: "Projektowanie Wnętrz", href: "/services/interior" },
-        { label: "Zarządzanie Projektem", href: "/services/management" },
+        { label: "Budownictwo ogólne", href: "/services/general" },
+        { label: "Projektowanie wnętrz", href: "/services/interior" },
+        { label: "Zarządzanie projektem", href: "/services/management" },
         { label: "Konsultacje", href: "/services/consultation" },
       ],
     },
@@ -128,7 +128,7 @@ const footerData = {
     copyright: "Copyright © 2024 CoreLTB Builders. Wszelkie prawa zastrzeżone.",
     links: [
       { label: "Regulamin", href: "/terms" },
-      { label: "Polityka Prywatności", href: "/privacy" },
+      { label: "Polityka prywatności", href: "/privacy" },
     ],
   },
   socials: [

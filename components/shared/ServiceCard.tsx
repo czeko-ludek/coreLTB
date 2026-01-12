@@ -18,7 +18,7 @@ export function ServiceCard({
   href,
 }: ServiceCardProps) {
   return (
-    <div className="group relative bg-white hover:bg-gray-50 rounded-xl p-8 border-t-2 border-primary/20 hover:border-t-primary border-x border-b border-transparent hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 shadow-md hover:shadow-xl">
+    <div className="group relative h-full bg-white hover:bg-gray-50 rounded-xl p-8 border-t-2 border-primary/20 hover:border-t-primary border-x border-b border-transparent hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 shadow-md hover:shadow-xl flex flex-col">
       {/* Icon and Title - horizontal on desktop, vertical on mobile */}
       <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6 mb-6">
         {/* Icon */}
@@ -37,8 +37,8 @@ export function ServiceCard({
       </div>
 
       {/* Content */}
-      <div className="relative space-y-4">
-        <p className="text-body-md text-text-secondary leading-relaxed">
+      <div className="relative space-y-4 flex-1 flex flex-col">
+        <p className="text-body-md text-text-secondary leading-relaxed flex-1">
           {description}
         </p>
 

@@ -41,10 +41,27 @@
       "Bash(cat:*)",
       "Bash(clip:*)",
       "Bash(del dataservicesV2_faq_temp.ts)",
-      "WebFetch(domain:www.semrush.com)"
+      "WebFetch(domain:www.semrush.com)",
+      "WebFetch(domain:thatware.co)",
+      "Bash(test:*)",
+      "Bash(py --version)",
+      "Bash(streamlit run:*)",
+      "Bash(py -m streamlit:*)",
+      "Bash(py -m py_compile:*)",
+      "Bash(py main.py:*)",
+      "Bash(cd:*)",
+      "Bash(venvScriptspython.exe:*)",
+      "Bash(\"D:\\CORE LTB\\elever\\tools\\seo-expert\\venv\\Scripts\\python.exe\":*)",
+      "Bash(\"D:\\CORE LTB\\elever\\tools\\seo-expert\\venv\\Scripts\\python.exe\" -m py_compile:*)",
+      "Bash(ls:*)",
+      "Bash(npx @biomejs/biome:*)"
     ],
     "deny": [],
     "ask": []
   },
-  "model": "sonnet"
+  "model": "sonnet",
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y @owloops/claude-powerline@latest --style=powerline"
+  }
 }

@@ -167,7 +167,7 @@ export const allProjects: Project[] = [
       },
     ],
     costCalculation: {
-      title: 'KALKULACJA SZACUNKOWA Zb5 duo',
+      title: 'Kalkulacja szacunkowa Zb5 duo',
       items: [
         { name: 'Stan zerowy', prices: { average: '167 228 zł', min: '149 311 zł' } },
         { name: 'Stan surowy otwarty', prices: { average: '609 891 zł', min: '544 545 zł' } },
@@ -257,7 +257,7 @@ export const allProjects: Project[] = [
       },
     ],
     costCalculation: {
-      title: 'KALKULACJA SZACUNKOWA Zx201',
+      title: 'Kalkulacja szacunkowa Zx201',
       items: [
         { name: 'Stan zerowy', prices: { average: '60 220 zł', min: '53 768 zł' } },
         { name: 'Stan surowy otwarty', prices: { average: '219 625 zł', min: '196 094 zł' } },
@@ -357,7 +357,7 @@ export const allProjects: Project[] = [
       },
     ],
     costCalculation: {
-      title: 'KALKULACJA SZACUNKOWA Zx201',
+      title: 'Kalkulacja szacunkowa Zx201',
       items: [
         { name: 'Stan zerowy', prices: { average: '94 119 zł', min: '84 035 zł' } },
         { name: 'Stan surowy otwarty', prices: { average: '343 259 zł', min: '306 481 zł' } },
@@ -462,7 +462,7 @@ export const allProjects: Project[] = [
       },
     ],
     costCalculation: {
-      title: 'KALKULACJA SZACUNKOWA Zx251',
+      title: 'Kalkulacja szacunkowa Zx251',
       items: [
         { name: 'Stan zerowy', prices: { average: '127 003 zł', min: '113 396 zł' } },
         { name: 'Stan surowy otwarty', prices: { average: '463 188 zł', min: '413 561 zł' } },
@@ -574,7 +574,7 @@ export const allProjects: Project[] = [
       },
     ],
     costCalculation: {
-      title: 'KALKULACJA SZACUNKOWA Z357',
+      title: 'Kalkulacja szacunkowa Z357',
       items: [
         { name: 'Stan zerowy', prices: { average: '95 063 zł', min: '84 878 zł' } },
         { name: 'Stan surowy otwarty', prices: { average: '346 702 zł', min: '309 555 zł' } },
