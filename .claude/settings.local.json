@@ -50,9 +50,9 @@
       "Bash(py -m py_compile:*)",
       "Bash(py main.py:*)",
       "Bash(cd:*)",
-      "Bash(venvScriptspython.exe:*)",
-      "Bash(\"D:\\CORE LTB\\elever\\tools\\seo-expert\\venv\\Scripts\\python.exe\":*)",
-      "Bash(\"D:\\CORE LTB\\elever\\tools\\seo-expert\\venv\\Scripts\\python.exe\" -m py_compile:*)",
+      "Bash(venv\\Scripts\\python.exe:*)",
+      "Bash(\"D:\\\\CORE LTB\\\\elever\\\\tools\\\\seo-expert\\\\venv\\\\Scripts\\\\python.exe\":*)",
+      "Bash(\"D:\\\\CORE LTB\\\\elever\\\\tools\\\\seo-expert\\\\venv\\\\Scripts\\\\python.exe\" -m py_compile:*)",
       "Bash(ls:*)",
       "Bash(npx @biomejs/biome:*)"
     ],

@@ -422,7 +422,7 @@ servicesAccordion: {
       header: {
         label: 'JAK PRACUJEMY',
         title: 'Droga do Twojego wymarzonego domu',
-        description: 'Etapy Współpracy z Nami',
+        description: 'Proces budowy z CoreLTB Builders jest poukładany inżyniersko. Nie ma tu miejsca na improwizację. Każdy etap wynika z poprzedniego, tworząc spójny ciąg przyczynowo-skutkowy, który prowadzi do bezpiecznego domu.',
         theme: 'light' as const,
       },
       steps: [
@@ -431,19 +431,18 @@ servicesAccordion: {
           number: 1,
           icon: 'mapPin',
           label: 'Działka',
-          title: 'Działka budowlana',
+          title: 'Audyt działki i analiza geotechniczna',
           content: [
             {
               type: 'paragraph',
-              value: 'Wybór działki to najważniejsza decyzja, która definiuje całą przyszłą inwestycję. Błędny zakup może oznaczać ogromne koszty i problemy. Dlatego współpracę z CoreLTB Builders możesz rozpocząć jeszcze przed jej nabyciem. Nasz zespół przeprowadzi **pełną i szczegółową analizę gruntu**, która jest fundamentem Twojego bezpieczeństwa. Weryfikujemy kluczowe aspekty:'
+              value: 'Start inwestycji na terenie Południowej Polski (Śląsk, Małopolska) wymaga wyjścia poza standardową weryfikację prawną. Specyfika regionu – w tym **grunty wysadzinowe (gliny)** oraz **aktywne szkody górnicze** (od I do IV kategorii) – bezpośrednio wpływa na koszt budowy. Nasz zespól analizuje nie tylko, czy możesz budować, ale ile będzie kosztowało "wyjście z ziemi". Różnica między standardową ławą a wzmocnioną płytą fundamentową może wynosić nawet 20-30% budżetu stanu surowego'
             },
             {
               type: 'list',
               items: [
-                '**Zgodność z MPZP:** Sprawdzamy zapisy w **Miejscowym Planie Zagospodarowania Przestrzennego (MPZP)**, aby upewnić się, że Twój wymarzony projekt będzie mógł na niej powstać.',
-                '**Warunki Zabudowy:** Jeśli działka nie jest objęta MPZP, bierzemy na siebie cały proces uzyskania **decyzji o Warunkach Zabudowy**.',
-                '**Dostępność mediów:** Analizujemy możliwości i koszty **uzbrojenia działki** w prąd, wodę, gaz i kanalizację.',
-                '**Warunki geologiczne:** Zlecamy badania gruntu, aby uniknąć kosztownych niespodzianek na etapie fundamentowania.'
+                '**Geologia Inżynierska:** Wykonujemy odwierty kontrolne, aby wykryć wody gruntowe i grunty nienośne (nasypy). Unikasz ryzyka wymiany gruntu.',
+                '**Szkody Górnicze (Śląsk):** Weryfikujemy zapisy w PGG i Miejscowym Planie (MPZP), dobierając odpowiednie zabezpieczenia konstrukcyjne (tuleje, dylatacje).',
+                '**Uzbrojenie i WZ:** Analizujemy realne (a nie "na mapie") możliwości przyłącza mediów oraz procedujemy Decyzję o Warunkach Zabudowy w przypadku braku planu.'
               ]
             },
             {
@@ -459,17 +458,18 @@ servicesAccordion: {
           number: 2,
           icon: 'draftingCompass',
           label: 'Projekt',
-          title: 'Projekt domu',
+          title: 'Projekt i Optymalizacja Konstrukcji',
           content: [
             {
               type: 'paragraph',
-              value: 'To etap, na którym Twoje marzenia ubieramy w realne, techniczne ramy. Jako doświadczeni budowlańcy, wiemy, które rozwiązania są funkcjonalne, trwałe i optymalne kosztowo.'
+              value: 'Dla nas projekt to nie tylko wizualizacja, ale precyzyjny plan wydatków. Niezależnie od ścieżki, weryfikujemy dokumentację "okiem wykonawcy". Eliminujemy błędy projektowe i przewymiarowaną ilość stali w fundamentach, zanim maszyny wjadą na budowę.  **Oszczędzasz 10-20% na stanie surowym** dzięki optymalizacji.'
             },
             {
               type: 'list',
               items: [
-                '**Adaptacja Projektu Gotowego:** Wybrałeś projekt z katalogu? Nasz zespół architektów dokona jego **profesjonalnej adaptacji**. To więcej niż formalność – dostosowujemy go do specyfiki Twojej działki, stron świata i Twoich indywidualnych potrzeb.',
-                '**Indywidualny Projekt Domu:** Jeśli marzysz o domu "szytym na miarę", tworzymy od zera **unikalną koncepcję architektoniczną**, która w 100% odzwierciedla Twój styl życia.'
+                '**Adaptacja projektu gotowego:** Masz projekt z katalogu? Przeliczamy go na nowo pod kątem **lokalnych stref wiatrowych/śniegowych** i szkód górniczych. Często "odchudzamy" fundamenty lub zmieniamy drogi strop monolityczny na tańszą Terivę/systemowy, zachowując pełną nośność.',
+                '**Indywidualny projekt domu:** Projektujemy od "czystej kartki" domy energooszczędne **WT2021**. Tworzymy bryły proste w budowie i tanie w eksploatacji, od razu uwzględniając miejsce na rekuperację i pompę ciepła.',
+                '**Projekty branżowe:** Kompletujemy pełną dokumentację instalacyjną, wjazdy (ZUD) i charakterystykę energetyczną budynku.'
               ]
             },
             {
@@ -489,15 +489,15 @@ servicesAccordion: {
           content: [
             {
               type: 'paragraph',
-              value: 'Sprawne doprowadzenie mediów to fundament komfortowego życia w nowym domu. W CoreLTB Builders bierzemy na siebie **cały, często skomplikowany proces koordynacji przyłączy**, oszczędzając Twój czas i nerwy.'
+              value: 'Uzbrojenie działki to labirynt biurokracji i prac ziemnych. W CoreLTB działamy kompleksowo: **jako Twój pełnomocnik** przejmujemy kontakt z gestorami sieci (Tauron, PSG, Lokalne Wodociągi) na terenie Śląska i Małopolski. Ty nie stoisz w kolejkach, my dostarczamy media do budynku.'
             },
             {
               type: 'list',
               items: [
-                '**Wnioskujemy o warunki przyłączenia** do sieci energetycznej, wodociągowej i gazowej.',
-                '**Zlecamy i nadzorujemy wykonanie projektów** technicznych przyłączy.',
-                '**Koordynujemy prace ziemne i montażowe** z ekipami posiadającymi niezbędne uprawnienia.',
-                '**Organizujemy odbiory techniczne** z gestorami sieci, finalizując cały proces.'
+                '**Warunki techniczne (WTP):** Składamy wnioski o wydanie warunków przyłączenia dla wszystkich mediów (Prąd, Woda, Gaz, Kanalizacja), negocjując optymalne trasy przebiegu.',
+                '**Projekty branżowe i ZUD:** Zlecamy projekty uprawnionym projektantom sanitarnym/elektrycznym i przeprowadzamy je przez Zespół Uzgodnień Dokumentacji (ZUD) w urzędzie.',
+                '**Realizacja (prace ziemne):** Wprowadzamy certyfikowane ekipy instalatorskie. Koordynujemy wykopy i montaże, dbając o normowe wykonanie (podsypki, taśmy ostrzegawcze).',
+                '**Odbiory i liczniki:** Organizujemy inwentaryzację geodezyjną powykonawczą oraz końcowe odbiory techniczne z zakładem energetycznym/gazownią, aż do momentu montażu liczników.'
               ]
             },
             {
@@ -517,15 +517,14 @@ servicesAccordion: {
           content: [
             {
               type: 'paragraph',
-              value: 'Uzyskanie **pozwolenia na budowę** to kamień milowy każdej inwestycji. Najczęstszą przyczyną opóźnień są braki formalne i błędy we wnioskach. Z nami ten problem nie istnieje. W Twoim imieniu przygotowujemy i składamy **kompletny wniosek o pozwolenie na budowę**. Nasz zespół dba o to, by do urzędu trafiła cała niezbędna dokumentacja:'
+              value: ' W CoreLTB przygotowujemy kompletny wniosek zgodny z aktualnym Prawem Budowlanym. Znamy specyfikę i wymogi formalne wydziałów architektury w lokalnych Starostwach (Katowice, Rybnik, Gliwice, Opole), co minimalizuje ryzyko odrzucenia wniosku.'
             },
             {
               type: 'list',
               items: [
-                'Cztery egzemplarze projektu budowlanego.',
-                'Oświadczenie o prawie do dysponowania nieruchomością.',
-                'Decyzja o Warunkach Zabudowy (jeśli jest wymagana).',
-                'Wszystkie wymagane opinie, uzgodnienia i pozwolenia.'
+                '**Kompletacja dokumentacji:** Składamy Projekt Zagospodarowania Terenu (PZT) oraz Projekt Architektoniczno-Budowlany (PAB) wraz z wymaganymi opiniami.',
+                '**Obsługa formalna:** Wypełniamy oświadczenia o prawie do dysponowania nieruchomością, wnioski o odrolnienie oraz uzgodnienia z rzeczoznawcami (ppoż/sanepid).',
+                '**Monitoring sprawy:** Na bieżąco kontaktujemy się z inspektorem prowadzącym sprawę, aby błyskawicznie reagować na ewentualne wezwania, nie angażując Twojego czasu.'
               ]
             },
             {
@@ -541,11 +540,11 @@ servicesAccordion: {
           number: 5,
           icon: 'landmark',
           label: 'Finansowanie',
-          title: 'Wsparcie w finansowaniu',
+          title: 'Budżet i Finansowanie',
           content: [
             {
               type: 'paragraph',
-              value: 'Wiemy, że budowa domu to jedna z największych decyzji finansowych w życiu. Dlatego w CoreLTB Builders zapewniamy pełne wsparcie i transparentność również na etapie finansowania. Naszym celem jest maksymalne uproszczenie procedur i zapewnienie Ci solidnych podstaw do rozmów z bankiem, aby proces ubiegania się o **kredyt na budowę domu** był jak najmniej stresujący.'
+              value: 'Uzyskanie kredytu to procedura techniczna. Analitycy bankowi odrzucają wnioski oparte na nierealnych wycenach. Jako Generalny Wykonawca przygotowujemy profesjonalny **Harmonogram Rzeczowo-Finansowy**. Jest to dokument w pełni zgodny z wymogami banków, co drastycznie przyspiesza decyzję kredytową i wypłatę środków'
             },
             {
               type: 'paragraph',
@@ -554,9 +553,9 @@ servicesAccordion: {
             {
               type: 'list',
               items: [
-                '**Rzetelny Kosztorys Budowlany do Banku:** Przygotowujemy **szczegółowy i wiarygodny kosztorys**, który jest w pełni zgodny z wymogami instytucji finansowych. To kluczowy dokument, który precyzyjnie określa wartość inwestycji i jest podstawą do pozytywnej decyzji kredytowej.',
-                '**Współpraca z Doradcami Finansowymi:** Współpracujemy z **zaufanymi, niezależnymi doradcami kredytowymi**, którzy pomogą Ci porównać oferty różnych banków i wybrać najkorzystniejsze rozwiązanie, dopasowane do Twoich możliwości.',
-                '**Przygotowanie Harmonogramu:** Opracowujemy **jasny harmonogram prac i płatności**, który jest wymagany przez banki do wypłaty kredytu w transzach. Dzięki temu proces finansowania przebiega płynnie, zgodnie z postępem na budowie.'
+                '**Kosztorys dla Banku:** Otrzymujesz gotowy dokument potwierdzający wartość inwestycji, uznawany przez rzeczoznawców majątkowych.',
+                '**Transzowanie:** Synchronizujemy etapy budowy z wypłatami transz bankowych. Dzięki temu nie tracisz płynności finansowej w trakcie prac.',
+                '**Eksperci kredytowi:** Udostępniamy kontakt do sprawdzonych, niezależnych doradców na Śląsku i w Małopolsce, którzy znają nasz proces budowlany.'
               ]
             },
             {
@@ -576,15 +575,15 @@ servicesAccordion: {
           content: [
             {
               type: 'paragraph',
-              value: 'To serce naszej działalności, gdzie plany zamieniają się w rzeczywistość. Jako **generalny wykonawca**, bierzemy pełną odpowiedzialność za plac budowy. Fundamentem naszej jakości są **własne, wyspecjalizowane ekipy budowlane**, które pracują z nami od lat. Zapewniamy pełną realizację, obejmującą wszystkie kluczowe etapy:'
+              value: 'Budujemy w według norm **WT2021**, eliminując mostki termiczne już na etapie wznoszenia murów (systemy cienkospoinowe Porotherm/Silka/Ytong). W CoreLTB Builders pilnujemy przerw technologicznych – beton musi osiągnąć pełną wytrzymałość przed kolejnym etapem. W standardzie deweloperskim otrzymujesz budynek wyposażony w nowoczesne systemy (Pompa Ciepła, Rekuperacja), gotowy do prac wykończeniowych.'
             },
             {
               type: 'list',
               items: [
-                '**Stan surowy otwarty:** Precyzyjne prace ziemne, solidne fundamenty, wznoszenie ścian i montaż konstrukcji dachu.',
-                '**Stan surowy zamknięty:** Montaż energooszczędnej stolarki okiennej i drzwiowej.',
-                '**Stan deweloperski:** Wykonanie wszystkich instalacji wewnętrznych, tynków i wylewek.',
-                '**Prace "pod klucz":** Kompleksowe wykończenie wnętrz według Twoich wytycznych.'
+                '**SSO (Konstrukcja):** Ściany w systemie bezspoinowym, stropy żelbetowe monolityczne (akustyka!), więźba dachowa impregnowana ciśnieniowo.',
+                '**SSZ (Ciepłe zamknięcie):** Stolarka okienna 3-szybowa (Ug<0.9) montowana w warstwie ocieplenia (tzw. ciepły montaż) na taśmach szczelnych.',
+                '**Instalacje:** Rozprowadzenie ogrzewania podłogowego, wod-kan, elektryki oraz montaż maszynowni (Kotłownia/Pompa).',
+                '**Prace pod klucz:** Możliwość płynnego przejścia do etapu wykończenia wnętrz z naszym dedykowanym zespołem projektowym.'
               ]
             },
             {
@@ -604,19 +603,15 @@ servicesAccordion: {
           content: [
             {
               type: 'paragraph',
-              value: 'Prawdziwy dom to nie tylko cztery ściany. To także przestrzeń wokół niego, która wieńczy całe dzieło. W CoreLTB Builders rozumiemy, że ogród, podjazd i taras są naturalnym przedłużeniem Twojego domu, dlatego nasza kompleksowa usługa obejmuje również **pełną i przemyślaną aranżację całej działki**.'
+              value: 'Nie zostawiamy Inwestora na "księżycowym krajobrazie". Na Śląsku i w Małopolsce, gdzie dominują grunty słabo przepuszczalne (gliny), kluczowe jest **profesjonalne ukształtowanie spadków terenu**. Wchodzimy z ciężkim sprzętem zaraz po demontażu rusztowań, aby odprowadzić wody opadowe z dala od fundamentów, chroniąc piwnice i mury przed zawilgoceniem.'
             },
-            {
-              type: 'paragraph',
-              value: 'Jako generalny wykonawca, koordynujemy wszystkie prace zewnętrzne, zapewniając ich spójność z architekturą budynku i najwyższą jakość wykonania. Nasze działania obejmują:'
-            },
+    
             {
               type: 'list',
               items: [
-                '**Niwelację i Kształtowanie Terenu:** Precyzyjnie przygotowujemy grunt, dbając o prawidłowe spadki i odwodnienie.',
-                '**Prace Brukarskie i Tarasy:** Tworzymy estetyczne i trwałe podjazdy, chodniki oraz tarasy, które stają się letnim sercem domu.',
-                '**Montaż Ogrodzenia:** Zapewniamy prywatność i bezpieczeństwo, realizując ogrodzenia dopasowane do stylu posesji.',
-                '**Zakładanie Zieleni:** Finalnym akcentem jest zakładanie trawnika z siewu lub rolki oraz realizacja nasadzeń roślinnych.',
+                '**Kształtowanie terenu:** Niwelacja, humusowanie oraz wykonanie drenażu opaskowego i studni chłonnych (rozwiązanie problemu błota).',
+                '**Nawierzchnie utwardzone:** Podjazdy i tarasy wykonujemy na pełnej podbudowie drogowej (kruszywo łamane stabilizowane mechanicznie), co gwarantuje, że kostka nie "siądzie" pod ciężarem samochodów.',
+                '**Ogrodzenie systemowe:** Montaż cokołów, paneli i bram z automatyką zintegrowaną z instalacją elektryczną domu.',
               ]
             },
             {
@@ -632,11 +627,11 @@ servicesAccordion: {
           number: 8,
           icon: 'keyRound',
           label: 'Odbiór',
-          title: 'Odbiór i gwarancja',
+          title: 'Procedura PINB i 5-Letnia rękojmia',
           content: [
             {
               type: 'paragraph',
-              value: 'To moment, na który czekałeś – radosny finał naszej wspólnej podróży i początek Twojego nowego rozdziału. Zwieńczeniem naszej współpracy jest oficjalny odbiór budynku, który przeprowadzamy z taką samą starannością, jak każdy poprzedni etap. Naszym celem jest zapewnienie Ci **pełnej obsługi formalnej** aż do samego końca.'
+              value: 'Zakończenie budowy to procedura administracyjna, nie tylko przekazanie kluczy. Zamieszkanie bez odbioru grozi karami finansowymi, dlatego jako Twój pełnomocnik składamy zawiadomienie o zakończeniu budowy do powiatowego inspektoratu nadzoru budowlanego. Nasz kierownik budowy zamyka dziennik i przygotowuje budynek do legalnego użytkowania, zdejmując z ciebie ryzyko prawne.'
             },
             {
               type: 'paragraph',
@@ -645,9 +640,9 @@ servicesAccordion: {
             {
               type: 'list',
               items: [
-                '**Kompletujemy dokumentację powykonawczą:** Zbieramy wszystkie niezbędne dokumenty, w tym dziennik budowy i protokoły odbiorów technicznych instalacji.',
-                '**Zgłaszamy zakończenie budowy:** Składamy oficjalne zawiadomienie do Powiatowego Inspektoratu Nadzoru Budowlanego.',
-                '**Uzyskujemy pozwolenie na użytkowanie:** Pilotujemy cały proces aż do uzyskania ostatecznej decyzji, która pozwala na legalne zamieszkanie.'
+'**Dokumentacja powykonawcza:** kompletujemy inwentaryzację geodezyjną, protokoły kominiarskie, elektryczne i szczelności instalacji gazowej niezbędne dla urzędu.',
+                '**Pozwolenie na użytkowanie:** uzyskujemy tzw. "milczącą zgodę" lub decyzję o pozwoleniu na użytkowanie, co formalnie kończy proces budowlany.',
+                '**Gwarancja i serwis:** udzielamy pełnej, 5-letniej rękojmi na konstrukcję i szczelność budynku oraz przeprowadzamy instruktaż obsługi systemów (rekuperacja, pompa ciepła).'
               ]
             },
             {
