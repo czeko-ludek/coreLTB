@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import { Header, Footer } from "@/components/sections"; // ✅ Centralized import from index.ts
 
-const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: "CoreLTB Builders - Zbuduj Swój Wymarzony Projekt z Nami",
@@ -147,7 +147,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl" data-scroll-behavior="smooth">
-      <body className={inter.className}>
+      <body className={outfit.className}>
         <Header {...headerData} />
         {children}
         <Footer {...footerData} />

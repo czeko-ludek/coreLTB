@@ -13,8 +13,8 @@ type ContentBlock =
 export interface TimelineStepNoLineData {
   id: string;
   number: number;
-  icon: IconName; // Używane tylko w nawigacji
-  label: string; // Używane tylko w nawigacji
+  icon: IconName; // Ikona w nawigacji + floating badge
+  label: string; // Label w nawigacji + floating badge
   title: string;
   content: ContentBlock[];
   imageSrc: string;
@@ -88,6 +88,7 @@ export function CooperationTimelineSectionNoLine({
                 id={step.id}
                 number={step.number}
                 icon={step.icon}
+                label={step.label}
                 title={step.title}
                 content={step.content}
                 imageSrc={step.imageSrc}

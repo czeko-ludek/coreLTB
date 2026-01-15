@@ -14,7 +14,8 @@ type ContentBlock =
 export interface TimelineStepNoLineProps {
   id: string;
   number: number;
-  icon: IconName; // Dodana ikona zamiast badge "Etap X"
+  icon: IconName;
+  label: string; // Label dla floating badge (np. "Projekt Gotowy")
   title: string;
   content: ContentBlock[];
   imageSrc: string;
@@ -28,6 +29,7 @@ export function TimelineStepNoLine({
   id,
   number,
   icon,
+  label,
   title,
   content,
   imageSrc,
@@ -78,9 +80,20 @@ export function TimelineStepNoLine({
 
   // Renderowanie bloku treści
   const renderContentBlock = (block: ContentBlock, index: number) => {
+    // Sprawdź czy to ostatni block
+    const isLastBlock = index === content.length - 1;
+    const isLastParagraph = block.type === 'paragraph' && isLastBlock;
+
     if (block.type === 'paragraph') {
       return (
-        <p key={index} className="mb-4 last:mb-0">
+        <p
+          key={index}
+          className={clsx(
+            isLastParagraph
+              ? "text-base italic border-l-4 border-primary pl-6 py-2 bg-primary/5 mb-8 rounded-r-lg"
+              : "mb-4 last:mb-0"
+          )}
+        >
           {formatText(block.value)}
         </p>
       );
@@ -88,14 +101,14 @@ export function TimelineStepNoLine({
 
     if (block.type === 'list') {
       return (
-        <ul key={index} className="mb-4 last:mb-0 space-y-2">
+        <div key={index} className="grid grid-cols-1 gap-5 mb-8">
           {block.items.map((item, itemIndex) => (
-            <li key={itemIndex} className="flex items-start gap-2">
-              <span className="text-primary mt-1.5">•</span>
-              <span className="flex-1">{formatText(item)}</span>
-            </li>
+            <div key={itemIndex} className="flex items-start gap-3">
+              <Icon name="checkmark" className="text-primary mt-1 shrink-0" size="md" />
+              <span className="text-base">{formatText(item)}</span>
+            </div>
           ))}
-        </ul>
+        </div>
       );
     }
 
@@ -105,7 +118,7 @@ export function TimelineStepNoLine({
   return (
     <section id={id} ref={setRefs} className="scroll-mt-24">
       {/* Layout Mobile (pionowy stack) - w białym kontenerze */}
-      <div className={`md:hidden bg-white rounded-xl shadow-lg p-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+      <div className={`md:hidden bg-white rounded-3xl shadow-lg p-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
         {/* Nagłówek z numerem */}
         <div className="flex items-center gap-4 mb-4">
           <div
@@ -129,7 +142,7 @@ export function TimelineStepNoLine({
         </div>
 
         {/* Obraz */}
-        <div className="relative w-full aspect-[16/10] rounded-lg overflow-hidden mb-4">
+        <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden mb-4">
           <Image
             src={imageSrc}
             alt={imageAlt}
@@ -145,58 +158,49 @@ export function TimelineStepNoLine({
         </div>
       </div>
 
-      {/* Layout Desktop - UPROSZCZONY (BEZ LINII, Z IKONĄ) */}
+      {/* Layout Desktop - BENTO STYLE */}
       <div className="hidden md:block">
         {/* Jeden biały kontener dla tekstu i obrazu */}
         <div className="relative py-6">
-          <div className={`bg-white rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.08)] p-8 md:p-10 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
+          <div className={`min-h-[600px] bg-white rounded-3xl overflow-hidden flex flex-col lg:flex-row shadow-lg hover:shadow-xl transition-shadow duration-300 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
                style={{ animationDelay: '0.2s' }}>
-            {/* Grid: tekst po lewej, obraz po prawej - items-center dla wycentrowania */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              {/* Lewa kolumna - TEKST */}
-              <div>
-                {/* Ikona nad tytułem (taka jak w nawigacji) */}
-                <div
-                  className={clsx(
-                    'inline-flex items-center justify-center mb-4 w-12 h-12 rounded-full border-2 transition-all duration-300',
-                    isActive
-                      ? 'bg-primary border-primary text-white shadow-lg shadow-primary/30'
-                      : 'bg-white border-gray-300 text-gray-600'
-                  )}
-                >
+            {/* TEXT Section - 60% width, order-2 mobile, order-1 desktop */}
+            <div className="p-8 lg:p-12 flex-1 lg:flex-[6] flex flex-col justify-center order-2 lg:order-1">
+              {/* Ikona usunieta - będzie floating badge na obrazie */}
+
+              <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+                {title}
+              </h3>
+
+              <div className="text-gray-700 leading-relaxed text-base">
+                {content.map((block, index) => renderContentBlock(block, index))}
+              </div>
+            </div>
+
+            {/* IMAGE Section - 40% width, order-1 mobile, order-2 desktop */}
+            <div className="relative w-full lg:w-2/5 lg:flex-[4] h-80 lg:h-auto overflow-hidden order-1 lg:order-2">
+              <Image
+                src={imageSrc}
+                alt={imageAlt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 40vw"
+              />
+
+              {/* Floating badge (top-left) - IKONA + LABEL */}
+              <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm px-5 py-3 rounded-full flex items-center gap-3 shadow-sm">
+                <div className={clsx(
+                  "w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-300",
+                  isActive ? 'bg-primary text-white' : 'bg-gray-600 text-white'
+                )}>
                   <Icon
                     name={icon}
-                    size="sm"
-                    className={clsx(
-                      'transition-colors duration-300',
-                      isActive ? 'text-white' : 'text-gray-600'
-                    )}
+                    className="w-4 h-4"
                   />
                 </div>
-
-                <h3
-                  className={clsx(
-                    'text-2xl lg:text-3xl font-bold mb-6 transition-colors duration-300',
-                    isActive ? 'text-primary' : 'text-gray-900'
-                  )}
-                >
-                  {title}
-                </h3>
-
-                <div className="text-gray-700 leading-relaxed text-base lg:text-lg">
-                  {content.map((block, index) => renderContentBlock(block, index))}
-                </div>
-              </div>
-
-              {/* Prawa kolumna - OBRAZ */}
-              <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
-                <Image
-                  src={imageSrc}
-                  alt={imageAlt}
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                  sizes="(max-width: 768px) 100vw, 40vw"
-                />
+                <span className="text-base font-bold text-gray-900">
+                  {label}
+                </span>
               </div>
             </div>
           </div>

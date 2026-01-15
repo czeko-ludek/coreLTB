@@ -85,3 +85,13 @@ export type { CompetenciesSectionProps } from './CompetenciesSection';
 
 export { BusinessResponsibilitySection } from './BusinessResponsibilitySection';
 export type { BusinessResponsibilitySectionProps } from './BusinessResponsibilitySection';
+
+export { BentoContactSection } from './BentoContactSection';
+export type { BentoContactSectionProps, ContactInfo } from './BentoContactSection';
+
+export { BentoOfferSection } from './BentoOfferSection';
+
+export { BentoAreasSection } from './BentoAreasSection';
+
+export { BentoKnowledgeSection } from './BentoKnowledgeSection';
+

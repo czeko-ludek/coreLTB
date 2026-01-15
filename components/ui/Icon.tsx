@@ -74,6 +74,9 @@ import {
   Umbrella,
   AreaChart,
   Leaf,
+  Type,
+  Check,
+  Paperclip,
 } from 'lucide-react';
 
 const iconMap = {
@@ -153,6 +156,9 @@ const iconMap = {
   umbrella: Umbrella,
   areaChart: AreaChart,
   leaf: Leaf,
+  type: Type,
+  checkmark: Check,
+  paperclip: Paperclip,
 };
 
 export type IconName = keyof typeof iconMap;
@@ -179,8 +185,8 @@ export function Icon({ name, size = 'md', className }: IconProps) {
   };
 
   return (
-    <IconComponent 
-      className={clsx(sizeClasses[size], className)} 
+    <IconComponent
+      className={clsx(sizeClasses[size], className)}
       strokeWidth={2}
     />
   );
