@@ -43,6 +43,9 @@ export type { CountingNumberProps } from './CountingNumber';
 export { MegaMenu } from './MegaMenu';
 export type { MegaMenuProps, MegaMenuItem } from './MegaMenu';
 
+export { TableOfContents } from './TableOfContents';
+export type { TOCSection } from './TableOfContents';
+
 export { SliderArrow } from './SliderArrow';
 export type { SliderArrowProps } from './SliderArrow';
 

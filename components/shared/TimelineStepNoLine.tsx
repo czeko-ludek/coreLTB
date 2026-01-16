@@ -153,7 +153,7 @@ export function TimelineStepNoLine({
         </div>
 
         {/* Treść */}
-        <div className="text-gray-700 leading-relaxed">
+        <div className="text-gray-600 leading-relaxed">
           {content.map((block, index) => renderContentBlock(block, index))}
         </div>
       </div>
@@ -172,7 +172,7 @@ export function TimelineStepNoLine({
                 {title}
               </h3>
 
-              <div className="text-gray-700 leading-relaxed text-base">
+              <div className="text-gray-600 leading-relaxed text-base">
                 {content.map((block, index) => renderContentBlock(block, index))}
               </div>
             </div>

@@ -1,0 +1,51 @@
+
+> elever@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.4
+   - Experiments (use with caution):
+     · optimizePackageImports
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 3.7s
+   Linting and checking validity of types ...
+
+./app/oferta/[slug]/page.tsx
+11:3  Warning: 'CooperationTimelineSection' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/playground/FontWrapper.tsx
+3:27  Warning: 'useEffect' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/sections/AboutIntroSection.tsx
+4:24  Warning: 'Icon' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/sections/BentoOfferSection.tsx
+6:16  Warning: 'IconName' is defined but never used.  @typescript-eslint/no-unused-vars
+151:62  Warning: 'index' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/sections/CtaSection.tsx
+18:3  Warning: 'title' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/sections/ServiceShowcaseSection.tsx
+54:9  Warning: 'activeService' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/shared/RelatedProjectsSection.tsx
+27:10  Warning: 'swiperInstance' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/shared/ServiceCard.tsx
+15:3  Warning: 'serviceNumber' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/shared/TimelineStep.tsx
+36:3  Warning: 'isLast' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/shared/TimelineStepNoLine.tsx
+38:3  Warning: 'isLast' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/ui/FloatingCTA.tsx
+3:31  Warning: 'useRef' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/ui/Icon.tsx
+47:13  Warning: 'MapPinIcon' is defined but never used.  @typescript-eslint/no-unused-vars
+52:3  Warning: 'Construction' is defined but never used.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules

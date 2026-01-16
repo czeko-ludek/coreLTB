@@ -77,6 +77,7 @@ import {
   Type,
   Check,
   Paperclip,
+  Wind,
 } from 'lucide-react';
 
 const iconMap = {
@@ -156,9 +157,11 @@ const iconMap = {
   umbrella: Umbrella,
   areaChart: AreaChart,
   leaf: Leaf,
+  leafIcon: Leaf,
   type: Type,
   checkmark: Check,
   paperclip: Paperclip,
+  wind: Wind,
 };
 
 export type IconName = keyof typeof iconMap;

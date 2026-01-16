@@ -47,9 +47,12 @@ export function NumberedListItem({
         <h3 className="text-xl font-semibold text-text-primary mb-2">
           {title}
         </h3>
-        <p className="text-body-md text-text-secondary leading-relaxed">
-          {description}
-        </p>
+        <p
+          className="text-body-md text-text-secondary leading-relaxed"
+          dangerouslySetInnerHTML={{
+            __html: description.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-text">$1</strong>'),
+          }}
+        />
       </div>
     </div>
   );

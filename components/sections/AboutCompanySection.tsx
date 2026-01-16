@@ -75,15 +75,16 @@ export function AboutCompanySection({
               <SectionHeader {...header} align="left" theme="light" />
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 about-content">
               {content.map((paragraph, index) => (
                 <p
                   key={index}
                   className={`text-body-md text-text-secondary leading-relaxed ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
                   style={{ animationDelay: `${0.4 + index * 0.15}s` }}
-                >
-                  {paragraph}
-                </p>
+                  dangerouslySetInnerHTML={{
+                    __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-text">$1</strong>'),
+                  }}
+                />
               ))}
             </div>
 

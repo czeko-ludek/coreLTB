@@ -78,6 +78,25 @@ export interface ContactCTAData {
   }>;
 }
 
+// Logistyka i Zasięg (AreasSection)
+export interface CityData {
+  label: string;
+  url: string;
+}
+
+export interface HubData {
+  hubName: string;
+  subLabel: string;
+  iconName: IconName;
+  description: string;
+  cities: CityData[];
+}
+
+export interface AreasData {
+  header: SectionHeaderProps;
+  hubs: HubData[];
+}
+
 // Content Blocks dla elastycznego formatowania
 export type ContentBlock =
   | { type: 'paragraph'; value: string }
@@ -158,6 +177,9 @@ export interface ServiceV2 {
 
   // Sekcja 4: Treść dla Zainteresowanych (Usługi)
   servicesAccordion?: ServicesAccordionData;
+
+  // Sekcja 4b (opcjonalna): Logistyka i Zasięg
+  areasData?: AreasData;
 
   // Sekcja 5: Opinie Klientów (TestimonialsSection - reużywalny komponent ze strony głównej)
   testimonials: {
@@ -654,6 +676,43 @@ servicesAccordion: {
           imageAlt: 'Szczęśliwa para otrzymująca klucze do swojego nowego domu od przedstawiciela firmy',
         },
       ],
+    },
+    areasData: {
+      header: {
+        label: 'LOGISTYKA I ZASIĘG',
+        title: 'Dwie Bazy Operacyjne: Jaworzno i Wodzisław',
+        description: 'Dzięki strategicznemu położeniu baz przy A4 i w centrum ROW, eliminujemy koszty dojazdów w promieniu 50km.',
+        align: 'center' as const,
+        theme: 'light' as const,
+      },
+      hubs: [
+        {
+          hubName: 'WODZISŁAW ŚLĄSKI',
+          subLabel: '',
+          iconName: 'mountain' as const,
+          description: 'Specjalizacja: Fundamenty na trudnych gruntach gliniastych i górniczych (kat. I-IV).',
+          cities: [
+            { label: 'Wodzisław Śląski', url: '/obszar-dzialania/budowa-domow-wodzislaw-slaski' },
+            { label: 'Rybnik', url: '/obszar-dzialania/budowa-domow-rybnik' },
+            { label: 'Żory', url: '/obszar-dzialania/budowa-domow-zory' },
+            { label: 'Racibórz', url: '/obszar-dzialania/budowa-domow-raciborz' },
+            { label: 'Jastrzębie-Zdrój', url: '/obszar-dzialania/budowa-domow-jastrzebie-zdroj' },
+          ]
+        },
+        {
+          hubName: 'JAWORZNO',
+          subLabel: '',
+          iconName: 'building' as const,
+          description: 'Logistyka materiałowa A4/S1. Szybki start inwestycji w Katowicach, Tychach i Małopolsce.',
+          cities: [
+            { label: 'Jaworzno', url: '/obszar-dzialania/budowa-domow-jaworzno' },
+            { label: 'Katowice', url: '/obszar-dzialania/budowa-domow-katowice' },
+            { label: 'Tychy', url: '/obszar-dzialania/budowa-domow-tychy' },
+            { label: 'Gliwice', url: '/obszar-dzialania/budowa-domow-gliwice' },
+            { label: 'Mikołów', url: '/obszar-dzialania/budowa-domow-mikolow' },
+          ]
+        }
+      ]
     },
 
     // Sekcja 8: Wezwanie do Działania

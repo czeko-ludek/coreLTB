@@ -54,7 +54,14 @@
       "Bash(\"D:\\\\CORE LTB\\\\elever\\\\tools\\\\seo-expert\\\\venv\\\\Scripts\\\\python.exe\":*)",
       "Bash(\"D:\\\\CORE LTB\\\\elever\\\\tools\\\\seo-expert\\\\venv\\\\Scripts\\\\python.exe\" -m py_compile:*)",
       "Bash(ls:*)",
-      "Bash(npx @biomejs/biome:*)"
+      "Bash(npx @biomejs/biome:*)",
+      "Bash(npm run build:*)",
+      "Bash(1)",
+      "Bash(node -e:*)",
+      "Bash(curl:*)",
+      "Bash(grep:*)",
+      "Bash(npm outdated:*)",
+      "Bash(npm update:*)"
     ],
     "deny": [],
     "ask": []

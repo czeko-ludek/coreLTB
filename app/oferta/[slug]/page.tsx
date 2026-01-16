@@ -6,6 +6,7 @@ import {
   EmotionalHeroSection,
   PhilosophyTimelineSection,
   ServicesAccordionSection,
+  AreasSection,
   TestimonialsSection,
   CooperationTimelineSection,
   CooperationTimelineSectionNoLine,
@@ -86,15 +87,20 @@ export default async function ServicePageV2({
         <CooperationTimelineSectionNoLine {...service.cooperationTimelineNoLine} />
       )}
 
-      {/* Sekcja 4: Treść dla Zainteresowanych (Accordion) */}
+      {/* Sekcja 4: Logistyka i Zasięg (opcjonalna) - ZARAZ PO ARTYKULE */}
+      {service.areasData && (
+        <AreasSection {...service.areasData} />
+      )}
+
+      {/* Sekcja 5: Treść dla Zainteresowanych (FAQ/Accordion) */}
       {service.servicesAccordion && (
         <ServicesAccordionSection {...service.servicesAccordion} />
       )}
 
-      {/* Sekcja 5: Opinie Klientów */}
+      {/* Sekcja 6: Opinie Klientów */}
       <TestimonialsSection {...service.testimonials} />
 
-      {/* Sekcja 6: Wezwanie do Działania (Kontakt) */}
+      {/* Sekcja 7: Wezwanie do Działania (Kontakt) */}
       <ContactCTASection {...service.contactCTA} />
 
       {/* Sticky FloatingCTA - pojawia się gdy użytkownik scrolluje poniżej EmotionalHeroSection */}

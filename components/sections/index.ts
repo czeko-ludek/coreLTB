@@ -93,5 +93,18 @@ export { BentoOfferSection } from './BentoOfferSection';
 
 export { BentoAreasSection } from './BentoAreasSection';
 
+export { AreasSection } from './AreasSection';
+export type { AreasSectionProps, Hub, City } from './AreasSection';
+
 export { BentoKnowledgeSection } from './BentoKnowledgeSection';
+
+// Local Pages Sections
+export { DistrictsSection } from './DistrictsSection';
+export type { DistrictsSectionProps } from './DistrictsSection';
+
+export { PricingSection } from './PricingSection';
+export type { PricingSectionProps } from './PricingSection';
+
+export { SimpleImageTextSection } from './SimpleImageTextSection';
+export type { SimpleImageTextSectionProps } from './SimpleImageTextSection';
 

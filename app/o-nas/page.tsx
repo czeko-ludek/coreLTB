@@ -27,27 +27,27 @@ export default function AboutPage() {
 		label: "O NAS",
 		title: "CoreLTB to",
 		description: [
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-			"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+			"CoreLTB to firma inżynieryjna wywodząca się z serca Śląska i Małopolski. Działamy w modelu 'Design & Build' oraz jako Generalny Wykonawca inwestycji indywidualnych. Od 2005 roku łączymy rzemieślniczą dokładność firmy rodzinnej ze skalą i procedurami dużej organizacji.",
+			"Nie jesteśmy anonimową spółką. Nasze bazy w Jaworznie i Wodzisławiu Śląskim pozwalają nam operacyjnie pokryć cały pas Polski Południowej. Dla Inwestora oznaczamy koniec z chaosem 'systemu gospodarczego'. Wnosimy na budowę domów jednorodzinnych standardy znane z inwestycji komercyjnych: nadzór kierownika kontraktu, transparentne harmonogramy i żelazną dyscyplinę budżetową.",
 		],
 		philosophyCards: [
 			{
 				number: 1,
-				title: "Fundament to zaufanie budowane latami",
+				title: "15 lat na trudnym gruncie",
 				description:
-					"Działamy od 2005 roku. Jako firma rodzinna traktujemy każdą budowę osobiście – Twoja wizytówka to nasza wizytówka.",
+					"Specjalizujemy się w geologii Śląska i Małopolski. Wiemy, jak budować bezpiecznie na glinach i terenach górniczych.",
 			},
 			{
 				number: 2,
-				title: "Łączymy twarde dane z wizją",
+				title: "Inżynieria kosztów",
 				description:
-					"Precyzyjne badania gruntu i kosztorysy minimalizują ryzyko. Realizujemy Twoją wizję nowoczesną technologią – bez niespodzianek w budżecie.",
+					"Zamiast wróżenia z fusów, opieramy się na precyzyjnych kosztorysach opartych na rzeczywistych cenach materiałów i robocizny z regionu.",
 			},
 			{
 				number: 3,
-				title: "Zdejmujemy ciężar z twoich barków",
+				title: "Jeden partner do rozliczeń",
 				description:
-					"Od zakupu działki przez formalności, aż po klucze do gotowego domu. Ty marzysz, my realizujemy.",
+					"Zastępujemy chaotyczny 'system gospodarczy'. Masz jedną umowę, jeden numer telefonu i jedną osobę odpowiedzialną za budowę.",
 			},
 		],
 	};
@@ -55,35 +55,35 @@ export default function AboutPage() {
 	const competenciesData = {
 		header: {
 			label: "NASZE KOMPETENCJE",
-			title: "Kompetencje CoreLTB",
-			description: "Czym się wyróżniamy na rynku budowlanym",
+			title: "Czym się wyróżniamy?",
+			description: "",
 			align: "center" as const,
 			theme: "light" as const,
 		},
 		competencies: [
 			{
 				icon: "building" as const,
-				title: "Kompleksowa realizacja",
+				title: "Generalne wykonawstwo",
 				description:
-					"Nie jesteśmy tylko pośrednikami – budujemy. Realizujemy domy pod klucz, biorąc pełną odpowiedzialność za terminowość i jakość. Zarządzamy całym procesem: od pierwszej łopaty po montaż ostatniego gniazd­ka.",
+					"Zastępujemy inwestora w procesie budowlanym. Przejmujemy ryzyko kontraktowe, logistykę materiałową oraz koordynację wszystkich branż (od ziemnych po instalacyjne). Masz jedną umowę i jednego partnera do rozliczeń.",
 			},
 			{
 				icon: "hammer" as const,
-				title: "Profesjonalne wykonawstwo",
+				title: "Technologia i konstrukcja",
 				description:
-					"Nie jesteśmy tylko pośrednikami – budujemy. Realizujemy domy pod klucz, biorąc pełną odpowiedzialność za terminowość i jakość. Zarządzamy całym procesem: od pierwszej łopaty po montaż ostatniego gniazd­ka.",
+					"Nie oszczędzamy na 'stanach zerowych'. Projektujemy i wykonujemy wzmocnione płyty fundamentowe oraz żelbety, które zabezpieczają budynek przed szkodami górniczymi do IV kategorii włącznie.",
 			},
 			{
 				icon: "users" as const,
-				title: "Doświadczony zespół",
+				title: "Własne zasoby wykonawcze",
 				description:
-					"Nie jesteśmy tylko pośrednikami – budujemy. Realizujemy domy pod klucz, biorąc pełną odpowiedzialność za terminowość i jakość. Zarządzamy całym procesem: od pierwszej łopaty po montaż ostatniego gniazd­ka.",
+					"Nie polegamy na przypadkowych podwykonawcach z ogłoszenia. Dysponujemy stałymi, zweryfikowanymi brygadami oraz własnym zapleczem szalunkowym, co uniezależnia nas od braków na rynku usług.",
 			},
 			{
 				icon: "shieldCheck" as const,
-				title: "Gwarancja jakości",
+				title: "Bezpieczeństwo formalne",
 				description:
-					"Nie jesteśmy tylko pośrednikami – budujemy. Realizujemy domy pod klucz, biorąc pełną odpowiedzialność za terminowość i jakość. Zarządzamy całym procesem: od pierwszej łopaty po montaż ostatniego gniazd­ka.",
+					"Jako Twój pełnomocnik, procesujemy Pozwolenie na Budowę, uzgodnienia z gestorami mediów oraz finalny odbiór techniczny. Eliminujemy dla Ciebie ryzyko administracyjne i prawne.",
 			},
 		],
 	};
@@ -92,35 +92,34 @@ export default function AboutPage() {
 		header: {
 			label: "ODPOWIEDZIALNOŚĆ BIZNESU",
 			title: "Filary naszych działań",
-			description:
-				"Nie jesteśmy tylko pośrednikami – budujemy. Realizujemy domy pod klucz, biorąc pełną odpowiedzialność za terminowość i jakość.",
+			description: "",
 			align: "center" as const,
 			theme: "light" as const,
 		},
 		cards: [
 			{
-				icon: "users" as const,
-				title: "Społeczna odpowiedzialność biznesu",
+				icon: "briefcase" as const,
+				title: "Transparentność finansowa",
 				description:
-					"Promujemy społeczną odpowiedzialność biznesu. Staramy się wspierać społeczność lokalną. Dbamy o ludzi. Ne akceptujemy dyskryminacji i wykluczenia.",
+					"W budownictwie płynność to podstawa. Jesteśmy rzetelnym płatnikiem wobec dostawców i pracowników. Dajemy Inwestorowi pełny wgląd w koszty. Nie stosujemy 'gwiazdek' w umowach ani ukrytych dopłat w trakcie realizacji.",
 			},
 			{
 				icon: "leaf" as const,
-				title: "Ochrona środowiska",
+				title: "Czysta budowa i ekologia",
 				description:
-					"Przestrzegamy zasad ekologii i ograniczamy nasz wpływ na środowisko. Promujemy zrównoważony rozwój. Stosujemy materiały oraz urządzenia o jak najmniejszym śladzie ekologicznym.",
+					"Segregujemy odpady budowlane zgodnie z BDO. Stosujemy materiały o niskim śladzie węglowym i promujemy standard energooszczędny WT2021. Dbamy o porządek na placu, szanując Twoich przyszłych sąsiadów.",
 			},
 			{
-				icon: "briefcase" as const,
-				title: "Dobre praktyki zarządzania",
+				icon: "mapPin" as const,
+				title: "Lokalny patriotyzm gospodarczy",
 				description:
-					"Przestrzegamy zasad dobrych praktyk zarządzania. Zapewniamy otwartą komunikację. Nasze działania są jawne, rzetelne i skuteczne.",
+					"Budujemy na Południu i tu zostawiamy podatki. Współpracujemy z lokalnymi betoniarniami, składami i rzemieślnikami z Jaworzna, Rybnika czy Gliwic, wspierając rozwój regionu, w którym żyjemy.",
 			},
 			{
 				icon: "shieldCheck" as const,
 				title: "Etyczne działania",
 				description:
-					"Działamy etycznie. W firmie i relacjach biznesowych nie tolerujemy korupcji, nieuczciwości oraz nieetycznych działań.",
+					"Działamy etycznie. W firmie i relacjach biznesowych nie tolerujemy korupcji, nieuczciwości oraz nieetycznych działań. Budujemy długoterminowe relacje oparte na zaufaniu.",
 			},
 		],
 	};

@@ -20,101 +20,109 @@ export function CtaSection({
   primaryButton,
   socials,
 }: CtaSectionProps) {
-  // Scroll-triggered animation for curtain reveal
+  // Scroll-triggered animation
   const { ref: sectionRef, inView: sectionInView } = useInView({
     threshold: 0.3,
     triggerOnce: true,
   });
 
   return (
-    <section ref={sectionRef} className="bg-background py-8">
-      <div className="px-0 md:px-[50px]">
+    <section ref={sectionRef} className="bg-[#efebe7] py-10 sm:py-12">
+      <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
+        {/* Bento Card - Asymetryczny Split */}
         <div
-          className={`animate-cta-curtain-reveal rounded-lg shadow-lg ${
-            sectionInView ? 'cta-curtain-animate' : ''
+          className={`bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-xl ${
+            sectionInView ? 'animate-fade-in-up' : 'opacity-0'
           }`}
-          style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}
+          style={{ animationDelay: '0.2s' }}
         >
-          <div
-            className="bg-gradient-to-br from-primary via-primary to-primary/90 rounded-lg overflow-hidden"
-          >
-            <div className="container mx-auto px-6 py-8 md:py-10">
-              {/* Title */}
-              <h2
-                className={`text-3xl md:text-6xl lg:text-7xl font-bold mb-8 md:mb-10 ${
-                  sectionInView ? 'animate-fade-in-up' : 'opacity-0'
-                }`}
-                style={{ animationDelay: '0.6s' }}
-              >
-                <span className="text-white block">Gotowy na budowę</span>
-                <span className="block" style={{ color: '#1a1a1a' }}>swoich marzeń?</span>
-              </h2>
-
-              {/* 3-Column Grid with Dividers */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr]">
+            {/* Lewa strona - CTA Content */}
+            <div className="bg-gradient-to-br from-primary to-primary/90 p-6 md:p-8 lg:p-10 flex flex-col justify-center">
               <div
-                className={`grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 items-center md:divide-x md:divide-white/40 ${
+                className={`${
                   sectionInView ? 'animate-fade-in-up' : 'opacity-0'
                 }`}
-                style={{ animationDelay: '0.8s' }}
+                style={{ animationDelay: '0.3s' }}
               >
-              {/* Email Column */}
-              <div className="md:pr-6">
-                <div className="text-white/80 text-xs md:text-sm uppercase tracking-wider mb-2 font-medium">
-                  Email
+                <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full mb-4">
+                  <span className="text-white text-xs font-bold uppercase tracking-wider">
+                    Skontaktuj się z nami
+                  </span>
                 </div>
-                <a
-                  href={`mailto:${email}`}
-                  className="text-white text-lg md:text-xl font-semibold hover:text-white/90 transition-colors break-words flex items-center gap-2"
-                >
-                  <Icon name="mail" size="md" className="flex-shrink-0" />
-                  <span>{email}</span>
-                </a>
-              </div>
 
-              {/* CTA Column */}
-              <div className="text-center md:px-6">
-                <div className="text-white/80 text-xs md:text-sm uppercase tracking-wider mb-3 font-medium">
-                  Skontaktuj się
-                </div>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight">
+                  Gotowy na budowę<br />swoich marzeń?
+                </h2>
+
+                <p className="text-white/90 text-sm md:text-base mb-6 leading-relaxed max-w-lg">
+                  Umów się na bezpłatną konsultację i poznaj możliwości realizacji Twojego projektu.
+                </p>
+
                 <Button
                   variant="secondary"
                   size="lg"
                   href={primaryButton.href}
-                  className="w-full md:w-auto bg-white font-bold shadow-md !text-[#1a1a1a] hover:!bg-[#1a1a1a] hover:!text-white transition-all duration-200"
-                  leftIcon={<Icon name="calendar" size="sm" />}
+                  className="!bg-[#1a1a1a] font-bold shadow-xl !text-white hover:!bg-white hover:!text-[#1a1a1a] transition-all duration-300 hover:scale-105"
+                  leftIcon={<Icon name="calendar" size="md" />}
                 >
                   {primaryButton.text}
                 </Button>
               </div>
+            </div>
 
-              {/* Social Column */}
-              <div className="text-center md:text-right md:pl-6">
-                <div className="text-white/80 text-xs md:text-sm uppercase tracking-wider mb-3 font-medium">
-                  Social
+            {/* Prawa strona - Contact Info */}
+            <div
+              className={`bg-gray-50 p-6 md:p-8 flex flex-col justify-center ${
+                sectionInView ? 'animate-fade-in-up' : 'opacity-0'
+              }`}
+              style={{ animationDelay: '0.5s' }}
+            >
+              <div className="space-y-5">
+                {/* Email */}
+                <div className="group">
+                  <div className="text-gray-400 text-xs uppercase tracking-wider mb-2 font-bold">
+                    Email
+                  </div>
+                  <a
+                    href={`mailto:${email}`}
+                    className="flex items-center gap-3 text-gray-900 hover:text-primary transition-colors"
+                  >
+                    <div className="h-12 w-12 rounded-2xl bg-white shadow-md flex items-center justify-center group-hover:bg-primary group-hover:shadow-lg transition-all">
+                      <Icon name="mail" size="md" className="text-primary group-hover:text-white transition-colors" />
+                    </div>
+                    <span className="text-base md:text-lg font-bold break-all">{email}</span>
+                  </a>
                 </div>
-                <div className="flex items-center justify-center md:justify-end gap-3">
-                  {socials.map((social, index) => (
-                    <a
-                      key={index}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-white rounded-full p-3 transition-all duration-200 hover:scale-110 hover:shadow-lg"
-                      style={{ color: '#1a1a1a' }}
-                      aria-label={`Odwiedź nas na ${social.platform}`}
-                    >
-                      <Icon name={social.platform} size="md" />
-                    </a>
-                  ))}
+
+                {/* Divider */}
+                <div className="border-t border-gray-200"></div>
+
+                {/* Social */}
+                <div>
+                  <div className="text-gray-400 text-xs uppercase tracking-wider mb-3 font-bold">
+                    Śledź nas
+                  </div>
+                  <div className="flex items-center gap-3">
+                    {socials.map((social, index) => (
+                      <a
+                        key={index}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group h-12 w-12 rounded-2xl bg-white shadow-md flex items-center justify-center hover:bg-primary hover:shadow-lg transition-all hover:scale-110"
+                        aria-label={`Odwiedź nas na ${social.platform}`}
+                      >
+                        <Icon name={social.platform} size="md" className="text-primary group-hover:text-white transition-colors" />
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
-              </div> {/* Close grid */}
-            </div> {/* Close container */}
-          </div> {/* Close bg-gradient */}
-        </div> {/* Close animate-cta-curtain-reveal */}
-      </div> {/* Close px-0 */}
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
-
-

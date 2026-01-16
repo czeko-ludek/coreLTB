@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import { Header, Footer } from "@/components/sections"; // ✅ Centralized import from index.ts
+import { companyData } from "@/data/company-data";
 
-const outfit = Outfit({ subsets: ["latin"], display: "swap" });
+const manrope = Manrope({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(companyData.url),
   title: "CoreLTB Builders - Zbuduj Swój Wymarzony Projekt z Nami",
   description: "Profesjonalne usługi budowlane. Dostarczamy klientom większą przejrzystość projektów, lepszy wgląd i mniej chaosu.",
 };
@@ -147,7 +149,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl" data-scroll-behavior="smooth">
-      <body className={outfit.className}>
+      <body className={manrope.className}>
         <Header {...headerData} />
         {children}
         <Footer {...footerData} />

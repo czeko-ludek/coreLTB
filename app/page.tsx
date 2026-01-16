@@ -6,7 +6,6 @@ import {
 	HowItWorksSection,
 	ProjectsSection,
 	ServiceShowcaseSection,
-	TeamSection,
 	TestimonialsSection,
 	// PartnersSection, // Disabled - missing images
 } from "@/components/sections"; // ✅ Centralized import from index.ts
@@ -51,8 +50,8 @@ export default function Home() {
 			theme: "light" as const,
 		},
 		content: [
-			"Od 2005 roku budujemy domy z pasją przekazywaną w rodzinie z pokolenia na pokolenie. Ponad 200 zrealizowanych projektów to dowód, że potrafimy zamienić marzenia w rzeczywistość. Jesteśmy z Tobą na każdym kroku – od pomocy w zakupie działki, przez wszystkie formalności i projekt, aż po przekazanie kluczy do Twojego wymarzonego domu. Ty decydujesz o szczegółach, a my dbamy o resztę.",
-			"Nasze doświadczenie to gwarancja terminowości, jakości i inteligentnych rozwiązań, które optymalizują koszty bez kompromisów. Pomagamy z formalnościami, doradzamy, wspieramy – bo wiemy, że budowa to nie tylko cegły, ale przede wszystkim ludzie i ich marzenia. Z nami budujesz nie tylko dom – tworzysz miejsce dla swojej rodziny.",
+			"Jesteśmy firmą rodzinną z **podwójnym korzeniem** – operujemy z Jaworzna i Wodzisławia Śląskiego. Działamy w skali generalnego wykonawcy, ale podchodzimy do inwestycji z rzemieślniczą odpowiedzialnością, gdzie nazwisko właściciela jest najlepszą gwarancją jakości.",
+			"Od ponad 15 lat rozwiązujemy **inżynierskie problemy Południowej Polski**: szkody górnicze na Śląsku, trudne warunki gruntowe i skomplikowaną logistykę materiałową. Nie sprzedajemy marzeń o domu – dostarczamy bezpieczny, terminowo zrealizowany budynek oparty na solidnej umowie.",
 		],
 		image: {
 			src: "/aboutcompany1.webp",
@@ -61,18 +60,18 @@ export default function Home() {
 		stats: {
 			stats: [
 				{
-					value: "500+",
-					label: "Zadowolonych klientów",
+					value: "100+",
+					label: "Zakończonych Inwestycji",
 					variant: "dark" as const,
 				},
 				{
-					value: "15+",
-					label: "Zdobytych nagród",
+					value: "15 LAT",
+					label: "Doświadczenia Inżynierskiego Kadry",
 					variant: "primary" as const,
 				},
 			],
 		},
-		ctaButton: { text: "Dowiedz się więcej", href: "/about" },
+		ctaButton: { text: "Poznaj nasz zespół", href: "/o-nas" },
 	};
 
 	// Services Section Data
@@ -143,31 +142,31 @@ export default function Home() {
 	// How It Works Section Data
 	const howItWorksData = {
 		header: {
-			label: "JAK PRACUJEMY",
-			title: "Jak wygląda współpraca z CoreLTB Builders",
+			label: "MODEL REALIZACJI",
+			title: "Inwestycja prowadzona systemowo",
 			theme: "light" as const,
 		},
 		steps: [
 			{
 				number: 1,
 				iconName: "check" as const,
-				title: "Konsultacja i planowanie",
+				title: "Audyt Działki i Budżetowanie",
 				description:
-					"Zaczynamy od zrozumienia Twojej wizji, wymagań i budżetu, aby stworzyć kompleksowy plan projektu.",
+					"Zamiast \"rozmów o wizji\", zaczynamy od weryfikacji MPZP i warunków gruntowych (szkody górnicze). Przygotowujemy **wstępny kosztorys inwestorski**, aby zderzyć Twoje oczekiwania z realiami rynkowymi 2026 r. przed wydaniem pieniędzy na projekt.",
 			},
 			{
 				number: 2,
 				iconName: "fileCheck" as const,
-				title: "Projekt i zatwierdzenie",
+				title: "Projekt i Formalności (PnB)",
 				description:
-					"Nasi eksperci opracowują szczegółowe projekty i plany, pracując ściśle z Tobą nad zatwierdzeniem i udoskonaleniem.",
+					"Przejmujemy biurokrację. Na podstawie pełnomocnictwa uzyskujemy **Pozwolenie na Budowę** i wykonujemy adaptację konstrukcyjną budynku. Optymalizujemy projekt, zamieniając przewymiarowane rozwiązania na ekonomiczne technologie systemowe.",
 			},
 			{
 				number: 3,
 				iconName: "building" as const,
-				title: "Budowa i realizacja",
+				title: "Realizacja i Odbiory Techniczne",
 				description:
-					"Realizujemy projekt z precyzją, utrzymując standardy jakości i dostarczając na czas.",
+					"Budowa pod nadzorem Inżyniera Kontraktu. Nie martwisz się o dostawy betonu czy harmonogram brygad. Każdy etap (fundamenty, stropy) kończy się rygorem odbiorowym i dokumentacją fotograficzną.",
 			},
 		],
 		video: {
@@ -203,47 +202,6 @@ export default function Home() {
 			],
 			isActive: index === 0, // First project is active in slider
 		})),
-	};
-
-	// Team Section Data
-	const teamData = {
-		header: {
-			label: "POZNAJ NASZ ZESPÓŁ",
-			title: "Nasi eksperci",
-			theme: "dark" as const,
-		},
-		team: [
-			{
-				image: {
-					src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600",
-					alt: "Tomasz Kowalski",
-				},
-				name: "Tomasz Kowalski",
-				role: "Kierownik projektu",
-				description:
-					"Ekspert w koordynacji i realizacji projektów z ponad 15-letnim doświadczeniem.",
-				socials: [
-					{ platform: "facebook" as const, href: "https://facebook.com" },
-					{ platform: "twitter" as const, href: "https://twitter.com" },
-					{ platform: "linkedin" as const, href: "https://linkedin.com" },
-				],
-			},
-			{
-				image: {
-					src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600",
-					alt: "Anna Nowak",
-				},
-				name: "Anna Nowak",
-				role: "Główny architekt",
-				description:
-					"Innowacyjna projektantka specjalizująca się w nowoczesnej i zrównoważonej architekturze.",
-				socials: [
-					{ platform: "facebook" as const, href: "https://facebook.com" },
-					{ platform: "twitter" as const, href: "https://twitter.com" },
-					{ platform: "linkedin" as const, href: "https://linkedin.com" },
-				],
-			},
-		],
 	};
 
 	// Testimonials Section Data
@@ -362,7 +320,6 @@ export default function Home() {
 			<ServiceShowcaseSection {...servicesData} />
 			<HowItWorksSection {...howItWorksData} />
 			<ProjectsSection {...projectsData} />
-			<TeamSection {...teamData} />
 			<TestimonialsSection {...testimonialsData} />
 			<CtaSection {...ctaData} />
 			<BlogSection {...blogData} />

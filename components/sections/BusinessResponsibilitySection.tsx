@@ -1,15 +1,23 @@
 'use client';
 
 import React from 'react';
-import { SectionHeader, SectionHeaderProps, ResponsibilityCardProps } from '@/components/shared';
-import { Icon } from '@/components/ui';
+import { SectionHeader, SectionHeaderProps } from '@/components/shared';
+import { Icon, IconName } from '@/components/ui';
+
+export interface ResponsibilityCardProps {
+  icon: IconName;
+  title: string;
+  description: string;
+}
 
 export interface BusinessResponsibilitySectionProps {
+  id?: string;
   header: SectionHeaderProps;
   cards: ResponsibilityCardProps[];
 }
 
 export function BusinessResponsibilitySection({
+  id,
   header,
   cards,
 }: BusinessResponsibilitySectionProps) {
@@ -17,7 +25,6 @@ export function BusinessResponsibilitySection({
   const sectionRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    // Check if IntersectionObserver is available (client-side only)
     if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
       setIsVisible(true);
       return;
@@ -40,12 +47,8 @@ export function BusinessResponsibilitySection({
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="py-20"
-      style={{ backgroundColor: '#efebe7' }}
-    >
-      <div className="container mx-auto px-4">
+    <section id={id} ref={sectionRef} className="bg-[#efebe7] py-16 sm:py-20">
+      <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div
           className={`mb-12 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
@@ -54,46 +57,37 @@ export function BusinessResponsibilitySection({
           <SectionHeader {...header} />
         </div>
 
-        {/* Timeline Container */}
-        <div className="max-w-4xl mx-auto relative">
-          {/* Vertical Gold Line */}
-          <div className="absolute left-10 top-20 bottom-0 w-[3px] bg-gradient-to-b from-primary via-primary/80 to-primary/20 hidden md:block"></div>
-
-          {/* Timeline Items */}
-          <div className="space-y-8">
-            {cards.map((card, index) => (
-                <div
-                  key={index}
-                  className={`flex gap-6 relative ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
-                  style={{ animationDelay: `${0.2 + index * 0.15}s` }}
-                >
-                  {/* Icon circle with number badge */}
-                  <div className="relative flex-shrink-0">
-                    <div className="w-20 h-20 rounded-full bg-primary shadow-md flex items-center justify-center">
-                      <Icon name={card.icon} size="xl" className="text-white" />
-                    </div>
-
-                    {/* Number badge on top right */}
-                    <div className="absolute -top-1 -right-1 w-10 h-10 rounded-full bg-primary border-4 border-white shadow-lg flex items-center justify-center">
-                      <span className="text-lg font-bold text-white">
-                        {index + 1}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Content Card */}
-                  <div className="flex-1 bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300">
-                    <h3 className="text-xl font-bold text-text-primary mb-3 leading-tight">
-                      {card.title}
-                    </h3>
-                    <div className="w-full h-[2px] bg-gradient-to-r from-primary via-primary/50 to-transparent mb-3"></div>
-                    <p className="text-body-md text-text-secondary leading-relaxed">
-                      {card.description}
-                    </p>
-                  </div>
+        {/* Bento Grid - 4 kolumny */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {cards.map((card, index) => (
+            <div
+              key={index}
+              className={`bg-white rounded-3xl border border-gray-100 shadow-xl p-6 md:p-8 flex flex-col hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 ${
+                isVisible ? 'animate-fade-in-up' : 'opacity-0'
+              }`}
+              style={{ animationDelay: `${0.2 + index * 0.1}s` }}
+            >
+              {/* Icon */}
+              <div className="mb-6">
+                <div className="h-14 w-14 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/30">
+                  <Icon name={card.icon} size="lg" className="text-white" />
                 </div>
-            ))}
-          </div>
+              </div>
+
+              {/* Title */}
+              <h3 className="text-xl font-bold text-text-primary mb-3 leading-tight">
+                {card.title}
+              </h3>
+
+              {/* Divider */}
+              <div className="w-16 h-1 bg-gradient-to-r from-primary to-primary/30 mb-4"></div>
+
+              {/* Description */}
+              <p className="text-sm text-text-secondary leading-relaxed flex-grow">
+                {card.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
