@@ -139,6 +139,25 @@ const clickHandler = () => {
 (circle as HTMLElement).dataset.voivodeship = city.voivodeship;
 ```
 
+**5. Map Entry Animation (Bezpieczne podejście)**
+```typescript
+// InteractiveMapSection.tsx - Animacja SVG kontenera
+<div
+  className={clsx(
+    "relative aspect-[16/9] p-6",
+    "transition-all duration-700 delay-300",  // ← 300ms delay po białej karcie
+    inView ? 'opacity-100 scale-100' : 'opacity-0 scale-[0.96]'  // ← Scale z 0.96 → 1.0
+  )}
+  style={{
+    transformOrigin: 'center center'  // ← Skalowanie z centrum
+  }}
+>
+  <PolandMapSVG ... />
+</div>
+```
+
+**WAŻNE:** Nie modyfikujemy domyślnych stylów `.map-voivodeship` (opacity, transform) - to powodowało niewidoczność mapy. Zamiast tego animujemy cały kontener SVG jako jedną jednostkę.
+
 ### Stany Mapy
 
 | Stan | Opis | Klasy CSS |
