@@ -14,6 +14,29 @@
 - ✅ `ProjectsSection` - Animowany slider portfolio (header, button, slider)
 - ✅ `BlogSection` - Animowane karty blogowe (cascading)
 
+### ✅ Nowe Animacje Mapy SVG (InteractiveMapSection)
+
+**Rozdzielone animacje:**
+1. **Kontener mapy** - `animate-map-container-entry` (0.2s delay)
+   - fadeIn + translateY(30px→0) + scale(0.97→1)
+   - Duration: 0.8s, cubic-bezier easing
+2. **Województwa** - staggered entry z `voiv-animate` class
+   - fadeIn + scale(0.92→1)
+   - Śląskie: 0.5s delay
+   - Małopolskie: 0.65s delay
+   - Opolskie: 0.8s delay
+
+**Nowe keyframes w globals.css:**
+```css
+@keyframes mapContainerEntry { ... }
+@keyframes voivodeshipEntry { ... }
+```
+
+**PolandMapSVG - nowy prop:**
+```typescript
+isAnimated?: boolean;  // Trigger entry animations
+```
+
 ### ✅ Footer - Aktualizacja Sekcji "Obszar Działania"
 
 **Zmiana:** "Szybkie Usługi" → "Obszar Działania" z 5 najważniejszymi miastami
@@ -289,6 +312,8 @@ Projekt używa spójnego systemu animacji opartego na:
 | `fadeInRight` | Fade + translateX(30px→0) | 0.8s | CTA Box, elementy boczne |
 | `heroImageZoom` | Scale(1.05→1.0) | 1.2s | Obraz tła w PageHeader |
 | `watermarkFadeIn` | Opacity(0→1) | 0.8s | Watermark w PageHeader |
+| `mapContainerEntry` | Fade + translateY(30px→0) + scale(0.97→1) | 0.8s | Kontener mapy SVG |
+| `voivodeshipEntry` | Fade + scale(0.92→1) | 0.6s | Województwa (staggered: 0.5s, 0.65s, 0.8s) |
 
 ### Komponenty z Animacjami
 
@@ -364,7 +389,7 @@ interface IntroSectionProps {
 | `ServicesAccordionSection` | 0.1 | fadeInUp (header, items 0.08s interval) |
 | `ContactCTASection` | 0.1 | fadeInUp (header, form) + fadeInRight (contact boxes) |
 | `BusinessResponsibilitySection` | 0.2 | fadeInUp (header, cards cascading) |
-| `InteractiveMapSection` | 0.2 | Custom transition (header, map container) |
+| `InteractiveMapSection` | 0.2 | header (fadeInUp) + container (mapContainerEntry) + voivodeships (staggered voivodeshipEntry) |
 | `BentoContactSection` | 0.1 | fadeInUp (header, 5 grid items cascading 0.2-0.6s) |
 | `ProjectsSection` | 0.1 | fadeInUp (header+desc, button, slider) |
 | `BlogSection` | 0.1 | fadeInUp (header, cards cascading 0.1s interval) |

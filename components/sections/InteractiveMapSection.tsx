@@ -134,9 +134,9 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
         <div
           className={clsx(
             'relative bg-white rounded-3xl shadow-[0_0_20px_rgba(0,0,0,0.05)] overflow-hidden',
-            'transition-all duration-700',
-            inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            inView ? 'animate-map-container-entry' : 'opacity-0'
           )}
+          style={{ animationDelay: '0.2s' }}
         >
           {/* Back Button (zoomed mode only) */}
           {view === 'zoomed' && (
@@ -186,6 +186,7 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
               onVoivodeshipHover={handleVoivodeshipHover}
               onCityClick={handleCityClick}
               onCityHover={handleCityHover}
+              isAnimated={inView}
             />
 
             {/* Voivodeship Name Label (hover state) */}

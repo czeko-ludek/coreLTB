@@ -624,6 +624,70 @@
     opacity: 0;
   }
 
+  /* ======= MAP ENTRY ANIMATIONS ======= */
+
+  /* Map container entry - fade in + scale from 0.95 */
+  @keyframes mapContainerEntry {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.97);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .animate-map-container-entry {
+    animation: mapContainerEntry 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+  }
+
+  /* Voivodeship entry - fade in + scale from center */
+  @keyframes voivodeshipEntry {
+    0% {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Map SVG entry - entire SVG fades in after container */
+  .map-svg-entry {
+    opacity: 0;
+  }
+
+  .map-svg-entry.animate {
+    animation: voivodeshipEntry 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.4s;
+  }
+
+  /* Staggered voivodeship entry animations */
+  .map-voivodeship {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  .map-voivodeship.voiv-animate {
+    animation: voivodeshipEntry 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Staggered delays for each voivodeship */
+  #slaskie.voiv-animate {
+    animation-delay: 0.5s;
+  }
+
+  #malopolskie.voiv-animate {
+    animation-delay: 0.65s;
+  }
+
+  #opolskie.voiv-animate {
+    animation-delay: 0.8s;
+  }
+
   /* Curtain reveal animation - gold paper slides revealing gray, then gray slides revealing image */
   @keyframes curtainSlideGold {
     0% {
