@@ -172,9 +172,16 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
           {/* SVG Map */}
           <div
             ref={tooltipContainerRef}
-            className="relative aspect-[16/9] p-6"
+            className={clsx(
+              "relative aspect-[16/9] p-6",
+              "transition-all duration-700 delay-300",
+              inView ? 'opacity-100 scale-100' : 'opacity-0 scale-[0.96]'
+            )}
             onClick={view === 'zoomed' ? handleBackClick : undefined}
-            style={{ cursor: view === 'zoomed' ? 'pointer' : 'default' }}
+            style={{
+              cursor: view === 'zoomed' ? 'pointer' : 'default',
+              transformOrigin: 'center center'
+            }}
           >
             <PolandMapSVG
               view={view}
