@@ -63,6 +63,35 @@ export function ServiceShowcaseSection({ header, services }: ServiceShowcaseSect
           </div>
         </div>
 
+        {/* Navigation Tiles - MOBILE ONLY (na górze przed treścią) */}
+        <div
+          className={`lg:hidden grid grid-cols-2 md:grid-cols-3 gap-3 mb-8 ${inView ? 'animate-fade-in-up' : 'opacity-0'}`}
+          style={{ animationDelay: '0.3s' }}
+        >
+          {services.map((service, index) => (
+            <button
+              key={`mobile-nav-${index}`}
+              onClick={() => handleServiceClick(index)}
+              className={`relative group p-4 rounded-xl transition-all duration-300 ${
+                activeIndex === index
+                  ? 'bg-primary text-white shadow-lg scale-[1.02]'
+                  : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md'
+              }`}
+            >
+              <div className="flex flex-col items-center gap-2">
+                <Icon
+                  name={service.iconName}
+                  size="lg"
+                  className={activeIndex === index ? 'text-white' : 'text-primary'}
+                />
+                <span className="text-xs font-semibold text-center leading-tight">
+                  {service.title}
+                </span>
+              </div>
+            </button>
+          ))}
+        </div>
+
         {/* Main Showcase Card - z animacją Scale Down + Fade + Scale Up */}
         <div
           className={`relative mb-8 ${inView ? 'animate-fade-in-up' : 'opacity-0'}`}
@@ -127,14 +156,14 @@ export function ServiceShowcaseSection({ header, services }: ServiceShowcaseSect
           ))}
         </div>
 
-        {/* Navigation Tiles - małe kafelki */}
+        {/* Navigation Tiles - DESKTOP ONLY (na dole po treści) */}
         <div
-          className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 ${inView ? 'animate-fade-in-up' : 'opacity-0'}`}
+          className={`hidden lg:grid lg:grid-cols-6 gap-4 ${inView ? 'animate-fade-in-up' : 'opacity-0'}`}
           style={{ animationDelay: '0.6s' }}
         >
           {services.map((service, index) => (
             <button
-              key={index}
+              key={`desktop-nav-${index}`}
               onClick={() => handleServiceClick(index)}
               className={`relative group p-6 rounded-xl transition-all duration-300 ${
                 activeIndex === index
