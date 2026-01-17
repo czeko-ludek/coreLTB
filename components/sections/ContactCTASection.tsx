@@ -1,8 +1,10 @@
 'use client';
 
 import React from 'react';
+import { useInView } from 'react-intersection-observer';
 import { SectionHeader, SectionHeaderProps } from '@/components/shared';
 import { Button, Icon } from '@/components/ui';
+import { clsx } from 'clsx';
 
 export interface ContactInfo {
   phone: string;
@@ -24,18 +26,33 @@ export const ContactCTASection: React.FC<ContactCTASectionProps> = ({
   header,
   contactInfo,
 }) => {
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+    rootMargin: '50px 0px',
+  });
+
   return (
-    <section className="bg-[#efebe7] py-16 sm:py-20 lg:py-24">
+    <section ref={ref} className="bg-[#efebe7] py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-12">
+        <div
+          className={clsx("mb-12", inView ? 'animate-fade-in-up' : 'opacity-0')}
+          style={{ animationDelay: '0.1s' }}
+        >
           <SectionHeader {...header} align="center" theme="light" />
         </div>
 
         {/* Bento Grid: Formularz (lewo, 2 cols) + Contact Boxes (prawo, stack) */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* FORMULARZ - 2 kolumny na desktop */}
-          <div className="lg:col-span-2 bg-white rounded-3xl p-8 lg:p-10 border border-gray-100 shadow-lg">
+          <div
+            className={clsx(
+              "lg:col-span-2 bg-white rounded-3xl p-8 lg:p-10 border border-gray-100 shadow-lg",
+              inView ? 'animate-fade-in-up' : 'opacity-0'
+            )}
+            style={{ animationDelay: '0.2s' }}
+          >
             <div className="mb-6">
               <h3 className="text-xl font-bold text-gray-900">Formularz Kontaktowy</h3>
               <p className="text-gray-500 text-sm mt-1">Wypełnij formularz, a my zajmiemy się resztą.</p>
@@ -96,7 +113,13 @@ export const ContactCTASection: React.FC<ContactCTASectionProps> = ({
           {/* CONTACT BOXES - 1 kolumna stack na desktop */}
           <div className="flex flex-col gap-6">
             {/* Phone Box */}
-            <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-lg flex flex-col justify-between group cursor-pointer hover:bg-gray-50 transition-colors">
+            <div
+              className={clsx(
+                "bg-white rounded-3xl p-6 border border-gray-100 shadow-lg flex flex-col justify-between group cursor-pointer hover:bg-gray-50 transition-colors",
+                inView ? 'animate-fade-in-right' : 'opacity-0'
+              )}
+              style={{ animationDelay: '0.3s' }}
+            >
               <div className="h-14 w-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 transition-transform group-hover:scale-110 mb-4">
                 <Icon name="phone" className="text-white" size="md" />
               </div>
@@ -112,7 +135,13 @@ export const ContactCTASection: React.FC<ContactCTASectionProps> = ({
             </div>
 
             {/* Email Box */}
-            <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-lg flex flex-col justify-between group cursor-pointer hover:bg-gray-50 transition-colors">
+            <div
+              className={clsx(
+                "bg-white rounded-3xl p-6 border border-gray-100 shadow-lg flex flex-col justify-between group cursor-pointer hover:bg-gray-50 transition-colors",
+                inView ? 'animate-fade-in-right' : 'opacity-0'
+              )}
+              style={{ animationDelay: '0.4s' }}
+            >
               <div className="h-14 w-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 transition-transform group-hover:scale-110 mb-4">
                 <Icon name="mail" className="text-white" size="md" />
               </div>
@@ -128,7 +157,13 @@ export const ContactCTASection: React.FC<ContactCTASectionProps> = ({
             </div>
 
             {/* Address Box */}
-            <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-lg flex flex-col justify-between group">
+            <div
+              className={clsx(
+                "bg-white rounded-3xl p-6 border border-gray-100 shadow-lg flex flex-col justify-between group",
+                inView ? 'animate-fade-in-right' : 'opacity-0'
+              )}
+              style={{ animationDelay: '0.5s' }}
+            >
               <div className="h-14 w-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 mb-4">
                 <Icon name="mapPin" className="text-white" size="md" />
               </div>

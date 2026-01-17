@@ -6,14 +6,13 @@ import {
   getAllLocalPageSlugs
 } from '@/data/local-pages';
 import { PageHeader, TableOfContents, TOCSection } from '@/components/shared';
-import { SectionLabel } from '@/components/ui';
 import {
   AreasSection,
   BusinessResponsibilitySection,
   ServicesAccordionSection,
-  PricingSection,
   SimpleImageTextSection,
-  ContactCTASection
+  ContactCTASection,
+  IntroSection
 } from '@/components/sections';
 import { generateLocalPageSchema, sanitizeJsonLd } from '@/lib/schema';
 import { companyData } from '@/data/company-data';
@@ -93,9 +92,6 @@ export default async function LocalPage({
   ];
 
   // Add optional sections
-  if (page.pricing) {
-    tocSections.push({ id: 'pricing', label: 'Cennik', icon: 'coins' });
-  }
   if (page.energyEfficiency) {
     tocSections.push({ id: 'energy-efficiency', label: 'Energooszczędność', icon: 'leaf' });
   }
@@ -116,28 +112,8 @@ export default async function LocalPage({
         {/* Hero - PageHeader (reużywalny) */}
         <PageHeader {...page.pageHeader} />
 
-        {/* Intro Section */}
-        <section id="intro" className="bg-white py-16 sm:py-20">
-          <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto">
-              <SectionLabel>{page.intro.label}</SectionLabel>
-              <div className="space-y-4 mt-6">
-                {page.intro.paragraphs.map((paragraph, index) => (
-                  <p
-                    key={index}
-                    className="text-base md:text-lg text-text-secondary leading-relaxed"
-                    dangerouslySetInnerHTML={{
-                      __html: paragraph.replace(
-                        /\*\*(.*?)\*\*/g,
-                        '<strong class="font-bold text-text-primary">$1</strong>'
-                      ),
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Intro Section - z animacjami */}
+        <IntroSection label={page.intro.label} paragraphs={page.intro.paragraphs} />
 
         {/* Wrapper Container for TOC + All Sections */}
         <div className="relative mt-5">
@@ -165,16 +141,6 @@ export default async function LocalPage({
               imageSrc={page.localSpecifics.imageSrc}
               imageAlt={page.localSpecifics.imageAlt}
             />
-
-            {/* Pricing Section (optional) */}
-            {page.pricing && (
-              <PricingSection
-                id="pricing"
-                header={page.pricing.header}
-                rows={page.pricing.rows}
-                disclaimer={page.pricing.disclaimer}
-              />
-            )}
 
             {/* Energy Efficiency - SimpleImageTextSection (optional) */}
             {page.energyEfficiency && (

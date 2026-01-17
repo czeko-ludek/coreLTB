@@ -78,6 +78,7 @@ import {
   Check,
   Paperclip,
   Wind,
+  MousePointer2,
 } from 'lucide-react';
 
 const iconMap = {
@@ -162,6 +163,7 @@ const iconMap = {
   checkmark: Check,
   paperclip: Paperclip,
   wind: Wind,
+  mousePointer: MousePointer2,
 };
 
 export type IconName = keyof typeof iconMap;

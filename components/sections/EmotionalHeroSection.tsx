@@ -31,16 +31,24 @@ export const EmotionalHeroSection: React.FC<EmotionalHeroSectionProps> = ({
   return (
     <section id="emotional-hero" className="py-6 md:py-8" style={{ backgroundColor: '#efebe7' }}>
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
-        <div className="bg-white rounded-xl shadow-lg p-8 md:p-12 lg:p-16">
+        <div
+          className="bg-white rounded-xl shadow-lg p-8 md:p-12 lg:p-16 animate-fade-in-up"
+          style={{ animationDelay: '0.3s' }}
+        >
           {/* Grid layout: tekst po lewej, CTA Box po prawej */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 items-start">
             {/* Lewa kolumna - tekst */}
             <div>
               {/* Label (złoty akcent) */}
-              <SectionLabel className="mb-4">{label}</SectionLabel>
+              <div className="animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+                <SectionLabel className="mb-4">{label}</SectionLabel>
+              </div>
 
               {/* Headline (H2 - główny nagłówek sekcji, H1 jest w PageHeader) */}
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-4 md:mb-6 leading-tight">
+              <h2
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-4 md:mb-6 leading-tight animate-fade-in-up"
+                style={{ animationDelay: '0.5s' }}
+              >
                 {Array.isArray(headline) ? (
                   headline.map((line, index) => (
                     <React.Fragment key={index}>
@@ -54,7 +62,10 @@ export const EmotionalHeroSection: React.FC<EmotionalHeroSectionProps> = ({
               </h2>
 
               {/* Subtitle */}
-              <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
+              <p
+                className="text-lg md:text-xl text-text-secondary leading-relaxed animate-fade-in-up"
+                style={{ animationDelay: '0.6s' }}
+              >
                 {subtitle}
               </p>
 
@@ -62,7 +73,11 @@ export const EmotionalHeroSection: React.FC<EmotionalHeroSectionProps> = ({
               {benefits && benefits.length > 0 && (
                 <ul className="mt-6 md:mt-8 space-y-3">
                   {benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start gap-3">
+                    <li
+                      key={index}
+                      className="flex items-start gap-3 animate-fade-in-up"
+                      style={{ animationDelay: `${0.7 + index * 0.1}s` }}
+                    >
                       <Icon
                         name="check"
                         className="text-primary mt-1 flex-shrink-0"
@@ -77,8 +92,11 @@ export const EmotionalHeroSection: React.FC<EmotionalHeroSectionProps> = ({
               )}
             </div>
 
-            {/* Prawa kolumna - CTA Box */}
-            <div className="w-full lg:w-auto lg:min-w-[380px] lg:max-w-[420px]">
+            {/* Prawa kolumna - CTA Box z fadeInRight */}
+            <div
+              className="w-full lg:w-auto lg:min-w-[380px] lg:max-w-[420px] animate-fade-in-right"
+              style={{ animationDelay: '0.5s' }}
+            >
               <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-6 md:p-7 border-2 border-primary/20 h-full flex flex-col">
                 {/* Tytuł */}
                 <h3 className="text-lg md:text-xl font-bold text-text-primary mb-4 text-center">

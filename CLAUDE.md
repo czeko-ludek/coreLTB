@@ -1,6 +1,404 @@
 # CLAUDE.md - CoreLTB Builders - Dokumentacja Projektu
 
-**Ostatnia aktualizacja:** 2026-01-16
+**Ostatnia aktualizacja:** 2026-01-17
+
+---
+
+## 🆕 AKTUALIZACJA SESJI (2026-01-17)
+
+### ✅ Nowa Strona: Obszar Działania Hub z Interaktywną Mapą SVG
+
+**Routing:** `/obszar-dzialania` (page.tsx - SSG)
+
+**1. Strona Hub "Obszar Działania"**
+- ✅ Nowa strona główna dla sekcji "Obszar Działania"
+- ✅ Interaktywna mapa SVG 3 województw (śląskie, małopolskie, opolskie)
+- ✅ Lista miast z dedykowanymi stronami (grid z linkami)
+- ✅ Karty województw z listą miast
+- ✅ Sekcja "Logistyka i Zaplecze" (4 benefity)
+- ✅ Schema.org: LocalBusiness + BreadcrumbList
+
+**2. Nowe Komponenty Interaktywnej Mapy:**
+
+| Komponent | Lokalizacja | Typ | Opis |
+|-----------|-------------|-----|------|
+| `InteractiveMapSection` | `/components/sections/` | Organizm | Sekcja z mapą (tylko desktop) |
+| `PolandMapSVG` | `/components/shared/` | Molekuła | Komponent SVG z interaktywnością |
+| `MapTooltip` | `/components/ui/` | Atom | Tooltip nad miastem |
+
+**3. Nowy Plik Danych:**
+- `/data/map-data.ts` - Dane województw, miast, helper functions
+
+**4. Plik SVG:**
+- `/public/mapa_3_wojewodztwa.svg` - Zewnętrzny plik mapy Polski
+
+---
+
+## 🗺️ INTERAKTYWNA MAPA SVG - DOKUMENTACJA TECHNICZNA
+
+### Architektura Komponentów
+
+```
+InteractiveMapSection (Organizm)
+├── SectionHeader
+├── PolandMapSVG (Molekuła)
+│   └── [SVG Injection] mapa_3_wojewodztwa.svg
+├── MapTooltip (Atom)
+├── Legend (wbudowany)
+├── Back Button (wbudowany)
+└── Instructions (wbudowany)
+```
+
+### Wzorce Implementacyjne
+
+**1. SVG Injection Pattern**
+```typescript
+// PolandMapSVG.tsx - Ładowanie zewnętrznego SVG
+useEffect(() => {
+  const loadSVG = async () => {
+    const response = await fetch('/mapa_3_wojewodztwa.svg');
+    const svgText = await response.text();
+    containerRef.current.innerHTML = svgText;
+    svgRef.current = containerRef.current.querySelector('svg');
+    // Setup interaktywności...
+  };
+  loadSVG();
+}, []);
+```
+
+**2. Callback Refs Pattern (unikanie stale closures)**
+```typescript
+// Przechowywanie callbacków w refs dla event listenerów
+const callbacksRef = useRef<CallbackRefs>({
+  onVoivodeshipClick,
+  onVoivodeshipHover,
+  onCityClick,
+  onCityHover,
+});
+
+// Aktualizacja przy każdej zmianie props
+useEffect(() => {
+  callbacksRef.current = { ... };
+}, [deps]);
+
+// Event listener używa ref (zawsze aktualna wersja)
+const clickHandler = () => {
+  callbacksRef.current.onVoivodeshipClick(voiv.id);
+};
+```
+
+**3. CSS Transform Zoom**
+```css
+/* Zoom do województwa przez CSS transform */
+.map-container.zoomed-slaskie {
+  transform-origin: 42% 52%;
+  transform: scale(1.5) translate(6%, 10%);
+}
+```
+
+**4. Dataset API (dane na elementach SVG)**
+```typescript
+// Przechowywanie danych na elementach DOM
+(circle as HTMLElement).dataset.cityId = city.id;
+(circle as HTMLElement).dataset.voivodeship = city.voivodeship;
+```
+
+### Stany Mapy
+
+| Stan | Opis | Klasy CSS |
+|------|------|-----------|
+| `overview` | Widok wszystkich 3 województw | Brak transformacji |
+| `zoomed` | Zoom na jedno województwo | `.zoomed-{id}` na kontenerze |
+| `hovered` | Hover na województwie (overview) | `.hovered` na grupie SVG |
+| `active` | Aktywne województwo (zoomed) | `.active` na grupie SVG |
+| `faded` | Nieaktywne województwa (zoomed) | `.faded` na grupie SVG |
+
+### Stany Miast
+
+| Stan | Opis | Klasy CSS |
+|------|------|-----------|
+| Ukryte | Domyślny stan | `.miasto` (opacity: 0) |
+| Preview | Hover na województwie | `.miasto-preview` |
+| Widoczne | Zoom na województwo | `.miasto-visible` |
+| Label widoczny | Zoom na województwo | `.label-visible` |
+
+### Struktura Danych (`/data/map-data.ts`)
+
+```typescript
+// Typy
+export type VoivodeshipId = 'slaskie' | 'malopolskie' | 'opolskie';
+
+export interface MapCity {
+  id: string;                    // Unique identifier
+  name: string;                  // Display name (Polish)
+  nameInSvg: string;             // Name as it appears in SVG
+  slug: string | null;           // URL slug (null = no page)
+  voivodeship: VoivodeshipId;    // Parent voivodeship
+  coordinates: { cx: number; cy: number };  // SVG coordinates
+  hasPage: boolean;              // Has dedicated local page
+}
+
+export interface MapVoivodeship {
+  id: VoivodeshipId;
+  name: string;                  // Display name
+  svgGroupId: string;            // ID grupy w SVG (#wojewodztwo-slaskie)
+  citiesGroupId: string;         // ID grupy miast w SVG
+  cities: MapCity[];
+}
+```
+
+**Helper Functions:**
+- `getAllCities()` - Wszystkie miasta (flat array)
+- `getCitiesWithPages()` - Miasta z dedykowanymi stronami
+- `getCityById(id)` - Znajdź miasto po ID
+- `getCityByNameInSvg(name)` - Znajdź miasto po nazwie w SVG
+- `getVoivodeshipById(id)` - Znajdź województwo
+- `getMapStats()` - Statystyki (total, withPages, comingSoon)
+
+### Style CSS (`globals.css`)
+
+**Sekcje stylów mapy:**
+1. **Map Container** - `.map-container`, `.zoomed-{id}`
+2. **Voivodeship Styles** - `.map-voivodeship`, `.hovered`, `.active`, `.faded`
+3. **City Markers** - `.miasto`, `.miasto-visible`, `.miasto-preview`
+4. **Labels** - `.label`, `.label-visible`
+5. **Voivodeship Name Label** - `.voivodeship-hover-label`
+6. **Legend** - `.map-legend`, `.map-legend-item`, `.map-legend-dot`
+7. **Back Button** - `.map-back-button`
+8. **Tooltip** - `.map-tooltip`, `.map-tooltip-title`, `.map-tooltip-subtitle`
+
+### Responsywność
+
+**Desktop Only:**
+```tsx
+// InteractiveMapSection - ukryta na mobile
+<section className="hidden lg:block ...">
+```
+
+**Mobile Fallback:**
+- Sekcja "Lista Miast" (Section 2) widoczna na wszystkich urządzeniach
+- Grid miast z linkami zastępuje interaktywną mapę
+
+### Flow Użytkownika
+
+```
+[Overview Mode]
+    │
+    ├─ Hover na województwo → Label nazwy + preview miast
+    │
+    └─ Klik na województwo → [Zoomed Mode]
+                                  │
+                                  ├─ Widoczne markery miast
+                                  ├─ Hover na miasto → Tooltip
+                                  ├─ Klik na miasto (hasPage) → Nawigacja
+                                  └─ Klik poza / Back button → [Overview Mode]
+```
+
+### Dodawanie Nowego Miasta
+
+**Krok 1:** Dodaj miasto do `/data/map-data.ts`
+```typescript
+const slaskieCities: MapCity[] = [
+  // ... existing cities
+  createCity('nowe-miasto', 'Nowe Miasto', 'Nowe Miasto', 'nowe-miasto', 'slaskie', 700, 1100),
+];
+```
+
+**Krok 2:** Jeśli miasto ma stronę, dodaj slug do `existingPageSlugs`
+```typescript
+const existingPageSlugs = new Set([
+  'rybnik',
+  'nowe-miasto',  // ← Dodaj tutaj
+]);
+```
+
+**Krok 3:** Upewnij się, że miasto jest w pliku SVG (text.label + circle.miasto)
+
+### Pliki Komponentów
+
+```
+/components/
+├── sections/
+│   └── InteractiveMapSection.tsx   ← Organizm (246 linii)
+├── shared/
+│   └── PolandMapSVG.tsx            ← Molekuła (288 linii)
+└── ui/
+    └── MapTooltip.tsx              ← Atom (49 linii)
+
+/data/
+└── map-data.ts                     ← Dane (229 linii)
+
+/public/
+└── mapa_3_wojewodztwa.svg          ← Plik SVG mapy
+
+/app/globals.css                    ← Style mapy (linie 278-574)
+```
+
+---
+
+## ✨ SYSTEM ANIMACJI - DOKUMENTACJA
+
+### Przegląd
+
+Projekt używa spójnego systemu animacji opartego na:
+- **CSS Keyframes** - definicje w `globals.css`
+- **react-intersection-observer** - scroll-triggered animations
+- **Cascading delays** - kaskadowe opóźnienia elementów
+
+### Keyframes CSS (`globals.css`)
+
+| Keyframe | Opis | Czas | Użycie |
+|----------|------|------|--------|
+| `fadeInUp` | Fade + translateY(20px→0) | 0.72s | Główna animacja sekcji |
+| `fadeInRight` | Fade + translateX(30px→0) | 0.8s | CTA Box, elementy boczne |
+| `heroImageZoom` | Scale(1.05→1.0) | 1.2s | Obraz tła w PageHeader |
+| `watermarkFadeIn` | Opacity(0→1) | 0.8s | Watermark w PageHeader |
+
+### Komponenty z Animacjami
+
+#### 1. `AnimatedSection` (Wrapper)
+**Lokalizacja:** `/components/shared/AnimatedSection.tsx`
+
+Uniwersalny wrapper do scroll-triggered fadeInUp.
+
+```typescript
+interface AnimatedSectionProps {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;      // Opóźnienie w sekundach (default: 0.1)
+  id?: string;
+  as?: 'section' | 'div';
+}
+
+// Użycie
+<AnimatedSection className="bg-white rounded-3xl" delay={0.1}>
+  <SectionHeader ... />
+  <Content ... />
+</AnimatedSection>
+```
+
+**Użycie:** `/obszar-dzialania/page.tsx` (4 sekcje)
+
+#### 2. `IntroSection`
+**Lokalizacja:** `/components/sections/IntroSection.tsx`
+
+Sekcja wprowadzająca z animowanym labelem i paragrafami.
+
+```typescript
+interface IntroSectionProps {
+  label: string;
+  paragraphs: readonly string[];
+}
+```
+
+**Animacje:**
+- Label: fadeInUp (0.1s delay)
+- Paragrafy: cascading fadeInUp (0.2s, 0.3s, 0.4s...)
+
+**Użycie:** `/obszar-dzialania/[slug]/page.tsx`
+
+#### 3. `PageHeader` (On-Load Animations)
+**Lokalizacja:** `/components/shared/PageHeader.tsx`
+
+| Element | Animacja | Delay |
+|---------|----------|-------|
+| Obraz tła | `animate-hero-zoom` | 0s |
+| Tytuł H1 | `animate-fade-in-up` | 0.2s |
+| Watermark | `animate-watermark-fade` | 0.3s |
+| Breadcrumbs | `animate-fade-in-up` | 0.4s |
+
+#### 4. `EmotionalHeroSection` (On-Load Cascading)
+**Lokalizacja:** `/components/sections/EmotionalHeroSection.tsx`
+
+| Element | Animacja | Delay |
+|---------|----------|-------|
+| Biały kontener | fadeInUp | 0.3s |
+| Label (złoty) | fadeInUp | 0.4s |
+| Nagłówek H2 | fadeInUp | 0.5s |
+| Subtitle | fadeInUp | 0.6s |
+| Benefits | fadeInUp (cascading) | 0.7s, 0.8s, 0.9s |
+| CTA Box | fadeInRight | 0.5s |
+
+#### 5. Sekcje ze Scroll-Triggered Animations
+
+| Komponent | Threshold | Animacja |
+|-----------|-----------|----------|
+| `SimpleImageTextSection` | 0.1 | fadeInUp (header, content, image) |
+| `AreasSection` | 0.1 | fadeInUp (header, hubs cascading) |
+| `ServicesAccordionSection` | 0.1 | fadeInUp (header, items 0.08s interval) |
+| `ContactCTASection` | 0.1 | fadeInUp (header, form) + fadeInRight (contact boxes) |
+| `BusinessResponsibilitySection` | 0.2 | fadeInUp (header, cards cascading) |
+| `InteractiveMapSection` | 0.2 | Custom transition (header, map container) |
+
+### Wzorzec Implementacji
+
+```typescript
+'use client';
+
+import { useInView } from 'react-intersection-observer';
+import { clsx } from 'clsx';
+
+export function MySection() {
+  const { ref, inView } = useInView({
+    threshold: 0.1,          // Trigger gdy 10% sekcji widoczne
+    triggerOnce: true,       // Animuj tylko raz
+    rootMargin: '50px 0px',  // Trigger 50px przed viewport
+  });
+
+  return (
+    <section ref={ref}>
+      <div
+        className={clsx(inView ? 'animate-fade-in-up' : 'opacity-0')}
+        style={{ animationDelay: '0.1s' }}
+      >
+        {/* Content */}
+      </div>
+    </section>
+  );
+}
+```
+
+### Cascading Pattern
+
+```typescript
+{items.map((item, index) => (
+  <div
+    key={index}
+    className={clsx(inView ? 'animate-fade-in-up' : 'opacity-0')}
+    style={{ animationDelay: `${0.2 + index * 0.1}s` }}  // 0.2s, 0.3s, 0.4s...
+  >
+    {item}
+  </div>
+))}
+```
+
+### Klasy CSS Animacji
+
+```css
+/* Fade in from bottom */
+.animate-fade-in-up {
+  animation: fadeInUp 0.72s ease-out forwards;
+  opacity: 0;
+}
+
+/* Fade in from right */
+.animate-fade-in-right {
+  animation: fadeInRight 0.8s ease-out forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+/* Hero image zoom */
+.animate-hero-zoom {
+  animation: heroImageZoom 1.2s ease-out forwards;
+}
+
+/* Watermark fade */
+.animate-watermark-fade {
+  animation: watermarkFadeIn 0.8s ease-out forwards;
+  opacity: 0;
+}
+```
 
 ---
 
@@ -86,12 +484,13 @@ Route (app)                                  Size  First Load JS
 2. [Stos Technologiczny](#stos-technologiczny)
 3. [Architektura Projektu](#architektura-projektu)
 4. [Strony Lokalne (Obszar Działania)](#strony-lokalne-obszar-działania)
-5. [Schema.org - Implementacja](#schemaorg-implementacja)
-6. [Atomic Design - Komponenty](#atomic-design-komponenty)
-7. [Dane Firmy - Single Source of Truth](#dane-firmy-single-source-of-truth)
-8. [SEO i Metadata](#seo-i-metadata)
-9. [Routing i SSG](#routing-i-ssg)
-10. [Best Practices](#best-practices)
+5. [Interaktywna Mapa SVG](#🗺️-interaktywna-mapa-svg---dokumentacja-techniczna) 🆕
+6. [Schema.org - Implementacja](#schemaorg-implementacja)
+7. [Atomic Design - Komponenty](#atomic-design-komponenty)
+8. [Dane Firmy - Single Source of Truth](#dane-firmy-single-source-of-truth)
+9. [SEO i Metadata](#seo-i-metadata)
+10. [Routing i SSG](#routing-i-ssg)
+11. [Best Practices](#best-practices)
 
 ---
 
@@ -138,13 +537,14 @@ Route (app)                                  Size  First Load JS
 │   ├── /page.tsx                      # Lista usług
 │   └── /[slug]/page.tsx               # Dynamiczne strony usług (V2)
 ├── /projekty/[slug]/page.tsx          # Projekty (SSG)
-└── /obszar-dzialania/                 # 🆕 STRONY LOKALNE
-    ├── /page.tsx                      # Hub z mapą (TODO)
+└── /obszar-dzialania/                 # STRONY LOKALNE
+    ├── /page.tsx                      # 🆕 Hub z interaktywną mapą SVG
     └── /[slug]/page.tsx               # Dynamiczne strony miast (SSG)
 
 /data
-├── company-data.ts                    # 🆕 Dane firmy (SSOT)
-├── local-pages.ts                     # 🆕 Dane stron lokalnych
+├── company-data.ts                    # Dane firmy (SSOT)
+├── local-pages.ts                     # Dane stron lokalnych
+├── map-data.ts                        # 🆕 Dane interaktywnej mapy
 ├── projects.ts                        # Dane projektów
 ├── services.ts                        # Stare dane usług
 └── servicesV2.ts                      # Nowe dane usług (V2)
@@ -220,13 +620,6 @@ export interface LocalPageData {
   faq: {
     header: SectionHeaderProps;
     items: readonly FAQItem[];
-  };
-
-  // Cennik (opcjonalny)
-  pricing?: {
-    header: SectionHeaderProps;
-    rows: readonly PricingRow[];
-    disclaimer: string;
   };
 
   // Sekcje dodatkowe (opcjonalne)
@@ -340,16 +733,6 @@ districts: {
   }
 }
 ```
-
-#### 📋 PricingSection - Tabela Cennikowa
-
-**Lokalizacja:** `/components/sections/PricingSection.tsx`
-
-**Charakterystyka:**
-- Tabela z 4 kolumnami (Etap, Zakres, Koszt, Czas)
-- Desktop: Pełna tabela
-- Mobile: Karty z danymi
-- Disclaimer na dole
 
 #### 🔄 Reużywane Komponenty
 
@@ -551,6 +934,7 @@ export default async function LocalPage({ params }) {
 - `Icon` - 80+ ikon z lucide-react
 - `SectionLabel` - Złote etykiety nad nagłówkami
 - `Portal` - Wrapper dla modals/tooltips
+- `MapTooltip` 🆕 - Tooltip nad miastem na mapie
 
 ### 🧬 Molekuły (`/components/shared/`)
 
@@ -560,6 +944,7 @@ export default async function LocalPage({ params }) {
 - `NumberedListItem` - Element listy z numerem i ikoną
 - `TimelineNav` - Nawigacja timeline (dla usług)
 - `TimelineStep` - Krok timeline z ContentBlock[]
+- `PolandMapSVG` 🆕 - Interaktywny komponent mapy SVG
 
 ### 🏗️ Organizmy (`/components/sections/`)
 
@@ -569,12 +954,14 @@ export default async function LocalPage({ params }) {
 **Strony usług (V2):**
 - `EmotionalHeroSection`, `PhilosophyTimelineSection`, `CooperationTimelineSection`, `CooperationTimelineSectionNoLine`, `ServicesAccordionSection`, `ContactCTASection`
 
-**Strony lokalne:** 🆕
+**Strony lokalne:**
 - `SimpleImageTextSection` - Główny komponent dla wszystkich sekcji tekstowych (buildingStages, localSpecifics, energyEfficiency, formalities)
 - `AreasSection` - Sekcja "Gdzie Budujemy" (reużywalny z oferty, 1 hub dla local pages)
 - `BusinessResponsibilitySection` - Sekcja "Dlaczego My" (reużywalny)
 - `ServicesAccordionSection` - FAQ (reużywalny)
-- `PricingSection` - Cennik (opcjonalny, obecnie nieużywany)
+
+**Strona Hub "Obszar Działania":** 🆕
+- `InteractiveMapSection` - Sekcja z interaktywną mapą SVG (tylko desktop)
 
 **Strona O nas:**
 - `AboutIntroSection`, `CompetenciesSection`, `BusinessResponsibilitySection`

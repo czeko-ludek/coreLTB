@@ -110,3 +110,7 @@ export type { ResponsibilityPillarsCardProps, ResponsibilityPillar } from './Res
 
 export { ResponsibilityCard } from './ResponsibilityCard';
 export type { ResponsibilityCardProps } from './ResponsibilityCard';
+
+// Animation Wrappers
+export { AnimatedSection } from './AnimatedSection';
+export type { AnimatedSectionProps } from './AnimatedSection';

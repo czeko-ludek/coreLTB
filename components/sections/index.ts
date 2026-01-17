@@ -108,3 +108,6 @@ export type { PricingSectionProps } from './PricingSection';
 export { SimpleImageTextSection } from './SimpleImageTextSection';
 export type { SimpleImageTextSectionProps } from './SimpleImageTextSection';
 
+export { IntroSection } from './IntroSection';
+export type { IntroSectionProps } from './IntroSection';
+

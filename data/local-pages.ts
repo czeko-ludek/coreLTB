@@ -27,16 +27,6 @@ export interface WhyUsPoint {
 }
 
 /**
- * Wiersz tabeli cennika
- */
-export interface PricingRow {
-  stage: string;
-  scope: string;
-  priceRange: string;
-  timeRange: string;
-}
-
-/**
  * Sekcja tekstowa (SimpleImageTextSection)
  * Opcjonalny obraz renderowany w grid 2-kolumnowym (tekst + obraz)
  */
@@ -89,13 +79,6 @@ export interface LocalPageData {
   faq: {
     header: SectionHeaderProps;
     items: FAQ[];  // Import z shared-types.ts
-  };
-
-  // Cennik (opcjonalny)
-  pricing?: {
-    header: SectionHeaderProps;
-    rows: PricingRow[];
-    disclaimer: string;
   };
 
   // Sekcje dodatkowe (opcjonalne - SimpleImageTextSection style)
@@ -369,50 +352,6 @@ export const rybnikPage: LocalPageData = {
         answer: "Realizujemy inwestycje we wszystkich dzielnicach Rybnika, zarówno w centrum, jak i w zielonych lokalizacjach podmiejskich. Weryfikacja gruntu to nasz standard – specjaliści CoreLTB analizują warunki geotechniczne oraz zapisy MPZP, precyzyjnie określając możliwości zabudowy. Taka wstępna ekspertyza pozwala uniknąć ukrytych kosztów i potwierdza opłacalność przedsięwzięcia."
       }
     ]
-  },
-
-  // Cennik
-  pricing: {
-    header: {
-      label: "SZACUNKOWY CENNIK",
-      title: "Ile kosztuje budowa domu w Rybniku?",
-      description: "Orientacyjne koszty budowy domu jednorodzinnego o powierzchni ok. 120-150 m². Ostateczna cena zależy od kategorii szkód górniczych i stopnia skomplikowania bryły dachu.",
-      align: "center",
-      theme: "light"
-    },
-    rows: [
-      {
-        stage: "Stan Surowy Otwarty",
-        scope: "Fundamenty, ściany, stropy, dach, izolacje",
-        priceRange: "2300 - 2800 zł / m²",
-        timeRange: "3-4 miesiące"
-      },
-      {
-        stage: "Stan Deweloperski",
-        scope: "Okna, tynki, wylewki, instalacje, ocieplenie",
-        priceRange: "4800 - 5800 zł / m²",
-        timeRange: "5-7 miesięcy"
-      },
-      {
-        stage: "Dom pod klucz",
-        scope: "Podłogi, łazienki, malowanie, drzwi wew.",
-        priceRange: "od 6500 zł / m²",
-        timeRange: "8-12 miesięcy"
-      },
-      {
-        stage: "Adaptacja projektu",
-        scope: "Dostosowanie do szkód górniczych i MPZP",
-        priceRange: "Wycena indywidualna",
-        timeRange: "4-8 tygodni"
-      },
-      {
-        stage: "Płyta fundamentowa",
-        scope: "Zamiennie za ławy (dla szkód górniczych)",
-        priceRange: "Wycena indywidualna",
-        timeRange: "2-3 tygodnie"
-      }
-    ],
-    disclaimer: "Podane ceny są szacunkowe i nie stanowią oferty handlowej. Dokładny kosztorys (TCO) przygotowujemy po analizie projektu konstrukcyjnego."
   },
 
   // Energooszczędność - nowoczesne rozwiązania przeciw smogowi
@@ -755,11 +694,7 @@ export const wodzislawPage: LocalPageData = {
         title: "Znamy lokalny grunt",
         description: "Mamy doświadczenie w budowaniu na terenach górniczych (KWK ROW) i wiemy, jak skutecznie zbroić fundamenty, by dom nie pękał."
       },
-      {
-        icon: "users",
-        title: "Stałe ekipy",
-        description: "Nie szukamy ludzi \"z łapanki\". Pracujemy ze sprawdzonymi brygadami murarskimi i instalacyjnymi, co gwarantuje powtarzalną, wysoką jakość."
-      },
+      
       {
         icon: "trendingUp",
         title: "Przejrzystość finansowa",
@@ -800,50 +735,6 @@ export const wodzislawPage: LocalPageData = {
         answer: "Budując dom dzisiaj, musisz myśleć o jego wartości za 10-15 lat. Unia Europejska wprowadza dyrektywę EPBD, która dąży do budownictwa bezemisyjnego. Domy, które nie będą spełniać rygorystycznych norm energetycznych, stracą na wartości rynkowej i będą trudne do sprzedania. Dlatego w CoreLTB Builders nie budujemy \"na minimum normowe\". Promujemy rozwiązania, które wyprzedzają obecne Warunki Techniczne (WT 2021). Skupiamy się na **szczelności powietrznej** budynku. Nieszczelny dom to straty ciepła, których nie zatrzyma nawet najgrubszy styropian. Zalecamy wykonanie **Blower Door Test** (testu szczelności) przed tynkami, aby wykryć i uszczelnić wszelkie przedmuchy. Montujemy rekuperację (często z odzyskiem wilgoci - entalpią), co staje się standardem w nowoczesnym budownictwie. Twój dom ma być aktywem, a nie obciążeniem finansowym."
       }
     ]
-  },
-
-  // Cennik
-  pricing: {
-    header: {
-      label: "SZACUNKOWY CENNIK",
-      title: "Cennik budowy domu – Wodzisław Śląski 2024",
-      description: "Poniższa tabela przedstawia szacunkowe zakresy cenowe dla poszczególnych etapów budowy domu jednorodzinnego w technologii murowanej. Pamiętaj, że ostateczna wycena zależy od skomplikowania bryły dachu, ilości stali potrzebnej na szkody górnicze oraz standardu wykończenia.",
-      align: "center",
-      theme: "light"
-    },
-    rows: [
-      {
-        stage: "Stan Zerowy",
-        scope: "Roboty ziemne, fundamenty (płyta/ławy), izolacje, kanalizacja",
-        priceRange: "Wycena indywidualna",
-        timeRange: "3-5 tygodni"
-      },
-      {
-        stage: "Stan Surowy Otwarty",
-        scope: "Ściany nośne, stropy, kominy, więźba, pokrycie dachu",
-        priceRange: "Wycena indywidualna",
-        timeRange: "2-3 miesiące"
-      },
-      {
-        stage: "Stan Surowy Zamknięty",
-        scope: "Stolarka okienna, drzwi, brama garażowa",
-        priceRange: "Wycena indywidualna",
-        timeRange: "1-2 miesiące"
-      },
-      {
-        stage: "Stan Deweloperski",
-        scope: "Instalacje, tynki, wylewki, ocieplenie elewacji",
-        priceRange: "Wycena indywidualna",
-        timeRange: "3-4 miesiące"
-      },
-      {
-        stage: "Pod klucz",
-        scope: "Podłogi, malowanie, biały montaż, drzwi wewnętrzne",
-        priceRange: "Wycena indywidualna",
-        timeRange: "2-3 miesiące"
-      }
-    ],
-    disclaimer: "Wycena jest darmowa i niezobowiązująca. Ostateczny koszt jest zapisywany w umowie i gwarantujemy jego stałość, o ile nie zmieni się zakres prac. Zapewniamy przejrzystą umowę bez ukrytych kosztów."
   },
 
   // Schema.org
@@ -1142,50 +1033,6 @@ export const tychyPage: LocalPageData = {
     ]
   },
 
-  // Cennik
-  pricing: {
-    header: {
-      label: "SZACUNKOWY CENNIK",
-      title: "Szacunkowe koszty budowy domu (2025)",
-      description: "Poniższa tabela prezentuje orientacyjne koszty dla domu jednorodzinnego o prostej bryle (dach dwuspadowy). Pamiętaj, że każda budowa wyceniana jest indywidualnie. Ceny materiałów budowlanych są zmienne, dlatego zawsze przygotowujemy aktualny kosztorys przed podpisaniem umowy.",
-      align: "center",
-      theme: "light"
-    },
-    rows: [
-      {
-        stage: "Stan Zero",
-        scope: "Roboty ziemne, ławy/płyta, izolacje, chudziak",
-        priceRange: "Wycena indywidualna",
-        timeRange: "3-5 tygodni"
-      },
-      {
-        stage: "Stan Surowy Otwarty",
-        scope: "Ściany nośne, stropy, więźba, pokrycie wstępne",
-        priceRange: "Wycena indywidualna",
-        timeRange: "2-3 miesiące"
-      },
-      {
-        stage: "Stan Surowy Zamknięty",
-        scope: "Okna 3-szybowe, drzwi, brama, dach docelowy",
-        priceRange: "Wycena indywidualna",
-        timeRange: "1-2 miesiące"
-      },
-      {
-        stage: "Stan Deweloperski",
-        scope: "Instalacje, tynki, wylewki, ocieplenie elewacji",
-        priceRange: "Wycena indywidualna",
-        timeRange: "3-4 miesiące"
-      },
-      {
-        stage: "Kompleksowa budowa",
-        scope: "Całość od A do Z (Pakiet Inwestora)",
-        priceRange: "Wycena indywidualna",
-        timeRange: "8-12 miesięcy"
-      }
-    ],
-    disclaimer: "Uwaga: Ostateczna cena zależy od projektu, kategorii szkód górniczych (ilość stali) oraz wybranych materiałów wykończeniowych."
-  },
-
   // Schema.org
   areaServed: [
     "Tychy",
@@ -1218,14 +1065,14 @@ export const katowicePage: LocalPageData = {
   slug: "katowice",
   cityName: "Katowice",
   region: "woj. śląskie",
-  metaTitle: "Budowa Domów Katowice – Generalny Wykonawca | CoreLTB Builders",
-  metaDescription: "Profesjonalna budowa domów w Katowice. ✓ Gwarancja ✓ Doświadczenie",
+  metaTitle: "Budowa Domów Katowice – Kompleksowe Wykonawstwo 2026 | CoreLTB Builders",
+  metaDescription: "Budowa domu jednorodzinnego w Katowicach. Koszt stanu deweloperskiego od 5500-6500 zł/m². Specjalizacja w terenach górniczych. ✓ Lokalna baza logistyczna ✓ Gwarancja stałej ceny ✓ 12-18 miesięcy realizacji",
 
   // Hero
   pageHeader: {
     title: "Budowa Domów Katowice",
     watermarkText: "KATOWICE",
-    backgroundImage: "/images/local/katowice/hero.webp", // TODO: Dodać obraz
+    backgroundImage: "/images/local/katowice/hero.webp",
     breadcrumbs: [
       { label: "Strona główna", href: "/" },
       { label: "Budowa domów Katowice", href: "" }
@@ -1236,110 +1083,123 @@ export const katowicePage: LocalPageData = {
   intro: {
     label: "BUDOWA DOMÓW KATOWICE",
     paragraphs: [
-      "**Budowa domu w technologii murowanej** to kompleksowy proces inwestycyjny, obejmujący realizację od stanu zerowego po klucz, z uwzględnieniem specyfiki geologicznej gruntu. Szacunkowy koszt stanu deweloperskiego w 2025 roku wynosi **4800–6500 zł netto za m²** powierzchni użytkowej. Czas realizacji pełnego cyklu budowlanego to zazwyczaj **12–18 miesięcy**. Jako generalny wykonawca, przejmujemy pełną odpowiedzialność prawną i techniczną za inwestycję, zabezpieczając budynek przed szkodami górniczymi charakterystycznymi dla Katowic.",
+      "Mieszkasz w Katowicach i planujesz inwestycję życia, ale przeraża Cię wizja wieloletniej budowy? **Budowa domu jednorodzinnego** w technologii murowanej to proces inżynieryjny, który przy dobrej organizacji trwa średnio **12-18 miesięcy**. Koszt stanu deweloperskiego w 2026 roku dla naszego regionu startuje od **5500-6500 zł netto za m²**, a czas realizacji stanu surowego otwartego to zaledwie **3-4 miesiące**.",
+      "Jako **CORE LTB Builders**, jesteśmy Twoim lokalnym partnerem na Śląsku. Nasza baza logistyczna znajduje się w bezpośrednim sąsiedztwie, dzięki czemu dojazd na inwestycje w dzielnicach takich jak Podlesie, Zarzecze czy Kostuchna zajmuje nam kilkanaście minut. Eliminujemy zbędne koszty transportu i jesteśmy na budowie zawsze wtedy, gdy tego potrzebujesz. Oferujemy pełną koordynację prac – od fundamentów po klucz – zapewniając bezpieczeństwo finansowe i techniczne na trudnym, górniczym terenie."
     ]
   },
 
-  // buildingStages
+  // buildingStages - Ile trwa budowa domu?
   buildingStages: {
     header: {
       label: 'ETAPY REALIZACJI',
-      title: 'Etapy współpracy – od \"WZ\" do odbioru kluczy',
-      description: 'Proces budowy domu to skomplikowana operacja logistyczna. Aby zdjąć z Ciebie ciężar zarządzania, działamy według sprawdzonego schematu, który eliminuje chaos i przestoje.',
+      title: 'Ile trwa budowa domu w Katowicach? (Standardy 2026)',
+      description: 'Średni czas realizacji dla domu o powierzchni 150 m² w technologii tradycyjnej (murowanej) wynosi od 12 do 18 miesięcy do momentu wprowadzenia się. Harmonogram jest ściśle uzależniony od pór roku oraz przerw technologicznych niezbędnych dla wiązania betonu i wysychania tynków.',
       align: 'left',
       theme: 'light',
     },
     items: [
       {
-        icon: 'fileText',
-        title: 'Formalności w Urzędzie Miasta Katowice',
+        icon: 'hardHat',
+        title: 'Etap 1: Stan Surowy Otwarty (SSO) – 3 do 4 miesięcy',
         content: [
           {
             type: 'paragraph',
-            value: 'Zanim pierwsza koparka wjedzie na działkę, musimy przebrnąć przez procedury administracyjne. W Katowicach czas oczekiwania na Warunki Zabudowy (jeśli brak MPZP) wynosi średnio **3-6 miesięcy**.',
+            value: 'To najszybszy i najbardziej spektakularny etap budowy. W ciągu niespełna kwartału na Twojej działce powstaje kompletna konstrukcja budynku.',
           },
           {
             type: 'list',
-            items: ["**Analiza działki:** Sprawdzamy dostęp do mediów i mapy szkód górniczych w Wyższym Urzędzie Górniczym.", "**Adaptacja projektu:** Nasz architekt adaptujący nanosi budynek na mapę do celów projektowych i projektuje niezbędne wzmocnienia konstrukcyjne (trzpienie, wieńce).", "**Pozwolenie na budowę:** Kompletujemy dokumentację i składamy wniosek w Wydziale Architektury i Budownictwa przy Rynku 1 w Katowicach."],
+            items: [
+              "**Fundamenty:** Wykonanie płyty fundamentowej lub ław zajmuje około **2-3 tygodni**. Na terenach górniczych czas ten może się wydłużyć o **5-7 dni** ze względu na wzmocnione zbrojenie (nawet do **150-180 kg stali na m³ betonu**).",
+              "**Ściany nośne i stropy:** Murowanie ścian i wylewanie stropów to kolejne **4-6 tygodni**.",
+              "**Więźba i pokrycie dachu:** Konstrukcja dachu wraz z foliowaniem i łatowaniem zamyka ten etap w kolejnych **3-4 tygodniach**."
+            ],
           },
         ],
       },
       {
         icon: 'clipboard',
-        title: 'Nadzór kierownika budowy i zarządzanie kryzysowe',
+        title: 'Etap 2: Stan Deweloperski – 5 do 7 miesięcy',
         content: [
           {
             type: 'paragraph',
-            value: 'Na budowie, nawet najlepiej zaplanowanej, mogą wystąpić nieprzewidziane sytuacje – od nagłego załamania pogody po ukryte wady gruntu (np. kurzawka). Wyróżnia nas podejście do zarządzania kryzysowego.',
+            value: 'To moment, w którym budynek \"zwalnia\", ale dzieje się w nim najwięcej prac instalacyjnych.',
           },
           {
             type: 'list',
-            items: ["**Checklisty odbiorowe:** Każdy etap prac zanikowych (zbrojenie, izolacje) jest weryfikowany przez kierownika budowy według listy kontrolnej obejmującej ponad **50 punktów**.", "**Dokumentacja fotograficzna:** Tworzymy pełną historię budowy. Wiesz dokładnie, jak wygląda zbrojenie w fundamencie, zanim zostanie zalane betonem.", "**Reakcja na błędy:** Jeśli popełnimy błąd (jesteśmy tylko ludźmi), naprawiamy go na własny koszt przed przejściem do kolejnego etapu. Nie \"pudrujemy\" problemów tynkiem."],
+            items: [
+              "**Stolarka otworowa:** Montaż okien i drzwi (uszczelnienie budynku) – **2-3 dni**.",
+              "**Instalacje:** Rozprowadzenie elektryki, hydrauliki, rekuperacji – **3-5 tygodni**.",
+              "**Tynki i wylewki:** Wykonanie tynków wewnętrznych i wylewek podłogowych wymaga czasu na wyschnięcie. Technologicznie musimy odczekać minimum **4-6 tygodni** przed rozpoczęciem prac wykończeniowych, aby wilgotność podłoża spadła poniżej **3-4% CM**."
+            ],
           },
         ],
       },
     ],
     imageSrc: '/images/local/katowice/etapy-realizacji.webp',
-    imageAlt: 'Etapy współpracy – od \"WZ\" do odbioru kluczy - Katowice',
+    imageAlt: 'Etapy budowy domu w Katowicach - harmonogram 2026',
   },
 
-  // localSpecifics
+  // localSpecifics - Szkody górnicze
   localSpecifics: {
     header: {
-      label: 'SPECYFIKA BUDOWY W KATOWICE',
-      title: 'Szkody górnicze w Katowicach a budowa domu – co musisz wiedzieć?',
-      description: 'Budowa domu w stolicy Górnego Śląska nierozerwalnie wiąże się z tematem szkód górniczych. Większość terenów inwestycyjnych w Katowicach (szczególnie południowe dzielnice) znajduje się w zasięgu eksplo',
+      label: 'SPECYFIKA REGIONU',
+      title: 'Szkody górnicze a budowa domu w Katowicach',
+      description: 'Budowanie na Śląsku, a w szczególności w Katowicach, wymaga specjalistycznej wiedzy inżynieryjnej. Większość terenów inwestycyjnych znajduje się w zasięgu oddziaływania eksploatacji górniczej. Ignorowanie tego faktu na etapie projektu to prosty przepis na pęknięte ściany i uszkodzoną konstrukcję już po kilku latach.',
       align: 'left',
       theme: 'light',
     },
     items: [
       {
         icon: 'layers',
-        title: 'Fundamenty na terenach górniczych – płyta czy ławy?',
+        title: 'Fundamenty na terenach górniczych – Płyta vs Ławy',
         content: [
           {
             type: 'paragraph',
-            value: 'Tradycyjne ławy fundamentowe często nie zdają egzaminu na terenach objętych III lub IV kategorią szkód górniczych. W przypadku wystąpienia deformacji terenu (np. niecki osiadania), ławy mogą pękać, przenosząc naprężenia bezpośrednio na ściany nośne.',
-          },
-          {
-            type: 'paragraph',
-            value: 'Dlatego w Katowicach rekomendujemy i wykonujemy **płyty fundamentowe**.',
+            value: 'Standardowe ławy fundamentowe, które sprawdzają się w centralnej Polsce, w Katowicach często są niewystarczające.',
           },
           {
             type: 'list',
-            items: ["**Sztywność:** Płyta to jednolity element żelbetowy, zbrojony górą i dołem (często zużywamy tu o **40% więcej stali** niż w standardzie).", "**Praca z gruntem:** Gdy ziemia \"ucieka\" spod budynku w wyniku tąpnięcia, płyta przechyla się jako całość, ale nie pęka. Dom pozostaje stabilną bryłą.", "**Izolacja:** Płyta pozwala na ciągłą izolację termiczną od spodu (XPS), co eliminuje mostki termiczne przy gruncie."],
+            items: [
+              "**Sztywność konstrukcji:** Na terenach II, III i IV kategorii szkód górniczych rekomendujemy **płytę fundamentową**. Działa ona jak sztywna taca, na której \"pływa\" cały budynek podczas wstrząsów.",
+              "**Zbrojenie:** W naszych realizacjach stosujemy stal zbrojeniową o podwyższonej klasie ciągliwości (A-IIIN). Ilość stali w fundamencie jest często o **30-40% wyższa** niż w standardowym projekcie.",
+              "**Dylatacje i zabezpieczenia:** Budynek musi być odpowiednio zdylatowany od elementów zewnętrznych (tarasy, schody wejściowe), aby ruchy gruntu nie powodowały naprężeń niszczących elewację."
+            ],
           },
         ],
       },
       {
-        icon: 'info',
-        title: 'Materiały odporne na wstrząsy i akustyka',
+        icon: 'fileText',
+        title: 'Adaptacja projektu do kategorii terenu',
         content: [
           {
             type: 'paragraph',
-            value: 'Technologia murowana, którą stosujemy, jest dobierana pod kątem odporności na drgania oraz komfortu akustycznego. To aspekt często pomijany przez konkurencję, a kluczowy dla życia w dużym mieście.',
-          },
-          {
-            type: 'paragraph',
-            value: 'Stosujemy rozwiązania systemowe:',
+            value: 'Każdy \"gotowy\" projekt domu wymaga adaptacji do warunków miejscowych. W Katowicach inżynier adaptujący musi uwzględnić:',
           },
           {
             type: 'list',
-            items: ["**Bloczki silikatowe lub ceramika poryzowana klasy 15+:** Materiały o dużej gęstości, które zapewniają świetną izolacyjność akustyczną (nawet **55 dB** dla ścian międzylokalowych) i dużą pojemność cieplną.", "**Stropy żelbetowe monolityczne:** W przeciwieństwie do lekkich stropów drewnianych czy gęstożebrowych, monolit wiąże ściany budynku w sztywną skrzynię, co jest krytyczne przy wstrząsach górniczych. Dodatkowo, taki strop doskonale tłumi dźwięki uderzeniowe z piętra.", "**Dylatacje obwodowe:** Stosujemy specjalistyczne taśmy dylatacyjne przy ściankach działowych, aby te nie przejmowały obciążeń z konstrukcji nośnej podczas pracy budynku."],
+            items: [
+              "Przyspieszenia poziome gruntu.",
+              "Krzywiznę terenu (niecki i wypiętrzenia).",
+              "Odkształcenia poziome."
+            ],
+          },
+          {
+            type: 'paragraph',
+            value: 'Realizując inwestycję z nami, masz pewność, że **kierownik budowy** dopilnuje zgodności wykonania z tymi zaostrzonymi rygorami. Nie oszczędzamy na betonie i stali tam, gdzie decyduje się stabilność Twojego domu.',
           },
         ],
       },
     ],
     imageSrc: '/images/local/katowice/specyfika-budowy-w-katowice.webp',
-    imageAlt: 'Szkody górnicze w Katowicach a budowa domu – co musisz wiedzieć? - Katowice',
+    imageAlt: 'Szkody górnicze w Katowicach - fundamenty i zabezpieczenia',
   },
-  
-  // Dzielnice
+
+  // Dzielnice - rozbudowane
   districts: {
     header: {
       label: "GDZIE BUDUJEMY",
-      title: "Gdzie budujemy? Dzielnice Katowic i okolice",
-      description: "Działamy lokalnie. Znamy specyfikę terenu w Katowice.",
+      title: "Dzielnice Katowic – gdzie najczęściej realizujemy inwestycje?",
+      description: "Katowice to miasto o bardzo zróżnicowanej strukturze geologicznej i urbanistycznej. Jako lokalny wykonawca znamy specyfikę poszczególnych dzielnic, co pozwala nam precyzyjnie planować logistykę i unikać problemów z dojazdem ciężkiego sprzętu.",
       align: "left",
       theme: "light"
     },
@@ -1347,7 +1207,7 @@ export const katowicePage: LocalPageData = {
       hubName: "KATOWICE I OKOLICE",
       subLabel: "OBSZAR DZIAŁANIA",
       iconName: "mapPin",
-      description: "Realizujemy inwestycje w Katowice oraz okolicach.",
+      description: "Najwięcej inwestycji realizujemy w południowych dzielnicach miasta. Podlesie i Zarzecze charakteryzują się dużą ilością nowych inwestycji. Kostuchna i Murcki wymagają szczególnej uwagi na szkody górnicze (historyczna eksploatacja KWK Murcki-Staszic). Panewniki i Ligota to wyzwania logistyczne – wąskie działki i ograniczenia tonażowe.",
       cities: [
         { label: "Podlesie", url: "#" },
         { label: "Zarzecze", url: "#" },
@@ -1362,121 +1222,90 @@ export const katowicePage: LocalPageData = {
       ]
     }
   },
-    // Dlaczego my
-    whyUs: {
-      header: {
-        label: "DLACZEGO CORE LTB BUILDERS",
-        title: "Dlaczego mieszkańcy Katowic wybierają CORE LTB Builders?",
-        description: "Wybór wykonawcy to decyzja, która zaważy na Twoim komforcie życia przez następne 30 lat.Oto konkretne powody, dla których inwestorzy ze Śląska powierzają nam swoje budżety:",
-        align: "center",
-        theme: "light"
-      },
-      points: [
-        {
-          icon: "shield",
-          title: "Inżynierskie podejście do szkód górniczych",
-          description: "Nie zgadujemy. Projektujemy fundamenty i konstrukcję w oparciu o twarde dane geologiczne i wytyczne dla terenów górniczych IV kategorii."
-        },
-        {
-          icon: "shieldCheck",
-          title: "Stała cena w umowie",
-          description: "W dobie inflacji gwarantujemy stałość ceny na poszczególne etapy. Podpisując umowę na stan surowy, masz pewność, że cena betonu czy stali nie zmieni Twojego budżetu w trakcie trwania tego etapu."
-        },
-        {
-          icon: "trendingUp",
-          title: "TCO i Wartość Odsprzedaży",
-          description: "Budujemy domy murowane, które utrzymują wysoką wartość rynkową. Dom murowany w Katowicach po 20 latach jest wart znacznie więcej niż jego odpowiednik w technologii lekkiej, a jego koszty konserwacji (elewacja, szczelność) są o 40-60% niższe."
-        },
-        
-        {
-          icon: "fileCheck",
-          title: "Bezpieczeństwo prawne",
-          description: "Działamy legalnie, wystawiamy faktury VAT, posiadamy ubezpieczenie OC działalności.Twoja inwestycja jest chroniona prawnie."
-        }
-      ]
-    },
-  // Cennik
-  pricing: {
+
+  // Dlaczego my - rozbudowane
+  whyUs: {
     header: {
-      label: "SZACUNKOWY CENNIK",
-      title: "Koszt budowy domu 150m2 w Katowicach – Cennik 2025",
-      description: "Poniższa tabela przedstawia szacunkowe koszty budowy domu jednorodzinnego o powierzchni 150 m² w technologii murowanej, przy założeniu standardowych warunków gruntowych. Pamiętaj, że ostateczna cena z",
+      label: "DLACZEGO CORE LTB BUILDERS",
+      title: "Dlaczego mieszkańcy Katowic wybierają CORE LTB Builders?",
+      description: "Decyzja o wyborze firmy budowlanej to decyzja na całe życie. Klienci z naszego regionu cenią nas za podejście oparte na faktach i inżynieryjnej precyzji, a nie na obietnicach bez pokrycia.",
       align: "center",
       theme: "light"
     },
-    rows: [
+    points: [
       {
-        stage: "Stan Surowy Otwarty",
-        scope: "Fundamenty, ściany, stropy, dach",
-        priceRange: "2300 - 2800 zł / m²",
-        timeRange: "3-4 miesiące"
+        icon: "shield",
+        title: "Doświadczenie w szkodach górniczych",
+        description: "Nie uczymy się na Twoim domu. Mamy udokumentowane realizacje na terenach III i IV kategorii szkód górniczych w Katowicach i miastach ościennych."
       },
       {
-        stage: "Stan Deweloperski",
-        scope: "Okna, tynki, wylewki, instalacje",
-        priceRange: "4800 - 5800 zł / m²",
-        timeRange: "5-7 miesięcy"
+        icon: "shieldCheck",
+        title: "Gwarancja stałej ceny",
+        description: "Podpisując umowę, otrzymujesz gwarancję ceny na dany etap. Posiadamy klauzule waloryzacyjne, które są transparentne i uczciwe, ale chronimy Cię przed spekulacyjnymi wzrostami cen materiałów, magazynując je z wyprzedzeniem."
       },
       {
-        stage: "Dom pod klucz",
-        scope: "Podłogi, łazienki, malowanie",
-        priceRange: "od 6500 zł / m²",
-        timeRange: "8-12 miesięcy"
+        icon: "users",
+        title: "Niezależny nadzór",
+        description: "Współpracujemy z kierownikami budowy, którzy dbają o Twój interes, a nie tylko o \"szybkie zalanie betonu\". Każdy etap kończy się formalnym odbiorem technicznym."
       },
-    ],
-    disclaimer: "Podane ceny są szacunkowe. Dokładny kosztorys przygotowujemy po analizie projektu."
+      {
+        icon: "fileCheck",
+        title: "Pomoc w odbiorach",
+        description: "Nie zostawiamy Cię z kluczami w ręku. Asystujemy przy odbiorach budynku przez PINB (Powiatowy Inspektorat Nadzoru Budowlanego), dostarczając komplet dokumentacji powykonawczej."
+      }
+    ]
   },
-// FAQ
-faq: {
-  header: {
-    label: "NAJCZĘŚCIEJ ZADAWANE PYTANIA",
-    title: "Budowa domu w Katowicach – odpowiadamy na Twoje wątpliwości",
-    description: "Zbieramy pytania, które najczęściej słyszymy od klientów planujących budowę w Katowicach i okolicach.",
-    align: "center",
-    theme: "light"
+
+  // FAQ - rozbudowane z nowymi pytaniami
+  faq: {
+    header: {
+      label: "NAJCZĘŚCIEJ ZADAWANE PYTANIA",
+      title: "Budowa domu w Katowicach – odpowiadamy na Twoje wątpliwości",
+      description: "Zbieramy pytania, które najczęściej słyszymy od klientów planujących budowę w Katowicach i okolicach.",
+      align: "center",
+      theme: "light"
+    },
+    items: [
+      {
+        question: "Ile kosztuje budowa domu 100–150 m² w Katowicach w 2026 roku?",
+        answer: "Koszt stanu deweloperskiego startuje od **5500-6500 zł netto za m²**. Realizacja domu 100–150 m² w standardzie pod klucz zazwyczaj wynosi od 750 tys. zł wzwyż. Budżet 450–650 tys. zł pozwoli na doprowadzenie inwestycji do stanu deweloperskiego. Dokładny kosztorys przygotowujemy po analizie projektu."
+      },
+      {
+        question: "Jakie są ukryte koszty budowy domu w Katowicach?",
+        answer: "**Przyłącza mediów:** Doprowadzenie wody, prądu, gazu i kanalizacji może wynieść od **15 000 do 40 000 zł** w zależności od odległości od sieci. **Zagospodarowanie terenu:** Ogrodzenie, podjazd, niwelacja – kolejne **30 000-60 000 zł**. **Badania geotechniczne:** Koszt rzędu **1500-2000 zł**, ale absolutnie niezbędny dla właściwego doboru fundamentów."
+      },
+      {
+        question: "Czy realizujecie budowy na terenach szkód górniczych?",
+        answer: "Tak, to nasza specjalizacja. Realizujemy inwestycje na terenach objętych wpływami eksploatacji górniczej do IV kategorii. Stosujemy płyty fundamentowe ze wzmocnionym zbrojeniem (o **30-40% więcej stali** niż w standardzie) oraz stal klasy A-IIIN o podwyższonej ciągliwości."
+      },
+      {
+        question: "Jaki projekt domu wychodzi najtaniej w budowie?",
+        answer: "Najtańszy w budowie jest dom na planie prostokąta z dachem dwuspadowym. **Brak lukarn i wykuszy** – lukarna oszczędza od **3000 do 5000 zł** na jednym elemencie. **Balkony** to drogi element i potencjalny mostek termiczny. Dach wielospadowy jest o **20-30% droższy** niż dwuspadowy."
+      },
+      {
+        question: "Dlaczego warto wybrać generalnego wykonawcę zamiast systemu gospodarczego?",
+        answer: "**Ceny materiałów:** Zamawiamy hurtowo – klient indywidualny płaci marżę wyższą o **15-20%**. **VAT:** Usługa budowlana z materiałem to **8% VAT**, zakup samodzielny to **23% VAT**. **Odpowiedzialność:** Masz jedną umowę i jedną gwarancję. Realnie oszczędność systemu gospodarczego jest iluzoryczna (często poniżej 5%), a ryzyko błędów – ogromne."
+      }
+    ]
   },
-  items: [
-    {
-      question: "Ile kosztuje budowa domu 100–150 m² w Katowicach w 2025 roku?",
-      answer: "Realizacja domu 100–150 m² w standardzie pod klucz w 2025 roku zazwyczaj wynosi od 700 tys.zł wzwyż. Budżet 400–600 tys. zł pozwoli na doprowadzenie inwestycji do stanu deweloperskiego. Dokładny kosztorys przygotowujemy po analizie projektu."
-    },
-    {
-      question: "Czy realizujecie budowy w Katowicach i okolicach?",
-      answer: "Tak, specjalizujemy się w budownictwie na Śląsku, w tym w Katowicach i wszystkich dzielnicach. Znamy lokalną specyfikę gruntów i procedury administracyjne w katowickich urzędach."
-    },
-    {
-      question: "Czy budujecie na terenach szkód górniczych?",
-      answer: "Tak, realizujemy inwestycje na terenach objętych wpływami eksploatacji górniczej.Zabezpieczenia konstrukcyjne dobieramy indywidualnie na podstawie kategorii szkód określonej w badaniach geologicznych."
-    },
-    {
-      question: "Jaki projekt domu wychodzi najtaniej w budowie?",
-      answer: "Najtańszy w realizacji jest dom o prostej bryle na planie prostokąta, przekryty dachem dwuspadowym. Rezygnacja z piwnicy, balkonów i lukarn pozwala na oszczędności 15-20%."
-    },
-    {
-      question: "Czy oferujecie kompleksową budowę od zera do klucza?",
-      answer: "Tak, specjalizujemy się w generalnym wykonawstwie. Przejmujemy pełną odpowiedzialność za proces inwestycyjny – od robót ziemnych i fundamentów, przez stan surowy, aż po finalne wykończenie pod klucz."
-    }
-  ]
-},
-  
 
   // Schema.org
   areaServed: [
     "Katowice",
-    "Brynów",
     "Podlesie",
     "Zarzecze",
-    "Panewniki",
-    "Murcki",
-    "Ligota",
     "Kostuchna",
+    "Murcki",
+    "Panewniki",
+    "Ligota",
+    "Brynów",
     "Giszowiec",
     "Szopienice",
     "Dąbrówka Mała",
   ],
   geoCoordinates: {
-    latitude: "0.0000", // TODO: Dodać współrzędne
-    longitude: "0.0000"
+    latitude: "50.2649",
+    longitude: "19.0238"
   }
 };
 
@@ -1726,50 +1555,6 @@ export const jaworznoPage: LocalPageData = {
     ]
   },
 
-  // Cennik
-  pricing: {
-    header: {
-      label: "SZACUNKOWY CENNIK",
-      title: "Cennik budowy domu w Jaworznie (Szacunkowe koszty 2025)",
-      description: "Poniższa tabela przedstawia szacunkowe koszty budowy domu jednorodzinnego o powierzchni ok. 120-150 m². Pamiętaj, że są to wartości orientacyjne dla standardu energooszczędnego (WT 2021). Ostateczna cena zależy od projektu, warunków gruntowych (szkody górnicze!) oraz wybranych materiałów wykończeniowych.",
-      align: "center",
-      theme: "light"
-    },
-    rows: [
-      {
-        stage: "Stan Surowy Otwarty",
-        scope: "Fundamenty, ściany, strop, dach",
-        priceRange: "Wycena indywidualna",
-        timeRange: "3-4 miesiące"
-      },
-      {
-        stage: "Stan Surowy Zamknięty",
-        scope: "+ Okna, drzwi, bramy, ścianki działowe",
-        priceRange: "Wycena indywidualna",
-        timeRange: "+ 1-2 miesiące"
-      },
-      {
-        stage: "Stan Deweloperski",
-        scope: "+ Instalacje, tynki, wylewki, ocieplenie",
-        priceRange: "Wycena indywidualna",
-        timeRange: "+ 3-4 miesiące"
-      },
-      {
-        stage: "Budowa Pod Klucz",
-        scope: "+ Podłogi, malowanie, łazienki",
-        priceRange: "Wycena indywidualna",
-        timeRange: "+ 2-3 miesiące"
-      },
-      {
-        stage: "Adaptacja Projektu",
-        scope: "Dostosowanie do szkód górniczych",
-        priceRange: "Wycena indywidualna",
-        timeRange: "2-4 tygodnie"
-      }
-    ],
-    disclaimer: "Uwaga: Wycena jest zawsze darmowa. W przypadku budowy na terenach szkód górniczych, koszt stanu surowego może wzrosnąć ze względu na konieczność użycia większej ilości stali zbrojeniowej i betonu wyższej klasy (np. C25/30)."
-  },
-
   // Schema.org
   areaServed: [
     "Jaworzno",
@@ -1792,6 +1577,639 @@ export const jaworznoPage: LocalPageData = {
 
 
 /**
+ * ========================================
+ * MIKOŁÓW - Budowa Domów
+ * ========================================
+ */
+export const mikolowPage: LocalPageData = {
+  // Meta
+  slug: "mikolow",
+  cityName: "Mikołów",
+  region: "woj. śląskie",
+  metaTitle: "Budowa Domów Mikołów – Kompleksowa Realizacja 2026 | CoreLTB Builders",
+  metaDescription: "Budowa domu jednorodzinnego w Mikołowie. Koszt stanu deweloperskiego od 5500-7200 zł/m². Specjalizacja w szkodach górniczych (KWK Bolesław Śmiały). ✓ Lokalna firma ✓ Gwarancja stałej ceny ✓ 8-12 miesięcy realizacji",
+
+  // Hero
+  pageHeader: {
+    title: "Budowa Domów Mikołów",
+    watermarkText: "MIKOŁÓW",
+    backgroundImage: "/images/local/mikolow/hero.webp",
+    breadcrumbs: [
+      { label: "Strona główna", href: "/" },
+      { label: "Obszar działania", href: "/obszar-dzialania" },
+      { label: "Budowa domów Mikołów", href: "" }
+    ]
+  },
+
+  // Intro
+  intro: {
+    label: "BUDOWA DOMÓW MIKOŁÓW",
+    paragraphs: [
+      "**Budowa domu w systemie generalnego wykonawstwa** to złożony proces inwestycyjny, obejmujący realizację obiektu od prac ziemnych po stan gotowy do zamieszkania. Czas realizacji takiej inwestycji wynosi średnio **8-12 miesięcy**. Koszt budowy domu do stanu deweloperskiego w 2026 roku waha się w granicach **5500 – 7200 zł netto za m²**, w zależności od technologii i warunków gruntowych.",
+      "Mieszkasz w Mikołowie lub planujesz tu inwestycję? Jako lokalny wykonawca doskonale znamy specyfikę tutejszych gruntów. Działamy na terenie całego powiatu, od centrum po sołectwa, zabezpieczając budynki przed szkodami górniczymi (nawet do III i IV kategorii) oraz optymalizując koszty już na etapie adaptacji projektu. Zamiast szukać dziesięciu różnych ekip, powierzasz budowę **CORE LTB Builders** – my bierzemy na siebie pełną odpowiedzialność logistyczną, prawną i techniczną."
+    ]
+  },
+
+  // Etapy budowy (współpracy z inwestorem)
+  buildingStages: {
+    header: {
+      label: "ETAPY WSPÓŁPRACY",
+      title: "Jak przebiega budowa domu w powiecie mikołowskim?",
+      description: "Budowa domów w Mikołowie to proces wymagający uwzględnienia specyficznych uwarunkowań geologicznych oraz formalnych, charakterystycznych dla Górnego Śląska. Generalny wykonawca w tym regionie pełni funkcję nie tylko budowlańca, ale przede wszystkim inżyniera kontraktu, który zarządza ryzykiem inwestycyjnym.",
+      align: "left",
+      theme: "light"
+    },
+    items: [
+      {
+        icon: "search",
+        title: "Weryfikacja działki i badanie gruntu",
+        content: [
+          {
+            type: "paragraph",
+            value: "Zlecenie badań geotechnicznych (minimum 3 odwierty), aby określić nośność gruntu i poziom wód gruntowych. To podstawa do wyceny fundamentów i doboru odpowiedniej konstrukcji."
+          },
+          {
+            type: "paragraph",
+            value: "W pierwszej kolejności analizujemy **Miejscowy Plan Zagospodarowania Przestrzennego (MPZP)** lub Warunki Zabudowy. W 2026 roku kluczowym elementem jest adaptacja projektu do lokalnych warunków gruntowych – w Mikołowie często mamy do czynienia z terenami poeksploatacyjnymi."
+          }
+        ]
+      },
+      {
+        icon: "fileText",
+        title: "Harmonogram rzeczowo-finansowy",
+        content: [
+          {
+            type: "paragraph",
+            value: "Otrzymujesz dokument, który jest podstawą do wypłaty transz przez bank. Wiążemy się **stałą ceną** na poszczególne etapy, co chroni Cię przed inflacją cen materiałów."
+          },
+          {
+            type: "paragraph",
+            value: "Nasz zespół koordynuje uzyskanie pozwolenia na budowę w Starostwie Powiatowym w Mikołowie przy ul. Żwirki i Wigury, co zazwyczaj zajmuje ustawowe 65 dni, pod warunkiem kompletnej dokumentacji."
+          }
+        ]
+      },
+      {
+        icon: "building",
+        title: "Realizacja stanu surowego",
+        content: [
+          {
+            type: "paragraph",
+            value: "To najszybszy i najbardziej spektakularny etap budowy. Na Twojej działce powstaje kompletna konstrukcja budynku."
+          },
+          {
+            type: "list",
+            items: [
+              "Roboty ziemne i wykonanie fundamentów (na terenach szkód górniczych standardem jest **płyta fundamentowa**).",
+              "Murowanie ścian z certyfikowanych materiałów ceramicznych lub silikatowych.",
+              "Wylewanie stropów monolitycznych dla lepszego usztywnienia konstrukcji.",
+              "Więźba dachowa (drewno klasy C24) i pokrycie dachu."
+            ]
+          }
+        ]
+      },
+      {
+        icon: "settings",
+        title: "Prace instalacyjne i wykończeniowe",
+        content: [
+          {
+            type: "paragraph",
+            value: "Etap, w którym budynek staje się funkcjonalnym domem pod kątem technicznym."
+          },
+          {
+            type: "list",
+            items: [
+              "Montaż okien 3-szybowych (pakiety o Uw < 0,9 W/m²K) w technologii ciepłego montażu.",
+              "Rozprowadzenie instalacji elektrycznych, wod-kan i rekuperacji.",
+              "Wykonanie tynków maszynowych i wylewek podłogowych z izolacją termiczną.",
+              "Ocieplenie budynku styropianem grafitowym z tynkiem silikonowym."
+            ]
+          }
+        ]
+      }
+    ],
+    imageSrc: "/images/local/mikolow/etapy-budowy.webp",
+    imageAlt: "Etapy budowy domu w Mikołowie - harmonogram realizacji"
+  },
+
+  // Specyfika lokalna - szkody górnicze i teren
+  localSpecifics: {
+    header: {
+      label: "SPECYFIKA BUDOWY W MIKOŁOWIE",
+      title: "Szkody górnicze i ukształtowanie terenu",
+      description: "Budowa domu w powiecie mikołowskim różni się od inwestycji w innych częściach Polski. Lokalizacja ta, będąca częścią Górnośląskiego Okręgu Przemysłowego, niesie ze sobą konkretne wyzwania inżynieryjne, których zignorowanie może prowadzić do pękania ścian czy osiadania budynku już po kilku latach.",
+      align: "left",
+      theme: "light"
+    },
+    items: [
+      {
+        icon: "layers",
+        title: "Zabezpieczenie przed szkodami górniczymi",
+        content: [
+          {
+            type: "paragraph",
+            value: "Mikołów znajduje się w zasięgu oddziaływania eksploatacji górniczej, m.in. **KWK Bolesław Śmiały**. Tereny te są często sklasyfikowane jako kategoria szkód górniczych od I do III, a miejscami nawet IV."
+          },
+          {
+            type: "paragraph",
+            value: "Standardowy fundament to za mało. Budynek na takim terenie musi pracować jak sztywna bryła. Dlatego w naszych realizacjach stosujemy:"
+          },
+          {
+            type: "list",
+            items: [
+              "**Płyty fundamentowe:** Działają jak \"sztywna taca\", na której stoi dom. Nawet jeśli grunt pod budynkiem się przemieści, płyta zapobiega pękaniu ścian nośnych.",
+              "**Wzmocnione zbrojenie:** Zwiększamy ilość stali w wieńcach stropowych i nadprożach, stosując pręty żebrowane o wyższej klasie wytrzymałości (A-IIIN).",
+              "**Dylatacje:** W przypadku domów o skomplikowanej bryle dzielimy budynek na mniejsze, niezależne segmenty."
+            ]
+          }
+        ]
+      },
+      {
+        icon: "mountain",
+        title: "Niwelacja terenu i wody gruntowe",
+        content: [
+          {
+            type: "paragraph",
+            value: "Mikołów charakteryzuje się **pagórkowatym ukształtowaniem terenu** (np. okolice Śląskiego Ogrodu Botanicznego, Mokre). Działki ze spadkiem wymagają precyzyjnej niwelacji i odpowiedniego zaprojektowania poziomu \"zero\" budynku."
+          },
+          {
+            type: "paragraph",
+            value: "Częstym problemem są również **gliniaste grunty**, które słabo przepuszczają wodę. W takich warunkach konieczne jest wykonanie:"
+          },
+          {
+            type: "list",
+            items: [
+              "Drenażu opaskowego wokół fundamentów.",
+              "Odprowadzenia wód opadowych do studni chłonnych lub kanalizacji deszczowej.",
+              "Izolacji przeciwwilgociowej fundamentów i ścian piwnic."
+            ]
+          },
+          {
+            type: "paragraph",
+            value: "Bagatelizowanie tego etapu to prosta droga do zawilgocenia ścian piwnic lub parteru."
+          }
+        ]
+      },
+      {
+        icon: "hardHat",
+        title: "Technologie budowy – murowane czy szkieletowe?",
+        content: [
+          {
+            type: "paragraph",
+            value: "Wybór technologii to decyzja na całe życie. W CORE LTB Builders nie faworyzujemy jednej metody – dobieramy ją do potrzeb klienta, budżetu i specyfiki działki. Analizujemy **Całkowity Koszt Posiadania (TCO)**, biorąc pod uwagę nie tylko koszt budowy, ale też ogrzewania i konserwacji przez 30 lat."
+          },
+          {
+            type: "paragraph",
+            value: "**Tradycyjna budowa domów murowanych** (Porotherm, silikaty, beton komórkowy):"
+          },
+          {
+            type: "list",
+            items: [
+              "**Akumulacja ciepła:** Masywne ściany działają jak bufor termiczny. Zimą długo trzymają ciepło, latem zapobiegają przegrzewaniu.",
+              "**Akustyka:** Ciężkie materiały (zwłaszcza silikaty) doskonale tłumią dźwięki – ważne przy budowie blisko DK44 czy A4.",
+              "**Odporność:** Technologia murowana, przy odpowiednim zbrojeniu, świetnie znosi naprężenia wynikające ze szkód górniczych."
+            ]
+          },
+          {
+            type: "paragraph",
+            value: "**Konstrukcja domów szkieletowych** (drewno C24, suszenie komorowe):"
+          },
+          {
+            type: "list",
+            items: [
+              "**Szybkość realizacji:** Stan deweloperski możemy osiągnąć w 4-6 miesięcy.",
+              "**Energooszczędność:** Ściana szkieletowa to w większości izolacja – łatwiej uzyskać standard pasywny.",
+              "**Precyzja:** Używamy drewna struganego czterostronnie, które nie będzie się rozsychać ani wypaczać."
+            ]
+          }
+        ]
+      }
+    ],
+    imageSrc: "/images/local/mikolow/specyfika-mikolow.webp",
+    imageAlt: "Specyfika budowy w Mikołowie - szkody górnicze i teren pagórkowaty"
+  },
+
+  // Dzielnice
+  districts: {
+    header: {
+      label: "GDZIE BUDUJEMY",
+      title: "Dzielnice Mikołowa i okolice – gdzie realizujemy inwestycje?",
+      description: "Jako firma stacjonująca w regionie, znamy topografię i specyfikę poszczególnych dzielnic. Nie doliczamy gigantycznych kosztów logistycznych za dojazd, co jest częstą praktyką firm ogólnopolskich. Nasze ekipy operują sprawnie na terenie całego powiatu.",
+      align: "left",
+      theme: "light"
+    },
+    hub: {
+      hubName: "MIKOŁÓW I POWIAT MIKOŁOWSKI",
+      subLabel: "OBSZAR DZIAŁANIA",
+      iconName: "mapPin",
+      description: "Obsługujemy wszystkie dzielnice i sołectwa Mikołowa. Znajomość lokalnych MPZP pozwala nam szybciej ocenić potencjał działki. Wiemy, gdzie gmina planuje kanalizację, a gdzie konieczne będzie szambo lub przydomowa oczyszczalnia ścieków.",
+      cities: [
+        { label: "Centrum i Śródmieście", url: "#" },
+        { label: "Kamionka", url: "#" },
+        { label: "Borowa Wieś", url: "#" },
+        { label: "Paniowy", url: "#" },
+        { label: "Bujaków", url: "#" },
+        { label: "Mokre", url: "#" },
+        { label: "Śmiłowice", url: "#" },
+        { label: "Reta", url: "#" }
+      ]
+    }
+  },
+
+  // Dlaczego my
+  whyUs: {
+    header: {
+      label: "DLACZEGO CORE LTB BUILDERS",
+      title: "Dlaczego warto wybrać CORE LTB Builders do budowy w Mikołowie?",
+      description: "Decyzja o wyborze generalnego wykonawcy to decyzja o bezpieczeństwie Twoich pieniędzy (często kredytowych). Mieszkańcy Mikołowa i okolic wybierają CORE LTB Builders, ponieważ oferujemy transparentność i inżynierskie podejście.",
+      align: "center",
+      theme: "light"
+    },
+    points: [
+      {
+        icon: "trendingUp",
+        title: "Zabezpieczenie przed inflacją",
+        description: "Nasze umowy zawierają jasne klauzule waloryzacyjne. Wiesz, co wpływa na cenę, a co jest stałe. Chronimy Cię przed spekulacyjnymi wzrostami cen materiałów."
+      },
+      {
+        icon: "shield",
+        title: "Znajomość lokalnych gruntów",
+        description: "Wiemy, gdzie w Mikołowie występuje kurzawka, a gdzie szkody górnicze wymagają betonu klasy C30/37. Nie uczymy się na Twojej budowie – my to już wiemy."
+      },
+      {
+        icon: "users",
+        title: "Własne brygady",
+        description: "Nie jesteśmy \"firmą teczkową\". Zatrudniamy murarzy, zbrojarzy i cieśli. Dzięki temu mamy pełną kontrolę nad jakością wykonania i terminowością."
+      },
+      {
+        icon: "fileText",
+        title: "Pełna obsługa formalna",
+        description: "Pomagamy w skompletowaniu dokumentów do E-Dziennika Budowy (system EDB) i reprezentujemy inwestora w urzędach – od pozwolenia po odbiór końcowy."
+      },
+      {
+        icon: "shieldCheck",
+        title: "Gwarancja systemowa",
+        description: "Udzielamy rękojmi i gwarancji na konstrukcję, co daje Ci spokój na lata. Wszelkie usterki usuwamy na nasz koszt zgodnie z przepisami Kodeksu Cywilnego."
+      }
+    ]
+  },
+
+  // FAQ
+  faq: {
+    header: {
+      label: "NAJCZĘŚCIEJ ZADAWANE PYTANIA",
+      title: "Budowa domów w Mikołowie – odpowiadamy na Twoje pytania",
+      description: "Zbieramy pytania, które najczęściej słyszymy od klientów planujących budowę w Mikołowie i okolicach.",
+      align: "center",
+      theme: "light"
+    },
+    items: [
+      {
+        question: "Ile kosztuje budowa domu w 2026 roku i czy budżet 350-500 tys. zł wystarczy na realizację pod klucz?",
+        answer: "Koszt budowy domu pod klucz w 2026 roku oscyluje w granicach **6000–8500 zł za m²**. Budżet 350–500 tys. zł jest sporym wyzwaniem i zazwyczaj pozwala na realizację mniejszego budynku lub doprowadzenie inwestycji jedynie do stanu deweloperskiego. W CORE LTB Builders pomagamy optymalizować projekty (prosta bryła, dach dwuspadowy), jednak przy tej kwocie pełne wykończenie standardowego metrażu może być niemożliwe."
+      },
+      {
+        question: "Czy realizujecie budowy na terenach ze szkodami górniczymi w Mikołowie i jak dobieracie odpowiednie fundamenty?",
+        answer: "Tak, z powodzeniem budujemy na terenach objętych szkodami górniczymi w Mikołowie, również w zasięgu oddziaływania KWK Bolesław Śmiały. Podstawą jest szczegółowa analiza geologiczna, na bazie której dobieramy rozwiązanie – zazwyczaj jest to solidnie zbrojona **płyta fundamentowa**. Taka konstrukcja najlepiej przenosi naprężenia i minimalizuje ryzyko pęknięć. Projekt konstrukcyjny zawsze dostosowujemy do konkretnej kategorii szkód."
+      },
+      {
+        question: "Jakie rodzaje domów są obecnie najchętniej budowane w Mikołowie i na które projekty jest największy popyt?",
+        answer: "W Mikołowie inwestorzy najchętniej wybierają obecnie domy typu **\"nowoczesna stodoła\"** oraz kompaktowe **parterówki o powierzchni do 120 m²**. Klienci stawiają na prostą bryłę i energooszczędność. W CORE LTB Builders zauważamy również rosnący popyt na projekty z płaskim dachem, które doskonale wpisują się w lokalny krajobraz, łącząc funkcjonalność z minimalizmem."
+      }
+    ]
+  },
+
+  // Schema.org
+  areaServed: [
+    "Mikołów",
+    "Kamionka",
+    "Borowa Wieś",
+    "Paniowy",
+    "Bujaków",
+    "Mokre",
+    "Śmiłowice",
+    "Reta"
+  ],
+  geoCoordinates: {
+    latitude: "50.1695",
+    longitude: "18.8976"
+  }
+};
+
+
+/**
+ * ========================================
+ * GLIWICE - Budowa Domów
+ * ========================================
+ */
+export const gliwicePage: LocalPageData = {
+  // Meta
+  slug: "gliwice",
+  cityName: "Gliwice",
+  region: "woj. śląskie",
+  metaTitle: "Budowa Domów Gliwice – Generalny Wykonawca 2026 | CoreLTB Builders",
+  metaDescription: "Budowa domu jednorodzinnego w Gliwicach. Specjalizacja w terenach górniczych (kategorie I-IV). Płyty fundamentowe, wzmocnione konstrukcje. ✓ 12-18 miesięcy realizacji ✓ Gwarancja stałej ceny ✓ Własne brygady",
+
+  // Hero
+  pageHeader: {
+    title: "Budowa Domów Gliwice",
+    watermarkText: "GLIWICE",
+    backgroundImage: "/images/local/gliwice/hero.webp",
+    breadcrumbs: [
+      { label: "Strona główna", href: "/" },
+      { label: "Obszar działania", href: "/obszar-dzialania" },
+      { label: "Budowa domów Gliwice", href: "" }
+    ]
+  },
+
+  // Intro
+  intro: {
+    label: "BUDOWA DOMÓW GLIWICE",
+    paragraphs: [
+      "**Budowa domów w Gliwicach** to złożony proces inwestycyjny, który w 2026 roku trwa średnio od **12 do 18 miesięcy** (do stanu deweloperskiego). Koszt realizacji jest ściśle uzależniony od kategorii szkód górniczych na danej działce oraz wybranej technologii posadowienia. Jako generalny wykonawca, CoreLTB Builders przejmuje pełną odpowiedzialność za proces: od adaptacji projektu, przez wzmocnione fundamenty, aż po odbiory techniczne.",
+      "Zapewniamy bezpieczeństwo konstrukcji na terenach eksploatacji górniczej oraz terminowość potwierdzoną umową z gwarancją ceny. Gliwice i powiat gliwicki to teren specyficzny geologicznie – występowanie szkód górniczych (kategorie I-IV) oraz gruntów nasypowych wymaga indywidualnego podejścia do każdego projektu."
+    ]
+  },
+
+  // buildingStages
+  buildingStages: {
+    header: {
+      label: "ETAPY REALIZACJI",
+      title: "Etapy budowy domu – zakres prac w naszej ofercie",
+      description: "Realizujemy inwestycje kompleksowo, dzieląc proces na czytelne etapy rozliczeniowe. Dzięki temu Inwestor płaci za faktycznie wykonane prace, zachowując płynność finansową.",
+      align: "left",
+      theme: "light"
+    },
+    items: [
+      {
+        icon: "layers",
+        title: "1. Stan Zerowy – fundamenty i izolacje",
+        content: [
+          {
+            type: "paragraph",
+            value: "To najważniejszy etap dla trwałości budynku. Błędy popełnione tutaj są niemożliwe do taniego naprawienia w przyszłości."
+          },
+          {
+            type: "list",
+            items: [
+              "Geodezyjne wytyczenie budynku na działce (tyczenie osi).",
+              "Zdjęcie warstwy humusu i wykopy pod fundamenty.",
+              "Wykonanie płyty fundamentowej lub ław i ścian fundamentowych z bloczków betonowych.",
+              "Wyprowadzenie kanalizacji podposadzkowej i przepustów wodno-elektrycznych.",
+              "Izolacja przeciwwilgociowa (bitumiczna) i termiczna (XPS/Styrodur)."
+            ]
+          }
+        ]
+      },
+      {
+        icon: "building",
+        title: "2. Stan Surowy Otwarty (SSO)",
+        content: [
+          {
+            type: "paragraph",
+            value: "Etap, w którym budynek nabiera kształtu. Czas realizacji: zazwyczaj **2-3 miesiące**."
+          },
+          {
+            type: "list",
+            items: [
+              "**Murowanie ścian nośnych:** Używamy ceramiki (np. 25 cm) lub silikatów (18-24 cm) na zaprawie cienkowarstwowej.",
+              "**Stropy:** Wykonujemy stropy monolityczne (żelbetowe wylewane na mokro) lub gęstożebrowe (typu Teriva/Vector).",
+              "**Konstrukcja dachu:** Montaż więźby dachowej z drewna impregnowanego klasy C24.",
+              "**Kominy:** Systemowe kominy spalinowe i wentylacyjne (np. Schiedel/Plewa)."
+            ]
+          }
+        ]
+      },
+      {
+        icon: "keyRound",
+        title: "3. Stan Surowy Zamknięty (SSZ)",
+        content: [
+          {
+            type: "paragraph",
+            value: "Zabezpieczenie budynku przed warunkami atmosferycznymi."
+          },
+          {
+            type: "list",
+            items: [
+              "**Pokrycie dachowe:** Dachówka ceramiczna, betonowa lub blachodachówka wraz z obróbkami blacharskimi i rynnami.",
+              "**Stolarka okienna:** Montaż okien 3-szybowych (Uf < 0.9 W/m²K) w warstwie ocieplenia (ciepły montaż).",
+              "**Bramy i drzwi:** Montaż bramy garażowej segmentowej i drzwi wejściowych antywłamaniowych."
+            ]
+          }
+        ]
+      }
+    ],
+    imageSrc: "/images/local/gliwice/etapy-realizacji.webp",
+    imageAlt: "Etapy budowy domu w Gliwicach - od fundamentów po stan zamknięty"
+  },
+
+  // localSpecifics
+  localSpecifics: {
+    header: {
+      label: "SPECYFIKA BUDOWY W GLIWICACH",
+      title: "Szkody górnicze i trudne grunty",
+      description: "Gliwice i powiat gliwicki to teren specyficzny geologicznie. Występowanie szkód górniczych (kategorie I-IV) oraz gruntów nasypowych wymaga indywidualnego podejścia do każdego projektu katalogowego.",
+      align: "left",
+      theme: "light"
+    },
+    items: [
+      {
+        icon: "layers",
+        title: "Płyta fundamentowa a szkody górnicze",
+        content: [
+          {
+            type: "paragraph",
+            value: "Na terenach objętych eksploatacją górniczą (np. w dzielnicach takich jak **Sośnica** czy **Bojków**), rekomendujemy i wykonujemy **płyty fundamentowe zbrojone**. Płyta działa jak sztywna taca – w przypadku ruchów górotworu cały budynek \"pływa\" na gruncie, co minimalizuje ryzyko pękania ścian nośnych."
+          },
+          {
+            type: "paragraph",
+            value: "Realizacja fundamentów w strefie szkód obejmuje:"
+          },
+          {
+            type: "list",
+            items: [
+              "**Wymianę gruntu:** Wybranie rodzimej ziemi i wykonanie podbudowy z kruszywa łamanego stabilizowanego mechanicznie.",
+              "**Zwiększone zbrojenie:** Stosujemy stal klasy A-IIIN o podwyższonej ciągliwości, zgodnie z wytycznymi konstruktora.",
+              "**Beton wodoszczelny:** Używamy mieszanek klasy C25/30 z dodatkami uszczelniającymi W8."
+            ]
+          }
+        ]
+      },
+      {
+        icon: "fileText",
+        title: "Adaptacja projektu do warunków lokalnych",
+        content: [
+          {
+            type: "paragraph",
+            value: "Zanim wbijemy pierwszą łopatę, nasz zespół analizuje Miejscowy Plan Zagospodarowania Przestrzennego (MPZP) oraz opinie geologiczne. W Gliwicach często spotykamy się z koniecznością stosowania **dylatacji konstrukcyjnych** oraz dodatkowych wieńców żelbetowych."
+          },
+          {
+            type: "paragraph",
+            value: "Te elementy spinają budynek niczym klamra, zapewniając mu sztywność przestrzenną wymaganą przy wstrząsach górniczych. Nasz kierownik budowy dopilnuje zgodności wykonania z tymi zaostrzonymi rygorami."
+          }
+        ]
+      }
+    ],
+    imageSrc: "/images/local/gliwice/specyfika-budowy-w-gliwice.webp",
+    imageAlt: "Specyfika budowy w Gliwicach - szkody górnicze i trudne grunty"
+  },
+
+  // Dzielnice
+  districts: {
+    header: {
+      label: "GDZIE BUDUJEMY",
+      title: "Dzielnice Gliwic – gdzie realizujemy inwestycje?",
+      description: "Jako lokalny wykonawca znamy specyfikę poszczególnych dzielnic Gliwic. Wiemy, gdzie występują tereny pogórnicze, a gdzie grunt jest stabilny. Nie doliczamy kosztów logistycznych za dojazd z odległych miast.",
+      align: "left",
+      theme: "light"
+    },
+    hub: {
+      hubName: "GLIWICE I POWIAT GLIWICKI",
+      subLabel: "OBSZAR DZIAŁANIA",
+      iconName: "mapPin",
+      description: "Realizujemy inwestycje we wszystkich dzielnicach Gliwic. W dzielnicach takich jak Sośnica czy Bojków szczególną uwagę zwracamy na zabezpieczenia przed szkodami górniczymi. Łabędy i Szobiszowice to rejony o stabilniejszym gruncie.",
+      cities: [
+        { label: "Śródmieście", url: "#" },
+        { label: "Sośnica", url: "#" },
+        { label: "Bojków", url: "#" },
+        { label: "Łabędy", url: "#" },
+        { label: "Szobiszowice", url: "#" },
+        { label: "Trynek", url: "#" },
+        { label: "Ostropa", url: "#" },
+        { label: "Brzezinka", url: "#" },
+        { label: "Ligota Zabrska", url: "#" },
+        { label: "Żerniki", url: "#" }
+      ]
+    }
+  },
+
+  // Dlaczego my
+  whyUs: {
+    header: {
+      label: "DLACZEGO CORELTB BUILDERS",
+      title: "Dlaczego Inwestorzy z Gliwic wybierają naszą firmę?",
+      description: "Decyzja o wyborze generalnego wykonawcy rzutuje na spokój Twojej rodziny przez najbliższe lata. Klienci CoreLTB Builders cenią nas za inżynierskie podejście i transparentność finansową.",
+      align: "center",
+      theme: "light"
+    },
+    points: [
+      {
+        icon: "shield",
+        title: "Znajomość lokalnej geologii",
+        description: "Nie zgadujemy, jak zbroić fundamenty. Opieramy się na mapach górniczych i badaniach geotechnicznych specyficznych dla Gliwic."
+      },
+      {
+        icon: "users",
+        title: "Własne, stałe brygady",
+        description: "Nie zlecamy prac przypadkowym podwykonawcom z ogłoszenia. Nasi murarze i zbrojarze to sprawdzony zespół, pracujący ze sobą od lat."
+      },
+      {
+        icon: "trendingUp",
+        title: "Stała cena w umowie",
+        description: "W dobie inflacji materiałowej, gwarantujemy stałość ceny na zakontraktowany etap. Cena betonu czy cegły nie wzrośnie dla Ciebie w trakcie realizacji."
+      },
+      {
+        icon: "shieldCheck",
+        title: "Niezależny nadzór",
+        description: "Zachęcamy do zatrudnienia Inspektora Nadzoru Inwestorskiego. Jesteśmy pewni jakości naszych prac i nie boimy się zewnętrznej kontroli technicznej."
+      }
+    ]
+  },
+
+  // FAQ
+  faq: {
+    header: {
+      label: "NAJCZĘŚCIEJ ZADAWANE PYTANIA",
+      title: "Budowa domów w Gliwicach – odpowiadamy na pytania",
+      description: "Zbieramy pytania, które najczęściej słyszymy od klientów planujących budowę w Gliwicach i okolicach.",
+      align: "center",
+      theme: "light"
+    },
+    items: [
+      {
+        question: "Czy budowa na szkodach górniczych w Gliwicach jest bezpieczna?",
+        answer: "Budowa w strefie wpływów eksploatacji górniczej jest bezpieczna, o ile zastosuje się odpowiednie zabezpieczenia konstrukcyjne. W Gliwicach najczęściej rekomendujemy **płytę fundamentową**, która \"pływa\" na gruncie, minimalizując ryzyko pękania ścian. Inżynierowie CoreLTB Builders dobierają parametry zbrojenia indywidualnie do kategorii szkód, co gwarantuje spokój i trwałość domu na lata."
+      },
+      {
+        question: "Jaki fundament rekomendujecie – płytę czy ławy fundamentowe?",
+        answer: "Na terenach objętych szkodami górniczymi (np. Sośnica, Bojków) rekomendujemy **płytę fundamentową zbrojną**. Działa ona jak sztywna taca – nawet gdy grunt się przemieszcza, cały budynek pracuje jako jednolita bryła. Na stabilnych gruntach (np. Łabędy) można rozważyć tradycyjne ławy, ale decyzję podejmujemy po analizie badań geotechnicznych."
+      },
+      {
+        question: "Jak sprawdzić kategorię szkód górniczych działki?",
+        answer: "Aktualną kategorię terenu potwierdza **opinia geologiczno-górnicza**, którą wydaje lokalny zakład wydobywczy lub Okręgowy Urząd Górniczy. W ramach współpracy kompleksowo adaptujemy dokumentację do uzyskanej klasy szkód. Stosujemy niezbędne wzmocnienia, zapewniając pełne bezpieczeństwo konstrukcji."
+      }
+    ]
+  },
+
+  // formalities (opcjonalne)
+  formalities: {
+    header: {
+      label: "FORMALNOŚCI",
+      title: "Logistyka i formalności – jak wspieramy Inwestora?",
+      description: "Budowa domu to nie tylko murowanie, to także \"papierologia\". Urząd Miejski w Gliwicach (Wydział Architektury i Budownictwa) ma swoje specyficzne wymagania dotyczące kompletowania dokumentacji.",
+      align: "left",
+      theme: "light"
+    },
+    items: [
+      {
+        icon: "fileText",
+        title: "Obsługa formalna",
+        content: [
+          {
+            type: "paragraph",
+            value: "Nasz zespół pomaga w skompletowaniu dokumentów niezbędnych do rozpoczęcia i zakończenia budowy:"
+          },
+          {
+            type: "list",
+            items: [
+              "**Zgłoszenie rozpoczęcia robót:** Przygotowujemy oświadczenie kierownika budowy.",
+              "**Dziennik budowy:** Prowadzimy go skrupulatnie, wpisując każdy istotny etap prac zanikowych.",
+              "**Odbiory przyłączy:** Koordynujemy prace z gestorami sieci (wodociągi, energetyka).",
+              "**Inwentaryzacja powykonawcza:** Współpracujemy z geodetami, aby mapa do odbioru była gotowa na czas."
+            ]
+          }
+        ]
+      },
+      {
+        icon: "leaf",
+        title: "Energooszczędność i walka ze smogiem",
+        content: [
+          {
+            type: "paragraph",
+            value: "Gliwice, jak wiele śląskich miast, zmagają się z problemem jakości powietrza. Dlatego w naszych realizacjach standardem staje się **wentylacja mechaniczna z rekuperacją**."
+          },
+          {
+            type: "paragraph",
+            value: "Rekuperacja pozwala na filtrację powietrza wchodzącego do domu (filtry F7/węglowe), zatrzymując pyły zawieszone PM10 i PM2.5. Dodatkowo, system ten odzyskuje ciepło, obniżając koszty ogrzewania nawet o **30%**."
+          }
+        ]
+      }
+    ],
+    imageSrc: "/images/local/gliwice/formalnosci.webp",
+    imageAlt: "Formalności budowlane w Gliwicach - wsparcie dla inwestora"
+  },
+
+  // Schema.org
+  areaServed: [
+    "Gliwice",
+    "Śródmieście",
+    "Sośnica",
+    "Bojków",
+    "Łabędy",
+    "Szobiszowice",
+    "Trynek",
+    "Ostropa",
+    "Brzezinka",
+    "Ligota Zabrska",
+    "Żerniki"
+  ],
+  geoCoordinates: {
+    latitude: "50.2945",
+    longitude: "18.6714"
+  }
+};
+
+
+/**
  * Wszystkie strony lokalne
  */
 export const allLocalPages: readonly LocalPageData[] = [
@@ -1799,7 +2217,9 @@ export const allLocalPages: readonly LocalPageData[] = [
   wodzislawPage,
   tychyPage,
   jaworznoPage,
-  katowicePage
+  katowicePage,
+  mikolowPage,
+  gliwicePage
 ] as const;
 
 /**

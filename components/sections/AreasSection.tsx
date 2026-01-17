@@ -2,8 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useInView } from 'react-intersection-observer';
 import { SectionHeader } from '@/components/shared';
 import { Icon, IconName } from '@/components/ui';
+import { clsx } from 'clsx';
 
 export interface City {
     label: string;
@@ -29,21 +31,36 @@ export interface AreasSectionProps {
 }
 
 export const AreasSection: React.FC<AreasSectionProps> = ({ id, header, hubs }) => {
+    const { ref, inView } = useInView({
+        threshold: 0.1,
+        triggerOnce: true,
+        rootMargin: '50px 0px',
+    });
+
     return (
-        <section id={id} className="bg-white rounded-3xl py-16 sm:py-20">
+        <section id={id} ref={ref} className="bg-white rounded-3xl py-16 sm:py-20">
             <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto">
-                    <SectionHeader
-                        label={header.label}
-                        title={header.title}
-                        description={header.description}
-                        align="left"
-                        theme="light"
-                    />
+                    <div
+                        className={clsx(inView ? 'animate-fade-in-up' : 'opacity-0')}
+                        style={{ animationDelay: '0.1s' }}
+                    >
+                        <SectionHeader
+                            label={header.label}
+                            title={header.title}
+                            description={header.description}
+                            align="left"
+                            theme="light"
+                        />
+                    </div>
 
                     <div className="mt-12 space-y-12">
                         {hubs.map((hub, index) => (
-                            <article key={index}>
+                            <article
+                                key={index}
+                                className={clsx(inView ? 'animate-fade-in-up' : 'opacity-0')}
+                                style={{ animationDelay: `${0.2 + index * 0.1}s` }}
+                            >
                                 {/* H3 nagłówek z ikoną */}
                                 <div className="flex items-center gap-4 mb-6">
                                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
