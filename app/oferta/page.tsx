@@ -6,7 +6,9 @@ import {
 	PageHeader,
 	SectionHeader,
 	ServiceCardSimple,
+	AnimatedSection,
 } from "@/components/shared";
+import { AnimatedServiceGrid } from "@/components/shared/AnimatedServiceGrid";
 
 export const metadata: Metadata = {
 	title: "Nasza oferta - CoreLTB Builders",
@@ -94,7 +96,7 @@ export default function OfferPage() {
 			/>
 
 			{/* 2. SectionHeader - Krótki intro (40 słów, 5-8 sekund czytania) */}
-			<section className="py-12 px-4 bg-background">
+			<AnimatedSection as="div" className="py-12 px-4 bg-background" delay={0.1}>
 				<div className="container mx-auto max-w-4xl">
 					<SectionHeader
 						label="KOMPLEKSOWE USŁUGI BUDOWLANE"
@@ -104,16 +106,12 @@ export default function OfferPage() {
 						theme="light"
 					/>
 				</div>
-			</section>
+			</AnimatedSection>
 
 			{/* 3. GRID USŁUG - Najważniejsze! User chce zobaczyć opcje NATYCHMIAST */}
 			<section className="py-16 px-4 bg-background">
 				<div className="container mx-auto">
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{offerData.map((item) => (
-							<ServiceCardSimple key={item.title} {...item} />
-						))}
-					</div>
+					<AnimatedServiceGrid items={offerData} />
 				</div>
 			</section>
 

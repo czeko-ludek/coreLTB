@@ -1,6 +1,8 @@
 'use client';
 
 import React from 'react';
+import { useInView } from 'react-intersection-observer';
+import { clsx } from 'clsx';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
@@ -15,6 +17,12 @@ export interface ProjectsSectionProps {
 export function ProjectsSection({ header, projects }: ProjectsSectionProps) {
   const [swiperInstance, setSwiperInstance] = React.useState<SwiperType | null>(null);
   const [isMounted, setIsMounted] = React.useState(false);
+
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+    rootMargin: '50px 0px',
+  });
 
   React.useEffect(() => {
     setIsMounted(true);
@@ -43,23 +51,34 @@ export function ProjectsSection({ header, projects }: ProjectsSectionProps) {
   }
 
   return (
-    <section style={{ backgroundColor: '#efebe7' }} className="relative py-20 overflow-visible">
+    <section ref={ref} style={{ backgroundColor: '#efebe7' }} className="relative py-20 overflow-visible">
       <div className="container mx-auto px-4">
         {/* Custom header - left aligned with button on right */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
-          <div className="max-w-2xl">
+          <div
+            className={clsx('max-w-2xl', inView ? 'animate-fade-in-up' : 'opacity-0')}
+            style={{ animationDelay: '0.1s' }}
+          >
             <SectionHeader {...header} align="left" theme="light" />
             <p className="mt-4 text-base lg:text-lg text-text-secondary leading-relaxed">
               Odkryj nasze projekty, które łączą ponadczasowy design z indywidualnymi potrzebami klientów, tworząc wyjątkowe przestrzenie do życia i pracy.
             </p>
           </div>
-          <Button variant="outline" size="md" href="/projekty">
-            Zobacz Wszystkie
-          </Button>
+          <div
+            className={clsx(inView ? 'animate-fade-in-up' : 'opacity-0')}
+            style={{ animationDelay: '0.2s' }}
+          >
+            <Button variant="outline" size="md" href="/projekty">
+              Zobacz Wszystkie
+            </Button>
+          </div>
         </div>
 
         {/* Slider Container - arrows completely outside section */}
-        <div className="mt-8 relative">
+        <div
+          className={clsx('mt-8 relative', inView ? 'animate-fade-in-up' : 'opacity-0')}
+          style={{ animationDelay: '0.3s' }}
+        >
           {/* Desktop Navigation Arrows - Outside container, centered vertically */}
           <div className="hidden lg:block absolute -left-20 top-1/2 -translate-y-1/2 z-10">
             <SliderArrow

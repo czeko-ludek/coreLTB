@@ -1,11 +1,12 @@
 import React from 'react';
 import { clsx } from 'clsx';
 
-interface BentoGridItemProps {
+export interface BentoGridItemProps {
     children: React.ReactNode;
     className?: string;
     colSpan?: 1 | 2 | 3 | 4;
     rowSpan?: 1 | 2 | 3 | 4;
+    style?: React.CSSProperties;
 }
 
 export const BentoGridItem: React.FC<BentoGridItemProps> = ({
@@ -13,6 +14,7 @@ export const BentoGridItem: React.FC<BentoGridItemProps> = ({
     className,
     colSpan = 1,
     rowSpan = 1,
+    style,
 }) => {
     return (
         <div
@@ -28,6 +30,7 @@ export const BentoGridItem: React.FC<BentoGridItemProps> = ({
                 rowSpan === 4 && 'md:row-span-4',
                 className
             )}
+            style={style}
         >
             {children}
         </div>

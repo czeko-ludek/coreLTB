@@ -61,12 +61,13 @@
       "Bash(curl:*)",
       "Bash(grep:*)",
       "Bash(npm outdated:*)",
-      "Bash(npm update:*)"
+      "Bash(npm update:*)",
+      "Bash(layout \")"
     ],
     "deny": [],
     "ask": []
   },
-  "model": "sonnet",
+  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "npx -y @owloops/claude-powerline@latest --style=powerline"

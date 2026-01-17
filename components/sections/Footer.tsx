@@ -15,6 +15,7 @@ export interface FooterProps {
   about: string;
   linkGroups: Array<{
     title: string;
+    titleHref?: string;
     links: Array<{ label: string; href: string }>;
   }>;
   newsletter: {
@@ -111,9 +112,18 @@ export function Footer({
             {/* Link Groups */}
             {linkGroups.map((group, index) => (
               <div key={index}>
-                <h4 className="text-base font-semibold text-white mb-4">
-                  {group.title}
-                </h4>
+                {group.titleHref ? (
+                  <Link
+                    href={group.titleHref}
+                    className="text-base font-semibold text-white mb-4 block hover:text-primary transition-colors"
+                  >
+                    {group.title}
+                  </Link>
+                ) : (
+                  <h4 className="text-base font-semibold text-white mb-4">
+                    {group.title}
+                  </h4>
+                )}
                 <ul className="space-y-3">
                   {group.links.map((link, linkIndex) => (
                     <li key={linkIndex}>

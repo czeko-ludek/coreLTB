@@ -1,6 +1,8 @@
 'use client';
 
 import React from 'react';
+import { useInView } from 'react-intersection-observer';
+import { clsx } from 'clsx';
 import { SectionHeader } from '@/components/shared';
 import { Button, Icon } from '@/components/ui';
 import { BentoGridItem } from '@/components/shared/BentoGridItem';
@@ -18,11 +20,20 @@ export interface BentoContactSectionProps {
 export const BentoContactSection: React.FC<BentoContactSectionProps> = ({
     contactInfo,
 }) => {
+    const { ref, inView } = useInView({
+        threshold: 0.1,
+        triggerOnce: true,
+        rootMargin: '50px 0px',
+    });
+
     return (
-        <section className="bg-[#efebe7] py-16 sm:py-20 lg:py-24">
+        <section ref={ref} className="bg-[#efebe7] py-16 sm:py-20 lg:py-24">
             {/* Widened container: max-w-[90rem] is approx 1440px, 20% wider than 7xl (1280px) would be ~1536px (2xl) */}
             <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
-                <div className="mb-12">
+                <div className={clsx(
+                    'mb-12',
+                    inView ? 'animate-fade-in-up' : 'opacity-0'
+                )} style={{ animationDelay: '0.1s' }}>
                     <SectionHeader
                         label="KONTAKT"
                         title="Rozpocznijmy Współpracę"
@@ -34,7 +45,14 @@ export const BentoContactSection: React.FC<BentoContactSectionProps> = ({
 
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[minmax(180px,auto)]">
                     {/* 1. Intro Box - Top Left */}
-                    <BentoGridItem colSpan={2} className="flex flex-col justify-center bg-primary text-gray-900 border-none">
+                    <BentoGridItem
+                        colSpan={2}
+                        className={clsx(
+                            "flex flex-col justify-center bg-primary text-gray-900 border-none",
+                            inView ? 'animate-fade-in-up' : 'opacity-0'
+                        )}
+                        style={{ animationDelay: '0.2s' }}
+                    >
                         <div className="space-y-4">
                             <div className="h-12 w-12 rounded-full bg-black/10 flex items-center justify-center backdrop-blur-sm">
                                 <Icon name="helpCircle" className="text-gray-900" />
@@ -47,7 +65,15 @@ export const BentoContactSection: React.FC<BentoContactSectionProps> = ({
                     </BentoGridItem>
 
                     {/* 2. Contact Form - Right Column (Spans 3 rows vertically) */}
-                    <BentoGridItem colSpan={2} rowSpan={3} className="flex flex-col">
+                    <BentoGridItem
+                        colSpan={2}
+                        rowSpan={3}
+                        className={clsx(
+                            "flex flex-col",
+                            inView ? 'animate-fade-in-up' : 'opacity-0'
+                        )}
+                        style={{ animationDelay: '0.3s' }}
+                    >
                         <div className="mb-6">
                             <h3 className="text-xl font-bold text-gray-900">Formularz Kontaktowy</h3>
                             <p className="text-gray-500 text-sm mt-1">Wypełnij formularz, a my zajmiemy się resztą.</p>
@@ -131,7 +157,13 @@ export const BentoContactSection: React.FC<BentoContactSectionProps> = ({
                     </BentoGridItem>
 
                     {/* 3. Phone Box */}
-                    <BentoGridItem className="flex flex-col justify-between group cursor-pointer hover:bg-gray-50">
+                    <BentoGridItem
+                        className={clsx(
+                            "flex flex-col justify-between group cursor-pointer hover:bg-gray-50",
+                            inView ? 'animate-fade-in-up' : 'opacity-0'
+                        )}
+                        style={{ animationDelay: '0.4s' }}
+                    >
                         <div className="h-14 w-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 transition-transform group-hover:scale-110">
                             <Icon name="phone" className="text-white" size="md" />
                         </div>
@@ -142,7 +174,13 @@ export const BentoContactSection: React.FC<BentoContactSectionProps> = ({
                     </BentoGridItem>
 
                     {/* 4. Email Box */}
-                    <BentoGridItem className="flex flex-col justify-between group cursor-pointer hover:bg-gray-50">
+                    <BentoGridItem
+                        className={clsx(
+                            "flex flex-col justify-between group cursor-pointer hover:bg-gray-50",
+                            inView ? 'animate-fade-in-up' : 'opacity-0'
+                        )}
+                        style={{ animationDelay: '0.5s' }}
+                    >
                         <div className="h-14 w-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 transition-transform group-hover:scale-110">
                             <Icon name="mail" className="text-white" size="md" />
                         </div>
@@ -153,7 +191,14 @@ export const BentoContactSection: React.FC<BentoContactSectionProps> = ({
                     </BentoGridItem>
 
                     {/* 5. Address/Map Box - Bottom Left */}
-                    <BentoGridItem colSpan={2} className="relative !p-0 overflow-hidden group min-h-[450px]">
+                    <BentoGridItem
+                        colSpan={2}
+                        className={clsx(
+                            "relative !p-0 overflow-hidden group min-h-[450px]",
+                            inView ? 'animate-fade-in-up' : 'opacity-0'
+                        )}
+                        style={{ animationDelay: '0.6s' }}
+                    >
                         <div className="absolute inset-0 bg-gray-200">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2578.508774828688!2d18.465833!3d50.001667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4711467475130b0d%3A0x6a0c50766308360!2sWa%C5%82owa%2055%2C%2044-300%20Wodzis%C5%82aw%20%C5%9Al%C4%85ski!5e0!3m2!1spl!2spl!4v1700000000000!5m2!1spl!2spl"

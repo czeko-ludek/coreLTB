@@ -114,3 +114,6 @@ export type { ResponsibilityCardProps } from './ResponsibilityCard';
 // Animation Wrappers
 export { AnimatedSection } from './AnimatedSection';
 export type { AnimatedSectionProps } from './AnimatedSection';
+
+export { AnimatedServiceGrid } from './AnimatedServiceGrid';
+export type { AnimatedServiceGridProps } from './AnimatedServiceGrid';

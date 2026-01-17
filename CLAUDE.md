@@ -6,6 +6,42 @@
 
 ## 🆕 AKTUALIZACJA SESJI (2026-01-17)
 
+### ✅ Rozszerzone Animacje Scroll-Triggered
+
+**Nowe komponenty z animacjami:**
+- ✅ `BentoContactSection` - Animowane kafelki formularza kontaktowego (cascading 0.2-0.6s)
+- ✅ `AnimatedServiceGrid` - Nowy komponent wrapper dla animowanych kart usług
+- ✅ `ProjectsSection` - Animowany slider portfolio (header, button, slider)
+- ✅ `BlogSection` - Animowane karty blogowe (cascading)
+
+### ✅ Footer - Aktualizacja Sekcji "Obszar Działania"
+
+**Zmiana:** "Szybkie Usługi" → "Obszar Działania" z 5 najważniejszymi miastami
+
+**Nowa struktura:**
+```typescript
+{
+  title: "Obszar Działania",
+  titleHref: "/obszar-dzialania",  // ← Klikalnyttuł
+  links: [
+    { label: "Rybnik", href: "/obszar-dzialania/rybnik" },
+    { label: "Katowice", href: "/obszar-dzialania/katowice" },
+    { label: "Tychy", href: "/obszar-dzialania/tychy" },
+    { label: "Jaworzno", href: "/obszar-dzialania/jaworzno" },
+    { label: "Wodzisław Śląski", href: "/obszar-dzialania/wodzislaw-slaski" },
+  ],
+}
+```
+
+**Zaktualizowany interface `FooterProps`:**
+```typescript
+linkGroups: Array<{
+  title: string;
+  titleHref?: string;  // ← Opcjonalny link dla tytułu
+  links: Array<{ label: string; href: string }>;
+}>;
+```
+
 ### ✅ Nowa Strona: Obszar Działania Hub z Interaktywną Mapą SVG
 
 **Routing:** `/obszar-dzialania` (page.tsx - SSG)
@@ -329,6 +365,39 @@ interface IntroSectionProps {
 | `ContactCTASection` | 0.1 | fadeInUp (header, form) + fadeInRight (contact boxes) |
 | `BusinessResponsibilitySection` | 0.2 | fadeInUp (header, cards cascading) |
 | `InteractiveMapSection` | 0.2 | Custom transition (header, map container) |
+| `BentoContactSection` | 0.1 | fadeInUp (header, 5 grid items cascading 0.2-0.6s) |
+| `ProjectsSection` | 0.1 | fadeInUp (header+desc, button, slider) |
+| `BlogSection` | 0.1 | fadeInUp (header, cards cascading 0.1s interval) |
+
+#### 6. `AnimatedServiceGrid` (Wrapper dla kart usług)
+**Lokalizacja:** `/components/shared/AnimatedServiceGrid.tsx`
+
+Wrapper dla gridu kart usług z cascading animations.
+
+```typescript
+interface AnimatedServiceGridProps {
+  items: ServiceCardSimpleProps[];
+}
+```
+
+**Animacje:**
+- Karty: cascading fadeInUp (0.1s, 0.2s, 0.3s...)
+
+**Użycie:** `/oferta/page.tsx`
+
+#### 7. `BentoContactSection` (Animacje formularza kontaktowego)
+**Lokalizacja:** `/components/sections/BentoContactSection.tsx`
+
+| Element | Animacja | Delay |
+|---------|----------|-------|
+| Header | fadeInUp | 0.1s |
+| Intro Box (złoty) | fadeInUp | 0.2s |
+| Formularz | fadeInUp | 0.3s |
+| Phone Box | fadeInUp | 0.4s |
+| Email Box | fadeInUp | 0.5s |
+| Address/Map Box | fadeInUp | 0.6s |
+
+**Użycie:** `/kontakt/page.tsx`
 
 ### Wzorzec Implementacji
 
