@@ -20,8 +20,6 @@ interface PolandMapSVGProps {
   onVoivodeshipHover: (id: VoivodeshipId | null) => void;
   onCityClick: (city: MapCity) => void;
   onCityHover: (cityId: string | null, position?: { x: number; y: number }) => void;
-  /** Trigger entry animations when true */
-  isAnimated?: boolean;
   className?: string;
 }
 
@@ -51,7 +49,6 @@ export function PolandMapSVG({
   onVoivodeshipHover,
   onCityClick,
   onCityHover,
-  isAnimated = false,
   className,
 }: PolandMapSVGProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -272,19 +269,6 @@ export function PolandMapSVG({
       }
     });
   }, [view, activeVoivodeship, hoveredVoivodeship, hoveredCity]);
-
-  // Entry animations - add animation class to voivodeships when isAnimated becomes true
-  useEffect(() => {
-    if (!svgRef.current || !isAnimated) return;
-
-    // Add animation class to each voivodeship with staggered delays (defined in CSS)
-    mapVoivodeships.forEach((voiv) => {
-      const group = svgRef.current?.querySelector(`#${voiv.svgGroupId}`);
-      if (group) {
-        group.classList.add('voiv-animate');
-      }
-    });
-  }, [isAnimated]);
 
   return (
     <div
