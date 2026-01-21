@@ -19,7 +19,7 @@ export default function Home() {
 		tagline: "BUDUJEMY LEPSZE JUTRO",
 		title: "Zrealizuj z nami projekt swoich marzeń!",
 		subtitle:
-			"CoreLTB to Twój zaufany partner w realizacji projektów budowlanych. Specjalizujemy się w budownictwie kubaturowym i nowoczesnym budownictwie mieszkalnym na terenach górniczych Śląska.",
+			"Budujemy domy pod klucz. Od projektu po odbiór - jeden wykonawca, jedna umowa.",
 		images: [
 			{ src: "/images/hero/slide-1.webp", alt: "Budowa domu na Śląsku" },
 			{ src: "/images/hero/slide-2.webp", alt: "Nowoczesny dom jednorodzinny" },
