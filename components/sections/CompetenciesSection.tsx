@@ -1,142 +1,101 @@
 'use client';
 
 import React from 'react';
-import { SectionHeader, SectionHeaderProps } from '@/components/shared';
+import { useInView } from 'react-intersection-observer';
+import clsx from 'clsx';
 import { Icon, IconName } from '@/components/ui';
 
-export interface CompetenceCardProps {
+interface CompetencyCard {
   icon: IconName;
   title: string;
   description: string;
 }
 
 export interface CompetenciesSectionProps {
-  header: SectionHeaderProps;
-  competencies: CompetenceCardProps[];
+  label: string;
+  title: string;
+  titleHighlight?: string;
+  competencies: CompetencyCard[];
 }
 
 export function CompetenciesSection({
-  header,
+  label,
+  title,
+  titleHighlight,
   competencies,
 }: CompetenciesSectionProps) {
-  const [isVisible, setIsVisible] = React.useState(false);
-  const sectionRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
-      setIsVisible(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
 
   return (
-    <section ref={sectionRef} className="bg-white py-16 sm:py-20">
+    <section ref={ref} className="bg-[#efebe7] py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div
-          className={`mb-12 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
-          style={{ animationDelay: '0.1s' }}
-        >
-          <SectionHeader {...header} />
+
+        {/* Header - wyśrodkowany */}
+        <div className="text-center mb-12 lg:mb-16">
+          <span
+            className={clsx(
+              'inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider mb-4',
+              inView ? 'animate-fade-in-up' : 'opacity-0'
+            )}
+            style={{ animationDelay: '0.1s' }}
+          >
+            {label}
+          </span>
+
+          <h2
+            className={clsx(
+              'text-3xl md:text-4xl lg:text-5xl font-black text-zinc-900 leading-tight',
+              inView ? 'animate-fade-in-up' : 'opacity-0'
+            )}
+            style={{ animationDelay: '0.2s' }}
+          >
+            {title}
+            {titleHighlight && (
+              <span className="text-primary"> {titleHighlight}</span>
+            )}
+          </h2>
         </div>
 
-        {/* Asymetryczny Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {/* Card 1 - Duża (2 kolumny) */}
-          {competencies[0] && (
+        {/* Cards Grid - 2x2 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {competencies.map((comp, index) => (
             <div
-              className={`md:col-span-2 bg-gradient-to-br from-gray-50 to-white rounded-3xl border-2 border-gray-200 shadow-lg p-5 md:p-6 hover:shadow-xl hover:border-primary/30 hover:scale-[1.02] transition-all duration-300 ${
-                isVisible ? 'animate-fade-in-up' : 'opacity-0'
-              }`}
-              style={{ animationDelay: '0.2s' }}
+              key={index}
+              className={clsx(
+                'bg-white rounded-3xl p-8 lg:p-10 border border-zinc-200 shadow-lg',
+                inView ? 'animate-fade-in-up' : 'opacity-0'
+              )}
+              style={{ animationDelay: `${0.3 + index * 0.1}s` }}
             >
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
-                <Icon name={competencies[0].icon} size="lg" className="text-primary" />
+              {/* Ikona + Numer */}
+              <div className="flex items-center gap-4 mb-6">
+                <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+                  <Icon name={comp.icon} size="lg" className="text-primary" />
+                </div>
+                <span className="text-5xl font-black text-zinc-200">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
               </div>
-              <h3 className="text-2xl font-bold text-text-primary mb-4 leading-tight">
-                {competencies[0].title}
-              </h3>
-              <p className="text-base text-text-secondary leading-relaxed">
-                {competencies[0].description}
-              </p>
-            </div>
-          )}
 
-          {/* Card 2 - Wysoka (2 rows) */}
-          {competencies[1] && (
-            <div
-              className={`md:row-span-2 bg-gradient-to-br from-primary/5 to-white rounded-3xl border-2 border-gray-200 shadow-lg p-5 md:p-6 hover:shadow-xl hover:border-primary/30 hover:scale-[1.02] transition-all duration-300 ${
-                isVisible ? 'animate-fade-in-up' : 'opacity-0'
-              }`}
-              style={{ animationDelay: '0.3s' }}
-            >
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
-                <Icon name={competencies[1].icon} size="lg" className="text-primary" />
-              </div>
-              <h3 className="text-2xl font-bold text-text-primary mb-4 leading-tight">
-                {competencies[1].title}
+              {/* Tytuł */}
+              <h3 className="text-xl lg:text-2xl font-bold text-zinc-900 mb-4">
+                {comp.title}
               </h3>
-              <p className="text-base text-text-secondary leading-relaxed">
-                {competencies[1].description}
-              </p>
-            </div>
-          )}
 
-          {/* Card 3 - Normalna */}
-          {competencies[2] && (
-            <div
-              className={`bg-gradient-to-br from-gray-50 to-white rounded-3xl border-2 border-gray-200 shadow-lg p-5 md:p-6 hover:shadow-xl hover:border-primary/30 hover:scale-[1.02] transition-all duration-300 ${
-                isVisible ? 'animate-fade-in-up' : 'opacity-0'
-              }`}
-              style={{ animationDelay: '0.4s' }}
-            >
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
-                <Icon name={competencies[2].icon} size="lg" className="text-primary" />
-              </div>
-              <h3 className="text-2xl font-bold text-text-primary mb-4 leading-tight">
-                {competencies[2].title}
-              </h3>
-              <p className="text-base text-text-secondary leading-relaxed">
-                {competencies[2].description}
-              </p>
-            </div>
-          )}
+              {/* Złota linia */}
+              <div className="w-16 h-1 bg-gradient-to-r from-primary to-transparent mb-4" />
 
-          {/* Card 4 - Duża (2 kolumny) */}
-          {competencies[3] && (
-            <div
-              className={`md:col-span-2 bg-gradient-to-br from-white to-gray-50 rounded-3xl border-2 border-gray-200 shadow-lg p-5 md:p-6 hover:shadow-xl hover:border-primary/30 hover:scale-[1.02] transition-all duration-300 ${
-                isVisible ? 'animate-fade-in-up' : 'opacity-0'
-              }`}
-              style={{ animationDelay: '0.5s' }}
-            >
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
-                <Icon name={competencies[3].icon} size="lg" className="text-primary" />
-              </div>
-              <h3 className="text-2xl font-bold text-text-primary mb-4 leading-tight">
-                {competencies[3].title}
-              </h3>
-              <p className="text-base text-text-secondary leading-relaxed">
-                {competencies[3].description}
+              {/* Opis */}
+              <p className="text-zinc-600 leading-relaxed">
+                {comp.description}
               </p>
             </div>
-          )}
+          ))}
         </div>
+
       </div>
     </section>
   );

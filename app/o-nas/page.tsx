@@ -26,6 +26,7 @@ export default function AboutPage() {
 	const aboutIntroData = {
 		label: "O NAS",
 		title: "CoreLTB to",
+		titleHighlight: "firma inżynieryjna",
 		description: [
 			"CoreLTB to firma inżynieryjna wywodząca się z serca Śląska i Małopolski. Działamy w modelu 'Design & Build' oraz jako Generalny Wykonawca inwestycji indywidualnych. Od 2005 roku łączymy rzemieślniczą dokładność firmy rodzinnej ze skalą i procedurami dużej organizacji.",
 			"Nie jesteśmy anonimową spółką. Nasze bazy w Jaworznie i Wodzisławiu Śląskim pozwalają nam operacyjnie pokryć cały pas Polski Południowej. Dla Inwestora oznaczamy koniec z chaosem 'systemu gospodarczego'. Wnosimy na budowę domów jednorodzinnych standardy znane z inwestycji komercyjnych: nadzór kierownika kontraktu, transparentne harmonogramy i żelazną dyscyplinę budżetową.",
@@ -53,13 +54,9 @@ export default function AboutPage() {
 	};
 
 	const competenciesData = {
-		header: {
-			label: "NASZE KOMPETENCJE",
-			title: "Czym się wyróżniamy?",
-			description: "",
-			align: "center" as const,
-			theme: "light" as const,
-		},
+		label: "NASZE KOMPETENCJE",
+		title: "Czym się",
+		titleHighlight: "wyróżniamy?",
 		competencies: [
 			{
 				icon: "building" as const,

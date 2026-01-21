@@ -83,6 +83,10 @@ export type { AboutIntroSectionProps } from './AboutIntroSection';
 export { CompetenciesSection } from './CompetenciesSection';
 export type { CompetenciesSectionProps } from './CompetenciesSection';
 
+// Aliases for new naming convention (same components)
+export { AboutIntroSection as AboutHeroIntroLight } from './AboutIntroSection';
+export { CompetenciesSection as AboutCompetenciesLight } from './CompetenciesSection';
+
 export { BusinessResponsibilitySection } from './BusinessResponsibilitySection';
 export type { BusinessResponsibilitySectionProps } from './BusinessResponsibilitySection';
 
