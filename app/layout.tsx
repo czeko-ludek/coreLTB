@@ -151,6 +151,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl" data-scroll-behavior="smooth">
+      <head>
+        {/* Preconnect to critical origins for faster resource loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* DNS prefetch for external resources */}
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+      </head>
       <body className={manrope.className}>
         <Header {...headerData} />
         {children}

@@ -26,7 +26,9 @@ const nextConfig = {
   // ✅ Optymalizacje dla Next.js 15
   experimental: {
     // Optymalizuje importy pakietów (zmniejsza bundle size)
-    optimizePackageImports: ['lucide-react', 'swiper'],
+    optimizePackageImports: ['lucide-react', 'swiper', 'framer-motion'],
+    // Inline critical CSS (requires critters package)
+    optimizeCss: true,
   },
 
   // ✅ Kompresja (Cloudflare też kompresuje, ale warto mieć)
