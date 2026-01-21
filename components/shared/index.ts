@@ -117,3 +117,17 @@ export type { AnimatedSectionProps } from './AnimatedSection';
 
 export { AnimatedServiceGrid } from './AnimatedServiceGrid';
 export type { AnimatedServiceGridProps } from './AnimatedServiceGrid';
+
+// Projects Listing Components
+export { ProjectListingCard } from './ProjectListingCard';
+export type { ProjectListingCardProps } from './ProjectListingCard';
+
+export { ProjectFilterSidebar } from './ProjectFilterSidebar';
+export type { ProjectFilterSidebarProps } from './ProjectFilterSidebar';
+
+export { MobileFilterDrawer } from './MobileFilterDrawer';
+export type { MobileFilterDrawerProps } from './MobileFilterDrawer';
+
+// Local Page Sidebar
+export { LocalPageSidebar } from './LocalPageSidebar';
+export type { LocalPageSidebarProps, TOCItem } from './LocalPageSidebar';

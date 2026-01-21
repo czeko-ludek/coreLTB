@@ -48,7 +48,7 @@ export function TimelineStep({
 
   // useInView dla animacji (jednorazowe wyzwolenie)
   const { ref: animRef, inView: isVisible } = useInView({
-    threshold: 0.3,
+    threshold: 0.2,
     triggerOnce: true,
   });
 
@@ -102,118 +102,72 @@ export function TimelineStep({
     return null;
   };
 
+  // Zigzag: nieparzyste (1,3,5...) = tekst-obraz, parzyste (2,4,6...) = obraz-tekst
+  const isEven = number % 2 === 0;
+
   return (
     <section id={id} ref={setRefs} className="scroll-mt-24">
-      {/* Layout Mobile (pionowy stack) - w białym kontenerze */}
-      <div className={`md:hidden bg-white rounded-xl shadow-lg p-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-        {/* Nagłówek z numerem */}
-        <div className="flex items-center gap-4 mb-4">
-          <div
-            className={clsx(
-              'w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all duration-300 flex-shrink-0',
-              isActive
-                ? 'bg-primary border-primary text-white shadow-lg'
-                : 'bg-gray-100 border-gray-300 text-gray-600'
-            )}
-          >
-            <span className="text-sm font-bold">{number}</span>
-          </div>
+      {/* Layout Zigzag - Mobile: stack, Desktop: flex row/row-reverse */}
+      <div
+        className={clsx(
+          'flex flex-col gap-6',
+          'lg:flex-row lg:items-center lg:gap-12',
+          isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'
+        )}
+      >
+        {/* Biały Box z Tekstem */}
+        <div
+          className={clsx(
+            'flex-1 bg-white rounded-3xl p-6 md:p-8 lg:p-10 shadow-lg',
+            isVisible ? 'animate-fade-in-up' : 'opacity-0'
+          )}
+          style={{ animationDelay: '0.1s' }}
+        >
+          {/* Tytuł */}
           <h3
             className={clsx(
-              'text-xl font-bold transition-colors duration-300',
+              'text-xl md:text-2xl lg:text-3xl font-bold transition-colors duration-300 mb-6',
               isActive ? 'text-primary' : 'text-gray-900'
             )}
           >
             {title}
           </h3>
+
+          {/* Treść */}
+          <div className="text-gray-600 leading-relaxed text-base lg:text-lg">
+            {content.map((block, index) => renderContentBlock(block, index))}
+          </div>
         </div>
 
-        {/* Obraz */}
-        <div className="relative w-full aspect-[16/10] rounded-lg overflow-hidden mb-4">
-          <Image
-            src={imageSrc}
-            alt={imageAlt}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-        </div>
-
-        {/* Treść */}
-        <div className="text-gray-700 leading-relaxed">
-          {content.map((block, index) => renderContentBlock(block, index))}
-        </div>
-      </div>
-
-      {/* Layout Desktop - IKONA NA ŚRODKU, TEKST I OBRAZ W KONTENERZE */}
-      <div className="hidden md:grid md:grid-cols-[auto_1fr] md:gap-8 md:items-center">
-        {/* Timeline Column - IKONA wycentrowana pionowo */}
-        <div className={`relative flex flex-col items-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
-             style={{ animationDelay: '0.1s' }}>
-          {/* Ikona w dużym kółku - WIĘKSZA i bardziej ekskluzywna */}
-          <div
-            className={clsx(
-              'relative z-10 w-20 h-20 rounded-full border-4 flex items-center justify-center transition-all duration-500 bg-white',
-              isActive
-                ? 'border-primary shadow-[0_0_30px_rgba(223,187,104,0.5)] scale-110'
-                : 'border-gray-300 shadow-lg hover:border-primary/50'
-            )}
-          >
-            <Icon
-              name={icon}
-              size="xl"
-              className={clsx(
-                'transition-colors duration-300',
-                isActive ? 'text-primary' : 'text-gray-600'
-              )}
+        {/* Obraz z ikoną w rogu */}
+        <div
+          className={clsx(
+            'flex-1',
+            isVisible ? 'animate-fade-in-up' : 'opacity-0'
+          )}
+          style={{ animationDelay: '0.25s' }}
+        >
+          <div className="relative w-full aspect-[4/3] lg:aspect-[16/12] rounded-3xl overflow-hidden shadow-xl ring-1 ring-black/5">
+            <Image
+              src={imageSrc}
+              alt={imageAlt}
+              fill
+              className="object-cover hover:scale-105 transition-transform duration-700"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
-          </div>
+            {/* Subtle gradient overlay on image */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
 
-          {/* Numer etapu pod ikoną - WIĘKSZY */}
-          <div
-            className={clsx(
-              'mt-4 text-base font-bold px-4 py-2 rounded-full transition-all duration-300',
-              isActive
-                ? 'bg-primary text-white shadow-lg shadow-primary/30'
-                : 'bg-gray-100 text-gray-600'
-            )}
-          >
-            Etap {number}
-          </div>
-        </div>
-
-        {/* Jeden biały kontener dla tekstu i obrazu */}
-        <div className="relative py-8">
-          <div className={`bg-white rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.08)] p-8 md:p-10 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
-               style={{ animationDelay: '0.3s' }}>
-            {/* Grid: tekst po lewej, obraz po prawej - items-center dla wycentrowania */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              {/* Lewa kolumna - TEKST */}
-              <div>
-                <h3
-                  className={clsx(
-                    'text-2xl lg:text-3xl font-bold mb-6 transition-colors duration-300',
-                    isActive ? 'text-primary' : 'text-gray-900'
-                  )}
-                >
-                  {title}
-                </h3>
-
-                <div className="text-gray-700 leading-relaxed text-base lg:text-lg">
-                  {content.map((block, index) => renderContentBlock(block, index))}
-                </div>
-              </div>
-
-              {/* Prawa kolumna - OBRAZ */}
-              <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
-                <Image
-                  src={imageSrc}
-                  alt={imageAlt}
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                  sizes="(max-width: 768px) 100vw, 40vw"
-                />
-              </div>
+            {/* Floating Icon Badge - top left corner */}
+            <div
+              className={clsx(
+                'absolute top-4 left-4 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-lg',
+                isActive
+                  ? 'bg-primary text-white'
+                  : 'bg-white/90 backdrop-blur-sm text-primary'
+              )}
+            >
+              <Icon name={icon} size="lg" />
             </div>
           </div>
         </div>

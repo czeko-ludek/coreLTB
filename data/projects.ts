@@ -36,6 +36,69 @@ export interface ProjectCostTable {
   items: ProjectCostItem[];
 }
 
+// --- Typy Filtrowania i Sortowania ---
+
+export type ProjectCategory = 'jednorodzinny' | 'dwulokalowy' | 'z-poddaszem' | 'parterowy';
+export type ProjectTechnology = 'MUROWANY' | 'DREWNIANY';
+export type SortOption = 'price-asc' | 'price-desc' | 'area-asc' | 'area-desc';
+
+export interface BudgetRange {
+  id: string;
+  label: string;
+  min: number;
+  max: number | null; // null = bez limitu górnego
+}
+
+export interface SurfaceRange {
+  id: string;
+  label: string;
+  min: number;
+  max: number | null; // null = bez limitu górnego
+}
+
+export interface ProjectFilters {
+  technology: ProjectTechnology[];
+  category: ProjectCategory[];
+  budgetRange: string | null;
+  surfaceRange: string | null;
+}
+
+// --- Stałe Konfiguracyjne (łatwe do rozszerzenia) ---
+
+export const projectCategories = [
+  { id: 'jednorodzinny', label: 'Jednorodzinny' },
+  { id: 'dwulokalowy', label: 'Dwulokalowy' },
+  { id: 'z-poddaszem', label: 'Z poddaszem' },
+  { id: 'parterowy', label: 'Parterowy' },
+] as const;
+
+export const projectTechnologies = [
+  { id: 'MUROWANY', label: 'Murowany' },
+  { id: 'DREWNIANY', label: 'Drewniany' },
+] as const;
+
+export const budgetRanges: BudgetRange[] = [
+  { id: 'do-500', label: 'do 500 tys. zł', min: 0, max: 500000 },
+  { id: '500-800', label: '500-800 tys. zł', min: 500000, max: 800000 },
+  { id: 'powyzej-800', label: 'powyżej 800 tys. zł', min: 800000, max: null },
+];
+
+export const surfaceRanges: SurfaceRange[] = [
+  { id: 'do-100', label: 'do 100 m²', min: 0, max: 100 },
+  { id: '100-120', label: '100-120 m²', min: 100, max: 120 },
+  { id: '120-160', label: '120-160 m²', min: 120, max: 160 },
+  { id: '160-200', label: '160-200 m²', min: 160, max: 200 },
+  { id: '200-250', label: '200-250 m²', min: 200, max: 250 },
+  { id: 'powyzej-250', label: 'powyżej 250 m²', min: 250, max: null },
+];
+
+export const sortOptions = [
+  { id: 'price-asc', label: 'Cena rosnąco' },
+  { id: 'price-desc', label: 'Cena malejąco' },
+  { id: 'area-asc', label: 'Powierzchnia rosnąco' },
+  { id: 'area-desc', label: 'Powierzchnia malejąco' },
+] as const;
+
 // --- Główny Typ Projektu ---
 
 export interface Project {
@@ -47,11 +110,15 @@ export interface Project {
   availability: string;
   surfaceArea: string;
   estimatedBuildCost: string;
-  technology: string;
+  technology: ProjectTechnology;
   galleryImageCount: number;
   floorPlans: FloorPlan[];
   specifications: ProjectSpecificationTab[];
   costCalculation: ProjectCostTable;
+  // Nowe pola do filtrowania
+  category: ProjectCategory;
+  dateAdded: number; // timestamp do sortowania
+  thumbnailSrc?: string; // opcjonalne - domyślnie /images/projekty/{slug}/thumbnail.webp
 }
 
 // --- Przykładowe Dane ---
@@ -67,6 +134,8 @@ export const allProjects: Project[] = [
     surfaceArea: '248 + 38m²',
     estimatedBuildCost: '984 tys. zł',
     technology: 'MUROWANY',
+    category: 'dwulokalowy',
+    dateAdded: Date.parse('2025-12-01'),
     galleryImageCount: 5, // Łączna liczba zdjęć w galerii (main.jpg + 4x gallery-X.jpg)
     floorPlans: [
       {
@@ -188,6 +257,8 @@ export const allProjects: Project[] = [
     surfaceArea: '108m²',
     estimatedBuildCost: '354 tys. zł',
     technology: 'MUROWANY',
+    category: 'parterowy',
+    dateAdded: Date.parse('2025-11-15'),
     galleryImageCount: 5,
     floorPlans: [
       {
@@ -278,6 +349,8 @@ export const allProjects: Project[] = [
     surfaceArea: '177 + 34m²',
     estimatedBuildCost: '810 000 zł',
     technology: 'DREWNIANY',
+    category: 'z-poddaszem',
+    dateAdded: Date.parse('2025-10-20'),
     galleryImageCount: 4, // Domyślna wartość, do uzupełnienia
     floorPlans: [
       {
@@ -378,6 +451,8 @@ export const allProjects: Project[] = [
     surfaceArea: '157 + 55 m²',
     estimatedBuildCost: '747 tys. zł',
     technology: 'MUROWANY',
+    category: 'z-poddaszem',
+    dateAdded: Date.parse('2025-09-10'),
     galleryImageCount: 5, // Domyślna wartość, do uzupełnienia
     floorPlans: [
       {
@@ -483,6 +558,8 @@ export const allProjects: Project[] = [
     surfaceArea: '179 + 33 m²',
     estimatedBuildCost: '559 tys. zł',
     technology: 'MUROWANY',
+    category: 'z-poddaszem',
+    dateAdded: Date.parse('2025-08-05'),
     galleryImageCount: 5, // Domyślna wartość, do uzupełnienia
     floorPlans: [
       {
@@ -590,3 +667,115 @@ export const allProjects: Project[] = [
 
 export const getProjectBySlug = (slug: string): Project | undefined =>
   allProjects.find((p) => p.slug === slug);
+
+// --- Helper Functions dla Filtrowania i Sortowania ---
+
+/**
+ * Parsuje string ceny "984 tys. zł" lub "810 000 zł" na liczbę
+ */
+export function parseEstimatedCost(costString: string): number {
+  // Usuń wszystkie spacje i zamień przecinki na kropki
+  const cleanString = costString.replace(/\s/g, '').replace(',', '.');
+
+  // Znajdź liczby
+  const match = cleanString.match(/(\d+(?:\.\d+)?)/);
+  if (!match) return 0;
+
+  const num = parseFloat(match[1]);
+
+  // Sprawdź czy zawiera "tys" (tysiące)
+  if (costString.toLowerCase().includes('tys')) {
+    return num * 1000;
+  }
+
+  return num;
+}
+
+/**
+ * Parsuje string powierzchni "248 + 38m²" lub "108m²" na sumę liczb
+ */
+export function parseSurfaceArea(areaString: string): number {
+  const numbers = areaString.match(/\d+/g);
+  if (!numbers) return 0;
+  return numbers.reduce((sum, n) => sum + parseInt(n, 10), 0);
+}
+
+/**
+ * Filtruje projekty według podanych filtrów
+ */
+export function filterProjects(
+  projects: Project[],
+  filters: ProjectFilters
+): Project[] {
+  return projects.filter(project => {
+    // Filtr technologii (checkbox - może być wiele wybranych)
+    if (filters.technology.length > 0 && !filters.technology.includes(project.technology)) {
+      return false;
+    }
+
+    // Filtr kategorii (checkbox - może być wiele wybranych)
+    if (filters.category.length > 0 && !filters.category.includes(project.category)) {
+      return false;
+    }
+
+    // Filtr budżetu (radio - tylko jeden)
+    if (filters.budgetRange) {
+      const range = budgetRanges.find(r => r.id === filters.budgetRange);
+      if (range) {
+        const cost = parseEstimatedCost(project.estimatedBuildCost);
+        if (cost < range.min) return false;
+        if (range.max !== null && cost > range.max) return false;
+      }
+    }
+
+    // Filtr powierzchni użytkowej (radio - tylko jeden)
+    if (filters.surfaceRange) {
+      const range = surfaceRanges.find(r => r.id === filters.surfaceRange);
+      if (range) {
+        const area = parseSurfaceArea(project.surfaceArea);
+        if (area < range.min) return false;
+        if (range.max !== null && area > range.max) return false;
+      }
+    }
+
+    return true;
+  });
+}
+
+/**
+ * Sortuje projekty według wybranej opcji
+ */
+export function sortProjects(projects: Project[], sortBy: SortOption): Project[] {
+  const sorted = [...projects];
+
+  switch (sortBy) {
+    case 'price-asc':
+      return sorted.sort((a, b) => parseEstimatedCost(a.estimatedBuildCost) - parseEstimatedCost(b.estimatedBuildCost));
+    case 'price-desc':
+      return sorted.sort((a, b) => parseEstimatedCost(b.estimatedBuildCost) - parseEstimatedCost(a.estimatedBuildCost));
+    case 'area-asc':
+      return sorted.sort((a, b) => parseSurfaceArea(a.surfaceArea) - parseSurfaceArea(b.surfaceArea));
+    case 'area-desc':
+      return sorted.sort((a, b) => parseSurfaceArea(b.surfaceArea) - parseSurfaceArea(a.surfaceArea));
+    default:
+      return sorted;
+  }
+}
+
+/**
+ * Zlicza projekty dla danego filtra (do wyświetlania "Murowany (4)")
+ */
+export function countProjectsByFilter(
+  projects: Project[],
+  filterType: 'technology' | 'category',
+  value: string
+): number {
+  return projects.filter(p => p[filterType] === value).length;
+}
+
+/**
+ * Zwraca wszystkie slugi projektów (dla SSG generateStaticParams)
+ */
+export function getAllProjectSlugs(): string[] {
+  return allProjects.map(p => p.slug);
+}

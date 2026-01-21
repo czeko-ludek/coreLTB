@@ -60,7 +60,7 @@ export function generateServiceSchema(
     "@type": "Service",
     "@id": `${pageUrl}#service`,
     name: `Budowa domów ${page.cityName}`,
-    description: stripMarkdown(page.intro.paragraphs.join(' ')),
+    description: stripMarkdown(page.emotionalHero.subtitle),
     provider: getProviderSchema(),
     areaServed: page.areaServed.map(city => ({
       "@type": "City",

@@ -11,6 +11,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronDown,
+  ChevronUp,
   Facebook,
   Twitter,
   Instagram,
@@ -79,6 +80,12 @@ import {
   Paperclip,
   Wind,
   MousePointer2,
+  Link2,
+  List,
+  Filter,
+  RefreshCw,
+  SlidersHorizontal,
+  ArrowUpDown,
 } from 'lucide-react';
 
 const iconMap = {
@@ -164,6 +171,13 @@ const iconMap = {
   paperclip: Paperclip,
   wind: Wind,
   mousePointer: MousePointer2,
+  link: Link2,
+  list: List,
+  filter: Filter,
+  refreshCw: RefreshCw,
+  chevronUp: ChevronUp,
+  slidersHorizontal: SlidersHorizontal,
+  arrowUpDown: ArrowUpDown,
 };
 
 export type IconName = keyof typeof iconMap;

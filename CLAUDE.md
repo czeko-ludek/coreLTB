@@ -1,6 +1,1018 @@
 # CLAUDE.md - CoreLTB Builders - Dokumentacja Projektu
 
-**Ostatnia aktualizacja:** 2026-01-17
+**Ostatnia aktualizacja:** 2026-01-20
+
+---
+
+## 🆕 AKTUALIZACJA SESJI (2026-01-20) - Sticky Sidebar + Active Section Tracking + CTA Redesign
+
+### ✅ Naprawa Sticky Sidebar na Stronach Lokalnych
+
+**Problem:** Spis treści i CTA box nie podążały za użytkownikiem przy scrollowaniu. Brak podświetlania aktywnej sekcji w TOC.
+
+**Rozwiązanie:**
+
+1. **Sticky Sidebar** - Dodano `self-start` i poprawny offset `lg:top-[160px]`
+2. **Active Section Tracking** - IntersectionObserver podświetla aktywną sekcję w TOC
+3. **Scroll Margin** - `scroll-mt-[168px]` dla spójności z sticky headerem (~150px)
+
+### ✅ Redesign CTA Box (Compact & Personalized)
+
+**Zmiana:** Długi, generyczny CTA box → Krótki, spersonalizowany dla miasta
+
+**Stary CTA:**
+- Długi tytuł + 4 benefity + 2 buttony + subtext
+
+**Nowy CTA:**
+```
+┌─────────────────────────────┐
+│ Planujesz budowę w {miasto}?│
+│                             │
+│ Bezpłatna konsultacja i     │
+│ wycena. Budujemy lokalnie   │
+│ od 15 lat.                  │
+│                             │
+│ [📞 Zadzwoń] [✉️ Napisz]    │
+└─────────────────────────────┘
+```
+
+**Interface zmieniony:**
+```tsx
+// Stary
+interface LocalPageSidebarProps {
+  sections: TOCItem[];
+  ctaBox?: CTABoxData;  // ❌ USUNIĘTY
+  ...
+}
+
+// Nowy
+interface LocalPageSidebarProps {
+  sections: TOCItem[];
+  cityName: string;     // ✅ NOWY - miasto dla personalizacji
+  ...
+}
+```
+
+**CTA teraz używa `companyData.telephone` dla linku tel:**
+
+### ✅ System Odmian Nazw Miast (Miejscownik)
+
+**Problem:** Polski wymaga odmiany - "w Mikołowie", nie "w Mikołów"
+
+**Rozwiązanie:** Dodane pole `cityNameLocative` (miejscownik) do `LocalPageData`
+
+```typescript
+// local-pages.ts
+export interface LocalPageData {
+  cityName: string;           // "Mikołów" (mianownik)
+  cityNameLocative: string;   // "Mikołowie" (miejscownik - "w Mikołowie")
+  // ...
+}
+```
+
+**Aktualne odmiany (7 miast):**
+
+| Miasto | Mianownik | Miejscownik |
+|--------|-----------|-------------|
+| Rybnik | Rybnik | Rybniku |
+| Wodzisław Śląski | Wodzisław Śląski | Wodzisławiu Śląskim |
+| Tychy | Tychy | Tychach |
+| Katowice | Katowice | Katowicach |
+| Jaworzno | Jaworzno | Jaworznie |
+| Mikołów | Mikołów | Mikołowie |
+| Gliwice | Gliwice | Gliwicach |
+
+**Przy dodawaniu nowego miasta pamiętaj o dodaniu `cityNameLocative`!**
+
+**Zmodyfikowane pliki:**
+- `/components/shared/LocalPageSidebar.tsx` - sticky fix + offset
+- `/components/sections/LocalPageContentSection.tsx` - active section tracking
+
+### Techniczne Szczegóły
+
+**LocalPageSidebar.tsx:**
+```tsx
+// Sticky sidebar z offsetem uwzględniającym header (~150px + gap)
+<aside className="lg:sticky lg:top-[160px] self-start space-y-6">
+```
+
+**LocalPageContentSection.tsx:**
+```tsx
+// useMemo dla tocItems (optymalizacja)
+const tocItems = useMemo(() => [...], [deps]);
+
+// Active section tracking z IntersectionObserver
+const [activeSection, setActiveSection] = useState<string>('');
+const HEADER_OFFSET = 168;
+
+// Observer z rootMargin uwzględniającym header
+rootMargin: `-${HEADER_OFFSET}px 0px -50% 0px`
+
+// Scroll margin na sekcjach
+<section id={section.id} className="scroll-mt-[168px]">
+```
+
+### Konfiguracja Offsetów (WAŻNE)
+
+| Element | Wartość | Opis |
+|---------|---------|------|
+| Header sticky | ~150px | Top bar (~40px) + Main nav (~107px) |
+| Sidebar top | `160px` | Header + 10px gap |
+| Scroll margin | `168px` | Header + 18px gap (lepszy UX) |
+| Observer offset | `168px` | Spójne z scroll margin |
+
+**Aby zmienić offset (np. przy zmianie wysokości headera):**
+1. `LocalPageSidebar.tsx` → `lg:top-[XXXpx]`
+2. `LocalPageContentSection.tsx` → `HEADER_OFFSET = XXX`
+3. `LocalPageContentSection.tsx` → `scroll-mt-[XXXpx]`
+
+---
+
+## 🆕 AKTUALIZACJA SESJI (2026-01-19) - Redesign Stron Lokalnych (Blog-Style)
+
+### ✅ Nowy Layout Stron Lokalnych `/obszar-dzialania/[slug]`
+
+**Cel:** Przekształcenie stron lokalnych na design podobny do strony pojedynczego wpisu blogowego z 2-kolumnowym layoutem i sticky sidebar.
+
+**Nowe pliki:**
+- `/components/sections/LocalPageContentSection.tsx` - Główna sekcja 2-kolumnowa (organizm)
+- `/components/shared/LocalPageSidebar.tsx` - Sticky sidebar z TOC + CTA Box (molekuła)
+
+**Zmodyfikowane pliki:**
+- `/app/obszar-dzialania/[slug]/page.tsx` - Nowy layout z funkcją konwertującą dane
+- `/components/sections/index.ts` - Eksport LocalPageContentSection
+- `/components/shared/index.ts` - Eksport LocalPageSidebar
+
+### Architektura Nowego Layoutu
+
+```
+┌────────────────────────────────────────────────────────────┐
+│  PageHeader (hero + breadcrumbs)    ← BEZ ZMIAN            │
+├────────────────────────────────────────────────────────────┤
+│  BEŻOWE TŁO (#efebe7)                                      │
+│  ┌────────────────────────────────┐ ┌──────────────────┐   │
+│  │  BIAŁY BOX (TREŚĆ)             │ │  SIDEBAR (320px) │   │
+│  │                                │ │  (sticky)        │   │
+│  │  H1: Budowa Domów {miasto}     │ │                  │   │
+│  │  ════════════════════          │ │ ┌──────────────┐ │   │
+│  │                                │ │ │ SPIS TREŚCI  │ │   │
+│  │  ## Sekcja 1                   │ │ │  • Sekcja 1  │ │   │
+│  │  ────────────────              │ │ │  • Sekcja 2  │ │   │
+│  │  ContentBlocks...              │ │ │  • Dzielnice │ │   │
+│  │                                │ │ │  • FAQ       │ │   │
+│  │  ## Sekcja 2                   │ │ └──────────────┘ │   │
+│  │  ────────────────              │ │                  │   │
+│  │  ContentBlocks...              │ │ ┌──────────────┐ │   │
+│  │                                │ │ │ CTA BOX      │ │   │
+│  │  ## Dzielnice                  │ │ │ (złoty)      │ │   │
+│  │  ────────────────              │ │ │ ✓ Benefit 1  │ │   │
+│  │  [Grid dzielnic]               │ │ │ ✓ Benefit 2  │ │   │
+│  │                                │ │ │ [Zadzwoń]    │ │   │
+│  │  ## FAQ                        │ │ └──────────────┘ │   │
+│  │  ────────────────              │ │                  │   │
+│  │  [Accordion]                   │ └──────────────────┘   │
+│  └────────────────────────────────┘                        │
+├────────────────────────────────────────────────────────────┤
+│  ContactCTASection    ← BEZ ZMIAN                          │
+└────────────────────────────────────────────────────────────┘
+```
+
+### Złote Kreski Pod Nagłówkami (KONFIGUROWALNE)
+
+**Można zmienić/wyłączyć** w `/components/sections/LocalPageContentSection.tsx`:
+
+```tsx
+// H1 - większa kreska (linia ~348)
+<span className="block w-20 h-1.5 bg-primary mt-4 mb-2 rounded-full" />
+
+// H2 - mniejsza kreska (linie ~351, ~191, ~265)
+<span className="block w-16 h-1 bg-primary mt-3 rounded-full" />
+```
+
+**Aby wyłączyć:** Usuń lub zakomentuj linie ze `<span className="block w-... bg-primary..." />`
+
+**Aby zmienić rozmiar:**
+- `w-16` → `w-20`, `w-24` (szerokość)
+- `h-1` → `h-0.5`, `h-1.5` (grubość)
+- `mt-3` → `mt-2`, `mt-4` (odstęp od góry)
+
+### Konwersja Danych (Automatyczna)
+
+Funkcja `convertToLocalPageContent()` w `page.tsx` automatycznie konwertuje istniejące dane z `local-pages.ts` do nowego formatu. **Nie trzeba przepisywać danych 7 miast.**
+
+Konwertuje:
+- `emotionalHero.subtitle` → sekcja "Wprowadzenie" z callout
+- `buildingStages.items` → sekcja z H3 i ContentBlocks
+- `localSpecifics.items` → sekcja z H3 i ContentBlocks
+- `energyEfficiency/formalities` → opcjonalne sekcje
+- `whyUs.points` → sekcja "Dlaczego My"
+- `districts.hub.cities` → grid dzielnic
+- `faq.items` → accordion FAQ
+- `**bold**` markdown → `<strong>` HTML
+
+### Responsywność
+
+| Viewport | Layout |
+|----------|--------|
+| Mobile (<1024px) | 1 kolumna, sidebar pod treścią |
+| Desktop (>=1024px) | 2 kolumny, sidebar sticky |
+
+### Opcja Cofnięcia
+
+Jeśli nowy design nie pasuje, wystarczy przywrócić poprzednią wersję `page.tsx` z git:
+```bash
+git checkout HEAD~1 -- app/obszar-dzialania/[slug]/page.tsx
+```
+
+**Build:** ✅ 42 strony SSG wygenerowane poprawnie
+
+---
+
+## 🆕 AKTUALIZACJA SESJI (2026-01-19) - Sekcja Projekty z Filtrowaniem
+
+### ✅ Nowa Strona Listingowa Projektów `/projekty`
+
+**Cel:** Stworzenie pełnej strony katalogowej projektów z filtrowaniem, sortowaniem i responsywnym designem.
+
+**Nowe pliki:**
+- `/app/projekty/page.tsx` - Strona listingowa (SSG)
+- `/components/sections/ProjectsListingSection.tsx` - Główna sekcja (organizm)
+- `/components/shared/ProjectListingCard.tsx` - Karta projektu (molekuła)
+- `/components/shared/ProjectFilterSidebar.tsx` - Sidebar z filtrami (molekuła)
+- `/components/shared/MobileFilterDrawer.tsx` - Drawer filtrów na mobile
+
+**Zmodyfikowane pliki:**
+- `/data/projects.ts` - Rozszerzony interface Project + helper functions
+- `/components/ui/Icon.tsx` - Nowe ikony (filter, refreshCw, chevronUp)
+- `/components/sections/index.ts` - Eksport ProjectsListingSection
+- `/components/shared/index.ts` - Eksporty nowych komponentów
+
+**Build:** ✅ 42 strony SSG wygenerowane poprawnie (0 errors)
+
+---
+
+## 🏠 PROJEKTY - DOKUMENTACJA TECHNICZNA
+
+### Architektura Sekcji Projektów
+
+```
+ProjectsListingSection (Organizm)
+├── Breadcrumbs (nawigacja)
+├── H1 Title + Highlight (złoty kolor)
+├── Description
+├── Mobile Filter Button (lg:hidden)
+├── Main Grid (lg:grid-cols-[280px_1fr])
+│   ├── ProjectFilterSidebar (sticky, desktop only)
+│   │   ├── Wyniki counter
+│   │   ├── Sortowanie (radio)
+│   │   ├── Technologia (checkbox)
+│   │   ├── Kategoria (checkbox)
+│   │   ├── Budżet (radio)
+│   │   └── Reset Button
+│   └── Projects Grid (1/2/3 kolumny)
+│       └── ProjectListingCard[] (cascading animations)
+├── Empty State (gdy brak wyników)
+├── CTA Banner (złoty gradient)
+└── MobileFilterDrawer (bottom sheet)
+```
+
+### Rozszerzony Interface Project
+
+```typescript
+// Nowe typy w /data/projects.ts
+export type ProjectCategory = 'jednorodzinny' | 'dwulokalowy' | 'z-poddaszem' | 'parterowy';
+export type ProjectTechnology = 'MUROWANY' | 'DREWNIANY';
+export type SortOption = 'newest' | 'oldest' | 'price-asc' | 'price-desc' | 'area-asc' | 'area-desc';
+
+export interface ProjectFilters {
+  technology: ProjectTechnology[];
+  category: ProjectCategory[];
+  budgetRange: string | null;
+}
+
+export interface Project {
+  // Istniejące pola
+  slug: string;
+  id: string;
+  title: string;
+  // ...
+
+  // NOWE POLA
+  category: ProjectCategory;    // 'jednorodzinny' | 'dwulokalowy' | ...
+  dateAdded: number;            // timestamp do sortowania
+  thumbnailSrc?: string;        // opcjonalne
+}
+```
+
+### Stałe Konfiguracyjne (łatwe do rozszerzenia)
+
+```typescript
+// Kategorie - dodaj nowe tutaj
+export const projectCategories = [
+  { id: 'jednorodzinny', label: 'Jednorodzinny' },
+  { id: 'dwulokalowy', label: 'Dwulokalowy' },
+  { id: 'z-poddaszem', label: 'Z poddaszem' },
+  { id: 'parterowy', label: 'Parterowy' },
+] as const;
+
+// Technologie
+export const projectTechnologies = [
+  { id: 'MUROWANY', label: 'Murowany' },
+  { id: 'DREWNIANY', label: 'Drewniany' },
+] as const;
+
+// Zakresy budżetowe
+export const budgetRanges: BudgetRange[] = [
+  { id: 'do-500', label: 'do 500 tys. zł', min: 0, max: 500000 },
+  { id: '500-800', label: '500-800 tys. zł', min: 500000, max: 800000 },
+  { id: 'powyzej-800', label: 'powyżej 800 tys. zł', min: 800000, max: null },
+];
+
+// Opcje sortowania
+export const sortOptions = [
+  { id: 'newest', label: 'Najnowsze' },
+  { id: 'oldest', label: 'Najstarsze' },
+  { id: 'price-asc', label: 'Cena rosnąco' },
+  { id: 'price-desc', label: 'Cena malejąco' },
+  { id: 'area-asc', label: 'Powierzchnia rosnąco' },
+  { id: 'area-desc', label: 'Powierzchnia malejąco' },
+] as const;
+```
+
+### Helper Functions
+
+```typescript
+// Parsowanie ceny "984 tys. zł" → 984000
+parseEstimatedCost(costString: string): number
+
+// Parsowanie powierzchni "248 + 38m²" → 286
+parseSurfaceArea(areaString: string): number
+
+// Filtrowanie projektów
+filterProjects(projects: Project[], filters: ProjectFilters): Project[]
+
+// Sortowanie projektów
+sortProjects(projects: Project[], sortBy: SortOption): Project[]
+
+// Liczenie projektów per filtr (dla "Murowany (4)")
+countProjectsByFilter(projects: Project[], filterType, value): number
+
+// Wszystkie slugi (dla SSG)
+getAllProjectSlugs(): string[]
+```
+
+### Komponenty Kart
+
+| Komponent | Użycie | Opis |
+|-----------|--------|------|
+| `ProjectListingCard` | Grid projektów | Karta z obrazem, badge'ami kategorii/technologii, detalami |
+
+**Layout karty:**
+```
+┌─────────────────────────────────────┐
+│  [KATEGORIA badge - lewy górny]    │
+│        OBRAZEK (aspect 4/3)         │
+│  [TECHNOLOGIA badge - prawy dolny] │
+├─────────────────────────────────────┤
+│  Projekt ID                         │
+│  TYTUŁ (h3, line-clamp-2)          │
+│  ┌─────────────┐ ┌───────────────┐ │
+│  │ POWIERZCHNIA│ │ KOSZT BUDOWY  │ │
+│  └─────────────┘ └───────────────┘ │
+│  [Zobacz projekt →]                │
+└─────────────────────────────────────┘
+```
+
+### Responsywność
+
+| Viewport | Sidebar | Projects Grid | Filtry |
+|----------|---------|---------------|--------|
+| Mobile (<768px) | Ukryty | 1 kolumna | Bottom drawer |
+| Tablet (768-1023px) | Ukryty | 2 kolumny | Bottom drawer |
+| Desktop (>=1024px) | Sticky 280px | 2-3 kolumny | W sidebarze |
+
+### Animacje
+
+| Element | Animacja | Delay |
+|---------|----------|-------|
+| Breadcrumbs | fadeInUp | 0.1s |
+| Header | fadeInUp | 0.15s |
+| Mobile button | fadeInUp | 0.2s |
+| Sidebar | fadeInUp | 0.2s |
+| Karty | fadeInUp cascading | 0.3 + index*0.1s |
+| CTA Banner | fadeInUp | 0.5s |
+
+### Procedura Dodawania Nowego Projektu
+
+**Krok 1:** Edytuj `/data/projects.ts`:
+
+```typescript
+export const allProjects: Project[] = [
+  // ... istniejące projekty
+  {
+    slug: 'nowy-projekt',
+    id: 'NP100',
+    title: 'Opis projektu...',
+    alt: 'Wizualizacja...',
+    price: '6 500 zł',
+    availability: '3 dni robocze',
+    surfaceArea: '145m²',
+    estimatedBuildCost: '520 tys. zł',
+    technology: 'MUROWANY',
+    category: 'jednorodzinny',           // ← WYMAGANE
+    dateAdded: Date.parse('2026-01-19'), // ← WYMAGANE
+    galleryImageCount: 5,
+    floorPlans: [...],
+    specifications: [...],
+    costCalculation: {...},
+  },
+];
+```
+
+**Krok 2:** Dodaj obrazy:
+
+```
+/public/images/projekty/nowy-projekt/
+├── main.webp           - Główne zdjęcie
+├── thumbnail.webp      - Miniatura (800×600 rekomendowane)
+├── gallery-1.webp      - Galeria
+└── plan-parter.webp    - Plan piętra
+```
+
+**Krok 3:** Build
+
+```bash
+npm run build
+```
+
+Projekt automatycznie pojawi się:
+- Na stronie `/projekty` (listing z filtrami)
+- Na stronie `/projekty/nowy-projekt` (szczegóły)
+
+### Dodawanie Nowej Kategorii
+
+**Krok 1:** Edytuj `/data/projects.ts`:
+
+```typescript
+// 1. Dodaj do typu
+export type ProjectCategory = 'jednorodzinny' | 'dwulokalowy' | 'z-poddaszem' | 'parterowy' | 'nowa-kategoria';
+
+// 2. Dodaj do stałej
+export const projectCategories = [
+  // ... istniejące
+  { id: 'nowa-kategoria', label: 'Nowa Kategoria' },
+] as const;
+```
+
+**Krok 2:** Przypisz kategorię do projektów i uruchom build.
+
+### Kolorystyka
+
+| Element | Kolor | Klasa/Wartość |
+|---------|-------|---------------|
+| Tło sekcji | Beżowy | `#efebe7` |
+| Karty | Biały | `bg-white` |
+| Badge kategorii | Złoty | `bg-primary text-white` |
+| Badge technologii | Ciemny | `bg-zinc-800/90 text-white` |
+| Aktywny filtr | Złoty | `accent-primary` |
+| CTA Banner | Złoty gradient | `from-primary to-primary-dark` |
+
+### Routing
+
+| Ścieżka | Plik | Opis |
+|---------|------|------|
+| `/projekty` | `/app/projekty/page.tsx` | Lista wszystkich projektów z filtrami |
+| `/projekty/[slug]` | `/app/projekty/[slug]/page.tsx` | Strona pojedynczego projektu (SSG) |
+
+---
+
+## 🆕 AKTUALIZACJA SESJI (2026-01-19)
+
+### ✅ Zmiana Sekcji Intro na EmotionalHeroSection (Strony Lokalne)
+
+**Cel:** Ujednolicenie designu stron lokalnych z sekcją początkową ze stron ofertowych (z CTA Box i buttonami konsultacji).
+
+**Zmiana:** `IntroSection` → `EmotionalHeroSection` na wszystkich 7 stronach lokalnych.
+
+**Zaktualizowane pliki:**
+
+1. **`/data/local-pages.ts`** - Nowy interface `EmotionalHeroData`:
+```typescript
+export interface EmotionalHeroData {
+  label: string;
+  headline: string | string[];
+  subtitle: string;
+  benefits?: string[];
+  ctaBoxTitle: string;
+  ctaBoxBenefits: string[];
+  ctaBoxSubtext: string;
+  ctaBoxButtons: CTAButton[];
+}
+
+export interface LocalPageData {
+  // ...
+  emotionalHero: EmotionalHeroData;  // ← Zamiast intro
+  // ...
+}
+```
+
+2. **`/app/obszar-dzialania/[slug]/page.tsx`**:
+   - Import: `IntroSection` → `EmotionalHeroSection`
+   - Użycie: `<EmotionalHeroSection {...page.emotionalHero} />`
+   - TOC: ID sekcji `intro` → `emotional-hero`, label `Wprowadzenie` → `Konsultacja`
+
+3. **`/lib/schema/generators.ts`**:
+   - Zmiana: `page.intro.paragraphs.join(' ')` → `page.emotionalHero.subtitle`
+
+**Zaktualizowane strony lokalne (7):**
+- ✅ Rybnik
+- ✅ Wodzisław Śląski
+- ✅ Tychy
+- ✅ Katowice
+- ✅ Jaworzno
+- ✅ Mikołów
+- ✅ Gliwice
+
+**Przykładowa struktura EmotionalHero dla strony lokalnej:**
+```typescript
+emotionalHero: {
+  label: "BUDOWA DOMÓW RYBNIK",
+  headline: ["Budujesz Dom w Rybniku?", "Teren Górniczy Wymaga Specjalistów"],
+  subtitle: "Rybnik to teren górniczy kategorii II-IV. Standardowy projekt katalogowy nie wystarczy...",
+  benefits: [
+    "Specjalizacja w budowie na terenach górniczych (kat. II-IV)",
+    "Płyty fundamentowe i wzmocnione konstrukcje jako standard",
+    "15 lat doświadczenia w powiecie rybnickim",
+  ],
+  ctaBoxTitle: "☎ Umów Bezpłatną Konsultację",
+  ctaBoxBenefits: [
+    "Ocenimy kategorię terenu górniczego Twojej działki",
+    "Dobierzemy odpowiednie rozwiązania konstrukcyjne",
+    "Przedstawimy realny kosztorys budowy",
+    "Odpowiemy na wszystkie Twoje pytania",
+  ],
+  ctaBoxSubtext: "Konsultacja jest bezpłatna i niezobowiązująca.",
+  ctaBoxButtons: [
+    { text: "Zadzwoń do Nas", variant: "secondary" },
+    { text: "Napisz do Nas", href: "#kontakt", variant: "secondary" },
+  ],
+},
+```
+
+**Build:** ✅ 28 stron SSG wygenerowanych poprawnie (0 errors)
+
+### ✅ Sekcja Blogowa - BentoBlogSection (ZAKTUALIZOWANA)
+
+**Cel:** Nowoczesna sekcja blogowa z dynamicznym filtrowaniem po kategoriach i automatycznym sortowaniem po dacie.
+
+**Pliki:**
+- `/components/sections/BentoBlogSection.tsx` - Główny komponent
+- `/data/blog-data.ts` - Dane wszystkich wpisów blogowych
+- `/app/blog/page.tsx` - Strona bloga
+
+---
+
+## 📝 BLOG - DOKUMENTACJA TECHNICZNA
+
+### Architektura Sekcji Blogowej
+
+```
+BentoBlogSection (Organizm)
+├── Breadcrumbs (nawigacja)
+├── H1 Title + Highlight (złoty kolor)
+├── Description
+├── Category Filters (grid 5-kolumnowy)
+├── Main Grid (3-kolumnowy)
+│   ├── MainPostCard (2/3 szerokości) - najnowszy post
+│   └── Recommended Sidebar (1/3) - starsze posty
+├── Bottom Grid (3 kafelki) - następne 3 najnowsze
+└── Load More Button
+```
+
+### Logika Wyświetlania Postów
+
+**KLUCZOWE:** Posty są automatycznie rozdzielane na sekcje na podstawie daty:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  1. FILTROWANIE                                             │
+│     - "Wszystkie" → wszystkie posty                         │
+│     - Kategoria → tylko posty z categoryId === activeCategory│
+├─────────────────────────────────────────────────────────────┤
+│  2. SORTOWANIE                                              │
+│     - Po dateTimestamp (najnowsze najpierw)                 │
+├─────────────────────────────────────────────────────────────┤
+│  3. ROZDZIELENIE NA SEKCJE                                  │
+│     - mainPost = filteredPosts[0] (najnowszy)               │
+│     - bottomPosts = filteredPosts[1..3] (następne 3)        │
+│     - recommendedPosts = filteredPosts[4+] (reszta/starsze) │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Interface BlogPost
+
+```typescript
+export interface BlogPost {
+  id: string;                    // Unikalne ID (używane jako key i w URL)
+  image: { src: string; alt: string };
+  category: string;              // Nazwa wyświetlana (np. "Technologia")
+  categoryId: string;            // ID do filtrowania (np. "technologia")
+  date: string;                  // Data wyświetlana (np. "14 Stycznia, 2026")
+  dateTimestamp: number;         // Timestamp do sortowania (Date.parse())
+  readTime?: string;             // Opcjonalnie (np. "5 min czytania")
+  title: string;
+  excerpt: string;
+  author?: BlogAuthor;           // Opcjonalnie { name, role?, avatar? }
+  href: string;                  // Link do wpisu
+}
+```
+
+### Interface BentoBlogSectionProps
+
+```typescript
+export interface BentoBlogSectionProps {
+  breadcrumbs?: Breadcrumb[];    // Nawigacja nad H1
+  title: string;                 // "Wiedza, innowacje i"
+  titleHighlight?: string;       // "nowoczesne budownictwo." (złoty)
+  description: string;
+  categories: BlogCategory[];    // Filtry kategorii
+  posts: BlogPost[];             // WSZYSTKIE posty (sortowanie automatyczne)
+  loadMoreLabel?: string;
+}
+```
+
+### Kategorie
+
+```typescript
+export const blogCategories: BlogCategory[] = [
+  { id: 'realizacje', label: 'Realizacje' },
+  { id: 'technologia', label: 'Technologia' },
+  { id: 'prawo', label: 'Prawo budowlane' },
+  { id: 'porady', label: 'Porady' },
+];
+```
+
+### Komponenty Kart
+
+| Komponent | Użycie | Opis |
+|-----------|--------|------|
+| `MainPostCard` | Główny post (lewo) | Duża karta 2/3 szerokości, zdjęcie, autor, excerpt |
+| `SmallPostCard` | Sidebar "Polecane" | Mała karta z miniaturką 96x96px |
+| `GridPostCard` | Dolne 3 kafelki | Karta ze zdjęciem aspect-[4/3] |
+
+### Dodawanie Nowego Wpisu
+
+**Krok 1:** Dodaj wpis do `/data/blog-data.ts`:
+
+```typescript
+export const blogPosts: BlogPost[] = [
+  {
+    id: 'moj-nowy-wpis',                          // Unikalne ID
+    image: {
+      src: 'https://images.unsplash.com/...',    // URL zdjęcia
+      alt: 'Opis zdjęcia',
+    },
+    category: 'Technologia',                      // Nazwa wyświetlana
+    categoryId: 'technologia',                    // ID kategorii
+    date: '20 Stycznia, 2026',                    // Data wyświetlana
+    dateTimestamp: Date.parse('2026-01-20'),      // ← WAŻNE: timestamp do sortowania
+    readTime: '5 min czytania',                   // Opcjonalnie
+    title: 'Tytuł mojego wpisu',
+    excerpt: 'Krótki opis wpisu...',
+    author: {                                     // Opcjonalnie
+      name: 'Jan Kowalski',
+      avatar: 'https://...',
+    },
+    href: '/blog/moj-nowy-wpis',                  // Link do wpisu
+  },
+  // ... inne wpisy
+];
+```
+
+**Krok 2:** Post automatycznie pojawi się w odpowiednim miejscu na podstawie `dateTimestamp`.
+
+### Kolorystyka
+
+| Element | Kolor | Klasa/Wartość |
+|---------|-------|---------------|
+| Tło sekcji | Beżowy | `#efebe7` |
+| Karty | Biały | `#ffffff` |
+| Kategoria (badge) | Złoty + biały tekst | `bg-primary text-white` |
+| Aktywny filtr | Złoty | `bg-primary text-white` |
+| Nieaktywny filtr | Biały + ramka | `bg-white border-2` |
+| Title highlight | Złoty | `text-primary` |
+
+### Responsywność
+
+| Viewport | Filtry | Main Grid | Bottom Grid |
+|----------|--------|-----------|-------------|
+| Mobile | 2 kolumny | 1 kolumna (stack) | 1 kolumna |
+| Tablet | 3 kolumny | 1 kolumna | 2 kolumny |
+| Desktop | 5 kolumn | 3 kolumny (2+1) | 3 kolumny |
+
+### Użycie
+
+```tsx
+// /app/blog/page.tsx
+import { BentoBlogSection } from '@/components/sections';
+import { blogSectionData } from '@/data/blog-data';
+
+export default function BlogPage() {
+  return (
+    <main>
+      <BentoBlogSection {...blogSectionData} />
+    </main>
+  );
+}
+```
+
+### Funkcje
+
+- ✅ Dynamiczne filtrowanie po kategoriach
+- ✅ Automatyczne sortowanie po dacie
+- ✅ Breadcrumbs nawigacja
+- ✅ Animacje scroll-triggered (cascading delays)
+- ✅ Sticky main post na desktop
+- ✅ Scrollowalny sidebar "Polecane"
+- ✅ Hover effects na kartach (scale, shadow, color)
+- ✅ Pełne karty klikalne (Link wrapper)
+- ✅ Empty state gdy brak postów w kategorii
+- ✅ Load More button
+
+---
+
+## 📄 STRONA POJEDYNCZEGO WPISU BLOGOWEGO
+
+### Architektura
+
+```
+BlogPostContent (Organizm) - /app/blog/[slug]/page.tsx
+├── Breadcrumbs (Strona główna → Blog → Tytuł)
+├── Main Grid (2-kolumnowy: lg:grid-cols-[1fr_320px])
+│   ├── Article (lewa kolumna - biały box)
+│   │   ├── Featured Image (aspect 2:1)
+│   │   ├── Post Meta (data, czas czytania, kategoria)
+│   │   ├── H1 Title
+│   │   ├── Content Blocks (renderowane dynamicznie)
+│   │   ├── Tags (linki)
+│   │   ├── Share Buttons (Facebook, LinkedIn, Link)
+│   │   └── Author Box (zdjęcie + imię + rola)
+│   └── Sidebar (prawa kolumna - sticky)
+│       ├── Table of Contents (biały box, sticky top-24)
+│       └── CTA Box (gradient złoty)
+└── Related Posts (3 karty, full width)
+```
+
+### Layout
+
+**2-kolumnowy grid:** Artykuł (lewo) + Sticky Sidebar (prawo, 320px).
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│                         BEŻOWE TŁO (#efebe7)                           │
+│                                                                        │
+│  ┌────────────────────────────────────────────────┐  ┌──────────────┐  │
+│  │           BIAŁY BOX (ARTYKUŁ)                  │  │   SIDEBAR    │  │
+│  │  ┌──────────────────────────────────────────┐  │  │   (320px)    │  │
+│  │  │        FEATURED IMAGE (aspect 2:1)       │  │  │              │  │
+│  │  └──────────────────────────────────────────┘  │  │ ┌──────────┐ │  │
+│  │                                                │  │ │ SPIS     │ │  │
+│  │  Meta: 📅 14 Stycznia  •  ⏱ 5 min  •  KATEG.  │  │ │ TREŚCI   │ │  │
+│  │                                                │  │ │ (sticky) │ │  │
+│  │  # Tytuł Artykułu (H1)                        │  │ │  • H2    │ │  │
+│  │                                                │  │ │    • H3  │ │  │
+│  │  CONTENT BLOCKS:                              │  │ └──────────┘ │  │
+│  │  - paragraph                                  │  │              │  │
+│  │  - heading (H2, H3, H4)                       │  │ ┌──────────┐ │  │
+│  │  - list (złote kropki)                        │  │ │ CTA BOX  │ │  │
+│  │  - image (z caption)                          │  │ │ (złoty   │ │  │
+│  │  - quote (złota linia)                        │  │ │ gradient)│ │  │
+│  │  - callout (info/warning/tip)                 │  │ │          │ │  │
+│  │                                                │  │ │ [Umów    │ │  │
+│  │  ─────────────────────────────────────────    │  │ │konsultację]│ │
+│  │  Tags: #technologia #materiały                │  │ └──────────┘ │  │
+│  │  ─────────────────────────────────────────    │  │              │  │
+│  │  Udostępnij: [FB] [LI] [🔗]                   │  └──────────────┘  │
+│  │                                                │                    │
+│  │  ┌──────────────────────────────────────────┐  │                    │
+│  │  │ 👤 AUTHOR BOX                            │  │                    │
+│  │  └──────────────────────────────────────────┘  │                    │
+│  └────────────────────────────────────────────────┘                    │
+│                                                                        │
+│              PODOBNE ARTYKUŁY (3 karty, full width)                    │
+│              [Karta 1]      [Karta 2]      [Karta 3]                   │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+**Responsywność:**
+- **Desktop (lg+):** 2 kolumny - artykuł + sticky sidebar
+- **Mobile/Tablet:** 1 kolumna - sidebar pod artykułem
+
+### System ContentBlock
+
+**Interface:**
+```typescript
+export interface ContentBlock {
+  type: 'paragraph' | 'heading' | 'image' | 'list' | 'quote' | 'callout';
+  content?: string;        // Treść (wspiera HTML)
+  items?: string[];        // Lista elementów
+  src?: string;            // URL obrazu
+  alt?: string;            // Alt text obrazu
+  caption?: string;        // Podpis (obraz, cytat)
+  level?: 2 | 3 | 4;       // Poziom nagłówka
+  variant?: 'info' | 'warning' | 'tip';  // Wariant callout
+}
+```
+
+### 🎨 Stylizacja ContentBlock
+
+#### 1. **Paragraph** (Akapit)
+```typescript
+{ type: 'paragraph', content: 'Treść akapitu z <strong>bold</strong>...' }
+```
+- **Style:** `text-text-secondary leading-relaxed mb-6`
+- **HTML:** Wspiera `<strong>`, `<em>`, `<a>` przez `dangerouslySetInnerHTML`
+
+#### 2. **Heading** (Nagłówek)
+```typescript
+{ type: 'heading', level: 2, content: 'Tytuł sekcji' }
+```
+
+| Level | Style | Użycie |
+|-------|-------|--------|
+| H2 | `text-2xl md:text-3xl font-bold mt-12 mb-6` | Główne sekcje artykułu |
+| H3 | `text-xl md:text-2xl font-semibold mt-10 mb-4` | Podsekcje |
+| H4 | `text-lg md:text-xl font-semibold mt-8 mb-3` | Mniejsze nagłówki |
+
+#### 3. **List** (Lista punktowana)
+```typescript
+{
+  type: 'list',
+  items: [
+    '<strong>Element 1</strong> - opis',
+    '<strong>Element 2</strong> - opis',
+  ]
+}
+```
+- **Style:** `space-y-3 mb-6 ml-6`
+- **Punkt:** Złota kropka (`bg-primary rounded-full w-2 h-2`)
+- **HTML:** Wspiera `<strong>`, `<em>` w elementach
+
+#### 4. **Image** (Obraz)
+```typescript
+{
+  type: 'image',
+  src: 'https://images.unsplash.com/...',
+  alt: 'Opis obrazu',
+  caption: 'Podpis pod obrazem (opcjonalny)'
+}
+```
+- **Kontener:** `aspect-[16/9] rounded-xl overflow-hidden my-8`
+- **Podpis:** `text-sm text-text-muted text-center italic mt-3`
+
+#### 5. **Quote** (Cytat)
+```typescript
+{
+  type: 'quote',
+  content: 'Treść cytatu...',
+  caption: 'Autor cytatu'
+}
+```
+- **Style:** `pl-6 border-l-4 border-primary bg-primary/5 py-4 pr-6 rounded-r-xl my-8`
+- **Treść:** `text-lg italic text-text-primary`
+- **Autor:** `text-sm text-text-muted not-italic` z prefixem "—"
+
+#### 6. **Callout** (Wyróżniony blok) ⭐
+
+```typescript
+{
+  type: 'callout',
+  variant: 'info' | 'warning' | 'tip',
+  content: '<strong>Nagłówek:</strong> Treść callout...'
+}
+```
+
+| Variant | Kolor | Ikona | Użycie |
+|---------|-------|-------|--------|
+| **info** 🔵 | `bg-blue-50 border-blue-200 text-blue-800` | `info` | Informacje dodatkowe, ciekawostki |
+| **warning** 🟠 | `bg-amber-50 border-amber-200 text-amber-800` | `alertTriangle` | Ostrzeżenia, ważne uwagi |
+| **tip** 🟢 | `bg-green-50 border-green-200 text-green-800` | `lightbulb` | Porady eksperta, wskazówki |
+
+**Przykłady użycia:**
+
+```typescript
+// 🔵 INFO - Informacja
+{
+  type: 'callout',
+  variant: 'info',
+  content: '<strong>Uwaga:</strong> Ta sekcja dotyczy tylko terenów górniczych kategorii III i wyższej.'
+}
+
+// 🟠 WARNING - Ostrzeżenie
+{
+  type: 'callout',
+  variant: 'warning',
+  content: '<strong>Ważne:</strong> Przed rozpoczęciem budowy należy uzyskać opinię geotechniczną!'
+}
+
+// 🟢 TIP - Porada
+{
+  type: 'callout',
+  variant: 'tip',
+  content: '<strong>Porada eksperta:</strong> Zalecamy stosowanie izolacji XPS o grubości min. 15 cm.'
+}
+```
+
+### Dodawanie Treści do Wpisu
+
+**Krok 1:** W `/data/blog-data.ts` dodaj treść do `blogPostContents`:
+
+```typescript
+export const blogPostContents: Record<string, ContentBlock[]> = {
+  'moj-nowy-wpis': [
+    {
+      type: 'paragraph',
+      content: 'Wprowadzenie do artykułu...',
+    },
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Pierwszy rozdział',
+    },
+    {
+      type: 'paragraph',
+      content: 'Treść pierwszego rozdziału...',
+    },
+    {
+      type: 'callout',
+      variant: 'tip',
+      content: '<strong>Porada:</strong> Pamiętaj o tym aspekcie!',
+    },
+    {
+      type: 'list',
+      items: [
+        '<strong>Punkt 1</strong> - opis',
+        '<strong>Punkt 2</strong> - opis',
+      ],
+    },
+    {
+      type: 'image',
+      src: 'https://images.unsplash.com/...',
+      alt: 'Opis obrazu',
+      caption: 'Podpis pod obrazem',
+    },
+    {
+      type: 'quote',
+      content: 'Cytat z artykułu lub od eksperta.',
+      caption: 'Imię Nazwisko, Stanowisko',
+    },
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Podsumowanie',
+    },
+    {
+      type: 'paragraph',
+      content: 'Końcowe wnioski...',
+    },
+  ],
+};
+```
+
+**Krok 2:** Strona automatycznie wygeneruje się pod `/blog/moj-nowy-wpis` (SSG).
+
+### Funkcje Pomocnicze
+
+```typescript
+// Pobierz post po slug
+getBlogPostBySlug(slug: string): BlogPost | undefined
+
+// Wszystkie slugi (dla generateStaticParams)
+getAllBlogSlugs(): string[]
+
+// Powiązane posty (ta sama kategoria)
+getRelatedPosts(currentSlug: string, limit?: number): BlogPost[]
+
+// Pełne dane posta z treścią
+getBlogPostDataBySlug(slug: string): BlogPostData | undefined
+
+// Konwersja do RelatedPost
+toRelatedPost(post: BlogPost): RelatedPost
+```
+
+### Routing
+
+| Ścieżka | Plik | Opis |
+|---------|------|------|
+| `/blog` | `/app/blog/page.tsx` | Lista wszystkich wpisów |
+| `/blog/[slug]` | `/app/blog/[slug]/page.tsx` | Strona pojedynczego wpisu (SSG) |
+
+### SEO
+
+- ✅ `generateMetadata()` z title, description, OpenGraph
+- ✅ Twitter Cards (summary_large_image)
+- ✅ Breadcrumbs
+- ✅ Semantic HTML (article, h1, h2, nav)
 
 ---
 

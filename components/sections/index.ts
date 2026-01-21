@@ -40,9 +40,6 @@ export type { TeamSectionProps } from './TeamSection';
 export { TestimonialsSection } from './TestimonialsSection';
 export type { TestimonialsSectionProps } from './TestimonialsSection';
 
-export { CtaSection } from './CtaSection';
-export type { CtaSectionProps } from './CtaSection';
-
 export { BlogSection } from './BlogSection';
 export type { BlogSectionProps } from './BlogSection';
 
@@ -61,6 +58,9 @@ export type { CooperationTimelineSectionNoLineProps } from './CooperationTimelin
 
 export { ServicesAccordionSection } from './ServicesAccordionSection';
 export type { ServicesAccordionSectionProps } from './ServicesAccordionSection';
+
+export { FAQTwoColumnsSection } from './FAQTwoColumnsSection';
+export type { FAQTwoColumnsSectionProps, FAQItem as FAQTwoColumnsItem } from './FAQTwoColumnsSection';
 
 export { ContactCTASection } from './ContactCTASection';
 export type { ContactCTASectionProps } from './ContactCTASection';
@@ -111,3 +111,51 @@ export type { SimpleImageTextSectionProps } from './SimpleImageTextSection';
 export { IntroSection } from './IntroSection';
 export type { IntroSectionProps } from './IntroSection';
 
+// Interactive Map Section (Obszar Działania Hub)
+export { InteractiveMapSection } from './InteractiveMapSection';
+
+// Bento Blog Section
+export { BentoBlogSection } from './BentoBlogSection';
+export type {
+  BentoBlogSectionProps,
+  Breadcrumb,
+  BlogCategory,
+  BlogAuthor,
+  BlogPost,
+  FeaturedPost,
+  TallPost,
+  StandardPost,
+  QuoteBlock,
+  WidePost,
+  NewsletterBlock,
+  RecommendedPost,
+  ImagePost,
+  BlogGridItem
+} from './BentoBlogSection';
+
+// Blog Post Content (Single Post Page)
+export { BlogPostContent } from './BlogPostContent';
+export type {
+  BlogPostContentProps,
+  BlogPostData,
+  ContentBlock,
+  RelatedPost,
+  FAQItem as BlogFAQItem,
+} from './BlogPostContent';
+
+// Projects Listing Section
+export { ProjectsListingSection } from './ProjectsListingSection';
+export type { ProjectsListingSectionProps, Breadcrumb as ProjectsBreadcrumb } from './ProjectsListingSection';
+
+// Local Page Content Section (Blog-style layout)
+export { LocalPageContentSection } from './LocalPageContentSection';
+export type {
+  LocalPageContentSectionProps,
+  LocalPageContent,
+  LocalPageSection,
+  ContentBlock as LocalContentBlock,
+  District,
+  DistrictsData,
+  FAQItem as LocalFAQItem,
+  FAQData,
+} from './LocalPageContentSection';

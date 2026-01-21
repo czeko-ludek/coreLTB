@@ -5,10 +5,9 @@ import { PageHeader } from '@/components/shared'; // ✅ Centralized import
 import {
   EmotionalHeroSection,
   PhilosophyTimelineSection,
-  ServicesAccordionSection,
+  FAQTwoColumnsSection,
   AreasSection,
   TestimonialsSection,
-  CooperationTimelineSection,
   CooperationTimelineSectionNoLine,
   ContactCTASection,
 } from '@/components/sections'; // ✅ Centralized import
@@ -92,9 +91,15 @@ export default async function ServicePageV2({
         <AreasSection {...service.areasData} />
       )}
 
-      {/* Sekcja 5: Treść dla Zainteresowanych (FAQ/Accordion) */}
+      {/* Sekcja 5: FAQ - Najczęściej zadawane pytania (2-kolumnowy layout) */}
       {service.servicesAccordion && (
-        <ServicesAccordionSection {...service.servicesAccordion} />
+        <FAQTwoColumnsSection
+          header={service.servicesAccordion.header}
+          items={service.servicesAccordion.services.map((s) => ({
+            question: s.title,
+            content: s.content,
+          }))}
+        />
       )}
 
       {/* Sekcja 6: Opinie Klientów */}

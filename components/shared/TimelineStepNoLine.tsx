@@ -115,93 +115,77 @@ export function TimelineStepNoLine({
     return null;
   };
 
+  // Zigzag: nieparzyste (1,3,5...) = tekst-obraz, parzyste (2,4,6...) = obraz-tekst
+  const isEven = number % 2 === 0;
+
   return (
     <section id={id} ref={setRefs} className="scroll-mt-24">
-      {/* Layout Mobile (pionowy stack) - w białym kontenerze */}
-      <div className={`md:hidden bg-white rounded-3xl shadow-lg p-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-        {/* Nagłówek z numerem */}
-        <div className="flex items-center gap-4 mb-4">
-          <div
-            className={clsx(
-              'w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all duration-300 flex-shrink-0',
-              isActive
-                ? 'bg-primary border-primary text-white shadow-lg'
-                : 'bg-gray-100 border-gray-300 text-gray-600'
-            )}
-          >
-            <span className="text-sm font-bold">{number}</span>
+      {/* Layout Zigzag - Mobile: stack, Desktop: flex row/row-reverse */}
+      <div
+        className={clsx(
+          'flex flex-col gap-6',
+          'lg:flex-row lg:items-center lg:gap-12',
+          isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'
+        )}
+      >
+        {/* Biały Box z Tekstem */}
+        <div
+          className={clsx(
+            'flex-1 bg-white rounded-3xl p-6 md:p-8 lg:p-10 shadow-lg',
+            isVisible ? 'animate-fade-in-up' : 'opacity-0'
+          )}
+          style={{ animationDelay: '0.1s' }}
+        >
+          {/* Label + Tytuł */}
+          <div className="mb-6">
+            <span className="text-sm font-semibold text-primary uppercase tracking-wide">
+              {label}
+            </span>
+            <h3
+              className={clsx(
+                'text-xl md:text-2xl lg:text-3xl font-bold transition-colors duration-300 mt-1',
+                isActive ? 'text-primary' : 'text-gray-900'
+              )}
+            >
+              {title}
+            </h3>
           </div>
-          <h3
-            className={clsx(
-              'text-xl font-bold transition-colors duration-300',
-              isActive ? 'text-primary' : 'text-gray-900'
-            )}
-          >
-            {title}
-          </h3>
+
+          {/* Treść */}
+          <div className="text-gray-600 leading-relaxed text-base lg:text-lg">
+            {content.map((block, index) => renderContentBlock(block, index))}
+          </div>
         </div>
 
-        {/* Obraz */}
-        <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden mb-4">
-          <Image
-            src={imageSrc}
-            alt={imageAlt}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-        </div>
+        {/* Obraz z ikoną w rogu */}
+        <div
+          className={clsx(
+            'flex-1',
+            isVisible ? 'animate-fade-in-up' : 'opacity-0'
+          )}
+          style={{ animationDelay: '0.25s' }}
+        >
+          <div className="relative w-full aspect-[4/3] lg:aspect-[16/12] rounded-3xl overflow-hidden shadow-xl ring-1 ring-black/5">
+            <Image
+              src={imageSrc}
+              alt={imageAlt}
+              fill
+              className="object-cover hover:scale-105 transition-transform duration-700"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+            {/* Subtle gradient overlay on image */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
 
-        {/* Treść */}
-        <div className="text-gray-600 leading-relaxed">
-          {content.map((block, index) => renderContentBlock(block, index))}
-        </div>
-      </div>
-
-      {/* Layout Desktop - BENTO STYLE */}
-      <div className="hidden md:block">
-        {/* Jeden biały kontener dla tekstu i obrazu */}
-        <div className="relative py-6">
-          <div className={`min-h-[600px] bg-white rounded-3xl overflow-hidden flex flex-col lg:flex-row shadow-lg hover:shadow-xl transition-shadow duration-300 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
-               style={{ animationDelay: '0.2s' }}>
-            {/* TEXT Section - 60% width, order-2 mobile, order-1 desktop */}
-            <div className="p-8 lg:p-12 flex-1 lg:flex-[6] flex flex-col justify-center order-2 lg:order-1">
-              {/* Ikona usunieta - będzie floating badge na obrazie */}
-
-              <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-                {title}
-              </h3>
-
-              <div className="text-gray-600 leading-relaxed text-base">
-                {content.map((block, index) => renderContentBlock(block, index))}
-              </div>
-            </div>
-
-            {/* IMAGE Section - 40% width, order-1 mobile, order-2 desktop */}
-            <div className="relative w-full lg:w-2/5 lg:flex-[4] h-80 lg:h-auto overflow-hidden order-1 lg:order-2">
-              <Image
-                src={imageSrc}
-                alt={imageAlt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 40vw"
-              />
-
-              {/* Floating badge (top-left) - IKONA + LABEL */}
-              <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm px-5 py-3 rounded-full flex items-center gap-3 shadow-sm">
-                <div className={clsx(
-                  "w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-300",
-                  isActive ? 'bg-primary text-white' : 'bg-gray-600 text-white'
-                )}>
-                  <Icon
-                    name={icon}
-                    className="w-4 h-4"
-                  />
-                </div>
-                <span className="text-base font-bold text-gray-900">
-                  {label}
-                </span>
-              </div>
+            {/* Floating Icon Badge - top left corner */}
+            <div
+              className={clsx(
+                'absolute top-4 left-4 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-lg',
+                isActive
+                  ? 'bg-primary text-white'
+                  : 'bg-white/90 backdrop-blur-sm text-primary'
+              )}
+            >
+              <Icon name={icon} size="lg" />
             </div>
           </div>
         </div>

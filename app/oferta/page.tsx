@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import React from "react";
-import { CtaSection } from "@/components/sections/CtaSection";
+import { ContactCTASection } from "@/components/sections";
+import { companyData } from "@/data/company-data";
 import { PhilosophyTimelineSection } from "@/components/sections/PhilosophyTimelineSection";
 import {
 	PageHeader,
@@ -153,19 +154,16 @@ export default function OfferPage() {
 				}}
 			/>
 
-			{/* 5. CTA Section - Final push dla undecided users */}
-			<CtaSection
-				title="Nie wiesz od czego zacząć?"
-				email="coreltb@gmail.com"
-				primaryButton={{
-					text: "Umów konsultację",
-					href: "/kontakt",
+			{/* 5. CTA Section */}
+			<ContactCTASection
+				contactInfo={{
+					phone: companyData.telephone,
+					email: companyData.email,
 				}}
 				socials={[
-					{ platform: "facebook" as const, href: "https://facebook.com" },
-					{ platform: "instagram" as const, href: "https://instagram.com" },
-					{ platform: "linkedin" as const, href: "https://linkedin.com" },
-					{ platform: "youtube" as const, href: "https://youtube.com" },
+					{ platform: "facebook", href: "https://facebook.com" },
+					{ platform: "instagram", href: "https://instagram.com" },
+					{ platform: "linkedin", href: "https://linkedin.com" },
 				]}
 			/>
 		</main>

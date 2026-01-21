@@ -38,12 +38,36 @@ export interface ImageTextSection {
 }
 
 /**
+ * EmotionalHero CTA Button
+ */
+export interface CTAButton {
+  text: string;
+  href?: string;
+  variant?: 'primary' | 'secondary';
+}
+
+/**
+ * EmotionalHero Section Data (zgodne z EmotionalHeroSectionProps)
+ */
+export interface EmotionalHeroData {
+  label: string;
+  headline: string | string[];
+  subtitle: string;
+  benefits?: string[];
+  ctaBoxTitle: string;
+  ctaBoxBenefits: string[];
+  ctaBoxSubtext: string;
+  ctaBoxButtons: CTAButton[];
+}
+
+/**
  * Główny interface dla strony lokalnej
  */
 export interface LocalPageData {
   // Meta & Routing
   slug: string;                    // "rybnik"
-  cityName: string;                // "Rybnik"
+  cityName: string;                // "Rybnik" (mianownik)
+  cityNameLocative: string;        // "Rybniku" (miejscownik - "w Rybniku")
   region: string;                  // "woj. śląskie"
   metaTitle: string;
   metaDescription: string;
@@ -51,11 +75,8 @@ export interface LocalPageData {
   // Hero (PageHeader)
   pageHeader: PageHeaderProps;
 
-  // Intro (tekst wstępny)
-  intro: {
-    label: string;
-    paragraphs: string[];
-  };
+  // EmotionalHero (sekcja z CTA Box - jak na stronach ofertowych)
+  emotionalHero: EmotionalHeroData;
 
   // Etapy budowy (SimpleImageTextSection style)
   buildingStages: ImageTextSection;
@@ -102,6 +123,7 @@ export const rybnikPage: LocalPageData = {
   // Meta
   slug: "rybnik",
   cityName: "Rybnik",
+  cityNameLocative: "Rybniku",
   region: "woj. śląskie",
   metaTitle: "Budowa Domów Rybnik – Generalny Wykonawca | CoreLTB Builders",
   metaDescription: "Profesjonalna budowa domów w Rybniku. Specjalizujemy się w terenach górniczych. Płyty fundamentowe, wzmocnione konstrukcje, pełne zabezpieczenia. ✓ 15 lat doświadczenia ✓ Gwarancja",
@@ -113,17 +135,33 @@ export const rybnikPage: LocalPageData = {
     backgroundImage: "/images/local/rybnik/hero.webp", // TODO: Dodać obraz
     breadcrumbs: [
       { label: "Strona główna", href: "/" },
+      { label: "Obszar działania", href: "/obszar-dzialania" },
       { label: "Budowa domów Rybnik", href: "" }
     ]
   },
 
-  // Intro
-  intro: {
+  // EmotionalHero - sekcja z CTA Box
+  emotionalHero: {
     label: "BUDOWA DOMÓW RYBNIK",
-    paragraphs: [
-      "**Budowa domu** na terenie Rybnika czy powiatu rybnickiego różni się od realizacji w innych częściach Polski jednym kluczowym czynnikiem: aktywnością górniczą. Pierwszym krokiem nie jest wybór koloru elewacji, ale weryfikacja **Miejscowego Planu Zagospodarowania Przestrzennego (MPZP)** oraz uzyskanie informacji o prognozowanej kategorii terenu górniczego.",
-      "Większość działek w dzielnicach takich jak Boguszowice, Chwałowice czy Niedobczyce znajduje się w strefie wpływów eksploatacji górniczej. Oznacza to konieczność wykonania **adaptacji projektu** przez konstruktora z uprawnieniami do projektowania na terenach górniczych. Standardowy projekt katalogowy \"za 3000 zł\" nie uwzględnia wzmocnień fundamentów ani sztywności bryły budynku wymaganej przy wstrząsach rzędu 3-4 stopni w skali Richtera."
-    ]
+    headline: ["Budujesz Dom w Rybniku?", "Teren Górniczy Wymaga Specjalistów"],
+    subtitle: "Rybnik to teren górniczy kategorii II-IV. Standardowy projekt katalogowy nie wystarczy – potrzebujesz wykonawcy, który zna lokalne uwarunkowania i zabezpieczy Twój dom przed skutkami eksploatacji górniczej.",
+    benefits: [
+      "Specjalizacja w budowie na terenach górniczych (kat. II-IV)",
+      "Płyty fundamentowe i wzmocnione konstrukcje jako standard",
+      "15 lat doświadczenia w powiecie rybnickim",
+    ],
+    ctaBoxTitle: "☎ Umów Bezpłatną Konsultację",
+    ctaBoxBenefits: [
+      "Ocenimy kategorię terenu górniczego Twojej działki",
+      "Dobierzemy odpowiednie rozwiązania konstrukcyjne",
+      "Przedstawimy realny kosztorys budowy",
+      "Odpowiemy na wszystkie Twoje pytania",
+    ],
+    ctaBoxSubtext: "Konsultacja jest bezpłatna i niezobowiązująca.",
+    ctaBoxButtons: [
+      { text: "Zadzwoń do Nas", variant: "secondary" },
+      { text: "Napisz do Nas", href: "#kontakt", variant: "secondary" },
+    ],
   },
 
   // Etapy budowy - 3 główne zakresy współpracy
@@ -513,6 +551,7 @@ export const wodzislawPage: LocalPageData = {
   // Meta
   slug: "wodzislaw-slaski",
   cityName: "Wodzisław Śląski",
+  cityNameLocative: "Wodzisławiu Śląskim",
   region: "woj. śląskie",
   metaTitle: "Budowa Domów Wodzisław Śląski – Generalny Wykonawca | CoreLTB Builders",
   metaDescription: "Profesjonalna budowa domów w Wodzisławiu Śląskim. Specjalizujemy się w terenach górniczych. Płyty fundamentowe, wzmocnione konstrukcje. ✓ 15 lat doświadczenia ✓ Gwarancja",
@@ -521,21 +560,36 @@ export const wodzislawPage: LocalPageData = {
   pageHeader: {
     title: "Budowa Domów Wodzisław Śląski",
     watermarkText: "WODZISŁAW",
-    backgroundImage: "/images/local/wodzislaw/hero.webp",
+    backgroundImage: "/images/local/wodzislaw-slaski/hero.webp",
     breadcrumbs: [
       { label: "Strona główna", href: "/" },
+      { label: "Obszar działania", href: "/obszar-dzialania" },
       { label: "Budowa domów Wodzisław Śląski", href: "" }
     ]
   },
 
-  // Intro
-  intro: {
+  // EmotionalHero - sekcja z CTA Box
+  emotionalHero: {
     label: "BUDOWA DOMÓW WODZISŁAW ŚLĄSKI",
-    paragraphs: [
-      "Wodzisław Śląski i powiat wodzisławski to teren wymagający, gdzie standardowe podejście do budownictwa jednorodzinnego często okazuje się niewystarczające. **Kompleksowa budowa domu** w naszym wydaniu to nie tylko wznoszenie murów, ale przede wszystkim inżynieryjne zarządzanie projektem w warunkach deformacji górotworu.",
-      "Definiujemy generalne wykonawstwo jako proces, w którym **CoreLTB Builders** przejmuje rolę jedynego partnera odpowiedzialnego za efekt końcowy. Oznacza to, że nie musisz koordynować pracy geodety, operatora koparki, murarzy, dekarzy i hydraulików. My robimy to za Ciebie. W warunkach śląskich, gdzie **szkody górnicze** mogą osiągać nawet III czy IV kategorię, kluczowa jest ciągłość nadzoru. Jeden błąd przy zbrojeniu ław fundamentowych może skutkować pękaniem ścian nośnych po kilku latach eksploatacji. Nasz model pracy opiera się na **technologii tradycyjnej murowanej**, która dzięki swojej masie i sztywności, przy odpowiednim wzmocnieniu, najlepiej znosi lokalne wstrząsy.",
-      "Działamy w oparciu o precyzyjny harmonogram rzeczowo-finansowy. Dzięki temu wiesz, kiedy zamawiamy stal na strop, kiedy wchodzi ekipa od tynków, a kiedy wykonujemy **testy szczelności** budynku. To podejście eliminuje przestoje, które w obecnych czasach generują ogromne koszty związane z wynajmem sprzętu czy wzrostem cen materiałów."
-    ]
+    headline: ["Planujesz Budowę w Wodzisławiu?", "Znamy Ten Teren od 15 Lat"],
+    subtitle: "Powiat wodzisławski to teren górniczy, gdzie standardowe projekty często zawodzą. Potrzebujesz wykonawcy z doświadczeniem w budowie na deformujących się gruntach – my realizujemy domy od stanu zero do klucza.",
+    benefits: [
+      "15 lat doświadczenia w powiecie wodzisławskim",
+      "Technologia murowana odporna na wstrząsy górnicze",
+      "Jeden partner = pełna odpowiedzialność za efekt końcowy",
+    ],
+    ctaBoxTitle: "☎ Umów Bezpłatną Konsultację",
+    ctaBoxBenefits: [
+      "Sprawdzimy kategorię terenu górniczego Twojej działki",
+      "Dobierzemy optymalną technologię budowy",
+      "Przedstawimy harmonogram i kosztorys",
+      "Odpowiemy na wszystkie Twoje pytania",
+    ],
+    ctaBoxSubtext: "Konsultacja jest bezpłatna i niezobowiązująca.",
+    ctaBoxButtons: [
+      { text: "Zadzwoń do Nas", variant: "secondary" },
+      { text: "Napisz do Nas", href: "#kontakt", variant: "secondary" },
+    ],
   },
 
   // Etapy budowy
@@ -766,6 +820,7 @@ export const tychyPage: LocalPageData = {
   // Meta
   slug: "tychy",
   cityName: "Tychy",
+  cityNameLocative: "Tychach",
   region: "woj. śląskie",
   metaTitle: "Budowa Domów Tychy – Generalny Wykonawca | CoreLTB Builders",
   metaDescription: "Profesjonalna budowa domów w Tychach. Specjalizacja w terenach górniczych i trudnych gruntach. ✓ Doświadczenie ✓ Gwarancja ✓ Terminowość",
@@ -777,16 +832,33 @@ export const tychyPage: LocalPageData = {
     backgroundImage: "/images/local/tychy/hero.webp",
     breadcrumbs: [
       { label: "Strona główna", href: "/" },
+      { label: "Obszar działania", href: "/obszar-dzialania" },
       { label: "Budowa domów Tychy", href: "" }
     ]
   },
 
-  // Intro
-  intro: {
+  // EmotionalHero - sekcja z CTA Box
+  emotionalHero: {
     label: "BUDOWA DOMÓW TYCHY",
-    paragraphs: [
-      "Mieszkasz w Tychach lub planujesz zakup działki w tym regionie? **Budowa domów** na Śląsku to wyzwanie inżynieryjne, które wymaga czegoś więcej niż standardowego projektu z katalogu. Specyfika tutejszych gruntów – często gliniastych i narażonych na szkody górnicze – wymusza stosowanie wzmocnionych konstrukcji i precyzyjnej izolacji. Jako generalny wykonawca działający lokalnie, realizujemy inwestycje w technologii murowanej, zapewniając **stan surowy otwarty** lub **deweloperski** w czasie od **8 do 14 miesięcy**. Koszt realizacji jest ściśle powiązany z kategorią szkód górniczych i startuje od poziomu rynkowego dla budownictwa energooszczędnego (szczegóły w tabeli poniżej). Nie jesteśmy pośrednikiem – dysponujemy własnym zapleczem sprzętowym i ludzkim, co pozwala nam przejąć pełną odpowiedzialność za proces budowlany, od geodezji po odbiory techniczne."
-    ]
+    headline: ["Budujesz Dom w Tychach?", "Lokalna Specjalizacja Ma Znaczenie"],
+    subtitle: "Tychy i okolice to teren, gdzie grunty gliniaste i wpływy górnicze wymagają specjalistycznego podejścia. Nie jesteśmy pośrednikiem – dysponujemy własnym zapleczem i realizujemy domy od 8 do 14 miesięcy.",
+    benefits: [
+      "Własne zaplecze sprzętowe i ekipy (bez pośredników)",
+      "Specjalizacja w trudnych gruntach i terenach górniczych",
+      "Realizacja od stanu zero do klucza w 8-14 miesięcy",
+    ],
+    ctaBoxTitle: "☎ Umów Bezpłatną Konsultację",
+    ctaBoxBenefits: [
+      "Ocenimy specyfikę Twojej działki i gruntu",
+      "Sprawdzimy kategorię terenu górniczego",
+      "Przedstawimy realny harmonogram i kosztorys",
+      "Odpowiemy na wszystkie Twoje pytania",
+    ],
+    ctaBoxSubtext: "Konsultacja jest bezpłatna i niezobowiązująca.",
+    ctaBoxButtons: [
+      { text: "Zadzwoń do Nas", variant: "secondary" },
+      { text: "Napisz do Nas", href: "#kontakt", variant: "secondary" },
+    ],
   },
 
   // Etapy budowy
@@ -1064,6 +1136,7 @@ export const katowicePage: LocalPageData = {
   // Meta
   slug: "katowice",
   cityName: "Katowice",
+  cityNameLocative: "Katowicach",
   region: "woj. śląskie",
   metaTitle: "Budowa Domów Katowice – Kompleksowe Wykonawstwo 2026 | CoreLTB Builders",
   metaDescription: "Budowa domu jednorodzinnego w Katowicach. Koszt stanu deweloperskiego od 5500-6500 zł/m². Specjalizacja w terenach górniczych. ✓ Lokalna baza logistyczna ✓ Gwarancja stałej ceny ✓ 12-18 miesięcy realizacji",
@@ -1075,17 +1148,33 @@ export const katowicePage: LocalPageData = {
     backgroundImage: "/images/local/katowice/hero.webp",
     breadcrumbs: [
       { label: "Strona główna", href: "/" },
+      { label: "Obszar działania", href: "/obszar-dzialania" },
       { label: "Budowa domów Katowice", href: "" }
     ]
   },
 
-  // Intro
-  intro: {
+  // EmotionalHero - sekcja z CTA Box
+  emotionalHero: {
     label: "BUDOWA DOMÓW KATOWICE",
-    paragraphs: [
-      "Mieszkasz w Katowicach i planujesz inwestycję życia, ale przeraża Cię wizja wieloletniej budowy? **Budowa domu jednorodzinnego** w technologii murowanej to proces inżynieryjny, który przy dobrej organizacji trwa średnio **12-18 miesięcy**. Koszt stanu deweloperskiego w 2026 roku dla naszego regionu startuje od **5500-6500 zł netto za m²**, a czas realizacji stanu surowego otwartego to zaledwie **3-4 miesiące**.",
-      "Jako **CORE LTB Builders**, jesteśmy Twoim lokalnym partnerem na Śląsku. Nasza baza logistyczna znajduje się w bezpośrednim sąsiedztwie, dzięki czemu dojazd na inwestycje w dzielnicach takich jak Podlesie, Zarzecze czy Kostuchna zajmuje nam kilkanaście minut. Eliminujemy zbędne koszty transportu i jesteśmy na budowie zawsze wtedy, gdy tego potrzebujesz. Oferujemy pełną koordynację prac – od fundamentów po klucz – zapewniając bezpieczeństwo finansowe i techniczne na trudnym, górniczym terenie."
-    ]
+    headline: ["Budujesz Dom w Katowicach?", "Mamy Bazę Logistyczną Tuż Obok"],
+    subtitle: "Realizujemy budowę domu jednorodzinnego w 12-18 miesięcy. Nasza baza jest w sąsiedztwie Katowic – dojazd na Podlesie, Zarzecze czy Kostuchnę zajmuje nam kilkanaście minut. Zero zbędnych kosztów transportu.",
+    benefits: [
+      "Stan deweloperski od 5500-6500 zł/m² netto (2026)",
+      "Lokalna baza logistyczna = szybka reakcja na budowie",
+      "Specjalizacja w terenach górniczych Katowic",
+    ],
+    ctaBoxTitle: "☎ Umów Bezpłatną Konsultację",
+    ctaBoxBenefits: [
+      "Ocenimy specyfikę terenu górniczego Twojej działki",
+      "Przedstawimy realny harmonogram 12-18 miesięcy",
+      "Przygotujemy wstępny kosztorys inwestycji",
+      "Odpowiemy na wszystkie Twoje pytania",
+    ],
+    ctaBoxSubtext: "Konsultacja jest bezpłatna i niezobowiązująca.",
+    ctaBoxButtons: [
+      { text: "Zadzwoń do Nas", variant: "secondary" },
+      { text: "Napisz do Nas", href: "#kontakt", variant: "secondary" },
+    ],
   },
 
   // buildingStages - Ile trwa budowa domu?
@@ -1318,6 +1407,7 @@ export const jaworznoPage: LocalPageData = {
   // Meta
   slug: "jaworzno",
   cityName: "Jaworzno",
+  cityNameLocative: "Jaworznie",
   region: "woj. śląskie",
   metaTitle: "Budowa Domów Jaworzno – Generalny Wykonawca | CoreLTB Builders",
   metaDescription: "Kompleksowa budowa domów w Jaworznie. Specjalizacja w terenach pogórniczych i trudnych gruntach. ✓ Lokalny wykonawca ✓ Gwarancja ✓ Stała cena",
@@ -1329,17 +1419,33 @@ export const jaworznoPage: LocalPageData = {
     backgroundImage: "/images/local/jaworzno/hero.webp",
     breadcrumbs: [
       { label: "Strona główna", href: "/" },
+      { label: "Obszar działania", href: "/obszar-dzialania" },
       { label: "Budowa domów Jaworzno", href: "" }
     ]
   },
 
-  // Intro
-  intro: {
+  // EmotionalHero - sekcja z CTA Box
+  emotionalHero: {
     label: "BUDOWA DOMÓW JAWORZNO",
-    paragraphs: [
-      "**Budowa domów w Jaworznie** to złożony proces inwestycyjny realizowany w technologii murowanej, wymagający uwzględnienia specyficznych warunków gruntowych (szkody górnicze). Czas realizacji inwestycji od \"wbicia łopaty\" do stanu deweloperskiego wynosi średnio **8-12 miesięcy**. Koszt stanu surowego otwartego jest każdorazowo przedmiotem **wyceny indywidualnej**, zależnej od stopnia skomplikowania projektu i klasy gruntu. Jako lokalny generalny wykonawca, przejmujemy pełną odpowiedzialność za logistykę, materiały i nadzór techniczny, eliminując ryzyko błędów wykonawczych.",
-      "Mieszkasz w Jaworznie lub planujesz tu swoją przyszłość? Nie musisz szukać firmy budowlanej z drugiego końca Polski. Nasza baza operacyjna znajduje się w regionie, dzięki czemu doskonale znamy specyfikę lokalnych gruntów – od Jelenia po Ciężkowice. Wiemy, gdzie występują pustki pogórnicze, a gdzie grunt jest stabilny. Oferujemy realizację inwestycji z gwarancją stałej ceny, co w obecnych czasach inflacji materiałowej jest kluczowym bezpiecznikiem dla Twojego budżetu."
-    ]
+    headline: ["Budujesz Dom w Jaworznie?", "Znamy Każdy Zakamarek Tego Terenu"],
+    subtitle: "Nasza baza operacyjna jest w regionie – doskonale znamy specyfikę gruntów od Jelenia po Ciężkowice. Wiemy, gdzie występują pustki pogórnicze i jak zabezpieczyć Twój dom. Realizacja w 8-12 miesięcy.",
+    benefits: [
+      "Znajomość lokalnych warunków gruntowych (pustki pogórnicze)",
+      "Gwarancja stałej ceny – zabezpieczenie przed inflacją materiałów",
+      "Realizacja od stanu zero do deweloperskiego w 8-12 miesięcy",
+    ],
+    ctaBoxTitle: "☎ Umów Bezpłatną Konsultację",
+    ctaBoxBenefits: [
+      "Sprawdzimy specyfikę gruntu Twojej działki",
+      "Ocenimy ewentualne zagrożenia pogórnicze",
+      "Przedstawimy kosztorys z gwarancją stałej ceny",
+      "Odpowiemy na wszystkie Twoje pytania",
+    ],
+    ctaBoxSubtext: "Konsultacja jest bezpłatna i niezobowiązująca.",
+    ctaBoxButtons: [
+      { text: "Zadzwoń do Nas", variant: "secondary" },
+      { text: "Napisz do Nas", href: "#kontakt", variant: "secondary" },
+    ],
   },
 
   // Etapy budowy
@@ -1585,6 +1691,7 @@ export const mikolowPage: LocalPageData = {
   // Meta
   slug: "mikolow",
   cityName: "Mikołów",
+  cityNameLocative: "Mikołowie",
   region: "woj. śląskie",
   metaTitle: "Budowa Domów Mikołów – Kompleksowa Realizacja 2026 | CoreLTB Builders",
   metaDescription: "Budowa domu jednorodzinnego w Mikołowie. Koszt stanu deweloperskiego od 5500-7200 zł/m². Specjalizacja w szkodach górniczych (KWK Bolesław Śmiały). ✓ Lokalna firma ✓ Gwarancja stałej ceny ✓ 8-12 miesięcy realizacji",
@@ -1601,13 +1708,28 @@ export const mikolowPage: LocalPageData = {
     ]
   },
 
-  // Intro
-  intro: {
+  // EmotionalHero - sekcja z CTA Box
+  emotionalHero: {
     label: "BUDOWA DOMÓW MIKOŁÓW",
-    paragraphs: [
-      "**Budowa domu w systemie generalnego wykonawstwa** to złożony proces inwestycyjny, obejmujący realizację obiektu od prac ziemnych po stan gotowy do zamieszkania. Czas realizacji takiej inwestycji wynosi średnio **8-12 miesięcy**. Koszt budowy domu do stanu deweloperskiego w 2026 roku waha się w granicach **5500 – 7200 zł netto za m²**, w zależności od technologii i warunków gruntowych.",
-      "Mieszkasz w Mikołowie lub planujesz tu inwestycję? Jako lokalny wykonawca doskonale znamy specyfikę tutejszych gruntów. Działamy na terenie całego powiatu, od centrum po sołectwa, zabezpieczając budynki przed szkodami górniczymi (nawet do III i IV kategorii) oraz optymalizując koszty już na etapie adaptacji projektu. Zamiast szukać dziesięciu różnych ekip, powierzasz budowę **CORE LTB Builders** – my bierzemy na siebie pełną odpowiedzialność logistyczną, prawną i techniczną."
-    ]
+    headline: ["Budujesz Dom w Mikołowie?", "Lokalny Wykonawca to Klucz do Sukcesu"],
+    subtitle: "Znamy specyfikę gruntów w całym powiecie mikołowskim – od centrum po sołectwa. Zabezpieczamy budynki przed szkodami górniczymi (kat. III-IV). Realizacja w 8-12 miesięcy do stanu deweloperskiego.",
+    benefits: [
+      "Koszt stanu deweloperskiego od 5500-7200 zł/m² netto (2026)",
+      "Specjalizacja w terenach poeksploatacyjnych (KWK Bolesław Śmiały)",
+      "Pełna odpowiedzialność logistyczna, prawna i techniczna",
+    ],
+    ctaBoxTitle: "☎ Umów Bezpłatną Konsultację",
+    ctaBoxBenefits: [
+      "Zweryfikujemy MPZP i kategorię terenu górniczego",
+      "Ocenimy potrzebę badań geotechnicznych",
+      "Przedstawimy harmonogram i kosztorys",
+      "Odpowiemy na wszystkie Twoje pytania",
+    ],
+    ctaBoxSubtext: "Konsultacja jest bezpłatna i niezobowiązująca.",
+    ctaBoxButtons: [
+      { text: "Zadzwoń do Nas", variant: "secondary" },
+      { text: "Napisz do Nas", href: "#kontakt", variant: "secondary" },
+    ],
   },
 
   // Etapy budowy (współpracy z inwestorem)
@@ -1905,6 +2027,7 @@ export const gliwicePage: LocalPageData = {
   // Meta
   slug: "gliwice",
   cityName: "Gliwice",
+  cityNameLocative: "Gliwicach",
   region: "woj. śląskie",
   metaTitle: "Budowa Domów Gliwice – Generalny Wykonawca 2026 | CoreLTB Builders",
   metaDescription: "Budowa domu jednorodzinnego w Gliwicach. Specjalizacja w terenach górniczych (kategorie I-IV). Płyty fundamentowe, wzmocnione konstrukcje. ✓ 12-18 miesięcy realizacji ✓ Gwarancja stałej ceny ✓ Własne brygady",
@@ -1921,13 +2044,28 @@ export const gliwicePage: LocalPageData = {
     ]
   },
 
-  // Intro
-  intro: {
+  // EmotionalHero - sekcja z CTA Box
+  emotionalHero: {
     label: "BUDOWA DOMÓW GLIWICE",
-    paragraphs: [
-      "**Budowa domów w Gliwicach** to złożony proces inwestycyjny, który w 2026 roku trwa średnio od **12 do 18 miesięcy** (do stanu deweloperskiego). Koszt realizacji jest ściśle uzależniony od kategorii szkód górniczych na danej działce oraz wybranej technologii posadowienia. Jako generalny wykonawca, CoreLTB Builders przejmuje pełną odpowiedzialność za proces: od adaptacji projektu, przez wzmocnione fundamenty, aż po odbiory techniczne.",
-      "Zapewniamy bezpieczeństwo konstrukcji na terenach eksploatacji górniczej oraz terminowość potwierdzoną umową z gwarancją ceny. Gliwice i powiat gliwicki to teren specyficzny geologicznie – występowanie szkód górniczych (kategorie I-IV) oraz gruntów nasypowych wymaga indywidualnego podejścia do każdego projektu."
-    ]
+    headline: ["Budujesz Dom w Gliwicach?", "Teren Górniczy Wymaga Specjalistów"],
+    subtitle: "Gliwice i powiat gliwicki to teren z kategoriami szkód I-IV i gruntami nasypowymi. Przejmujemy pełną odpowiedzialność za proces budowy – od adaptacji projektu po odbiory techniczne. Realizacja w 12-18 miesięcy.",
+    benefits: [
+      "Specjalizacja w terenach górniczych (kategorie I-IV)",
+      "Wzmocnione fundamenty i płyty jako standard",
+      "Gwarancja stałej ceny i terminowości w umowie",
+    ],
+    ctaBoxTitle: "☎ Umów Bezpłatną Konsultację",
+    ctaBoxBenefits: [
+      "Sprawdzimy kategorię szkód górniczych Twojej działki",
+      "Dobierzemy optymalną technologię posadowienia",
+      "Przedstawimy harmonogram i kosztorys",
+      "Odpowiemy na wszystkie Twoje pytania",
+    ],
+    ctaBoxSubtext: "Konsultacja jest bezpłatna i niezobowiązująca.",
+    ctaBoxButtons: [
+      { text: "Zadzwoń do Nas", variant: "secondary" },
+      { text: "Napisz do Nas", href: "#kontakt", variant: "secondary" },
+    ],
   },
 
   // buildingStages

@@ -402,11 +402,11 @@ servicesAccordion: {
             'Od początku czuliśmy, że jesteśmy w dobrych rękach. CoreLTB traktował naszą inwestycję jak swoją własną. Terminowość, jakość i kontakt na najwyższym poziomie.',
           author: {
             image: {
-              src: '/images/testimonials/marek-kasia.jpg',
-              alt: 'Marek i Kasia - Właściciele domu w Krakowie',
+              src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100',
+              alt: 'Marek i Kasia',
             },
             name: 'Marek i Kasia',
-            role: 'Właściciele domu w Krakowie',
+            role: 'Właściciele domu, Rybnik',
           },
           rating: 5,
         },
@@ -415,11 +415,11 @@ servicesAccordion: {
             'Budowaliśmy po raz pierwszy i obawialiśmy się całego procesu. Dzięki CoreLTB wszystko przebiegło sprawnie i bez stresu. Polecam z całego serca!',
           author: {
             image: {
-              src: '/images/testimonials/piotr-nowicki.jpg',
-              alt: 'Piotr Nowicki - Właściciel domu w Katowicach',
+              src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100',
+              alt: 'Piotr Nowicki',
             },
             name: 'Piotr Nowicki',
-            role: 'Właściciel domu w Katowicach',
+            role: 'Właściciel domu, Katowice',
           },
           rating: 5,
         },
@@ -428,11 +428,50 @@ servicesAccordion: {
             'Profesjonalizm, uczciwość i zaangażowanie. To słowa, które najlepiej opisują CoreLTB. Nasz dom jest dokładnie taki, o jakim marzyliśmy.',
           author: {
             image: {
-              src: '/images/testimonials/anna-kowalczyk.jpg',
-              alt: 'Anna Kowalczyk - Właścicielka domu w Zakopanem',
+              src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100',
+              alt: 'Anna Kowalczyk',
             },
             name: 'Anna Kowalczyk',
-            role: 'Właścicielka domu w Zakopanem',
+            role: 'Właścicielka domu, Tychy',
+          },
+          rating: 5,
+        },
+        {
+          quote:
+            'Budowa na terenie szkód górniczych III kategorii - myśleliśmy, że to będzie koszmar. CoreLTB zrobili płytę fundamentową i stan surowy bez żadnych problemów. Fachowcy od trudnych gruntów!',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100',
+              alt: 'Tomasz Wróbel',
+            },
+            name: 'Tomasz Wróbel',
+            role: 'Inwestor, Bytom',
+          },
+          rating: 5,
+        },
+        {
+          quote:
+            'Stała cena w umowie i zero niespodzianek. Po doświadczeniach z poprzednią firmą to był oddech. Dom oddany tydzień przed terminem!',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100',
+              alt: 'Magdalena Sikora',
+            },
+            name: 'Magdalena Sikora',
+            role: 'Właścicielka domu, Gliwice',
+          },
+          rating: 4.9,
+        },
+        {
+          quote:
+            'Kompleksowa obsługa od A do Z. Nie musiałem szukać osobno ekip do każdego etapu. Jeden telefon, jeden wykonawca, zero stresu.',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100',
+              alt: 'Krzysztof Mazur',
+            },
+            name: 'Krzysztof Mazur',
+            role: 'Właściciel domu, Jaworzno',
           },
           rating: 5,
         },
@@ -750,7 +789,7 @@ servicesAccordion: {
 
     // PageHeader
     pageHeader: {
-      title: 'Projektowanie domu',
+      title: 'Projekty Domów i Adaptacje',
       watermarkText: 'PROJEKTOWANIE',
       backgroundImage: '/images/uslugi/projektowanie/hero.webp',
       breadcrumbs: [
@@ -762,71 +801,56 @@ servicesAccordion: {
 
     // Sekcja 1: EmotionalHero - Od Marzenia do Projektu
     emotionalHero: {
-      label: 'PROJEKTOWANIE DOMU',
-      headline: 'Od marzenia do projektu',
+      label: 'BIURO PROJEKTOWE & GENERALNY WYKONAWCY',
+      headline: 'Projekty skrojone pod Twój budżet',
       subtitle:
-        'Budowa domu zaczyna się od projektu. Dobry projekt to spokojny sen przez całą budowę i lata mieszkania. Zły projekt to przepalony budżet, frustracja na budowie i kosztowne poprawki. W CoreLTB Builders tworzymy projekty, które działają – zarówno na papierze, jak i w realnym życiu.',
+        'Architekci-wizjonerzy często projektują budynki, których realizacja przekracza możliwości Inwestora. My działamy odwrotnie. Jako Generalny Wykonawca znamy ceny robocizny i materiałów na 2026 rok. Projektujemy tylko to, co da się wybudować w Twoim budżecie.',
       benefits: [
-        '500+ zrealizowanych projektów domów – znamy każdą pułapkę',
-        'Projekt zintegrowany z budżetem budowy od pierwszej linii',
-        'Architekci + inżynierowie w jednym zespole – zero niespodzianek na budowie',
+        'Projekt z gwarancją zmieszczenia się w założonym kosztorysie',
+        'Adaptacja fundamentów do trudnych gruntów (gliny, skarpy, szkody)',
+        'Bezpłatny Harmonogram Rzeczowo-Finansowy do kredytu',
       ],
-      // CTA Box zamiast prostego buttona
-      ctaBoxTitle: '☎ Umów Konsultację (30 min, online/stacjonarnie)',
+      // CTA - Konkret techniczny
+      ctaBoxTitle: 'Wstępna Analiza Inwestycji',
       ctaBoxBenefits: [
-        'Przeanalizujemy Twoją działkę i warunki prawne',
-        'Polecimy optymalny rodzaj projektu (gotowy vs. indywidualny)',
-        'Wycenimy projekt i szacunkowy koszt budowy',
-        'Odpowiemy na wszystkie Twoje pytania i wątpliwości',
+        'Weryfikacja MPZP (Co wolno wybudować?)',
+        'Ocena warunków gruntowych i spadków terenu',
+        'Dobór technologii do budżetu (Ceramika/Silikat/Beton)',
       ],
-      ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
+      ctaBoxSubtext: 'Konsultacja z Inżynierem, nie handlowcem.',
       ctaBoxButtons: [
-        {
-          text: 'Zadzwoń do Nas',
-          href: 'tel:+48123456789',
-          variant: 'primary',
-        },
-        {
-          text: 'Napisz do Nas',
-          href: '#kontakt',
-          variant: 'secondary',
-        },
+        { text: 'Zamów analizę działki', href: 'tel:+48123456789', variant: 'primary' },
+        { text: 'Wyceń projekt', href: '#kontakt', variant: 'secondary' },
       ],
     },
 
-    // Sekcja 2: PhilosophyTimeline - Dlaczego warto nam zlecić projekt
-    philosophyTimeline: {
-      header: {
-        label: 'DLACZEGO WARTO NAM ZLECIĆ PROJEKT?',
-        title: 'Projekt to coś więcej niż wizja – to plan budowy',
-        description:
-          'Znamy problem: architekt projektuje piękny dom, a potem wykonawca mówi "To będzie kosztować 100 000 zł więcej". U nas tego nie ma. Nasz zespół projektowy pracuje z inżynierami budowy od pierwszej kreski. Każde rozwiązanie jest sprawdzone pod kątem kosztów przed trafieniem do projektu.',
-      },
-
-      items: [
-        {
-          number: 1,
-          iconName: 'pencil',
-          title: 'Twój projekt, nasza wiedza',
-          description:
-            'U nas nie ma konfliktu między wizją architekta a realiami budowy. Nasz zespół projektowy pracuje ramię w ramię z kierownikami budowy. Każda kreska jest weryfikowana pod kątem wykonalności i kosztów, co eliminuje stres i nieprzewidziane wydatki na późniejszym etapie.',
-        },
-        {
-          number: 2,
-          iconName: 'landmark',
-          title: 'Twój budżet, nasz priorytet',
-          description:
-            'Zaczynamy od Twoich realnych możliwości finansowych. Projektujemy dom, na który Cię stać. Optymalizujemy każde rozwiązanie pod kątem trwałości i ekonomii. Nigdy kosztem jakości. Nie tworzymy drogich fantazji – tworzymy realne, wykonalne plany.',
-        },
-        {
-          number: 3,
-          iconName: 'building',
-          title: 'Wiedza prosto z budowy',
-          description:
-            'Nasi projektanci znają realia placu budowy. Wiemy, które rozwiązania sprawdzają się w codziennym życiu, a które są tylko efektowne na papierze. To praktyczna wiedza zdobyta na ponad 500 realizacjach, której nie znajdziesz w żadnym katalogu.',
-        },
-      ],
-
+// Sekcja 2: DLACZEGO ZLECIC PROJEKT WYKONAWCY?
+philosophyTimeline: {
+  header: {
+    label: 'FILOZOFIA DESIGN & BUILD',
+    title: 'Nie projektujemy "do szuflady"',
+    description: 'Eliminujemy ryzyko, że projekt trafi do kosza przez zbyt wysokie koszty budowy. Tworzymy dokumentację wykonawczą, a nie tylko wizualną.',
+  },
+  items: [
+    {
+      number: 1,
+      iconName: 'coins', // Ikona Finansowa
+      title: 'Kontrola Kosztów (Value Engineering)', 
+      description: 'Zamiast "cenników z internetu", bazujemy na naszych realnych kontraktach. Optymalizujemy zużycie stali i betonu, często oszczędzając inwestorowi 15-20% na stanie surowym bez utraty jakości.',
+    },
+    {
+      number: 2,
+      iconName: 'layers', // Ikona Gruntu/Warstw
+      title: 'Konstrukcja dobrana do gruntu', 
+      description: 'Każda działka jest inna. Projektujemy bezpieczne fundamenty zarówno na śląskie szkody górnicze, jak i na krakowskie lessy, skarpy czy skaliste podłoża jury.',
+    },
+    {
+      number: 3,
+      iconName: 'clipboardCheck', 
+      title: 'Wykonalność Techniczna',
+      description: 'Unikamy rozwiązań "ładnych, ale trudnych w izolacji". Nasi inżynierowie weryfikują projekt pod kątem mostków termicznych i szczelności montażu okien.',
+    },
+  ],
       image: {
         src: '/images/uslugi/projektowanie/dlaczego-warto.webp',
         alt: 'Zespół projektowy CoreLTB Builders pracujący nad indywidualnym projektem domu',
@@ -835,563 +859,243 @@ servicesAccordion: {
 
     cooperationTimelineNoLine: {
       header: {
-        label: 'PROCES PROJEKTOWANIA',
-        title: 'Od koncepcji do gotowego projektu',
-        description: 'Projekt to najważniejszy etap, który decyduje o kosztach, funkcjonalności i komforcie Twojego przyszłego domu. Zobacz, jak przeprowadzimy Cię przez ten proces, gwarantując spokój i bezpieczeństwo inwestycji.',
+        label: 'PROCES PROJEKTOWY',
+        title: 'Ścieżka do Pozwolenia na Budowę',
+        description: 'Nie teoretyzujemy. Każdy z tych etapów służy jednemu celowi: uzyskaniu legalnego projektu, który zmieści się w Twoim budżecie wykonawczym.',
       },
       steps: [
         {
-          id: 'projekt-gotowy',
+          id: 'step-1',
           number: 1,
           icon: 'fileText',
-          label: 'Projekt gotowy',
-          title: 'Analiza projektu gotowego (katalogowego)',
+          label: 'Wybór',
+          title: 'Wariant A: Adaptacja Projektu Gotowego',
           content: [
             {
               type: 'paragraph',
-              value: 'To gotowa dokumentacja, którą możesz kupić **od ręki**. Tysiące dostępnych opcji sprawiają, że jest to kuszące rozwiązanie, ale kluczem jest świadomy wybór.'
+              value: 'To rozwiązanie budżetowe na start, ale wymagające czujności inżynierskiej. Kupując projekt "z półki", ryzykujesz, że nie będzie pasował do specyfiki gruntu w Twoim regionie.'
             },
             {
               type: 'paragraph',
-              value: '**Zalety:**'
+              value: '**Co weryfikujemy przed adaptacją?**'
             },
             {
               type: 'list',
               items: [
-                '**Niska cena zakupu**: Zwykle w przedziale **3 000 - 8 000 zł**.',
-                '**Szybkość**: Projekt masz dostępny niemal od razu po zakupie.',
-                '**Przewidywalność**: Często możesz zobaczyć zdjęcia z realizacji lub wizualizacje.'
+                '**Przewymiarowanie konstrukcji:** Często "odchudzamy" ilość stali w fundamentach (średnio o 15-20%) lub zmieniamy drogie stropy na systemowe.',
+                '**Dostosowanie do działki:** Weryfikujemy zgodność z MPZP (kąty dachu, wysokość) oraz orientację względem stron świata.',
+                '**Koszty ukryte:** Wskazujemy detale (np. nietypowe okna), które drastycznie podniosą cenę budowy.'
               ]
             },
             {
               type: 'paragraph',
-              value: '**Wady i Pułapki:**'
-            },
-            {
-              type: 'list',
-              items: [
-                '**Konieczność adaptacji**: Zawsze musisz zapłacić za adaptację projektu do Twojej działki, co jest dodatkowym kosztem rzędu **3 000 - 7 000 zł**.',
-                '**Kompromisy**: Dom nie jest "szyty na miarę". Układ pomieszczeń czy wielkość okien mogą nie odpowiadać w pełni Twoim potrzebom.',
-                '**Niedopasowanie**: Projekt może nie wykorzystywać atutów Twojej działki (np. widoku czy nasłonecznienia).'
-              ]
-            },
-            {
-              type: 'paragraph',
-              value: 'Naszym zadaniem jest **profesjonalna adaptacja**, która eliminuje wady projektu gotowego i maksymalizuje jego zalety, dostosowując go do Twoich realnych potrzeb.'
+              value: 'Naszym zadaniem jest zamiana "taniego projektu" w dokumentację "tanią w budowie".'
             }
           ],
+          // PRZYWRÓCONY ORYGINALNY PLIK
           imageSrc: '/images/uslugi/projektowanie/etapy/projekt-gotowy.webp',
-          imageAlt: 'Mężczyzna przeglądający katalog z gotowymi projektami domów'
+          imageAlt: 'Inżynier weryfikujący projekt katalogowy pod kątem kosztów'
         },
         {
-          id: 'projekt-indywidualny',
+          id: 'step-2',
           number: 2,
           icon: 'draftingCompass',
-          label: 'Projekt indywidualny',
-          title: 'Projekt indywidualny',
+          label: 'Wybór',
+          title: 'Wariant B: Projekt Indywidualny "Pod Budżet"',
           content: [
             {
-                type: 'paragraph',
-                value: 'To projekt tworzony **od zera** przez architekta w ścisłej współpracy z Tobą, aby w 100% odzwierciedlał Twoje marzenia i potrzeby.'
+              type: 'paragraph',
+              value: 'Tworzymy projekt od zera pod trudną działkę (skarpę, wąski front, szkody górnicze). Projektujemy z kalkulatorem w ręku, traktując budżet jako główną wytyczną, a nie dodatek.'
             },
             {
               type: 'paragraph',
-              value: '**Zalety:**'
+              value: '**Dlaczego warto?**'
             },
             {
               type: 'list',
               items: [
-                '**Idealne dopasowanie**: Każdy metr kwadratowy jest zaplanowany pod styl życia Twojej rodziny.',
-                '**Maksymalne wykorzystanie działki**: Projekt uwzględnia nasłonecznienie, widoki, ukształtowanie terenu i otoczenie.',
-                '**Unikalność i optymalizacja**: Pełna kontrola nad funkcją i estetyką, co często pozwala na **długoterminowe oszczędności** (np. na ogrzewaniu).'
+                '**Optymalizacja PUM:** Projektujemy bryłę tak, aby zminimalizować "puste metry" (korytarze), za które płacisz przy budowie.',
+                '**Bilans Terenu:** Wykorzystujemy naturalne ukształtowanie spadków, aby uniknąć kosztownego wywożenia ziemi.',
+                '**Standard Energetyczny:** Modelujemy budynek pod pompy ciepła i rekuperację, eliminując mostki termiczne już w geometrii ścian.'
               ]
             },
             {
               type: 'paragraph',
-              value: '**Wady i Pułapki:**'
-            },
-            {
-              type: 'list',
-              items: [
-                '**Wyższa cena**: Koszt projektu to średnio **100 - 450 zł za m²**.',
-                '**Dłuższy czas oczekiwania**: Proces projektowy trwa od kilku tygodni do kilku miesięcy.',
-                '**Ryzyko "przerostu formy nad treścią"**: Bez wsparcia doświadczonego wykonawcy, łatwo zaprojektować rozwiązania niepraktyczne lub bardzo drogie w budowie.'
-              ]
-            },
-            {
-              type: 'paragraph',
-              value: 'W CoreLTB Builders pilnujemy, by projekt indywidualny był nie tylko piękny, ale przede wszystkim **mądry, funkcjonalny i osadzony w ustalonym budżecie budowy**.'
+              value: 'Efektem jest unikalny dom, który kosztuje tyle samo, co katalogowy, ale jest pozbawiony błędów funkcjonalnych.'
             }
           ],
+          // PRZYWRÓCONY ORYGINALNY PLIK
           imageSrc: '/images/uslugi/projektowanie/etapy/projekt-indywidualny.webp',
-          imageAlt: 'Architekt szkicujący unikalny projekt domu na tablecie graficznym'
+          imageAlt: 'Projektowanie indywidualne domu na wymagającej działce'
         },
         {
-          id: 'adaptacja-projektu',
+          // MERGED STEP (Używamy tu zdjęcia z dawnej "Adaptacji", bo pasuje tematycznie)
+          id: 'step-3',
           number: 3,
-          icon: 'settings',
-          label: 'Adaptacja',
-          title: 'Adaptacja projektu',
+          icon: 'settings', 
+          label: 'Inżynieria',
+          title: 'Optymalizacja Konstrukcyjna (Value Engineering)',
           content: [
             {
               type: 'paragraph',
-              value: 'Wielu inwestorów myśli, że adaptacja to niepotrzebna formalność. To błąd. Adaptacja jest obowiązkowym i kluczowym procesem, który dostosowuje uniwersalny projekt do Twojej unikalnej lokalizacji i zapewnia bezpieczeństwo konstrukcji.'
+              value: 'To jest serce naszej pracy. Niezależnie od wariantu, nasi konstruktorzy przeliczają budynek, aby był bezpieczny i ekonomiczny. Eliminujemy ryzyka, które generują koszty na placu budowy.'
             },
             {
               type: 'paragraph',
-              value: '**Adaptacja Obowiązkowa:**'
+              value: '**Zakres prac inżynieryjnych:**'
             },
             {
               type: 'list',
               items: [
-                '**Projekt Zagospodarowania Działki:** Wrysowujemy budynek na mapę, planujemy przyłącza, podjazd i układ terenu.',
-                '**Dostosowanie do Warunków Lokalnych:** Sprawdzamy zgodność z Miejscowym Planem (MPZP) lub Warunkami Zabudowy (WZ).',
-                '**Dostosowanie Konstrukcji:** Adaptujemy fundamenty do wyników badań geologicznych gruntu oraz konstrukcję dachu do lokalnej strefy wiatrowej i śniegowej.'
+                '**Fundamenty na szkody:** Dobieramy płytę fundamentową lub ławy w zależności od kategorii terenu (I-IV) i badań geologicznych (gliny).',
+                '**Kolizje i Detale:** Weryfikujemy przejścia instalacyjne przez stropy i podciągi, aby uniknąć kucia betonu podczas realizacji.',
+                '**Termika detalu:** Projektujemy połączenia balkonów i nadproży w standardzie "zero mostków", co jest kluczowe dla norm WT 2026.'
               ]
             },
             {
               type: 'paragraph',
-              value: '**Zmiany Dodatkowe (na Twoje życzenie):**'
-            },
-            {
-              type: 'list',
-              items: [
-                'Przesunięcie lub likwidacja ścian działowych.',
-                'Zmiana lokalizacji i wielkości okien lub drzwi.',
-                'Wybór innych materiałów budowlanych.'
-              ]
-            },
-            {
-              type: 'paragraph',
-              value: 'W CoreLTB Builders dbamy o to, by adaptacja była nie tylko formalnością, ale **realną optymalizacją Twojego przyszłego domu.**'
+              value: 'Dzięki temu budowa przebiega płynnie, a Ty nie słyszysz od kierownika budowy: *"Tego się nie da zrobić tak jak na rysunku".*'
             }
           ],
+          // PRZYWRÓCONY ORYGINALNY PLIK
           imageSrc: '/images/uslugi/projektowanie/etapy/adaptacja.webp',
-          imageAlt: 'Architekt nanosi zmiany na gotowy projekt, dostosowując go do konkretnej działki'
+          imageAlt: 'Optymalizacja konstrukcji i adaptacja do warunków gruntowych'
         },
         {
-          id: 'koszty-projektu',
+          id: 'step-4',
           number: 4,
-          icon: 'piggyBank',
-          label: 'Koszty',
-          title: 'Budżet i koszty',
+          icon: 'piggyBank', // Tutaj miałeś 'coins', ale w pliku 'piggyBank' - przywracam piggyBank
+          label: 'Wycena',
+          title: 'Kosztorys Inwestorski (Gwarancja Wykonalności)',
           content: [
             {
               type: 'paragraph',
-              value: '**Co składa się na finalną cenę projektu?**'
+              value: 'Jako Generalny Wykonawca dajemy Ci przewagę, której nie mają zwykłe biura projektowe. Wraz z projektem otrzymujesz **szacunek realnych kosztów budowy** na rok 2026.'
+            },
+            {
+              type: 'paragraph',
+              value: '**Co zyskujesz?**'
             },
             {
               type: 'list',
               items: [
-                '**Zakup projektu gotowego (3 000 - 8 000 zł):** Pomoc w wyborze projektu zoptymalizowanego pod Twoją działkę i budżet.',
-                '**Adaptacja projektu gotowego (3 000 - 7 000 zł):** Pełna, profesjonalna adaptacja z uwzględnieniem naszych doświadczeń budowlanych.',
-                '**Projekt indywidualny (100 - 450 zł / m²):** Projekt "szyty na miarę", zintegrowany z realnym kosztorysem budowy.'
+                '**Decyzyjność:** Wiesz, czy stać Cię na SSO i Deweloperkę przed wydaniem oszczędności na start robót.',
+                '**Bezpieczeństwo kredytowe:** Otrzymujesz wsad merytoryczny niezbędny do rozmów z analitykiem bankowym (Harmonogram).',
+                '**Weryfikacja materiałowa:** To ostatni moment na zamianę drogich rozwiązań (np. dachówka ceramiczna) na tańsze (blacha), jeśli budżet tego wymaga.'
               ]
             },
             {
               type: 'paragraph',
-              value: '**Ważne:** Kupując projekt gotowy, **zawsze musisz doliczyć koszt adaptacji**. Finalny koszt takiego rozwiązania to często **6 000 - 15 000 zł**. Dlatego zawsze warto porównać tę kwotę z ceną projektu indywidualnego, który od początku jest tworzony bez kompromisów.'
-            },
-            {
-              type: 'paragraph',
-              value: 'W CoreLTB Builders gwarantujemy, że każda złotówka wydana na projekt jest **inwestycją w optymalizację i bezpieczeństwo całej budowy.**'
+              value: 'Traktujemy projekt jako integralną część budżetu, a nie "sztukę dla sztuki".'
             }
           ],
+          // PRZYWRÓCONY ORYGINALNY PLIK
           imageSrc: '/images/uslugi/projektowanie/etapy/koszty.webp',
-          imageAlt: 'Zbliżenie na kalkulator i plany, symbolizujące planowanie budżetu projektu'
+          imageAlt: 'Analiza kosztorysu i budżetu budowy domu'
         },
         {
-          id: 'zawartosc-projektu',
+          id: 'step-5',
           number: 5,
-          icon: 'clipboardCheck',
-          label: 'Dokumentacja',
-          title: 'Kompletna dokumentacja budowlana',
+          icon: 'clipboardCheck', // Przywrócona Twoja ikona dokumentacji
+          label: 'Finał',
+          title: 'Kompletna Dokumentacja i Pozwolenie (PnB)',
           content: [
             {
               type: 'paragraph',
-              value: 'Jakość i kompletność projektu decydują o sprawności procesu urzędowego i bezproblemowej realizacji. Niepełna dokumentacja to prosta droga do przestojów i nerwów.'
-            },
-            {
-                type: 'paragraph',
-                value: 'Zgodnie z polskim prawem, kompletny projekt, który od nas otrzymasz, **składa się z 3 kluczowych części:**'
-            },
-            {
-                type: 'list',
-                items: [
-                    '**Projekt Zagospodarowania Działki lub Terenu:** To mapa Twojej inwestycji, pokazująca usytuowanie budynku, przyłącza i układ terenu.',
-                    '**Projekt Architektoniczno-Budowlany:** To serce projektu, zawierające rzuty, przekroje i wygląd elewacji, składane do urzędu.',
-                    '**Projekt Techniczny:** To szczegółowa instrukcja dla wykonawców, zawierająca detale konstrukcyjne niezbędne do realizacji prac.'
-                ]
-            },
-            {
-                type: 'paragraph',
-                value: 'Powierzając nam projekt, masz **100% pewności**, że otrzymasz kompletną, zgodną z przepisami dokumentację.'
-            }
-          ],
-          imageSrc: '/images/uslugi/projektowanie/etapy/dokumentacja.webp',
-          imageAlt: 'Profesjonalnie oprawiony projekt budowlany z pieczątką'
-        },
-        {
-          id: 'trendy-2026',
-          number: 6,
-          icon: 'lightbulb',
-          label: 'Rozwiązania',
-          title: 'Praktyczne rozwiązania, które oszczędzają pieniądze',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Projekt domu to decyzja na dekady. W CoreLTB Builders nie podążamy ślepo za modą. Wdrażamy **sprawdzone rozwiązania**, które zwracają się w konkretnych liczbach i podnoszą komfort życia. Oto 3 najważniejsze kierunki, które warto uwzględnić już na etapie projektu.'
+              value: 'Biurokrację bierzemy na siebie. Przygotowujemy dokumentację w formie wymaganej przez aktualne Prawo Budowlane (podział na PZT, PAB i PT).'
             },
             {
               type: 'paragraph',
-              value: '**1. Dom Energooszczędny – Oszczędzaj 6 000 zł Rocznie**'
-            },
-            {
-              type: 'paragraph',
-              value: '**Przykład:** Dom 150m² z tradycyjnym ogrzewaniem gazowym to koszt **~8 000 zł rocznie**. Ten sam dom z **pompą ciepła + fotowoltaiką + rekuperacją** to **~2 000 zł rocznie**.'
-            },
-            {
-              type: 'paragraph',
-              value: '**Kalkulacja:** Przez 20 lat to różnica **120 000 zł**. Koszt wdrożenia tych technologii to dodatkowe **~30 000 zł** w projekcie. **Zwrot inwestycji: 5 lat**. Przez kolejne 15 lat to czysta oszczędność w Twoim portfelu.'
-            },
-            {
-              type: 'paragraph',
-              value: 'W CoreLTB Builders projektujemy domy energooszczędne jako standard, bo to się po prostu **opłaca**.'
-            },
-            {
-              type: 'paragraph',
-              value: '**2. Prosta Bryła – Taniej w Budowie, Cieplej w Użytkowaniu**'
-            },
-            {
-              type: 'paragraph',
-              value: 'Skomplikowana bryła (wykusze, balkony, załamania dachu) to **wyższe koszty budowy** (+15-20%) i **wyższe straty ciepła** (więcej mostków termicznych). Prosta, zwarta bryła w stylu **"nowoczesnej stodoły"** to elegancja, oszczędność i funkcjonalność. Siłę projektu budujemy przez **jakość materiałów elewacyjnych**, nie przez skomplikowaną formę.'
-            },
-            {
-              type: 'paragraph',
-              value: '**3. Wielofunkcyjność Przestrzeni – Dom Gotowy na Przyszłość**'
-            },
-            {
-              type: 'paragraph',
-              value: 'Projektujemy przestrzenie, które **łatwo się adaptują** do zmieniających się potrzeb: gabinet może stać się pokojem gościnnym, otwarta strefa dzienna z elastycznym podziałem to miejsce do pracy, relaksu i zabawy. To rozwiązanie sprawdza się szczególnie w pracy zdalnej i gdy dzieci dorastają i opuszczają dom.'
-            }
-          ],
-          imageSrc: '/images/uslugi/projektowanie/etapy/trendy.webp',
-          imageAlt: 'Nowoczesny dom w stylu stodoły z dużymi przeszkleniami, otwarty na ogród'
-        },
-        {
-          id: 'unikanie-bledow',
-          number: 7,
-          icon: 'shield',
-          label: 'Unikanie błędów',
-          title: 'Eliminacja najczęstszych błędów projektowych',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Nasze doświadczenie z ponad 500 realizacji pozwoliło nam stworzyć listę najkosztowniejszych i najbardziej irytujących błędów projektowych:'
+              value: '**Twoja teczka zawiera:**'
             },
             {
               type: 'list',
               items: [
-                '**Niefunkcjonalny Układ Komunikacji:** Zbyt długie korytarze, które kradną cenną powierzchnię.',
-                '**Złe Usytuowanie Względem Stron Świata:** Salon od północy (ciemny i zimny), sypialnia od zachodu (przegrzana latem).',
-                '**Niedopasowanie Garażu:** Zbyt mały garaż, w którym nie mieszczą się nowoczesne samochody lub brakuje miejsca na rowery.',
-                '**Brak Pomieszczeń Gospodarczych:** Zapominanie o spiżarni, pralni czy schowku, co prowadzi do bałaganu w części mieszkalnej.',
-                '**Źle Zaprojektowane Schody:** Zbyt strome lub niewygodne, stanowiące codzienne wyzwanie.',
-                '**Zbyt Mało Miejsca na Szafy:** Ignorowanie potrzeby przechowywania, co skutkuje zagraceniem sypialni.',
-                '**Kuchnia Oderwana od Rzeczywistości:** Nielogiczny układ "trójkąta roboczego" (lodówka-zlew-płyta), który utrudnia gotowanie.',
-                '**Niedostateczne Oświetlenie Naturalne:** Zbyt małe okna lub ich zła lokalizacja, tworzące mroczne i przygnębiające wnętrza.',
-                '**Hałas i Brak Prywatności:** Sypialnia nad salonem lub obok łazienki, co zakłóca spokój domowników.',
-                '**Ignorowanie Otoczenia:** Projekt, który zupełnie nie pasuje do sąsiednich budynków i krajobrazu.'
+                '**PZT:** Projekt Zagospodarowania Terenu (mapa z wrysowanym budynkiem i mediami).',
+                '**PAB:** Projekt Architektoniczno-Budowlany (rzuty i elewacje dla urzędu).',
+                '**PT:** Projekt Techniczny (szczegóły konstrukcyjne i instalacyjne dla kierownika budowy).'
               ]
             },
             {
               type: 'paragraph',
-              value: 'Każdy z tych błędów to potencjalny koszt i codzienna frustracja. Dzięki naszej metodzie projektowania, gdzie wizja architekta jest stale weryfikowana przez doświadczenie budowlańców, w CoreLTB Builders **eliminujemy te problemy na etapie kartki papieru.**'
+              value: 'Jako Twój pełnomocnik składamy wniosek i monitorujemy procedurę w Starostwie, aż do uzyskania prawomocnej decyzji (PnB).'
             }
           ],
-          imageSrc: '/images/uslugi/projektowanie/etapy/bledy.webp',
-          imageAlt: 'Ręka architekta zakreślająca błąd na planie technicznym'
+          // PRZYWRÓCONY ORYGINALNY PLIK
+          imageSrc: '/images/uslugi/projektowanie/etapy/dokumentacja.webp',
+          imageAlt: 'Gotowa dokumentacja projektowa z pozwoleniem na budowę'
         }
       ]
-    },
 
+    },
     // Sekcja 4: ServicesAccordion (FAQ w formie rozwijanych sekcji)
     servicesAccordion: {
       header: {
-        label: 'NAJCZĘŚCIEJ ZADAWANE PYTANIA',
-        title: 'Odpowiedzi na kluczowe pytania o projektowanie',
-        description: 'Sprawdź najważniejsze informacje, które pomogą Ci podjąć świadomą decyzję. Podzieliliśmy pytania na kategorie, aby łatwiej znaleźć to, czego szukasz.',
+        label: 'PYTANIA I ODPOWIEDZI',
+        title: 'Kwestie Prawne i Budżetowe',
+        description: 'Odpowiedzi na najczęstsze obawy inwestorów dotyczące adaptacji i projektów indywidualnych.',
       },
       services: [
-        // PODSTAWY PROJEKTOWANIA
-        {
-          iconName: 'clock',
-          title: 'Ile trwa przygotowanie projektu indywidualnego?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Średnio proces ten zajmuje **od 24 do 36 tygodni**. Czas ten obejmuje stworzenie koncepcji, przygotowanie projektu budowlanego i uzyskanie wszystkich niezbędnych uzgodnień.'
-            },
-            {
-              type: 'paragraph',
-              value: 'W CoreLTB Builders **dbamy o to, by każdy etap był maksymalnie efektywny**, co pozwala nam skrócić czas realizacji bez kompromisów w jakości.'
-            }
-          ]
-        },
-        {
-          iconName: 'fileText',
-          title: 'Jaka jest różnica między projektem budowlanym a wykonawczym?',
-          content: [
-            {
-              type: 'paragraph',
-              value: '**Projekt budowlany** to dokumentacja, którą składasz do urzędu, aby uzyskać pozwolenie na budowę. Zawiera rzuty, przekroje, elewacje i podstawowe rozwiązania konstrukcyjne.'
-            },
-            {
-              type: 'paragraph',
-              value: '**Projekt wykonawczy (techniczny)** to znacznie bardziej szczegółowa instrukcja dla ekipy budowlanej. Zawiera dokładne detale konstrukcyjne, specyfikacje materiałów i wszystkie niezbędne informacje do wykonania prac.'
-            },
-            {
-              type: 'paragraph',
-              value: '**Wniosek:** Projekt budowlany to "przepustka" do urzędu, projekt wykonawczy to "instrukcja obsługi" dla budowlańców.'
-            }
-          ]
-        },
         {
           iconName: 'wallet',
-          title: 'Ile kosztuje projekt domu 150m²?',
+          title: 'Czy projekt indywidualny jest dużo droższy od gotowego?',
           content: [
             {
               type: 'paragraph',
-              value: 'Koszt zależy od wybranej drogi. **Projekt gotowy z adaptacją** to zazwyczaj koszt w przedziale **8 000 - 18 000 zł**.'
-            },
-            {
-              type: 'paragraph',
-              value: '**Projekt indywidualny** dla domu 150 m² to inwestycja rzędu **22 500 - 45 000 zł** (150-300 zł/m²). Pamiętaj, że projekt indywidualny, choć droższy na starcie, często pozwala na **większe oszczędności na etapie budowy** dzięki idealnemu dopasowaniu do działki i Twoich potrzeb.'
+              value: 'Na start - tak. Dokumentacja indywidualna to koszt rzędu 150-250 zł/m². Jednak patrząc na **całość inwestycji**, projekt "szyty na miarę" często wychodzi taniej. Dlaczego? Ponieważ nie budujesz "zbędnych metrów" i drogich rozwiązań konstrukcyjnych, które są zaszyte w projektach katalogowych. Bilans wychodzi na zero lub na plus przy realizacji.'
             }
           ]
         },
         {
-          iconName: 'shieldCheck',
-          title: 'Czy projekt z internetu jest legalny?',
+          iconName: 'shieldCheck', // Zamiast alertTriangle - budujemy zaufanie
+          title: 'Czy mogę kupić "tani projekt z internetu"?',
           content: [
             {
               type: 'paragraph',
-              value: '**Tak, ale z warunkami.** Projekty z internetu (katalogowe) są legalne, ale podlegają **prawom autorskim**. Kupujesz **licencję na realizację**, a nie pełne prawa do projektu.'
-            },
-            {
-              type: 'paragraph',
-              value: '**Ważne:** Każdy projekt gotowy **wymaga adaptacji** do Twojej działki (zgodność z MPZP, dostosowanie fundamentów do geologii, itp.). Nie możesz wprowadzać zmian samodzielnie – **każda modyfikacja musi być pieczętowana przez uprawnionego architekta**.'
-            },
-            {
-              type: 'paragraph',
-              value: 'W CoreLTB Builders pomagamy wybrać projekt i przeprowadzamy pełną, legalną adaptację.'
+              value: 'Możesz, ale bądź ostrożny. Tanie projekty (za 3-4 tys. zł) często mają **przewymiarowaną stal** lub błędy w detalach dachowych. Ich "taniość" kończy się w momencie zamawiania materiałów na budowę. Oferujemy usługę audytu takiego projektu przed zakupem, abyś wiedział, czy nie kupujesz "kota w worku".'
             }
           ]
         },
-
-        // ZMIANY I ADAPTACJE
         {
           iconName: 'edit',
-          title: 'Czy mogę wprowadzić zmiany w projekcie w trakcie budowy?',
+          title: 'Czy mogę wprowadzać zmiany w trakcie budowy?',
           content: [
             {
               type: 'paragraph',
-              value: 'Tak, ale zmiany istotne (np. zmiana wielkości budynku, przebudowa konstrukcji) wymagają **projektu zamiennego** i zgłoszenia do urzędu. Drobne zmiany (np. przesunięcie ścianki działowej) można wykonać bez formalności.'
-            },
-            {
-              type: 'paragraph',
-              value: '**Dlatego tak duży nacisk kładziemy na dopracowanie projektu do perfekcji, zanim ruszy budowa.** Projekt to mapa – im lepsza, tym spokojniejsza droga. Naszym celem jest minimalizacja zmian na budowie, co eliminuje stres, przestoje i dodatkowe koszty.'
+              value: 'Prawo dopuszcza "nieistotne odstąpienia", ale naszym celem jest ich unikanie. Zmiany na budowie to zawsze stres i dodatkowe koszty (kucie, przeróbki). Jako Generalny Wykonawca "męczymy" projekt tak długo na etapie cyfrowym, aby na placu budowy nie trzeba było niczego zmieniać.'
             }
           ]
         },
         {
-          iconName: 'alertCircle',
-          title: 'Czy mogę samodzielnie wprowadzić zmiany w kupionym projekcie?',
+          iconName: 'mountain',
+          title: 'Mam działkę ze szkodami górniczymi. Co z projektem?',
           content: [
             {
               type: 'paragraph',
-              value: '**NIE.** To częsty błąd inwestorów. Każda zmiana w projekcie budowlanym **musi być zatwierdzona i opieczętowana przez architekta z odpowiednimi uprawnieniami**.'
-            },
-            {
-              type: 'paragraph',
-              value: 'Samowolne zmiany mogą skutkować: **odmową odbioru przez nadzór budowlany**, **karami finansowymi** lub nawet **nakazem rozbiórki**.'
-            },
-            {
-              type: 'paragraph',
-              value: 'W CoreLTB Builders zajmujemy się **profesjonalnymi modyfikacjami projektów**, dbając o ich zgodność z prawem i normami technicznymi.'
-            }
-          ]
-        },
-        {
-          iconName: 'coins',
-          title: 'Ile kosztuje każda zmiana w projekcie po jego zatwierdzeniu?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Koszt zależy od zakresu zmiany. **Drobne modyfikacje** (np. przesunięcie okna) to **500 - 1 500 zł**. **Średnie zmiany** (np. przebudowa układu pomieszczeń) to **2 000 - 5 000 zł**. **Duże zmiany konstrukcyjne** (np. zmiana wielkości budynku) to **projekt zamiennych od 5 000 zł wzwyż**.'
-            },
-            {
-              type: 'paragraph',
-              value: '**Wniosek:** Warto dokładnie przemyśleć projekt przed jego zatwierdzeniem. W CoreLTB Builders poświęcamy czas na **szczegółowe konsultacje**, aby projekt był idealny od razu.'
-            }
-          ]
-        },
-        {
-          iconName: 'checkCircle',
-          title: 'Czy mogę sam kupić projekt i zlecić Wam tylko adaptację?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Oczywiście, świadczymy taką usługę. Co więcej, rekomendujemy skonsultowanie z nami wyboru projektu gotowego **jeszcze przed jego zakupem**.'
-            },
-            {
-              type: 'paragraph',
-              value: 'Nasz zespół budowlany zweryfikuje, czy projekt jest optymalny dla Twojej działki i nie zawiera kosztownych w realizacji rozwiązań. Dzięki temu **unikniesz pułapki zakupu pięknego, ale problematycznego projektu.**'
-            }
-          ]
-        },
-
-        // PROCEDURY I PRAWO
-        {
-          iconName: 'map',
-          title: 'Czy projekt musi być sprawdzony przez geodetę?',
-          content: [
-            {
-              type: 'paragraph',
-              value: '**Tak.** Projekt zagospodarowania działki (część projektu budowlanego) wymaga **mapy do celów projektowych**, którą sporządza uprawniony geodeta.'
-            },
-            {
-              type: 'paragraph',
-              value: 'Geodeta nanosi na mapę aktualny stan działki (granice, ukształtowanie terenu, istniejące budynki, drzewa). Ta mapa jest **podstawą do zaprojektowania usytuowania domu** i wymaganym załącznikiem do wniosku o pozwolenie na budowę.'
-            },
-            {
-              type: 'paragraph',
-              value: 'W CoreLTB Builders **koordynujemy współpracę z geodetą**, aby cały proces przebiegł sprawnie.'
+              value: 'To nasza codzienność. Standardowy projekt nie przejdzie w Starostwie bez **Adaptacji Konstrukcyjnej** do kategorii szkód (I-IV). Nasz konstruktor przeliczy fundamenty (najczęściej na płytę fundamentową) i zaprojektuje niezbędne dylatacje/wieńce, zgodnie z wytycznymi GIG.'
             }
           ]
         },
         {
           iconName: 'calendar',
-          title: 'Jak długo czeka się na pozwolenie na budowę?',
+          title: 'Ile realnie trwa uzyskanie Pozwolenia na Budowę (PnB)?',
           content: [
             {
               type: 'paragraph',
-              value: 'Zgodnie z prawem, urząd ma **65 dni** na wydanie decyzji od dnia złożenia kompletnego wniosku. W praktyce czas ten może być różny w zależności od urzędu.'
-            },
-            {
-              type: 'paragraph',
-              value: 'Kluczem jest słowo **"kompletny"**. Dzięki naszemu doświadczeniu dbamy o to, by składana przez nas dokumentacja była bezbłędna, co **minimalizuje ryzyko wezwań do uzupełnień i maksymalnie skraca cały proces.**'
-            }
-          ]
-        },
-        {
-          iconName: 'fileCheck',
-          title: 'Czy zajmujecie się również formalnościami urzędowymi?',
-          content: [
-            {
-              type: 'paragraph',
-              value: '**Tak, to jeden z fundamentów naszej usługi.** W Twoim imieniu składamy wniosek o pozwolenie na budowę i pilotujemy cały proces w urzędzie, zdejmując z Ciebie cały ciężar "papierologii".'
-            },
-            {
-              type: 'paragraph',
-              value: 'Dzięki wieloletniemu doświadczeniu wiemy dokładnie, jak przygotować dokumentację, by uzyskać pozwolenie **szybko i bezproblemowo**.'
-            }
-          ]
-        },
-        {
-          iconName: 'home',
-          title: 'Czy mogę budować dom bez pozwolenia?',
-          content: [
-            {
-              type: 'paragraph',
-              value: '**Tak, ale tylko do 70m²**. Od lipca 2023 roku obowiązują nowe przepisy: domy **do 70m² powierzchni użytkowej** można budować **bez pozwolenia na budowę**, wystarczy zgłoszenie w urzędzie.'
-            },
-            {
-              type: 'paragraph',
-              value: '**Warunki:** Dom musi być **parterowy** (bez poddasza użytkowego), na działce objętej **Miejscowym Planem Zagospodarowania Przestrzennego (MPZP)** lub z decyzją o **Warunkach Zabudowy (WZ)**. Odległość od granic działki min. **3 metry**.'
-            },
-            {
-              type: 'paragraph',
-              value: 'W CoreLTB Builders przygotowujemy **projekty kompaktowych domów do 70m²**, które spełniają wszystkie wymogi nowych przepisów.'
-            }
-          ]
-        },
-
-        // TRUDNE PRZYPADKI
-        {
-          iconName: 'mountain',
-          title: 'Co jeśli działka jest na skarpie lub to trudny teren?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'To idealna sytuacja, w której **projekt indywidualny pokazuje swoją największą siłę**. Trudny teren to dla nas nie problem, a wyzwanie projektowe, które pozwala stworzyć unikalną i spektakularną architekturę.'
-            },
-            {
-              type: 'paragraph',
-              value: 'Adaptacja projektu gotowego na taką działkę jest często bardzo kosztowna i kompromisowa. W CoreLTB Builders **specjalizujemy się w projektach na wymagających działkach**, w pełni wykorzystując ich potencjał (np. podpiwniczenie częściowe, taras na poziomie parteru od południa, garaż wbudowany w skarpy).'
-            }
-          ]
-        },
-        {
-          iconName: 'alertTriangle',
-          title: 'Co jeśli w trakcie projektowania zmienią się warunki zabudowy?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Zdarza się rzadko, ale to możliwe (np. uchwalenie nowego MPZP). Jeśli zmiana nastąpi **przed złożeniem wniosku o pozwolenie**, musimy dostosować projekt do nowych przepisów (dodatkowy koszt zależny od zakresu zmian).'
-            },
-            {
-              type: 'paragraph',
-              value: 'Jeśli zmiana nastąpi **po uzyskaniu pozwolenia**, Twoje pozwolenie **pozostaje ważne** (prawo nabyte). W CoreLTB Builders **monitorujemy lokalną sytuację prawną** i informujemy Cię o ewentualnych zmianach na bieżąco.'
-            }
-          ]
-        },
-        {
-          iconName: 'users',
-          title: 'Co jeśli sąsiad się sprzeciwi mojemu projektowi?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Sąsiad ma prawo **złożyć uwagi** do projektu w ciągu **21 dni** od wywieszenia obwieszczenia w urzędzie. Urząd bada te uwagi i może: **odrzucić je** (jeśli są nieuzasadnione), **nakazać modyfikację projektu** (jeśli są uzasadnione).'
-            },
-            {
-              type: 'paragraph',
-              value: '**Jak się bronić:** Najlepszą obroną jest **projekt zgodny z prawem** (odległości od granic, wysokość budynku, architektura zgodna z MPZP). W CoreLTB Builders dbamy o to, by projekty były **prawnie niepodważalne**, co minimalizuje ryzyko skutecznych protestów sąsiadów.'
-            }
-          ]
-        },
-        {
-          iconName: 'xCircle',
-          title: 'Co jeśli projekt gotowy nie przejdzie w urzędzie?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Najczęstsze przyczyny odmowy: **niezgodność z MPZP/WZ** (np. przekroczenie wysokości budynku), **błędy formalne** (brak wymaganych uzgodnień), **nieprawidłowa dokumentacja**.'
-            },
-            {
-              type: 'paragraph',
-              value: '**Nasze rozwiązanie:** Przed zakupem projektu gotowego **weryfikujemy jego zgodność** z warunkami Twojej działki. Dzięki temu eliminujemy ryzyko odmowy. Jeśli mimo to urząd zgłosi uwagi, **szybko wprowadzamy poprawki** i ponownie składamy wniosek.'
+              value: 'Przy dobrze przygotowanym wniosku (a my takie składamy) urzędy w południowej Polsce wydają decyzję w **30-60 dni**. Do tego należy doliczyć czas na mapę do celów projektowych (geodeta) i uzgodnienia mediów. Bezpiecznie jest założyć ok. 3-4 miesiące na całą "papierologię".'
             }
           ]
         },
         {
           iconName: 'trendingUp',
-          title: 'Co jeśli projekt będę chciał rozbudować za 5 lat?',
+          title: 'Czy pomożecie, jeśli kosztorys projektu przekroczy mój budżet?',
           content: [
             {
               type: 'paragraph',
-              value: 'Doskonałe pytanie! To często pomijany aspekt. Jeśli planujesz **przyszłą rozbudowę** (np. dodanie garażu, powiększenie salonu), warto to uwzględnić już na etapie projektu.'
-            },
-            {
-              type: 'paragraph',
-              value: '**Nasze rozwiązanie:** Projektujemy dom z "zapasem" – fundamenty i konstrukcja przygotowane na przyszłą rozbudowę (dodatkowe zbrojenie, rezerwa w instalacjach). To kosztuje **niewiele na etapie budowy**, ale oszczędza **dziesiątki tysięcy złotych** przy rozbudowie w przyszłości.'
-            },
-            {
-              type: 'paragraph',
-              value: 'W CoreLTB Builders rozmawiamy z klientami o **długoterminowych planach** i projektujemy domy gotowe na przyszłość.'
+              value: '**Tak, to jest istota Design & Build.** Jeśli wycena wstępna wyjdzie za wysoka, nie zostawiamy Cię z problemem. Proponujemy zamienniki: np. tańsze okna, rezygnację z lukarny, zamianę ceramiki na gazobeton. Optymalizujemy projekt, aż "epnie" się w Excelu.'
             }
           ]
-        },
+        }
       ]
     },
 
@@ -1409,11 +1113,11 @@ servicesAccordion: {
             'Projekt CoreLTB to była najlepsza decyzja w całym procesie budowy. Wszystko zostało przemyślane - od rozkładu pomieszczeń po detale instalacyjne. Budowa przebiegła gładko, bez żadnych niespodzianek.',
           author: {
             image: {
-              src: '/images/testimonials/anna-kowalczyk.jpg',
+              src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100',
               alt: 'Anna Kowalczyk',
             },
             name: 'Anna Kowalczyk',
-            role: 'Właścicielka domu jednorodzinnego',
+            role: 'Właścicielka domu, Mikołów',
           },
           rating: 5.0,
         },
@@ -1422,11 +1126,63 @@ servicesAccordion: {
             'Byłem sceptyczny czy warto płacić więcej za projekt indywidualny. Teraz wiem, że to była strzał w dziesiątkę. Dom jest dokładnie taki jak chcieliśmy, a co najważniejsze - zmieściliśmy się w budżecie dzięki mądrym rozwiązaniom projektowym.',
           author: {
             image: {
-              src: '/images/testimonials/piotr-nowicki.jpg',
+              src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100',
               alt: 'Piotr Nowicki',
             },
             name: 'Piotr Nowicki',
-            role: 'Inwestor prywatny',
+            role: 'Inwestor prywatny, Katowice',
+          },
+          rating: 5.0,
+        },
+        {
+          quote:
+            'Adaptacja projektu katalogowego do naszej działki na szkodach górniczych - brzmiało strasznie. Architekt CoreLTB wziął wszystko na siebie. Pozwolenie na budowę dostaliśmy w 6 tygodni.',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100',
+              alt: 'Robert Lis',
+            },
+            name: 'Robert Lis',
+            role: 'Właściciel domu, Ruda Śląska',
+          },
+          rating: 5.0,
+        },
+        {
+          quote:
+            'Wizualizacje 3D pozwoliły nam zobaczyć dom przed budową. Dzięki temu uniknęliśmy kilku błędów, które zauważyliśmy dopiero widząc przestrzeń w 3D. Warto!',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100',
+              alt: 'Karolina Adamska',
+            },
+            name: 'Karolina Adamska',
+            role: 'Inwestorka, Gliwice',
+          },
+          rating: 4.9,
+        },
+        {
+          quote:
+            'Projekt indywidualny na wąską działkę - inne firmy mówiły że się nie da. CoreLTB zaprojektowali dom idealnie dopasowany do naszych warunków. Funkcjonalny i piękny.',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100',
+              alt: 'Damian Kaczmarek',
+            },
+            name: 'Damian Kaczmarek',
+            role: 'Właściciel domu, Tychy',
+          },
+          rating: 5.0,
+        },
+        {
+          quote:
+            'Cenię sobie kompleksowe podejście - projekt uwzględniał od razu instalacje, konstrukcję i koszty. Żadnych niespodzianek na budowie.',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100',
+              alt: 'Andrzej Pawlak',
+            },
+            name: 'Andrzej Pawlak',
+            role: 'Inwestor, Jaworzno',
           },
           rating: 5.0,
         },
@@ -1449,7 +1205,7 @@ contactCTA: {
 },
 
     // SEO
-    metaTitle: 'Projektowanie Domu | CoreLTB Builders - Od Marzenia do Projektu',
+    metaTitle: 'Projekty Domów i Adaptacje | Południowa Polska',
     metaDescription:
       'Profesjonalne projektowanie domów jednorodzinnych. Projekt zintegrowany z budową i budżetem. 15 lat doświadczenia. Indywidualne projekty i adaptacje. Bezpłatna konsultacja.',
 
@@ -1815,11 +1571,11 @@ contactCTA: {
             'Nadzór CoreLTB wykrył poważny błąd w izolacji fundamentów, który mógł kosztować nas 50 000 zł w przyszłości. To była najlepsza decyzja w całej budowie.',
           author: {
             image: {
-              src: '/images/testimonials/marek-kasia.jpg',
-              alt: 'Marek i Kasia',
+              src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100',
+              alt: 'Marek Jankowski',
             },
-            name: 'Marek i Kasia',
-            role: 'Inwestorzy prywatni',
+            name: 'Marek Jankowski',
+            role: 'Inwestor prywatny, Rybnik',
           },
           rating: 5.0,
         },
@@ -1828,11 +1584,63 @@ contactCTA: {
             'Bez nadzoru byśmy tego nie zauważyli. Kierownik budowy z CoreLTB na bieżąco kontrolował każdy etap i trzymał wykonawcę w ryzach. Spokój ducha bezcenny.',
           author: {
             image: {
-              src: '/images/testimonials/piotr-nowicki.jpg',
+              src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100',
               alt: 'Piotr Nowicki',
             },
             name: 'Piotr Nowicki',
-            role: 'Właściciel domu jednorodzinnego',
+            role: 'Właściciel domu, Katowice',
+          },
+          rating: 5.0,
+        },
+        {
+          quote:
+            'Odbiór mieszkania od dewelopera - inspektor z CoreLTB znalazł 47 usterek, które deweloper musiał naprawić przed przekazaniem kluczy. Sam bym połowy nie zauważył.',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100',
+              alt: 'Łukasz Zawadzki',
+            },
+            name: 'Łukasz Zawadzki',
+            role: 'Nabywca mieszkania, Gliwice',
+          },
+          rating: 5.0,
+        },
+        {
+          quote:
+            'Budowaliśmy systemem gospodarczym. Nadzór CoreLTB pilnował jakości prac podwykonawców i terminów. Dzięki temu uniknęliśmy przestojów i fuszerki.',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100',
+              alt: 'Agnieszka Kwiatkowska',
+            },
+            name: 'Agnieszka Kwiatkowska',
+            role: 'Inwestorka, Tychy',
+          },
+          rating: 4.9,
+        },
+        {
+          quote:
+            'Weryfikacja umowy z wykonawcą przed podpisaniem - inspektor wyłapał kilka niekorzystnych zapisów. Poprawki uchroniły nas przed potencjalnymi problemami.',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100',
+              alt: 'Wojciech Dąbrowski',
+            },
+            name: 'Wojciech Dąbrowski',
+            role: 'Inwestor, Jaworzno',
+          },
+          rating: 5.0,
+        },
+        {
+          quote:
+            'Nadzór na budowie domu na szkodach górniczych - CoreLTB zna specyfikę regionu. Kontrolowali zbrojenie płyty fundamentowej co do centymetra.',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100',
+              alt: 'Natalia Górska',
+            },
+            name: 'Natalia Górska',
+            role: 'Właścicielka domu, Bytom',
           },
           rating: 5.0,
         },
@@ -2133,11 +1941,11 @@ contactCTA: {
             'Badania gruntu wykazały, że nasz grunt wymaga pali fundamentowych. Gdybyśmy tego nie wiedzieli i zbudowali dom na standardowych fundamentach, moglibyśmy mieć pęknięcia i koszty napraw rzędu 100 000 zł. CoreLTB uratowało nasze marzenie o domu.',
           author: {
             image: {
-              src: '/images/testimonials/marek-kasia.jpg',
-              alt: 'Marek i Kasia Nowak',
+              src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100',
+              alt: 'Marek Nowak',
             },
-            name: 'Marek i Kasia Nowak',
-            role: 'Inwestorzy prywatni',
+            name: 'Marek Nowak',
+            role: 'Inwestor prywatny, Rybnik',
           },
           rating: 5.0,
         },
@@ -2146,11 +1954,63 @@ contactCTA: {
             'Kosztorys wykonany przez CoreLTB pozwolił nam odkryć, że oferta jednego z wykonawców była zawyżona o 120 000 zł. Mając twarde dane, negocjowaliśmy z pozycji siły i znaleźliśmy uczciwego wykonawcę.',
           author: {
             image: {
-              src: '/images/testimonials/anna-kowalczyk.jpg',
+              src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100',
               alt: 'Anna Kowalczyk',
             },
             name: 'Anna Kowalczyk',
-            role: 'Właścicielka domu jednorodzinnego',
+            role: 'Właścicielka domu, Katowice',
+          },
+          rating: 5.0,
+        },
+        {
+          quote:
+            'Geodeta z CoreLTB załatwił wszystko - mapy, wytyczenie, obsługę budowy. Jeden dostawca zamiast szukania osobno. Szybko i profesjonalnie.',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100',
+              alt: 'Jan Wiśniewski',
+            },
+            name: 'Jan Wiśniewski',
+            role: 'Inwestor, Gliwice',
+          },
+          rating: 5.0,
+        },
+        {
+          quote:
+            'Ekspertyza techniczna przed zakupem starego domu - CoreLTB znaleźli problemy z konstrukcją, które sprzedający ukrywał. Uniknęliśmy zakupu ruiny za 800 tys.',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100',
+              alt: 'Bartosz Michalski',
+            },
+            name: 'Bartosz Michalski',
+            role: 'Nabywca nieruchomości, Tychy',
+          },
+          rating: 5.0,
+        },
+        {
+          quote:
+            'Świadectwo energetyczne potrzebne do odbioru domu - audytor przyjechał następnego dnia. Szybko, sprawnie, bez stresu przed terminem.',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100',
+              alt: 'Monika Zielińska',
+            },
+            name: 'Monika Zielińska',
+            role: 'Właścicielka domu, Jaworzno',
+          },
+          rating: 4.9,
+        },
+        {
+          quote:
+            'Badania geotechniczne na działce na szkodach górniczych - raport jasno określił kategorię i wymagania. Konstruktor od razu wiedział jak projektować fundamenty.',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100',
+              alt: 'Grzegorz Adamczyk',
+            },
+            name: 'Grzegorz Adamczyk',
+            role: 'Inwestor, Ruda Śląska',
           },
           rating: 5.0,
         },
@@ -2731,52 +2591,76 @@ cooperationTimelineNoLine: {
       },
       testimonials: [
         {
-          quote: 'Byliśmy przerażeni wizją koordynacji kilkunastu fachowców. CoreLTB wzięło wszystko na siebie. Jeden Project Manager, stały kontakt i wszystko zapięte na ostatni guzik. Dla nas, osób pracujących na pełen etat, ten spokój był bezcenny. Polecamy z całego serca.',
+          quote: 'Byliśmy przerażeni wizją koordynacji kilkunastu fachowców. CoreLTB wzięło wszystko na siebie. Jeden Project Manager, stały kontakt i wszystko zapięte na ostatni guzik. Dla nas, osób pracujących na pełen etat, ten spokój był bezcenny.',
           author: {
             image: {
-              src: '/images/testimonials/kowalscy.webp',
-              alt: 'Anna i Tomasz Kowalscy',
+              src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100',
+              alt: 'Tomasz Kowalski',
             },
             name: 'Anna i Tomasz Kowalscy',
-            role: 'Właściciele domu pod Warszawą',
+            role: 'Właściciele domu, Katowice',
           },
           rating: 5.0,
         },
         {
-          quote: 'Największym plusem była transparentność i trzymanie się budżetu. Kosztorys, który otrzymałem na początku, zgadzał się co do złotówki z fakturą końcową. W dzisiejszych czasach to rzadkość. Pełen profesjonalizm i uczciwość.',
+          quote: 'Największym plusem była transparentność i trzymanie się budżetu. Kosztorys, który otrzymałem na początku, zgadzał się co do złotówki z fakturą końcową. W dzisiejszych czasach to rzadkość.',
           author: {
             image: {
-              src: '/images/testimonials/nowak.webp',
+              src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100',
               alt: 'Piotr Nowak',
             },
             name: 'Piotr Nowak',
-            role: 'Inwestor z Krakowa',
+            role: 'Inwestor, Rybnik',
           },
           rating: 5.0,
         },
         {
-          quote: 'Jestem estetką i zwracam uwagę na detale. Ekipa CoreLTB wykazała się niesamowitą precyzją – idealnie równe gładzie, perfekcyjnie położone płytki, wszystko wykonane z najwyższą starannością. Jakość wykonania przerosła moje oczekiwania. Dom jest piękny!',
+          quote: 'Jestem estetką i zwracam uwagę na detale. Ekipa CoreLTB wykazała się niesamowitą precyzją – idealnie równe gładzie, perfekcyjnie położone płytki. Jakość wykonania przerosła moje oczekiwania.',
           author: {
             image: {
-              src: '/images/testimonials/wisniewska.webp',
+              src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100',
               alt: 'Katarzyna Wiśniewska',
             },
             name: 'Katarzyna Wiśniewska',
-            role: 'Właścicielka domu jednorodzinnego',
+            role: 'Właścicielka domu, Gliwice',
           },
           rating: 5.0,
         },
         {
-          quote: 'Budowałem dom, mieszkając 300 km dalej. Nadzór i koordynacja prac wykończeniowych przez CoreLTB były kluczowe. Otrzymywałem cotygodniowe raporty ze zdjęciami i mogłem spokojnie pracować, wiedząc że wszystko idzie zgodnie z planem. Bezproblemowa współpraca na odległość.',
+          quote: 'Budowałem dom, mieszkając 300 km dalej. Otrzymywałem cotygodniowe raporty ze zdjęciami i mogłem spokojnie pracować, wiedząc że wszystko idzie zgodnie z planem.',
           author: {
             image: {
-              src: '/images/testimonials/zielinski.webp',
+              src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100',
               alt: 'Marek Zieliński',
             },
             name: 'Marek Zieliński',
-            role: 'Inwestor budujący zdalnie',
+            role: 'Inwestor budujący zdalnie, Tychy',
           },
           rating: 5.0,
+        },
+        {
+          quote: 'Łazienka i kuchnia wyglądają jak z magazynu wnętrzarskiego. Dobór płytek, oświetlenie, każdy detal przemyślany. CoreLTB ma świetnych fachowców od wykończeń.',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100',
+              alt: 'Sylwia Majewska',
+            },
+            name: 'Sylwia Majewska',
+            role: 'Właścicielka domu, Jaworzno',
+          },
+          rating: 5.0,
+        },
+        {
+          quote: 'Po stanie deweloperskim zostaliśmy z gołymi ścianami. CoreLTB w 3 miesiące zrobili wszystko - od gładzi po meble kuchenne. Wprowadziliśmy się zgodnie z planem.',
+          author: {
+            image: {
+              src: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100',
+              alt: 'Rafał Grabowski',
+            },
+            name: 'Rafał Grabowski',
+            role: 'Właściciel domu, Mikołów',
+          },
+          rating: 4.9,
         },
       ],
     },

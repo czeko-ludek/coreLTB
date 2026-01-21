@@ -29,7 +29,7 @@ const headerData = {
     { label: "Strona główna", href: "/" },
     { label: "O nas", href: "/o-nas" },
     { label: "Oferta", href: "/oferta" },
-    { label: "Projekty", href: "/projects" },
+    { label: "Projekty", href: "/projekty" },
     { label: "Blog", href: "/blog" },
     { label: "Kontakt", href: "/kontakt" },
   ],

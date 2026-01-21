@@ -1,85 +1,206 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Button, Icon, SectionLabel } from '@/components/ui';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { Icon } from '@/components/ui';
 
 export interface HeroSectionProps {
   tagline: string;
   title: string;
   subtitle: string;
-  backgroundImage: string;
   primaryButton: { text: string; href: string };
+  images: Array<{ src: string; alt: string }>;
+  // Backward compatibility - single image converted to array
+  backgroundImage?: string;
 }
 
 export function HeroSection({
   tagline,
   title,
   subtitle,
-  backgroundImage,
   primaryButton,
+  images: imagesProp,
+  backgroundImage,
 }: HeroSectionProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Support both single backgroundImage and images array
+  const images = imagesProp?.length
+    ? imagesProp
+    : backgroundImage
+      ? [{ src: backgroundImage, alt: 'Hero background' }]
+      : [{ src: '/slide-1.webp', alt: 'Hero background' }];
+
+  // Auto-advance every 7 seconds
+  useEffect(() => {
+    if (images.length <= 1) return;
+
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 7000);
+    return () => clearInterval(timer);
+  }, [images.length]);
+
   return (
-    <div className="px-0 md:px-[50px] mt-4 md:mt-8">
-      <section className="relative min-h-[500px] md:min-h-[calc(100vh-140px)] flex items-center md:rounded-lg overflow-hidden mx-auto shadow-xl">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={backgroundImage}
-            alt="Hero background"
-            fill
-            className="object-cover"
-            priority
-            fetchPriority="high"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+    <div className="px-4 md:px-[50px] mt-4 md:mt-8">
+      <section className="relative min-h-[500px] md:min-h-[70vh] flex flex-col justify-center overflow-hidden bg-zinc-900 rounded-2xl">
+        {/* Background Images with Zoom & Fade - Ken Burns style */}
+        {images.map((image, index) => (
+          <motion.div
+            key={`${index}-${currentIndex === index ? 'active' : 'inactive'}`}
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: index === currentIndex ? 1 : 0,
+            }}
+            transition={{
+              opacity: { duration: 1.2, ease: 'easeInOut' },
+            }}
+          >
+            <motion.div
+              className="absolute inset-0"
+              initial={{ scale: 1.0 }}
+              animate={index === currentIndex ? { scale: 1.15 } : { scale: 1.0 }}
+              transition={{
+                scale: { duration: 7, ease: 'linear' },
+              }}
+              key={`zoom-${index}-${currentIndex}`}
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                className="object-cover"
+                priority={index === 0}
+              />
+            </motion.div>
+          </motion.div>
+        ))}
+
+        {/* Cinematic Overlay - Strong left only, right side fully visible */}
+        <div className="absolute inset-0 z-[1]">
+          <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/30 via-transparent to-zinc-900/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/95 via-zinc-900/20 to-transparent" />
         </div>
 
+        {/* Animated Vignette */}
+        <motion.div
+          className="absolute inset-0 z-[2] pointer-events-none rounded-2xl"
+          animate={{
+            boxShadow: [
+              'inset 0 0 100px 30px rgba(0,0,0,0.5)',
+              'inset 0 0 150px 50px rgba(0,0,0,0.6)',
+              'inset 0 0 100px 30px rgba(0,0,0,0.5)',
+            ],
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        />
+
         {/* Content */}
-        <div className="container mx-auto px-4 md:px-8 lg:px-12 md:pr-24 relative z-10 py-20">
-          <div className="max-w-3xl space-y-6">
-            <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-              <SectionLabel>{tagline}</SectionLabel>
-            </div>
+        <div className="container mx-auto px-6 md:px-10 relative z-10 py-12 md:py-16">
+          <div className="max-w-2xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            >
+              <span className="text-primary font-bold text-xs uppercase tracking-[0.3em] mb-4 block">
+                {tagline}
+              </span>
+            </motion.div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-hero font-extrabold text-white leading-tight animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-              {title}
-            </h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 1 }}
+              className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-[0.95] mb-5"
+            >
+              {title.split(' ').slice(0, -1).join(' ')}
+              <br />
+              <span className="text-primary">{title.split(' ').slice(-1)}</span>
+            </motion.h1>
 
-            <p className="text-base md:text-body-lg text-white max-w-2xl animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="text-lg text-white/60 max-w-lg mb-8 leading-relaxed"
+            >
               {subtitle}
-            </p>
+            </motion.p>
 
-            <div className="pt-4 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-              <Button
-                variant="secondary"
-                size="lg"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.6 }}
+            >
+              <Link
                 href={primaryButton.href}
-                rightIcon={<Icon name="arrowRight" size="sm" />}
+                className="group inline-flex items-center gap-2 bg-white text-zinc-900 font-bold px-6 py-3 rounded-full hover:bg-primary transition-colors duration-300 text-sm"
               >
                 {primaryButton.text}
-              </Button>
-            </div>
+                <Icon name="arrowRight" size="sm" className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </motion.div>
           </div>
         </div>
 
-        {/* Slider Navigation - Right Side (Hidden on Mobile) */}
-        <div className="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 z-10 flex-col items-center gap-4">
-          <button className="w-12 h-12 rounded-full bg-primary text-white font-bold hover:bg-primary-dark transition-colors">
-            01
-          </button>
-          <button className="w-12 h-12 rounded-full bg-white/20 text-white font-bold hover:bg-white/30 transition-colors">
-            02
-          </button>
-          <button className="w-12 h-12 rounded-full bg-white/20 text-white font-bold hover:bg-white/30 transition-colors">
-            03
-          </button>
-          <span className="text-white text-sm font-medium mt-2 [writing-mode:vertical-lr] rotate-180">
-            Zobacz Wszystkie
-          </span>
-        </div>
+        {/* Circular Progress Indicators - Bottom Right, Vertical */}
+        {images.length > 1 && (
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
+            className="absolute bottom-8 right-8 z-20 flex flex-col gap-3"
+          >
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className="relative w-12 h-12 rounded-full group"
+              >
+                <svg className="w-12 h-12 -rotate-90">
+                  <circle
+                    cx="24"
+                    cy="24"
+                    r="20"
+                    fill="none"
+                    stroke="rgba(255,255,255,0.15)"
+                    strokeWidth="2"
+                  />
+                  {index === currentIndex && (
+                    <motion.circle
+                      cx="24"
+                      cy="24"
+                      r="20"
+                      fill="none"
+                      stroke="#dfbb68"
+                      strokeWidth="2.5"
+                      strokeDasharray="126"
+                      initial={{ strokeDashoffset: 126 }}
+                      animate={{ strokeDashoffset: 0 }}
+                      transition={{ duration: 7, ease: 'linear' }}
+                      key={currentIndex}
+                    />
+                  )}
+                </svg>
+                <span
+                  className={`absolute inset-0 flex items-center justify-center text-sm font-bold transition-colors duration-300 ${
+                    index === currentIndex ? 'text-primary' : 'text-white/50 group-hover:text-white/80'
+                  }`}
+                >
+                  {index + 1}
+                </span>
+              </button>
+            ))}
+          </motion.div>
+        )}
 
+        {/* Bottom Gradient */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-zinc-900 to-transparent z-[3] rounded-b-2xl" />
       </section>
     </div>
   );
 }
-

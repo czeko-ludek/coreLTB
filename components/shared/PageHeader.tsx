@@ -1,84 +1,95 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { Icon } from '@/components/ui';
 
 export interface PageHeaderProps {
   title: string;
-  watermarkText: string;
+  subtitle?: string;
+  watermarkText?: string; // Deprecated - kept for backwards compatibility
   breadcrumbs: Array<{ label: string; href: string }>;
   backgroundImage: string;
 }
 
 export function PageHeader({
   title,
-  watermarkText,
+  subtitle,
   breadcrumbs,
   backgroundImage,
 }: PageHeaderProps) {
   return (
-    <div className="px-0 md:px-[50px] mt-8">
-      <section className="relative h-[300px] md:h-[400px] overflow-hidden rounded-lg shadow-lg">
-        {/* Background Image - LCP optimized with zoom animation */}
+    <div className="px-4 md:px-[50px] mt-8">
+      <section className="relative h-[350px] md:h-[450px] overflow-hidden rounded-3xl shadow-2xl">
+        {/* 1. Background Image with zoom animation */}
         <Image
           src={backgroundImage}
           alt={title}
           fill
-          className="object-cover rounded-lg animate-hero-zoom"
+          className="object-cover animate-hero-zoom"
           priority
           fetchPriority="high"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+          sizes="100vw"
         />
 
-        {/* Gradient Overlay - Modern Smooth Gradient */}
-        <div className="absolute inset-0 rounded-lg" style={{
-          background: 'linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 35%, rgba(0,0,0,0.2) 65%, transparent 100%)'
-        }}></div>
+        {/* 2. Dark Overlay */}
+        <div className="absolute inset-0 bg-black/60" />
 
-        {/* Title - Left Aligned with fadeInUp animation */}
-        <div className="absolute inset-0 flex items-center z-10 px-4 md:px-8 left-0 overflow-hidden">
-          <h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-[400px] md:max-w-[600px] animate-fade-in-up"
-            style={{ animationDelay: '0.2s' }}
+        {/* 3. Breadcrumbs - Top Center */}
+        <nav className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
+          <motion.div
+            initial={{ opacity: 0, y: -10, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex items-center gap-2 text-sm bg-white/10 backdrop-blur-md px-6 py-2.5 rounded-full border border-white/20"
+          >
+            {breadcrumbs.map((crumb, index) => (
+              <React.Fragment key={crumb.href}>
+                {index > 0 && (
+                  <Icon name="chevronRight" className="text-white/50" size="sm" />
+                )}
+                <Link
+                  href={crumb.href}
+                  className={
+                    index === breadcrumbs.length - 1
+                      ? 'text-primary font-semibold'
+                      : 'text-white/80 hover:text-white transition-colors'
+                  }
+                >
+                  {crumb.label}
+                </Link>
+              </React.Fragment>
+            ))}
+          </motion.div>
+        </nav>
+
+        {/* 4. Centered Content */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10">
+          <motion.h1
+            initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight"
           >
             {title}
-          </h1>
-          {/* Watermark Text - Stroke Only, Next to Title - Single line */}
-          <div
-            className="text-[50px] md:text-[70px] lg:text-[90px] font-bold uppercase select-none pointer-events-none ml-4 md:ml-8 whitespace-nowrap animate-watermark-fade"
-            style={{
-              WebkitTextStroke: '1px rgba(255, 255, 255, 0.4)',
-              color: 'transparent',
-              animationDelay: '0.3s'
-            }}
-            aria-hidden="true"
-          >
-            {watermarkText}
-          </div>
+          </motion.h1>
+
+          {subtitle && (
+            <motion.p
+              initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-lg md:text-xl text-white/80 max-w-2xl"
+            >
+              {subtitle}
+            </motion.p>
+          )}
         </div>
 
-        {/* Breadcrumbs - Bottom Edge of Header with fadeInUp animation */}
-        <nav
-          className="absolute bottom-0 left-4 md:left-8 z-20 flex items-center gap-2 md:gap-3 text-xs md:text-sm bg-white px-4 md:px-8 py-3 md:py-4 rounded-t-lg shadow-lg animate-fade-in-up"
-          style={{ animationDelay: '0.4s' }}
-        >
-          {breadcrumbs.map((crumb, index) => (
-            <React.Fragment key={crumb.href}>
-              {index > 0 && (
-                <span className="text-gray-400 font-bold">•</span>
-              )}
-              <Link
-                href={crumb.href}
-                className={
-                  index === breadcrumbs.length - 1
-                    ? 'text-primary font-bold uppercase tracking-wider'
-                    : 'text-gray-900 hover:text-primary transition-colors uppercase tracking-wider font-bold'
-                }
-              >
-                {crumb.label}
-              </Link>
-            </React.Fragment>
-          ))}
-        </nav>
+        {/* 5. Decorative Bottom Gradient */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/50 to-transparent" />
       </section>
     </div>
   );

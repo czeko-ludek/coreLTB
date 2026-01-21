@@ -3,8 +3,7 @@ import Link from 'next/link';
 import Script from 'next/script';
 import { clsx } from 'clsx';
 
-import { InteractiveMapSection } from '@/components/sections/InteractiveMapSection';
-import { CtaSection } from '@/components/sections/CtaSection';
+import { InteractiveMapSection, ContactCTASection } from '@/components/sections';
 import { SectionHeader, AnimatedSection } from '@/components/shared';
 import { Icon } from '@/components/ui';
 
@@ -283,21 +282,17 @@ export default function ObszarDzialaniaPage() {
       {/* ================================================================
           SECTION 5: CTA
           ================================================================ */}
-      <AnimatedSection as="div" className="mx-4 md:mx-[50px] mt-5 mb-5" delay={0.1}>
-        <CtaSection
-          title="Twoja działka znajduje się w naszym zasięgu logistycznym?"
-          email={companyData.email}
-          primaryButton={{
-            text: 'Umów bezpłatną konsultację',
-            href: '/kontakt',
-          }}
-          socials={[
-            { platform: 'facebook', href: 'https://facebook.com/coreltb' },
-            { platform: 'instagram', href: 'https://instagram.com/coreltb' },
-            { platform: 'linkedin', href: 'https://linkedin.com/company/coreltb' },
-          ]}
-        />
-      </AnimatedSection>
+      <ContactCTASection
+        contactInfo={{
+          phone: companyData.telephone,
+          email: companyData.email,
+        }}
+        socials={[
+          { platform: 'facebook', href: 'https://facebook.com/coreltb' },
+          { platform: 'instagram', href: 'https://instagram.com/coreltb' },
+          { platform: 'linkedin', href: 'https://linkedin.com/company/coreltb' },
+        ]}
+      />
 
       {/* Schema.org JSON-LD */}
       <Script

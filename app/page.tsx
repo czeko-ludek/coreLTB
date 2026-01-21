@@ -1,7 +1,7 @@
 import {
 	AboutCompanySection,
 	BlogSection,
-	CtaSection,
+	ContactCTASection,
 	HeroSection,
 	HowItWorksSection,
 	ProjectsSection,
@@ -9,7 +9,9 @@ import {
 	TestimonialsSection,
 	// PartnersSection, // Disabled - missing images
 } from "@/components/sections"; // ✅ Centralized import from index.ts
+import { companyData } from "@/data/company-data";
 import { allProjects } from "@/data/projects";
+import { blogPosts } from "@/data/blog-data";
 
 export default function Home() {
 	// Hero Section Data
@@ -17,29 +19,14 @@ export default function Home() {
 		tagline: "BUDUJEMY LEPSZE JUTRO",
 		title: "Zrealizuj z nami projekt swoich marzeń!",
 		subtitle:
-			"CoreLTB to Twój zaufany partner w realizacji projektów budowlanych. Specjalizujemy się w budownictwie kubaturowym, projektach infrastrukturalnych, nowoczesnym budownictwie mieszkalnym, łącząc innowacyjne technologie z wieloletnim doświadczeniem. Od koncepcji aż po finalizację – budujemy solidne fundamenty dla Twojej przyszłości.",
-		backgroundImage: "/slide-1.webp",
-		primaryButton: { text: "Nasze usługi", href: "/services" },
-		stats: [
-			{
-				iconName: "building" as const,
-				value: "200",
-				label: "Zrealizowanych projektów",
-				suffix: "+",
-			},
-			{
-				iconName: "users" as const,
-				value: "15",
-				label: "Ekspertów w zespole",
-				suffix: "+",
-			},
-			{
-				iconName: "award" as const,
-				value: "25",
-				label: "Lat doświadczenia",
-				suffix: "",
-			},
+			"CoreLTB to Twój zaufany partner w realizacji projektów budowlanych. Specjalizujemy się w budownictwie kubaturowym i nowoczesnym budownictwie mieszkalnym na terenach górniczych Śląska.",
+		images: [
+			{ src: "/images/hero/slide-1.webp", alt: "Budowa domu na Śląsku" },
+			{ src: "/images/hero/slide-2.webp", alt: "Nowoczesny dom jednorodzinny" },
+			{ src: "/images/hero/slide-3.webp", alt: "Realizacja CoreLTB Builders" },
+			{ src: "/images/hero/slide-4.webp", alt: "Dom pod klucz" },
 		],
+		primaryButton: { text: "Nasze usługi", href: "/oferta" },
 	};
 
 	// About Company Section Data
@@ -221,7 +208,7 @@ export default function Home() {
 						alt: "Katarzyna Wiśniewska",
 					},
 					name: "Katarzyna Wiśniewska",
-					role: "Właścicielka domu",
+					role: "Właścicielka domu, Rybnik",
 				},
 				rating: 4.8,
 			},
@@ -234,72 +221,90 @@ export default function Home() {
 						alt: "Michał Lewandowski",
 					},
 					name: "Michał Lewandowski",
-					role: "Właściciel firmy",
+					role: "Właściciel firmy, Katowice",
 				},
 				rating: 4.9,
+			},
+			{
+				quote:
+					"Budowa na terenie górniczym to było nasze największe zmartwienie. CoreLTB wykonali płytę fundamentową i cały stan surowy bez żadnych problemów. Wszystko zgodnie z harmonogramem i budżetem.",
+				author: {
+					image: {
+						src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100",
+						alt: "Tomasz Kowalczyk",
+					},
+					name: "Tomasz Kowalczyk",
+					role: "Inwestor prywatny, Tychy",
+				},
+				rating: 5.0,
+			},
+			{
+				quote:
+					"Polecam z czystym sumieniem. Transparentna wycena, żadnych ukrytych kosztów. Kierownik budowy był dostępny praktycznie całą dobę. Dom oddany 2 tygodnie przed terminem!",
+				author: {
+					image: {
+						src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100",
+						alt: "Anna Nowak",
+					},
+					name: "Anna Nowak",
+					role: "Właścicielka domu, Gliwice",
+				},
+				rating: 4.9,
+			},
+			{
+				quote:
+					"Trzecia budowa w życiu i pierwsza bez stresu. CoreLTB to profesjonaliści, którzy wiedzą co robią. Szczególnie doceniam ich doświadczenie w budownictwie na szkodach górniczych.",
+				author: {
+					image: {
+						src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100",
+						alt: "Piotr Zieliński",
+					},
+					name: "Piotr Zieliński",
+					role: "Inwestor, Jaworzno",
+				},
+				rating: 4.8,
+			},
+			{
+				quote:
+					"Od projektu po wykończenie pod klucz - wszystko w jednym miejscu. Oszczędziłem mnóstwo czasu i nerwów. Efekt końcowy przerósł moje oczekiwania.",
+				author: {
+					image: {
+						src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100",
+						alt: "Marek Wójcik",
+					},
+					name: "Marek Wójcik",
+					role: "Właściciel domu, Mikołów",
+				},
+				rating: 5.0,
 			},
 		],
 	};
 
 	// CTA Section Data
 	const ctaData = {
-		title: "Gotowy na budowę swoich marzeń?",
-		email: "coreltb@gmail.com",
-		primaryButton: { text: "Umów wizytę", href: "/kontakt" },
+		contactInfo: {
+			phone: companyData.telephone,
+			email: companyData.email,
+		},
 		socials: [
 			{ platform: "facebook" as const, href: "https://facebook.com" },
 			{ platform: "instagram" as const, href: "https://instagram.com" },
 			{ platform: "linkedin" as const, href: "https://linkedin.com" },
-			{ platform: "youtube" as const, href: "https://youtube.com" },
 		],
 	};
 
-	// Blog Section Data
+	// Blog Section Data - najnowsze 3 posty z bloga
+	const latestPosts = [...blogPosts]
+		.sort((a, b) => b.dateTimestamp - a.dateTimestamp)
+		.slice(0, 3);
+
 	const blogData = {
 		header: {
 			label: "ARTYKUŁY I BLOG",
 			title: "Najnowsze wiadomości i aktualności",
 			theme: "light" as const,
 		},
-		posts: [
-			{
-				image: {
-					src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800",
-					alt: "Nowoczesne Budownictwo",
-				},
-				category: "Budownictwo",
-				date: "15 Gru, 2023",
-				title: "Nowoczesne techniki budowlane dla zrównoważonego budownictwa",
-				excerpt:
-					"Odkryj najnowsze innowacje w budownictwie, które promują zrównoważony rozwój i efektywność.",
-				href: "/blog/modern-construction",
-			},
-			{
-				image: {
-					src: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=800",
-					alt: "Projektowanie Wnętrz",
-				},
-				category: "Design",
-				date: "10 Gru, 2023",
-				title:
-					"Najważniejsze trendy w projektowaniu wnętrz dla nowoczesnych domów",
-				excerpt:
-					"Poznaj najgorętsze trendy w projektowaniu wnętrz, które kształtują współczesne przestrzenie życiowe.",
-				href: "/blog/design-trends",
-			},
-			{
-				image: {
-					src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800",
-					alt: "Planowanie Projektu",
-				},
-				category: "Planowanie",
-				date: "05 Gru, 2023",
-				title: "Kluczowe etapy planowania projektu budowlanego",
-				excerpt:
-					"Dowiedz się o krytycznych fazach planowania, które zapewniają udaną realizację projektu.",
-				href: "/blog/project-planning",
-			},
-		],
+		posts: latestPosts,
 	};
 
 	// Partners Section Data - Disabled (missing images)
@@ -321,7 +326,7 @@ export default function Home() {
 			<HowItWorksSection {...howItWorksData} />
 			<ProjectsSection {...projectsData} />
 			<TestimonialsSection {...testimonialsData} />
-			<CtaSection {...ctaData} />
+			<ContactCTASection {...ctaData} />
 			<BlogSection {...blogData} />
 			{/* <PartnersSection {...partnersData} /> */}
 		</main>
