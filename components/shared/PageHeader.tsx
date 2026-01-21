@@ -37,13 +37,13 @@ export function PageHeader({
         {/* 2. Dark Overlay */}
         <div className="absolute inset-0 bg-black/60" />
 
-        {/* 3. Breadcrumbs - Top Center */}
-        <nav className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
+        {/* 3. Breadcrumbs - Top Center (hidden on very small screens) */}
+        <nav className="absolute top-4 sm:top-6 left-1/2 -translate-x-1/2 z-20 hidden sm:block">
           <motion.div
             initial={{ opacity: 0, y: -10, filter: 'blur(10px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex items-center gap-2 text-sm bg-white/10 backdrop-blur-md px-6 py-2.5 rounded-full border border-white/20"
+            className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm bg-white/10 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-2.5 rounded-full border border-white/20"
           >
             {breadcrumbs.map((crumb, index) => (
               <React.Fragment key={crumb.href}>
@@ -71,7 +71,7 @@ export function PageHeader({
             initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight"
+            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 leading-tight px-2"
           >
             {title}
           </motion.h1>
@@ -81,7 +81,7 @@ export function PageHeader({
               initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-lg md:text-xl text-white/80 max-w-2xl"
+              className="text-base sm:text-lg md:text-xl text-white/80 max-w-2xl px-2"
             >
               {subtitle}
             </motion.p>

@@ -35,6 +35,7 @@ export function HowItWorksSection({ header, steps, video }: HowItWorksSectionPro
               alt="Video placeholder"
               fill
               className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
 
             {/* Play Button */}

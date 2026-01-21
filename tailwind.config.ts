@@ -30,8 +30,8 @@ const config: Config = {
         text: {
           primary: "#1a1a1a",
           dark: "#1a1a1a",
-          secondary: "#6b7280",
-          muted: "#9ca3af",
+          secondary: "#9ca3af", // Improved contrast for dark backgrounds (was #6b7280)
+          muted: "#a3a3a3",
         },
         // Kolory obramowań
         border: {

@@ -79,17 +79,26 @@ export function Header({
               {/* Social Links */}
               <div className="flex items-center gap-2.5">
                 <span className="text-primary text-sm mr-2 font-semibold">Śledź nas:</span>
-                {topBar.socials.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-primary transition-colors"
-                  >
-                    <Icon name={social.platform} size="sm" />
-                  </a>
-                ))}
+                {topBar.socials.map((social, index) => {
+                  const platformNames: Record<string, string> = {
+                    facebook: 'Facebook',
+                    twitter: 'Twitter',
+                    instagram: 'Instagram',
+                    linkedin: 'LinkedIn',
+                  };
+                  return (
+                    <a
+                      key={index}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Odwiedź nasz profil na ${platformNames[social.platform]}`}
+                      className="text-gray-600 hover:text-primary transition-colors"
+                    >
+                      <Icon name={social.platform} size="sm" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -159,7 +168,10 @@ export function Header({
               {/* Mobile & Desktop Actions */}
               <div className="flex items-center gap-2.5">
                 {searchEnabled && (
-                  <button className="text-primary hover:text-primary-dark transition-colors p-1.5">
+                  <button
+                    aria-label="Szukaj"
+                    className="text-primary hover:text-primary-dark transition-colors p-1.5"
+                  >
                     <Icon name="search" size="md" />
                   </button>
                 )}

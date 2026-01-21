@@ -33,13 +33,13 @@ export function HeroSection({
       ? [{ src: backgroundImage, alt: 'Hero background' }]
       : [{ src: '/slide-1.webp', alt: 'Hero background' }];
 
-  // Auto-advance every 7 seconds
+  // Auto-advance every 4 seconds (synced with Ken Burns animation)
   useEffect(() => {
     if (images.length <= 1) return;
 
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 7000);
+    }, 4000);
     return () => clearInterval(timer);
   }, [images.length]);
 
@@ -64,7 +64,7 @@ export function HeroSection({
               initial={{ scale: 1.0 }}
               animate={index === currentIndex ? { scale: 1.15 } : { scale: 1.0 }}
               transition={{
-                scale: { duration: 7, ease: 'linear' },
+                scale: { duration: 4, ease: 'linear' },
               }}
               key={`zoom-${index}-${currentIndex}`}
             >
@@ -74,6 +74,7 @@ export function HeroSection({
                 fill
                 className="object-cover"
                 priority={index === 0}
+                sizes="100vw"
               />
             </motion.div>
           </motion.div>
@@ -85,17 +86,10 @@ export function HeroSection({
           <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/95 via-zinc-900/20 to-transparent" />
         </div>
 
-        {/* Animated Vignette */}
-        <motion.div
+        {/* Static Vignette - no animation for better performance */}
+        <div
           className="absolute inset-0 z-[2] pointer-events-none rounded-2xl"
-          animate={{
-            boxShadow: [
-              'inset 0 0 100px 30px rgba(0,0,0,0.5)',
-              'inset 0 0 150px 50px rgba(0,0,0,0.6)',
-              'inset 0 0 100px 30px rgba(0,0,0,0.5)',
-            ],
-          }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ boxShadow: 'inset 0 0 120px 40px rgba(0,0,0,0.55)' }}
         />
 
         {/* Content */}
@@ -125,7 +119,7 @@ export function HeroSection({
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
+              transition={{ delay: 0, duration: 0.5 }}
               className="text-lg text-white/60 max-w-lg mb-8 leading-relaxed"
             >
               {subtitle}
@@ -181,7 +175,7 @@ export function HeroSection({
                       strokeDasharray="126"
                       initial={{ strokeDashoffset: 126 }}
                       animate={{ strokeDashoffset: 0 }}
-                      transition={{ duration: 7, ease: 'linear' }}
+                      transition={{ duration: 4, ease: 'linear' }}
                       key={currentIndex}
                     />
                   )}

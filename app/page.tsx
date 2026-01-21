@@ -41,7 +41,7 @@ export default function Home() {
 			"Od ponad 15 lat rozwiązujemy **inżynierskie problemy Południowej Polski**: szkody górnicze na Śląsku, trudne warunki gruntowe i skomplikowaną logistykę materiałową. Nie sprzedajemy marzeń o domu – dostarczamy bezpieczny, terminowo zrealizowany budynek oparty na solidnej umowie.",
 		],
 		image: {
-			src: "/aboutcompany1.webp",
+			src: "/images/o-nas-hero.webp",
 			alt: "Zespół CoreLTB Builders na budowie",
 		},
 		stats: {

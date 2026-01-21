@@ -95,17 +95,27 @@ export function Footer({
                 {about}
               </p>
               <div className="flex gap-3">
-                {socials.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 rounded-full bg-surface-dark flex items-center justify-center text-white hover:bg-primary transition-colors"
-                  >
-                    <Icon name={social.platform} size="sm" />
-                  </a>
-                ))}
+                {socials.map((social, index) => {
+                  const platformNames: Record<string, string> = {
+                    facebook: 'Facebook',
+                    twitter: 'Twitter',
+                    instagram: 'Instagram',
+                    linkedin: 'LinkedIn',
+                    youtube: 'YouTube',
+                  };
+                  return (
+                    <a
+                      key={index}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Odwiedź nasz profil na ${platformNames[social.platform]}`}
+                      className="w-9 h-9 rounded-full bg-surface-dark flex items-center justify-center text-white hover:bg-primary transition-colors"
+                    >
+                      <Icon name={social.platform} size="sm" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
 
@@ -158,6 +168,7 @@ export function Footer({
                 />
                 <button
                   type="submit"
+                  aria-label="Zapisz się do newslettera"
                   className="px-4 py-2 bg-primary text-white rounded-r-md hover:bg-primary-dark transition-colors flex items-center justify-center"
                 >
                   <Icon name="arrowRight" size="sm" />
