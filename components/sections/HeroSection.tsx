@@ -116,14 +116,10 @@ export function HeroSection({
               <span className="text-primary">{title.split(' ').slice(-1)}</span>
             </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0, duration: 0.5 }}
-              className="text-lg text-white/60 max-w-lg mb-8 leading-relaxed"
-            >
+            {/* LCP Element - No animation, visible immediately for best LCP score */}
+            <p className="text-lg text-white/60 max-w-lg mb-8 leading-relaxed">
               {subtitle}
-            </motion.p>
+            </p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
