@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -33,21 +33,37 @@ export function Header({
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  React.useEffect(() => {
+  // Handle scroll state for header styling
+  useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
+  // Close mobile menu handler
+  const closeMobileMenu = useCallback(() => {
+    setMobileMenuOpen(false);
   }, []);
 
   return (
     <div
-      className={`z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'sticky top-0 px-0 md:px-[50px]'
-          : 'px-0 md:px-[50px] py-4'
+      className={`sticky top-0 z-50 transition-[padding] duration-300 px-0 md:px-[50px] ${
+        isScrolled ? '' : 'py-2 md:py-4'
       }`}
       onMouseLeave={() => setMegaMenuOpen(false)}
     >
@@ -107,9 +123,9 @@ export function Header({
         {/* Main Navigation */}
         <div className="bg-white border-t border-gray-200 md:border-t-0">
           <div className="container mx-auto px-6">
-            <div className="flex items-center justify-between py-2.5 min-h-[107px]">
-              {/* Logo - 96x87px */}
-              <Link href="/" className="relative flex-shrink-0" style={{ width: '96px', height: '87px' }}>
+            <div className="flex items-center justify-between py-2 min-h-[72px] md:min-h-[107px]">
+              {/* Logo - Responsive sizing */}
+              <Link href="/" className="relative flex-shrink-0 w-[64px] h-[58px] md:w-[96px] md:h-[87px]">
                 <Image
                   src={logo.src}
                   alt={logo.alt}
@@ -202,34 +218,44 @@ export function Header({
               </div>
             </div>
 
-            {/* Mobile Menu Dropdown */}
-            {mobileMenuOpen && (
-              <div className="lg:hidden py-3 border-t border-gray-200">
-                <nav className="flex flex-col space-y-2">
-                  {navLinks.map((link, index) => {
-                    const isActive = pathname === link.href;
-                    return (
-                      <Link
-                        key={index}
-                        href={link.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className={`text-sm font-semibold transition-colors px-2 py-1.5 ${
-                          isActive
-                            ? 'text-primary bg-primary/20 rounded'
-                            : 'text-gray-700 hover:text-primary'
-                        }`}
-                      >
-                        {link.label}
-                      </Link>
-                    );
-                  })}
-
-                </nav>
-              </div>
-            )}
           </div>
         </div>
         </header>
+
+        {/* Mobile Menu Overlay - Fixed position, always rendered for smooth animation */}
+        <div
+          className={`
+            fixed inset-x-0 top-[72px] md:top-[147px] bottom-0 z-40 lg:hidden
+            bg-white
+            transition-all duration-300 ease-out
+            ${mobileMenuOpen
+              ? 'opacity-100 translate-y-0 pointer-events-auto'
+              : 'opacity-0 -translate-y-4 pointer-events-none'
+            }
+          `}
+        >
+          <div className="container mx-auto px-6 py-6 overflow-y-auto h-full">
+            <nav className="flex flex-col space-y-1">
+              {navLinks.map((link, index) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={index}
+                    href={link.href}
+                    onClick={closeMobileMenu}
+                    className={`text-base font-semibold transition-colors px-4 py-3 rounded-xl ${
+                      isActive
+                        ? 'text-primary bg-primary/10'
+                        : 'text-gray-700 hover:text-primary hover:bg-gray-50'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+        </div>
 
         {/* Mega Menu for Oferta - Positioned absolutely below header */}
         <div

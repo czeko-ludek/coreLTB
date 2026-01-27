@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
 import { Icon } from '@/components/ui';
 import { MapTooltip } from '@/components/ui/MapTooltip';
@@ -14,6 +14,12 @@ import {
   getVoivodeshipById,
   getMapStats,
 } from '@/data/map-data';
+import {
+  fadeInUp,
+  scaleIn,
+  fadeIn,
+  viewportConfig,
+} from '@/lib/animations';
 
 interface InteractiveMapSectionProps {
   header: {
@@ -52,12 +58,6 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
   const [activeVoivodeship, setActiveVoivodeship] = useState<VoivodeshipId | null>(null);
   const [hoveredVoivodeship, setHoveredVoivodeship] = useState<VoivodeshipId | null>(null);
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);
-
-  // Animation on scroll
-  const { ref: sectionRef, inView } = useInView({
-    threshold: 0.2,
-    triggerOnce: true,
-  });
 
   // Get map stats for legend
   const stats = getMapStats();
@@ -108,18 +108,23 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
     ? getVoivodeshipById(activeVoivodeship)?.name
     : null;
 
+  // Custom viewport config for this section (threshold 0.2)
+  const mapViewportConfig = {
+    once: true,
+    margin: '-50px 0px',
+    amount: 0.2,
+  };
+
   return (
-    <section
-      ref={sectionRef}
-      className="hidden lg:block bg-[#efebe7] py-16 sm:py-20"
-    >
+    <section className="hidden lg:block bg-[#efebe7] py-16 sm:py-20">
       <div className="mx-auto max-w-[83rem] px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div
-          className={clsx(
-            'mb-12 transition-all duration-700',
-            inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          )}
+        <motion.div
+          className="mb-12"
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={mapViewportConfig}
         >
           <SectionHeader
             label={header.label}
@@ -128,60 +133,62 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
             align="center"
             theme="light"
           />
-        </div>
+        </motion.div>
 
         {/* Map Container */}
-        <div
-          className={clsx(
-            'relative bg-white rounded-3xl shadow-[0_0_20px_rgba(0,0,0,0.05)] overflow-hidden',
-            'transition-all duration-700',
-            inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          )}
+        <motion.div
+          className="relative bg-white rounded-3xl shadow-[0_0_20px_rgba(0,0,0,0.05)] overflow-hidden map-wrapper"
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={mapViewportConfig}
         >
           {/* Back Button (zoomed mode only) */}
           {view === 'zoomed' && (
-            <button
+            <motion.button
               onClick={handleBackClick}
               className={clsx(
                 'map-back-button',
-                'absolute top-4 left-4 z-20',
-                'animate-fade-in-up'
+                'absolute top-4 left-4 z-20'
               )}
-              style={{ animationDuration: '0.3s' }}
+              variants={fadeIn}
+              initial="hidden"
+              animate="visible"
             >
               <Icon name="chevronLeft" size="sm" />
               <span>Wszystkie województwa</span>
-            </button>
+            </motion.button>
           )}
 
           {/* Active Voivodeship Name (zoomed mode) */}
           {view === 'zoomed' && activeVoivName && (
-            <div
+            <motion.div
               className={clsx(
                 'absolute top-4 left-1/2 -translate-x-1/2 z-20',
                 'px-4 py-2 bg-primary/10 rounded-full',
-                'text-sm font-bold text-primary uppercase tracking-wider',
-                'animate-fade-in-up'
+                'text-sm font-bold text-primary uppercase tracking-wider'
               )}
-              style={{ animationDuration: '0.3s' }}
+              variants={fadeIn}
+              initial="hidden"
+              animate="visible"
             >
               Województwo {activeVoivName}
-            </div>
+            </motion.div>
           )}
 
           {/* SVG Map */}
-          <div
+          <motion.div
             ref={tooltipContainerRef}
-            className={clsx(
-              "relative aspect-[16/9] p-6",
-              "transition-all duration-700 delay-300",
-              inView ? 'opacity-100 scale-100' : 'opacity-0 scale-[0.96]'
-            )}
+            className="relative aspect-[16/9] p-6"
             onClick={view === 'zoomed' ? handleBackClick : undefined}
             style={{
               cursor: view === 'zoomed' ? 'pointer' : 'default',
               transformOrigin: 'center center'
             }}
+            variants={scaleIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
           >
             <PolandMapSVG
               view={view}
@@ -209,7 +216,7 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
             {tooltip && view === 'zoomed' && (
               <MapTooltip cityId={tooltip.cityId} position={tooltip.position} />
             )}
-          </div>
+          </motion.div>
 
           {/* Legend */}
           <div className="absolute bottom-4 right-4 z-20">
@@ -243,7 +250,7 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
               <span>Kliknij na województwo, aby zobaczyć miasta</span>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
