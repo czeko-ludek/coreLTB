@@ -54,7 +54,7 @@ export function DistrictsSection({
   ].filter((area) => area.items && area.items.length > 0);
 
   return (
-    <section ref={sectionRef} className="bg-[#efebe7] py-16 sm:py-20">
+    <section ref={sectionRef} className="bg-background-beige py-16 sm:py-20">
       <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div

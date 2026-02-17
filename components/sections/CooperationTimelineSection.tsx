@@ -55,7 +55,7 @@ export function CooperationTimelineSection({
   };
 
   return (
-    <section className="py-16 lg:py-24 relative overflow-hidden" style={{ backgroundColor: '#efebe7' }}>
+    <section className="py-16 lg:py-24 relative overflow-hidden bg-background-beige">
       <div className="container mx-auto px-4">
         {/* Header with SectionHeader */}
         <div ref={headlineRef} className={headlineInView ? 'animate-fade-in-up' : 'opacity-0'}

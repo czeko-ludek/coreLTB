@@ -122,8 +122,7 @@ export function FAQTwoColumnsSection({
     <section
       id={id || 'faq-section'}
       ref={ref}
-      className="py-16 lg:py-24 scroll-mt-24"
-      style={{ backgroundColor: '#efebe7' }}
+      className="py-16 lg:py-24 scroll-mt-24 bg-background-beige"
     >
       <div className="container mx-auto px-4">
         {/* Header */}

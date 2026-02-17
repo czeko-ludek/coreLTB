@@ -9,7 +9,9 @@ import {
   ProjectOptimalPrice,
   ProjectModificationCTA,
   RelatedProjectsSection,
-} from '@/components/shared'; // ✅ Centralized import from index.ts
+} from '@/components/shared';
+import { ProjectElevations } from '@/components/shared/ProjectElevations';
+import { MirrorModeProvider } from '@/contexts/MirrorModeContext';
 
 // Generate static params for all projects
 export async function generateStaticParams() {
@@ -35,7 +37,7 @@ export async function generateMetadata({
 
   return {
     title: `${project.title} - ${project.id} | CoreLTB Builders`,
-    description: `${project.title}. Powierzchnia: ${project.surfaceArea}. Szacunkowy koszt: ${project.estimatedBuildCost}. Technologia: ${project.technology}.`,
+    description: `${project.title}. Powierzchnia: ${project.surfaceArea}.${project.estimatedBuildCost ? ` Szacunkowy koszt: ${project.estimatedBuildCost}.` : ''} Technologia: ${project.technology}.`,
     openGraph: {
       title: project.title,
       description: `Projekt ${project.id} - ${project.surfaceArea}`,
@@ -64,36 +66,52 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
   return (
     <main>
-      {/* Gallery Hero Section */}
-      <ProjectGalleryHero
-        slug={project.slug}
-        alt={project.alt}
-        galleryImageCount={project.galleryImageCount}
-      />
+      <MirrorModeProvider hasMirror={project.hasMirror ?? false}>
+        {/* Gallery Hero Section */}
+        <ProjectGalleryHero
+          slug={project.slug}
+          alt={project.alt}
+          galleryImageCount={project.galleryImageCount}
+        />
 
-      {/* Introduction Section with Price and CTA */}
-      <ProjectIntroduction
-        id={project.id}
-        surfaceArea={project.surfaceArea}
-        estimatedBuildCost={project.estimatedBuildCost}
-        title={project.title}
-        technology={project.technology}
-        price={project.price}
-        availability={project.availability}
-      />
+        {/* Introduction Section with Price and CTA */}
+        <ProjectIntroduction
+          id={project.id}
+          surfaceArea={project.surfaceArea}
+          estimatedBuildCost={project.estimatedBuildCost}
+          title={project.title}
+          technology={project.technology}
+          price={project.price}
+          availability={project.availability}
+          hasMirror={project.hasMirror}
+        />
 
-      {/* Specifications Tabs */}
-      <ProjectTabs specifications={project.specifications} />
+        {/* Specifications Tabs (bez zakładki "Koszty") */}
+        <ProjectTabs specifications={project.specifications.filter(tab => tab.title !== 'Koszty')} />
 
-      {/* Floor Plans with Modal */}
-      <ProjectFloorPlans slug={project.slug} floorPlans={project.floorPlans} />
+        {/* Floor Plans with Modal */}
+        <ProjectFloorPlans slug={project.slug} floorPlans={project.floorPlans} />
 
-      {/* Optimal Price Display */}
+        {/* Elevations, Cross Section & Site Plan */}
+        <ProjectElevations
+          slug={project.slug}
+          elevationImageCount={project.elevationImageCount}
+          hasCrossSection={project.hasCrossSection}
+          hasSitePlan={project.hasSitePlan}
+          lotWidth={project.lotWidth}
+          lotLength={project.lotLength}
+          elevationWidth={project.elevationWidth}
+        />
+      </MirrorModeProvider>
+
+      {/* Optimal Price Display — only if cost data available */}
+      {project.costCalculation && project.costCalculation.items.length > 0 && (
       <ProjectOptimalPrice
         title={project.costCalculation.title}
         stageName="Stan surowy zamknięty"
         price={project.costCalculation.items.find(item => item.name === 'Stan surowy zamknięty')?.prices.min || 'N/A'}
       />
+      )}
 
       {/* CTA for Project Modifications */}
       <ProjectModificationCTA />

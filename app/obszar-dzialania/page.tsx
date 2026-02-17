@@ -128,7 +128,7 @@ export default function ObszarDzialaniaPage() {
                   size="sm"
                   className="text-primary group-hover:text-white transition-colors"
                 />
-                <span className="font-semibold text-[#1a1a1a] group-hover:text-white transition-colors">
+                <span className="font-semibold text-text-dark group-hover:text-white transition-colors">
                   {city.name}
                 </span>
               </Link>
@@ -171,7 +171,7 @@ export default function ObszarDzialaniaPage() {
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                     <Icon name="mapPin" size="sm" className="text-primary" />
                   </div>
-                  <h3 className="text-lg font-bold text-[#1a1a1a]">
+                  <h3 className="text-lg font-bold text-text-dark">
                     Województwo {voiv.name}
                   </h3>
                 </div>
@@ -224,7 +224,7 @@ export default function ObszarDzialaniaPage() {
                 <Icon name="building" size="md" className="text-primary" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-[#1a1a1a] mb-2">Własne Zaplecze Sprzętowe</h3>
+                <h3 className="text-lg font-bold text-text-dark mb-2">Własne Zaplecze Sprzętowe</h3>
                 <p className="text-gray-600 text-base leading-relaxed">
                   Posiadamy własne szalunki systemowe i transport HDS. Gdy potrzebujemy
                   przewieźć sprzęt z Wodzisławia do Gliwic, robimy to z dnia na dzień, bez
@@ -239,7 +239,7 @@ export default function ObszarDzialaniaPage() {
                 <Icon name="users" size="md" className="text-primary" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-[#1a1a1a] mb-2">Lokalne Partnerstwa</h3>
+                <h3 className="text-lg font-bold text-text-dark mb-2">Lokalne Partnerstwa</h3>
                 <p className="text-gray-600 text-base leading-relaxed">
                   Mamy podpisane stałe umowy z największymi sieciami betoniarni i hurtowni
                   na Południu. Ty zyskujesz ceny &quot;dużego gracza&quot;, a towar dociera na czas.
@@ -253,7 +253,7 @@ export default function ObszarDzialaniaPage() {
                 <Icon name="shieldCheck" size="md" className="text-primary" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-[#1a1a1a] mb-2">Znajomość Terenu</h3>
+                <h3 className="text-lg font-bold text-text-dark mb-2">Znajomość Terenu</h3>
                 <p className="text-gray-600 text-base leading-relaxed">
                   Znamy specyfikę regionu – szkody górnicze, warunki gruntowe, lokalne
                   urzędy. To doświadczenie przekłada się na sprawniejszy przebieg budowy.
@@ -267,7 +267,7 @@ export default function ObszarDzialaniaPage() {
                 <Icon name="clock" size="md" className="text-primary" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-[#1a1a1a] mb-2">Szybka Reakcja</h3>
+                <h3 className="text-lg font-bold text-text-dark mb-2">Szybka Reakcja</h3>
                 <p className="text-gray-600 text-base leading-relaxed">
                   Dojazd z naszej siedziby do każdego miasta w obszarze działania zajmuje
                   maksymalnie godzinę. W razie pilnej potrzeby jesteśmy na miejscu tego

@@ -24,7 +24,7 @@ export const ServicesAccordionSection: React.FC<ServicesAccordionSectionProps> =
   });
 
   return (
-    <section id={id || "faq-section"} ref={ref} className="py-16 sm:py-20 lg:py-24 scroll-mt-24" style={{ backgroundColor: '#efebe7' }}>
+    <section id={id || "faq-section"} ref={ref} className="py-16 sm:py-20 lg:py-24 scroll-mt-24 bg-background-beige">
       <div className="container mx-auto px-4">
         {/* 2-kolumnowy layout: Header (lewo) + Pytania (prawo) */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-12">

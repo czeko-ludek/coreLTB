@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Manrope, Funnel_Sans } from "next/font/google";
 import "./globals.css";
 import { Header, Footer } from "@/components/sections"; // ✅ Centralized import from index.ts
 import { companyData } from "@/data/company-data";
 
 const manrope = Manrope({ subsets: ["latin"], display: "swap" });
+const funnelSans = Funnel_Sans({ subsets: ["latin"], display: "swap", variable: "--font-heading" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(companyData.url),
@@ -158,7 +159,7 @@ export default function RootLayout({
         {/* DNS prefetch for external resources */}
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
       </head>
-      <body className={manrope.className}>
+      <body className={`${manrope.className} ${funnelSans.variable}`}>
         <Header {...headerData} />
         {children}
         <Footer {...footerData} />

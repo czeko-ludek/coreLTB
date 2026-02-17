@@ -38,16 +38,6 @@ export function HowItWorksSection({ header, steps, video }: HowItWorksSectionPro
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
 
-            {/* Play Button */}
-            <button
-              onClick={handleVideoPlay}
-              className="absolute bottom-6 right-6 flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all group z-20"
-            >
-              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-                <Icon name="play" size="sm" className="text-white" />
-              </div>
-              <span className="font-semibold text-text-primary">Obejrzyj Wideo</span>
-            </button>
           </div>
 
           {/* Right: Steps */}

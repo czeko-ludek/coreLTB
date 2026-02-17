@@ -634,8 +634,7 @@ export function LocalPageContentSection({
   return (
     <section
       ref={ref}
-      className="py-8 md:py-12"
-      style={{ backgroundColor: '#efebe7' }}
+      className="py-8 md:py-12 bg-background-beige"
     >
       <div className="container mx-auto px-4 md:px-6">
         {/* Main Content Grid - 2 columns */}

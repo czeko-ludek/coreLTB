@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { Icon } from '@/components/ui';
-import { projectCategories, type ProjectCategory, type ProjectTechnology } from '@/data/projects';
+import { type ProjectCategory, type ProjectTechnology } from '@/data/projects';
 
 export interface ProjectListingCardProps {
   slug: string;
@@ -14,20 +14,23 @@ export interface ProjectListingCardProps {
   category: ProjectCategory;
   technology: ProjectTechnology;
   surfaceArea: string;
-  estimatedBuildCost: string;
+  estimatedBuildCost?: string;
   price: string;
   thumbnailSrc?: string;
   inView?: boolean;
   delay?: number;
+  priority?: boolean;
 }
 
-// Mapowanie kategorii na etykiety
-const getCategoryLabel = (category: ProjectCategory): string => {
-  const found = projectCategories.find(c => c.id === category);
-  return found?.label || category;
+// O(1) lookup — zawiera WSZYSTKIE możliwe kategorie (nie tylko filtrowalne)
+const CATEGORY_LABEL: Record<string, string> = {
+  jednorodzinny: 'Jednorodzinny',
+  dwulokalowy: 'Dwulokalowy',
+  'z-poddaszem': 'Z poddaszem',
+  parterowy: 'Parterowy',
 };
 
-export function ProjectListingCard({
+export const ProjectListingCard = React.memo(function ProjectListingCard({
   slug,
   id,
   title,
@@ -39,8 +42,8 @@ export function ProjectListingCard({
   thumbnailSrc,
   inView = true,
   delay = 0,
+  priority = false,
 }: ProjectListingCardProps) {
-  // Domyślna ścieżka do thumbnail
   const imageSrc = thumbnailSrc || `/images/projekty/${slug}/thumbnail.webp`;
 
   return (
@@ -52,7 +55,7 @@ export function ProjectListingCard({
         'transition-all duration-500 flex flex-col h-full',
         inView ? 'animate-fade-in-up' : 'opacity-0'
       )}
-      style={{ animationDelay: `${delay}s` }}
+      style={{ animationDelay: delay > 0 ? `${delay}s` : undefined }}
     >
       {/* Obrazek z badge'ami */}
       <div className="relative aspect-[4/3] overflow-hidden">
@@ -60,19 +63,10 @@ export function ProjectListingCard({
           src={imageSrc}
           alt={title}
           fill
+          priority={priority}
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
-
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-
-        {/* Badge kategorii - lewy górny */}
-        <div className="absolute top-4 left-4 z-10">
-          <span className="bg-primary text-white text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wide">
-            {getCategoryLabel(category)}
-          </span>
-        </div>
 
         {/* Badge technologii - prawy dolny */}
         <div className="absolute bottom-4 right-4 z-10">
@@ -106,13 +100,22 @@ export function ProjectListingCard({
         <div className="grid grid-cols-2 gap-3 mt-auto">
           <div className="bg-zinc-50 rounded-lg p-3">
             <p className="text-[0.7rem] text-text-muted uppercase tracking-wide mb-0.5">
+              Typ
+            </p>
+            <p className="text-sm font-bold text-text-primary">
+              {CATEGORY_LABEL[category] ?? category}
+            </p>
+          </div>
+          <div className="bg-zinc-50 rounded-lg p-3">
+            <p className="text-[0.7rem] text-text-muted uppercase tracking-wide mb-0.5">
               Powierzchnia
             </p>
             <p className="text-sm font-bold text-text-primary">
               {surfaceArea}
             </p>
           </div>
-          <div className="bg-zinc-50 rounded-lg p-3">
+          {estimatedBuildCost && (
+          <div className="bg-zinc-50 rounded-lg p-3 col-span-2">
             <p className="text-[0.7rem] text-text-muted uppercase tracking-wide mb-0.5">
               Koszt budowy
             </p>
@@ -120,6 +123,7 @@ export function ProjectListingCard({
               {estimatedBuildCost}
             </p>
           </div>
+          )}
         </div>
 
         {/* Link "Zobacz projekt" */}
@@ -134,4 +138,4 @@ export function ProjectListingCard({
       </div>
     </Link>
   );
-}
+});

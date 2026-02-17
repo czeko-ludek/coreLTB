@@ -27,7 +27,7 @@ export const BentoContactSection: React.FC<BentoContactSectionProps> = ({
     });
 
     return (
-        <section ref={ref} className="bg-[#efebe7] py-16 sm:py-20 lg:py-24">
+        <section ref={ref} className="bg-background-beige py-16 sm:py-20 lg:py-24">
             {/* Widened container: max-w-[90rem] is approx 1440px, 20% wider than 7xl (1280px) would be ~1536px (2xl) */}
             <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
                 <div className={clsx(

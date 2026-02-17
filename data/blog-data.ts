@@ -277,13 +277,13 @@ export function getRelatedPosts(currentSlug: string, limit: number = 3): BlogPos
 // TREŚCI POSTÓW BLOGOWYCH (dla pojedynczych stron)
 // =============================================================================
 
-import type { ContentBlock, BlogPostData, RelatedPost } from '@/components/sections/BlogPostContent';
+import type { BlogContentBlock, BlogPostData, RelatedPost } from '@/components/sections/BlogPostContent';
 
 /**
  * Mapa treści postów blogowych
  * Klucz = slug (id) posta
  */
-export const blogPostContents: Record<string, ContentBlock[]> = {
+export const blogPostContents: Record<string, BlogContentBlock[]> = {
   'plyta-fundamentowa-tereny-gornicze': [
     // =============================================================================
     // INTRO - Bezpieczne fundamenty w rejonie szkód górniczych

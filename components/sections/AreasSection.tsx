@@ -66,7 +66,7 @@ export const AreasSection: React.FC<AreasSectionProps> = ({ id, header, hubs }) 
                                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                                         <Icon name={hub.iconName} className="text-primary" size="lg" />
                                     </div>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">{hub.hubName}</h3>
+                                    <h3 className="text-2xl md:text-3xl font-bold text-text-dark">{hub.hubName}</h3>
                                 </div>
 
                                 {/* Opis */}

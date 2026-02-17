@@ -47,7 +47,7 @@ export function AboutCompanySection({
   }, []);
 
   return (
-    <section ref={sectionRef} style={{ backgroundColor: '#ffffff' }} className="py-20">
+    <section ref={sectionRef} className="py-20 bg-surface-light">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Left: Image with Stats Overlay */}

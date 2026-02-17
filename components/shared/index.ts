@@ -91,6 +91,8 @@ export type { ProjectGalleryHeroProps } from './ProjectGalleryHero';
 export { ProjectFloorPlans } from './ProjectFloorPlans';
 export type { ProjectFloorPlansProps } from './ProjectFloorPlans';
 
+export { MirrorToggle } from './MirrorToggle';
+
 export { RelatedProjectsSection } from './RelatedProjectsSection';
 export type { RelatedProjectsSectionProps } from './RelatedProjectsSection';
 

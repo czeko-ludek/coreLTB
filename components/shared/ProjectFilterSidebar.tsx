@@ -1,17 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import clsx from 'clsx';
-import { Icon } from '@/components/ui';
 import {
   projectCategories,
   projectTechnologies,
-  budgetRanges,
+  projectSources,
   surfaceRanges,
   type ProjectFilters,
   type ProjectTechnology,
   type ProjectCategory,
+  type ProjectSource,
 } from '@/data/projects';
+import { FilterSection } from './FilterSection';
 
 export interface ProjectFilterSidebarProps {
   filters: ProjectFilters;
@@ -19,46 +20,10 @@ export interface ProjectFilterSidebarProps {
   projectCounts: {
     technology: Record<string, number>;
     category: Record<string, number>;
+    source: Record<string, number>;
   };
   totalResults: number;
   inView?: boolean;
-}
-
-interface FilterSectionProps {
-  title: string;
-  defaultOpen?: boolean;
-  children: React.ReactNode;
-}
-
-// Rozwijalna sekcja filtra
-function FilterSection({ title, defaultOpen = true, children }: FilterSectionProps) {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
-
-  return (
-    <div className="border-b border-zinc-100 last:border-b-0">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full py-4 text-left"
-      >
-        <span className="text-sm font-bold text-text-primary uppercase tracking-wide">
-          {title}
-        </span>
-        <Icon
-          name={isOpen ? 'chevronUp' : 'chevronDown'}
-          size="sm"
-          className="text-text-muted"
-        />
-      </button>
-      <div
-        className={clsx(
-          'overflow-hidden transition-all duration-300',
-          isOpen ? 'max-h-96 pb-4' : 'max-h-0'
-        )}
-      >
-        {children}
-      </div>
-    </div>
-  );
 }
 
 export function ProjectFilterSidebar({
@@ -83,9 +48,11 @@ export function ProjectFilterSidebar({
     onFiltersChange({ ...filters, category: newCat });
   };
 
-  // Handler dla radio (budżet)
-  const handleBudgetChange = (budgetId: string | null) => {
-    onFiltersChange({ ...filters, budgetRange: budgetId });
+  const handleSourceChange = (src: ProjectSource, checked: boolean) => {
+    const newSource = checked
+      ? [...filters.source, src]
+      : filters.source.filter(s => s !== src);
+    onFiltersChange({ ...filters, source: newSource });
   };
 
   // Handler dla radio (powierzchnia)
@@ -98,8 +65,8 @@ export function ProjectFilterSidebar({
     onFiltersChange({
       technology: [],
       category: [],
-      budgetRange: null,
       surfaceRange: null,
+      source: [],
     });
   };
 
@@ -107,8 +74,8 @@ export function ProjectFilterSidebar({
   const hasActiveFilters =
     filters.technology.length > 0 ||
     filters.category.length > 0 ||
-    filters.budgetRange !== null ||
-    filters.surfaceRange !== null;
+    filters.surfaceRange !== null ||
+    filters.source.length > 0;
 
   return (
     <div
@@ -181,6 +148,33 @@ export function ProjectFilterSidebar({
         </div>
       </FilterSection>
 
+      {/* Kolekcja */}
+      <FilterSection title="Kolekcja">
+        <div className="space-y-2">
+          {projectSources.map((src) => (
+            <label
+              key={src.id}
+              className="flex items-center gap-3 cursor-pointer group"
+            >
+              <input
+                type="checkbox"
+                checked={filters.source.includes(src.id as ProjectSource)}
+                onChange={(e) =>
+                  handleSourceChange(src.id as ProjectSource, e.target.checked)
+                }
+                className="w-4 h-4 rounded accent-primary"
+              />
+              <span className="text-sm text-text-secondary group-hover:text-text-primary transition-colors flex-1">
+                {src.label}
+              </span>
+              <span className="text-xs text-text-muted">
+                ({projectCounts.source[src.id] || 0})
+              </span>
+            </label>
+          ))}
+        </div>
+      </FilterSection>
+
       {/* Powierzchnia użytkowa */}
       <FilterSection title="Powierzchnia">
         <div className="space-y-2">
@@ -208,43 +202,6 @@ export function ProjectFilterSidebar({
                 value={range.id}
                 checked={filters.surfaceRange === range.id}
                 onChange={() => handleSurfaceChange(range.id)}
-                className="appearance-none w-4 h-4 border-2 border-zinc-300 rounded-sm checked:bg-primary checked:border-primary transition-colors"
-              />
-              <span className="text-sm text-text-secondary group-hover:text-text-primary transition-colors">
-                {range.label}
-              </span>
-            </label>
-          ))}
-        </div>
-      </FilterSection>
-
-      {/* Budżet */}
-      <FilterSection title="Budżet budowy">
-        <div className="space-y-2">
-          {/* Opcja "Wszystkie" */}
-          <label className="flex items-center gap-3 cursor-pointer group">
-            <input
-              type="radio"
-              name="budget"
-              checked={filters.budgetRange === null}
-              onChange={() => handleBudgetChange(null)}
-              className="appearance-none w-4 h-4 border-2 border-zinc-300 rounded-sm checked:bg-primary checked:border-primary transition-colors"
-            />
-            <span className="text-sm text-text-secondary group-hover:text-text-primary transition-colors">
-              Wszystkie
-            </span>
-          </label>
-          {budgetRanges.map((range) => (
-            <label
-              key={range.id}
-              className="flex items-center gap-3 cursor-pointer group"
-            >
-              <input
-                type="radio"
-                name="budget"
-                value={range.id}
-                checked={filters.budgetRange === range.id}
-                onChange={() => handleBudgetChange(range.id)}
                 className="appearance-none w-4 h-4 border-2 border-zinc-300 rounded-sm checked:bg-primary checked:border-primary transition-colors"
               />
               <span className="text-sm text-text-secondary group-hover:text-text-primary transition-colors">

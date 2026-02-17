@@ -1,0 +1,59 @@
+// data/projects/index.ts
+// Centralny punkt wejścia — łączy wszystkie źródła projektów i re-exportuje API
+
+// Re-export typów i stałych
+export type {
+  Project,
+  ProjectSpecificationItem,
+  ProjectSpecificationTab,
+  Room,
+  FloorPlan,
+  ProjectCostItem,
+  ProjectCostTable,
+  ProjectCategory,
+  ProjectTechnology,
+  ProjectSource,
+  SortOption,
+  SurfaceRange,
+  ProjectFilters,
+  ProjectListingItem,
+} from './types';
+
+export {
+  projectCategories,
+  projectTechnologies,
+  projectSources,
+  surfaceRanges,
+  sortOptions,
+} from './types';
+
+// Re-export helperów
+export {
+  parseEstimatedCost,
+  parseSurfaceArea,
+  toListingItem,
+  filterProjects,
+  sortProjects,
+  countProjectsByFilter,
+} from './helpers';
+
+// --- Źródła projektów ---
+import type { Project } from './types';
+import { manualProjects } from './manual';
+import { galeriadomowProjects } from './galeriadomow';
+import { z500Projects } from './z500';
+
+// --- Złączona tablica wszystkich projektów ---
+export const allProjects: Project[] = [
+  ...manualProjects,
+  ...galeriadomowProjects,
+  ...z500Projects,
+];
+
+// --- Lookup helpers ---
+export const getProjectBySlug = (slug: string): Project | undefined =>
+  allProjects.find((p) => p.slug === slug);
+
+export function getAllProjectSlugs(): string[] {
+  return allProjects.map(p => p.slug);
+}

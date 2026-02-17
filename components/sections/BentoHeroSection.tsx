@@ -25,7 +25,7 @@ export const BentoHeroSection: React.FC<BentoHeroSectionProps> = ({ data, varian
     // VARIANT 1: Split Screen - Image Right, Content Left
     if (variant === 'v1') {
         return (
-            <section className="bg-[#f5f5f3] py-16 sm:py-20 lg:py-24">
+            <section className="bg-background-cream py-16 sm:py-20 lg:py-24">
                 <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
                     <div className="bg-white rounded-3xl overflow-hidden shadow-xl">
                         <div className="grid lg:grid-cols-2 gap-0">
@@ -80,7 +80,7 @@ export const BentoHeroSection: React.FC<BentoHeroSectionProps> = ({ data, varian
     // VARIANT 2: Overlay - Text Over Image with Gradient
     if (variant === 'v2') {
         return (
-            <section className="bg-[#f5f5f3] py-16 sm:py-20 lg:py-24">
+            <section className="bg-background-cream py-16 sm:py-20 lg:py-24">
                 <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
                     <div className="relative bg-white rounded-3xl overflow-hidden shadow-xl h-[600px]">
                         {/* Background Image */}
@@ -136,7 +136,7 @@ export const BentoHeroSection: React.FC<BentoHeroSectionProps> = ({ data, varian
     // VARIANT 3: Asymmetric - Large Image with Floating Content Card
     if (variant === 'v3') {
         return (
-            <section className="bg-[#f5f5f3] py-16 sm:py-20 lg:py-24">
+            <section className="bg-background-cream py-16 sm:py-20 lg:py-24">
                 <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
                     <div className="relative rounded-3xl overflow-hidden shadow-xl h-[600px]">
                         {/* Background Image */}
@@ -189,7 +189,7 @@ export const BentoHeroSection: React.FC<BentoHeroSectionProps> = ({ data, varian
     // VARIANT 4: Stacked - Image Top, Content Bottom with Overlap
     if (variant === 'v4') {
         return (
-            <section className="bg-[#f5f5f3] py-16 sm:py-20 lg:py-24">
+            <section className="bg-background-cream py-16 sm:py-20 lg:py-24">
                 <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
                     <div className="bg-white rounded-3xl overflow-hidden shadow-xl">
                         {/* Image */}

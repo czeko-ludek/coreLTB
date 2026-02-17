@@ -86,6 +86,7 @@ import {
   RefreshCw,
   SlidersHorizontal,
   ArrowUpDown,
+  FlipHorizontal2,
 } from 'lucide-react';
 
 const iconMap = {
@@ -178,6 +179,7 @@ const iconMap = {
   chevronUp: ChevronUp,
   slidersHorizontal: SlidersHorizontal,
   arrowUpDown: ArrowUpDown,
+  flipHorizontal: FlipHorizontal2,
 };
 
 export type IconName = keyof typeof iconMap;

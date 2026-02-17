@@ -104,7 +104,7 @@ export function SimpleImageTextSection({
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                     <Icon name={item.icon} className="text-primary" size="lg" />
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">{item.title}</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-text-dark">{item.title}</h3>
                 </div>
 
                 {/* Treść (paragrafy, listy, obrazy) */}

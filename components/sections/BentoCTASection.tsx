@@ -35,7 +35,7 @@ export const BentoCTASection: React.FC<BentoCTASectionProps> = ({
     // VARIANT 1: Centered Card - Clean & Professional
     if (variant === 'v1') {
         return (
-            <section className="bg-[#efebe7] py-16 sm:py-20 lg:py-24">
+            <section className="bg-background-beige py-16 sm:py-20 lg:py-24">
                 <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
                     <div className="bg-white rounded-3xl p-10 lg:p-12 shadow-xl border border-gray-100">
                         {/* Header */}
@@ -92,7 +92,7 @@ export const BentoCTASection: React.FC<BentoCTASectionProps> = ({
     // VARIANT 2: Split Layout - Benefits Left, CTA Right
     if (variant === 'v2') {
         return (
-            <section className="bg-[#efebe7] py-16 sm:py-20 lg:py-24">
+            <section className="bg-background-beige py-16 sm:py-20 lg:py-24">
                 <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
                     <div className="bg-white rounded-3xl overflow-hidden shadow-xl">
                         <div className="grid lg:grid-cols-2 gap-0">
@@ -151,7 +151,7 @@ export const BentoCTASection: React.FC<BentoCTASectionProps> = ({
     // VARIANT 3: Compact Horizontal - All in One Row
     if (variant === 'v3') {
         return (
-            <section className="bg-[#efebe7] py-16 sm:py-20 lg:py-24">
+            <section className="bg-background-beige py-16 sm:py-20 lg:py-24">
                 <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
                     <div className="bg-gradient-to-r from-primary to-primary-dark rounded-3xl p-8 lg:p-10 shadow-xl">
                         <div className="flex flex-col lg:flex-row items-center gap-8">
@@ -199,7 +199,7 @@ export const BentoCTASection: React.FC<BentoCTASectionProps> = ({
     // VARIANT 4: Grid Cards - Each Benefit as Card
     if (variant === 'v4') {
         return (
-            <section className="bg-[#efebe7] py-16 sm:py-20 lg:py-24">
+            <section className="bg-background-beige py-16 sm:py-20 lg:py-24">
                 <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
                     <div className="bg-white rounded-3xl p-10 lg:p-12 shadow-xl">
                         {/* Header */}

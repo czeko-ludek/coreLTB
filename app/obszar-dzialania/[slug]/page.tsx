@@ -11,7 +11,7 @@ import {
   LocalPageContentSection,
   ContactCTASection,
   type LocalPageContent,
-  type ContentBlock as LocalContentBlock,
+  type LocalContentBlock,
   type LocalPageSection,
 } from '@/components/sections';
 import { generateLocalPageSchema, sanitizeJsonLd } from '@/lib/schema';

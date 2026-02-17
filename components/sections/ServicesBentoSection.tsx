@@ -18,7 +18,7 @@ export function ServicesBentoSection({ header, services }: ServicesBentoSectionP
   });
 
   return (
-    <section ref={ref} style={{ backgroundColor: '#efebe7' }} className="py-24">
+    <section ref={ref} className="py-24 bg-background-beige">
       <div className="container mx-auto px-4">
         {/* Custom header - left aligned with description and button on right */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">

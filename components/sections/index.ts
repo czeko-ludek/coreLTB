@@ -142,7 +142,7 @@ export { BlogPostContent } from './BlogPostContent';
 export type {
   BlogPostContentProps,
   BlogPostData,
-  ContentBlock,
+  BlogContentBlock,
   RelatedPost,
   FAQItem as BlogFAQItem,
 } from './BlogPostContent';

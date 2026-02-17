@@ -56,8 +56,12 @@
     @apply text-text-primary antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold;
+  h1, h2, h3, h4, h5 {
+    @apply font-heading font-semibold;
+  }
+
+  h6 {
+    @apply font-heading font-medium;
   }
 }
 
@@ -648,11 +652,11 @@
 
   /* Only animate when the class is present */
   .animate-curtain-reveal.curtain-animate::before {
-    animation: curtainSlideGold 0.68s ease-in-out 0.17s forwards;
+    animation: curtainSlideGold 0.51s ease-in-out 0.13s forwards;
   }
 
   .animate-curtain-reveal.curtain-animate::after {
-    animation: curtainSlideGray 0.68s ease-in-out 0.77s forwards;
+    animation: curtainSlideGray 0.51s ease-in-out 0.58s forwards;
   }
 
   /* CTA Section Curtain Reveal - Gray → Gold (bottom to top) */

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -31,10 +31,11 @@ export function RelatedProjectsSection({
     setIsMounted(true);
   }, []);
 
-  // Filtruj projekty - wyłącz aktualny projekt i weź max 4
-  const relatedProjects = allProjects
-    .filter(project => project.slug !== currentProjectSlug)
-    .slice(0, 4);
+  // Memoize — przelicza się tylko gdy lista projektów lub aktualny slug się zmieni
+  const relatedProjects = useMemo(
+    () => allProjects.filter((p) => p.slug !== currentProjectSlug).slice(0, 4),
+    [allProjects, currentProjectSlug]
+  );
 
   if (!isMounted) {
     return (
@@ -52,7 +53,7 @@ export function RelatedProjectsSection({
   }
 
   return (
-    <section className="py-12 md:py-16" style={{ backgroundColor: '#efebe7' }}>
+    <section className="py-12 md:py-16 bg-background-beige">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">

@@ -14,7 +14,7 @@ export function ProjectOptimalPrice({ title, stageName, price }: ProjectOptimalP
   const definition = hasInfo ? getDefinition(stageName) : null;
 
   return (
-    <section className="py-8 md:py-12" style={{ backgroundColor: '#efebe7' }}>
+    <section className="py-8 md:py-12 bg-background-beige">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Title */}

@@ -126,8 +126,7 @@ export function TestimonialsSection({ header, testimonials }: TestimonialsSectio
   return (
     <section
       ref={ref}
-      style={{ backgroundColor: '#efebe7' }}
-      className="relative py-16 lg:py-24 overflow-hidden"
+      className="relative py-16 lg:py-24 overflow-hidden bg-background-beige"
     >
       <div className="container mx-auto px-4">
         {/* Header */}

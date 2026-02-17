@@ -24,7 +24,7 @@ interface BentoKnowledgeSectionProps {
 
 export const BentoKnowledgeSection: React.FC<BentoKnowledgeSectionProps> = ({ header, articles }) => {
     return (
-        <section className="bg-[#efebe7] py-16 sm:py-20 lg:py-24">
+        <section className="bg-background-beige py-16 sm:py-20 lg:py-24">
             <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="mb-12">
@@ -61,7 +61,7 @@ export const BentoKnowledgeSection: React.FC<BentoKnowledgeSectionProps> = ({ he
                                 flex items-center justify-center
                                 ${article.highlight
                                     ? 'bg-primary text-white'
-                                    : 'bg-[#fafaf9] text-primary group-hover:bg-primary group-hover:text-white'
+                                    : 'bg-background-light text-primary group-hover:bg-primary group-hover:text-white'
                                 }
                                 transition-all duration-300
                             `}>
@@ -69,7 +69,7 @@ export const BentoKnowledgeSection: React.FC<BentoKnowledgeSectionProps> = ({ he
                             </div>
 
                             {/* Title */}
-                            <h3 className="text-xl lg:text-2xl font-bold text-[#1a1a1a] mb-3 leading-tight group-hover:text-primary transition-colors">
+                            <h3 className="text-xl lg:text-2xl font-bold text-text-dark mb-3 leading-tight group-hover:text-primary transition-colors">
                                 {article.title}
                             </h3>
 

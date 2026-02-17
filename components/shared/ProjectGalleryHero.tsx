@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import { Icon, Portal } from '@/components/ui';
+import { useToggle } from '@/hooks/useToggle';
+import { useMirrorMode } from '@/contexts/MirrorModeContext';
 
 export interface ProjectGalleryHeroProps {
   slug: string;
@@ -14,37 +16,43 @@ export interface ProjectGalleryHeroProps {
 }
 
 export function ProjectGalleryHero({ slug, alt, galleryImageCount }: ProjectGalleryHeroProps) {
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [isLightboxOpen, , setIsLightboxOpen] = useToggle(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  const { getMirrorPath } = useMirrorMode();
 
-  // Generate all gallery image paths
-  const allImages = [
+  // Standard paths — stable, only recomputes when slug/count changes
+  const standardImages = useMemo(() => [
     `/images/projekty/${slug}/main.webp`,
     ...Array.from({ length: galleryImageCount - 1 }, (_, i) =>
       `/images/projekty/${slug}/gallery-${i + 1}.webp`
     ),
-  ];
+  ], [slug, galleryImageCount]);
 
-  const openLightbox = (index: number) => {
+  // Mirror-aware paths — recomputes when mirror mode toggles
+  const allImages = useMemo(
+    () => standardImages.map(getMirrorPath),
+    [standardImages, getMirrorPath]
+  );
+
+  const openLightbox = useCallback((index: number) => {
     setActiveIndex(index);
     setIsLightboxOpen(true);
-  };
+  }, [setIsLightboxOpen]);
 
-  const closeLightbox = () => {
+  const closeLightbox = useCallback(() => {
     setIsLightboxOpen(false);
-  };
+  }, [setIsLightboxOpen]);
 
   // Handle keyboard ESC to close
   React.useEffect(() => {
+    if (!isLightboxOpen) return;
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isLightboxOpen) {
-        closeLightbox();
-      }
+      if (e.key === 'Escape') closeLightbox();
     };
     window.addEventListener('keydown', handleEscape);
     return () => window.removeEventListener('keydown', handleEscape);
-  }, [isLightboxOpen]);
+  }, [isLightboxOpen, closeLightbox]);
 
   return (
     <>

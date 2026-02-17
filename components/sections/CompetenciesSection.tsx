@@ -30,7 +30,7 @@ export function CompetenciesSection({
   });
 
   return (
-    <section ref={ref} className="bg-[#efebe7] py-16 sm:py-20 lg:py-24">
+    <section ref={ref} className="bg-background-beige py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
 
         {/* Header - wyśrodkowany */}

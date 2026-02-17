@@ -29,7 +29,7 @@ export const EmotionalHeroSection: React.FC<EmotionalHeroSectionProps> = ({
   ctaBoxButtons,
 }) => {
   return (
-    <section id="emotional-hero" className="py-6 md:py-8" style={{ backgroundColor: '#efebe7' }}>
+    <section id="emotional-hero" className="py-6 md:py-8 bg-background-beige">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         <div
           className="bg-white rounded-xl shadow-lg p-8 md:p-12 lg:p-16 animate-fade-in-up"

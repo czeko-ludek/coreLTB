@@ -1,24 +1,29 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback, useRef } from 'react';
 import Link from 'next/link';
+import { useRouter, usePathname } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
 import clsx from 'clsx';
 import { Icon, SectionLabel } from '@/components/ui';
 import { ProjectListingCard } from '@/components/shared/ProjectListingCard';
 import { ProjectFilterSidebar } from '@/components/shared/ProjectFilterSidebar';
 import { MobileFilterDrawer } from '@/components/shared/MobileFilterDrawer';
+import { useToggle } from '@/hooks/useToggle';
 import {
   filterProjects,
   sortProjects,
   countProjectsByFilter,
   projectCategories,
   projectTechnologies,
+  projectSources,
   sortOptions,
-  type Project,
+  type ProjectListingItem,
   type ProjectFilters,
   type SortOption,
 } from '@/data/projects';
+
+const PROJECTS_PER_PAGE = 24;
 
 export interface Breadcrumb {
   label: string;
@@ -30,7 +35,33 @@ export interface ProjectsListingSectionProps {
   title: string;
   titleHighlight?: string;
   description: string;
-  projects: Project[];
+  projects: ProjectListingItem[];
+  initialFilters?: ProjectFilters;
+  initialSort?: SortOption;
+  initialPage?: number;
+}
+
+/**
+ * Buduje URL z aktualnymi filtrami/sortem/stroną.
+ * Pomija wartości domyślne (sort=newest, page=1) dla czystszych URLi.
+ */
+function buildUrl(
+  pathname: string,
+  filters: ProjectFilters,
+  sortBy: SortOption,
+  page: number
+): string {
+  const params = new URLSearchParams();
+
+  if (filters.technology.length)  params.set('technology', filters.technology.join(','));
+  if (filters.category.length)    params.set('category',   filters.category.join(','));
+  if (filters.source.length)      params.set('source',     filters.source.join(','));
+  if (filters.surfaceRange)       params.set('surface',    filters.surfaceRange);
+  if (sortBy !== 'newest')        params.set('sort',       sortBy);   // default pominięty
+  if (page > 1)                   params.set('page',       String(page)); // page=1 pominięta
+
+  const query = params.toString();
+  return query ? `${pathname}?${query}` : pathname;
 }
 
 export function ProjectsListingSection({
@@ -39,24 +70,61 @@ export function ProjectsListingSection({
   titleHighlight,
   description,
   projects,
+  initialFilters,
+  initialSort   = 'newest',
+  initialPage   = 1,
 }: ProjectsListingSectionProps) {
-  // Stan filtrów i sortowania
-  const [filters, setFilters] = useState<ProjectFilters>({
-    technology: [],
-    category: [],
-    budgetRange: null,
-    surfaceRange: null,
-  });
-  const [sortBy, setSortBy] = useState<SortOption>('price-asc');
-  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
-  const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
+  const router   = useRouter();
+  const pathname = usePathname();
+
+  // Stan inicjalizowany z URL (przekazanego przez Server Component)
+  const [filters, setFilters] = useState<ProjectFilters>(
+    initialFilters ?? { technology: [], category: [], surfaceRange: null, source: [] }
+  );
+  const [sortBy, setSortBy] = useState<SortOption>(initialSort);
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [isMobileFilterOpen, toggleMobileFilter, setIsMobileFilterOpen] = useToggle(false);
+  const [isSortDropdownOpen, toggleSortDropdown, setIsSortDropdownOpen] = useToggle(false);
+
+  // Ref do scrollowania na górę gridu przy zmianie strony
+  const gridTopRef = useRef<HTMLDivElement>(null);
+
+  // Filtry — reset strony + sync URL
+  const handleFiltersChange = useCallback((newFilters: ProjectFilters) => {
+    setFilters(newFilters);
+    setCurrentPage(1);
+    router.replace(buildUrl(pathname, newFilters, sortBy, 1), { scroll: false });
+  }, [sortBy, pathname, router]);
+
+  // Sort — reset strony + sync URL
+  const handleSortChange = useCallback((newSort: SortOption) => {
+    setSortBy(newSort);
+    setCurrentPage(1);
+    router.replace(buildUrl(pathname, filters, newSort, 1), { scroll: false });
+  }, [filters, pathname, router]);
+
+  // Strona — scroll do góry + sync URL
+  const goToPage = useCallback((page: number) => {
+    setCurrentPage(page);
+    router.replace(buildUrl(pathname, filters, sortBy, page), { scroll: false });
+    gridTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [filters, sortBy, pathname, router]);
+
+  // Pełny reset — jeden router.replace zamiast dwóch (brak stale closure)
+  const handleReset = useCallback(() => {
+    const empty: ProjectFilters = { technology: [], category: [], surfaceRange: null, source: [] };
+    setFilters(empty);
+    setSortBy('newest');
+    setCurrentPage(1);
+    router.replace(pathname, { scroll: false }); // czyste URL bez parametrów
+  }, [pathname, router]);
 
   // Aktualnie wybrana opcja sortowania
   const currentSortOption = sortOptions.find(opt => opt.id === sortBy);
 
-  // Scroll-triggered animations
+  // Scroll-triggered animations — threshold: 0 bo sekcja z 300+ kartami jest olbrzymia
   const { ref, inView } = useInView({
-    threshold: 0.05,
+    threshold: 0,
     triggerOnce: true,
     rootMargin: '50px 0px',
   });
@@ -67,6 +135,13 @@ export function ProjectsListingSection({
     return sortProjects(filtered, sortBy);
   }, [projects, filters, sortBy]);
 
+  // Paginacja
+  const totalPages = Math.ceil(filteredProjects.length / PROJECTS_PER_PAGE);
+  const paginatedProjects = useMemo(() => {
+    const start = (currentPage - 1) * PROJECTS_PER_PAGE;
+    return filteredProjects.slice(start, start + PROJECTS_PER_PAGE);
+  }, [filteredProjects, currentPage]);
+
   // Liczniki dla filtrów (zawsze na podstawie WSZYSTKICH projektów)
   const projectCounts = useMemo(() => ({
     technology: Object.fromEntries(
@@ -75,20 +150,40 @@ export function ProjectsListingSection({
     category: Object.fromEntries(
       projectCategories.map(c => [c.id, countProjectsByFilter(projects, 'category', c.id)])
     ),
+    source: Object.fromEntries(
+      projectSources.map(s => [s.id, countProjectsByFilter(projects, 'source', s.id)])
+    ),
   }), [projects]);
 
   // Licznik aktywnych filtrów (dla mobile button)
   const activeFiltersCount =
     filters.technology.length +
     filters.category.length +
-    (filters.budgetRange ? 1 : 0) +
+    filters.source.length +
     (filters.surfaceRange ? 1 : 0);
+
+  // Generowanie numerów stron do wyświetlenia (max 7 pozycji z wielokropkami)
+  const pageNumbers = useMemo(() => {
+    if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1);
+
+    const pages: (number | 'dots')[] = [1];
+
+    if (currentPage > 3) pages.push('dots');
+
+    const start = Math.max(2, currentPage - 1);
+    const end = Math.min(totalPages - 1, currentPage + 1);
+    for (let i = start; i <= end; i++) pages.push(i);
+
+    if (currentPage < totalPages - 2) pages.push('dots');
+
+    pages.push(totalPages);
+    return pages;
+  }, [totalPages, currentPage]);
 
   return (
     <section
       ref={ref}
-      className="pt-6 pb-16 md:pt-8 md:pb-24"
-      style={{ backgroundColor: '#efebe7' }}
+      className="pt-6 pb-16 md:pt-8 md:pb-24 bg-background-beige"
     >
       <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-[96rem]">
         {/* Breadcrumbs */}
@@ -151,6 +246,7 @@ export function ProjectsListingSection({
           <button
             onClick={() => setIsMobileFilterOpen(true)}
             className="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-white rounded-xl border border-zinc-200 text-sm font-medium text-text-primary hover:border-primary transition-colors"
+            aria-expanded={isMobileFilterOpen}
           >
             <Icon name="filter" size="sm" />
             Filtry
@@ -163,7 +259,7 @@ export function ProjectsListingSection({
           {/* Mobile Sort Dropdown */}
           <div className="relative">
             <button
-              onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
+              onClick={toggleSortDropdown}
               className="flex items-center gap-2 py-3 px-4 bg-white rounded-xl border border-zinc-200 text-sm font-medium text-text-primary hover:border-primary transition-colors"
             >
               <Icon name="arrowUpDown" size="sm" />
@@ -176,7 +272,7 @@ export function ProjectsListingSection({
                   <button
                     key={option.id}
                     onClick={() => {
-                      setSortBy(option.id as SortOption);
+                      handleSortChange(option.id as SortOption);
                       setIsSortDropdownOpen(false);
                     }}
                     className={clsx(
@@ -200,7 +296,7 @@ export function ProjectsListingSection({
           <aside className="hidden lg:block">
             <ProjectFilterSidebar
               filters={filters}
-              onFiltersChange={setFilters}
+              onFiltersChange={handleFiltersChange}
               projectCounts={projectCounts}
               totalResults={filteredProjects.length}
               inView={inView}
@@ -208,7 +304,7 @@ export function ProjectsListingSection({
           </aside>
 
           {/* Projects Grid */}
-          <div>
+          <div ref={gridTopRef} className="scroll-mt-6">
             {/* Desktop Sort Dropdown */}
             <div
               className={clsx(
@@ -219,7 +315,7 @@ export function ProjectsListingSection({
             >
               <div className="relative">
                 <button
-                  onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
+                  onClick={toggleSortDropdown}
                   className="flex items-center gap-2 py-2.5 px-4 bg-white rounded-xl border border-zinc-200 text-sm font-medium text-text-primary hover:border-primary transition-colors shadow-sm"
                 >
                   <Icon name="arrowUpDown" size="sm" />
@@ -232,7 +328,7 @@ export function ProjectsListingSection({
                       <button
                         key={option.id}
                         onClick={() => {
-                          setSortBy(option.id as SortOption);
+                          handleSortChange(option.id as SortOption);
                           setIsSortDropdownOpen(false);
                         }}
                         className={clsx(
@@ -269,10 +365,7 @@ export function ProjectsListingSection({
                   Nie znaleziono projektów spełniających wybrane kryteria.
                 </p>
                 <button
-                  onClick={() => {
-                    setFilters({ technology: [], category: [], budgetRange: null, surfaceRange: null });
-                    setSortBy('price-asc');
-                  }}
+                  onClick={handleReset}
                   className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-medium hover:bg-primary-dark transition-colors"
                 >
                   <Icon name="refreshCw" size="sm" />
@@ -280,25 +373,103 @@ export function ProjectsListingSection({
                 </button>
               </div>
             ) : (
-              /* Projects Grid */
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {filteredProjects.map((project, index) => (
-                  <ProjectListingCard
-                    key={project.slug}
-                    slug={project.slug}
-                    id={project.id}
-                    title={project.title}
-                    category={project.category}
-                    technology={project.technology}
-                    surfaceArea={project.surfaceArea}
-                    estimatedBuildCost={project.estimatedBuildCost}
-                    price={project.price}
-                    thumbnailSrc={project.thumbnailSrc}
-                    inView={inView}
-                    delay={0.3 + index * 0.1}
-                  />
-                ))}
-              </div>
+              /* Projects Grid + Paginacja */
+              <>
+                {/* Licznik wyników + info o stronie */}
+                <div
+                  className={clsx(
+                    'flex items-center justify-between mb-4',
+                    inView ? 'animate-fade-in-up' : 'opacity-0'
+                  )}
+                  style={{ animationDelay: '0.25s' }}
+                >
+                  <p className="text-sm text-text-muted">
+                    {filteredProjects.length} {filteredProjects.length === 1 ? 'projekt' : filteredProjects.length < 5 ? 'projekty' : 'projektów'}
+                    {totalPages > 1 && (
+                      <span> · Strona {currentPage} z {totalPages}</span>
+                    )}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {paginatedProjects.map((project, index) => (
+                    <ProjectListingCard
+                      key={project.slug}
+                      slug={project.slug}
+                      id={project.id}
+                      title={project.title}
+                      category={project.category}
+                      technology={project.technology}
+                      surfaceArea={project.surfaceArea}
+                      estimatedBuildCost={project.estimatedBuildCost}
+                      price={project.price}
+                      thumbnailSrc={project.thumbnailSrc}
+                      inView={inView}
+                      delay={index < 6 ? 0.3 + index * 0.08 : 0}
+                      priority={currentPage === 1 && index < 3}
+                    />
+                  ))}
+                </div>
+
+                {/* Paginacja */}
+                {totalPages > 1 && (
+                  <nav aria-label="Paginacja projektów" className="flex items-center justify-center gap-1.5 mt-10">
+                    {/* Poprzednia strona */}
+                    <button
+                      onClick={() => goToPage(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className={clsx(
+                        'flex items-center justify-center w-10 h-10 rounded-xl text-sm font-medium transition-all duration-200',
+                        currentPage === 1
+                          ? 'text-zinc-300 cursor-not-allowed'
+                          : 'text-text-secondary bg-white border border-zinc-200 hover:border-primary hover:text-primary shadow-sm'
+                      )}
+                      aria-label="Poprzednia strona"
+                    >
+                      <Icon name="chevronLeft" size="sm" />
+                    </button>
+
+                    {/* Numery stron */}
+                    {pageNumbers.map((page, idx) =>
+                      page === 'dots' ? (
+                        <span key={`dots-${idx}`} className="w-10 h-10 flex items-center justify-center text-text-muted text-sm">
+                          …
+                        </span>
+                      ) : (
+                        <button
+                          key={page}
+                          onClick={() => goToPage(page)}
+                          className={clsx(
+                            'flex items-center justify-center w-10 h-10 rounded-xl text-sm font-semibold transition-all duration-200',
+                            currentPage === page
+                              ? 'bg-primary text-white shadow-lg shadow-primary/25'
+                              : 'text-text-secondary bg-white border border-zinc-200 hover:border-primary hover:text-primary shadow-sm'
+                          )}
+                          aria-label={`Strona ${page}`}
+                          aria-current={currentPage === page ? 'page' : undefined}
+                        >
+                          {page}
+                        </button>
+                      )
+                    )}
+
+                    {/* Następna strona */}
+                    <button
+                      onClick={() => goToPage(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                      className={clsx(
+                        'flex items-center justify-center w-10 h-10 rounded-xl text-sm font-medium transition-all duration-200',
+                        currentPage === totalPages
+                          ? 'text-zinc-300 cursor-not-allowed'
+                          : 'text-text-secondary bg-white border border-zinc-200 hover:border-primary hover:text-primary shadow-sm'
+                      )}
+                      aria-label="Następna strona"
+                    >
+                      <Icon name="chevronRight" size="sm" />
+                    </button>
+                  </nav>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -336,7 +507,7 @@ export function ProjectsListingSection({
         isOpen={isMobileFilterOpen}
         onClose={() => setIsMobileFilterOpen(false)}
         filters={filters}
-        onFiltersChange={setFilters}
+        onFiltersChange={handleFiltersChange}
         projectCounts={projectCounts}
         totalResults={filteredProjects.length}
       />

@@ -41,7 +41,7 @@ export function Button({
     // Color variants
     {
       'bg-primary text-white hover:bg-primary-dark hover:shadow-lg': variant === 'primary',
-      'bg-primary text-white border-2 border-primary hover:bg-[#1a1a1a] hover:text-white hover:border-[#1a1a1a]': variant === 'secondary',
+      'bg-primary text-white border-2 border-primary hover:bg-background-dark hover:text-white hover:border-background-dark': variant === 'secondary',
       'bg-primary text-white border-2 border-primary hover:bg-transparent hover:text-text-dark hover:border-text-dark': variant === 'outline',
       'bg-transparent text-primary hover:bg-primary/10': variant === 'ghost',
       'bg-transparent text-white border-2 border-white hover:bg-white hover:text-primary': variant === 'outline-white',

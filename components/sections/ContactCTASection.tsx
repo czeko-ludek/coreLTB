@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
 import { clsx } from 'clsx';
 import { Icon, type IconName } from '@/components/ui';
@@ -47,17 +48,18 @@ export const ContactCTASection: React.FC<ContactCTASectionProps> = ({
   });
 
   return (
-    <section ref={ref} className="bg-[#efebe7] py-8 sm:py-12">
+    <section ref={ref} className="bg-background-beige py-8 sm:py-12">
       <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
-        <div
-          className={clsx(
-            'bg-zinc-900 rounded-2xl overflow-hidden',
-            'transition-all duration-700',
-            inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-          )}
-        >
-          <div className="p-6 md:p-8 lg:p-10">
-            <div className="max-w-4xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+          {/* Left: Content */}
+          <div
+            className={clsx(
+              'bg-zinc-900 rounded-2xl overflow-hidden',
+              'transition-all duration-700',
+              inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            )}
+          >
+            <div className="p-6 md:p-8 lg:p-10 flex flex-col justify-center h-full">
               {/* Label */}
               <span
                 className={clsx(
@@ -177,6 +179,23 @@ export const ContactCTASection: React.FC<ContactCTASectionProps> = ({
                 )}
               </div>
             </div>
+          </div>
+
+          {/* Right: Image */}
+          <div
+            className={clsx(
+              'relative min-h-[300px] rounded-2xl overflow-hidden',
+              'transition-all duration-700 delay-300',
+              inView ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+            )}
+          >
+            <Image
+              src="/images/cta.webp"
+              alt="CoreLTB Builders - Budowa domu"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
           </div>
         </div>
       </div>

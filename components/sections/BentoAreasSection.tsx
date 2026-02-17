@@ -30,7 +30,7 @@ interface BentoAreasSectionProps {
 
 export const BentoAreasSection: React.FC<BentoAreasSectionProps> = ({ header, hubs }) => {
     return (
-        <section className="bg-[#f5f5f3] py-16 sm:py-20 lg:py-24">
+        <section className="bg-background-cream py-16 sm:py-20 lg:py-24">
             <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
                 <div className="mb-12">
                     <SectionHeader
@@ -57,7 +57,7 @@ export const BentoAreasSection: React.FC<BentoAreasSectionProps> = ({ header, hu
                                     {hub.subLabel}
                                 </p>
 
-                                <h3 className="text-2xl lg:text-3xl font-bold text-[#1a1a1a] leading-tight">
+                                <h3 className="text-2xl lg:text-3xl font-bold text-text-dark leading-tight">
                                     {hub.hubName}
                                 </h3>
                             </div>
@@ -73,7 +73,7 @@ export const BentoAreasSection: React.FC<BentoAreasSectionProps> = ({ header, hu
                                         <Link
                                             key={cityIndex}
                                             href={city.url}
-                                            className="block px-4 py-2 bg-white text-[#1a1a1a] rounded-lg font-semibold text-sm border border-gray-200 transition-all hover:bg-primary hover:text-white hover:border-primary hover:shadow-md text-center"
+                                            className="block px-4 py-2 bg-white text-text-dark rounded-lg font-semibold text-sm border border-gray-200 transition-all hover:bg-primary hover:text-white hover:border-primary hover:shadow-md text-center"
                                         >
                                             {city.label}
                                         </Link>

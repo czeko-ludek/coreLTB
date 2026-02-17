@@ -21,6 +21,7 @@ const config: Config = {
           light: "#fafaf9",
           pattern: "#f0f0ee",
           cream: "#f5f5f3",
+          beige: "#efebe7",
         },
         surface: {
           dark: "#4a4a4a",
@@ -40,18 +41,23 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["Manrope", "system-ui", "sans-serif"],
+        heading: ["var(--font-heading)", "Funnel Sans", "sans-serif"],
       },
       fontSize: {
-        // Skala typograficzna
-        "hero": ["5.5rem", { lineHeight: "1.1", fontWeight: "800" }],
-        "display": ["4rem", { lineHeight: "1.2", fontWeight: "700" }],
-        "h2": ["2.5rem", { lineHeight: "1.3", fontWeight: "700" }],
-        "h3": ["1.6rem", { lineHeight: "1.4", fontWeight: "600" }],
-        "body-lg": ["1.125rem", { lineHeight: "1.7", fontWeight: "400" }],
-        "body-md": ["1rem", { lineHeight: "1.6", fontWeight: "400" }],
-        "body-sm": ["0.875rem", { lineHeight: "1.5", fontWeight: "400" }],
-        "label": ["0.75rem", { lineHeight: "1.4", fontWeight: "700", letterSpacing: "0.1em" }],
+        // Skala typograficzna — Dwellis Design System
+        "hero": ["3.5rem", { lineHeight: "1.1", fontWeight: "600" }],    // h1: 56px
+        "display": ["2.5rem", { lineHeight: "1.15", fontWeight: "600" }], // h2: 40px
+        "h2": ["2.5rem", { lineHeight: "1.15", fontWeight: "600" }],      // h2: 40px
+        "h3": ["2rem", { lineHeight: "1.2", fontWeight: "600" }],         // h3: 32px
+        "h4": ["1.75rem", { lineHeight: "1.2", fontWeight: "600" }],      // h4: 28px
+        "h5": ["1.25rem", { lineHeight: "1.3", fontWeight: "600" }],      // h5: 20px
+        "h6": ["1.125rem", { lineHeight: "1.3", fontWeight: "500" }],     // h6: 18px
+        "body-lg": ["1.25rem", { lineHeight: "1.5", fontWeight: "400" }], // 20px
+        "body-md": ["1rem", { lineHeight: "1.5", fontWeight: "400" }],    // 16px
+        "body-sm": ["0.95rem", { lineHeight: "1.5", fontWeight: "400" }], // ~15px
+        "body-xs": ["0.755rem", { lineHeight: "1.4", fontWeight: "400" }],// ~12px
+        "label": ["0.875rem", { lineHeight: "1.4", fontWeight: "500", letterSpacing: "0.05em" }],
       },
       borderRadius: {
         "sm": "0.375rem",

@@ -133,7 +133,7 @@ export const BentoOfferSection: React.FC = () => {
     }, []);
 
     return (
-        <section ref={sectionRef} className="bg-[#efebe7] py-16 sm:py-20 lg:py-24 relative">
+        <section ref={sectionRef} className="bg-background-beige py-16 sm:py-20 lg:py-24 relative">
             <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
                 {/* Horizontal Top Navigation - Initial State */}
                 <div

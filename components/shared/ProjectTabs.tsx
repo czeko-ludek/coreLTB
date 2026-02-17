@@ -13,7 +13,7 @@ export function ProjectTabs({ specifications }: ProjectTabsProps) {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   return (
-    <section className="py-8 md:py-12" style={{ backgroundColor: '#efebe7' }}>
+    <section className="py-8 md:py-12 bg-background-beige">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         {/* Tab Headers */}
         <div className="flex flex-wrap gap-2 md:gap-3">

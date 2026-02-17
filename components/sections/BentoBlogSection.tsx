@@ -198,7 +198,7 @@ function TallPostCard({ post, inView, delay }: { post: TallPost; inView: boolean
   return (
     <article
       className={clsx(
-        'group relative col-span-1 row-span-2 bg-[#1a1a1a] rounded-2xl border border-zinc-800 overflow-hidden flex flex-col',
+        'group relative col-span-1 row-span-2 bg-background-dark rounded-2xl border border-zinc-800 overflow-hidden flex flex-col',
         inView ? 'animate-fade-in-up' : 'opacity-0'
       )}
       style={{ animationDelay: `${delay}s` }}
@@ -279,7 +279,7 @@ function QuoteBlockCard({ block, inView, delay }: { block: QuoteBlock; inView: b
   return (
     <div
       className={clsx(
-        'col-span-1 md:col-span-2 lg:col-span-1 bg-[#efebe7] rounded-2xl border border-zinc-200/60 p-6 flex flex-col justify-center items-center text-center relative overflow-hidden',
+        'col-span-1 md:col-span-2 lg:col-span-1 bg-background-beige rounded-2xl border border-zinc-200/60 p-6 flex flex-col justify-center items-center text-center relative overflow-hidden',
         inView ? 'animate-fade-in-up' : 'opacity-0'
       )}
       style={{ animationDelay: `${delay}s` }}
@@ -340,7 +340,7 @@ function NewsletterBlockCard({ block, inView, delay }: { block: NewsletterBlock;
   return (
     <div
       className={clsx(
-        'col-span-1 bg-[#1a1a1a] rounded-2xl p-6 flex flex-col justify-center relative overflow-hidden',
+        'col-span-1 bg-background-dark rounded-2xl p-6 flex flex-col justify-center relative overflow-hidden',
         inView ? 'animate-fade-in-up' : 'opacity-0'
       )}
       style={{ animationDelay: `${delay}s` }}
@@ -593,7 +593,7 @@ export function BentoBlogSection({
   }, [filteredPosts]);
 
   return (
-    <section ref={ref} className="pt-6 pb-16 md:pt-8 md:pb-24" style={{ backgroundColor: '#efebe7' }}>
+    <section ref={ref} className="pt-6 pb-16 md:pt-8 md:pb-24 bg-background-beige">
       <div className="container mx-auto px-4 md:px-6">
 
         {/* Header */}

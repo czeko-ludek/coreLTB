@@ -44,7 +44,7 @@ export function HeroSection({
   }, [images.length]);
 
   return (
-    <div className="px-4 md:px-[50px] mt-4 md:mt-8">
+    <div className="px-4 md:px-[50px] mt-4 md:mt-8 mb-4 md:mb-8">
       <section className="relative min-h-[500px] md:min-h-[70vh] flex flex-col justify-center overflow-hidden bg-zinc-900 rounded-2xl">
         {/* Background Images with Zoom & Fade - Ken Burns style */}
         {images.map((image, index) => (
@@ -111,8 +111,7 @@ export function HeroSection({
               transition={{ delay: 0.5, duration: 1 }}
               className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-[0.95] mb-5"
             >
-              {title.split(' ').slice(0, -1).join(' ')}
-              <br />
+              {title.split(' ').slice(0, -1).join(' ')}{' '}
               <span className="text-primary">{title.split(' ').slice(-1)}</span>
             </motion.h1>
 

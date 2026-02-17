@@ -30,7 +30,7 @@ export function PricingSection({ id, header, rows, disclaimer }: PricingSectionP
   });
 
   return (
-    <section id={id} className="py-16 sm:py-20 lg:py-24" style={{ backgroundColor: '#efebe7' }}>
+    <section id={id} className="py-16 sm:py-20 lg:py-24 bg-background-beige">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div ref={headlineRef} className={headlineInView ? 'animate-fade-in-up' : 'opacity-0'}>

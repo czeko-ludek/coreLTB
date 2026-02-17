@@ -54,7 +54,7 @@ export function ServiceShowcaseSection({ header, services }: ServiceShowcaseSect
   const activeService = services[activeIndex];
 
   return (
-    <section ref={ref} style={{ backgroundColor: '#efebe7' }} className="py-24">
+    <section ref={ref} className="py-24 bg-background-beige">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="max-w-2xl mb-12">
@@ -85,6 +85,35 @@ export function ServiceShowcaseSection({ header, services }: ServiceShowcaseSect
                   className={activeIndex === index ? 'text-white' : 'text-primary'}
                 />
                 <span className="text-xs font-semibold text-center leading-tight">
+                  {service.title}
+                </span>
+              </div>
+            </button>
+          ))}
+        </div>
+
+        {/* Navigation Tiles - DESKTOP ONLY (nad treścią) */}
+        <div
+          className={`hidden lg:grid lg:grid-cols-6 gap-4 mb-8 ${inView ? 'animate-fade-in-up' : 'opacity-0'}`}
+          style={{ animationDelay: '0.3s' }}
+        >
+          {services.map((service, index) => (
+            <button
+              key={`desktop-nav-${index}`}
+              onClick={() => handleServiceClick(index)}
+              className={`relative group p-6 rounded-xl transition-all duration-300 ${
+                activeIndex === index
+                  ? 'bg-primary text-white shadow-lg scale-105'
+                  : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md'
+              }`}
+            >
+              <div className="flex flex-col items-center gap-3">
+                <Icon
+                  name={service.iconName}
+                  size="xl"
+                  className={activeIndex === index ? 'text-white' : 'text-primary'}
+                />
+                <span className="text-sm font-semibold text-center">
                   {service.title}
                 </span>
               </div>
@@ -156,34 +185,6 @@ export function ServiceShowcaseSection({ header, services }: ServiceShowcaseSect
           ))}
         </div>
 
-        {/* Navigation Tiles - DESKTOP ONLY (na dole po treści) */}
-        <div
-          className={`hidden lg:grid lg:grid-cols-6 gap-4 ${inView ? 'animate-fade-in-up' : 'opacity-0'}`}
-          style={{ animationDelay: '0.6s' }}
-        >
-          {services.map((service, index) => (
-            <button
-              key={`desktop-nav-${index}`}
-              onClick={() => handleServiceClick(index)}
-              className={`relative group p-6 rounded-xl transition-all duration-300 ${
-                activeIndex === index
-                  ? 'bg-primary text-white shadow-lg scale-105'
-                  : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md'
-              }`}
-            >
-              <div className="flex flex-col items-center gap-3">
-                <Icon
-                  name={service.iconName}
-                  size="xl"
-                  className={activeIndex === index ? 'text-white' : 'text-primary'}
-                />
-                <span className="text-sm font-semibold text-center">
-                  {service.title}
-                </span>
-              </div>
-            </button>
-          ))}
-        </div>
       </div>
     </section>
   );

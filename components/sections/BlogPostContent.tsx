@@ -13,7 +13,7 @@ import type { BlogPost, BlogAuthor } from './BentoBlogSection';
 // INTERFACES
 // =============================================================================
 
-export interface ContentBlock {
+export interface BlogContentBlock {
   type: 'paragraph' | 'heading' | 'image' | 'list' | 'quote' | 'callout' | 'faq';
   content?: string;
   items?: string[];
@@ -32,7 +32,7 @@ export interface FAQItem {
 }
 
 export interface BlogPostData extends BlogPost {
-  content: ContentBlock[];
+  content: BlogContentBlock[];
   tags?: string[];
 }
 
@@ -178,7 +178,7 @@ function AuthorBox({ author }: { author: BlogAuthor }) {
   );
 }
 
-function ContentRenderer({ block, index }: { block: ContentBlock; index: number }) {
+function ContentRenderer({ block, index }: { block: BlogContentBlock; index: number }) {
   switch (block.type) {
     case 'paragraph':
       return (
@@ -410,7 +410,7 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
   }, [tocItems]);
 
   return (
-    <article ref={ref} className="py-8 md:py-12" style={{ backgroundColor: '#efebe7' }}>
+    <article ref={ref} className="py-8 md:py-12 bg-background-beige">
       <div className="container mx-auto px-4 md:px-6">
 
         {/* Breadcrumbs */}
