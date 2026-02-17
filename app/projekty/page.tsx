@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import type { Metadata } from 'next';
 import { ProjectsListingSection } from '@/components/sections/ProjectsListingSection';
 import {
