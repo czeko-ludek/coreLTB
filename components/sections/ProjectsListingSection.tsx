@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useCallback, useRef } from 'react';
 import Link from 'next/link';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
 import clsx from 'clsx';
 import { Icon, SectionLabel } from '@/components/ui';
@@ -64,6 +64,30 @@ function buildUrl(
   return query ? `${pathname}?${query}` : pathname;
 }
 
+/** Parsuje wartość query param → string[] */
+function parseList(value: string | null): string[] {
+  if (!value) return [];
+  return value.split(',').filter(Boolean);
+}
+
+/** Czyta filtry/sort/page z searchParams (klient) */
+function parseFiltersFromURL(sp: URLSearchParams): {
+  filters: ProjectFilters;
+  sort: SortOption;
+  page: number;
+} {
+  return {
+    filters: {
+      technology: parseList(sp.get('technology')) as ProjectFilters['technology'],
+      category:   parseList(sp.get('category'))   as ProjectFilters['category'],
+      source:     parseList(sp.get('source'))      as ProjectFilters['source'],
+      surfaceRange: sp.get('surface') || null,
+    },
+    sort: (sp.get('sort') || 'newest') as SortOption,
+    page: Math.max(1, parseInt(sp.get('page') || '1', 10)),
+  };
+}
+
 export function ProjectsListingSection({
   breadcrumbs,
   title,
@@ -76,13 +100,21 @@ export function ProjectsListingSection({
 }: ProjectsListingSectionProps) {
   const router   = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  // Stan inicjalizowany z URL (przekazanego przez Server Component)
+  // Czytaj filtry z URL (klient) lub z props (server)
+  const urlState = useMemo(() => {
+    if (searchParams && searchParams.toString()) {
+      return parseFiltersFromURL(searchParams);
+    }
+    return null;
+  }, [searchParams]);
+
   const [filters, setFilters] = useState<ProjectFilters>(
-    initialFilters ?? { technology: [], category: [], surfaceRange: null, source: [] }
+    urlState?.filters ?? initialFilters ?? { technology: [], category: [], surfaceRange: null, source: [] }
   );
-  const [sortBy, setSortBy] = useState<SortOption>(initialSort);
-  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [sortBy, setSortBy] = useState<SortOption>(urlState?.sort ?? initialSort);
+  const [currentPage, setCurrentPage] = useState(urlState?.page ?? initialPage);
   const [isMobileFilterOpen, toggleMobileFilter, setIsMobileFilterOpen] = useToggle(false);
   const [isSortDropdownOpen, toggleSortDropdown, setIsSortDropdownOpen] = useToggle(false);
 
