@@ -153,32 +153,36 @@ export function ProjectElevations({
             </div>
           )}
 
-          {/* Przekrój — pełna szerokość lub pół */}
-          {otherImages.filter(i => i.src.includes('przekroj')).map((img) => (
-            <button
-              key={img.src}
-              onClick={() => openLightbox(img.globalIdx)}
-              className="group relative w-full bg-white rounded-xl border border-border-light overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer mb-6"
-            >
-              <div className="relative aspect-[16/9] bg-gray-50">
-                <Image
-                  src={img.src}
-                  alt={img.label}
-                  fill
-                  className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
-                  sizes="100vw"
-                />
-              </div>
-              <div className="px-4 py-3 border-t border-border-light bg-gray-50/50">
-                <p className="text-sm font-medium text-text-primary">{img.label}</p>
-              </div>
-            </button>
-          ))}
+          {/* --- Wariant A: Galeria — przekrój + usytuowanie obok siebie (2 obrazy) --- */}
+          {hasCrossSection && otherImages.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-6">
+              {otherImages.map((img) => (
+                <button
+                  key={img.src}
+                  onClick={() => openLightbox(img.globalIdx)}
+                  className="group relative bg-white rounded-xl border border-border-light overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
+                >
+                  <div className="relative aspect-[16/9] bg-gray-50">
+                    <Image
+                      src={img.src}
+                      alt={img.label}
+                      fill
+                      className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                    />
+                  </div>
+                  <div className="px-4 py-3 border-t border-border-light bg-gray-50/50">
+                    <p className="text-sm font-medium text-text-primary">{img.label}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
 
-          {/* Usytuowanie na działce + wymiary — 2 kolumny */}
-          {(otherImages.some(i => i.src.includes('sytuacja')) || lotWidth || elevationWidth) && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-              {/* Lewa kolumna — mapa/sytuacja */}
+          {/* --- Wariant B: Z500 — usytuowanie (obraz) + wymiary (kafelki) obok siebie --- */}
+          {!hasCrossSection && (hasSitePlan || lotWidth || elevationWidth) && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+              {/* Lewa kolumna — rysunek usytuowania */}
               {otherImages.filter(i => i.src.includes('sytuacja')).map((img) => (
                 <button
                   key={img.src}
@@ -191,7 +195,7 @@ export function ProjectElevations({
                       alt={img.label}
                       fill
                       className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
-                      sizes="(max-width: 768px) 100vw, 50vw"
+                      sizes="(max-width: 640px) 100vw, 50vw"
                     />
                   </div>
                   <div className="px-4 py-3 border-t border-border-light bg-gray-50/50">
@@ -200,9 +204,9 @@ export function ProjectElevations({
                 </button>
               ))}
 
-              {/* Prawa kolumna — wymiary */}
+              {/* Prawa kolumna — kafelki z wymiarami */}
               {(lotWidth || elevationWidth) && (
-                <div className="flex flex-col gap-4 h-full justify-center">
+                <div className="flex flex-col gap-4 justify-center">
                   {lotWidth && lotLength && (
                     <div className="p-5 bg-gray-50 rounded-xl border border-border-light">
                       <h3 className="font-semibold text-sm text-text-muted uppercase tracking-wide mb-3">
