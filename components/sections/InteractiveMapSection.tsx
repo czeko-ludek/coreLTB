@@ -117,7 +117,6 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
 
   return (
     <section
-      ref={sectionRef}
       className="hidden lg:block bg-background-beige py-16 sm:py-20"
     >
       <div className="mx-auto max-w-[83rem] px-4 sm:px-6 lg:px-8">
