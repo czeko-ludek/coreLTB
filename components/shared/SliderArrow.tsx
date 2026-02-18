@@ -21,6 +21,7 @@ export function SliderArrow({
     <button
       onClick={onClick}
       disabled={disabled}
+      aria-label={direction === 'left' ? 'Poprzedni slajd' : 'Następny slajd'}
       className={clsx(
         'w-14 h-14 rounded-full flex items-center justify-center',
         'transition-all duration-300',

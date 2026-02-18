@@ -170,6 +170,7 @@ export const ContactCTASection: React.FC<ContactCTASectionProps> = ({
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`Odwiedź nasz profil na ${social.platform.charAt(0).toUpperCase() + social.platform.slice(1)}`}
                         className="h-10 w-10 rounded-lg bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-primary hover:border-primary hover:scale-110 hover:-translate-y-0.5 transition-all duration-300"
                       >
                         <Icon name={social.platform as IconName} size="sm" />
