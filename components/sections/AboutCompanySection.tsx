@@ -60,6 +60,7 @@ export function AboutCompanySection({
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
               priority
+              fetchPriority="high"
             />
 
             {/* Subtle gradient overlay for better box visibility */}
