@@ -169,7 +169,7 @@ export default function Home() {
 			title: "Odkryj nasze portfolio wyjątkowych projektów",
 			theme: "light" as const,
 		},
-		projects: allProjects.map((project, index) => ({
+		projects: allProjects.slice(0, 8).map((project, index) => ({
 			slug: project.slug,
 			alt: project.alt,
 			title: project.title,

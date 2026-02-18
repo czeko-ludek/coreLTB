@@ -131,6 +131,7 @@ export function Header({
                   alt={logo.alt}
                   fill
                   className="object-contain"
+                  sizes="96px"
                   priority
                 />
               </Link>

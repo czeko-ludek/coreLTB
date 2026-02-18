@@ -3,7 +3,6 @@
 import React from 'react';
 import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
-import { Icon } from '@/components/ui';
 import { SectionHeader, SectionHeaderProps, NumberedListItem, NumberedListItemProps } from '@/components/shared';
 
 export interface HowItWorksSectionProps {
@@ -18,11 +17,6 @@ export function HowItWorksSection({ header, steps, video }: HowItWorksSectionPro
     threshold: 0.3,
     triggerOnce: true,
   });
-
-  const handleVideoPlay = () => {
-    // Video play logic here
-    console.log('Play video:', video.videoUrl);
-  };
 
   return (
     <section ref={ref} className="section-with-bg py-20">

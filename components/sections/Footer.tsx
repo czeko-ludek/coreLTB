@@ -46,7 +46,7 @@ export function Footer({
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Newsletter subscription:', email);
+    // TODO: Implement newsletter API integration
     setEmail('');
   };
 
@@ -89,6 +89,7 @@ export function Footer({
                   alt={logo.alt}
                   fill
                   className="object-contain"
+                  sizes="128px"
                 />
               </Link>
               <p className="text-sm text-text-secondary leading-relaxed">

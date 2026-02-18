@@ -83,6 +83,7 @@ function TestimonialCard({
               alt={author.image.alt}
               fill
               className="object-cover"
+              sizes="44px"
             />
           </div>
           <div>
