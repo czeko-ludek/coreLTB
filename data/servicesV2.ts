@@ -222,12 +222,12 @@ export const allServicesV2: ServiceV2[] = [
 
     // Sekcja 1: Dom to więcej niż budynek
     emotionalHero: {
-      label: 'KOMPLEKSOWA BUDOWA DOMÓW',
-      headline: ['Generalny wykonawca',
-      'nadzór, logistyka i stała cena'
+      label: 'GENERALNY WYKONAWCA • ŚLĄSK, MAŁOPOLSKA, OPOLSKIE',
+      headline: ['Pełna logistyka, nadzór inżynierski',
+      'i gwarancja stałej ceny'
     ],
       subtitle:
-        'Jako generalny wykonawca, zastępujemy chaos "systemu gospodarczego" inżynierskim procesem budowlanym. Przejmujemy 100% odpowiedzialności za logistykę na Śląsku, w Małopolsce i Opolskiem – od analizy gruntu, przez stan surowy, aż po odbiory techniczne.',
+        'Jako Generalny Wykonawca przejmujemy 100% odpowiedzialności za proces inwestycyjny. W przeciwieństwie do budowy "systemem gospodarczym", oferujemy przewidywalność. Przejmujemy 100% odpowiedzialności za logistykę na Śląsku, w Małopolsce i Opolskiem – od analizy gruntu, przez stan surowy, aż po odbiory techniczne.',
       benefits: [
         '15 lat doświadczenia w realizacji budynków jednorodzinnych',
         'Jeden wykonawca = jedna gwarancja na cały budynek',
@@ -258,44 +258,41 @@ export const allServicesV2: ServiceV2[] = [
 
 // Sekcja 2: Filozofia (Budujemy zaufanie)
 philosophyTimeline: {
-  // Nagłówek jest teraz bardziej bezpośredni i skupiony na korzyściach
   header: {
-    label: 'DLACZEGO WARTO NAS WYBRAĆ?',
-    title: 'Budujemy tak, jak sami chcielibyśmy mieszkać',
+    label: 'MODEL REALIZACJI',
+    title: 'Więcej niż ekipa budowlana',
     description:
-      'Na rynku jest wielu wykonawców. My nie konkurujemy ceną – konkurujemy spokojem, który dajemy naszym klientom. Wybierając CoreLTB Builders, wybierasz partnera, który bierze pełną odpowiedzialność za Twoje marzenie i Twoje pieniądze.',
+      'W budownictwie najdroższe są błędy na styku ekip. Hydraulik wini murarza, a tynkarz elektryka. W CoreLTB Builders likwidujemy ten problem. Przejmujemy 100% odpowiedzialności za błędy, logistykę i terminowość.',
   },
   
-  // Punkty są teraz mocniejszymi argumentami sprzedażowymi
   items: [
     {
       number: 1,
-      iconName: 'fileText', // Sugeruję zmianę ikony na symbolizującą umowę
-      title: 'Jeden partner, jedna umowa, pełna odpowiedzialność',
+      iconName: 'users',
+      title: 'Jeden Adresat Roszczeń (Rękojmia)',
       description:
-        'Zapomnij o koordynowaniu dziesiątek podwykonawców. Jako generalny wykonawca, podpisujesz z nami jedną, przejrzystą umowę i to my odpowiadamy za wszystko: od projektu, przez budowę, aż po odbiory.',
+        'Dajemy 5-letnią rękojmię na cały budynek. W razie usterki dzwonisz pod jeden numer. Nie musisz szukać elektryka, który 3 lata temu kładł kable – my odpowiadamy za sprawność wszystkich instalacji.',
     },
     {
       number: 2,
-      iconName: 'shieldCheck', // Sugeruję zmianę ikony na symbolizującą bezpieczeństwo
-      title: 'Gwarancja stałej ceny i terminu – bez niespodzianek',
+      iconName: 'fileCheck',
+      title: 'Kontrakt Ryczałtowy (Ochrona Ceny)',
       description:
-        'Podpisujesz umowę na kwotę brutto. To my bierzemy na siebie ryzyko, że stal lub styropian zdrożeje w przyszłym miesiącu. Twój kosztorys dla Banku jest "sztywny" i bezpieczny',
+        'Podpisujesz umowę na stałą kwotę. W dobie inflacji to Twoja polisa ubezpieczeniowa. Nawet jeśli ceny materiałów na giełdach wzrosną w trakcie budowy, Twój harmonogram płatności pozostaje bez zmian.',
     },
     {
       number: 3,
-      iconName: 'award', // Sugeruję zmianę ikony na symbolizującą jakość
-      title: 'Technologia Dobrana do Gruntu',
+      iconName: 'award', // Wróciłem też do 'award' jeśli nie masz 'pickaxe'/'mountain'
+      title: 'Geotechnika i Szkody Górnicze',
       description:
-        'Zrealizowaliśmy wiele inwestycji na wymagających, gliniastych terenach Południowej Polski. Nie powielamy schematów – dobieramy izolacje i typ fundamentowania (ławy vs płyta) indywidualnie pod wyniki badań geotechnicznych, eliminując ryzyko pękania ścian po latach.',
+        'Budujemy na Śląsku, więc wiemy, że fundament to nie tylko beton. Dobieramy zbrojenie i dylatacje (płyta vs ławy) ściśle pod kategorię terenu (PGG) i badania gruntu, eliminując ryzyko pękania konstrukcji w przyszłości.',
     },
   ],
   
-  // Pamiętaj, aby dodać również ten obiekt, jeśli go nie masz,
-  // ponieważ jest on wymagany przez poprawiony komponent.
   image: {
+    // TWOJA ORYGINALNA ŚCIEŻKA:
     src: '/images/uslugi/kompleksowa-budowa-domow/zespol-coreltb-builders.webp',
-    alt: 'Doświadczony kierownik budowy z CoreLTB Builders na placu budowy, w kasku z logo, analizujący plany.',
+    alt: 'Inżynier CoreLTB weryfikujący zbrojenie płyty fundamentowej zgodnie z projektem',
   },
 },
 
@@ -483,7 +480,7 @@ servicesAccordion: {
       header: {
         label: 'JAK PRACUJEMY',
         title: 'Droga do Twojego wymarzonego domu',
-        description: 'Proces budowy z CoreLTB Builders jest poukładany inżyniersko. Nie ma tu miejsca na improwizację. Każdy etap wynika z poprzedniego, tworząc spójny ciąg przyczynowo-skutkowy, który prowadzi do bezpiecznego domu.',
+        description: 'Jako Generalny Wykonawca eliminujemy chaos. Każdy etap – od weryfikacji gruntu po odbiór kluczy – ma przypisany kamień milowy i procedurę kontrolną. Ty akceptujesz efekty, my robimy resztę.',
         theme: 'light' as const,
       },
       steps: [
@@ -492,25 +489,27 @@ servicesAccordion: {
           number: 1,
           icon: 'mapPin',
           label: 'Działka',
-          title: 'Audyt działki i analiza geotechniczna',
+          title: 'Audyt Terenu i Geotechnika',
           content: [
             {
               type: 'paragraph',
-              value: 'Start inwestycji na terenie Południowej Polski (Śląsk, Małopolska) wymaga wyjścia poza standardową weryfikację prawną. Specyfika regionu – w tym **grunty wysadzinowe (gliny)** oraz **aktywne szkody górnicze** (od I do IV kategorii) – bezpośrednio wpływa na koszt budowy. Nasz zespól analizuje nie tylko, czy możesz budować, ale ile będzie kosztowało "wyjście z ziemi". Różnica między standardową ławą a wzmocnioną płytą fundamentową może wynosić nawet 20-30% budżetu stanu surowego'
+              value: 'Na Południu Polski zakup działki bez sprawdzenia geologii to hazard. Specyfika regionu – w tym **grunty wysadzinowe (gliny)** oraz **aktywne szkody górnicze** (od I do IV kategorii) – bezpośrednio wpływa na koszt fundamentów. Analizujemy grunt przed startem prac, bo różnica w cenie między ławą a płytą fundamentową jest znacząca.'
             },
             {
               type: 'list',
               items: [
-                '**Geologia Inżynierska:** Wykonujemy odwierty kontrolne, aby wykryć wody gruntowe i grunty nienośne (nasypy). Unikasz ryzyka wymiany gruntu.',
-                '**Szkody Górnicze (Śląsk):** Weryfikujemy zapisy w PGG i Miejscowym Planie (MPZP), dobierając odpowiednie zabezpieczenia konstrukcyjne (tuleje, dylatacje).',
-                '**Uzbrojenie i WZ:** Analizujemy realne (a nie "na mapie") możliwości przyłącza mediów oraz procedujemy Decyzję o Warunkach Zabudowy w przypadku braku planu.'
+                '**Odwierty Geologiczne:** Wykonujemy badania gruntu, aby wykluczyć kosztowną wymianę gruntu (np. przy nasypach niekontrolowanych).',
+                '**Szkody Górnicze:** Weryfikujemy kategorię terenu (PGG/WUG) i dobieramy stal zbrojeniową, która utrzyma sztywność budynku przy wstrząsach.',
+                '**Geodeta:** Wykonujemy mapę do celów projektowych i wytyczamy budynek w terenie z dokładnością milimetrową.'
               ]
             },
             {
-              type: 'paragraph',
-              value: 'Dzięki temu masz **absolutną pewność**, że inwestujesz w grunt bez wad prawnych i ukrytych problemów technicznych.'
+               // STRATEGICZNY LINK WEWNĘTRZNY DO USŁUGI WSPIERAJĄCEJ
+               type: 'paragraph', 
+               value: '**Masz trudną działkę?** Sprawdź szczegóły: [Usługi Geologiczne i Geodezyjne w CoreLTB >](/oferta/uslugi-techniczne-w-budownictwie)'
             }
           ],
+          // Twoje oryginalne zdjęcie zostaje
           imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/dzialka-budowlana.webp',
           imageAlt: 'Geodeta z teodolitem na pustej działce budowlanej w słoneczny dzień',
         },

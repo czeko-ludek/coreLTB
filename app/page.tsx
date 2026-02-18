@@ -74,8 +74,7 @@ export default function Home() {
 				title: "Budowa domów",
 				description:
 					"Kompleksowa realizacja domów jednorodzinnych pod klucz, od projektu aż po finalne wykończenie. Zajmujemy się wszystkim - od fundamentów po dach.",
-				image:
-					"https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200",
+				image: "/images/uslugi/showcase/budowa-domow.webp",
 				href: "/oferta/kompleksowa-budowa-domow",
 			},
 			{
@@ -83,8 +82,7 @@ export default function Home() {
 				title: "Projektowanie",
 				description:
 					"Tworzymy nowoczesne i funkcjonalne projekty budowlane oraz aranżacje wnętrz dopasowane do Twoich potrzeb. Nasze projekty łączą estetykę z funkcjonalnością.",
-				image:
-					"https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200",
+				image: "/images/uslugi/showcase/projektowanie.webp",
 				href: "/oferta/projektowanie",
 			},
 			{
@@ -92,8 +90,7 @@ export default function Home() {
 				title: "Nadzór i doradztwo",
 				description:
 					"Profesjonalny nadzór inwestorski i doradztwo techniczne na każdym etapie realizacji Twojej inwestycji. Dbamy o jakość i terminowość.",
-				image:
-					"https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200",
+				image: "/images/uslugi/showcase/nadzor.webp",
 				href: "/oferta/nadzor-i-doradztwo",
 			},
 			{
@@ -101,8 +98,7 @@ export default function Home() {
 				title: "Usługi techniczne",
 				description:
 					"Zapewniamy pełen zakres usług technicznych, w tym instalacje sanitarne, elektryczne oraz systemy smart home. Nowoczesne rozwiązania dla Twojego domu.",
-				image:
-					"https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1200",
+				image: "/images/uslugi/showcase/uslugi-techniczne.webp",
 				href: "/oferta/uslugi-techniczne",
 			},
 			{
@@ -110,8 +106,7 @@ export default function Home() {
 				title: "Wykończenia",
 				description:
 					"Precyzyjne prace wykończeniowe i stylowe aranżacje wnętrz, które nadadzą Twojemu domowi unikalny charakter. Dbałość o każdy detal.",
-				image:
-					"https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200",
+				image: "/images/uslugi/showcase/wykonczenia.webp",
 				href: "/oferta/wykonczenia-i-aranzacje",
 			},
 			{
@@ -119,8 +114,7 @@ export default function Home() {
 				title: "Zagospodarowanie terenu",
 				description:
 					"Przekształcamy przestrzeń w funkcjonalne i estetyczne otoczenie, realizując ogrody, drogi i ogrodzenia. Kompleksowe zagospodarowanie działki.",
-				image:
-					"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200",
+				image: "/images/uslugi/showcase/zagospodarowanie.webp",
 				href: "/oferta/zagospodarowanie-terenu",
 			},
 		],
