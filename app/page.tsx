@@ -13,47 +13,49 @@ import { companyData } from "@/data/company-data";
 import { allProjects } from "@/data/projects";
 import { blogPosts } from "@/data/blog-data";
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export default function Home() {
-	// Hero Section Data
+	// Hero Section Data (Money Keywords w H1)
 	const heroData = {
-		tagline: "BUDUJEMY LEPSZE JUTRO",
-		title: "Zrealizuj z nami projekt swoich marzeń!",
+		tagline: "GENERALNY WYKONAWCA • ŚLĄSK I MAŁOPOLSKA",
+		title: "Kompleksowa budowa domów i inwestycje pod klucz",
 		subtitle:
-			"Budujemy domy pod klucz. Od projektu po odbiór - jeden wykonawca, jedna umowa.",
+			"Zastępujemy chaos systemu gospodarczego inżynierskim procesem. Przejmujemy 100% logistyki: od analizy gruntu, przez stan surowy, aż po odbiór budynku.",
 		images: [
-			{ src: "/images/hero/slide-1.webp", alt: "Budowa domu na Śląsku" },
-			{ src: "/images/hero/slide-2.webp", alt: "Nowoczesny dom jednorodzinny" },
+			{ src: "/images/hero/slide-1.webp", alt: "Budowa domu na płycie fundamentowej Śląsk" },
+			{ src: "/images/hero/slide-2.webp", alt: "Nowoczesny dom jednorodzinny realizacja Rybnik" },
 			{ src: "/images/hero/slide-3.webp", alt: "Realizacja CoreLTB Builders" },
-			{ src: "/images/hero/slide-4.webp", alt: "Dom pod klucz" },
+			{ src: "/images/hero/slide-4.webp", alt: "Wykończenie wnętrz pod klucz" },
 		],
-		primaryButton: { text: "Nasze usługi", href: "/oferta" },
+		primaryButton: { text: "Poznaj ofertę", href: "/oferta" },
 	};
 
-	// About Company Section Data
+	// About Company Section Data (korekta SEO w ALT + twarde liczby)
 	const aboutData = {
 		header: {
-			label: "O NASZEJ FIRMIE",
-			title: "Dlaczego warto wybrać CoreLTB Builders?",
+			label: "GENERALNE WYKONAWSTWO",
+			title: "Dlaczego inżynierowie wybierają CoreLTB?",
 			theme: "light" as const,
 		},
 		content: [
-			"Jesteśmy firmą rodzinną z **podwójnym korzeniem** – operujemy z Jaworzna i Wodzisławia Śląskiego. Działamy w skali generalnego wykonawcy, ale podchodzimy do inwestycji z rzemieślniczą odpowiedzialnością, gdzie nazwisko właściciela jest najlepszą gwarancją jakości.",
-			"Od ponad 15 lat rozwiązujemy **inżynierskie problemy Południowej Polski**: szkody górnicze na Śląsku, trudne warunki gruntowe i skomplikowaną logistykę materiałową. Nie sprzedajemy marzeń o domu – dostarczamy bezpieczny, terminowo zrealizowany budynek oparty na solidnej umowie.",
+			"Jesteśmy firmą inżynierską z **podwójnym zapleczem** – bazy w Jaworznie i Wodzisławiu Śląskim. Działamy w skali Generalnego Wykonawcy, eliminując ryzyka systemu gospodarczego.",
+			"Od 15 lat rozwiązujemy **trudne tematy Południa**: szkody górnicze, gliny i tereny zalewowe. Nie sprzedajemy obietnic – dostarczamy bezpieczny budynek, oparty na harmonogramie rzeczowo-finansowym i umowie z gwarancją ceny.",
 		],
 		image: {
 			src: "/images/about-home.webp",
-			alt: "Zespół CoreLTB Builders na budowie",
+			alt: "Zespół inżynierów CoreLTB na budowie w Katowicach",
 		},
 		stats: {
 			stats: [
 				{
-					value: "100+",
-					label: "Zakończonych Inwestycji",
+					value: "150+",
+					label: "Oddanych Inwestycji (Budynki)",
 					variant: "dark" as const,
 				},
 				{
 					value: "15 LAT",
-					label: "Doświadczenia Inżynierskiego Kadry",
+					label: "Doświadczenia w nadzorze i wykonawstwie",
 					variant: "primary" as const,
 				},
 			],
@@ -61,59 +63,59 @@ export default function Home() {
 		ctaButton: { text: "Poznaj nasz zespół", href: "/o-nas" },
 	};
 
-	// Services Section Data
+	// Services Section Data (Money Keywords Injection)
 	const servicesData = {
 		header: {
-			label: "POZNAJ NASZE USŁUGI",
-			title: "Oferujemy profesjonalne usługi budowlane",
+			label: "ZAKRES KOMPETENCJI",
+			title: "Model \"Zaprojektuj i wybuduj\"",
 			theme: "light" as const,
 		},
 		services: [
 			{
 				iconName: "home" as const,
-				title: "Budowa domów",
+				title: "Kompleksowa budowa domów",
 				description:
-					"Kompleksowa realizacja domów jednorodzinnych pod klucz, od projektu aż po finalne wykończenie. Zajmujemy się wszystkim - od fundamentów po dach.",
+					"Generalne wykonawstwo (SSO / Deweloperka) w reżimie WT2026. Płyty fundamentowe, szkody górnicze, materiał w cenie.",
 				image: "/images/uslugi/showcase/budowa-domow.webp",
 				href: "/oferta/kompleksowa-budowa-domow",
 			},
 			{
-				iconName: "pencil" as const,
-				title: "Projektowanie",
+				iconName: "draftingCompass" as const,
+				title: "Biuro projektowe",
 				description:
-					"Tworzymy nowoczesne i funkcjonalne projekty budowlane oraz aranżacje wnętrz dopasowane do Twoich potrzeb. Nasze projekty łączą estetykę z funkcjonalnością.",
+					"Projekty domów pod budżet wykonawczy. Adaptacja do szkód górniczych i optymalizacja kosztów stali (Value Engineering).",
 				image: "/images/uslugi/showcase/projektowanie.webp",
 				href: "/oferta/projektowanie",
 			},
 			{
-				iconName: "clipboard" as const,
-				title: "Nadzór i doradztwo",
+				iconName: "hardHat" as const,
+				title: "Nadzór i kierownik budowy",
 				description:
-					"Profesjonalny nadzór inwestorski i doradztwo techniczne na każdym etapie realizacji Twojej inwestycji. Dbamy o jakość i terminowość.",
+					"Twój techniczny adwokat na budowie. Kierownicy z uprawnieniami, inspektorzy nadzoru i odbiory mieszkań od dewelopera.",
 				image: "/images/uslugi/showcase/nadzor.webp",
 				href: "/oferta/nadzor-i-doradztwo",
 			},
 			{
-				iconName: "settings" as const,
-				title: "Usługi techniczne",
+				iconName: "mapPin" as const,
+				title: "Geologia i geodezja",
 				description:
-					"Zapewniamy pełen zakres usług technicznych, w tym instalacje sanitarne, elektryczne oraz systemy smart home. Nowoczesne rozwiązania dla Twojego domu.",
+					"Diagnostyka gruntu przed zakupem. Odwierty geotechniczne, mapy do celów projektowych (MDCP) i tyczenie budynków.",
 				image: "/images/uslugi/showcase/uslugi-techniczne.webp",
 				href: "/oferta/uslugi-techniczne",
 			},
 			{
 				iconName: "paintBrush" as const,
-				title: "Wykończenia",
+				title: "Wykończenia wnętrz",
 				description:
-					"Precyzyjne prace wykończeniowe i stylowe aranżacje wnętrz, które nadadzą Twojemu domowi unikalny charakter. Dbałość o każdy detal.",
+					"Fit-out pod klucz z 8% VAT na materiały. Gładzie, płytki, podłogi. Jedna ekipa, jeden termin i czysta budowa.",
 				image: "/images/uslugi/showcase/wykonczenia.webp",
 				href: "/oferta/wykonczenia-i-aranzacje",
 			},
 			{
 				iconName: "tree" as const,
-				title: "Zagospodarowanie terenu",
+				title: "Zagospodarowanie działki",
 				description:
-					"Przekształcamy przestrzeń w funkcjonalne i estetyczne otoczenie, realizując ogrody, drogi i ogrodzenia. Kompleksowe zagospodarowanie działki.",
+					"Brukarstwo, ogrodzenia, trawniki i oświetlenie terenu. Finalizujemy inwestycję tak, aby była gotowa do zamieszkania.",
 				image: "/images/uslugi/showcase/zagospodarowanie.webp",
 				href: "/oferta/zagospodarowanie-terenu",
 			},
@@ -123,31 +125,31 @@ export default function Home() {
 	// How It Works Section Data
 	const howItWorksData = {
 		header: {
-			label: "MODEL REALIZACJI",
-			title: "Inwestycja prowadzona systemowo",
+			label: "BUDOWA DOMU KROK PO KROKU",
+			title: "Od audytu działki po odbiór budynku",
 			theme: "light" as const,
 		},
 		steps: [
 			{
 				number: 1,
 				iconName: "check" as const,
-				title: "Audyt Działki i Budżetowanie",
+				title: "Audyt działki i budżetowanie",
 				description:
-					"Zamiast \"rozmów o wizji\", zaczynamy od weryfikacji MPZP i warunków gruntowych (szkody górnicze). Przygotowujemy **wstępny kosztorys inwestorski**, aby zderzyć Twoje oczekiwania z realiami rynkowymi 2026 r. przed wydaniem pieniędzy na projekt.",
+					`Zamiast "rozmów o wizji", zaczynamy od weryfikacji MPZP i warunków gruntowych (szkody górnicze). Przygotowujemy **wstępny kosztorys inwestorski**, aby zderzyć Twoje oczekiwania z realiami rynkowymi ${CURRENT_YEAR} r. przed wydaniem pieniędzy na projekt.`,
 			},
 			{
 				number: 2,
 				iconName: "fileCheck" as const,
-				title: "Projekt i Formalności (PnB)",
+				title: "Projekt i formalności (PnB)",
 				description:
-					"Przejmujemy biurokrację. Na podstawie pełnomocnictwa uzyskujemy **Pozwolenie na Budowę** i wykonujemy adaptację konstrukcyjną budynku. Optymalizujemy projekt, zamieniając przewymiarowane rozwiązania na ekonomiczne technologie systemowe.",
+					"Przejmujemy biurokrację. Na podstawie pełnomocnictwa uzyskujemy Pozwolenie na Budowę i wykonujemy adaptację projektu do Twojej działki. Optymalizujemy konstrukcję, zamieniając przewymiarowane rozwiązania na ekonomiczne technologie systemowe.",
 			},
 			{
 				number: 3,
 				iconName: "building" as const,
-				title: "Realizacja i Odbiory Techniczne",
+				title: "Realizacja i odbiory techniczne",
 				description:
-					"Budowa pod nadzorem Inżyniera Kontraktu. Nie martwisz się o dostawy betonu czy harmonogram brygad. Każdy etap (fundamenty, stropy) kończy się rygorem odbiorowym i dokumentacją fotograficzną.",
+					"Budujemy własnymi brygadami pod nadzorem Inżyniera Kontraktu. Płyty fundamentowe, stropy monolityczne, więźba — każdy etap kończy się odbiorem technicznym i dokumentacją fotograficzną w dzienniku budowy.",
 			},
 		],
 		video: {
@@ -159,8 +161,8 @@ export default function Home() {
 	// Projects Section Data - Using real projects from database
 	const projectsData = {
 		header: {
-			label: "NASZE ZREALIZOWANE PROJEKTY",
-			title: "Odkryj nasze portfolio wyjątkowych projektów",
+			label: "PROJEKTY DOMÓW JEDNORODZINNYCH",
+			title: "Budowa domów pod klucz — realizacje na Śląsku i w Małopolsce",
 			theme: "light" as const,
 		},
 		projects: allProjects.slice(0, 8).map((project, index) => ({
@@ -188,8 +190,8 @@ export default function Home() {
 	// Testimonials Section Data
 	const testimonialsData = {
 		header: {
-			label: "CO MÓWIĄ NASI KLIENCI",
-			title: "Po skorzystaniu z naszych usług",
+			label: "OPINIE KLIENTÓW",
+			title: "Zaufali nam inwestorzy z całego Śląska",
 			theme: "light" as const,
 		},
 		testimonials: [
@@ -294,8 +296,8 @@ export default function Home() {
 
 	const blogData = {
 		header: {
-			label: "ARTYKUŁY I BLOG",
-			title: "Najnowsze wiadomości i aktualności",
+			label: "BAZA WIEDZY",
+			title: "Poradniki budowlane i analizy kosztów",
 			theme: "light" as const,
 		},
 		posts: latestPosts,
