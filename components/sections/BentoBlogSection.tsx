@@ -329,7 +329,7 @@ function WidePostCard({ post, inView, delay }: { post: WidePost; inView: boolean
           src={post.image.src}
           alt={post.image.alt}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
       </div>
     </article>
@@ -382,7 +382,7 @@ function RecommendedPostCard({ post, inView, delay }: { post: RecommendedPost; i
           src={post.image.src}
           alt={post.image.alt}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
       </div>
       <div className="flex flex-col justify-center min-w-0">
@@ -485,7 +485,7 @@ function SmallPostCard({ post, inView, delay }: { post: BlogPost; inView: boolea
           src={post.image.src}
           alt={post.image.alt}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
       </div>
       <div className="flex flex-col justify-center min-w-0">

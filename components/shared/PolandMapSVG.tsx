@@ -172,36 +172,45 @@ export function PolandMapSVG({
       // Store city data on elements using SVGElement's dataset
       (label as unknown as HTMLElement).dataset.cityId = city.id;
       (label as unknown as HTMLElement).dataset.voivodeship = city.voivodeship;
+
+      // Shared handlers for both circle and label
+      const clickHandler = (e: Event) => {
+        e.stopPropagation();
+        callbacksRef.current.onCityClick(city);
+      };
+
+      const enterHandler = (e: Event) => {
+        const mouseEvent = e as MouseEvent;
+        const parentRect = tooltipContainerRef.current?.getBoundingClientRect();
+        if (parentRect) {
+          callbacksRef.current.onCityHover(city.id, {
+            x: mouseEvent.clientX - parentRect.left,
+            y: mouseEvent.clientY - parentRect.top + 15,
+          });
+        }
+      };
+
+      const leaveHandler = () => {
+        callbacksRef.current.onCityHover(null);
+      };
+
+      // Add handlers to label (city name text)
+      if (city.hasPage) {
+        (label as SVGElement).style.cursor = 'pointer';
+      }
+      addTrackedListener(label, 'click', clickHandler);
+      addTrackedListener(label, 'mouseenter', enterHandler);
+      addTrackedListener(label, 'mouseleave', leaveHandler);
+
+      // Add handlers to circle (city dot)
       if (circle) {
         (circle as unknown as HTMLElement).dataset.cityId = city.id;
         (circle as unknown as HTMLElement).dataset.voivodeship = city.voivodeship;
         if (city.hasPage) {
           circle.style.cursor = 'pointer';
         }
-
-        // Click handler on circle - use ref to always get current callback
-        const clickHandler = (e: Event) => {
-          e.stopPropagation();
-          callbacksRef.current.onCityClick(city);
-        };
         addTrackedListener(circle, 'click', clickHandler);
-
-        const enterHandler = (e: Event) => {
-          const mouseEvent = e as MouseEvent;
-          const parentRect = tooltipContainerRef.current?.getBoundingClientRect();
-          if (parentRect) {
-            // Use mouse position - always correct regardless of CSS transforms
-            callbacksRef.current.onCityHover(city.id, {
-              x: mouseEvent.clientX - parentRect.left,
-              y: mouseEvent.clientY - parentRect.top + 15, // 15px below cursor
-            });
-          }
-        };
         addTrackedListener(circle, 'mouseenter', enterHandler);
-
-        const leaveHandler = () => {
-          callbacksRef.current.onCityHover(null);
-        };
         addTrackedListener(circle, 'mouseleave', leaveHandler);
       }
     });

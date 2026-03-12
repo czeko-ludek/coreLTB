@@ -1,20 +1,10 @@
 import { MetadataRoute } from 'next';
 import { allServicesV2 } from '@/data/servicesV2';
 import { allProjects } from '@/data/projects';
+import { getAllLocalPageSlugs } from '@/data/local';
+import { companyData } from '@/data/company-data';
 
-/**
- * Sitemap Generator for CoreLTB Builders
- *
- * Automatycznie generuje sitemap.xml dla wszystkich stron:
- * - Strony statyczne (homepage, oferta)
- * - Dynamiczne strony usług (/oferta/[slug])
- * - Dynamiczne strony projektów (/projekty/[slug])
- *
- * WAŻNE: Zmień BASE_URL przed deployment na produkcję!
- */
-
-// TODO: Zmień na docelową domenę klienta przed wdrożeniem produkcyjnym
-const BASE_URL = 'https://coreltb-v2.pages.dev';
+const BASE_URL = companyData.url;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const currentDate = new Date();
@@ -28,10 +18,40 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      url: `${BASE_URL}/o-nas`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/oferta`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/projekty`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/kontakt`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/obszar-dzialania`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.8,
     },
   ];
 
@@ -51,6 +71,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  // Połącz wszystkie strony
-  return [...staticPages, ...servicePages, ...projectPages];
+  // Regionalne strony lokalne (/obszar-dzialania/[slug])
+  const localPages: MetadataRoute.Sitemap = getAllLocalPageSlugs().map((slug) => ({
+    url: `${BASE_URL}/obszar-dzialania/${slug}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...servicePages, ...projectPages, ...localPages];
 }

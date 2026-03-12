@@ -37,3 +37,8 @@ next-env.d.ts
 
 
 NUL
+
+# SEO Agent
+SEO/seo-agent/credentials/
+SEO/seo-agent/reports/
+SEO/seo-agent/node_modules/

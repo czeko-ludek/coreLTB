@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Icon, IconName } from '@/components/ui';
+import { formatBold } from '@/lib/utils';
 
 // Content Block Types (same as TimelineStep)
 type ContentBlock =
@@ -25,7 +26,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({ iconName, title, c
           key={index}
           className="mb-3 text-sm md:text-base leading-relaxed text-text/80"
           dangerouslySetInnerHTML={{
-            __html: block.value.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'),
+            __html: formatBold(block.value),
           }}
         />
       );
@@ -39,7 +40,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({ iconName, title, c
               key={itemIndex}
               className="text-sm md:text-base leading-relaxed text-text/80"
               dangerouslySetInnerHTML={{
-                __html: item.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'),
+                __html: formatBold(item),
               }}
             />
           ))}

@@ -87,6 +87,12 @@ import {
   SlidersHorizontal,
   ArrowUpDown,
   FlipHorizontal2,
+  Pickaxe,
+  Calculator,
+  CalendarRange,
+  Waves,
+  Combine,
+  Tractor,
 } from 'lucide-react';
 
 const iconMap = {
@@ -180,6 +186,12 @@ const iconMap = {
   slidersHorizontal: SlidersHorizontal,
   arrowUpDown: ArrowUpDown,
   flipHorizontal: FlipHorizontal2,
+  pickaxe: Pickaxe,
+  calculator: Calculator,
+  calendarRange: CalendarRange,
+  waves: Waves,
+  combine: Combine,
+  tractor: Tractor,
 };
 
 export type IconName = keyof typeof iconMap;

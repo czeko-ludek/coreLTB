@@ -114,16 +114,6 @@ export const ProjectListingCard = React.memo(function ProjectListingCard({
               {surfaceArea}
             </p>
           </div>
-          {estimatedBuildCost && (
-          <div className="bg-zinc-50 rounded-lg p-3 col-span-2">
-            <p className="text-[0.7rem] text-text-muted uppercase tracking-wide mb-0.5">
-              Koszt budowy
-            </p>
-            <p className="text-sm font-bold text-text-primary">
-              {estimatedBuildCost}
-            </p>
-          </div>
-          )}
         </div>
 
         {/* Link "Zobacz projekt" */}

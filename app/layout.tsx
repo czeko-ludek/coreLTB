@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Manrope, Funnel_Sans } from "next/font/google";
 import "./globals.css";
-import { Header, Footer } from "@/components/sections"; // ✅ Centralized import from index.ts
+import { Header, Footer } from "@/components/sections";
+import { ErrorBoundary } from "@/components/shared";
 import { companyData } from "@/data/company-data";
 
 const manrope = Manrope({ subsets: ["latin"], display: "swap" });
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 // Header data
 const headerData = {
   topBar: {
-    phone: "+48 123 456 789",
+    phone: "+48 664 123 757",
     email: "kontakt@coreltb.pl",
     socials: [
       { platform: "facebook" as const, href: "https://facebook.com" },
@@ -82,7 +83,7 @@ const footerData = {
     {
       iconName: "phone" as const,
       title: "Zadzwoń",
-      content: "+48 123 456 789",
+      content: "+48 664 123 757",
     },
     {
       iconName: "clock" as const,
@@ -130,7 +131,7 @@ const footerData = {
     placeholder: "Twój email",
   },
   bottomBar: {
-    copyright: "Copyright © 2024 CoreLTB Builders. Wszelkie prawa zastrzeżone.",
+    copyright: `Copyright © ${new Date().getFullYear()} CoreLTB Builders. Wszelkie prawa zastrzeżone.`,
     links: [
       { label: "Regulamin", href: "/terms" },
       { label: "Polityka prywatności", href: "/privacy" },
@@ -155,7 +156,9 @@ export default function RootLayout({
       {/* Preconnect/dns-prefetch removed: next/font/google hosts fonts locally, no external requests needed */}
       <body className={`${manrope.className} ${funnelSans.variable}`}>
         <Header {...headerData} />
-        {children}
+        <ErrorBoundary>
+          {children}
+        </ErrorBoundary>
         <Footer {...footerData} />
       </body>
     </html>

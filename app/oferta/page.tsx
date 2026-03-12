@@ -1,160 +1,119 @@
 import type { Metadata } from "next";
 import React from "react";
-import { ContactCTASection } from "@/components/sections";
+import { ContactCTASection, BlogSection } from "@/components/sections";
 import { companyData } from "@/data/company-data";
+import { blogPosts } from "@/data/blog-data";
 import { PhilosophyTimelineSection } from "@/components/sections/PhilosophyTimelineSection";
 import {
 	PageHeader,
+	Breadcrumbs,
 	SectionHeader,
-	ServiceCardSimple,
 	AnimatedSection,
 } from "@/components/shared";
 import { AnimatedServiceGrid } from "@/components/shared/AnimatedServiceGrid";
+import { getAllServicesListingData } from "@/data/servicesV2";
 
 export const metadata: Metadata = {
-	title: "Nasza oferta - CoreLTB Builders",
+	title: "Usługi Budowlane i Projektowe - Śląsk, Małopolska | CoreLTB",
 	description:
-		"Poznaj pełną ofertę usług CoreLTB Builders: budowa domów, projektowanie, nadzór budowlany, usługi techniczne i wykończenia wnętrz.",
+		"Generalny wykonawca domów. Oferujemy projektowanie, budowę pod klucz, nadzór inwestorski oraz badania geologiczne. Obsługujemy Śląsk i Małopolskę.",
 };
 
 export default function OfferPage() {
-	const offerData = [
-		{
-			image:
-				"https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=800",
-			title: "Generalne Wykonawstwo Domów (SSO / Deweloperski / Pod Klucz)",
-			description:
-				"Cały proces na Twojej głowie? Przejmujemy 100% logistyki. Stała cena, harmonogram i nadzór inżynierski.",
-			features: [
-				"Indywidualne projekty architektoniczne",
-				"Gwarancja jakości i terminowości",
-			],
-			href: "/oferta/kompleksowa-budowa-domow",
+	const offerData = getAllServicesListingData();
+
+	// Pobieramy 3 najnowsze artykuły z Bazy Wiedzy (Edukacja klienta)
+	const latestPosts = [...blogPosts]
+		.sort((a, b) => b.dateTimestamp - a.dateTimestamp)
+		.slice(0, 3);
+
+	const blogData = {
+		header: {
+			label: "BAZA WIEDZY INWESTORA",
+			title: "Decyzje oparte na faktach",
+			theme: "light" as const,
 		},
-		{
-			image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800",
-			title: "Projektowanie i Adaptacje",
-			description:
-				"Projekty indywidualne szyte na miarę oraz adaptacje gotowych projektów do specyfiki działek na szkodach górniczych.",
-			features: ["Wizualizacje 3D", "Pełna dokumentacja techniczna"],
-			href: "/oferta/projektowanie",
-		},
-		{
-			image:
-				"https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800",
-			title: "Nadzór Inwestorski",
-			description:
-				"Twój człowiek na budowie. Niezależna kontrola jakości prac, odbiory mieszkań od dewelopera i weryfikacja umów.",
-			features: ["Kontrola budżetu i harmonogramu", "Odbiory techniczne"],
-			href: "/oferta/nadzor-i-doradztwo",
-		},
-		{
-			image:
-				"https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800",
-			title: "Usługi Techniczne: Geologia, Geodezja, Kosztorys",
-			description:
-				"Niezbędne przed startem. Wiercenia geologiczne, mapy do celów projektowych i analizy chłonności gruntu.",
-			features: [
-				"Badania geologiczne i geotechniczne",
-				"Pomiary geodezyjne i kosztorysy",
-			],
-			href: "/oferta/uslugi-techniczne",
-		},
-		{
-			image:
-				"https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800",
-			title: "Wykończenia i aranżacje",
-			description:
-				"Precyzyjne prace wykończeniowe i stylowe aranżacje wnętrz, które nadadzą Twojemu domowi unikalny charakter.",
-			features: ["Najwyższej jakości materiały", "Dbałość o każdy detal"],
-			href: "/oferta/wykonczenia-i-aranzacje",
-		},
-		{
-			image:
-				"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
-			title: "Zagospodarowanie terenu",
-			description:
-				"Przekształcamy przestrzeń wokół budynków w funkcjonalne i estetyczne otoczenie, realizując ogrody, drogi i ogrodzenia.",
-			features: [
-				"Projektowanie ogrodów i otoczenia",
-				"Budowa dróg dojazdowych i ogrodzeń",
-			],
-			href: "/oferta/zagospodarowanie-terenu",
-		},
-	];
+		posts: latestPosts,
+	};
 
 	return (
 		<main>
-			{/* 1. Page Header - Hero z obrazem */}
+			{/* 1. Page Header - Inżynierski konkret */}
 			<PageHeader
-				title="Nasza oferta"
+				title="Usługi Budowlane"
 				watermarkText="OFERTA"
 				backgroundImage="/images/uslugi.webp"
-				breadcrumbs={[
-					{ label: "Strona Główna", href: "/" },
-					{ label: "Nasza Oferta", href: "/oferta" },
+			/>
+			<Breadcrumbs
+				items={[
+					{ label: "Strona główna", href: "/" },
+					{ label: "Oferta", href: "/oferta" },
 				]}
+				className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8"
 			/>
 
-			{/* 2. SectionHeader - Krótki intro (40 słów, 5-8 sekund czytania) */}
+			{/* 2. Intro - Czyste i lokalne (Śląsk / Kraków / Rybnik) */}
 			<AnimatedSection as="div" className="py-12 px-4 bg-background" delay={0.1}>
 				<div className="container mx-auto max-w-4xl">
 					<SectionHeader
-						label="KOMPLEKSOWE USŁUGI BUDOWLANE"
-						title="Generalne wykonawstwo i usługi inżynierskie – południe Polski"
-						description="Od analizy działki w Rybniku po odbiór kluczy w Krakowie. Skalujemy proces budowlany, dostarczając kompletny pakiet usług pod jednym dachem: projekt, budowa, nadzór, wnętrza."
+						label="MODEL DESIGN & BUILD"
+						title="Generalne wykonawstwo i usługi inżynierskie w Polsce Południowej"
+						description="Od analizy działki w Rybniku po odbiór kluczy w Krakowie. Skalujemy proces budowlany, dostarczając kompletny pakiet usług pod jednym dachem: projektowanie, wykonawstwo, nadzór oraz logistykę."
 						align="center"
 						theme="light"
 					/>
 				</div>
 			</AnimatedSection>
 
-			{/* 3. GRID USŁUG - Najważniejsze! User chce zobaczyć opcje NATYCHMIAST */}
+			{/* 3. GRID USŁUG */}
 			<section className="py-16 px-4 bg-background">
 				<div className="container mx-auto">
 					<AnimatedServiceGrid items={offerData} />
 				</div>
 			</section>
 
-			{/* 4. PhilosophyTimeline - Trust building (dla users którzy scrollują dalej) */}
+			{/* 4. PhilosophyTimeline - Uderzenie w system gospodarczy */}
 			<PhilosophyTimelineSection
 				header={{
 					label: "DLACZEGO JEDEN PARTNER?",
 					title: "Jeden telefon zamiast dziesięciu podwykonawców",
 					description:
-						"Koordynacja wielu firm to największy stres w budownictwie. My bierzemy to na siebie – oszczędzając Twój czas, pieniądze i nerwy.",
+						"Koordynacja wielu firm to największe ryzyko w budownictwie. My bierzemy to na siebie – chroniąc Twój budżet, czas i eliminując błędy wykonawcze.",
 					theme: "light",
 				}}
 				items={[
 					{
 						number: 1,
-						iconName: "shield",
-						title: "Jedna umowa = jedna odpowiedzialność",
+						iconName: "shieldCheck",
+						title: "Jedna umowa i jedna rękojmia",
 						description:
-							"Nie musisz koordynować 10 różnych firm. Nie musisz rozstrzygać sporów między architektem, wykonawcą i geodetą. My odpowiadamy za wszystko – od pierwszej linii projektu po odbiór końcowy. Jeśli coś pójdzie nie tak, nie szukasz winnego – dzwonisz do nas.",
+							"Nie musisz rozstrzygać sporów między architektem, murarzem i instalatorem. Bierzemy odpowiedzialność za cały proces – od pierwszej kreski w projekcie po odbiór końcowy (PINB). Jeśli coś wymaga poprawy, dzwonisz pod jeden numer.",
 					},
 					{
 						number: 2,
-						iconName: "trendingUp",
+						iconName: "coins",
 						title: "Lepsza cena niż 6 osobnych umów",
 						description:
-							'Gdy kupujesz usługi osobno, każda firma ma swoją marżę. Gdy kupujesz pakiet, eliminujesz wielokrotne marże i koszty koordynacji. Typowa oszczędność: 15-20% całkowitego budżetu budowy. Dzięki naszym rabatom w hurtowniach budowlanych na Śląsku, materiał kupujesz taniej niż w markecie. To często oznacza różnicę między „musimy zrezygnować z tarasu" a „mieścimy się w budżecie z zapasem".',
+							"Gdy kupujesz usługi osobno, każda ekipa narzuca swoją marżę. W pakiecie eliminujesz ukryte koszty koordynacji. Co więcej, dzięki naszym wypracowanym rabatom inwestycyjnym w hurtowniach na Śląsku, materiał kupujesz znacznie taniej niż w marketach budowlanych.",
 					},
 					{
 						number: 3,
 						iconName: "clock",
-						title: "Szybsza realizacja (brak przestojów)",
+						title: "Brak przestojów technologicznych",
 						description:
-							'500+ zrealizowanych projektów nauczyło nas, że największe opóźnienia powstają na styku różnych firm. Likwidacja dziur w harmonogramie." – Nasze ekipy wchodzą jedna po drugiej. Gdy hydraulik kończy, tynkarz wchodzi następnego dnia. Skracamy czas budowy średnio o 3 miesiące względem systemu gospodarczego.',
+							"Ponad 150 zrealizowanych inwestycji udowodniło nam, że opóźnienia powstają zawsze na styku różnych firm. My likwidujemy 'dziury' w harmonogramie. Gdy instalator kończy, następnego dnia wchodzą tynkarze. Skracamy czas budowy do stanu deweloperskiego nawet o 3 miesiące.",
 					},
 				]}
 				image={{
-					src: "/images/uslugi.webp",
-					alt: "Zespół CoreLTB Builders podczas spotkania projektowego",
+					src: "/images/uslugi/dlaczego-jeden-partner.jpeg",
+					alt: "Inżynierowie CoreLTB Builders podczas koordynacji projektu budowlanego",
 				}}
 			/>
 
-			{/* 5. CTA Section */}
+			{/* 5. Edukacja - Zatrzymanie klienta na stronie */}
+			<BlogSection {...blogData} />
+
+			{/* 6. CTA Section */}
 			<ContactCTASection
 				contactInfo={{
 					phone: companyData.telephone,

@@ -19,7 +19,7 @@ export function CompetenceCard({
     <div
       className={clsx(
         'bg-white rounded-xl p-6 shadow-lg',
-        'hover:shadow-xl hover:-translate-y-1 transition-all duration-300',
+        'transition-all duration-300',
         'h-full flex flex-col',
         className
       )}

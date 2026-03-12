@@ -570,14 +570,24 @@ export function LocalPageContentSection({
     triggerOnce: true,
   });
 
-  // Build TOC items from sections + offer + districts + whyUs + faq (memoized to prevent useEffect re-runs)
+  // Build TOC items — sales funnel order: Intro → Trust (WhyUs) → Product (Offer) → Tech (sections) → Districts → FAQ
+  const introSection = content.sections[0]; // Wprowadzenie
+  const techSections = content.sections.slice(1); // Specyfika lokalna, Energooszczędność, Formalności
+
   const tocItems: TOCItem[] = useMemo(() => [
-    ...content.sections.map(s => ({ id: s.id, title: s.title })),
-    ...(content.offer ? [{ id: content.offer.id, title: content.offer.title }] : []),
-    ...(content.districts ? [{ id: content.districts.id, title: content.districts.title }] : []),
+    // 1. Intro
+    ...(introSection ? [{ id: introSection.id, title: introSection.title }] : []),
+    // 2. Trust — Dlaczego my (4 kafelki)
     ...(content.whyUs ? [{ id: content.whyUs.id, title: content.whyUs.title }] : []),
+    // 3. Product — Co oferujemy (SSO / Deweloperski)
+    ...(content.offer ? [{ id: content.offer.id, title: content.offer.title }] : []),
+    // 4. Tech sections — Szkody górnicze, Energooszczędność, Formalności
+    ...techSections.map(s => ({ id: s.id, title: s.title })),
+    // 5. Districts
+    ...(content.districts ? [{ id: content.districts.id, title: content.districts.title }] : []),
+    // 6. FAQ
     ...(content.faq ? [{ id: content.faq.id, title: content.faq.title }] : []),
-  ], [content.sections, content.offer, content.districts, content.whyUs, content.faq]);
+  ], [introSection, content.whyUs, content.offer, techSections, content.districts, content.faq]);
 
   // Active section tracking
   const [activeSection, setActiveSection] = useState<string>(tocItems[0]?.id || '');
@@ -647,12 +657,37 @@ export function LocalPageContentSection({
             )}
             style={{ animationDelay: '0.2s' }}
           >
-            {/* Article Body */}
+            {/* Article Body — Sales funnel: Intro → Trust → Product → Tech → Districts → FAQ */}
             <div className="p-6 md:p-10">
-              {/* Content Sections */}
-              {content.sections.map((section) => (
+              {/* 1. INTRO — Ból / Problem (Wprowadzenie + Green Box) */}
+              {introSection && (
+                <section key={introSection.id} id={introSection.id} className="scroll-mt-[168px]">
+                  <div className="mb-6">
+                    <h2 className="text-2xl md:text-3xl font-bold text-text-primary">
+                      {introSection.title}
+                    </h2>
+                    <span className="block w-16 h-1 bg-primary mt-3 rounded-full" />
+                  </div>
+                  {introSection.content.map((block, index) => (
+                    <ContentRenderer key={index} block={block} index={index} />
+                  ))}
+                </section>
+              )}
+
+              {/* 2. TRUST — Dlaczego my (4 kafelki budujące zaufanie) */}
+              {content.whyUs && (
+                <WhyUsSection whyUs={content.whyUs} />
+              )}
+
+              {/* 3. PRODUCT — Co oferujemy (SSO / Deweloperski / Pod klucz) */}
+              {content.offer && (
+                <OfferSection offer={content.offer} />
+              )}
+
+              {/* 4. TECH — Specyfika lokalna, Energooszczędność, Formalności */}
+              {techSections.map((section) => (
                 <section key={section.id} id={section.id} className="scroll-mt-[168px]">
-                  <div className="mt-12 mb-6 first:mt-0">
+                  <div className="mt-12 mb-6">
                     <h2 className="text-2xl md:text-3xl font-bold text-text-primary">
                       {section.title}
                     </h2>
@@ -664,22 +699,12 @@ export function LocalPageContentSection({
                 </section>
               ))}
 
-              {/* Offer Section */}
-              {content.offer && (
-                <OfferSection offer={content.offer} />
-              )}
-
-              {/* Districts Section */}
+              {/* 5. DISTRICTS — Dzielnice i okolice */}
               {content.districts && (
                 <DistrictsSection districts={content.districts} />
               )}
 
-              {/* Why Us Section */}
-              {content.whyUs && (
-                <WhyUsSection whyUs={content.whyUs} />
-              )}
-
-              {/* FAQ Section */}
+              {/* 6. FAQ — Odpowiadamy na wątpliwości */}
               {content.faq && (
                 <FAQSection faq={content.faq} />
               )}

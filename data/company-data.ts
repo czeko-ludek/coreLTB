@@ -65,7 +65,7 @@ export const companyData: CompanyData = {
   alternateName: "CORE LTB",
   description: "Generalny Wykonawca domów jednorodzinnych. Specjalizujemy się w budownictwie na terenach górniczych Śląska i Małopolski. Od 2005 roku łączymy rzemieślniczą dokładność z profesjonalnym zarządzaniem projektami.",
   url: "https://coreltb.pl",
-  telephone: "+48123456789", // TODO: Uzupełnić właściwy numer
+  telephone: "+48664123757",
   email: "coreltb@gmail.com",
   foundingDate: "2005-01-01",
   priceRange: "$$$",
@@ -75,7 +75,7 @@ export const companyData: CompanyData = {
   // Główna siedziba - Jaworzno
   address: {
     "@type": "PostalAddress",
-    streetAddress: "ul. Przykładowa 1", // TODO: Uzupełnić prawdziwy adres
+    streetAddress: "ul. Grunwaldzka 34a",
     addressLocality: "Jaworzno",
     postalCode: "43-600",
     addressRegion: "śląskie",
@@ -92,7 +92,7 @@ export const companyData: CompanyData = {
   additionalLocation: {
     address: {
       "@type": "PostalAddress",
-      streetAddress: "ul. Przykładowa 2", // TODO: Uzupełnić prawdziwy adres
+      streetAddress: "ul. Wałowa 55",
       addressLocality: "Wodzisław Śląski",
       postalCode: "44-300",
       addressRegion: "śląskie",

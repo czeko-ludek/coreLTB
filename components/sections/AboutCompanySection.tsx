@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui';
 import { SectionHeader, SectionHeaderProps, CompanyStatBox, CompanyStatBoxProps } from '@/components/shared';
+import { formatBold } from '@/lib/utils';
 
 export interface AboutCompanySectionProps {
   header: SectionHeaderProps;
@@ -85,7 +86,7 @@ export function AboutCompanySection({
                   className={`text-body-md text-text-secondary leading-relaxed ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
                   style={{ animationDelay: `${0.4 + index * 0.15}s` }}
                   dangerouslySetInnerHTML={{
-                    __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-text">$1</strong>'),
+                    __html: formatBold(paragraph, 'font-bold text-text'),
                   }}
                 />
               ))}

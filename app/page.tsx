@@ -7,8 +7,9 @@ import {
 	ProjectsSection,
 	ServiceShowcaseSection,
 	TestimonialsSection,
+	AreasOfOperationSection,
 	// PartnersSection, // Disabled - missing images
-} from "@/components/sections"; // ✅ Centralized import from index.ts
+} from "@/components/sections";
 import { companyData } from "@/data/company-data";
 import { allProjects } from "@/data/projects";
 import { blogPosts } from "@/data/blog-data";
@@ -21,7 +22,7 @@ export default function Home() {
 		tagline: "GENERALNY WYKONAWCA • ŚLĄSK I MAŁOPOLSKA",
 		title: "Kompleksowa budowa domów i inwestycje pod klucz",
 		subtitle:
-			"Zastępujemy chaos systemu gospodarczego inżynierskim procesem. Przejmujemy 100% logistyki: od analizy gruntu, przez stan surowy, aż po odbiór budynku.",
+			"Zastępujemy chaos systemu gospodarczego inżynierskim procesem. Przejmujemy 100% logistyki: od analizy gruntu, przez stan surowy, aż po odbiór budynku w PINB.",
 		images: [
 			{ src: "/images/hero/slide-1.webp", alt: "Budowa domu na płycie fundamentowej Śląsk" },
 			{ src: "/images/hero/slide-2.webp", alt: "Nowoczesny dom jednorodzinny realizacja Rybnik" },
@@ -31,7 +32,7 @@ export default function Home() {
 		primaryButton: { text: "Poznaj ofertę", href: "/oferta" },
 	};
 
-	// About Company Section Data (korekta SEO w ALT + twarde liczby)
+	// About Company Section Data
 	const aboutData = {
 		header: {
 			label: "GENERALNE WYKONAWSTWO",
@@ -39,18 +40,18 @@ export default function Home() {
 			theme: "light" as const,
 		},
 		content: [
-			"Jesteśmy firmą inżynierską z **podwójnym zapleczem** – bazy w Jaworznie i Wodzisławiu Śląskim. Działamy w skali Generalnego Wykonawcy, eliminując ryzyka systemu gospodarczego.",
-			"Od 15 lat rozwiązujemy **trudne tematy Południa**: szkody górnicze, gliny i tereny zalewowe. Nie sprzedajemy obietnic – dostarczamy bezpieczny budynek, oparty na harmonogramie rzeczowo-finansowym i umowie z gwarancją ceny.",
+			"Jesteśmy firmą inżynierską z **podwójnym zapleczem logistycznym** – nasze bazy w Jaworznie i Wodzisławiu Śląskim pozwalają nam obsługiwać cały region bez pustych przebiegów i dopłat za dojazd.",
+			"Od 15 lat rozwiązujemy **trudne problemy Południa**: szkody górnicze, gliny i tereny o dużych spadkach. Nie sprzedajemy marzeń – dostarczamy bezpieczny budynek, oparty na harmonogramie rzeczowo-finansowym i umowie z gwarancją stałej ceny.",
 		],
 		image: {
 			src: "/images/about-home.webp",
-			alt: "Zespół inżynierów CoreLTB na budowie w Katowicach",
+			alt: "Kierownik budowy CoreLTB na inwestycji w Katowicach",
 		},
 		stats: {
 			stats: [
 				{
 					value: "150+",
-					label: "Oddanych Inwestycji (Budynki)",
+					label: "Oddanych Inwestycji (Stan Deweloperski / Pod Klucz)",
 					variant: "dark" as const,
 				},
 				{
@@ -63,11 +64,11 @@ export default function Home() {
 		ctaButton: { text: "Poznaj nasz zespół", href: "/o-nas" },
 	};
 
-	// Services Section Data (Money Keywords Injection)
+	// Services Section Data
 	const servicesData = {
 		header: {
 			label: "ZAKRES KOMPETENCJI",
-			title: "Model \"Zaprojektuj i wybuduj\"",
+			title: "Generalne wykonawstwo domów – od projektu po klucz",
 			theme: "light" as const,
 		},
 		services: [
@@ -75,7 +76,7 @@ export default function Home() {
 				iconName: "home" as const,
 				title: "Kompleksowa budowa domów",
 				description:
-					"Generalne wykonawstwo (SSO / Deweloperka) w reżimie WT2026. Płyty fundamentowe, szkody górnicze, materiał w cenie.",
+					"Generalne wykonawstwo (SSO / Deweloperka) w reżimie WT2026. Płyty fundamentowe, systemowe dylatacje, materiał z hurtowni w cenie.",
 				image: "/images/uslugi/showcase/budowa-domow.webp",
 				href: "/oferta/kompleksowa-budowa-domow",
 			},
@@ -83,15 +84,15 @@ export default function Home() {
 				iconName: "draftingCompass" as const,
 				title: "Biuro projektowe",
 				description:
-					"Projekty domów pod budżet wykonawczy. Adaptacja do szkód górniczych i optymalizacja kosztów stali (Value Engineering).",
+					"Projekty domów pod Twój budżet wykonawczy. Adaptacja do trudnych gruntów i optymalizacja kosztów stali (Value Engineering).",
 				image: "/images/uslugi/showcase/projektowanie.webp",
 				href: "/oferta/projektowanie",
 			},
 			{
 				iconName: "hardHat" as const,
-				title: "Nadzór i kierownik budowy",
+				title: "Nadzór inwestorski",
 				description:
-					"Twój techniczny adwokat na budowie. Kierownicy z uprawnieniami, inspektorzy nadzoru i odbiory mieszkań od dewelopera.",
+					"Twój inżynier na budowie. Kierownicy z uprawnieniami, niezależny nadzór i odbiory mieszkań od dewelopera na Śląsku.",
 				image: "/images/uslugi/showcase/nadzor.webp",
 				href: "/oferta/nadzor-i-doradztwo",
 			},
@@ -99,23 +100,23 @@ export default function Home() {
 				iconName: "mapPin" as const,
 				title: "Geologia i geodezja",
 				description:
-					"Diagnostyka gruntu przed zakupem. Odwierty geotechniczne, mapy do celów projektowych (MDCP) i tyczenie budynków.",
+					"Twarde dane przed zakupem działki. Odwierty geotechniczne, badanie nośności gruntu, mapy do celów projektowych (MDCP).",
 				image: "/images/uslugi/showcase/uslugi-techniczne.webp",
-				href: "/oferta/uslugi-techniczne",
+				href: "/oferta/uslugi-techniczne-w-budownictwie",
 			},
 			{
 				iconName: "paintBrush" as const,
 				title: "Wykończenia wnętrz",
 				description:
-					"Fit-out pod klucz z 8% VAT na materiały. Gładzie, płytki, podłogi. Jedna ekipa, jeden termin i czysta budowa.",
+					"Prace 'pod klucz' z preferencyjnym 8% VAT na materiały. Jedna ekipa, jeden harmonogram i odpowiedzialność za cały proces.",
 				image: "/images/uslugi/showcase/wykonczenia.webp",
 				href: "/oferta/wykonczenia-i-aranzacje",
 			},
 			{
 				iconName: "tree" as const,
-				title: "Zagospodarowanie działki",
+				title: "Zagospodarowanie terenu",
 				description:
-					"Brukarstwo, ogrodzenia, trawniki i oświetlenie terenu. Finalizujemy inwestycję tak, aby była gotowa do zamieszkania.",
+					"Odwodnienie liniowe, podbudowy pod ciężki sprzęt, brukarstwo i ogrodzenia. Finalizujemy inwestycję z dbałością o spadki terenu.",
 				image: "/images/uslugi/showcase/zagospodarowanie.webp",
 				href: "/oferta/zagospodarowanie-terenu",
 			},
@@ -125,7 +126,7 @@ export default function Home() {
 	// How It Works Section Data
 	const howItWorksData = {
 		header: {
-			label: "BUDOWA DOMU KROK PO KROKU",
+			label: "PROCES BUDOWLANY",
 			title: "Od audytu działki po odbiór budynku",
 			theme: "light" as const,
 		},
@@ -135,141 +136,129 @@ export default function Home() {
 				iconName: "check" as const,
 				title: "Audyt działki i budżetowanie",
 				description:
-					`Zamiast "rozmów o wizji", zaczynamy od weryfikacji MPZP i warunków gruntowych (szkody górnicze). Przygotowujemy **wstępny kosztorys inwestorski**, aby zderzyć Twoje oczekiwania z realiami rynkowymi ${CURRENT_YEAR} r. przed wydaniem pieniędzy na projekt.`,
+					`Weryfikujemy to, czego nie widać. Sprawdzamy MPZP, warunki gruntowe i dostępność mediów. Otrzymujesz **wstępny kosztorys inwestorski**, aby zderzyć Twoje oczekiwania z realiami cenowymi ${CURRENT_YEAR} r.`,
 			},
 			{
 				number: 2,
 				iconName: "fileCheck" as const,
 				title: "Projekt i formalności (PnB)",
 				description:
-					"Przejmujemy biurokrację. Na podstawie pełnomocnictwa uzyskujemy Pozwolenie na Budowę i wykonujemy adaptację projektu do Twojej działki. Optymalizujemy konstrukcję, zamieniając przewymiarowane rozwiązania na ekonomiczne technologie systemowe.",
+					"Działamy jako Twój pełnomocnik. Uzyskujemy Pozwolenie na Budowę i wykonujemy adaptację konstrukcyjną projektu do szkód górniczych. Optymalizujemy ilość stali, oszczędzając Twoje pieniądze.",
 			},
 			{
 				number: 3,
 				iconName: "building" as const,
 				title: "Realizacja i odbiory techniczne",
 				description:
-					"Budujemy własnymi brygadami pod nadzorem Inżyniera Kontraktu. Płyty fundamentowe, stropy monolityczne, więźba — każdy etap kończy się odbiorem technicznym i dokumentacją fotograficzną w dzienniku budowy.",
+					"Budujemy zgodnie z reżimem technologicznym. Każdy etap – od płyty fundamentowej po więźbę – podlega podwójnej kontroli jakościowej i zostaje wpisany do Elektronicznego Dziennika Budowy (EDB).",
 			},
 		],
 		video: {
 			placeholderImage: "/images/howitworks.webp",
-			videoUrl: "https://www.youtube.com/watch?v=example",
+			videoUrl: "",
 		},
 	};
 
-	// Projects Section Data - Using real projects from database
+	// Dane do sekcji: Obszar Działania (Mapa/Bento Grid)
+	const areasData = {
+		header: {
+			label: "ZASIĘG LOGISTYCZNY",
+			title: "Budujemy bez kosztów dojazdu",
+			description: "Dwie bazy sprzętowe pozwalają nam obsłużyć kluczowe inwestycje w pasie Polski Południowej.",
+		},
+		hubs: [
+			{
+				name: "HUB ROW (Baza Wodzisław)",
+				cities: [
+					{ label: "Wodzisław Śląski", href: "/obszar-dzialania/budowa-domow-wodzislaw-slaski" },
+					{ label: "Rybnik", href: "/obszar-dzialania/budowa-domow-rybnik" },
+					{ label: "Żory", href: "/obszar-dzialania/budowa-domow-zory" },
+					{ label: "Jastrzębie-Zdrój", href: "/obszar-dzialania/budowa-domow-jastrzebie-zdroj" },
+				],
+			},
+			{
+				name: "HUB AGLOMERACJA (Baza Jaworzno)",
+				cities: [
+					{ label: "Jaworzno (HQ)", href: "/obszar-dzialania/budowa-domow-jaworzno" },
+					{ label: "Katowice", href: "/obszar-dzialania/budowa-domow-katowice" },
+					{ label: "Gliwice", href: "/obszar-dzialania/budowa-domow-gliwice" },
+					{ label: "Tychy", href: "/obszar-dzialania/budowa-domow-tychy" },
+					{ label: "Mikołów", href: "/obszar-dzialania/budowa-domow-mikolow" },
+				],
+			},
+			{
+				name: "HUB MAŁOPOLSKA",
+				cities: [
+					{ label: "Chrzanów", href: "/obszar-dzialania/budowa-domow-chrzanow" },
+					{ label: "Kraków", href: "/obszar-dzialania/budowa-domow-krakow" },
+					{ label: "Oświęcim", href: "/obszar-dzialania/budowa-domow-oswiecim" },
+				],
+			},
+		],
+	};
+
+	// Projects Section Data
 	const projectsData = {
 		header: {
-			label: "PROJEKTY DOMÓW JEDNORODZINNYCH",
-			title: "Budowa domów pod klucz — realizacje na Śląsku i w Małopolsce",
+			label: "REALIZACJE",
+			title: "Nasze budowy na Śląsku i w Małopolsce",
 			theme: "light" as const,
 		},
-		projects: allProjects.slice(0, 8).map((project, index) => ({
+		projects: allProjects.slice(0, 8).map((project) => ({
 			slug: project.slug,
 			alt: project.alt,
 			title: project.title,
-			category: "Projekt", // All are projects
-			location: project.price, // Price shown as location
-			details: [
-				{ label: "Powierzchnia", value: project.surfaceArea },
-				{ label: "Technologia", value: project.technology },
-				{
-					label: "Działka",
-					value:
-						project.specifications[0]?.items.find(
-							(item) => item.label === "Minimalne wymiary działki",
-						)?.value || "N/A",
-				},
-				...(project.estimatedBuildCost ? [{ label: "Szacowany koszt", value: project.estimatedBuildCost }] : []),
-			],
-			isActive: index === 0, // First project is active in slider
+			price: project.price,
+			surfaceArea: project.surfaceArea,
+			technology: project.technology,
 		})),
 	};
 
 	// Testimonials Section Data
 	const testimonialsData = {
 		header: {
-			label: "OPINIE KLIENTÓW",
-			title: "Zaufali nam inwestorzy z całego Śląska",
+			label: "REFERENCJE",
+			title: "Co mówią Inwestorzy z regionu?",
 			theme: "light" as const,
 		},
 		testimonials: [
 			{
 				quote:
-					"Współpraca z CoreLTB Builders była czystą przyjemnością. Ich dbałość o szczegóły i zaangażowanie w jakość przekroczyły nasze oczekiwania. Zespół był profesjonalny, komunikatywny i dostarczył nasz wymarzony dom na czas.",
+					"Baliśmy się budowy na grząskim gruncie. CoreLTB sprawdziło działkę, zaprojektowało zbrojoną płytę fundamentową i zagwarantowało cenę w umowie. Zero stresu, czysta inżynieria i terminowość.",
 				author: {
-					image: {
-						src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100",
-						alt: "Katarzyna Wiśniewska",
-					},
-					name: "Katarzyna Wiśniewska",
-					role: "Właścicielka domu, Rybnik",
-				},
-				rating: 4.8,
-			},
-			{
-				quote:
-					"Wyjątkowa obsługa od początku do końca. Zespół CoreLTB przekształcił naszą przestrzeń biurową w nowoczesne, funkcjonalne środowisko. Ich ekspertyza i profesjonalizm sprawiły, że cały proces przebiegł sprawnie i bezstresowo.",
-				author: {
-					image: {
-						src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100",
-						alt: "Michał Lewandowski",
-					},
-					name: "Michał Lewandowski",
-					role: "Właściciel firmy, Katowice",
-				},
-				rating: 4.9,
-			},
-			{
-				quote:
-					"Budowa na terenie górniczym to było nasze największe zmartwienie. CoreLTB wykonali płytę fundamentową i cały stan surowy bez żadnych problemów. Wszystko zgodnie z harmonogramem i budżetem.",
-				author: {
-					image: {
-						src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100",
-						alt: "Tomasz Kowalczyk",
-					},
-					name: "Tomasz Kowalczyk",
-					role: "Inwestor prywatny, Tychy",
+					image: { src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100", alt: "Katarzyna W." },
+					name: "Katarzyna W.",
+					role: "Inwestycja: Rybnik-Boguszowice",
 				},
 				rating: 5.0,
 			},
 			{
 				quote:
-					"Polecam z czystym sumieniem. Transparentna wycena, żadnych ukrytych kosztów. Kierownik budowy był dostępny praktycznie całą dobę. Dom oddany 2 tygodnie przed terminem!",
+					"Szukaliśmy Generalnego Wykonawcy, a nie 'zbieraniny' ekip z ogłoszenia. Rewelacyjna logistyka, dostawy betonu na czas i kierownik budowy zawsze pod telefonem. Dom oddany do stanu deweloperskiego w 8 miesięcy.",
 				author: {
-					image: {
-						src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100",
-						alt: "Anna Nowak",
-					},
+					image: { src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100", alt: "Michał L." },
+					name: "Michał Lewandowski",
+					role: "Inwestycja: Katowice-Podlesie",
+				},
+				rating: 5.0,
+			},
+			{
+				quote:
+					"Budowa na terenie szkód górniczych III kategorii. Inne firmy proponowały astronomiczne kwoty. CoreLTB zoptymalizowało stal w projekcie, dając 5 lat rękojmi. Mamy bezpieczny dom i zaoszczędzone pieniądze.",
+				author: {
+					image: { src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100", alt: "Tomasz K." },
+					name: "Tomasz Kowalczyk",
+					role: "Inwestycja: Jastrzębie-Zdrój",
+				},
+				rating: 5.0,
+			},
+			{
+				quote:
+					"Polecam z czystym sumieniem umowę ryczałtową. Zapłaciliśmy dokładnie tyle, ile było w kosztorysie na początku roku, mimo że ceny styropianu na rynku wzrosły. Profesjonalne, uczciwe podejście.",
+				author: {
+					image: { src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100", alt: "Anna N." },
 					name: "Anna Nowak",
-					role: "Właścicielka domu, Gliwice",
-				},
-				rating: 4.9,
-			},
-			{
-				quote:
-					"Trzecia budowa w życiu i pierwsza bez stresu. CoreLTB to profesjonaliści, którzy wiedzą co robią. Szczególnie doceniam ich doświadczenie w budownictwie na szkodach górniczych.",
-				author: {
-					image: {
-						src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100",
-						alt: "Piotr Zieliński",
-					},
-					name: "Piotr Zieliński",
-					role: "Inwestor, Jaworzno",
-				},
-				rating: 4.8,
-			},
-			{
-				quote:
-					"Od projektu po wykończenie pod klucz - wszystko w jednym miejscu. Oszczędziłem mnóstwo czasu i nerwów. Efekt końcowy przerósł moje oczekiwania.",
-				author: {
-					image: {
-						src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100",
-						alt: "Marek Wójcik",
-					},
-					name: "Marek Wójcik",
-					role: "Właściciel domu, Mikołów",
+					role: "Inwestycja: Gliwice",
 				},
 				rating: 5.0,
 			},
@@ -289,42 +278,30 @@ export default function Home() {
 		],
 	};
 
-	// Blog Section Data - najnowsze 3 posty z bloga
 	const latestPosts = [...blogPosts]
 		.sort((a, b) => b.dateTimestamp - a.dateTimestamp)
 		.slice(0, 3);
 
 	const blogData = {
 		header: {
-			label: "BAZA WIEDZY",
-			title: "Poradniki budowlane i analizy kosztów",
+			label: "BAZA WIEDZY INWESTORA",
+			title: "Technologia i koszty bez tajemnic",
 			theme: "light" as const,
 		},
 		posts: latestPosts,
 	};
-
-	// Partners Section Data - Disabled (missing images)
-	// const partnersData = {
-	//   logos: [
-	//     { name: "Partner 1", image: "/partners/partner1.svg" },
-	//     { name: "Partner 2", image: "/partners/partner2.svg" },
-	//     { name: "Partner 3", image: "/partners/partner3.svg" },
-	//     { name: "Partner 4", image: "/partners/partner4.svg" },
-	//     { name: "Partner 5", image: "/partners/partner5.svg" },
-	//   ],
-	// };
 
 	return (
 		<main>
 			<HeroSection {...heroData} />
 			<AboutCompanySection {...aboutData} />
 			<ServiceShowcaseSection {...servicesData} />
+			<AreasOfOperationSection {...areasData} />
 			<HowItWorksSection {...howItWorksData} />
 			<ProjectsSection {...projectsData} />
 			<TestimonialsSection {...testimonialsData} />
 			<ContactCTASection {...ctaData} />
 			<BlogSection {...blogData} />
-			{/* <PartnersSection {...partnersData} /> */}
 		</main>
 	);
 }

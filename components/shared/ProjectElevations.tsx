@@ -141,7 +141,7 @@ export function ProjectElevations({
                       src={img.src}
                       alt={img.label}
                       fill
-                      className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                      className="object-contain p-4 transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-width: 640px) 100vw, 50vw"
                     />
                   </div>
@@ -167,7 +167,7 @@ export function ProjectElevations({
                       src={img.src}
                       alt={img.label}
                       fill
-                      className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                      className="object-contain p-4 transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-width: 640px) 100vw, 50vw"
                     />
                   </div>
@@ -194,7 +194,7 @@ export function ProjectElevations({
                       src={img.src}
                       alt={img.label}
                       fill
-                      className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                      className="object-contain p-4 transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-width: 640px) 100vw, 50vw"
                     />
                   </div>

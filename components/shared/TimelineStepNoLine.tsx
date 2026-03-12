@@ -63,15 +63,31 @@ export function TimelineStepNoLine({
     [scrollSpyRef, animRef]
   );
 
-  // Funkcja do formatowania tekstu z pogrubieniami
+  // Funkcja do formatowania tekstu z pogrubieniami i linkami markdown
   const formatText = (text: string) => {
-    const parts = text.split(/(\*\*.*?\*\*)/g);
+    // Split na bold (**text**) i linki ([text](url))
+    const parts = text.split(/(\*\*.*?\*\*|\[.*?\]\(.*?\))/g);
     return parts.map((part, index) => {
       if (part.startsWith('**') && part.endsWith('**')) {
         return (
           <strong key={index} className="font-bold text-gray-900">
             {part.slice(2, -2)}
           </strong>
+        );
+      }
+      const linkMatch = part.match(/^\[(.*?)\]\((.*?)\)$/);
+      if (linkMatch) {
+        const [, linkText, href] = linkMatch;
+        const isExternal = href.startsWith('http');
+        return (
+          <a
+            key={index}
+            href={href}
+            className="text-primary font-semibold hover:text-primary-dark underline underline-offset-2 transition-colors"
+            {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
+            {linkText}
+          </a>
         );
       }
       return <React.Fragment key={index}>{part}</React.Fragment>;

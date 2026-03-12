@@ -21,9 +21,8 @@ export function StatCard({
     <div
       className={clsx(
         'p-8 rounded-lg transition-all duration-300',
-        'hover:-translate-y-1',
         {
-          'bg-surface-light shadow-xl hover:shadow-2xl border border-gray-200': theme === 'light',
+          'bg-surface-light shadow-xl border border-gray-200': theme === 'light',
           'bg-surface-dark': theme === 'dark',
         }
       )}

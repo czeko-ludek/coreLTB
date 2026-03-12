@@ -2,7 +2,11 @@
 
 import React from 'react';
 import { SectionHeader, SectionHeaderProps } from '@/components/shared';
-import type { DistrictArea } from '@/data/local-pages';
+/** @deprecated Use components/sections/local/DistrictsSection instead */
+interface DistrictArea {
+  readonly name: string;
+  readonly description?: string;
+}
 
 export interface DistrictsSectionProps {
   header: SectionHeaderProps;
@@ -81,7 +85,7 @@ export function DistrictsSection({
           {areas.map((area, areaIndex) => (
             <div
               key={area.name}
-              className={`bg-white rounded-3xl border border-gray-100 shadow-lg p-6 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ${
+              className={`bg-white rounded-3xl border border-gray-100 shadow-lg p-6 hover:shadow-lg hover:shadow-zinc-200/50 transition-all duration-500 ${
                 isVisible ? 'animate-fade-in-up' : 'opacity-0'
               }`}
               style={{ animationDelay: `${0.3 + areaIndex * 0.1}s` }}

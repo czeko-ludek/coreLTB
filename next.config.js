@@ -11,6 +11,7 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // TODO: Zamienić obrazki z Unsplash na lokalne WebP, potem usunąć ten pattern
     remotePatterns: [
       {
         protocol: 'https',
@@ -27,8 +28,7 @@ const nextConfig = {
   experimental: {
     // Optymalizuje importy pakietów (zmniejsza bundle size)
     optimizePackageImports: ['lucide-react', 'swiper', 'framer-motion'],
-    // Inline critical CSS (requires critters package)
-    optimizeCss: true,
+    // optimizeCss removed — requires critters which is not properly integrated
   },
 
   // ✅ Kompresja (Cloudflare też kompresuje, ale warto mieć)

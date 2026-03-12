@@ -1,4 +1,8 @@
 /**
+ * @deprecated Use `@/data/local` instead.
+ * This file is kept for reference only. All production imports
+ * should use the new scalable system in data/local/.
+ *
  * DANE STRON REGIONALNYCH (Budowa domów w miastach)
  * Single Source of Truth dla content stron lokalnych
  */
@@ -309,20 +313,20 @@ export const rybnikPage: LocalPageData = {
       iconName: "mapPin",
       description: "Realizujemy inwestycje we wszystkich dzielnicach Rybnika oraz w ościennych gminach powiatu rybnickiego. Znamy specyfikę terenu górniczego oraz lokalne warunki gruntowe.",
       cities: [
-        { label: "Orzepowice", url: "#" },
-        { label: "Golejów", url: "#" },
-        { label: "Rybnicka Kuźnia", url: "#" },
-        { label: "Popielów", url: "#" },
-        { label: "Radziejów", url: "#" },
-        { label: "Chwałowice", url: "#" },
-        { label: "Boguszowice", url: "#" },
-        { label: "Zamysłów", url: "#" },
-        { label: "Zebrzydowice", url: "#" },
-        { label: "Niewiadom", url: "#" },
-        { label: "Jejkowice", url: "#" },
-        { label: "Lyski", url: "#" },
-        { label: "Gaszowice", url: "#" },
-        { label: "Świerklany", url: "#" }
+        { label: "Orzepowice" },
+        { label: "Golejów" },
+        { label: "Rybnicka Kuźnia" },
+        { label: "Popielów" },
+        { label: "Radziejów" },
+        { label: "Chwałowice" },
+        { label: "Boguszowice" },
+        { label: "Zamysłów" },
+        { label: "Zebrzydowice" },
+        { label: "Niewiadom" },
+        { label: "Jejkowice" },
+        { label: "Lyski" },
+        { label: "Gaszowice" },
+        { label: "Świerklany" }
       ]
     }
   },
@@ -719,16 +723,16 @@ export const wodzislawPage: LocalPageData = {
       iconName: "mapPin",
       description: "Obsługujemy inwestycje na terenie całego miasta oraz w gminach ościennych. Znamy lokalne wymogi MPZP (Miejscowych Planów Zagospodarowania Przestrzennego).",
       cities: [
-        { label: "Wilchwy", url: "#" },
-        { label: "Jedłownik", url: "#" },
-        { label: "Kokoszyce", url: "#" },
-        { label: "Radlin II", url: "#" },
-        { label: "Zawada", url: "#" },
-        { label: "Nowe Miasto", url: "#" },
-        { label: "Trzy Wzgórza", url: "#" },
-        { label: "Gorzyce", url: "#" },
-        { label: "Mszana", url: "#" },
-        { label: "Godów", url: "#" }
+        { label: "Wilchwy" },
+        { label: "Jedłownik" },
+        { label: "Kokoszyce" },
+        { label: "Radlin II" },
+        { label: "Zawada" },
+        { label: "Nowe Miasto" },
+        { label: "Trzy Wzgórza" },
+        { label: "Gorzyce" },
+        { label: "Mszana" },
+        { label: "Godów" }
       ]
     }
   },
@@ -1035,18 +1039,18 @@ export const tychyPage: LocalPageData = {
       iconName: "mapPin",
       description: "Obsługujemy inwestycje w lokalizacjach w Tychach oraz w miastach ościennych. Dzięki znajomości lokalnych składów budowlanych i betoniarni, minimalizujemy koszty transportu materiałów.",
       cities: [
-        { label: "Żwaków", url: "#" },
-        { label: "Czułów", url: "#" },
-        { label: "Jaroszowice", url: "#" },
-        { label: "Urbanowice", url: "#" },
-        { label: "Wilkowyje", url: "#" },
-        { label: "Mąkołowiec", url: "#" },
-        { label: "Wartogłowiec", url: "#" },
-        { label: "Mikołów", url: "#" },
-        { label: "Bieruń", url: "#" },
-        { label: "Kobiór", url: "#" },
-        { label: "Lędziny", url: "#" },
-        { label: "Pszczyna", url: "#" }
+        { label: "Żwaków" },
+        { label: "Czułów" },
+        { label: "Jaroszowice" },
+        { label: "Urbanowice" },
+        { label: "Wilkowyje" },
+        { label: "Mąkołowiec" },
+        { label: "Wartogłowiec" },
+        { label: "Mikołów" },
+        { label: "Bieruń" },
+        { label: "Kobiór" },
+        { label: "Lędziny" },
+        { label: "Pszczyna" }
       ]
     }
   },
@@ -1298,16 +1302,16 @@ export const katowicePage: LocalPageData = {
       iconName: "mapPin",
       description: "Najwięcej inwestycji realizujemy w południowych dzielnicach miasta. Podlesie i Zarzecze charakteryzują się dużą ilością nowych inwestycji. Kostuchna i Murcki wymagają szczególnej uwagi na szkody górnicze (historyczna eksploatacja KWK Murcki-Staszic). Panewniki i Ligota to wyzwania logistyczne – wąskie działki i ograniczenia tonażowe.",
       cities: [
-        { label: "Podlesie", url: "#" },
-        { label: "Zarzecze", url: "#" },
-        { label: "Kostuchna", url: "#" },
-        { label: "Murcki", url: "#" },
-        { label: "Panewniki", url: "#" },
-        { label: "Ligota", url: "#" },
-        { label: "Brynów", url: "#" },
-        { label: "Dąbrówka Mała", url: "#" },
-        { label: "Szopienice", url: "#" },
-        { label: "Giszowiec", url: "#" },
+        { label: "Podlesie" },
+        { label: "Zarzecze" },
+        { label: "Kostuchna" },
+        { label: "Murcki" },
+        { label: "Panewniki" },
+        { label: "Ligota" },
+        { label: "Brynów" },
+        { label: "Dąbrówka Mała" },
+        { label: "Szopienice" },
+        { label: "Giszowiec" },
       ]
     }
   },
@@ -1598,15 +1602,15 @@ export const jaworznoPage: LocalPageData = {
       iconName: "mapPin",
       description: "Obsługujemy inwestycje we wszystkich kluczowych dzielnicach, gdzie rozwija się budownictwo jednorodzinne. Dojazd naszych ekip na plac budowy w obrębie miasta zajmuje średnio **15-20 minut**, co pozwala na błyskawiczną reakcję w sytuacjach awaryjnych (np. nagłe załamanie pogody podczas betonowania).",
       cities: [
-        { label: "Jeleń", url: "#" },
-        { label: "Dąbrowa Narodowa", url: "#" },
-        { label: "Byczyna", url: "#" },
-        { label: "Ciężkowice", url: "#" },
-        { label: "Pieczyska", url: "#" },
-        { label: "Osiedle Stałe", url: "#" },
-        { label: "Bory", url: "#" },
-        { label: "Szczakowa", url: "#" },
-        { label: "Góra Piasku", url: "#" }
+        { label: "Jeleń" },
+        { label: "Dąbrowa Narodowa" },
+        { label: "Byczyna" },
+        { label: "Ciężkowice" },
+        { label: "Pieczyska" },
+        { label: "Osiedle Stałe" },
+        { label: "Bory" },
+        { label: "Szczakowa" },
+        { label: "Góra Piasku" }
       ]
     }
   },
@@ -1925,14 +1929,14 @@ export const mikolowPage: LocalPageData = {
       iconName: "mapPin",
       description: "Obsługujemy wszystkie dzielnice i sołectwa Mikołowa. Znajomość lokalnych MPZP pozwala nam szybciej ocenić potencjał działki. Wiemy, gdzie gmina planuje kanalizację, a gdzie konieczne będzie szambo lub przydomowa oczyszczalnia ścieków.",
       cities: [
-        { label: "Centrum i Śródmieście", url: "#" },
-        { label: "Kamionka", url: "#" },
-        { label: "Borowa Wieś", url: "#" },
-        { label: "Paniowy", url: "#" },
-        { label: "Bujaków", url: "#" },
-        { label: "Mokre", url: "#" },
-        { label: "Śmiłowice", url: "#" },
-        { label: "Reta", url: "#" }
+        { label: "Centrum i Śródmieście" },
+        { label: "Kamionka" },
+        { label: "Borowa Wieś" },
+        { label: "Paniowy" },
+        { label: "Bujaków" },
+        { label: "Mokre" },
+        { label: "Śmiłowice" },
+        { label: "Reta" }
       ]
     }
   },
@@ -2206,16 +2210,16 @@ export const gliwicePage: LocalPageData = {
       iconName: "mapPin",
       description: "Realizujemy inwestycje we wszystkich dzielnicach Gliwic. W dzielnicach takich jak Sośnica czy Bojków szczególną uwagę zwracamy na zabezpieczenia przed szkodami górniczymi. Łabędy i Szobiszowice to rejony o stabilniejszym gruncie.",
       cities: [
-        { label: "Śródmieście", url: "#" },
-        { label: "Sośnica", url: "#" },
-        { label: "Bojków", url: "#" },
-        { label: "Łabędy", url: "#" },
-        { label: "Szobiszowice", url: "#" },
-        { label: "Trynek", url: "#" },
-        { label: "Ostropa", url: "#" },
-        { label: "Brzezinka", url: "#" },
-        { label: "Ligota Zabrska", url: "#" },
-        { label: "Żerniki", url: "#" }
+        { label: "Śródmieście" },
+        { label: "Sośnica" },
+        { label: "Bojków" },
+        { label: "Łabędy" },
+        { label: "Szobiszowice" },
+        { label: "Trynek" },
+        { label: "Ostropa" },
+        { label: "Brzezinka" },
+        { label: "Ligota Zabrska" },
+        { label: "Żerniki" }
       ]
     }
   },

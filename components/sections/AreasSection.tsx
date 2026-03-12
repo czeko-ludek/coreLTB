@@ -9,7 +9,7 @@ import { clsx } from 'clsx';
 
 export interface City {
     label: string;
-    url: string;
+    url?: string;
 }
 
 export interface Hub {
@@ -76,16 +76,30 @@ export const AreasSection: React.FC<AreasSectionProps> = ({ id, header, hubs }) 
 
                                 {/* Lista miast */}
                                 <div className="flex flex-wrap gap-2">
-                                    {hub.cities.map((city, cityIndex) => (
-                                        <Link
-                                            key={cityIndex}
-                                            href={city.url}
-                                            className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-primary transition-colors"
-                                        >
-                                            {city.label}
-                                            {cityIndex < hub.cities.length - 1 && <span className="ml-2 text-gray-300">•</span>}
-                                        </Link>
-                                    ))}
+                                    {hub.cities.map((city, cityIndex) => {
+                                        const separator = cityIndex < hub.cities.length - 1 ? <span className="ml-2 text-gray-300">•</span> : null;
+                                        if (city.url && city.url !== '#') {
+                                            return (
+                                                <Link
+                                                    key={cityIndex}
+                                                    href={city.url}
+                                                    className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-primary transition-colors"
+                                                >
+                                                    {city.label}
+                                                    {separator}
+                                                </Link>
+                                            );
+                                        }
+                                        return (
+                                            <span
+                                                key={cityIndex}
+                                                className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700"
+                                            >
+                                                {city.label}
+                                                {separator}
+                                            </span>
+                                        );
+                                    })}
                                 </div>
                             </article>
                         ))}

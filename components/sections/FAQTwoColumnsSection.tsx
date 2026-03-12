@@ -34,7 +34,7 @@ export function FAQTwoColumnsSection({
   header,
   items,
 }: FAQTwoColumnsSectionProps) {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(items.length > 0 ? 0 : null);
   const [isMobile, setIsMobile] = useState(false);
 
   const { ref, inView } = useInView({
@@ -87,7 +87,9 @@ export function FAQTwoColumnsSection({
           key={index}
           className="mb-4 last:mb-0 text-base leading-relaxed text-gray-600"
           dangerouslySetInnerHTML={{
-            __html: block.value.replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-900">$1</strong>'),
+            __html: block.value
+              .replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-900">$1</strong>')
+              .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-primary font-semibold hover:text-primary-dark underline underline-offset-2 transition-colors">$1</a>'),
           }}
         />
       );
@@ -104,7 +106,9 @@ export function FAQTwoColumnsSection({
               <span
                 className="text-base text-gray-600"
                 dangerouslySetInnerHTML={{
-                  __html: item.replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-900">$1</strong>'),
+                  __html: item
+                    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-900">$1</strong>')
+                    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-primary font-semibold hover:text-primary-dark underline underline-offset-2 transition-colors">$1</a>'),
                 }}
               />
             </li>

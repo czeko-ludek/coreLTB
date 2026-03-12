@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { getServiceV2BySlug, allServicesV2 } from '@/data/servicesV2';
-import { PageHeader } from '@/components/shared'; // ✅ Centralized import
+import { PageHeader, Breadcrumbs } from '@/components/shared';
 import {
   EmotionalHeroSection,
   PhilosophyTimelineSection,
@@ -62,12 +62,18 @@ export default async function ServicePageV2({
 
   return (
     <main>
-      {/* PageHeader z breadcrumbs */}
+      {/* PageHeader */}
       <PageHeader
         title={service.pageHeader.title}
         watermarkText={service.pageHeader.watermarkText}
         backgroundImage={service.pageHeader.backgroundImage}
-        breadcrumbs={service.pageHeader.breadcrumbs}
+      />
+      <Breadcrumbs
+        items={service.pageHeader.breadcrumbs.map((crumb, index, arr) => ({
+          label: crumb.label,
+          href: index < arr.length - 1 ? crumb.href : undefined,
+        }))}
+        className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8"
       />
 
       {/* Sekcja 1: Dom to więcej niż budynek */}

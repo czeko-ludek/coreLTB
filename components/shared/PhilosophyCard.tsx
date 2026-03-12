@@ -18,7 +18,7 @@ export function PhilosophyCard({
     <div
       className={clsx(
         'relative bg-gradient-to-br from-primary/90 to-primary rounded-xl p-5 shadow-lg',
-        'hover:shadow-xl hover:scale-[1.02] transition-all duration-300',
+        'transition-all duration-300',
         'grid grid-cols-[auto_1fr] gap-6 items-center',
         className
       )}

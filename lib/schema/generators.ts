@@ -3,8 +3,7 @@
  * UWAGA: BEZ pricing (każdy projekt indywidualny)
  */
 
-import type { LocalPageData } from '@/data/local-pages';
-import type { FAQ } from '@/data/shared-types';
+import type { ResolvedLocalPageData, FAQItem } from '@/data/local';
 import { companyData, getLocalBusinessSchema, getProviderSchema } from '@/data/company-data';
 import type {
   SchemaGraph,
@@ -27,10 +26,23 @@ function stripMarkdown(text: string): string {
 }
 
 /**
+ * Flatten FAQItem content (ContentBlock[]) to plain text string
+ */
+function flattenFAQContent(item: FAQItem): string {
+  return item.content
+    .map((block) => {
+      if (block.type === 'paragraph') return stripMarkdown(block.value);
+      if (block.type === 'list') return block.items.map(i => stripMarkdown(i)).join('. ');
+      return '';
+    })
+    .join(' ');
+}
+
+/**
  * Generuje FAQPage Schema
  */
 export function generateFAQPageSchema(
-  faqItems: FAQ[],
+  faqItems: FAQItem[],
   pageUrl: string
 ): FAQPageSchema {
   return {
@@ -42,7 +54,7 @@ export function generateFAQPageSchema(
       name: item.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: stripMarkdown(item.answer)
+        text: flattenFAQContent(item)
       }
     }))
   };
@@ -52,7 +64,7 @@ export function generateFAQPageSchema(
  * Generuje Service Schema (bez pricing - bo każdy projekt indywidualny)
  */
 export function generateServiceSchema(
-  page: LocalPageData,
+  page: ResolvedLocalPageData,
   pageUrl: string
 ): ServiceSchema {
   return {
@@ -67,8 +79,6 @@ export function generateServiceSchema(
       name: city
     })),
     url: pageUrl,
-    // ❌ BEZ hasOfferCatalog - nie ma konkretnych cen
-    // Każdy projekt budowlany wyceniany indywidualnie
   };
 }
 
@@ -96,7 +106,7 @@ export function generateBreadcrumbSchema(
  * Generator główny dla stron lokalnych
  * Łączy Service + FAQPage + LocalBusiness + Breadcrumb
  */
-export function generateLocalPageSchema(page: LocalPageData): object {
+export function generateLocalPageSchema(page: ResolvedLocalPageData): object {
   const pageUrl = `${companyData.url}/obszar-dzialania/${page.slug}`;
   const graphItems: object[] = [];
 
@@ -127,7 +137,7 @@ export function generateLocalPageSchema(page: LocalPageData): object {
 
   // 4. BreadcrumbList Schema
   graphItems.push(
-    generateBreadcrumbSchema(page.pageHeader.breadcrumbs, pageUrl)
+    generateBreadcrumbSchema(page.pageHeader.breadcrumbs || [], pageUrl)
   );
 
   return {

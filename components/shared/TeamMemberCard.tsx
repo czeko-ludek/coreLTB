@@ -25,7 +25,7 @@ export function TeamMemberCard({
           src={image.src}
           alt={image.alt}
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-110"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
         
         {/* Overlay with social icons - appears on hover */}

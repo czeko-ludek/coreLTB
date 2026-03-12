@@ -100,6 +100,9 @@ export { BentoAreasSection } from './BentoAreasSection';
 export { AreasSection } from './AreasSection';
 export type { AreasSectionProps, Hub, City } from './AreasSection';
 
+export { AreasOfOperationSection } from './AreasOfOperationSection';
+export type { AreasOfOperationSectionProps, AreasHub, AreasCity } from './AreasOfOperationSection';
+
 export { BentoKnowledgeSection } from './BentoKnowledgeSection';
 
 // Local Pages Sections

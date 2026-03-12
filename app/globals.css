@@ -11,7 +11,7 @@
   --color-background-beige: #efebe7;
   --color-background-light: #fafaf9;
   --color-text-dark: #1a1a1a;
-  --color-text-muted: #6b7280;
+  --color-text-muted: #9ca3af;
   --color-gray-300: #d1d5db;
 }
 
@@ -66,48 +66,7 @@
 }
 
 @layer components {
-  /* TEST: Gradient 1 - Subtelny pionowy (jasny → lekko ciemniejszy) */
-  .section-test-gradient1 {
-    background: linear-gradient(
-      to bottom,
-      #fafaf9 0%,      /* Jasny góra */
-      #f0f0ee 100%     /* Lekko ciemniejszy dół */
-    );
-  }
-
-  /* TEST: Gradient 2 - Z płynnymi przejściami (jasny → ciemny → jasny) */
-  .section-test-gradient2 {
-    background: linear-gradient(
-      to bottom,
-      #fafaf9 0%,        /* Jasny góra (łączy się z sekcją wyżej) */
-      #e8e8e6 30%,       /* Ciemnieje */
-      #e0e0de 50%,       /* Najciemniejszy środek */
-      #e8e8e6 70%,       /* Rozjaśnia się */
-      #fafaf9 100%       /* Jasny dół (łączy się z sekcją niżej) */
-    );
-  }
-
-  /* TEST: Gradient 3 - Radialny z centrum (najjaśniejszy środek) */
-  .section-test-gradient3 {
-    background: radial-gradient(
-      ellipse at center,
-      #ffffff 0%,
-      #f5f5f3 50%,
-      #eeeeec 100%
-    );
-  }
-
-  /* TEST: Gradient 4 - Ciemniejszy ze złotym akcentem */
-  .section-test-gradient4 {
-    background: linear-gradient(
-      to bottom right,
-      #f0f0ee 0%,
-      #e8e6e0 50%,
-      #dedad2 100%
-    );
-  }
-
-  /* Oryginalna klasa - zostaje bez zmian */
+  /* Section background */
   .section-with-bg {
     position: relative;
     background-color: #fafaf9;
@@ -183,15 +142,15 @@
 
   /* Projects Swiper custom styles */
   .projects-swiper {
-    padding-top: 2rem !important;
-    padding-bottom: 4rem !important;
+    padding-top: 1rem !important;
+    padding-bottom: 3rem !important;
     overflow: hidden !important;
     width: 100%;
   }
 
   .projects-swiper .swiper-wrapper {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     display: flex;
     align-items: stretch;
   }
@@ -219,13 +178,6 @@
   /* Projects swiper pagination - uses universal .swiper-custom-bullet */
   .projects-swiper .swiper-pagination {
     bottom: 0 !important;
-  }
-
-  /* Show pagination only on mobile (< 1024px) */
-  @media (min-width: 1024px) {
-    .projects-swiper .swiper-pagination {
-      display: none !important;
-    }
   }
 
   /* Testimonials Swiper custom styles */
@@ -836,22 +788,6 @@
     transition: opacity 0.3s ease-in-out;
   }
 
-  /* Custom pagination for case studies */
-  .case-studies-pagination .swiper-pagination-bullet {
-    width: 12px !important;
-    height: 12px !important;
-    background: #d1d5db !important;
-    opacity: 0.5 !important;
-    border-radius: 50% !important;
-    transition: all 0.3s ease !important;
-  }
-
-  .case-studies-pagination .swiper-pagination-bullet-active {
-    width: 32px !important;
-    background: #dfbb68 !important;
-    opacity: 1 !important;
-    border-radius: 6px !important;
-  }
 
 /* ======================================================================
    REDUCED MOTION & MOBILE PERFORMANCE

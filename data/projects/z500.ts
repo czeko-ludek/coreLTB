@@ -1,5 +1,5 @@
 // Auto-generated from Z500.pl project pages
-// Generated: 2026-02-17
+// Generated: 2026-02-18
 // Projects: 24
 
 import type { Project } from './types';
@@ -17,7 +17,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '323 tys. zł',
     technology: 'MUROWANY',
     category: 'parterowy',
-    dateAdded: 1771363003313,
+    dateAdded: 1771409046931,
     galleryImageCount: 6,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/16128/z381,parterowy-dom-z-dachem-2spadowym-oraz-3-sypialniami-na-100m2',
@@ -90,7 +90,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '577 tys. zł',
     technology: 'MUROWANY',
     category: 'z-poddaszem',
-    dateAdded: 1771363005053,
+    dateAdded: 1771409048682,
     galleryImageCount: 6,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/32681/z408,dom-z-poddaszem-uzytkowym-nowoczesna-lukarna-garazem-i-schowkiem-na-rowery',
@@ -99,19 +99,19 @@ export const z500Projects: Project[] = [
     lotLength: '18.26 m',
     elevationWidth: '12.66 m',
     floorPlans: [
-      { name: 'Parter', area: '58.7m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '84.4m²', image: 'plan-parter.webp', rooms: [
         { name: 'Sień', area: '6.1 m²' },
         { name: 'Hol', area: '4.32 m²' },
         { name: 'Spiżarnia', area: '4.21 m²' },
         { name: 'Kuchnia', area: '9.29 m²' },
         { name: 'Salon+jadalnia', area: '33.14 m²' },
         { name: 'WC', area: '1.6 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
-        { name: 'Garaż', area: '0 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '7.35 m²' },
+        { name: 'Garaż', area: '18.37 m²' },
       ] },
-      { name: 'Poddasze', area: '85.9m²', image: 'plan-poddasze.webp', rooms: [
+      { name: 'Poddasze', area: '94.0m²', image: 'plan-poddasze.webp', rooms: [
         { name: 'Hol', area: '8.81 m²' },
-        { name: 'Schody', area: '0 m²' },
+        { name: 'Schody', area: '8.13 m²' },
         { name: 'Pokój', area: '13.51 m²' },
         { name: 'Pokój', area: '14.22 m²' },
         { name: 'Łazienka', area: '6.77 m²' },
@@ -175,7 +175,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '335 tys. zł',
     technology: 'MUROWANY',
     category: 'parterowy',
-    dateAdded: 1771363006757,
+    dateAdded: 1771409050421,
     galleryImageCount: 4,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/51005/z504,nowoczesna-stodola-z-dachem-bezokapowym-3-sypialniami-i-gabinetem-na-parterze',
@@ -183,17 +183,17 @@ export const z500Projects: Project[] = [
     lotLength: '15.66 m',
     elevationWidth: '11.46 m',
     floorPlans: [
-      { name: 'Parter', area: '58.3m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '61.7m²', image: 'plan-parter.webp', rooms: [
         { name: 'Gabinet', area: '11.23 m²' },
         { name: 'Hol', area: '2.7 m²' },
         { name: 'Kuchnia', area: '8.11 m²' },
         { name: 'Łazienka', area: '3.42 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '3.44 m²' },
         { name: 'Salon+jadalnia', area: '27.03 m²' },
         { name: 'Sień', area: '4.48 m²' },
         { name: 'Spiżarnia', area: '1.33 m²' },
       ] },
-      { name: 'Poddasze', area: '48.4m²', image: 'plan-poddasze.webp', rooms: [
+      { name: 'Poddasze', area: '52.9m²', image: 'plan-poddasze.webp', rooms: [
         { name: 'Garderoba', area: '2.64 m²' },
         { name: 'Hol', area: '7.04 m²' },
         { name: 'Łazienka', area: '4.94 m²' },
@@ -201,7 +201,7 @@ export const z500Projects: Project[] = [
         { name: 'Pokój', area: '11.24 m²' },
         { name: 'Pokój', area: '11.24 m²' },
         { name: 'Pralnia', area: '2.6 m²' },
-        { name: 'Schody', area: '0 m²' },
+        { name: 'Schody', area: '4.5 m²' },
       ] },
     ],
     specifications: [
@@ -249,7 +249,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '349 tys. zł',
     technology: 'MUROWANY',
     category: 'parterowy',
-    dateAdded: 1771363008508,
+    dateAdded: 1771409052208,
     galleryImageCount: 8,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/50907/z509,parterowy-w-stylu-nowoczesnej-stodoly-z-duzymi-przeszkleniami',
@@ -314,7 +314,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '601 tys. zł',
     technology: 'MUROWANY',
     category: 'jednorodzinny',
-    dateAdded: 1771363010243,
+    dateAdded: 1771409053952,
     galleryImageCount: 3,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/50170/zx214+%2b,powiekszony-wariant-domu-z-plaskim-dachem-i-garazem-dwustanowiskowym',
@@ -323,25 +323,25 @@ export const z500Projects: Project[] = [
     lotLength: '17.06 m',
     elevationWidth: '17.46 m',
     floorPlans: [
-      { name: 'Parter', area: '58.0m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '104.5m²', image: 'plan-parter.webp', rooms: [
         { name: 'Sień', area: '4.1 m²' },
         { name: 'Hol', area: '5.55 m²' },
         { name: 'WC', area: '2.93 m²' },
         { name: 'Kuchnia', area: '8.98 m²' },
         { name: 'Salon+jadalnia', area: '33.18 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
-        { name: 'Garaż', area: '0 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '4.55 m²' },
+        { name: 'Garaż', area: '41.92 m²' },
         { name: 'Schowek', area: '1.75 m²' },
         { name: 'Hol', area: '1.5 m²' },
       ] },
-      { name: 'Piętro', area: '80.6m²', image: 'plan-kondygnacja-7.webp', rooms: [
+      { name: 'Piętro', area: '85.8m²', image: 'plan-kondygnacja-7.webp', rooms: [
         { name: 'Hol', area: '8.96 m²' },
         { name: 'Pokój+garderoba', area: '19.68 m²' },
         { name: 'Łazienka', area: '6.14 m²' },
         { name: 'Pokój', area: '17.99 m²' },
         { name: 'Pokój', area: '16.96 m²' },
         { name: 'Łazienka', area: '5.69 m²' },
-        { name: 'Schody', area: '0 m²' },
+        { name: 'Schody', area: '5.18 m²' },
         { name: 'Garderoba', area: '5.22 m²' },
       ] },
     ],
@@ -395,7 +395,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '354 tys. zł',
     technology: 'MUROWANY',
     category: 'jednorodzinny',
-    dateAdded: 1771363012006,
+    dateAdded: 1771409055718,
     galleryImageCount: 10,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/16160/zx201,nowoczesny-dom-z-przestronnym-salonem-duzymi-przeszkleniami',
@@ -404,7 +404,7 @@ export const z500Projects: Project[] = [
     lotLength: '21.26 m',
     elevationWidth: '13.36 m',
     floorPlans: [
-      { name: 'Parter', area: '108.0m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '112.7m²', image: 'plan-parter.webp', rooms: [
         { name: 'Sień', area: '4.89 m²' },
         { name: 'Garderoba', area: '4.85 m²' },
         { name: 'Hol', area: '10.51 m²' },
@@ -413,7 +413,7 @@ export const z500Projects: Project[] = [
         { name: 'Pokój', area: '12.03 m²' },
         { name: 'Pokój', area: '11.61 m²' },
         { name: 'Łazienka', area: '3.08 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '4.62 m²' },
         { name: 'Salon+kuchnia', area: '41.22 m²' },
       ] },
     ],
@@ -466,7 +466,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '541 tys. zł',
     technology: 'MUROWANY',
     category: 'parterowy',
-    dateAdded: 1771363013756,
+    dateAdded: 1771409057484,
     galleryImageCount: 5,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/50578/z565,dom-parterowy-z-centralnie-umieszczona-strefa-dzienna-oraz-garazem-na-2-auta',
@@ -474,7 +474,7 @@ export const z500Projects: Project[] = [
     lotLength: '21.56 m',
     elevationWidth: '20.76 m',
     floorPlans: [
-      { name: 'Parter', area: '131.8m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '172.6m²', image: 'plan-parter.webp', rooms: [
         { name: 'Sień', area: '6.81 m²' },
         { name: 'Hol', area: '16.52 m²' },
         { name: 'WC', area: '2.94 m²' },
@@ -486,8 +486,8 @@ export const z500Projects: Project[] = [
         { name: 'Pokój', area: '13.76 m²' },
         { name: 'Łazienka', area: '5.5 m²' },
         { name: 'Garderoba', area: '5.25 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
-        { name: 'Garaż', area: '0 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '6.04 m²' },
+        { name: 'Garaż', area: '34.67 m²' },
       ] },
     ],
     specifications: [
@@ -538,7 +538,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '501 tys. zł',
     technology: 'MUROWANY',
     category: 'jednorodzinny',
-    dateAdded: 1771363015517,
+    dateAdded: 1771409059255,
     galleryImageCount: 3,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/152/z166,zgrabny-dom-z-wykuszem-i-czterema-komfortowymi-sypialniami',
@@ -558,9 +558,9 @@ export const z500Projects: Project[] = [
         { name: 'Schowek', area: '1.35 m²' },
         { name: 'Łazienka', area: '6.06 m²' },
       ] },
-      { name: 'Poddasze', area: '58.7m²', image: 'plan-poddasze.webp', rooms: [
+      { name: 'Poddasze', area: '63.6m²', image: 'plan-poddasze.webp', rooms: [
         { name: 'Hol', area: '4.48 m²' },
-        { name: 'Schody', area: '0 m²' },
+        { name: 'Schody', area: '4.87 m²' },
         { name: 'Pokój', area: '15.38 m²' },
         { name: 'Pokój', area: '15.88 m²' },
         { name: 'Pokój', area: '13.39 m²' },
@@ -618,7 +618,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '402 tys. zł',
     technology: 'MUROWANY',
     category: 'parterowy',
-    dateAdded: 1771363017465,
+    dateAdded: 1771409061215,
     galleryImageCount: 4,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/1201/z349,dom-parterowy-z-dachem-2-spadowym-4-sypialniami-oraz-przestronna-strefa-dzienna',
@@ -627,9 +627,9 @@ export const z500Projects: Project[] = [
     lotLength: '19.16 m',
     elevationWidth: '17.06 m',
     floorPlans: [
-      { name: 'Parter', area: '122.0m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '127.8m²', image: 'plan-parter.webp', rooms: [
         { name: 'Sień', area: '3.54 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '5.71 m²' },
         { name: 'Spiżarnia', area: '3.48 m²' },
         { name: 'Kuchnia', area: '11.22 m²' },
         { name: 'Salon+jadalnia', area: '32.14 m²' },
@@ -693,7 +693,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '559 tys. zł',
     technology: 'MUROWANY',
     category: 'z-poddaszem',
-    dateAdded: 1771363019400,
+    dateAdded: 1771409063207,
     galleryImageCount: 14,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/1008/z357,dom-nowoczesna-stodola-z-poddaszem-garazem-dwustanowiskowym-oraz-antresola',
@@ -702,7 +702,7 @@ export const z500Projects: Project[] = [
     lotLength: '22.46 m',
     elevationWidth: '16.56 m',
     floorPlans: [
-      { name: 'Parter', area: '94.7m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '134.2m²', image: 'plan-parter.webp', rooms: [
         { name: 'Sień', area: '5.2 m²' },
         { name: 'Hol', area: '11.07 m²' },
         { name: 'WC', area: '3.24 m²' },
@@ -712,10 +712,10 @@ export const z500Projects: Project[] = [
         { name: 'Pokój', area: '13.1 m²' },
         { name: 'Garderoba', area: '6.77 m²' },
         { name: 'Łazienka', area: '6.55 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
-        { name: 'Garaż', area: '0 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '6.61 m²' },
+        { name: 'Garaż', area: '32.95 m²' },
       ] },
-      { name: 'Poddasze', area: '84.3m²', image: 'plan-poddasze.webp', rooms: [
+      { name: 'Poddasze', area: '88.1m²', image: 'plan-poddasze.webp', rooms: [
         { name: 'Hol', area: '17.97 m²' },
         { name: 'Pokój', area: '9.91 m²' },
         { name: 'Garderoba', area: '4.94 m²' },
@@ -726,7 +726,7 @@ export const z500Projects: Project[] = [
         { name: 'Pokój', area: '10.06 m²' },
         { name: 'Garderoba', area: '8.18 m²' },
         { name: 'Pokój', area: '10.06 m²' },
-        { name: 'Schody', area: '0 m²' },
+        { name: 'Schody', area: '3.78 m²' },
       ] },
     ],
     specifications: [
@@ -781,7 +781,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '596 tys. zł',
     technology: 'MUROWANY',
     category: 'z-poddaszem',
-    dateAdded: 1771363021248,
+    dateAdded: 1771409065070,
     galleryImageCount: 6,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/34006/z416,nowoczesny-dom-z-dachem-bez-okapow-poddaszem-uzytkowym-oraz-garazem',
@@ -790,7 +790,7 @@ export const z500Projects: Project[] = [
     lotLength: '19.76 m',
     elevationWidth: '12.66 m',
     floorPlans: [
-      { name: 'Parter', area: '83.3m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '103.5m²', image: 'plan-parter.webp', rooms: [
         { name: 'Sień', area: '5.57 m²' },
         { name: 'Hol', area: '7.06 m²' },
         { name: 'Kuchnia', area: '13.65 m²' },
@@ -798,9 +798,9 @@ export const z500Projects: Project[] = [
         { name: 'Gabinet', area: '11.75 m²' },
         { name: 'WC', area: '2.12 m²' },
         { name: 'Pomieszczenie gospodarcze', area: '5.79 m²' },
-        { name: 'Garaż', area: '0 m²' },
+        { name: 'Garaż', area: '20.17 m²' },
       ] },
-      { name: 'Poddasze', area: '64.9m²', image: 'plan-poddasze.webp', rooms: [
+      { name: 'Poddasze', area: '73.2m²', image: 'plan-poddasze.webp', rooms: [
         { name: 'Hol', area: '6.62 m²' },
         { name: 'Pokój', area: '14.12 m²' },
         { name: 'Łazienka', area: '5.55 m²' },
@@ -808,7 +808,7 @@ export const z500Projects: Project[] = [
         { name: 'Pokój', area: '12.15 m²' },
         { name: 'Garderoba', area: '5.01 m²' },
         { name: 'Łazienka', area: '7.8 m²' },
-        { name: 'Schody', area: '0 m²' },
+        { name: 'Schody', area: '8.38 m²' },
       ] },
     ],
     specifications: [
@@ -863,7 +863,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '452 tys. zł',
     technology: 'MUROWANY',
     category: 'parterowy',
-    dateAdded: 1771363023013,
+    dateAdded: 1771409066953,
     galleryImageCount: 6,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/4714/z317,wspolczesny-dom-parterowy-z-odwroconym-ukladem-pomieszczen-dachem-wielospadowym',
@@ -872,9 +872,9 @@ export const z500Projects: Project[] = [
     lotLength: '26.06 m',
     elevationWidth: '14.16 m',
     floorPlans: [
-      { name: 'Parter', area: '136.5m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '143.6m²', image: 'plan-parter.webp', rooms: [
         { name: 'Sień', area: '4.28 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '7.06 m²' },
         { name: 'Spiżarnia', area: '2.71 m²' },
         { name: 'Kuchnia', area: '9.84 m²' },
         { name: 'Salon+jadalnia', area: '41.07 m²' },
@@ -941,7 +941,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '586 tys. zł',
     technology: 'MUROWANY',
     category: 'parterowy',
-    dateAdded: 1771363024909,
+    dateAdded: 1771409068858,
     galleryImageCount: 2,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/50811/z378+b,wariant-projektu-z-aneksem-kuchennym-z-wyspa-i-ekologicznymi-instalacjami',
@@ -950,7 +950,7 @@ export const z500Projects: Project[] = [
     lotLength: '26.96 m',
     elevationWidth: '16.86 m',
     floorPlans: [
-      { name: 'Parter', area: '142.5m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '187.1m²', image: 'plan-parter.webp', rooms: [
         { name: 'Sień', area: '6.05 m²' },
         { name: 'Hol', area: '6.46 m²' },
         { name: 'WC', area: '1.98 m²' },
@@ -965,8 +965,8 @@ export const z500Projects: Project[] = [
         { name: 'Pokój', area: '11.07 m²' },
         { name: 'Pokój', area: '11.07 m²' },
         { name: 'Pokój', area: '13.9 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
-        { name: 'Garaż', area: '0 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '8.22 m²' },
+        { name: 'Garaż', area: '36.39 m²' },
       ] },
     ],
     specifications: [
@@ -1020,7 +1020,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '437 tys. zł',
     technology: 'MUROWANY',
     category: 'parterowy',
-    dateAdded: 1771363026689,
+    dateAdded: 1771409070630,
     galleryImageCount: 8,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/38634/zx176,nowoczesny-parterowy-dom-jednorodzinny-o-prostej-bryle-z-plaskim-dachem',
@@ -1029,7 +1029,7 @@ export const z500Projects: Project[] = [
     lotLength: '22.2 m',
     elevationWidth: '14.34 m',
     floorPlans: [
-      { name: 'Parter', area: '135.1m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '138.9m²', image: 'plan-parter.webp', rooms: [
         { name: 'Gabinet', area: '12.56 m²' },
         { name: 'Garderoba', area: '3.5 m²' },
         { name: 'Garderoba', area: '4.55 m²' },
@@ -1037,7 +1037,7 @@ export const z500Projects: Project[] = [
         { name: 'Kuchnia', area: '11.9 m²' },
         { name: 'Łazienka', area: '3.75 m²' },
         { name: 'Łazienka', area: '6.55 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '3.76 m²' },
         { name: 'Pokój', area: '14.64 m²' },
         { name: 'Pokój', area: '14.64 m²' },
         { name: 'Pokój', area: '17.02 m²' },
@@ -1094,7 +1094,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '685 tys. zł',
     technology: 'MUROWANY',
     category: 'z-poddaszem',
-    dateAdded: 1771363028457,
+    dateAdded: 1771409072428,
     galleryImageCount: 19,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/27678/zx159,nowoczesny-dom-pietrowy-z-antresola-gabinetem-oraz-sypialnia-glowna-na-parterze',
@@ -1103,9 +1103,9 @@ export const z500Projects: Project[] = [
     lotLength: '23.66 m',
     elevationWidth: '16.86 m',
     floorPlans: [
-      { name: 'Parter', area: '121.5m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '161.4m²', image: 'plan-parter.webp', rooms: [
         { name: 'Gabinet', area: '10.56 m²' },
-        { name: 'Garaż', area: '0 m²' },
+        { name: 'Garaż', area: '39.83 m²' },
         { name: 'Garderoba', area: '4.14 m²' },
         { name: 'Hol', area: '4.48 m²' },
         { name: 'Hol', area: '11.79 m²' },
@@ -1119,12 +1119,12 @@ export const z500Projects: Project[] = [
         { name: 'Sień', area: '6.85 m²' },
         { name: 'Spiżarnia', area: '2.8 m²' },
       ] },
-      { name: 'Piętro', area: '47.5m²', image: 'plan-kondygnacja-7.webp', rooms: [
+      { name: 'Piętro', area: '55.4m²', image: 'plan-kondygnacja-7.webp', rooms: [
         { name: 'Hol', area: '10.47 m²' },
         { name: 'Łazienka', area: '6.49 m²' },
         { name: 'Pokój', area: '14.14 m²' },
         { name: 'Pokój', area: '16.39 m²' },
-        { name: 'Schody', area: '0 m²' },
+        { name: 'Schody', area: '7.9 m²' },
       ] },
     ],
     specifications: [
@@ -1177,7 +1177,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '708 tys. zł',
     technology: 'MUROWANY',
     category: 'parterowy',
-    dateAdded: 1771363030187,
+    dateAdded: 1771409074178,
     galleryImageCount: 6,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/49615/zx99+a,nowoczesny-dom-parterowy-z-garazem-na-2-samochody-oraz-pokojem-kapielowym',
@@ -1186,7 +1186,7 @@ export const z500Projects: Project[] = [
     lotLength: '30.16 m',
     elevationWidth: '18.96 m',
     floorPlans: [
-      { name: 'Parter', area: '184.5m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '225.3m²', image: 'plan-parter.webp', rooms: [
         { name: 'Sień', area: '4.38 m²' },
         { name: 'Spiżarnia', area: '2.55 m²' },
         { name: 'Kuchnia', area: '10.17 m²' },
@@ -1199,10 +1199,10 @@ export const z500Projects: Project[] = [
         { name: 'Łazienka', area: '15.72 m²' },
         { name: 'Pokój', area: '20.54 m²' },
         { name: 'Pokój', area: '20.05 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '6.19 m²' },
         { name: 'Pralnia', area: '3.06 m²' },
         { name: 'WC', area: '1.93 m²' },
-        { name: 'Garaż', area: '0 m²' },
+        { name: 'Garaż', area: '34.58 m²' },
       ] },
     ],
     specifications: [
@@ -1253,7 +1253,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '810 tys. zł',
     technology: 'MUROWANY',
     category: 'z-poddaszem',
-    dateAdded: 1771363031938,
+    dateAdded: 1771409075930,
     galleryImageCount: 5,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/16126/z404,pietrowy-dom-z-garazem-dwustanowiskowym-oraz-2-sypialniami-na-parterze',
@@ -1262,23 +1262,23 @@ export const z500Projects: Project[] = [
     lotLength: '21.56 m',
     elevationWidth: '20.46 m',
     floorPlans: [
-      { name: 'Parter', area: '120.3m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '177.0m²', image: 'plan-parter.webp', rooms: [
         { name: 'Sień', area: '5.52 m²' },
         { name: 'Hol', area: '16.22 m²' },
         { name: 'WC', area: '2.14 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '4.1 m²' },
         { name: 'Kuchnia', area: '12.04 m²' },
         { name: 'Spiżarnia', area: '3.19 m²' },
         { name: 'Salon+jadalnia', area: '46.59 m²' },
         { name: 'Pokój', area: '12.16 m²' },
         { name: 'Pokój', area: '16.22 m²' },
         { name: 'Łazienka', area: '6.19 m²' },
-        { name: 'Garaż', area: '0 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
+        { name: 'Garaż', area: '45.9 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '6.69 m²' },
       ] },
-      { name: 'Piętro', area: '91.6m²', image: 'plan-kondygnacja-7.webp', rooms: [
+      { name: 'Piętro', area: '96.7m²', image: 'plan-kondygnacja-7.webp', rooms: [
         { name: 'Hol', area: '12.94 m²' },
-        { name: 'Schody', area: '0 m²' },
+        { name: 'Schody', area: '5.12 m²' },
         { name: 'Pokój', area: '15.54 m²' },
         { name: 'Łazienka', area: '4.83 m²' },
         { name: 'Garderoba', area: '3.34 m²' },
@@ -1342,7 +1342,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '1081 tys. zł',
     technology: 'MUROWANY',
     category: 'z-poddaszem',
-    dateAdded: 1771363033719,
+    dateAdded: 1771409077695,
     galleryImageCount: 2,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/1195/zx125,nowoczesna-pietrowa-rezydencja-z-duzymi-przeszkleniami-i-zadaszonymi-tarasami',
@@ -1351,22 +1351,22 @@ export const z500Projects: Project[] = [
     lotLength: '31.16 m',
     elevationWidth: '17.67 m',
     floorPlans: [
-      { name: 'Parter', area: '175.0m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '227.3m²', image: 'plan-parter.webp', rooms: [
         { name: 'Gabinet', area: '8.97 m²' },
         { name: 'Gabinet', area: '11.7 m²' },
-        { name: 'Garaż', area: '0 m²' },
+        { name: 'Garaż', area: '42.1 m²' },
         { name: 'Garderoba', area: '5.71 m²' },
         { name: 'Hol', area: '13.28 m²' },
         { name: 'Kuchnia+jadalnia', area: '36.95 m²' },
         { name: 'Łazienka', area: '3.89 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '10.15 m²' },
         { name: 'Pokój rekreacyjny', area: '32.5 m²' },
         { name: 'Salon', area: '42 m²' },
         { name: 'Schowek', area: '7.42 m²' },
         { name: 'Sień', area: '8.88 m²' },
         { name: 'Spiżarnia', area: '3.74 m²' },
       ] },
-      { name: 'Piętro', area: '109.4m²', image: 'plan-kondygnacja-7.webp', rooms: [
+      { name: 'Piętro', area: '114.4m²', image: 'plan-kondygnacja-7.webp', rooms: [
         { name: 'Pokój rekreacyjny', area: '16.79 m²' },
         { name: 'Garderoba', area: '6.3 m²' },
         { name: 'Hol', area: '9.65 m²' },
@@ -1376,7 +1376,7 @@ export const z500Projects: Project[] = [
         { name: 'Pokój', area: '18.49 m²' },
         { name: 'Pokój', area: '21.22 m²' },
         { name: 'Pralnia', area: '4 m²' },
-        { name: 'Schody', area: '0 m²' },
+        { name: 'Schody', area: '4.99 m²' },
       ] },
     ],
     specifications: [
@@ -1430,7 +1430,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '674 tys. zł',
     technology: 'MUROWANY',
     category: 'jednorodzinny',
-    dateAdded: 1771363035464,
+    dateAdded: 1771409079449,
     galleryImageCount: 4,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/704/zx64,komfortowy-dom-w-nowoczesnym-stylu-z-wydzielona-czescia-uslugowa-od-frontu',
@@ -1512,7 +1512,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '721 tys. zł',
     technology: 'MUROWANY',
     category: 'z-poddaszem',
-    dateAdded: 1771363037232,
+    dateAdded: 1771409081209,
     galleryImageCount: 5,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/50471/z579,projekt-typu-stodola-z-poddaszem-do-adaptacji',
@@ -1520,9 +1520,9 @@ export const z500Projects: Project[] = [
     lotLength: '28.01 m',
     elevationWidth: '21.82 m',
     floorPlans: [
-      { name: 'Parter', area: '179.0m²', image: 'plan-parter.webp', rooms: [
+      { name: 'Parter', area: '229.4m²', image: 'plan-parter.webp', rooms: [
         { name: 'Gabinet', area: '19.52 m²' },
-        { name: 'Garaż', area: '0 m²' },
+        { name: 'Garaż', area: '43.01 m²' },
         { name: 'Garderoba', area: '2.87 m²' },
         { name: 'Garderoba', area: '5.62 m²' },
         { name: 'Garderoba', area: '6.25 m²' },
@@ -1530,7 +1530,7 @@ export const z500Projects: Project[] = [
         { name: 'Hol', area: '10.53 m²' },
         { name: 'Łazienka', area: '5.88 m²' },
         { name: 'Łazienka', area: '8.1 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '7.38 m²' },
         { name: 'Pokój', area: '13.72 m²' },
         { name: 'Pokój', area: '16.12 m²' },
         { name: 'Pokój', area: '16.38 m²' },
@@ -1584,7 +1584,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '445 tys. zł',
     technology: 'MUROWANY',
     category: 'z-poddaszem',
-    dateAdded: 1771363038999,
+    dateAdded: 1771409082989,
     galleryImageCount: 5,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/385/z12+wl,niedrogi-w-realizacji-dom-z-opcja-poddasza-dachem-dwuspadowym-i-wiata-na-auto',
@@ -1603,9 +1603,9 @@ export const z500Projects: Project[] = [
         { name: 'Pokój', area: '11.75 m²' },
         { name: 'Pokój', area: '9.06 m²' },
       ] },
-      { name: 'Poddasze', area: '35.3m²', image: 'plan-poddasze.webp', rooms: [
+      { name: 'Poddasze', area: '39.1m²', image: 'plan-poddasze.webp', rooms: [
         { name: 'Poddasze', area: '35.29 m²' },
-        { name: 'Schody', area: '0 m²' },
+        { name: 'Schody', area: '3.79 m²' },
       ] },
     ],
     specifications: [
@@ -1660,7 +1660,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '620 tys. zł',
     technology: 'MUROWANY',
     category: 'parterowy',
-    dateAdded: 1771363040747,
+    dateAdded: 1771409084717,
     galleryImageCount: 6,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/1181/zx141,nowoczesny-dom-parterowy-z-garazem-dwustanowiskowym',
@@ -1736,7 +1736,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '347 tys. zł',
     technology: 'MUROWANY',
     category: 'jednorodzinny',
-    dateAdded: 1771363042480,
+    dateAdded: 1771409086444,
     galleryImageCount: 2,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/780/zx102+bg,wersja-bez-garazu',
@@ -1806,7 +1806,7 @@ export const z500Projects: Project[] = [
     estimatedBuildCost: '514 tys. zł',
     technology: 'MUROWANY',
     category: 'parterowy',
-    dateAdded: 1771363044259,
+    dateAdded: 1771409088210,
     galleryImageCount: 9,
     hasSitePlan: true,
     sourceUrl: 'https://z500.pl/projekt/50468/z566,dom-parterowy-styl-nowoczesna-stodola-o-ukladzie-l-z-garazem-dwustanowiskowym',
@@ -1814,13 +1814,13 @@ export const z500Projects: Project[] = [
     lotLength: '28.16 m',
     elevationWidth: '15.8 m',
     floorPlans: [
-      { name: 'Parter', area: '121.8m²', image: 'plan-parter.webp', rooms: [
-        { name: 'Garaż', area: '0 m²' },
+      { name: 'Parter', area: '163.5m²', image: 'plan-parter.webp', rooms: [
+        { name: 'Garaż', area: '35.88 m²' },
         { name: 'Hol', area: '17.46 m²' },
         { name: 'Kuchnia', area: '8.7 m²' },
         { name: 'Łazienka', area: '3.96 m²' },
         { name: 'Łazienka', area: '6.65 m²' },
-        { name: 'Pomieszczenie gospodarcze', area: '0 m²' },
+        { name: 'Pomieszczenie gospodarcze', area: '5.85 m²' },
         { name: 'Pokój', area: '12.31 m²' },
         { name: 'Pokój', area: '12.31 m²' },
         { name: 'Pokój+garderoba', area: '17.37 m²' },

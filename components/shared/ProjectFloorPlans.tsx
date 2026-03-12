@@ -243,7 +243,7 @@ export function ProjectFloorPlans({ slug, floorPlans }: ProjectFloorPlansProps) 
                     src={getFloorPlanImagePath(activePlan.image)}
                     alt={`Rzut ${activePlan.name}`}
                     fill
-                    className="object-contain p-8 transition-transform duration-500 group-hover:scale-105"
+                    className="object-contain p-8 transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 1024px) 100vw, 60vw"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 flex items-center justify-center">

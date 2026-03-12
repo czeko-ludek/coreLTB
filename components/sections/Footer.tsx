@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Icon } from '@/components/ui';
+import { PLATFORM_NAMES } from '@/lib/utils';
 
 export interface FooterProps {
   contactInfo: Array<{
@@ -96,27 +97,18 @@ export function Footer({
                 {about}
               </p>
               <div className="flex gap-3">
-                {socials.map((social, index) => {
-                  const platformNames: Record<string, string> = {
-                    facebook: 'Facebook',
-                    twitter: 'Twitter',
-                    instagram: 'Instagram',
-                    linkedin: 'LinkedIn',
-                    youtube: 'YouTube',
-                  };
-                  return (
+                {socials.map((social, index) => (
                     <a
                       key={index}
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`Odwiedź nasz profil na ${platformNames[social.platform]}`}
+                      aria-label={`Odwiedź nasz profil na ${PLATFORM_NAMES[social.platform]}`}
                       className="w-9 h-9 rounded-full bg-surface-dark flex items-center justify-center text-white hover:bg-primary transition-colors"
                     >
                       <Icon name={social.platform} size="sm" />
                     </a>
-                  );
-                })}
+                ))}
               </div>
             </div>
 

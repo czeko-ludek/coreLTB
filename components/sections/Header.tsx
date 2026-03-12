@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Button, Icon } from '@/components/ui';
 import { MegaMenu, MegaMenuItem } from '@/components/shared';
+import { PLATFORM_NAMES } from '@/lib/utils';
 
 export interface HeaderProps {
   topBar: {
@@ -95,26 +96,18 @@ export function Header({
               {/* Social Links */}
               <div className="flex items-center gap-2.5">
                 <span className="text-primary text-sm mr-2 font-semibold">Śledź nas:</span>
-                {topBar.socials.map((social, index) => {
-                  const platformNames: Record<string, string> = {
-                    facebook: 'Facebook',
-                    twitter: 'Twitter',
-                    instagram: 'Instagram',
-                    linkedin: 'LinkedIn',
-                  };
-                  return (
+                {topBar.socials.map((social, index) => (
                     <a
                       key={index}
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`Odwiedź nasz profil na ${platformNames[social.platform]}`}
+                      aria-label={`Odwiedź nasz profil na ${PLATFORM_NAMES[social.platform]}`}
                       className="text-gray-600 hover:text-primary transition-colors"
                     >
                       <Icon name={social.platform} size="sm" />
                     </a>
-                  );
-                })}
+                ))}
               </div>
             </div>
           </div>

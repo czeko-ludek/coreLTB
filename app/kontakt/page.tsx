@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { BentoContactSection, ContactInfo } from "@/components/sections";
-import { PageHeader } from "@/components/shared";
+import { PageHeader, Breadcrumbs } from "@/components/shared";
 
 export const metadata: Metadata = {
 	title: "Kontakt - CoreLTB Builders",
@@ -28,6 +28,13 @@ export default function ContactPage() {
 	return (
 		<main>
 			<PageHeader {...pageHeaderData} />
+			<Breadcrumbs
+				items={[
+					{ label: "Strona główna", href: "/" },
+					{ label: "Kontakt" },
+				]}
+				className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8"
+			/>
 			<BentoContactSection contactInfo={contactInfo} />
 		</main>
 	);

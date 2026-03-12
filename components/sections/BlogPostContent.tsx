@@ -298,7 +298,7 @@ function RelatedPostCard({ post }: { post: RelatedPost }) {
           src={post.image.src}
           alt={post.image.alt}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
         <div className="absolute top-3 left-3">
           <span className="px-3 py-1.5 bg-primary rounded-full text-xs font-semibold text-white uppercase tracking-wider">

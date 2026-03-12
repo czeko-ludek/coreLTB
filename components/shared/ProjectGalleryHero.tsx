@@ -114,7 +114,7 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount }: ProjectGall
               src={allImages[0]}
               alt={alt}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
               sizes="66vw"
               priority
             />
@@ -133,7 +133,7 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount }: ProjectGall
                   src={src}
                   alt={`${alt} - zdjęcie ${index + 2}`}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="33vw"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />

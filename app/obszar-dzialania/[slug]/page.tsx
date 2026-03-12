@@ -1,30 +1,29 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Script from 'next/script';
-import {
-  getLocalPageBySlug,
-  getAllLocalPageSlugs,
-  type LocalPageData,
-} from '@/data/local-pages';
-import { PageHeader } from '@/components/shared';
-import {
-  LocalPageContentSection,
-  ContactCTASection,
-  type LocalPageContent,
-  type LocalContentBlock,
-  type LocalPageSection,
-} from '@/components/sections';
-import { generateLocalPageSchema, sanitizeJsonLd } from '@/lib/schema';
+import { getLocalPageBySlug, getAllLocalPageSlugs } from '@/data/local';
 import { companyData } from '@/data/company-data';
+import { generateLocalPageSchema, sanitizeJsonLd } from '@/lib/schema';
+
+import { PageHeader, Breadcrumbs } from '@/components/shared';
+import {
+  EmotionalHeroSection,
+  FAQTwoColumnsSection,
+  ContactCTASection,
+} from '@/components/sections';
+import { ServicePillarsSection } from '@/components/sections/local/ServicePillarsSection';
+import { MidPageCTA } from '@/components/sections/local/MidPageCTA';
+import { LocalExpertiseSection } from '@/components/sections/local/LocalExpertiseSection';
+import { BuildingStagesSection } from '@/components/sections/local/BuildingStagesSection';
+import { WhyUsSection } from '@/components/sections/local/WhyUsSection';
+import { PartnerLogosMarquee } from '@/components/sections/local/PartnerLogosMarquee';
+import { DistrictsSection } from '@/components/sections/local/DistrictsSection';
 
 /**
  * Generate static params for SSG
  */
 export async function generateStaticParams() {
-  const slugs = getAllLocalPageSlugs();
-  return slugs.map((slug) => ({
-    slug: slug,
-  }));
+  return getAllLocalPageSlugs().map((slug) => ({ slug }));
 }
 
 /**
@@ -39,9 +38,7 @@ export async function generateMetadata({
   const page = getLocalPageBySlug(slug);
 
   if (!page) {
-    return {
-      title: 'Nie znaleziono strony',
-    };
+    return { title: 'Nie znaleziono strony' };
   }
 
   const pageUrl = `${companyData.url}/obszar-dzialania/${slug}`;
@@ -66,184 +63,12 @@ export async function generateMetadata({
 }
 
 /**
- * Convert old ContentBlock format to new format
- */
-function convertContentBlock(block: { type: string; value?: string; items?: string[] }): LocalContentBlock {
-  if (block.type === 'paragraph') {
-    // Convert **bold** markdown to <strong> tags
-    const htmlContent = (block.value || '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    return { type: 'paragraph', content: htmlContent };
-  }
-  if (block.type === 'list') {
-    // Convert **bold** in list items
-    const htmlItems = (block.items || []).map(item =>
-      item.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    );
-    return { type: 'list', items: htmlItems };
-  }
-  return { type: 'paragraph', content: '' };
-}
-
-/**
- * Convert old ImageTextSection items to LocalPageSection
- */
-function convertSection(
-  id: string,
-  title: string,
-  items: Array<{ icon: string; title: string; content: Array<{ type: string; value?: string; items?: string[] }> }>
-): LocalPageSection {
-  const content: LocalContentBlock[] = [];
-
-  items.forEach((item, index) => {
-    // Add H3 heading for each item
-    if (index > 0) {
-      content.push({ type: 'heading', level: 3, content: item.title });
-    } else {
-      // First item - just add content without extra heading (section title is H2)
-      content.push({ type: 'heading', level: 3, content: item.title });
-    }
-
-    // Add content blocks
-    item.content.forEach(block => {
-      content.push(convertContentBlock(block));
-    });
-  });
-
-  return { id, title, content };
-}
-
-/**
- * Convert old LocalPageData to new LocalPageContent format
- */
-function convertToLocalPageContent(page: LocalPageData): LocalPageContent {
-  const sections: LocalPageSection[] = [];
-
-  // Intro section from EmotionalHero subtitle
-  if (page.emotionalHero.subtitle) {
-    const introContent: LocalContentBlock[] = [
-      { type: 'paragraph', content: page.emotionalHero.subtitle },
-    ];
-
-    // Add benefits as callout
-    if (page.emotionalHero.benefits && page.emotionalHero.benefits.length > 0) {
-      introContent.push({
-        type: 'callout',
-        variant: 'tip',
-        content: `<strong>Nasze atuty:</strong><br/>${page.emotionalHero.benefits.join('<br/>')}`,
-      });
-    }
-
-    sections.push({
-      id: 'wprowadzenie',
-      title: 'Wprowadzenie',
-      content: introContent,
-    });
-  }
-
-  // Building Stages / Offer - as dedicated card section with full content
-  const offer = {
-    id: 'oferta',
-    title: page.buildingStages.header.title,
-    description: page.buildingStages.header.description,
-    mainHref: '/oferta/kompleksowa-budowa-domow',
-    items: page.buildingStages.items.map(item => ({
-      icon: item.icon,
-      title: item.title,
-      content: item.content.map(block => {
-        if (block.type === 'paragraph') {
-          return {
-            type: 'paragraph' as const,
-            content: block.value.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'),
-          };
-        }
-        if (block.type === 'list') {
-          return {
-            type: 'list' as const,
-            items: block.items.map(i => i.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')),
-          };
-        }
-        return block;
-      }),
-      href: '/oferta/kompleksowa-budowa-domow',
-    })),
-  };
-
-  // Local Specifics section
-  sections.push(
-    convertSection(
-      'specyfika-lokalna',
-      page.localSpecifics.header.title,
-      page.localSpecifics.items
-    )
-  );
-
-  // Energy Efficiency section (optional)
-  if (page.energyEfficiency) {
-    sections.push(
-      convertSection(
-        'energooszczednosc',
-        page.energyEfficiency.header.title,
-        page.energyEfficiency.items
-      )
-    );
-  }
-
-  // Formalities section (optional)
-  if (page.formalities) {
-    sections.push(
-      convertSection(
-        'formalnosci',
-        page.formalities.header.title,
-        page.formalities.items
-      )
-    );
-  }
-
-  // Why Us - as dedicated section with cards
-  const whyUs = page.whyUs && page.whyUs.points.length > 0 ? {
-    id: 'dlaczego-my',
-    title: page.whyUs.header.title,
-    description: page.whyUs.header.description,
-    points: page.whyUs.points,
-  } : undefined;
-
-  // Districts
-  const districts = page.districts ? {
-    id: 'dzielnice',
-    title: page.districts.header.title,
-    description: page.districts.header.description,
-    items: page.districts.hub.cities.map(city => ({
-      label: city.label,
-      href: city.url !== '#' ? city.url : undefined,
-    })),
-  } : undefined;
-
-  // FAQ
-  const faq = page.faq && page.faq.items.length > 0 ? {
-    id: 'faq',
-    title: page.faq.header.title,
-    items: page.faq.items.map(item => ({
-      question: item.question,
-      answer: item.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'),
-    })),
-  } : undefined;
-
-  return {
-    sections,
-    offer,
-    districts,
-    whyUs,
-    faq,
-  };
-}
-
-/**
- * Strona lokalna - dynamiczna dla każdego miasta
+ * Strona lokalna — nowy layout (Layout A)
  */
 export default async function LocalPage({
-  params
+  params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
   const page = getLocalPageBySlug(slug);
@@ -252,26 +77,87 @@ export default async function LocalPage({
     notFound();
   }
 
-  // Generate Schema.org
   const schema = generateLocalPageSchema(page);
   const jsonLd = sanitizeJsonLd(schema);
-
-  // Convert old data format to new LocalPageContent format
-  const content = convertToLocalPageContent(page);
 
   return (
     <>
       <main>
-        {/* Hero - PageHeader (reużywalny) */}
-        <PageHeader {...page.pageHeader} />
-
-        {/* Main Content - Blog-style 2-column layout */}
-        <LocalPageContentSection
-          cityNameLocative={page.cityNameLocative}
-          content={content}
+        {/* 1. PageHeader — panorama hero */}
+        <PageHeader
+          title={page.pageHeader.title}
+          backgroundImage={page.pageHeader.backgroundImage}
         />
 
-        {/* Contact CTA Section */}
+        {/* 2. Breadcrumbs */}
+        <Breadcrumbs
+          items={page.pageHeader.breadcrumbs.map((crumb, i, arr) => ({
+            label: crumb.label,
+            href: i < arr.length - 1 ? crumb.href : undefined,
+          }))}
+          className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8"
+        />
+
+        {/* 3. EmotionalHeroSection — headline + CTA box */}
+        <EmotionalHeroSection {...page.emotionalHero} />
+
+        {/* 4. Partner logos — scrolling marquee */}
+        <PartnerLogosMarquee logos={page.partnerLogos} />
+
+        {/* 5. ServicePillarsSection — 3 karty usług */}
+        <ServicePillarsSection
+          header={page.servicePillars.header}
+          pillars={page.servicePillars.pillars}
+        />
+
+        {/* 6. MidPageCTA — złoty/ciemny banner */}
+        <MidPageCTA {...page.midCTA} />
+
+        {/* 7. LocalExpertiseSection — obraz + karty specyfiki */}
+        <LocalExpertiseSection
+          header={page.expertise.header}
+          cards={page.expertise.cards}
+          image={page.expertise.image}
+        />
+
+        {/* 8. Additional Sections (etapy-realizacji, energooszczednosc, formalnosci) */}
+        {page.additionalSections?.map((section) =>
+          section.id === 'etapy-realizacji' ? (
+            <BuildingStagesSection
+              key={section.id}
+              header={section.header}
+              cards={section.cards}
+              image={section.image}
+            />
+          ) : (
+            <LocalExpertiseSection
+              key={section.id}
+              header={section.header}
+              cards={section.cards}
+              image={section.image ?? page.expertise.image}
+            />
+          )
+        )}
+
+        {/* 9. WhyUsSection — kompaktowy grid 2x2 */}
+        <WhyUsSection {...page.whyUs} />
+
+        {/* 10. Districts + Nearby Cities (combined) */}
+        <DistrictsSection
+          header={page.districts.header}
+          items={page.districts.items}
+          hubDescription={page.districts.hubDescription}
+          nearbyCities={page.nearbyCities}
+        />
+
+        {/* 12. FAQTwoColumnsSection */}
+        <FAQTwoColumnsSection
+          id="faq-section"
+          header={page.faq.header}
+          items={page.faq.items}
+        />
+
+        {/* 13. ContactCTASection */}
         <ContactCTASection
           contactInfo={{
             phone: companyData.telephone,

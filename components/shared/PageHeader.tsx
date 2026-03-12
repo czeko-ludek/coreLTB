@@ -1,23 +1,20 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Icon } from '@/components/ui';
 
 export interface PageHeaderProps {
   title: string;
   subtitle?: string;
-  watermarkText?: string; // Deprecated - kept for backwards compatibility
-  breadcrumbs: Array<{ label: string; href: string }>;
+  watermarkText?: string;
+  breadcrumbs?: Array<{ label: string; href: string }>;
   backgroundImage: string;
 }
 
 export function PageHeader({
   title,
   subtitle,
-  breadcrumbs,
   backgroundImage,
 }: PageHeaderProps) {
   return (
@@ -37,35 +34,7 @@ export function PageHeader({
         {/* 2. Dark Overlay */}
         <div className="absolute inset-0 bg-black/60" />
 
-        {/* 3. Breadcrumbs - Top Center (hidden on very small screens) */}
-        <nav className="absolute top-4 sm:top-6 left-1/2 -translate-x-1/2 z-20 hidden sm:block">
-          <motion.div
-            initial={{ opacity: 0, y: -10, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm bg-white/10 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-2.5 rounded-full border border-white/20"
-          >
-            {breadcrumbs.map((crumb, index) => (
-              <React.Fragment key={crumb.href}>
-                {index > 0 && (
-                  <Icon name="chevronRight" className="text-white/50" size="sm" />
-                )}
-                <Link
-                  href={crumb.href}
-                  className={
-                    index === breadcrumbs.length - 1
-                      ? 'text-primary font-semibold'
-                      : 'text-white/80 hover:text-white transition-colors'
-                  }
-                >
-                  {crumb.label}
-                </Link>
-              </React.Fragment>
-            ))}
-          </motion.div>
-        </nav>
-
-        {/* 4. Centered Content */}
+        {/* 3. Centered Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10">
           <motion.span
             role="presentation"
@@ -89,7 +58,7 @@ export function PageHeader({
           )}
         </div>
 
-        {/* 5. Decorative Bottom Gradient */}
+        {/* 4. Decorative Bottom Gradient */}
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/50 to-transparent" />
       </section>
     </div>

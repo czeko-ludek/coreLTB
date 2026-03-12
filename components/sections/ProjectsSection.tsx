@@ -51,8 +51,8 @@ export function ProjectsSection({ header, projects }: ProjectsSectionProps) {
   }
 
   return (
-    <section ref={ref} className="relative py-20 overflow-visible bg-background-beige">
-      <div className="container mx-auto px-4">
+    <section ref={ref} className="relative py-20 overflow-hidden bg-background-beige">
+      <div className="mx-auto px-4 lg:px-8 max-w-[1400px]">
         {/* Custom header - left aligned with button on right */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
           <div
@@ -74,13 +74,13 @@ export function ProjectsSection({ header, projects }: ProjectsSectionProps) {
           </div>
         </div>
 
-        {/* Slider Container - arrows completely outside section */}
+        {/* Slider Container — side padding makes room for arrows on sm+ */}
         <div
-          className={clsx('mt-8 relative', inView ? 'animate-fade-in-up' : 'opacity-0')}
+          className={clsx('mt-8 relative sm:px-[4.5rem]', inView ? 'animate-fade-in-up' : 'opacity-0')}
           style={{ animationDelay: '0.3s' }}
         >
-          {/* Desktop Navigation Arrows - Outside container, centered vertically */}
-          <div className="hidden lg:block absolute -left-20 top-1/2 -translate-y-1/2 z-10">
+          {/* Left arrow — sits in the padding zone, outside cards */}
+          <div className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 z-10">
             <SliderArrow
               direction="left"
               onClick={handlePrev}
@@ -88,7 +88,9 @@ export function ProjectsSection({ header, projects }: ProjectsSectionProps) {
               variant="gold"
             />
           </div>
-          <div className="hidden lg:block absolute -right-20 top-1/2 -translate-y-1/2 z-10">
+
+          {/* Right arrow — sits in the padding zone, outside cards */}
+          <div className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 z-10">
             <SliderArrow
               direction="right"
               onClick={handleNext}
@@ -100,7 +102,7 @@ export function ProjectsSection({ header, projects }: ProjectsSectionProps) {
           {/* Projects Slider with Swiper */}
           <Swiper
             modules={[Navigation, Pagination]}
-            spaceBetween={24}
+            spaceBetween={16}
             slidesPerView={1}
             slidesPerGroup={1}
             loop={true}
@@ -108,8 +110,8 @@ export function ProjectsSection({ header, projects }: ProjectsSectionProps) {
             onSwiper={setSwiperInstance}
             pagination={{
               clickable: true,
-              bulletClass: 'swiper-pagination-bullet projects-bullet',
-              bulletActiveClass: 'swiper-pagination-bullet-active projects-bullet-active',
+              bulletClass: 'swiper-pagination-bullet swiper-custom-bullet',
+              bulletActiveClass: 'swiper-pagination-bullet-active swiper-custom-bullet-active',
             }}
             className="projects-swiper pb-12"
             breakpoints={{
@@ -117,18 +119,44 @@ export function ProjectsSection({ header, projects }: ProjectsSectionProps) {
                 slidesPerView: 1,
                 spaceBetween: 16,
               },
-              1024: {
+              640: {
                 slidesPerView: 2,
-                spaceBetween: 24,
+                spaceBetween: 16,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+              },
+              1280: {
+                slidesPerView: 4,
+                spaceBetween: 20,
               },
             }}
           >
             {projects.map((project, index) => (
-              <SwiperSlide key={`${project.title}-${index}`}>
+              <SwiperSlide key={`${project.slug}-${index}`}>
                 <ProjectCard {...project} />
               </SwiperSlide>
             ))}
           </Swiper>
+
+          {/* Mobile navigation — small arrows under cards, centered */}
+          <div className="flex sm:hidden items-center justify-center gap-4 mt-2">
+            <SliderArrow
+              direction="left"
+              onClick={handlePrev}
+              disabled={false}
+              variant="gold"
+              className="!w-11 !h-11"
+            />
+            <SliderArrow
+              direction="right"
+              onClick={handleNext}
+              disabled={false}
+              variant="gold"
+              className="!w-11 !h-11"
+            />
+          </div>
         </div>
       </div>
     </section>

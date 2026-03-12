@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Icon, IconName } from '@/components/ui';
+import { formatBold } from '@/lib/utils';
 import { CountingNumber } from './CountingNumber';
 
 export interface NumberedListItemProps {
@@ -50,7 +51,7 @@ export function NumberedListItem({
         <p
           className="text-body-md text-text-secondary leading-relaxed"
           dangerouslySetInnerHTML={{
-            __html: description.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-text">$1</strong>'),
+            __html: formatBold(description, 'font-bold text-text'),
           }}
         />
       </div>

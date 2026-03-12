@@ -4,7 +4,7 @@ Dokument stanowi pelna mape architektoniczna projektu CoreLTB Builders - strony 
 Zawiera inwentaryzacje wszystkich zaleznosci, komponentow, stron, plikow danych i ich wzajemnych powiazan.
 Cel: jeden dokument referencyjny dla dewelopera, ktory pozwala szybko zrozumiec co gdzie jest i co od czego zalezy.
 
-**Wygenerowano:** 2026-02-16
+**Wygenerowano:** 2026-02-17
 
 ---
 
@@ -340,18 +340,18 @@ Cel: jeden dokument referencyjny dla dewelopera, ktory pozwala szybko zrozumiec 
 
 ## 3.6 Projekty - Listing (`/projekty` - `/app/projekty/page.tsx`)
 
-**Typ:** SSR | **Metadata:** Statyczna
+**Typ:** SSG (statyczna) | **Metadata:** Statyczna | **Filtry:** kliencko przez `useSearchParams()` + `<Suspense>`
 
 | # | Komponent | Props/Dane |
 |---|-----------|-----------|
 | 1 | `ProjectsListingSection` | Cala sekcja (breadcrumbs, title, filters, grid) |
 
 **Wewnatrz ProjectsListingSection:**
-- `ProjectFilterSidebar` (desktop, sticky 280px)
+- `ProjectFilterSidebar` (desktop, sticky 280px) — technologia, kategoria, powierzchnia, zrodlo
 - `MobileFilterDrawer` (mobile, bottom sheet)
-- `ProjectListingCard[]` (grid 1/2/3 kolumny)
+- `ProjectListingCard[]` (grid 1/2/3 kolumny, 24/strone)
 
-**Zrodlo:** `allProjects` z `projects.ts`
+**Zrodlo:** `allProjects` z `data/projects/index.ts` (29 projektow)
 
 ---
 
@@ -359,19 +359,20 @@ Cel: jeden dokument referencyjny dla dewelopera, ktory pozwala szybko zrozumiec 
 
 **Typ:** SSG (`generateStaticParams`) | **Metadata:** `generateMetadata()`
 
-**5 projektow:** z357, z357-d-ecodom, zb5-duo, zx201, zx251
+**29 projektow:** 5 z galerii (manual.ts) + 24 z Z500 (z500.ts)
 
 | # | Komponent | Props/Dane |
 |---|-----------|-----------|
-| 1 | `ProjectGalleryHero` | Galeria zdjec z lightbox |
+| 1 | `ProjectGalleryHero` | Galeria zdjec/renderow z lightbox |
 | 2 | `ProjectIntroduction` | Powierzchnia, koszt, technologia, opis |
-| 3 | `ProjectTabs` | Zakladki specyfikacji |
-| 4 | `ProjectFloorPlans` | Plany pieter z modalem |
-| 5 | `ProjectOptimalPrice` | Rozbicie kosztow |
-| 6 | `ProjectModificationCTA` | CTA modyfikacji projektu |
-| 7 | `RelatedProjectsSection` | Powiazane projekty (Swiper) |
+| 3 | `ProjectTabs` | Zakladki specyfikacji (bez "Koszty" dla Z500) |
+| 4 | `ProjectFloorPlans` | Plany pieter z lightbox + toggle lustrzane odbicie |
+| 5 | `ProjectElevations` | Elewacje + przekroj/usytuowanie + wymiary dzialki |
+| 6 | `ProjectOptimalPrice` | Rozbicie kosztow (tylko galeria/own) |
+| 7 | `ProjectModificationCTA` | CTA modyfikacji projektu |
+| 8 | `RelatedProjectsSection` | Powiazane projekty (Swiper) |
 
-**Zrodlo:** `projects.ts` (getProjectBySlug)
+**Zrodlo:** `data/projects/index.ts` (getProjectBySlug) — laczy manual.ts + z500.ts
 
 ---
 
@@ -521,29 +522,128 @@ Cel: jeden dokument referencyjny dla dewelopera, ktory pozwala szybko zrozumiec 
 
 ---
 
-## 4.3 `projects.ts` - Dane Projektow
+## 4.3 System Projektow Domow
 
-**Typy:** `ProjectCategory`, `ProjectTechnology`, `SortOption`, `ProjectFilters`, `BudgetRange`, `SurfaceRange`, `Project`
+### Architektura danych
 
-**Eksportowane:**
+Projekty domow sa przechowywane w katalogu `/data/projects/` z podzialem na zrodla:
+
+```
+data/projects/
+├── types.ts          <- Interfejs Project, ProjectListingItem, ProjectFilters, typy pomocnicze
+├── index.ts          <- Re-eksport, allProjects (laczenie zrodel), filtry, sort, helpery
+├── manual.ts         <- 5 projektow z galerii domow (source: 'own')
+└── z500.ts           <- 24 projekty z Z500.pl (source: 'z500') — auto-generowany
+```
+
+### Dwa zrodla projektow
+
+| Cecha | Galeria (manual.ts) | Z500 (z500.ts) |
+|-------|---------------------|----------------|
+| **source** | `'own'` | `'z500'` |
+| **Ilosc** | 5 | 24 |
+| **Dane** | Reczne wpisy | Auto-import skryptem `scripts/import-z500.js` |
+| **Galeria zdjec** | `galleryImageCount` (5-15 zdjec) | `galleryImageCount` (5-15 renderow) |
+| **Elewacje** | `elevationImageCount` (4 elewacje) | `elevationImageCount` (4 elewacje) |
+| **Rzuty pieter** | `floorPlans[]` z etykietami | `floorPlans[]` z etykietami |
+| **Przekroj** | `hasCrossSection: true` (obraz) | Brak (Z500 nie udostepnia) |
+| **Usytuowanie** | `hasSitePlan: true` (obraz) | `hasSitePlan: true` (obraz SVG->WebP) |
+| **Wymiary dzialki** | Brak | `lotWidth`, `lotLength`, `elevationWidth` |
+| **Specyfikacje** | `specifications[]` z tabelami | `specifications[]` z tabelami |
+| **Koszty** | `estimatedCost`, `costBreakdown` | Brak kosztow (uslugi wyceny indywidualnej) |
+| **Opis** | Reczny | Auto z Z500 (`proj.text_short`, `proj.text_long`) |
+
+### Wyswietlanie na stronie `/projekty/[slug]`
+
+Strona projektu sklada sie z:
+
+1. **ProjectGalleryHero** — galeria zdjec/renderow z lightbox
+2. **ProjectIntroduction** — powierzchnia, koszt, technologia, opis
+3. **ProjectTabs** — zakladki specyfikacji (bez tab "Koszty" dla Z500)
+4. **ProjectFloorPlans** — rzuty pieter z lightbox + toggle lustrzane odbicie
+5. **ProjectElevations** — elewacje + przekroj/usytuowanie + wymiary
+6. **ProjectOptimalPrice** — rozbicie kosztow (tylko galeria)
+7. **ProjectModificationCTA** — CTA modyfikacji
+8. **RelatedProjectsSection** — powiazane projekty (Swiper)
+
+### Layout elewacji (ProjectElevations)
+
+Komponent rozroznia dwa warianty layoutu:
+
+**Wariant A — Galeria** (gdy `hasCrossSection=true`):
+```
+┌──────────────┬──────────────┐
+│ Elewacja 1   │ Elewacja 2   │  <- grid 2 kolumny
+├──────────────┼──────────────┤
+│ Elewacja 3   │ Elewacja 4   │
+├──────────────┼──────────────┤
+│ Przekroj     │ Usytuowanie  │  <- 2 obrazy obok siebie
+└──────────────┴──────────────┘
+```
+
+**Wariant B — Z500** (gdy `hasCrossSection=false` + wymiary):
+```
+┌──────────────┬──────────────┐
+│ Elewacja 1   │ Elewacja 2   │  <- grid 2 kolumny
+├──────────────┼──────────────┤
+│ Elewacja 3   │ Elewacja 4   │
+├──────────────┼──────────────┤
+│ Usytuowanie  │ Wymiary      │  <- obraz + kafelki obok siebie
+│ na dzialce   │ ┌──────────┐ │
+│ (obraz)      │ │Szer: 20m │ │
+│              │ │Dlug: 18m │ │
+│              │ ├──────────┤ │
+│              │ │Elew: 14m │ │
+│              │ └──────────┘ │
+└──────────────┴──────────────┘
+```
+
+### Lustrzane odbicie (Mirror Mode)
+
+Projekty Z500 czesto maja warianty lustrzane. System `MirrorModeContext` + `useMirrorMode()` pozwala:
+- Toggle miedzy oryginalem a odbiciem lustrzanym
+- Automatycznie zmienia sciezki obrazow (`/images/projekty/slug/` → `/images/projekty/slug/mirror/`)
+- Dotyczy: galerii, rzutow pieter, elewacji
+
+### Import z Z500 (`scripts/import-z500.js`)
+
+Skrypt scrapuje dane z z500.pl i generuje `data/projects/z500.ts`:
+
+1. **Wejscie:** `scripts/z500-urls.txt` — lista URLi projektow Z500
+2. **Proces:** Pobiera HTML → parsuje `PageData` (Vue SPA data) → pobiera obrazy → konwertuje SVG→WebP (ImageMagick)
+3. **Wyjscie:** Plik TS + obrazy w `public/images/projekty/<slug>/`
+4. **Uruchomienie:** `node scripts/import-z500.js` (pelny) lub `--skip-download` (tylko regeneracja TS)
+
+Dane pobierane z Z500: rendery, rzuty pieter, elewacje, przekroj (SVG), usytuowanie (SVG), specyfikacje, opis, instalacje, wymiary dzialki.
+
+### Eksporty z `data/projects/index.ts`
 
 | Export | Typ | Opis |
 |--------|-----|------|
-| `allProjects` | `Project[]` | 5 projektow |
-| `projectCategories` | Stala | 4 kategorie (jednorodzinny, dwulokalowy, z-poddaszem, parterowy) |
-| `projectTechnologies` | Stala | 2 technologie (MUROWANY, DREWNIANY) |
-| `budgetRanges` | `BudgetRange[]` | 3 zakresy budzetowe |
+| `allProjects` | `Project[]` | 29 projektow (5 manual + 24 z500) |
+| `toListingItem(p)` | Funkcja | Konwersja Project → ProjectListingItem (dla listingu) |
+| `projectCategories` | Stala | Kategorie (jednorodzinny, dwulokalowy, z-poddaszem, parterowy) |
+| `projectTechnologies` | Stala | Technologie (MUROWANY, DREWNIANY) |
+| `projectSources` | Stala | Zrodla (own, z500) |
 | `surfaceRanges` | `SurfaceRange[]` | 6 zakresow powierzchni |
-| `sortOptions` | Stala | 4 opcje sortowania (cena/powierzchnia asc/desc) |
-| `parseEstimatedCost(s)` | Funkcja | "984 tys. zl" -> 984000 |
-| `parseSurfaceArea(s)` | Funkcja | "248 + 38m2" -> 286 |
-| `filterProjects(...)` | Funkcja | Filtrowanie po technologii/kategorii/budzecie/powierzchni |
-| `sortProjects(...)` | Funkcja | Sortowanie po cenie/powierzchni |
+| `sortOptions` | Stala | 4 opcje sortowania |
+| `filterProjects(...)` | Funkcja | Filtrowanie po technologii/kategorii/powierzchni/zrodle |
+| `sortProjects(...)` | Funkcja | Sortowanie |
 | `countProjectsByFilter(...)` | Funkcja | Licznik per filtr |
 | `getAllProjectSlugs()` | Funkcja | Slugi (SSG) |
 | `getProjectBySlug(slug)` | Funkcja | Znajdz projekt |
 
-**5 projektow:** z357, z357-d-ecodom, zb5-duo, zx201, zx251
+### Filtry na stronie `/projekty`
+
+Strona jest **statyczna (SSG)** — filtry czytane kliencko przez `useSearchParams()`:
+- **Technologia:** murowany, drewniany
+- **Kategoria:** jednorodzinny, dwulokalowy, z-poddaszem, parterowy
+- **Powierzchnia:** 6 zakresow (do 80m², 80-100, 100-120, 120-150, 150-200, 200+)
+- **Zrodlo:** galeria domow (own), Z500 (z500)
+- **Sortowanie:** najnowsze, powierzchnia rosnaco/malejaco, cena rosnaco/malejaco
+- **Paginacja:** 24 projekty na strone
+
+URL sync: zmiana filtrow aktualizuje URL (`?technology=murowany&surface=100-120&sort=newest`)
 
 ---
 
@@ -833,8 +933,8 @@ h6 { font-family: font-heading; font-weight: 500 (medium) }
 | `/o-nas` | `app/o-nas/page.tsx` | SSR | Statyczna | Nie |
 | `/oferta` | `app/oferta/page.tsx` | SSR | Statyczna | Nie |
 | `/oferta/[slug]` | `app/oferta/[slug]/page.tsx` | **SSG** (6) | Dynamiczna | Tak |
-| `/projekty` | `app/projekty/page.tsx` | SSR | Statyczna | Nie |
-| `/projekty/[slug]` | `app/projekty/[slug]/page.tsx` | **SSG** (5) | Dynamiczna | Nie |
+| `/projekty` | `app/projekty/page.tsx` | **SSG** | Statyczna | Nie |
+| `/projekty/[slug]` | `app/projekty/[slug]/page.tsx` | **SSG** (29) | Dynamiczna | Nie |
 | `/blog` | `app/blog/page.tsx` | SSR | Statyczna | Nie |
 | `/blog/[slug]` | `app/blog/[slug]/page.tsx` | **SSG** (N) | Dynamiczna | Nie |
 | `/kontakt` | `app/kontakt/page.tsx` | SSR | Statyczna | Nie |
@@ -842,7 +942,7 @@ h6 { font-family: font-heading; font-weight: 500 (medium) }
 | `/obszar-dzialania` | `app/obszar-dzialania/page.tsx` | SSR | Statyczna | Tak |
 | `/obszar-dzialania/[slug]` | `app/obszar-dzialania/[slug]/page.tsx` | **SSG** (7) | Dynamiczna | Tak |
 
-**Lacznie SSG:** ~18+ stron statycznie generowanych (6 uslug + 5 projektow + N blogow + 7 miast)
+**Lacznie SSG:** ~402 strony statycznie generowane (6 uslug + 29 projektow + ~365 projektow z500-aliasy + 12 blogow + 7 miast)
 
 ---
 
@@ -903,7 +1003,7 @@ blog-data.ts (wpisy blogowe)
 | **Lacznie komponentow** | **92** |
 | Pliki danych (data/) | 10 |
 | Strony lokalne (miasta) | 7 |
-| Projekty | 5 |
+| Projekty (lacznie) | 29 (5 galeria + 24 Z500) |
 | Uslugi V2 | 6 |
 | Kategorie bloga | 4 |
 | Wojewodztwa na mapie | 3 |

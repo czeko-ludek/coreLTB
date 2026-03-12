@@ -1,12 +1,19 @@
 // Centralized exports for Shared components (Molecules)
 // This file provides a single entry point for all molecular components
 
+// Error Boundary
+export { ErrorBoundary } from './ErrorBoundary';
+
 // Section Headers
 export { SectionHeader } from './SectionHeader';
 export type { SectionHeaderProps } from './SectionHeader';
 
 export { PageHeader } from './PageHeader';
 export type { PageHeaderProps } from './PageHeader';
+
+// Breadcrumbs
+export { Breadcrumbs } from './Breadcrumbs';
+export type { BreadcrumbsProps, BreadcrumbItem } from './Breadcrumbs';
 
 // Cards - Services
 export { ServiceCard } from './ServiceCard';

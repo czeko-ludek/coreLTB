@@ -5,6 +5,9 @@
 import { IconName } from '@/components/ui';
 import { TestimonialCardProps, SectionHeaderProps, NumberedListItemProps } from '@/components/shared';
 
+/** Aktualny rok — używany w tekstach ofertowych, aby nie edytować ręcznie co roku. */
+const CURRENT_YEAR = new Date().getFullYear();
+
 // --- Nowe Typy Danych ---
 
 export interface PageHeaderData {
@@ -152,6 +155,15 @@ export interface CooperationTimelineNoLineData {
   steps: TimelineStepNoLineData[];
 }
 
+// --- Dane listingowe (karta na stronie /oferta) ---
+
+export interface ServiceListingData {
+  image: string;
+  title: string;
+  description: string;
+  features: string[];
+}
+
 // --- Główny Typ Usługi V2 ---
 
 export interface ServiceV2 {
@@ -159,6 +171,9 @@ export interface ServiceV2 {
   id: string;
   category: string;
   title: string;
+
+  // Listing (karta na stronie /oferta)
+  listing: ServiceListingData;
 
   // PageHeader (jak na innych stronach)
   pageHeader: PageHeaderData;
@@ -206,45 +221,64 @@ export const allServicesV2: ServiceV2[] = [
     slug: 'kompleksowa-budowa-domow',
     id: 'kompleksowa-budowa-domow',
     category: 'Kompleksowa budowa domów',
-    title: 'Kompleksowa budowa domów',
+    title: 'Generalny Wykonawca Domów Śląsk', // Zmiana pod SEO!
+
+    // Listing (karta na stronie /oferta)
+    listing: {
+      image: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=800',
+      title: 'Generalne wykonawstwo domów (SSO / deweloperski / pod klucz)',
+      description: 'Generalne wykonawstwo (SSO / Deweloperka) w reżimie WT2026. Płyty fundamentowe, dylatacje pod szkody górnicze, stała cena.',
+      features: [
+        'Indywidualne projekty architektoniczne',
+        'Gwarancja jakości i terminowości',
+      ],
+    },
 
     // PageHeader
     pageHeader: {
-      title: 'Kompleksowa budowa domów',
-      watermarkText: 'BUDOWA DOMÓW',
+      // TU ZMIANA: Hybryda Fraz (Vol: 5000 + 500)
+      title: 'Kompleksowa budowa domów: Generalny wykonawca',
+      watermarkText: 'GENERALNY WYKONAWCA', 
       backgroundImage: '/images/uslugi/kompleksowa-budowa-domow/hero.webp',
       breadcrumbs: [
         { label: 'Strona główna', href: '/' },
         { label: 'Oferta', href: '/oferta' },
-        { label: 'Kompleksowa budowa domów', href: '' },
+        // Zmieniamy breadcrumb na krótki SEO
+        { label: 'Budowa domów (Śląsk / Małopolska)', href: '' }, 
       ],
     },
 
-    // Sekcja 1: Dom to więcej niż budynek
+    // Sekcja 1: HERO - SEO + Konkret Inżynierski
     emotionalHero: {
-      label: 'GENERALNY WYKONAWCA • ŚLĄSK, MAŁOPOLSKA, OPOLSKIE',
-      headline: ['Pełna logistyka, nadzór inżynierski',
-      'i gwarancja stałej ceny'
-    ],
+      label: 'SYSTEMOWA BUDOWA DOMÓW NA ŚLĄSKU I W MAŁOPOLSCE',
+      // NAGŁÓWEK H1 - Bezpośrednio w frazę "Budowa Domów" (Volume: 5000)
+      headline: [
+        'Kompleksowa budowa domów',
+        'z gwarancją stałej ceny'
+      ],
+      // PODTYTUŁ - Tu wstrzykujemy semantykę (Płyta + Ceramika + Stan surowy)
       subtitle:
-        'Jako Generalny Wykonawca przejmujemy 100% odpowiedzialności za proces inwestycyjny. W przeciwieństwie do budowy "systemem gospodarczym", oferujemy przewidywalność. Przejmujemy 100% odpowiedzialności za logistykę na Śląsku, w Małopolsce i Opolskiem – od analizy gruntu, przez stan surowy, aż po odbiory techniczne.',
+        'Zastępujemy chaos systemu gospodarczego inżynierskim procesem. Realizujemy domy w technologii murowanej (ceramika/silikat) oraz na płycie fundamentowej, co jest kluczowe przy szkodach górniczych. Obsługujemy inwestycje od "geologa", przez stan surowy otwarty, aż po stan deweloperski i odbiory.',
+      
       benefits: [
-        '15 lat doświadczenia w realizacji budynków jednorodzinnych',
-        'Jeden wykonawca = jedna gwarancja na cały budynek',
-        'Stały koszt budowy wpisany w harmonogram',
+        // Konkretne liczby i nazewnictwo prawne
+        'Ponad 150 oddanych budynków (technologia tradycyjna i płytowa)',
+        'Pełna odpowiedzialność prawna (5 lat rękojmi na konstrukcję)',
+        'Umowa ryczałtowa (stała cena niezależnie od inflacji materiałowej)',
       ],
-      // CTA Box
-      ctaBoxTitle: '☎ Umów Bezpłatną Konsultację',
+      
+      // CTA Box - Sprzedajemy wiedzę za kontakt (Lead Magnet)
+      ctaBoxTitle: 'Wstępny audyt inwestycji',
       ctaBoxBenefits: [
-        'Wstępna analiza działki (Szkody górnicze, MPZP, Media)',
-        'Szacunkowy kosztorys budowy domu na rok 2026',
-        'Porównanie kosztów: Stan Surowy vs Deweloperski',
-        'Omówienie technologii (WT2021, Pompy ciepła)',
+        'Weryfikacja MPZP i kategorii szkód górniczych na działce',
+        'Szacunkowy kosztorys budowy domu na rok 2026 (SSO / Deweloperski)',
+        'Analiza: Ławy fundamentowe czy płyta? (Kalkulacja pod grunt)',
+        'Wstępny dobór technologii OZE (Pompa ciepła + Fotowoltaika)',
       ],
-      ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
+      ctaBoxSubtext: 'Konsultacja techniczna z Inżynierem Kontraktu.',
       ctaBoxButtons: [
         {
-          text: 'Zadzwoń do Nas',
+          text: 'Umów analizę działki', // Konkretna akcja
           href: 'tel:+48123456789',
           variant: 'primary',
         },
@@ -301,85 +335,70 @@ philosophyTimeline: {
 // Sekcja 4: Zakres Usług (w formie Akordeonu)
 servicesAccordion: {
   header: {
-    label: 'ZAKRES USŁUG',
-    title: 'Jeden partner, nieskończone możliwości',
-    description: 'Odkryj pełen zakres naszego wsparcia na każdym etapie Twojej inwestycji.',
+    label: 'PYTANIA I ODPOWIEDZI',
+    title: 'Kwestie budżetowe i prawne',
+    description: 'Odpowiedzi na najczęstsze obawy inwestorów dotyczące umów, cen i terminów.',
     theme: 'light' as const,
   },
   
-  // Zaktualizowana tablica usług
   services: [
     {
-      iconName: 'fileText', // Ikona dla pierwszej karty
-      title: 'Etap przed-budowlany: solidne fundamenty Twojej inwestycji',
+      iconName: 'coins', // Ikona Pieniędzy
+      title: 'Czy cena w umowie jest stała i gwarantowana?',
       content: [
         {
           type: 'paragraph',
-          value: 'Dobrze wiemy, że sukces całej budowy zależy od starannego przygotowania. Dlatego nasze wsparcie zaczyna się na długo przed pierwszym wbiciem łopaty. Bierzemy na siebie najbardziej złożone i czasochłonne zadania, aby Twoja inwestycja od samego początku stała na pewnym gruncie.'
+          value: '**Tak.** To fundamentalna różnica między Generalnym Wykonawcą a "systemem gospodarczym". Podpisujesz z nami umowę na stałą kwotę ryczałtową. Jako duży podmiot, my kontraktujemy materiały z wyprzedzeniem, biorąc na siebie **ryzyko inflacji i wzrostu cen**.'
         },
         {
-          type: 'list',
-          items: [
-            '**Analiza i Pomoc w Zakupie Działki:** Wyszukujemy i weryfikujemy działki pod kątem prawnym, technicznym i geologicznym, zapewniając, że Twój projekt będzie możliwy do zrealizowania.',
-            '**Obsługa Formalno-Prawna:** Reprezentujemy Cię w urzędach, uzyskując **Warunki Zabudowy**, wypisy z **MPZP** oraz finalne **pozwolenie na budowę**.',
-            '**Wsparcie w Finansowaniu:** Przygotowujemy profesjonalne **kosztorysy budowlane** i harmonogramy, które są niezbędne do uzyskania kredytu hipotecznego.',
-          ]
+          type: 'paragraph',
+          value: 'Dzięki temu Twoja rata kredytu i harmonogram finansowy są bezpieczne, a Ty nie musisz szukać dodatkowych środków w trakcie budowy.'
         }
       ]
     },
     {
-      iconName: 'draftingCompass', // Ikona dla drugiej karty
-      title: 'Projektowanie i adaptacje: Twoja wizja w rękach ekspertów',
+      iconName: 'calendar', // Ikona Kalendarza
+      title: 'Ile realnie trwa budowa do stanu deweloperskiego?',
       content: [
         {
           type: 'paragraph',
-          value: 'Każdy wielki dom zaczyna się od doskonałego projektu. Nasz zespół architektów i projektantów dba o to, by Twoja wizja została przelana na papier w sposób funkcjonalny, estetyczny i zgodny z budżetem.'
+          value: 'Dzięki własnym brygadom i materiałom systemowym, eliminujemy przestoje (tzw. "dziury w grafiku"). Średni czas realizacji dla domu ~150 m² to:'
         },
         {
-          type: 'list',
-          items: [
-            '**Indywidualne Projekty Architektoniczne:** Tworzymy unikalne projekty "szyte na miarę", które w 100% odpowiadają Twoim potrzebom i marzeniom.',
-            '**Adaptacje Projektów Gotowych:** Optymalizujemy i dostosowujemy projekty katalogowe do specyfiki Twojej działki, wprowadzając inteligentne zmiany, które podnoszą komfort życia.',
-            '**Projekty Branżowe i Techniczne:** Koordynujemy tworzenie kompletnej dokumentacji, w tym projektów konstrukcji i wszystkich niezbędnych instalacji.',
-            '**Projektowanie Wnętrz:** Oferujemy również wsparcie w aranżacji wnętrz, aby zapewnić spójność stylistyczną i funkcjonalną całego domu.',
-          ]
+           type: 'list',
+           items: [
+             '**3-4 miesiące** – Stan Surowy Otwarty (SSO).',
+             '**7-9 miesięcy** – Stan Deweloperski (pełne instalacje, tynki, elewacja).',
+             '**12 miesięcy** – Opcja "Pod Klucz" z wykończeniem wnętrz.'
+           ]
         }
       ]
     },
     {
-      iconName: 'hardHat', // Ikona dla trzeciej karty
-      title: 'Generalne wykonawstwo: budowa od A do Z pod pełną kontrolą',
+      iconName: 'shieldCheck', // Ikona Tarczy
+      title: 'Jak wygląda gwarancja na budynek?',
       content: [
         {
           type: 'paragraph',
-          value: 'Jako generalny wykonawca, jesteśmy jednym, w pełni odpowiedzialnym partnerem. Zarządzamy całym procesem budowlanym, gwarantując najwyższą jakość, terminowość i stały kontakt.'
+          value: 'W systemie gospodarczym, gdy pęknie rura lub dach zacznie przeciekać, dekarz zrzuca winę na kominiarza. U nas to niemożliwe. Jako Generalny Wykonawca udzielamy **jednej, spójnej 5-letniej rękojmi** na cały budynek (konstrukcję, szczelność, instalacje).'
         },
         {
-          type: 'list',
-          items: [
-            '**Realizacja Stanu Surowego:** Wznosimy solidne fundamenty, ściany i konstrukcję dachu, tworząc trwały szkielet Twojego domu (w stanie otwartym lub zamkniętym).',
-            '**Prace do Stanu Deweloperskiego:** Wykonujemy wszystkie instalacje, tynki, wylewki i ocieplenie, przygotowując budynek do prac wykończeniowych.',
-            '**Wykończenia "Pod Klucz":** Realizujemy kompleksowe prace wykończeniowe – od malowania i podłóg, przez łazienki, aż po biały montaż, oddając dom gotowy do zamieszkania.',
-            '**Kierownictwo i Nadzór Budowlany:** Zapewniamy profesjonalnego kierownika budowy, który dba o zgodność prac z projektem, normami i harmonogramem.',
-          ]
+          type: 'paragraph',
+          value: 'Masz jeden numer telefonu do zgłaszania usterek. To my zarządzamy podwykonawcami, a nie Ty.'
         }
       ]
     },
     {
-      iconName: 'tree', // Ikona dla czwartej karty (TreeDeciduous)
-      title: 'Prace zewnętrzne i finalizacja: perfekcyjne zwieńczenie projektu',
+      iconName: 'hardHat', // Ikona Kasku/Nadzoru
+      title: 'Czy muszę codziennie bywać na budowie?',
       content: [
         {
           type: 'paragraph',
-          value: 'Nasz zakres odpowiedzialności wykracza poza mury budynku. Dbamy o każdy detal, aż do momentu, w którym możesz w pełni cieszyć się swoją nową posiadłością.'
+          value: '**Nie.** Twoim reprezentantem na miejscu jest **Kierownik Kontraktu CoreLTB Builders**. Ty pojawiasz się tylko na kluczowych kamieniach milowych (np. odbiór zbrojenia stropu, odbiór tynków).'
         },
         {
-          type: 'list',
-          items: [
-            '**Zagospodarowanie Terenu:** Realizujemy kompleksowe prace zewnętrzne, w tym podjazdy, tarasy, ogrodzenia oraz zakładanie trawników i nasadzenia.',
-            '**Odbiory Techniczne:** Bierzemy na siebie cały proces odbiorów z udziałem nadzoru budowlanego, aż do uzyskania **pozwolenia na użytkowanie**.',
-            '**Serwis Gwarancyjny:** Jesteśmy do Twojej dyspozycji również po zakończeniu budowy, zapewniając pełne wsparcie w ramach wieloletniej gwarancji.',
-          ]
+          type: 'paragraph',
+          value: 'Codzienny nadzór logistyczny i jakościowy to nasza praca. Otrzymujesz od nas regularne raporty (zdjęcia/wideo) z postępów prac, więc widzisz, co dzieje się na Twojej działce bez wychodzenia z biura.'
         }
       ]
     }
@@ -484,241 +503,234 @@ servicesAccordion: {
         theme: 'light' as const,
       },
       steps: [
-        {
-          id: 'etap-1',
-          number: 1,
-          icon: 'mapPin',
-          label: 'Działka',
-          title: 'Audyt Terenu i Geotechnika',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Na Południu Polski zakup działki bez sprawdzenia geologii to hazard. Specyfika regionu – w tym **grunty wysadzinowe (gliny)** oraz **aktywne szkody górnicze** (od I do IV kategorii) – bezpośrednio wpływa na koszt fundamentów. Analizujemy grunt przed startem prac, bo różnica w cenie między ławą a płytą fundamentową jest znacząca.'
-            },
-            {
-              type: 'list',
-              items: [
-                '**Odwierty Geologiczne:** Wykonujemy badania gruntu, aby wykluczyć kosztowną wymianę gruntu (np. przy nasypach niekontrolowanych).',
-                '**Szkody Górnicze:** Weryfikujemy kategorię terenu (PGG/WUG) i dobieramy stal zbrojeniową, która utrzyma sztywność budynku przy wstrząsach.',
-                '**Geodeta:** Wykonujemy mapę do celów projektowych i wytyczamy budynek w terenie z dokładnością milimetrową.'
-              ]
-            },
-            {
-               // STRATEGICZNY LINK WEWNĘTRZNY DO USŁUGI WSPIERAJĄCEJ
-               type: 'paragraph', 
-               value: '**Masz trudną działkę?** Sprawdź szczegóły: [Usługi Geologiczne i Geodezyjne w CoreLTB >](/oferta/uslugi-techniczne-w-budownictwie)'
-            }
-          ],
-          // Twoje oryginalne zdjęcie zostaje
-          imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/dzialka-budowlana.webp',
-          imageAlt: 'Geodeta z teodolitem na pustej działce budowlanej w słoneczny dzień',
-        },
-        {
-          id: 'etap-2',
-          number: 2,
-          icon: 'draftingCompass',
-          label: 'Projekt',
-          title: 'Projekt i Optymalizacja Konstrukcji',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Dla nas projekt to nie tylko wizualizacja, ale precyzyjny plan wydatków. Niezależnie od ścieżki, weryfikujemy dokumentację "okiem wykonawcy". Eliminujemy błędy projektowe i przewymiarowaną ilość stali w fundamentach, zanim maszyny wjadą na budowę.  **Oszczędzasz 10-20% na stanie surowym** dzięki optymalizacji.'
-            },
-            {
-              type: 'list',
-              items: [
-                '**Adaptacja projektu gotowego:** Masz projekt z katalogu? Przeliczamy go na nowo pod kątem **lokalnych stref wiatrowych/śniegowych** i szkód górniczych. Często "odchudzamy" fundamenty lub zmieniamy drogi strop monolityczny na tańszą Terivę/systemowy, zachowując pełną nośność.',
-                '**Indywidualny projekt domu:** Projektujemy od "czystej kartki" domy energooszczędne **WT2021**. Tworzymy bryły proste w budowie i tanie w eksploatacji, od razu uwzględniając miejsce na rekuperację i pompę ciepła.',
-                '**Projekty branżowe:** Kompletujemy pełną dokumentację instalacyjną, wjazdy (ZUD) i charakterystykę energetyczną budynku.'
-              ]
-            },
-            {
-              type: 'paragraph',
-              value: 'Jesteśmy Twoim **partnerem w projektowaniu**, dbając o to, by finalny plan był nie tylko estetyczny, ale przede wszystkim możliwy do zrealizowania w założonym budżecie.'
-            }
-          ],
-          imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/projekt-domu.webp',
-          imageAlt: 'Architekci omawiający plany budowy w nowoczesnym biurze z modelem 3D domu',
-        },
-        {
-          id: 'etap-3',
-          number: 3,
-          icon: 'plug',
-          label: 'Przyłącza',
-          title: 'Przyłącza budowlane',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Uzbrojenie działki to labirynt biurokracji i prac ziemnych. W CoreLTB działamy kompleksowo: **jako Twój pełnomocnik** przejmujemy kontakt z gestorami sieci (Tauron, PSG, Lokalne Wodociągi) na terenie Śląska i Małopolski. Ty nie stoisz w kolejkach, my dostarczamy media do budynku.'
-            },
-            {
-              type: 'list',
-              items: [
-                '**Warunki techniczne (WTP):** Składamy wnioski o wydanie warunków przyłączenia dla wszystkich mediów (Prąd, Woda, Gaz, Kanalizacja), negocjując optymalne trasy przebiegu.',
-                '**Projekty branżowe i ZUD:** Zlecamy projekty uprawnionym projektantom sanitarnym/elektrycznym i przeprowadzamy je przez Zespół Uzgodnień Dokumentacji (ZUD) w urzędzie.',
-                '**Realizacja (prace ziemne):** Wprowadzamy certyfikowane ekipy instalatorskie. Koordynujemy wykopy i montaże, dbając o normowe wykonanie (podsypki, taśmy ostrzegawcze).',
-                '**Odbiory i liczniki:** Organizujemy inwentaryzację geodezyjną powykonawczą oraz końcowe odbiory techniczne z zakładem energetycznym/gazownią, aż do momentu montażu liczników.'
-              ]
-            },
-            {
-              type: 'paragraph',
-              value: 'Dzięki naszemu doświadczeniu, etap uzbrojenia działki przebiega **sprawnie i bez niepotrzebnych przestojów**.'
-            }
-          ],
-          imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/przylacza-budowlane.webp',
-          imageAlt: 'Pracownik budowlany łączący rury na placu budowy',
-        },
-        {
-          id: 'etap-4',
-          number: 4,
-          icon: 'stamp',
-          label: 'Pozwolenie',
-          title: 'Pozwolenie na budowę',
-          content: [
-            {
-              type: 'paragraph',
-              value: ' W CoreLTB przygotowujemy kompletny wniosek zgodny z aktualnym Prawem Budowlanym. Znamy specyfikę i wymogi formalne wydziałów architektury w lokalnych Starostwach (Katowice, Rybnik, Gliwice, Opole), co minimalizuje ryzyko odrzucenia wniosku.'
-            },
-            {
-              type: 'list',
-              items: [
-                '**Kompletacja dokumentacji:** Składamy Projekt Zagospodarowania Terenu (PZT) oraz Projekt Architektoniczno-Budowlany (PAB) wraz z wymaganymi opiniami.',
-                '**Obsługa formalna:** Wypełniamy oświadczenia o prawie do dysponowania nieruchomością, wnioski o odrolnienie oraz uzgodnienia z rzeczoznawcami (ppoż/sanepid).',
-                '**Monitoring sprawy:** Na bieżąco kontaktujemy się z inspektorem prowadzącym sprawę, aby błyskawicznie reagować na ewentualne wezwania, nie angażując Twojego czasu.'
-              ]
-            },
-            {
-              type: 'paragraph',
-              value: 'Dzięki naszej skrupulatności **minimalizujemy ryzyko odrzucenia wniosku** i maksymalnie skracamy czas oczekiwania na decyzję.'
-            }
-          ],
-          imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/pozwolenie-na-budowe.webp',
-          imageAlt: 'Oficjalny dokument z pieczęcią zatwierdzającą pozwolenie na budowę',
-        },
+          {
+            id: 'etap-1',
+            number: 1,
+            icon: 'mapPin',
+            label: 'Działka',
+            title: 'Audyt i badania geotechniczne gruntu', // WBITE SŁOWO KLUCZOWE (5k)
+            content: [
+              {
+                type: 'paragraph',
+                value: 'Zakup działki na Śląsku bez sprawdzenia gruntu to ryzyko. Grunty wysadzinowe (gliny) i **szkody górnicze** (kategorie I-IV) wpływają na koszty. Analizujemy grunt przed startem, bo różnica w cenie między ławą a **płytą fundamentową** jest znacząca.'
+              },
+              {
+                type: 'list',
+                items: [
+                  '**Badania geotechniczne gruntu:** wykonujemy odwierty, aby wykluczyć kosztowną wymianę gruntu (np. przy nasypach niekontrolowanych).',
+                  '**Szkody Górnicze:** weryfikujemy teren w PGG i dobieramy stal zbrojeniową (A-IIIN), która utrzyma sztywność budynku.',
+                  '**Mapa do celów projektowych:** geodeta przygotowuje dokument niezbędny do adaptacji projektu.'
+                ]
+              },
+              {
+                 type: 'paragraph', 
+                 value: '**Masz trudną działkę?** Sprawdź szczegóły: [Usługi geotechniczne w CoreLTB Builders](/oferta/uslugi-techniczne)'
+              }
+            ],
+            imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/dzialka-budowlana.webp',
+            imageAlt: 'Badania geotechniczne gruntu i geodeta na działce' // Alt też poprawiony
+          },
+          {
+            id: 'etap-2',
+            number: 2,
+            icon: 'draftingCompass',
+            label: 'Projekt',
+            title: 'Adaptacja projektu i optymalizacja (value engineering)', // WBITE SŁOWO KLUCZOWE
+            content: [
+              {
+                type: 'paragraph',
+                value: 'Papier przyjmie wszystko, budżet nie. Weryfikujemy dokumentację "okiem wykonawcy". Często **projekty gotowe** są przewymiarowane. Naszym celem jest redukcja kosztów stanu surowego przy zachowaniu norm **WT2021**.'
+              },
+              {
+                type: 'list',
+                items: [
+                  '**Adaptacja projektu:** przeliczamy fundamenty na **płytę fundamentową** (bezpieczniejszą na szkody górnicze) i dostosowujemy dach do stref wiatrowych.',
+                  '**Projekty indywidualne:** projektujemy domy pod pompy ciepła i rekuperację, eliminując mostki termiczne.',
+                  '**Formalności:** kompletujemy uzgodnienia ZUD i charakterystykę energetyczną do pozwolenia na budowę.'
+                ]
+              },
+              {
+                type: 'paragraph',
+                value: 'Sprawdź naszą ofertę: [Adaptacja projektów i Biuro Projektowe >](/oferta/projektowanie)'
+              }
+            ],
+            imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/projekt-domu.webp',
+            imageAlt: 'Adaptacja projektu gotowego - optymalizacja kosztów'
+          },
+          {
+            id: 'etap-3',
+            number: 3,
+            icon: 'plug',
+            label: 'Media',
+            title: 'Uzbrojenie działki i przyłącza', // Money Keyword (Uzbrojenie)
+            content: [
+              {
+                type: 'paragraph',
+                value: 'Brak mediów to najczęstsza blokada startu budowy. Jako generalny wykonawca działamy jako Twój pełnomocnik u lokalnych gestorów (Tauron, PSG, Wodociągi). Koordynujemy procedury tak, aby plac budowy miał zasilanie (tzw. prowizorkę) od pierwszego dnia.'
+              },
+              {
+                type: 'list',
+                items: [
+                  '**Warunki techniczne (WTP):** składamy wnioski o wydanie warunków przyłączenia, zlecamy projekty branżowe i uzgadniamy je w ZUD, optymalizując trasy wykopów.',
+                  '**Prąd budowlany (RB-tka):** organizujemy zasilanie tymczasowe ("siłę" 400V), co pozwala naszym brygadom ruszyć z pracami natychmiast, bez czekania na licznik docelowy.',
+                  '**Wykonawstwo i odbiory:** nadzorujemy wykopy, ułożenie rur zgodnie z normą (podsypki, taśmy ostrzegawcze) oraz kończymy proces inwentaryzacją geodezyjną.'
+                ]
+              },
+              {
+                 type: 'paragraph',
+                 value: 'Dzięki temu unikasz sytuacji, w której gotowy dom "stoi i niszczeje" przez brak licznika gazu potrzebnego do wygrzania posadzek.'
+              }
+            ],
+            imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/przylacza-budowlane.webp',
+            imageAlt: 'Wykopy i montaż przyłączy mediów na działce budowlanej',
+          },
+          {
+            id: 'etap-4',
+            number: 4,
+            icon: 'stamp',
+            label: 'Urzędy',
+            title: 'Pozwolenie na budowę (PnB) i warunki zabudowy', // Tu wbijamy frazę z 50k vol
+            content: [
+              {
+                type: 'paragraph',
+                value: 'Biurokracja to „wąskie gardło” inwestycji. Działamy na podstawie **pełnomocnictwa**. Weryfikujemy **warunki zabudowy (WZ)** lub MPZP i składamy wnioski, które nie wracają do "uzupełnień formalnych" w lokalnych starostwach (Wodzisław, Rybnik, Gliwice).'
+              },
+              {
+                type: 'list',
+                items: [
+                  '**Teczka projektowa:** kompletujemy dokumentację zgodną z nowym prawem budowlanym (obowiązkowy podział na PZT i PAB).',
+                  '**Cyfryzacja:** zakładamy Elektroniczny Dziennik Budowy (EDB), co usprawnia obieg dokumentów między inwestorem a kierownikiem budowy.',
+                  '**Nadzór procesu:** monitorujemy status sprawy u inspektora, aż do uzyskania prawomocnej decyzji.'
+                ]
+              },
+              {
+                // LINK SEO: Pozwolenie na budowę (Volume: 50, trend rosnący nieskończoność)
+                type: 'paragraph',
+                value: '**Checklista inwestora:** Sprawdź procedurę: [Pozwolenie na budowę krok po kroku](/baza-wiedzy/pozwolenie-na-budowe)'
+              }
+            ],
+            imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/pozwolenie-na-budowe.webp',
+            imageAlt: 'Decyzja administracyjna pozwolenia na budowę i pieczęć urzędu',
+          },
         {
           id: 'etap-5',
           number: 5,
-          icon: 'landmark',
-          label: 'Finansowanie',
-          title: 'Budżet i Finansowanie',
+          icon: 'landmark', // Ikona Banku
+          label: 'Finanse',
+          title: 'Budżet i harmonogram bankowy', // Bardziej precyzyjny tytuł
           content: [
             {
               type: 'paragraph',
-              value: 'Uzyskanie kredytu to procedura techniczna. Analitycy bankowi odrzucają wnioski oparte na nierealnych wycenach. Jako Generalny Wykonawca przygotowujemy profesjonalny **Harmonogram Rzeczowo-Finansowy**. Jest to dokument w pełni zgodny z wymogami banków, co drastycznie przyspiesza decyzję kredytową i wypłatę środków'
-            },
-            {
-              type: 'paragraph',
-              value: 'Nasze wsparcie w tym kluczowym momencie opiera się na trzech filarach:'
+              value: 'Dla banku Twoja budowa to cyfry w Excelu. Analitycy odrzucają wnioski oparte na nierealnych szacunkach. Jako Generalny Wykonawca dostarczamy **umowę z gwarancją ceny** oraz profesjonalny **Harmonogram Rzeczowo-Finansowy**. To dokument, który udowadnia bankowi, że inwestycja zostanie domknięta w założonym budżecie.'
             },
             {
               type: 'list',
               items: [
-                '**Kosztorys dla Banku:** Otrzymujesz gotowy dokument potwierdzający wartość inwestycji, uznawany przez rzeczoznawców majątkowych.',
-                '**Transzowanie:** Synchronizujemy etapy budowy z wypłatami transz bankowych. Dzięki temu nie tracisz płynności finansowej w trakcie prac.',
-                '**Eksperci kredytowi:** Udostępniamy kontakt do sprawdzonych, niezależnych doradców na Śląsku i w Małopolsce, którzy znają nasz proces budowlany.'
+                '**Dokumentacja dla rzeczoznawcy:** Przygotowujemy kosztorys, który jest podstawą do wyceny nieruchomości (operatu szacunkowego).',
+                '**Płynność Transz:** Planujemy etapy budowy (np. SSZ, instalacje) tak, aby idealnie pokrywały się z harmonogramem wypłat transz przez bank. Budowa nie stanie z powodu braku środków.',
+                '**Eksperci Kredytowi:** Udostępniamy kontakt do sprawdzonych doradców na Śląsku/Małopolsce, którzy znają specyfikę naszych umów ryczałtowych.'
               ]
             },
             {
+              // STRATEGICZNY LINK - KLIENT CHCE WIEDZIEĆ "ILE?"
               type: 'paragraph',
-              value: 'Dzięki naszemu wsparciu zyskujesz nie tylko pomoc w formalnościach, ale przede wszystkim spokój ducha i pewność, że Twój budżet jest **realistyczny, dobrze zaplanowany i bezpieczny**.'
+              value: `**Planujesz budżet na ${CURRENT_YEAR}?** Sprawdź naszą analizę rynku: [Ile realnie kosztuje budowa domu (SSO / Pod Klucz)?](/baza-wiedzy/koszt-budowy-domu-2026-cennik)`
             }
           ],
           imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/wsparcie-finansowanie.webp',
-          imageAlt: 'Para omawiająca finansowanie budowy z doradcą finansowym w biurze',
+          imageAlt: 'Analiza harmonogramu rzeczowo-finansowego budowy',
         },
         {
           id: 'etap-6',
           number: 6,
           icon: 'construction',
-          label: 'Budowa',
-          title: 'Realizacja budowy',
+          label: 'Realizacja', // Zmienione z 'Budowa' na bardziej pro 'Realizacja'
+          title: `Stan surowy i standard deweloperski WT2021`,
           content: [
             {
               type: 'paragraph',
-              value: 'Budujemy w według norm **WT2021**, eliminując mostki termiczne już na etapie wznoszenia murów (systemy cienkospoinowe Porotherm/Silka/Ytong). W CoreLTB Builders pilnujemy przerw technologicznych – beton musi osiągnąć pełną wytrzymałość przed kolejnym etapem. W standardzie deweloperskim otrzymujesz budynek wyposażony w nowoczesne systemy (Pompa Ciepła, Rekuperacja), gotowy do prac wykończeniowych.'
+              value: 'To inżynieria, nie improwizacja. Budowę prowadzimy własnymi brygadami, co gwarantuje zachowanie ciągłości prac. Pilnujemy reżimu technologicznego – beton musi osiągnąć pełną wytrzymałość (28 dni) przed obciążeniem, a mostki termiczne są eliminowane systemowo (np. przy roletach i balkonach).'
             },
             {
               type: 'list',
               items: [
-                '**SSO (Konstrukcja):** Ściany w systemie bezspoinowym, stropy żelbetowe monolityczne (akustyka!), więźba dachowa impregnowana ciśnieniowo.',
-                '**SSZ (Ciepłe zamknięcie):** Stolarka okienna 3-szybowa (Ug<0.9) montowana w warstwie ocieplenia (tzw. ciepły montaż) na taśmach szczelnych.',
-                '**Instalacje:** Rozprowadzenie ogrzewania podłogowego, wod-kan, elektryki oraz montaż maszynowni (Kotłownia/Pompa).',
-                '**Prace pod klucz:** Możliwość płynnego przejścia do etapu wykończenia wnętrz z naszym dedykowanym zespołem projektowym.'
+                '**Konstrukcja (SSO):** Mury w technologii cienkospoinowej (Ceramika/Silikat), stropy monolityczne żelbetowe (większa sztywność niż Teriva!) oraz więźba impregnowana.',
+                '**Zamknięcie (SSZ):** Okna 3-szybowe (Ug<0.9) w standardzie "ciepłego montażu" na taśmach paroszczelnych, co jest wymogiem dla pomp ciepła.',
+                '**Instalacje (Deweloperka):** Kompleksowe uzbrojenie budynku: Ogrzewanie podłogowe (w całym domu), Wod-Kan, Elektryka, Rekuperacja i Tynki maszynowe.'
               ]
             },
             {
+              // SUPER WAŻNY LINK - Chroni przed niedomówieniami
               type: 'paragraph',
-              value: 'Na każdym etapie masz **stały wgląd w postęp prac** i jednego, dedykowanego kierownika projektu do kontaktu.'
+              value: '**Uniknij nieporozumień:** Zobacz [Checklista prac (120 pkt): Standard Deweloperski >](/baza-wiedzy/stan-deweloperski-co-to-jest)'
             }
           ],
           imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/realizacja-budowy.webp',
-          imageAlt: 'Plac budowy z domem w stanie surowym otwartym na tle błękitnego nieba',
+          imageAlt: 'Budowa domu: murowanie ścian w technologii poryzowanej i stropy monolityczne',
         },
         {
           id: 'etap-7',
           number: 7,
-          icon: 'shovel',
+          icon: 'shovel', // Ikona łopaty/prac ziemnych
           label: 'Teren',
-          title: 'Zagospodarowanie terenu',
+          title: 'Prace ziemne i zagospodarowanie', // Bardziej techniczny tytuł
           content: [
             {
               type: 'paragraph',
-              value: 'Nie zostawiamy Inwestora na "księżycowym krajobrazie". Na Śląsku i w Małopolsce, gdzie dominują grunty słabo przepuszczalne (gliny), kluczowe jest **profesjonalne ukształtowanie spadków terenu**. Wchodzimy z ciężkim sprzętem zaraz po demontażu rusztowań, aby odprowadzić wody opadowe z dala od fundamentów, chroniąc piwnice i mury przed zawilgoceniem.'
+              value: 'Nie zostawiamy domu na "księżycowym krajobrazie". Zaraz po demontażu rusztowań wchodzimy z ciężkim sprzętem. Na nieprzepuszczalnych gruntach Południowej Polski (gliny) kluczowe jest **inżynierskie ukształtowanie spadków**, aby woda opadowa nie stała przy fundamentach, co grozi zawilgoceniem.'
             },
-    
             {
               type: 'list',
               items: [
-                '**Kształtowanie terenu:** Niwelacja, humusowanie oraz wykonanie drenażu opaskowego i studni chłonnych (rozwiązanie problemu błota).',
-                '**Nawierzchnie utwardzone:** Podjazdy i tarasy wykonujemy na pełnej podbudowie drogowej (kruszywo łamane stabilizowane mechanicznie), co gwarantuje, że kostka nie "siądzie" pod ciężarem samochodów.',
-                '**Ogrodzenie systemowe:** Montaż cokołów, paneli i bram z automatyką zintegrowaną z instalacją elektryczną domu.',
+                '**Gospodarka Wodna:** Niwelacja terenu, drenaż opaskowy wokół budynku oraz montaż studni chłonnych (rozwiązanie problemu błota).',
+                '**Nawierzchnie Utwardzone:** Podjazdy i tarasy wykonujemy na pełnej **podbudowie drogowej** (kruszywo łamane stabilizowane mechanicznie). Dajemy gwarancję, że kostka nie zapadnie się pod ciężkim samochodem.',
+                '**Ogrodzenie:** Montaż ogrodzeń systemowych i bram z automatyką zintegrowaną z elektryką domu.'
               ]
             },
             {
+              // LINK WEWNĘTRZNY DO OFERTY UZUPEŁNIAJĄCEJ (CROSS-SELLING)
               type: 'paragraph',
-              value: 'Powierzając nam ten etap, masz pewność, że otoczenie Twojego domu będzie **funkcjonalne, piękne i wykonane zgodnie ze sztuką**.'
+              value: '**Twój ogród i podjazd:** Zobacz co oferujemy w dziale: [Zagospodarowanie Terenu >](/oferta/zagospodarowanie-terenu)'
             }
           ],
           imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/zagospodarowanie-terenu.webp',
-          imageAlt: 'Nowoczesny taras z meblami ogrodowymi za świeżo wybudowanym domem',
+          imageAlt: 'Niwelacja terenu i układanie kostki brukowej na podjeździe',
         },
         {
           id: 'etap-8',
           number: 8,
           icon: 'keyRound',
-          label: 'Odbiór',
-          title: 'Procedura PINB i 5-Letnia rękojmia',
+          label: 'Finał',
+          title: 'Procedura PINB, rękojmia i szkolenie',
           content: [
             {
               type: 'paragraph',
-              value: 'Zakończenie budowy to procedura administracyjna, nie tylko przekazanie kluczy. Zamieszkanie bez odbioru grozi karami finansowymi, dlatego jako Twój pełnomocnik składamy zawiadomienie o zakończeniu budowy do powiatowego inspektoratu nadzoru budowlanego. Nasz kierownik budowy zamyka dziennik i przygotowuje budynek do legalnego użytkowania, zdejmując z ciebie ryzyko prawne.'
-            },
-            {
-              type: 'paragraph',
-              value: 'W Twoim imieniu zajmujemy się wszystkimi niezbędnymi formalnościami, abyś mógł legalnie i bezpiecznie zamieszkać w swoim nowym domu:'
+              value: 'Fizyczne zakończenie prac to nie wszystko. Aby legalnie zamieszkać, budynek musi przejść procedurę odbiorową w Powiatowym Inspektoracie Nadzoru Budowlanego (PINB). Użytkowanie domu bez odbioru grozi wysokimi karami administracyjnymi. Bierzemy tę biurokrację na siebie.'
             },
             {
               type: 'list',
               items: [
-'**Dokumentacja powykonawcza:** kompletujemy inwentaryzację geodezyjną, protokoły kominiarskie, elektryczne i szczelności instalacji gazowej niezbędne dla urzędu.',
-                '**Pozwolenie na użytkowanie:** uzyskujemy tzw. "milczącą zgodę" lub decyzję o pozwoleniu na użytkowanie, co formalnie kończy proces budowlany.',
-                '**Gwarancja i serwis:** udzielamy pełnej, 5-letniej rękojmi na konstrukcję i szczelność budynku oraz przeprowadzamy instruktaż obsługi systemów (rekuperacja, pompa ciepła).'
+                '**Kompletacja dokumentów:** Zbieramy wpisy kierownika budowy, protokoły kominiarskie, elektryczne, szczelności instalacji oraz geodezyjną inwentaryzację powykonawczą.',
+                '**Legalizacja:** Składamy zawiadomienie o zakończeniu budowy i uzyskujemy formalną zgodę na użytkowanie (tzw. milcząca zgoda lub decyzja).',
+                '**Rękojmia:** Od momentu odbioru startuje pełna, 5-letnia ochrona prawna na konstrukcję i szczelność budynku.'
               ]
             },
             {
-              type: 'paragraph',
-              value: 'Po dopełnieniu formalności, uroczyście przekazujemy Ci klucze oraz **wieloletnią, pisemną gwarancję na wykonane roboty budowlane**. To pieczęć jakości CoreLTB Builders i Twoje **poczucie pełnego bezpieczeństwa** na wiele lat szczęśliwego mieszkania. Witaj w domu!'
+               // WAŻNY DODATEK: "Onboarding" zamiast "Marzeń"
+               type: 'paragraph',
+               value: '**Przekazanie kluczy:** Wraz z domem otrzymujesz Teczkę Inwestycji oraz przeprowadzamy **techniczne szkolenie z obsługi budynku** (sterowanie ogrzewaniem, wymiana filtrów, serwis), abyś w pełni panował nad swoją nieruchomością.'
             }
           ],
+          // Twoje oryginalne zdjęcie
           imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/odbior-gwarancja.webp',
-          imageAlt: 'Szczęśliwa para otrzymująca klucze do swojego nowego domu od przedstawiciela firmy',
+          imageAlt: 'Przekazanie kluczy i dokumentacji technicznej inwestorowi',
         },
       ],
     },
     areasData: {
       header: {
         label: 'LOGISTYKA I ZASIĘG',
-        title: 'Dwie Bazy Operacyjne: Jaworzno i Wodzisław',
+        title: 'Dwie bazy operacyjne: Jaworzno i Wodzisław',
         description: 'Dzięki strategicznemu położeniu baz przy A4 i w centrum ROW, eliminujemy koszty dojazdów w promieniu 50km.',
         align: 'center' as const,
         theme: 'light' as const,
@@ -786,9 +798,20 @@ servicesAccordion: {
     category: 'Projektowanie',
     title: 'Projektowanie domu',
 
+    // Listing (karta na stronie /oferta)
+    listing: {
+      image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800',
+      title: 'Projektowanie i adaptacje',
+      description: 'Projekty domów pod budżet wykonawczy. Adaptacja konstrukcji do trudnych gruntów (Śląsk) i optymalizacja kosztów (Value Engineering).',
+      features: [
+        'Wizualizacje 3D',
+        'Pełna dokumentacja techniczna',
+      ],
+    },
+
     // PageHeader
     pageHeader: {
-      title: 'Projekty Domów i Adaptacje',
+      title: 'Projekty indywidualne i adaptacje projektów',
       watermarkText: 'PROJEKTOWANIE',
       backgroundImage: '/images/uslugi/projektowanie/hero.webp',
       breadcrumbs: [
@@ -798,68 +821,85 @@ servicesAccordion: {
       ],
     },
 
-    // Sekcja 1: EmotionalHero - Od Marzenia do Projektu
-    emotionalHero: {
-      label: 'BIURO PROJEKTOWE & GENERALNY WYKONAWCY',
-      headline: 'Projekty skrojone pod Twój budżet',
-      subtitle:
-        'Architekci-wizjonerzy często projektują budynki, których realizacja przekracza możliwości Inwestora. My działamy odwrotnie. Jako Generalny Wykonawca znamy ceny robocizny i materiałów na 2026 rok. Projektujemy tylko to, co da się wybudować w Twoim budżecie.',
-      benefits: [
-        'Projekt z gwarancją zmieszczenia się w założonym kosztorysie',
-        'Adaptacja fundamentów do trudnych gruntów (gliny, skarpy, szkody)',
-        'Bezpłatny Harmonogram Rzeczowo-Finansowy do kredytu',
-      ],
-      // CTA - Konkret techniczny
-      ctaBoxTitle: 'Wstępna Analiza Inwestycji',
-      ctaBoxBenefits: [
-        'Weryfikacja MPZP (Co wolno wybudować?)',
-        'Ocena warunków gruntowych i spadków terenu',
-        'Dobór technologii do budżetu (Ceramika/Silikat/Beton)',
-      ],
-      ctaBoxSubtext: 'Konsultacja z Inżynierem, nie handlowcem.',
-      ctaBoxButtons: [
-        { text: 'Zamów analizę działki', href: 'tel:+48123456789', variant: 'primary' },
-        { text: 'Wyceń projekt', href: '#kontakt', variant: 'secondary' },
-      ],
+// Sekcja 1: EmotionalHero - Konkret finansowy i technologiczny
+emotionalHero: {
+  label: 'BIURO PROJEKTOWE GENERALNEGO WYKONAWCY',
+  headline: 'Projekty domów, na które Cię stać', // Uderzenie w największy ból (budżet)
+  subtitle:
+    `Standardowe biura architektoniczne rzadko znają aktualne ceny stali i betonu na rok ${CURRENT_YEAR}. My tak. Jako generalny wykonawca łączymy estetykę z twardą kalkulacją wykonawczą. Eliminujemy drogie i zbędne rozwiązania konstrukcyjne już na etapie kreski, zanim wydasz pieniądze na fundamenty.`,
+  benefits: [
+    'Projekt z gwarancją zmieszczenia się w założonym kosztorysie',
+    'Adaptacja fundamentów do trudnych gruntów (gliny, szkody górnicze)',
+    'Bezpłatny harmonogram rzeczowo-finansowy pod kredyt hipoteczny',
+  ],
+  
+  // CTA - Konkretna wartość techniczna na start
+  ctaBoxTitle: 'Wstępny audyt działki i budżetu',
+  ctaBoxBenefits: [
+    'Weryfikacja MPZP (co urzędnik pozwoli wybudować?)',
+    'Ocena ryzyka szkód górniczych i warunków wodnych',
+    'Dobór technologii ścian i stropów do twojego budżetu',
+    'Wstępne oszacowanie kosztów stanu surowego (SSO)',
+  ],
+  ctaBoxSubtext: 'Konsultacja techniczna z inżynierem, nie handlowcem.',
+  ctaBoxButtons: [
+    { 
+      text: 'Umów analizę działki', 
+      href: 'tel:+48123456789', 
+      variant: 'primary' 
     },
+    { 
+      text: 'Wyceń projekt', 
+      href: '#kontakt', 
+      variant: 'secondary' 
+    },
+  ],
+},
 
-// Sekcja 2: DLACZEGO ZLECIC PROJEKT WYKONAWCY?
+// Sekcja 2: Dlaczego warto - model Design & Build
 philosophyTimeline: {
   header: {
-    label: 'FILOZOFIA DESIGN & BUILD',
+    label: 'MODEL "ZAPROJEKTUJ I WYBUDUJ"',
     title: 'Nie projektujemy "do szuflady"',
-    description: 'Eliminujemy ryzyko, że projekt trafi do kosza przez zbyt wysokie koszty budowy. Tworzymy dokumentację wykonawczą, a nie tylko wizualną.',
+    description:
+      'Eliminujemy ryzyko, że projekt trafi do kosza przez zbyt wysokie koszty realizacji. Jako generalny wykonawca tworzymy dokumentację wykonawczą, a nie tylko ładną wizualizację.',
   },
+
   items: [
     {
       number: 1,
-      iconName: 'coins', // Ikona Finansowa
-      title: 'Kontrola Kosztów (Value Engineering)', 
-      description: 'Zamiast "cenników z internetu", bazujemy na naszych realnych kontraktach. Optymalizujemy zużycie stali i betonu, często oszczędzając inwestorowi 15-20% na stanie surowym bez utraty jakości.',
+      iconName: 'coins', // Ikona finansowa
+      title: 'Kontrola kosztów (value engineering)',
+      description:
+        'Zamiast "cenników z internetu", bazujemy na naszych realnych kontraktach wykonawczych. Optymalizujemy zużycie stali i betonu, często oszczędzając inwestorowi 10-15% na stanie surowym bez utraty jakości konstrukcji.',
     },
     {
       number: 2,
-      iconName: 'layers', // Ikona Gruntu/Warstw
-      title: 'Konstrukcja dobrana do gruntu', 
-      description: 'Każda działka jest inna. Projektujemy bezpieczne fundamenty zarówno na śląskie szkody górnicze, jak i na krakowskie lessy, skarpy czy skaliste podłoża jury.',
+      iconName: 'layers', // Ikona warstw gruntu
+      title: 'Konstrukcja dobrana do geologii',
+      description:
+        'Każda działka jest inna. Projektujemy bezpieczne fundamenty zarówno na śląskie szkody górnicze (PGG/JSW), jak i na małopolskie lessy, skarpy czy skaliste podłoża jury krakowsko-częstochowskiej.',
     },
     {
       number: 3,
-      iconName: 'clipboardCheck', 
-      title: 'Wykonalność Techniczna',
-      description: 'Unikamy rozwiązań "ładnych, ale trudnych w izolacji". Nasi inżynierowie weryfikują projekt pod kątem mostków termicznych i szczelności montażu okien.',
+      iconName: 'clipboardCheck', // Ikona weryfikacji
+      title: 'Wykonalność techniczna detali',
+      description:
+        'Unikamy rozwiązań "ładnych, ale trudnych w izolacji". Nasi inżynierowie weryfikują projekt pod kątem eliminacji mostków termicznych i możliwości szczelnego montażu okien w warstwie ocieplenia.',
     },
   ],
-      image: {
-        src: '/images/uslugi/projektowanie/dlaczego-warto.webp',
-        alt: 'Zespół projektowy CoreLTB Builders pracujący nad indywidualnym projektem domu',
-      },
-    },
+
+  image: {
+    // Zostawiam oryginalną ścieżkę
+    src: '/images/uslugi/projektowanie/dlaczego-warto.webp',
+    alt: 'Zespół inżynierów CoreLTB weryfikujący projekt wykonawczy',
+  },
+},
 
     cooperationTimelineNoLine: {
       header: {
         label: 'PROCES PROJEKTOWY',
-        title: 'Ścieżka do Pozwolenia na Budowę',
+        title: 'Ścieżka do pozwolenia na budowę',
         description: 'Nie teoretyzujemy. Każdy z tych etapów służy jednemu celowi: uzyskaniu legalnego projektu, który zmieści się w Twoim budżecie wykonawczym.',
       },
       steps: [
@@ -867,8 +907,8 @@ philosophyTimeline: {
           id: 'step-1',
           number: 1,
           icon: 'fileText',
-          label: 'Wybór',
-          title: 'Wariant A: Adaptacja Projektu Gotowego',
+          label: 'Adaptacja',
+          title: 'Adaptacja projektu gotowego',
           content: [
             {
               type: 'paragraph',
@@ -881,9 +921,10 @@ philosophyTimeline: {
             {
               type: 'list',
               items: [
-                '**Przewymiarowanie konstrukcji:** Często "odchudzamy" ilość stali w fundamentach (średnio o 15-20%) lub zmieniamy drogie stropy na systemowe.',
-                '**Dostosowanie do działki:** Weryfikujemy zgodność z MPZP (kąty dachu, wysokość) oraz orientację względem stron świata.',
-                '**Koszty ukryte:** Wskazujemy detale (np. nietypowe okna), które drastycznie podniosą cenę budowy.'
+                '**Przewymiarowanie konstrukcji:** często "odchudzamy" ilość stali w fundamentach (średnio o 15-20%) lub zmieniamy drogie stropy na systemowe.',
+                '**Dostosowanie do działki:** weryfikujemy zgodność z MPZP (kąty dachu, wysokość) oraz orientację względem stron świata.',
+                '**Koszty ukryte:** wskazujemy detale (np. nietypowe okna), które drastycznie podniosą cenę budowy.',
+                'Wykonujemy pełną adaptację projektu do działki i warunków zabudowy (WZ) lub MPZP.'
               ]
             },
             {
@@ -891,20 +932,19 @@ philosophyTimeline: {
               value: 'Naszym zadaniem jest zamiana "taniego projektu" w dokumentację "tanią w budowie".'
             }
           ],
-          // PRZYWRÓCONY ORYGINALNY PLIK
           imageSrc: '/images/uslugi/projektowanie/etapy/projekt-gotowy.webp',
           imageAlt: 'Inżynier weryfikujący projekt katalogowy pod kątem kosztów'
         },
         {
-          id: 'step-2',
+          id: 'step-2', // Pamiętaj, żeby ID były unikalne (step-1, step-2...)
           number: 2,
           icon: 'draftingCompass',
-          label: 'Wybór',
-          title: 'Wariant B: Projekt Indywidualny "Pod Budżet"',
+          label: 'Projekt indywidualny',
+          title: 'Projekt indywidualny "pod budżet"',
           content: [
             {
               type: 'paragraph',
-              value: 'Tworzymy projekt od zera pod trudną działkę (skarpę, wąski front, szkody górnicze). Projektujemy z kalkulatorem w ręku, traktując budżet jako główną wytyczną, a nie dodatek.'
+              value: 'Tworzymy projekt od zera pod trudną działkę (skarpę, wąski front, szkody górnicze). Projektujemy z kalkulatorem w ręku, traktując budżet inwestorski jako główną wytyczną, a nie dodatek.'
             },
             {
               type: 'paragraph',
@@ -913,31 +953,30 @@ philosophyTimeline: {
             {
               type: 'list',
               items: [
-                '**Optymalizacja PUM:** Projektujemy bryłę tak, aby zminimalizować "puste metry" (korytarze), za które płacisz przy budowie.',
-                '**Bilans Terenu:** Wykorzystujemy naturalne ukształtowanie spadków, aby uniknąć kosztownego wywożenia ziemi.',
-                '**Standard Energetyczny:** Modelujemy budynek pod pompy ciepła i rekuperację, eliminując mostki termiczne już w geometrii ścian.'
+                '**Optymalizacja PUM:** projektujemy bryłę tak, aby zminimalizować "puste metry" (korytarze), za których budowę płacisz, a z nich nie korzystasz.',
+                '**Bilans mas ziemnych:** wykorzystujemy naturalne ukształtowanie spadków, aby uniknąć kosztownego wywożenia ziemi i drogich murów oporowych.',
+                '**Standard energetyczny:** modelujemy budynek pod pompę ciepła i rekuperację, eliminując mostki termiczne już w geometrii ścian zewnętrznych.'
               ]
             },
             {
               type: 'paragraph',
-              value: 'Efektem jest unikalny dom, który kosztuje tyle samo, co katalogowy, ale jest pozbawiony błędów funkcjonalnych.'
+              value: 'Efektem jest unikalny dom, który finalnie kosztuje tyle samo co katalogowy po adaptacji, ale jest pozbawiony błędów funkcjonalnych.'
             }
           ],
-          // PRZYWRÓCONY ORYGINALNY PLIK
           imageSrc: '/images/uslugi/projektowanie/etapy/projekt-indywidualny.webp',
           imageAlt: 'Projektowanie indywidualne domu na wymagającej działce'
         },
         {
-          // MERGED STEP (Używamy tu zdjęcia z dawnej "Adaptacji", bo pasuje tematycznie)
+          // Krok scalony (Technologia + Adaptacja) z Linkiem Edukacyjnym
           id: 'step-3',
           number: 3,
           icon: 'settings', 
           label: 'Inżynieria',
-          title: 'Optymalizacja Konstrukcyjna (Value Engineering)',
+          title: 'Optymalizacja konstrukcyjna (value engineering)',
           content: [
             {
               type: 'paragraph',
-              value: 'To jest serce naszej pracy. Niezależnie od wariantu, nasi konstruktorzy przeliczają budynek, aby był bezpieczny i ekonomiczny. Eliminujemy ryzyka, które generują koszty na placu budowy.'
+              value: 'To jest serce naszej pracy. Niezależnie od wariantu, nasi konstruktorzy przeliczają budynek, aby był bezpieczny i ekonomiczny. Eliminujemy błędy projektowe, które generują nieprzewidziane koszty na placu budowy.'
             },
             {
               type: 'paragraph',
@@ -946,30 +985,30 @@ philosophyTimeline: {
             {
               type: 'list',
               items: [
-                '**Fundamenty na szkody:** Dobieramy płytę fundamentową lub ławy w zależności od kategorii terenu (I-IV) i badań geologicznych (gliny).',
-                '**Kolizje i Detale:** Weryfikujemy przejścia instalacyjne przez stropy i podciągi, aby uniknąć kucia betonu podczas realizacji.',
-                '**Termika detalu:** Projektujemy połączenia balkonów i nadproży w standardzie "zero mostków", co jest kluczowe dla norm WT 2026.'
+                '**Fundamenty na szkody:** dobieramy płytę fundamentową lub ławy w zależności od kategorii terenu (I-IV) i badań geologicznych (szczególnie przy glinach).',
+                '**Kolizje i detale:** weryfikujemy przejścia instalacyjne przez stropy i podciągi, aby uniknąć kucia betonu podczas realizacji instalacji.',
+                `**Termika detalu:** projektujemy połączenia balkonów i nadproży w standardzie "zero mostków", co jest kluczowe dla spełnienia norm WT2021.`
               ]
             },
             {
-              type: 'paragraph',
-              value: 'Dzięki temu budowa przebiega płynnie, a Ty nie słyszysz od kierownika budowy: *"Tego się nie da zrobić tak jak na rysunku".*'
+               // STRATEGICZNY LINK DO ARTYKUŁU
+               type: 'paragraph',
+               value: '**Technologia:** Zobacz, jakie rozwiązania obniżą Twoje rachunki: [Domy energooszczędne i zwrot z inwestycji](/baza-wiedzy/domy-energooszczedne-technologia)'
             }
           ],
-          // PRZYWRÓCONY ORYGINALNY PLIK
           imageSrc: '/images/uslugi/projektowanie/etapy/adaptacja.webp',
           imageAlt: 'Optymalizacja konstrukcji i adaptacja do warunków gruntowych'
         },
         {
           id: 'step-4',
           number: 4,
-          icon: 'piggyBank', // Tutaj miałeś 'coins', ale w pliku 'piggyBank' - przywracam piggyBank
+          icon: 'piggyBank',
           label: 'Wycena',
-          title: 'Kosztorys Inwestorski (Gwarancja Wykonalności)',
+          title: 'Kosztorys inwestorski (gwarancja wykonalności)',
           content: [
             {
               type: 'paragraph',
-              value: 'Jako Generalny Wykonawca dajemy Ci przewagę, której nie mają zwykłe biura projektowe. Wraz z projektem otrzymujesz **szacunek realnych kosztów budowy** na rok 2026.'
+              value: `Jako generalny wykonawca dajemy Ci przewagę, której nie mają zwykłe biura projektowe. Wraz z projektem otrzymujesz **szacunek realnych kosztów budowy** na rok ${CURRENT_YEAR}, oparty na cenach transakcyjnych, a nie wskaźnikach.`
             },
             {
               type: 'paragraph',
@@ -978,30 +1017,30 @@ philosophyTimeline: {
             {
               type: 'list',
               items: [
-                '**Decyzyjność:** Wiesz, czy stać Cię na SSO i Deweloperkę przed wydaniem oszczędności na start robót.',
-                '**Bezpieczeństwo kredytowe:** Otrzymujesz wsad merytoryczny niezbędny do rozmów z analitykiem bankowym (Harmonogram).',
-                '**Weryfikacja materiałowa:** To ostatni moment na zamianę drogich rozwiązań (np. dachówka ceramiczna) na tańsze (blacha), jeśli budżet tego wymaga.'
+                '**Decyzyjność:** wiesz, czy stać Cię na stan surowy i deweloperski jeszcze przed wydaniem oszczędności na start robót.',
+                '**Bezpieczeństwo kredytowe:** otrzymujesz wsad merytoryczny niezbędny do rozmów z analitykiem bankowym (profesjonalny harmonogram rzeczowo-finansowy).',
+                '**Weryfikacja materiałowa:** to ostatni moment na zamianę drogich rozwiązań (np. dachówka ceramiczna, okna HS) na tańsze (blacha, okna PSK), jeśli budżet tego wymaga.'
               ]
             },
             {
+              // STRATEGICZNY LINK: Przekierowanie do analizy cen
               type: 'paragraph',
-              value: 'Traktujemy projekt jako integralną część budżetu, a nie "sztukę dla sztuki".'
+              value: `**Planujesz finanse?** Zobacz nasz aktualny: [Raport kosztów budowy domu ${CURRENT_YEAR}](/baza-wiedzy/koszt-budowy-domu-2026-cennik)`
             }
           ],
-          // PRZYWRÓCONY ORYGINALNY PLIK
           imageSrc: '/images/uslugi/projektowanie/etapy/koszty.webp',
           imageAlt: 'Analiza kosztorysu i budżetu budowy domu'
         },
         {
           id: 'step-5',
           number: 5,
-          icon: 'clipboardCheck', // Przywrócona Twoja ikona dokumentacji
+          icon: 'clipboardCheck', // Ikona dokumentacji
           label: 'Finał',
-          title: 'Kompletna Dokumentacja i Pozwolenie (PnB)',
+          title: 'Kompletna dokumentacja i pozwolenie (PnB)',
           content: [
             {
               type: 'paragraph',
-              value: 'Biurokrację bierzemy na siebie. Przygotowujemy dokumentację w formie wymaganej przez aktualne Prawo Budowlane (podział na PZT, PAB i PT).'
+              value: 'Biurokrację bierzemy na siebie. Przygotowujemy dokumentację w formie wymaganej przez aktualne Prawo budowlane (obowiązkowy podział na trzy tomy: PZT, PAB i PT).'
             },
             {
               type: 'paragraph',
@@ -1010,93 +1049,97 @@ philosophyTimeline: {
             {
               type: 'list',
               items: [
-                '**PZT:** Projekt Zagospodarowania Terenu (mapa z wrysowanym budynkiem i mediami).',
-                '**PAB:** Projekt Architektoniczno-Budowlany (rzuty i elewacje dla urzędu).',
-                '**PT:** Projekt Techniczny (szczegóły konstrukcyjne i instalacyjne dla kierownika budowy).'
+                '**PZT (Projekt zagospodarowania terenu):** mapa z wrysowanym budynkiem, zjazdami i przyłączami mediów.',
+                '**PAB (Projekt architektoniczno-budowlany):** rzuty i elewacje niezbędne dla urzędu do wydania decyzji.',
+                '**PT (Projekt techniczny):** szczegóły konstrukcyjne (zbrojenie) i instalacyjne, bez których kierownik budowy nie może legalnie rozpocząć prac.'
               ]
             },
             {
               type: 'paragraph',
-              value: 'Jako Twój pełnomocnik składamy wniosek i monitorujemy procedurę w Starostwie, aż do uzyskania prawomocnej decyzji (PnB).'
+              value: 'Jako Twój pełnomocnik składamy wniosek i monitorujemy procedurę w starostwie, odpowiadając na ewentualne wezwania, aż do uzyskania prawomocnej decyzji o pozwoleniu na budowę.'
+            },
+            {
+               // STRATEGICZNY LINK DO ARTYKUŁU EDUKACYJNEGO
+               type: 'paragraph',
+               value: `**Co dokładnie dostaniesz w teczce?** Sprawdź checklistę: [Co musi zawierać projekt budowlany ${CURRENT_YEAR}?](/baza-wiedzy/co-zawiera-projekt-budowlany)`
             }
           ],
-          // PRZYWRÓCONY ORYGINALNY PLIK
+          // Twoje oryginalne pliki
           imageSrc: '/images/uslugi/projektowanie/etapy/dokumentacja.webp',
           imageAlt: 'Gotowa dokumentacja projektowa z pozwoleniem na budowę'
         }
       ]
-
     },
-    // Sekcja 4: ServicesAccordion (FAQ w formie rozwijanych sekcji)
-    servicesAccordion: {
-      header: {
-        label: 'PYTANIA I ODPOWIEDZI',
-        title: 'Kwestie Prawne i Budżetowe',
-        description: 'Odpowiedzi na najczęstsze obawy inwestorów dotyczące adaptacji i projektów indywidualnych.',
-      },
-      services: [
+// Sekcja 4: FAQ Sprzedażowe (Edukacja Inżynierska)
+servicesAccordion: {
+  header: {
+    label: 'PYTANIA I ODPOWIEDZI',
+    title: 'Kwestie prawne i budżetowe',
+    description: 'Odpowiedzi na najczęstsze obawy inwestorów dotyczące adaptacji i projektów indywidualnych.',
+  },
+  services: [
+    {
+      iconName: 'wallet',
+      title: 'Czy projekt indywidualny jest dużo droższy od gotowego?',
+      content: [
         {
-          iconName: 'wallet',
-          title: 'Czy projekt indywidualny jest dużo droższy od gotowego?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Na start - tak. Dokumentacja indywidualna to koszt rzędu 150-250 zł/m². Jednak patrząc na **całość inwestycji**, projekt "szyty na miarę" często wychodzi taniej. Dlaczego? Ponieważ nie budujesz "zbędnych metrów" i drogich rozwiązań konstrukcyjnych, które są zaszyte w projektach katalogowych. Bilans wychodzi na zero lub na plus przy realizacji.'
-            }
-          ]
-        },
-        {
-          iconName: 'shieldCheck', // Zamiast alertTriangle - budujemy zaufanie
-          title: 'Czy mogę kupić "tani projekt z internetu"?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Możesz, ale bądź ostrożny. Tanie projekty (za 3-4 tys. zł) często mają **przewymiarowaną stal** lub błędy w detalach dachowych. Ich "taniość" kończy się w momencie zamawiania materiałów na budowę. Oferujemy usługę audytu takiego projektu przed zakupem, abyś wiedział, czy nie kupujesz "kota w worku".'
-            }
-          ]
-        },
-        {
-          iconName: 'edit',
-          title: 'Czy mogę wprowadzać zmiany w trakcie budowy?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Prawo dopuszcza "nieistotne odstąpienia", ale naszym celem jest ich unikanie. Zmiany na budowie to zawsze stres i dodatkowe koszty (kucie, przeróbki). Jako Generalny Wykonawca "męczymy" projekt tak długo na etapie cyfrowym, aby na placu budowy nie trzeba było niczego zmieniać.'
-            }
-          ]
-        },
-        {
-          iconName: 'mountain',
-          title: 'Mam działkę ze szkodami górniczymi. Co z projektem?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'To nasza codzienność. Standardowy projekt nie przejdzie w Starostwie bez **Adaptacji Konstrukcyjnej** do kategorii szkód (I-IV). Nasz konstruktor przeliczy fundamenty (najczęściej na płytę fundamentową) i zaprojektuje niezbędne dylatacje/wieńce, zgodnie z wytycznymi GIG.'
-            }
-          ]
-        },
-        {
-          iconName: 'calendar',
-          title: 'Ile realnie trwa uzyskanie Pozwolenia na Budowę (PnB)?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Przy dobrze przygotowanym wniosku (a my takie składamy) urzędy w południowej Polsce wydają decyzję w **30-60 dni**. Do tego należy doliczyć czas na mapę do celów projektowych (geodeta) i uzgodnienia mediów. Bezpiecznie jest założyć ok. 3-4 miesiące na całą "papierologię".'
-            }
-          ]
-        },
-        {
-          iconName: 'trendingUp',
-          title: 'Czy pomożecie, jeśli kosztorys projektu przekroczy mój budżet?',
-          content: [
-            {
-              type: 'paragraph',
-              value: '**Tak, to jest istota Design & Build.** Jeśli wycena wstępna wyjdzie za wysoka, nie zostawiamy Cię z problemem. Proponujemy zamienniki: np. tańsze okna, rezygnację z lukarny, zamianę ceramiki na gazobeton. Optymalizujemy projekt, aż "epnie" się w Excelu.'
-            }
-          ]
+          type: 'paragraph',
+          value: 'Na start - tak. Dokumentacja indywidualna to koszt rzędu 150-250 zł/m². Jednak patrząc na **całość inwestycji**, projekt "szyty na miarę" często wychodzi taniej. Dlaczego? Ponieważ nie budujesz "zbędnych metrów" i drogich rozwiązań konstrukcyjnych, które są zaszyte w projektach katalogowych. Bilans wychodzi na zero lub na plus przy realizacji.'
         }
       ]
     },
+    {
+      iconName: 'shieldCheck', 
+      title: 'Czy mogę kupić "tani projekt z internetu"?',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Możesz, ale bądź ostrożny. Tanie projekty (za 3-4 tys. zł) często mają **przewymiarowaną stal** lub błędy w detalach dachowych. Ich "taniość" kończy się w momencie zamawiania materiałów na budowę. Oferujemy usługę audytu takiego projektu przed zakupem, abyś wiedział, czy nie kupujesz "kota w worku".'
+        }
+      ]
+    },
+    {
+      iconName: 'edit',
+      title: 'Czy mogę wprowadzać zmiany w trakcie budowy?',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Prawo dopuszcza "nieistotne odstąpienia", ale naszym celem jest ich unikanie. Zmiany na budowie to zawsze stres i dodatkowe koszty (kucie, przeróbki). Jako Generalny Wykonawca "męczymy" projekt tak długo na etapie cyfrowym, aby na placu budowy nie trzeba było niczego zmieniać.'
+        }
+      ]
+    },
+    {
+      iconName: 'mountain', // Ważne dla Twojej lokalizacji (Śląsk)
+      title: 'Mam działkę ze szkodami górniczymi. Co z projektem?',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'To nasza codzienność. Standardowy projekt nie przejdzie w starostwie bez **adaptacji konstrukcyjnej** do kategorii szkód (I-IV). Nasz konstruktor przeliczy fundamenty (najczęściej na płytę fundamentową) i zaprojektuje niezbędne dylatacje/wieńce, zgodnie z wytycznymi GIG i lokalnym prawem geologicznym.'
+        }
+      ]
+    },
+    {
+      iconName: 'calendar',
+      title: 'Ile realnie trwa uzyskanie pozwolenia na budowę (PnB)?',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Przy dobrze przygotowanym wniosku (a my takie składamy) urzędy w południowej Polsce wydają decyzję w **30-60 dni**. Do tego należy doliczyć czas na mapę do celów projektowych (geodeta) i uzgodnienia mediów. Bezpiecznie jest założyć ok. 3-4 miesiące na całą "papierologię".'
+        }
+      ]
+    },
+    {
+      iconName: 'trendingUp',
+      title: 'Czy pomożecie, jeśli kosztorys projektu przekroczy mój budżet?',
+      content: [
+        {
+          type: 'paragraph',
+          value: '**Tak, to jest istota modelu Design & Build.** Jeśli wycena wstępna wyjdzie za wysoka, nie zostawiamy Cię z problemem. Proponujemy zamienniki: np. tańsze okna, rezygnację z lukarny, zamianę ceramiki na gazobeton. Optymalizujemy projekt, aż "zepnie" się w Excelu.'
+        }
+      ]
+    }
+  ]
+},
 
     // Sekcja 5: Testimonials
     testimonials: {
@@ -1212,349 +1255,355 @@ contactCTA: {
     updatedAt: '2025-01-24T10:00:00Z',
   },
 
-  // ============================================
-  // 3. NADZÓR BUDOWLANY I DORADZTWO
+// ============================================
+  // 3. NADZÓR I KIEROWNIK BUDOWY (Filar Ekspercki B2B/B2C)
   // ============================================
   {
     slug: 'nadzor-i-doradztwo',
     id: 'nadzor-i-doradztwo',
-    category: 'Nadzór i doradztwo',
-    title: 'Nadzór budowlany i doradztwo',
+    category: 'Nadzór techniczny',
+    title: 'Kierownik budowy i inspektor nadzoru', // Główna fraza SEO (5000 vol)
+
+    // Listing (karta na stronie /oferta)
+    listing: {
+      image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800',
+      title: 'Nadzór inwestorski',
+      description: 'Twój człowiek na budowie. Niezależna kontrola jakości prac, odbiory mieszkań od dewelopera i weryfikacja umów.',
+      features: [
+        'Kontrola budżetu i harmonogramu',
+        'Odbiory techniczne',
+      ],
+    },
 
     // PageHeader
     pageHeader: {
-      title: 'Nadzór budowlany i doradztwo',
-      watermarkText: 'NADZÓR',
+      title: 'Kierownik budowy i nadzór inwestorski',
+      watermarkText: 'KONTROLA JAKOŚCI',
       backgroundImage: '/images/uslugi/nadzor-i-doradztwo/hero.webp',
       breadcrumbs: [
         { label: 'Strona główna', href: '/' },
         { label: 'Oferta', href: '/oferta' },
-        { label: 'Nadzór i doradztwo', href: '/oferta/nadzor-i-doradztwo' },
+        { label: 'Kierownik Budowy i nadzór', href: '/oferta/nadzor-i-doradztwo' },
       ],
     },
 
-    // Sekcja 1: Emotional Hero
-    emotionalHero: {
-      label: 'NADZÓR BUDOWLANY I DORADZTWO',
-      headline: 'Twoja budowa, Twoje pieniądze, nasza ochrona',
-      subtitle:
-        'Aż 7 na 10 kosztownych błędów na budowie to efekt pominięcia fachowego nadzoru. Najczęstsze z nich to źle dobrany rodzaj fundamentu do warunków gruntu, zbyt płytkie posadowienie, użycie słabej jakości materiałów czy brak odpowiedniej izolacji przeciwwilgociowej. Takie błędy mogą prowadzić do pękania ścian, zawilgoceń i dużych kosztów napraw. Dlatego warto mieć zaufanego specjalistę na każdym etapie budowy.',
-      benefits: [
-        'Inspektor jako Twój osobisty adwokat na budowie',
-        'Wykrywamy błędy zanim staną się kosztownym problemem',
-        'Doświadczenie z 500+ realizacji – znamy każdą pułapkę',
-      ],
-      // CTA Box
-      ctaBoxTitle: '☎ Umów Bezpłatną Konsultację',
-      ctaBoxBenefits: [
-        'Ocenimy bieżący stan Twojej budowy (jeśli trwa)',
-        'Określimy zakres nadzoru dopasowany do Twoich potrzeb',
-        'Wycenimy usługę nadzoru inwestorskiego',
-        'Odpowiemy na wszystkie Twoje pytania i wątpliwości',
-      ],
-      ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca. Możemy dołączyć na każdym etapie budowy.',
-      ctaBoxButtons: [
-        {
-          text: 'Zadzwoń do Nas',
-          href: 'tel:+48123456789',
-          variant: 'primary',
-        },
-        {
-          text: 'Napisz do Nas',
-          href: '#kontakt',
-          variant: 'secondary',
-        },
-      ],
+// Sekcja 1: HERO - Adwokat Techniczny Inwestora
+emotionalHero: {
+  label: 'KIEROWNIK BUDOWY Z UPRAWNIENIAMI • ŚLĄSK I MAŁOPOLSKA',
+  headline: [
+    'Niezależny nadzór inwestorski' 
+  ],
+  subtitle:
+    'W budownictwie błędy kosztują fortunę. Jako Twój inspektor weryfikujemy prace, które ekipy ukrywają pod tynkiem lub w wykopie. Od zbrojenia na śląskich szkodach górniczych, przez szczelność izolacji, aż po prowadzenie Elektronicznego Dziennika Budowy (EDB). Gwarantujemy, że dom powstanie zgodnie ze sztuką, a nie "tak, jak majstrowi wygodniej".',
+  
+  benefits: [
+    'Kontrola robót zanikowych (fundamenty, trzpienie, wieńce)', 
+    'Bezwzględna weryfikacja kosztorysów pod kątem zawyżania ilości materiałów',
+    'Diagnostyka sprzętowa (kamery termowizyjne, wilgotnościomierze, lasery)',
+  ],
+  
+  // CTA Box - Konkretne usługi (Pieniądze)
+  ctaBoxTitle: 'Zleć kontrolę budowy',
+  ctaBoxBenefits: [
+    'Objęcie funkcji Kierownika Budowy (cały proces)',
+    'Nadzór Inwestorski (kontrola Twojego wykonawcy)',
+    'Odbiór mieszkania od dewelopera (protokół usterek)',
+    'Audyt techniczny trwającej budowy',
+  ],
+  ctaBoxSubtext: 'Ochrona kapitału przed błędami wykonawczymi.',
+  ctaBoxButtons: [
+    {
+      text: 'Wyceń nadzór',
+      href: 'tel:+48123456789', 
+      variant: 'primary',
     },
-
-    // Sekcja 2: Philosophy Timeline - CZEKA NA DANE
-    philosophyTimeline: {
-      header: {
-        label: 'NASZA FILOZOFIA NADZORU',
-        title: 'Nadzór budowlany, który jest po Twojej stronie',
-        description: 'W CoreLTB Builders wierzymy, że dobry inspektor to nie tylko kontroler, ale Twój partner na każdym etapie budowy. Nasza rola nie kończy się na formalnym „odhaczaniu” kolejnych etapów i podpisywaniu protokołów. Działamy dla Ciebie — czuwając nad jakością, doradzając w trudnych decyzjach, reagując na nieścisłości i nagłe sytuacje.',
-      },
-      items: [
-        {
-          number: 1,
-          iconName: 'shield',
-          title: 'Pełne wsparcie i reprezentacja interesów inwestora',
-          description: 'Jesteśmy z Tobą. Pilnujemy, by wykonawcy stosowali właściwe materiały, rozwiązania i nie szli na skróty. Chętnie wyjaśniamy techniczne zagadnienia i jesteśmy obecni w rozmowach z ekipą budowlaną.'
-        },
-        {
-          number: 2,
-          iconName: 'trendingUp',
-          title: 'Realna kontrola kosztów',
-          description: 'Dobry nadzór nie tylko chroni przed błędami, ale pozwala uniknąć niepotrzebnych wydatków. Pilnujemy budżetu i doradzamy, gdzie można zaoszczędzić bez ryzyka dla bezpieczeństwa i jakości.'
-        },
-        {
-          number: 3,
-          iconName: 'award',
-          title: 'Doświadczenie poparte realizacjami',
-          description: 'Znamy najczęstsze problemy i wiemy, gdzie mogą pojawić się nieoczekiwane trudności. Dzięki praktycznemu doświadczeniu szybko wykrywamy potencjalne zagrożenia – zanim staną się kosztownym problemem.'
-        }
-      ],
-    
-      image: {
-        src: '/images/uslugi/nadzor-i-doradztwo/filozofia-nadzoru.webp',
-        alt: 'Inspektor nadzoru CoreLTB Builders omawia plan z inwestorem na placu budowy',
-      },
+    {
+      text: 'Zamów odbiór',
+      href: '#kontakt',
+      variant: 'secondary',
     },
+  ],
+},
 
-    // Sekcja 3: Cooperation Timeline NoLine - CZEKA NA DANE (7 kroków)
-    cooperationTimelineNoLine: {
-      header: {
-        label: 'ZAKRES NADZORU',
-        title: 'Nasze usługi nadzoru',
-        description: 'Poznaj kluczowe elementy profesjonalnego nadzoru budowlanego.',
+// Sekcja 2: PHILOSOPHY TIMELINE - Rygor i Kompetencje
+philosophyTimeline: {
+  header: {
+    label: 'ROLA INSPEKTORA',
+    title: 'Nie jesteśmy tu, żeby pić kawę z wykonawcą',
+    description: 'Nadzór techniczny nie polega na „podbijaniu pieczątek” w dzienniku raz w tygodniu. Płacisz nam za to, abyśmy byli „niewygodni” dla ekipy budowlanej. Wchodzimy w wykopy, sprawdzamy klasy stali i jakość betonu. Jesteśmy Twoją polisą ubezpieczeniową przed fuszarką ukrytą pod tynkiem.',
+  },
+  items: [
+    {
+      number: 1,
+      iconName: 'shield', // Ikona Tarczy
+      title: 'Kontrola robót zanikowych',
+      description: 'Największe błędy (np. brak ciągłości hydroizolacji, złe zakotwienie zbrojenia) stają się niewidoczne chwilę po wylaniu betonu. Nasz inspektor jest na budowie W TRAKCIE tych prac, a nie po fakcie. Nie pozwalamy na zalewanie "bylejakości".'
+    },
+    {
+      number: 2,
+      iconName: 'trendingUp',
+      title: 'Blokada "robót dodatkowych"',
+      description: 'Wykonawcy często próbują naciągnąć inwestora na dopłaty, twierdząc, że "projekt tego nie przewidział". Weryfikujemy zasadność każdego roszczenia finansowego wykonawcy. Jeśli zakres był w projekcie, nie zapłacisz za to ani złotówki więcej.'
+    },
+    {
+      number: 3,
+      iconName: 'award', 
+      title: 'Wiedza o gruncie Śląska i Małopolski',
+      description: 'Inspektor "teoretyk" nie zauważy problemów ze szkodami górniczymi czy pęczniejącą gliną. My jesteśmy stąd. Wiemy, jak powinien wyglądać fundament zabezpieczony pod IV kategorię szkód (np. w Rybniku) i wymuszamy na wykonawcy zachowanie tych rygorów technicznych.'
+    }
+  ],
+
+  image: {
+    src: '/images/uslugi/nadzor-i-doradztwo/filozofia-nadzoru.webp',
+    alt: 'Inspektor nadzoru CoreLTB weryfikujący zbrojenie fundamentów z projektem konstrukcyjnym',
+  },
+},
+
+  // Sekcja 3: Cooperation Timeline NoLine
+  cooperationTimelineNoLine: {
+    header: {
+      label: 'ZAKRES NADZORU',
+      title: 'Formy współpracy: Kierownik i Inspektor',
+      description: 'Poznaj kluczowe elementy profesjonalnego nadzoru budowlanego. Wybierz poziom ochrony inwestycji dopasowany do Twoich potrzeb.',
+    },
+    steps: [
+      {
+        id: 'kierownik-vs-inspektor',
+        number: 1,
+        icon: 'users',
+        label: 'Kierownik czy inspektor',
+        title: 'Kierownik a Inspektor – Konflikt interesów?',
+        content: [
+          {
+            type: 'paragraph',
+            value: 'To nie są synonimy. Prawo budowlane nakłada obowiązek zatrudnienia kierownika, ale to Inspektor nadzoru inwestorskiego jest Twoim "agentem specjalnym". Zrozumienie różnicy to klucz do bezpieczeństwa Twoich pieniędzy.'
+          },
+          {
+            type: 'list',
+            items: [
+              '**Kierownik budowy z uprawnieniami:** odpowiada za technologię, BHP i prowadzenie Dziennika Budowy (często elektronicznego EDB).',
+              '**Inspektor nadzoru inwestorskiego:** funkcja nieobowiązkowa przy domach (chyba że urząd nakaże), ale kluczowa. Reprezentuje TYLKO CIEBIE, sprawdzając, czy kierownik i ekipa nie "zamietli błędów pod dywan".'
+            ]
+          },
+          {
+            type: 'paragraph',
+            value: 'W CoreLTB działamy dwutorowo. Jeśli budujemy Twój dom – zapewniamy rzetelnego Kierownika Budowy. Jeśli budujesz z inną firmą – **wynajmij naszych Inspektorów, aby patrzyli im na ręce**.'
+          },
+          {
+            // LINK SEO (Silos Tematyczny)
+            type: 'paragraph',
+            value: '**Wciąż nie masz pewności kogo potrzebujesz?** Przeczytaj analizę: [Kiedy warto zatrudnić Inspektora Nadzoru i ile to kosztuje? >](/baza-wiedzy/kierownik-budowy-czy-inspektor-nadzoru)'
+          }
+        ],
+        imageSrc: '/images/uslugi/nadzor-i-doradztwo/etapy/kierownik-vs-inspektor.webp',
+        imageAlt: 'Spotkanie na budowie: Inwestor, Kierownik Budowy i Inspektor Nadzoru'
       },
-      steps: [
-        // PLACEHOLDER - 7 kroków czeka na dane
-        {
-          id: 'kierownik-vs-inspektor',
-          number: 1,
-          icon: 'users',
-          label: 'Kierownik vs inspektor',
-          title: 'Kierownik budowy vs inspektor nadzoru',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'To jedna z najważniejszych, a zarazem najbardziej mylących kwestii na starcie budowy. Choć obie role brzmią podobnie, ich cele są fundamentalnie różne. Zrozumienie tej różnicy to pierwszy krok do świadomego i bezpiecznego prowadzenia inwestycji.'
-            },
-            {
-              type: 'list',
-              items: [
-                '**Kierownik Budowy:** Jest obowiązkowym zarządcą budowy, odpowiedzialnym za organizację i harmonogram prac. Najczęściej reprezentuje interes generalnego wykonawcy.',
-                '**Inspektor Nadzoru Inwestorskiego:** Jest Twoim prywatnym ekspertem i strażnikiem na budowie. Reprezentuje **wyłącznie Ciebie** i ma za zadanie kontrolować jakość prac oraz chronić Twój budżet.'
-              ]
-            },
-            {
-              type: 'paragraph',
-              value: 'W CoreLTB Builders oferujemy obie usługi, doskonale rozumiejąc specyfikę każdej z ról. Zapewniamy profesjonalnego Kierownika Budowy, który jest Twoim partnerem i doradcą, a także niezależnego Inspektora Nadzoru, który staje się Twoją gwarancją najwyższej jakości.'
-            },
-            {
-              type: 'paragraph',
-              value: 'Chcesz poznać wszystkie szczegóły i dowiedzieć się, które rozwiązanie jest najlepsze dla Twojej budowy? **Przeczytaj nasz szczegółowy artykuł porównawczy.**' // <<-- TUTAJ BĘDZIE LINK DO KLASTRA
-            }
-          ],
-          imageSrc: '/images/uslugi/nadzor-i-doradztwo/etapy/kierownik-vs-inspektor.webp',
-          imageAlt: 'Kierownik Budowy vs Inspektora Nadzoru Inwestorskiego'
-        },
         {
           id: 'kierownik-budowy',
           number: 2,
           icon: 'hardHat',
-          label: 'Kierownik budowy',
-          title: 'Usługa kierownika budowy',
+          label: 'Kierownik Budowy',
+          title: 'Nadzór techniczny (nie "figurant")',
           content: [
             {
               type: 'paragraph',
-              value: 'Zatrudnienie Kierownika Budowy to **ustawowy obowiązek każdego inwestora**. To on formalnie prowadzi budowę, odpowiada za jej zgodność z projektem i przepisami. Niestety, rynkowa praktyka często sprowadza tę kluczową rolę do minimum. W CoreLTB Builders podchodzimy do tego zupełnie inaczej.'
+              value: 'Zatrudnienie kierownika to wymóg Prawa Budowlanego, ale dla nas to fundament bezpieczeństwa konstrukcji. W CoreLTB Builders odcinamy się od praktyk "podbijania pieczątki". Nasz Kierownik to inżynier z uprawnieniami, który fizycznie weryfikuje poprawność prac przed każdym kluczowym etapem (tzw. prace zanikowe).'
             },
             {
               type: 'paragraph',
-              value: 'Dla nas Kierownik Budowy to nie tylko formalność, ale **Twój najważniejszy partner i doradca techniczny na placu budowy.** Oprócz pełnienia wszystkich obowiązków wynikających z Prawa Budowlanego, nasz Kierownik zapewnia:'
+              value: '**Co realnie sprawdzamy na placu?**'
             },
             {
               type: 'list',
               items: [
-                '**Aktywną Obecność i Kontrolę:** Regularne wizyty na budowie w kluczowych momentach (np. przed zalaniem fundamentów, przy montażu zbrojenia), aby osobiście zweryfikować jakość prac.',
-                '**Proaktywne Doradztwo Techniczne:** Nie tylko reagujemy na problemy, ale im zapobiegamy. Doradzamy w kwestii doboru materiałów i technologii, często znajdując rozwiązania, które generują realne oszczędności.',
-                '**Stały Kontakt i Transparentną Komunikację:** Jesteśmy do Twojej dyspozycji. Regularnie informujemy o postępach, wyjaśniamy skomplikowane kwestie techniczne i zapewniamy pełną dokumentację fotograficzną.',
-                '**Pełną Obsługę Formalną:** Bierzemy na siebie cały ciężar prowadzenia dokumentacji, w tym dziennika budowy, protokołów i przygotowania dokumentów do odbioru końcowego.'
+                '**Odbiór zbrojenia:** Wchodzimy do wykopu i sprawdzamy średnice prętów, zakłady i dystanse *zanim* przyjedzie beton. To jedyny moment na uniknięcie błędu.',
+                '**Kontrola Materiałów:** Weryfikujemy certyfikaty (Deklaracje Właściwości Użytkowych) betonu i stali. Nie pozwalamy na wbudowanie materiałów "no-name".',
+                '**Prowadzenie Dokumentacji:** Rzetelne wpisy w Dzienniku Budowy oraz dbałość o BIOZ, co jest kluczowe przy kontrolach inspektora pracy lub PINB.',
+                '**Optymalizacja:** Doradzamy wykonawcy, jak rozwiązać detale (np. szalunki), aby prace szły szybciej i taniej dla Inwestora.'
               ]
             },
             {
-              type: 'paragraph',
-              value: 'Wybierając Kierownika Budowy z CoreLTB Builders, wybierasz **spokój ducha i pewność**, że Twoja inwestycja jest w rękach zaangażowanego profesjonalisty, który dba o Twój interes.'
+               // LINK DO KLASTRA: EDUKACJA
+               type: 'paragraph',
+               value: '**Za co odpowiada kierownik?** Sprawdź pełną listę obowiązków: [Rola Kierownika Budowy w procesie inwestycyjnym >](/baza-wiedzy/obowiazki-kierownika-budowy)'
             }
           ],
+          // Twoje oryginalne zdjęcie
           imageSrc: '/images/uslugi/nadzor-i-doradztwo/etapy/kierownik-budowy.webp',
-          imageAlt: 'Kierownik Budowy CoreLTB Builders omawia postępy prac z inwestorem na budowie'
+          imageAlt: 'Kierownik Budowy CoreLTB odbierający zbrojenie płyty fundamentowej'
         },
         {
           id: 'inspektor-nadzoru',
           number: 3,
-          icon: 'users',
-          label: 'Inspektor nadzoru',
-          title: 'Inspektor nadzoru inwestorskiego',
+          icon: 'shield', // Ikona Tarczy (Ochrona)
+          label: 'Inspektor Nadzoru',
+          title: 'Inspektor Nadzoru - Twój pełnomocnik techniczny',
           content: [
             {
               type: 'paragraph',
-              value: 'Zatrudnienie Inspektora Nadzoru to **Twoja strategiczna decyzja o maksymalnym zabezpieczeniu inwestycji**. To usługa dla tych, którzy nie godzą się na żadne kompromisy i chcą mieć 100% pewności, że każdy detal ich przyszłego domu jest wykonany perfekcyjnie. Nasz Inspektor to Twój osobisty strażnik jakości na placu budowy.'
+              value: 'Budujesz firmą zewnętrzną i boisz się fuszerek? Inspektor to jedyna osoba na placu, która **nie jest opłacana przez wykonawcę**. To "policja budowlana", która w Twoim imieniu weryfikuje zgodność prac z projektem i sztuką. Działamy bezkompromisowo – jeśli ściana jest krzywa, nakazujemy jej rozebranie na koszt ekipy.'
             },
             {
               type: 'paragraph',
-              value: '**Kiedy szczególnie warto zainwestować w Inspektora Nadzoru?**'
+              value: '**Kiedy nas wezwać?**'
             },
             {
               type: 'list',
               items: [
-                '**Gdy budujesz zdalnie:** Jesteśmy Twoimi oczami i uszami na miejscu, regularnie kontrolując każdy etap.',
-                '**Gdy nie masz wiedzy technicznej:** Zdejmujemy z Ciebie ciężar oceny skomplikowanych prac budowlanych.',
-                '**Przy skomplikowanych projektach:** Pilnujemy, by nawet najtrudniejsze detale architektoniczne były wykonane zgodnie z projektem.',
-                '**Gdy chcesz uniknąć konfrontacji:** Bierzemy na siebie wszystkie rozmowy techniczne i ewentualne spory z wykonawcą.'
+                '**Przed zalaniem betonu:** Odbiór zbrojenia to najważniejszy moment budowy. Wykrywamy braki w ciągłości prętów, zanim znikną pod betonem.',
+                '**Odbiór "Stanu Zero":** Sprawdzamy jakość izolacji fundamentów (bitumy, styrodur). Tu najczęściej wykonawcy oszczędzają, co grozi wilgocią po latach.',
+                '**Spór z wykonawcą:** Gdy ekipa żąda dopłaty za "roboty dodatkowe", my weryfikujemy czy są one zasadne, czy wynikają z ich błędu.'
               ]
             },
             {
               type: 'paragraph',
-              value: '**Zakres kontroli naszego Inspektora obejmuje m.in.:**'
+              value: '**Twoja korzyść:** Nie musisz znać się na budowlance ani kłócić z majstrem. My używamy twardych argumentów inżynierskich, oszczędzając Twoje nerwy i pieniądze.'
             },
             {
-              type: 'list',
-              items: [
-                '**Weryfikację jakości materiałów:** Sprawdzamy, czy na budowę trafiają materiały zgodne z projektem i posiadające wymagane atesty.',
-                '**Kontrolę prac zanikających:** Drobiazgowo sprawdzamy zbrojenia, izolacje fundamentów i hydroizolacje, zanim zostaną zakryte.',
-                '**Odbiory kluczowych etapów:** Uczestniczymy w odbiorach stanu surowego, instalacji, tynków i posadzek, wyłapując wszelkie usterki.',
-                '**Reprezentowanie Cię przed wykonawcą:** W Twoim imieniu wydajemy polecenia i egzekwujemy najwyższą jakość wykonania.'
-              ]
+                // LINK DO ARTYKUŁU O PUŁAPKACH
+                type: 'paragraph',
+                value: '**Na co uważać przy wyborze ekipy?** Przeczytaj: [5 najczęstszych błędów wykonawczych, które wykrywa Inspektor](/baza-wiedzy/bledy-na-budowie-nadzor)'
             }
           ],
           imageSrc: '/images/uslugi/nadzor-i-doradztwo/etapy/inspektor-nadzoru.webp',
-          imageAlt: 'Inspektor Nadzoru CoreLTB Builders kontroluje zbrojenie fundamentów na budowie'
+          imageAlt: 'Inspektor CoreLTB mierzący jakość zbrojenia i betonu'
         },
         {
           id: 'odbiory-techniczne',
           number: 4,
           icon: 'clipboardCheck',
-          label: 'Odbiory Techniczne',
-          title: 'Odbiory Techniczne',
+          label: 'Odbiory techniczne',
+          title: 'Odbiór techniczny i weryfikacja usterek',
           content: [
             {
               type: 'paragraph',
-              value: 'Odbiór techniczny to moment prawdy – finalny etap, który formalnie kończy budowę i pozwala Ci bezpiecznie zamieszkać w swoim wymarzonym domu. To także ostatnia szansa na bezkosztowe usunięcie wszelkich usterek i niedociągnięć przez wykonawcę. Przeprowadzony bez fachowej wiedzy, może stać się źródłem przyszłych problemów. Z nami, jest gwarancją Twojego spokoju.'
+              value: 'To ostatni moment, by zmusić wykonawcę do darmowej naprawy błędów. Jeśli podpiszesz protokół odbioru bez uwag, za krzywe ściany czy porysowane okna zapłacisz z własnej kieszeni na etapie wykańczania wnętrz. Nasz inspektor wchodzi na budowę z chłodną głową i **profesjonalnym sprzętem pomiarowym** (niwelator laserowy, kamera termowizyjna, wilgotnościomierz).'
             },
             {
               type: 'paragraph',
-              value: 'Nasz inspektor, wyposażony w profesjonalny sprzęt, przeprowadza drobiazgowy audyt techniczny, sprawdzając m.in.:'
+              value: '**Co dyskwalifikuje odbiór? Sprawdzamy:**'
             },
             {
               type: 'list',
               items: [
-                '**Jakość tynków i wylewek:** Kontrola pionów, poziomów, kątów prostych i gładkości powierzchni.',
-                '**Stolarkę okienną i drzwiową:** Sprawdzenie prawidłowości montażu, szczelności, regulacji oraz ewentualnych uszkodzeń.',
-                '**Instalacje:** Weryfikacja rozmieszczenia i działania punktów elektrycznych, podejść wodno-kanalizacyjnych oraz wydajności wentylacji.',
-                '**Zgodność z projektem:** Porównanie stanu faktycznego z dokumentacją projektową co do milimetra.',
-                '**Elementy zewnętrzne:** Kontrola elewacji, parapetów, rynien i obróbek blacharskich.'
+                '**Geometria (Tynki/Wylewki):** Laserowa kontrola płaszczyzn i kątów prostych (krytyczne dla montażu mebli kuchennych i szaf wnękowych). Weryfikujemy zgodność z normą PN-B-10110.',
+                '**Stolarka:** Szukamy rys na pakietach szybowych (zgodnie z normą PN-EN 1279), sprawdzamy regulację okuć oraz szczelność montażu kamerą termowizyjną (przedmuchy).',
+                '**Wilgotność:** Mierzymy wilgotność wylewek (metoda CM). Położenie podłogi na mokry podkład to gwarantowane zniszczenie paneli.',
+                '**Zgodność z Projektem:** Czy gniazdka są tam, gdzie miały być? Czy otwory drzwiowe mają normową wysokość?'
               ]
             },
             {
+              // WAŻNY LINK - Przykład usterek
               type: 'paragraph',
-              value: 'Wynikiem naszej pracy jest **szczegółowy protokół odbioru** z listą ewentualnych usterek i terminem ich usunięcia przez wykonawcę. Dzięki temu masz pewność, że odbierasz dom wykonany **zgodnie z najwyższymi standardami sztuki budowlanej.**'
+              value: '**Efekt:** Otrzymujesz Protokół Usterek, który jest podstawą prawną do żądania napraw. Zobacz: [Lista najczęstszych usterek deweloperskich na Śląsku](/baza-wiedzy/najczestsze-usterki-przy-odbiorze)'
             }
           ],
           imageSrc: '/images/uslugi/nadzor-i-doradztwo/etapy/odbiory-techniczne.webp',
-          imageAlt: 'Inspektor CoreLTB Builders sprawdza piony ścian podczas odbioru technicznego domu z Porothermu'
+          imageAlt: 'Inspektor CoreLTB wykonujący pomiar laserowy tynków podczas odbioru'
         },
       ],
     },
 
-    // Sekcja 4: Services Accordion (FAQ) - CZEKA NA DANE
-    servicesAccordion: {
-      header: {
-        label: 'NAJCZĘŚCIEJ ZADAWANE PYTANIA',
-        title: 'Odpowiedzi na Kluczowe Pytania',
-        description: 'Sprawdź najważniejsze informacje, które pomogą Ci podjąć świadomą i bezpieczną decyzję. Podzieliliśmy pytania na kategorie, aby łatwiej znaleźć to, czego szukasz.',
-      },
-      services: [
-        // PODSTAWY NADZORU
+// Sekcja 4: FAQ - Obrona Inwestora i Pieniądze
+servicesAccordion: {
+  header: {
+    label: 'PYTANIA INWESTORA',
+    title: 'Kwestie prawne i koszty bezpieczeństwa',
+    description: 'Konkretne odpowiedzi o zakres odpowiedzialności, ceny i sens zatrudniania inspektora nadzoru.',
+  },
+  services: [
+    {
+      iconName: 'wallet', 
+      title: 'Czy nadzór mi się opłaci? (Koszt vs Zysk)',
+      content: [
         {
-          iconName: 'wallet',
-          title: 'Ile kosztuje profesjonalny nadzór budowlany?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Koszt jest zawsze indywidualny i zależy od złożoności projektu, ale kompleksowa usługa **Inspektora Nadzoru** dla domu jednorodzinnego to zazwyczaj inwestycja rzędu **1-2% wartości całej budowy**.'
-            },
-            {
-              type: 'paragraph',
-              value: 'Pojedyncza wizyta kontrolna to koszt od **300 do 500 zł**. Biorąc pod uwagę potencjalne oszczędności wynikające z eliminacji błędów, jest to jedna z najbardziej opłacalnych decyzji w całym procesie.'
-            }
-          ]
+          type: 'paragraph',
+          value: 'Koszt Inspektora Nadzoru to zazwyczaj **1-2% wartości inwestycji**. To promil w porównaniu do kosztów naprawy źle zaizolowanych fundamentów (często 50-100 tys. zł po kilku latach eksploatacji).'
         },
         {
-          iconName: 'users',
-          title: 'Czy kierownik budowy i inspektor nadzoru to może być ta sama osoba?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Absolutnie nie. **Polskie prawo budowlane zabrania łączenia tych dwóch funkcji** na jednej budowie. Co więcej, ich cele są często sprzeczne.'
-            },
-            {
-              type: 'paragraph',
-              value: 'Kierownik budowy dba o sprawną realizację, a Inspektor Nadzoru o **najwyższą jakość**, nawet jeśli wymaga to dodatkowego czasu. Rozdzielenie tych ról jest fundamentem prawidłowej i niezależnej kontroli na budowie.'
-            }
-          ]
+          type: 'paragraph',
+          value: 'Nasza usługa często "zarabia na siebie" już przy pierwszej kontroli, gdy blokujemy niezasadne faktury wykonawcy za rzekome "roboty dodatkowe" lub wymuszamy użycie stali właściwej klasy zamiast tańszego zamiennika.'
+        }
+      ]
+    },
+    {
+      iconName: 'users',
+      title: 'Dlaczego nie wystarczy sam Kierownik Budowy?',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Funkcje te się nie dublują. W praktyce rynkowej Kierownik jest często zatrudniony przez firmę wykonawczą, co rodzi **konflikt interesów**. Jemu zależy na szybkim postępie prac ("żeby przerobić").'
         },
         {
-          iconName: 'fileText',
-          title: 'Co to jest dziennik budowy i kto za niego odpowiada?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Dziennik budowy to **najważniejszy dokument urzędowy na placu budowy**, w którym odnotowuje się cały przebieg prac. Jest dowodem w ewentualnych sporach.'
-            },
-            {
-              type: 'paragraph',
-              value: 'Za jego prowadzenie formalnie odpowiada **Kierownik Budowy**. Nasz Inspektor Nadzoru ma prawo i obowiązek dokonywania w nim wpisów dotyczących kontroli, wykrytych usterek i zaleceń, co stanowi oficjalny ślad jego działań.'
-            }
-          ]
-        },
-    
-        // PRZEBIEG WSPÓŁPRACY
+          type: 'paragraph',
+          value: '**Inspektor nadzoru inwestorskiego** zależy wyłącznie na Twoim interesie. Jesteśmy jedyną osobą techniczną na budowie, której wykonawca nie płaci, więc nie mamy powodu, by przymykać oko na błędy.'
+        }
+      ]
+    },
+    {
+      iconName: 'home', // Odbiory mieszkań (Money Keyword)
+      title: 'Czy odbieracie też mieszkania od dewelopera?',
+      content: [
         {
-          iconName: 'calendar',
-          title: 'Jak często inspektor powinien być na budowie?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Częstotliwość zależy od etapu prac. Kluczowa jest obecność w momentach krytycznych i przy tzw. **pracach zanikających**, takich jak:'
-            },
-            {
-                type: 'list',
-                items: [
-                    'Przed zalaniem fundamentów (kontrola zbrojenia i szalunków).',
-                    'Przy montażu konstrukcji dachu.',
-                    'Przed zakryciem instalacji.',
-                    'Podczas odbiorów poszczególnych etapów (stan surowy, tynki).'
-                ]
-            },
-            {
-              type: 'paragraph',
-              value: 'W CoreLTB Builders ustalamy harmonogram wizyt indywidualnie, gwarantując **kontrolę nad wszystkimi najważniejszymi etapami budowy**.'
-            }
-          ]
+          type: 'paragraph',
+          value: '**Tak, to jedna z naszych głównych usług.** Deweloperzy często liczą na niewiedzę kupującego. My przychodzimy z normami (kąty, płaszczyzny tynków PN-B-10110) i kamerą termowizyjną. Znajdujemy mostki termiczne, porysowane szyby i brak kątów prostych w kuchni.'
         },
         {
-          iconName: 'alertTriangle',
-          title: 'Co jeśli inspektor znajdzie poważny błąd?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'To jest właśnie sedno naszej pracy. W takiej sytuacji inspektor natychmiast **wstrzymuje prace i wydaje Kierownikowi Budowy polecenie usunięcia usterki**, co jest odnotowywane w dzienniku budowy.'
-            },
-            {
-              type: 'paragraph',
-              value: 'Reprezentując Twój interes, dopilnowujemy, aby wszystko zostało naprawione **zgodnie ze sztuką i na koszt wykonawcy**, chroniąc Cię przed finansowymi konsekwencjami błędu.'
-            }
-          ]
+           // LINK SEO: USTERKI DEWELOPERSKIE
+           type: 'paragraph',
+           value: '**Idziesz na odbiór sam?** Zobacz, co możesz przeoczyć: [Lista najczęstszych usterek deweloperskich na Śląsku](/baza-wiedzy/najczestsze-usterki-przy-odbiorze)'
+        }
+      ]
+    },
+    {
+      iconName: 'calendarRange', 
+      title: 'Kiedy wzywać Inspektora na budowę?',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Nie musimy być na budowie codziennie, ale musimy być w momentach krytycznych – przy tzw. **pracach zanikających**. Gdy wyleją beton, jest już za późno na kontrolę zbrojenia.'
         },
         {
-          iconName: 'fileCheck',
-          title: 'Czy inspektor może pomóc mi zweryfikować umowę z wykonawcą?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Tak. To jedna z usług doradczych, którą świadczymy. **Przed podpisaniem umowy warto ją z nami skonsultować.**'
-            },
-            {
-              type: 'paragraph',
-              value: 'Pomożemy Ci zidentyfikować potencjalne "haczyki", nieprecyzyjne zapisy i upewnić się, że Twoje interesy są w pełni zabezpieczone na papierze, jeszcze przed rozpoczęciem prac. **Dobra umowa to podstawa spokojnej budowy.**'
-            }
+          type: 'paragraph',
+          value: '**Kluczowe momenty wizyt:**'
+        },
+        {
+          type: 'list',
+          items: [
+            'odbiór zbrojenia ław lub płyty fundamentowej (przed betonowaniem),',
+            'weryfikacja izolacji przeciwwilgociowych (przed zasypaniem),',
+            'kontrola więźby dachowej i warstw pokrycia,',
+            'sprawdzenie poprawności wykonania dylatacji (szczególnie na szkodach górniczych).'
           ]
         }
       ]
     },
+    {
+      iconName: 'alertTriangle',
+      title: 'Buduję na szkodach górniczych. Czy nadzór jest konieczny?',
+      content: [
+        {
+          type: 'paragraph',
+          value: '**Tak, to inżynierska konieczność.** Na terenach IV kategorii szkód (Rybnik, Jastrzębie, Wodzisław) budynek jest poddawany potężnym siłom. Wykonawcy z innych regionów często bagatelizują te wymogi.'
+        },
+        {
+          type: 'paragraph',
+          value: 'Nasz Inspektor weryfikuje zgodność zbrojenia (zagęszczone strzemiona, podwójne siatki) co do jednego pręta. Bez tego Twój dom może popękać przy pierwszym silniejszym wstrząsie.'
+        }
+      ]
+    },
+    {
+      iconName: 'fileCheck',
+      title: 'Co jeśli wykonawca nie chce poprawić błędu?',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Dokonujemy wpisu do Dziennika Budowy i wstrzymujemy etap prac. Wykonawca nie otrzyma zapłaty, dopóki wada nie zostanie usunięta. W razie sporu sądowego, nasza dokumentacja jest Twoim **najmocniejszym dowodem**. Działamy jak Twój techniczny adwokat.'
+        }
+      ]
+    }
+  ]
+},
 
     // Sekcja 5: Testimonials
     testimonials: {
@@ -1650,7 +1699,7 @@ contactCTA: {
     contactCTA: {
       header: {
         label: 'ZABEZPIECZ SWOJĄ INWESTYCJĘ',
-        title: 'Każdy Dzień bez Nadzoru to Ryzyko',
+        title: 'Każdy dzień bez nadzoru to Ryzyko',
         description: 'Umów bezpłatną konsultację i dowiedz się, jak chronimy Twoją budowę przed kosztownymi błędami.',
       },
       contactInfo: {
@@ -1661,7 +1710,7 @@ contactCTA: {
     },
 
     // SEO
-    metaTitle: 'Nadzór Budowlany | CoreLTB Builders - Ochrona Twojej Inwestycji',
+    metaTitle: 'Nadzór budowlany | CoreLTB Builders - Ochrona twojej inwestycji',
     metaDescription:
       'Profesjonalny nadzór budowlany chroni Twoją inwestycję. 15 lat doświadczenia. Kontrola jakości, budżetu i harmonogramu. Unikaj kosztownych błędów. Bezpłatna konsultacja.',
 
@@ -1669,225 +1718,239 @@ contactCTA: {
     updatedAt: '2025-10-24T10:00:00Z',
   },
 
-  // === USŁUGI TECHNICZNE (Ekspertyzy i Pomiary) ===
-  {
-    slug: 'uslugi-techniczne',
-    id: 'uslugi-techniczne',
-    category: 'Usługi Techniczne',
-    title: 'Ekspertyzy i Pomiary Budowlane',
-
-    // PageHeader
-    pageHeader: {
-      title: 'Ekspertyzy i Pomiary Budowlane',
-      watermarkText: 'USŁUGI TECHNICZNE',
-      backgroundImage: '/images/uslugi/uslugi-techniczne/hero.webp',
-      breadcrumbs: [
-        { label: 'Strona główna', href: '/' },
-        { label: 'Oferta', href: '/oferta' },
-        { label: 'Usługi Techniczne', href: '' },
-      ],
-    },
-
-    // Sekcja 1: EmotionalHero
-    emotionalHero: {
-      label: 'EKSPERTYZY I POMIARY BUDOWLANE',
-      headline: 'Zbuduj na Pewnym Gruncie. I na Twardych Danych',
-      subtitle:
-        'Fundamentem każdej udanej budowy są twarde dane, które pozwalają uniknąć najdroższych błędów – pękających ścian, przekroczonego budżetu czy problemów prawnych. W CoreLTB Builders działamy jak system wczesnego ostrzegania dla Twojej inwestycji. Dostarczamy precyzyjne pomiary, rzetelne ekspertyzy i zrozumiałe kosztorysy, które zamieniają niewiadome w pewność.',
-      benefits: [
-        'Precyzyjne dane, które eliminują ryzyko kosztownych błędów',
-        'Jeden zespół ekspertów – od geologii po kosztorys budowlany',
-        'Raporty i analizy w zrozumiałym języku, bez technicznego żargonu',
-      ],
-      // CTA Box
-      ctaBoxTitle: '☎ Umów Konsultację Techniczną)',
-      ctaBoxBenefits: [
-        'Określimy, jakich badań i pomiarów potrzebuje Twoja działka',
-        'Wycenimy niezbędne ekspertyzy i usługi geodezyjne',
-        'Wskażemy potencjalne ryzyka techniczne i prawne',
-        'Odpowiemy na wszystkie Twoje pytania i wątpliwości',
-      ],
-      ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
-      ctaBoxButtons: [
-        {
-          text: 'Zadzwoń do Nas',
-          href: 'tel:+48123456789',
-        },
-        {
-          text: 'Napisz do Nas',
-          href: '#kontakt',
-        },
-      ],
-    },
-
-    // Sekcja 2: PhilosophyTimeline
-    philosophyTimeline: {
-      header: {
-        label: 'NASZA FILOZOFIA',
-        title: 'Dane, Które Budują Pewność',
-        description: 'Nie zgadujemy. Mierzymy, badamy i sprawdzamy. Bo budowa to nie miejsce na domysły.',
-        theme: 'light' as const,
-      },
-      items: [
-        {
-          number: 1,
-          iconName: 'search',
-          title: 'Precyzyjne Badania Gruntu',
-          description:
-            'Każda działka skrywa tajemnice. Badania geologiczne ujawniają nośność gruntu, poziom wód gruntowych i potencjalne zagrożenia, zanim wbijesz pierwszą łopatę.',
-        },
-        {
-          number: 2,
-          iconName: 'ruler',
-          title: 'Geodezja i Pomiary Wykonawcze',
-          description:
-            'Tyczenie budynku, inwentaryzacje powykonawcze, mapa do celów prawnych – geodeta to kluczowy gracz w każdej budowie. Bez niego możesz zbudować dom 30 cm za blisko granicy.',
-        },
-        {
-          number: 3,
-          iconName: 'fileText',
-          title: 'Kosztorysy i Audyty Techniczne',
-          description:
-            'Ile naprawdę kosztuje Twój dom? Profesjonalny kosztorys chroni Cię przed zawyżonymi ofertami wykonawców i pozwala negocjować z pozycji wiedzy.',
-        },
-      ],
-      image: {
-        src: '/images/uslugi/uslugi-techniczne/filozofia-pomiary.webp',
-        alt: 'Zespół CoreLTB podczas pomiarów geodezyjnych',
-      },
-    },
-    
-    cooperationTimelineNoLine: {
-      header: {
-        label: 'ZAKRES EKSPERTYZ I POMIARÓW',
-        title: 'Dane, Które Gwarantują Bezpieczeństwo Twojej Inwestycji',
-        description: 'Od właściwości gruntu, przez precyzyjne mapy, aż po rzetelny kosztorys – każda budowa opiera się na danych. Poniżej przedstawiamy kluczowe ekspertyzy i pomiary, które zapewnią bezpieczeństwo i pełną kontrolę nad Twoim projektem.',
-      },
-      steps: [
-        {
-          id: 'uslugi-geodezyjne',
-          number: 1,
-          icon: 'map',
-          label: 'Geodezja',
-          title: 'Usługi Geodezyjne – Wyznaczanie Granic',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Wyobraź sobie, że Twój dom został wybudowany 30 centymetrów za blisko granicy działki. Taki błąd, wynikający z braku geodezyjnej precyzji, może prowadzić do kosztownego sporu z sąsiadem, a w skrajnych przypadkach nawet do nakazu częściowej rozbiórki. Usługi geodezyjne to **prawny i techniczny fundament** całej inwestycji. To one gwarantują, że Twój dom powstanie dokładnie tam, gdzie powinien.'
-            },
-            {
-              type: 'paragraph',
-              value: 'W CoreLTB Builders traktujemy geodezję jak system nawigacji dla Twojej budowy. Dzielimy ten proces na trzy kluczowe etapy:'
-            },
-            {
-              type: 'list',
-              items: [
-                '**Etap Planowania: Mapa dla Architekta.** Zanim powstanie pierwsza kreska projektu, nasz geodeta tworzy **mapę do celów projektowych**. To precyzyjne opracowanie jest fundamentem pracy architekta i niezbędnym dokumentem do uzyskania pozwolenia na budowę.',
-                '**Etap Realizacji: Wytyczenie Budynku w Terenie.** Gdy masz już pozwolenie, geodeta z milimetrową precyzją przenosi projekt z papieru na Twoją działkę. **Wskazuje dokładne miejsce pod fundamenty**, dając gwarancję, że budowa ruszy we właściwym miejscu.',
-                '**Etap Zakończenia: Inwentaryzacja Powykonawcza.** Po zakończeniu budowy, geodeta nanosi gotowy dom i przyłącza na oficjalne mapy. Ta **mapa powykonawcza** jest kluczowym dokumentem, wymaganym do legalnego odbioru budynku.'
-              ]
-            },
-            {
-              type: 'paragraph',
-              value: 'Koordynujemy pracę geodety na każdym z tych etapów, zapewniając płynną komunikację i pewność, że Twoja inwestycja od początku do końca stoi na **solidnym i legalnym gruncie.**'
-            }
-          ],
-          imageSrc: '/images/uslugi/uslugi-techniczne/etapy/geodezja.webp',
-          imageAlt: 'Geodeta wykonujący precyzyjne pomiary na działce budowlanej przy użyciu tachimetru'
-        },
-// Krok 2: Badania Geologiczne Gruntu
-
+// === USŁUGI TECHNICZNE (Ekspertyzy i Pomiary) ===
 {
-  id: 'badania-geologiczne',
-  number: 2,
-  icon: 'layers',
-  label: 'Geologia',
-  title: 'Badania Geologiczne Gruntu',
-  content: [
+  slug: 'uslugi-techniczne',
+  id: 'uslugi-techniczne',
+  category: 'Usługi Techniczne',
+  title: 'Geologia i Geodezja',
+
+  // Listing (karta na stronie /oferta)
+  listing: {
+    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800',
+    title: 'Usługi techniczne: geologia, geodezja, kosztorys',
+    description: 'Twarde dane przed startem. Odwierty geotechniczne, badanie nośności glin, mapy MDCP i tyczenie osi budynków.',
+    features: [
+      'Badania geologiczne i geotechniczne',
+      'Pomiary geodezyjne i kosztorysy',
+    ],
+  },
+
+  // PageHeader
+  pageHeader: {
+    // H1 ZOPTYMALIZOWANY POD FRAZY (Vol: 5k + 5k)
+    title: 'Geologia i geodezja: Badania geotechniczne i mapy',
+    watermarkText: 'USŁUGI INŻYNIERSKIE',
+    backgroundImage: '/images/uslugi/uslugi-techniczne/hero.webp',
+    breadcrumbs: [
+      { label: 'Strona główna', href: '/' },
+      { label: 'Oferta', href: '/oferta' },
+      { label: 'Geologia i Geodezja', href: '' },
+    ],
+  },
+
+  // Sekcja 1: HERO - Diagnostyka Gruntu (Intencja: Bezpieczeństwo i Prawo)
+  emotionalHero: {
+    label: 'USŁUGI INŻYNIERSKIE • DIAGNOSTYKA GRUNTU',
+    headline: [
+      'Nie buduj w ciemno.',
+      'Twarde dane przed wbiciem łopaty.'
+    ],
+    subtitle:
+      'Inwestycja na Śląsku lub w Małopolsce bez badań gruntu to ryzyko finansowe. Grunty wysadzinowe (gliny), szkody górnicze czy niekontrolowane nasypy mogą podwoić koszt fundamentów. Dostarczamy precyzyjną diagnostykę: odwierty geotechniczne, mapy do celów projektowych i rzetelne kosztorysy, które chronią Twój budżet przed niespodziankami.',
+    benefits: [
+      'Badania geotechniczne: wykrywamy wody gruntowe i grunty nienośne',
+      'Geodezja: wykonujemy mapy do celów projektowych i tyczenie budynków',
+      'Kosztorysowanie: dokumentacja niezbędna do banku (transze) i kontroli wykonawcy',
+    ],
+    
+    // CTA Box - Agresywne nastawienie na usługi "na już"
+    ctaBoxTitle: 'Wstępny audyt działki',
+    ctaBoxBenefits: [
+      'Analiza przydatności gruntu pod zabudowę',
+      'Weryfikacja granic prawnych (wznowienie znaków)',
+      'Wycena Mapy do celów projektowych (MDCP)',
+      'Ocena ryzyka szkód górniczych (Okręg Rybnicki/Śląsk)',
+    ],
+    ctaBoxSubtext: 'Raport techniczny niezbędny do rozpoczęcia budowy.',
+    ctaBoxButtons: [
+      {
+        text: 'Zleć badania gruntu',
+        href: 'tel:+48123456789',
+        variant: 'primary',
+      },
+      {
+        text: 'Zapytaj o geodetę',
+        href: '#kontakt',
+        variant: 'secondary',
+      },
+    ],
+  },
+
+// Sekcja 2: DLACZEGO WARTO BADAĆ? (USP Diagnostyczne)
+philosophyTimeline: {
+  header: {
+    label: 'DIAGNOSTYKA INWESTYCJI',
+    title: 'Błąd na papierze kosztuje grosze. Błąd na budowie – tysiące.',
+    description: 'Budownictwo nie wybacza "gdybania". Geologia i Geodezja to najtańsze ubezpieczenie Twojego kapitału. Wykrywamy grunty nienośne, kolizje prawne i ryzyka budżetowe, zanim wjadą koparki.',
+    theme: 'light',
+  },
+  items: [
     {
-      type: 'paragraph',
-      value: 'Trwałość i bezpieczeństwo Twojego domu zależą bezpośrednio od fundamentów, a ich konstrukcja – od tego, co znajduje się pod powierzchnią ziemi. **Pękające ściany, zalana piwnica czy nierówne osiadanie budynku** to najczęściej skutki niedopasowania projektu posadowienia do realnych warunków gruntowych. Profesjonalne badania geologiczne eliminują to ryzyko u samego źródła.'
+      number: 1,
+      iconName: 'pickaxe',
+      title: 'Geotechnika: unikasz wymiany gruntu',
+      description:
+        'Najczęstszy powód nagłych dopłat? "Wyszły torfy" albo "nasyp niekontrolowany". Nasze badania geotechniczne pokazują prawdę. Dowiesz się, czy możesz stawiać dom na ławach, czy grunt wymaga kosztownej wymiany lub płyty.',
     },
     {
-      type: 'paragraph',
-      value: 'Choć nie zawsze wymagane prawem, dla odpowiedzialnego architekta badania geologiczne są absolutną podstawą. W Naszej Firmie traktujemy je jako kluczowy element analizy ryzyka inwestycji. Nasz proces badawczy dostarcza **niezbędnych danych dla konstruktora**: '
+      number: 2,
+      iconName: 'ruler',
+      title: 'Geodezja: precyzja prawna (MDCP)',
+      description:
+        'Od mapy do celów projektowych po inwentaryzację. Nasz geodeta pilnuje granic. Przesunięcie budynku o 20 cm względem planu zagospodarowania może skutkować nakazem rozbiórki. My tego pilnujemy.',
     },
     {
-      type: 'list',
-      items: [
-        '**Określenie rodzaju i nośności gruntu:** Pozwala to dobrać optymalny i ekonomiczny typ fundamentów (ławowe, płytowe), zapobiegając zarówno niepotrzebnym kosztom (przeprojektowanie), jak i ryzyku katastrofy budowlanej (niedoszacowanie).',
-        '**Ustalenie poziomu wód gruntowych:** Ta informacja jest kluczowa dla projektu piwnicy, garażu podziemnego i doboru odpowiedniej hydroizolacji. Chroni budynek przed trwałą wilgocią i zalewaniem.',
-        '**Wykrycie potencjalnych zagrożeń:** Identyfikujemy grunty nienośne (np. torfy), wysadzinowe lub inne ukryte "niespodzianki", które mogą wymagać specjalistycznych i droższych rozwiązań. Wiedza o nich przed budową oszczędza setki tysięcy złotych.'
-      ]
+      number: 3,
+      iconName: 'calculator',
+      title: 'Kosztorys: twarde dane dla banku',
+      description:
+        'Nie daj się nabrać na wyceny "z sufitu". Tworzymy profesjonalny przedmiar robót i kosztorys inwestorski oparty na cenach rynkowych 2026. To Twoja tarcza w negocjacjach z bankiem i wykonawcami.',
     },
-    {
-      type: 'paragraph',
-      value: 'Wynikiem naszych badań jest **szczegółowa opinia geotechniczna**, zawierająca konkretne zalecenia projektowe. To niewielka inwestycja, która daje bezcenną pewność, że budujesz na solidnym i bezpiecznym fundamencie.'
-    }
   ],
-  imageSrc: '/images/uslugi/uslugi-techniczne/etapy/geologia.webp',
-  imageAlt: 'Geolog badający próbkę gruntu pobraną z odwiertu na działce budowlanej'
+  image: {
+    src: '/images/uslugi/uslugi-techniczne/filozofia-pomiary.webp',
+    alt: 'Zespół CoreLTB podczas pomiarów geodezyjnych na działce',
+  },
 },
+
+// Sekcja 3: PROCES USŁUG TECHNICZNYCH (4 Kroki)
+cooperationTimelineNoLine: {
+  header: {
+    label: 'ZAKRES EKSPERTYZ I POMIARÓW',
+    title: 'Kompleksowa obsługa inżynierska',
+    description: 'Budownictwo na Śląsku i w Małopolsce to wyzwanie geologiczne i formalne. Dostarczamy twarde dane, które pozwalają projektować bezpiecznie. Obsługujemy cały cykl: od mapy i odwiertów, przez kosztorys, aż po świadectwo energetyczne.',
+  },
+  steps: [
+    {
+      id: 'uslugi-geodezyjne',
+      number: 1,
+      icon: 'mapPin',
+      label: 'Geodezja',
+      title: 'Pełna obsługa geodezyjna (MDCP i tyczenie)',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Błąd w usytuowaniu budynku o 10 cm może skutkować wstrzymaniem budowy przez PINB lub wieloletnim sporem prawnym. Geodeta to nie tylko "człowiek od mapy", to gwarant legalności inwestycji. W CoreLTB Builders koordynujemy prace geodezyjne tak, aby dokumentacja wyprzedzała postęp prac.'
+        },
+        {
+          type: 'paragraph',
+          value: '**Zakres prac geodezyjnych:**'
+        },
+        {
+          type: 'list',
+          items: [
+            '**MDCP (mapa do celów projektowych):** aktualizujemy mapę zasadniczą, nanosząc realne uzbrojenie terenu. To baza dla architekta – bez tego nie złożysz wniosku o PnB.',
+            '**Tyczenie osi i "punktu zero":** przed wjazdem koparki geodeta wyznacza fizycznie w terenie obrys fundamentów oraz (co kluczowe) poziom posadzki parteru ("Zero"), aby dom nie był posadowiony za nisko względem drogi.',
+            '**Inwentaryzacja powykonawcza:** końcowy pomiar, który nanosi gotowy budynek i przyłącza na państwowe mapy zasobów (klauzula ośrodka geodezji).'
+          ]
+        },
+        {
+          type: 'paragraph',
+          value: 'Dzięki stałej współpracy z lokalnymi geodetami, mapy otrzymujemy szybciej niż klient indywidualny.'
+        }
+      ],
+      imageSrc: '/images/uslugi/uslugi-techniczne/etapy/geodezja.webp',
+      imageAlt: 'Geodeta wykonujący tyczenie budynku tachimetrem na budowie'
+    },
+    {
+      id: 'badania-geologiczne',
+      number: 2,
+      icon: 'layers',
+      label: 'Geologia',
+      title: 'Badania geotechniczne gruntu i wody',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Dla nas projektowanie fundamentów bez odwiertów to hazard. Specyfika gruntów na Śląsku i w Małopolsce (częste gliny, kurzawki, tereny poeksploatacyjne) wymaga twardych danych. **Opinia geotechniczna** jest dokumentem obowiązkowym do Projektu Budowlanego, ale jej jakość decyduje o kosztach "wyjścia z ziemi".'
+        },
+        {
+          type: 'paragraph',
+          value: '**Co realnie sprawdzamy wiercąc w ziemi?**'
+        },
+        {
+          type: 'list',
+          items: [
+            '**Warstwy nienośne:** wykrywamy nasypy niekontrolowane (częste na działkach "okazyjnych"), torfy i namuły, na których nie wolno bezpośrednio budować.',
+            '**Zwierciadło wody:** ustalamy, czy woda gruntowa nie zaleje fundamentów. To podstawa do zaprojektowania drenażu opaskowego lub hydroizolacji ciężkiej.',
+            '**Rodzaj gruntu (kategoria geotechniczna):** to decyduje o technologii. Na glinach wysadzinowych rekomendujemy płytę fundamentową, na piaskach wystarczą tańsze ławy.'
+          ]
+        },
+        {
+          // LINK: Baza wiedzy (Technologia/Geologia)
+          type: 'paragraph',
+          value: '**Budujesz na szkodach górniczych?** Sprawdź, jak dobrać fundamenty: [Szkody górnicze a fundamenty – poradnik inżyniera](/baza-wiedzy/fundamenty-na-szkodach-gorniczych)'
+        }
+      ],
+      imageSrc: '/images/uslugi/uslugi-techniczne/etapy/geologia.webp',
+      imageAlt: 'Geolog wykonujący odwiert mechaniczny sondą na działce'
+    },
 {
   id: 'kosztorysowanie-budowlane',
   number: 3,
   icon: 'wallet',
-  label: 'Kosztorysowanie',
-  title: 'Kosztorysowanie Budowlane',
+  label: 'Finanse',
+  title: 'Kosztorysowanie i harmonogramy do banku',
   content: [
     {
       type: 'paragraph',
-      value: 'Budżet to krwiobieg każdej budowy. Niedoszacowany prowadzi do przestojów i stresu; zawyżony – do przepalania pieniędzy. Profesjonalny kosztorys to **najważniejsze narzędzie do zarządzania finansami Twojej inwestycji**. Pozwala on nie tylko zaplanować wydatki, ale także skutecznie weryfikować i negocjować oferty wykonawców.'
-    },
-    {
-      type: 'paragraph',
-      value: 'W CoreLTB Builders specjalizujemy się w tworzeniu dwóch kluczowych rodzajów kosztorysów, które odpowiadają na inne potrzeby na różnych etapach inwestycji:'
+      value: `W procesie inwestycyjnym nie ma miejsca na wróżenie z fusów. Niedoszacowany budżet to najczęstsza przyczyna wstrzymania budowy w połowie. W CoreLTB tworzymy kosztorysy oparte o **bieżące stawki transakcyjne na rok ${CURRENT_YEAR}**, a nie o teoretyczne tabele katalogowe, które często nie nadążają za inflacją.`
     },
     {
       type: 'list',
       items: [
-        '**Kosztorys Inwestorski (do Banku):** To dokument, którego **wymaga bank do uruchomienia kredytu hipotecznego**. Opracowujemy go na podstawie projektu budowlanego i średnich stawek rynkowych. Jego celem jest precyzyjne oszacowanie całkowitej wartości inwestycji, co jest fundamentem do uzyskania finansowania i stworzenia realistycznego budżetu.',
-        '**Kosztorys Szczegółowy (Ofertowy):** To Twoja **tarcza i miecz w negocjacjach z wykonawcami**. Tworzymy go na podstawie przedmiaru robót, zawierając szczegółowy wykaz materiałów, robocizny i sprzętu. Pozwala on na dokładne porównanie ofert, wyłapanie zawyżonych cen i świadome prowadzenie rozmów handlowych.'
+        '**Kosztorys Bankowy (Inwestorski):** Przygotowujemy **Harmonogram Rzeczowo-Finansowy** wymagany przy kredycie hipotecznym. Dzielimy budowę na etapy logiczne dla analityka bankowego, co gwarantuje płynne uruchamianie kolejnych transz pieniędzy (brak zatorów płatniczych).',
+        '**Przedmiar Robót:** To precyzyjne wyliczenie ilości materiałów (ilość cegieł, m³ betonu, kg stali) wynikające z projektu. Dzięki temu dokumencie wiesz dokładnie, ile materiału zamówić i nikt nie oszuka Cię na "nadmiarach" czy fikcyjnych obmiarach prac.'
       ]
     },
     {
-      type: 'paragraph',
-      value: 'Nasz kosztorys to nie tylko liczby. To **Twoja mapa finansowa**, która daje Ci pełną kontrolę nad budżetem, chroni przed nieuczciwymi praktykami i pozwala podejmować świadome decyzje. Z nami masz pewność, że każda złotówka na Twojej budowie jest pod kontrolą.'
+       // KLUCZOWY LINK - Wysyłamy klienta do cennika
+       type: 'paragraph',
+       value: `**Sprawdź realia:** Ile naprawdę kosztuje dom w ${CURRENT_YEAR}? [Zobacz Raport Kosztów Budowy (Analiza Rynku)](/baza-wiedzy/koszt-budowy-domu-2026-cennik)`
     }
   ],
   imageSrc: '/images/uslugi/uslugi-techniczne/etapy/kosztorysowanie.webp',
-  imageAlt: 'Kosztorysant CoreLTB Builders analizujący kosztorys budowlany na komputerze w biurze'
+  imageAlt: 'Analiza harmonogramu rzeczowo-finansowego budowy dla banku'
 },
 
 {
   id: 'swiadectwa-energetyczne',
   number: 4,
   icon: 'fileBadge',
-  label: 'Świadectwa Energetyczne',
-  title: 'Świadectwa Charakterystyki Energetycznej',
+  label: 'Certyfikacja',
+  title: 'Świadectwa charakterystyki energetycznej',
   content: [
     {
       type: 'paragraph',
-      value: 'Od 28 kwietnia 2023 roku świadectwo charakterystyki energetycznej stało się **obowiązkowym dokumentem** dla większości właścicieli nieruchomości. To "dowód osobisty" Twojego budynku, który precyzyjnie określa jego zapotrzebowanie na energię. Brak tego dokumentu w wymaganych sytuacjach grozi wysoką grzywną.'
-    },
-    {
-      type: 'paragraph',
-      value: 'W CoreLTB Builders zapewniamy profesjonalne i zgodne z najnowszymi przepisami sporządzenie certyfikatów w dwóch kluczowych sytuacjach:'
+      value: 'Świadectwo to techniczny paszport budynku. Od 2023 roku jest to dokument obowiązkowy na każdym etapie cyklu życia nieruchomości. Dokument ten określa wskaźniki zapotrzebowania na energię (EP i EK), weryfikując czy budynek jest energooszczędny, czy generuje straty ciepła.'
     },
     {
       type: 'list',
       items: [
-        '**Dla Nowo Wybudowanych Domów:** Świadectwo jest **niezbędnym załącznikiem do zawiadomienia o zakończeniu budowy**. Bez niego nie możesz legalnie zamieszkać w swoim nowym domu. Dbamy o to, by ten ostatni, kluczowy dokument został przygotowany sprawnie i bezbłędnie.',
-        '**Przy Sprzedaży lub Wynajmie Nieruchomości:** Świadectwo musi zostać przekazane nowemu nabywcy lub najemcy. Notariusz ma obowiązek odnotować ten fakt w akcie notarialnym. Zapewniamy certyfikaty, które są w pełni akceptowane przez kancelarie notarialne i urzędy.'
+        '**Do odbioru budynku (PINB):** świadectwo jest niezbędnym załącznikiem do zawiadomienia o zakończeniu budowy. Bez ważnego certyfikatu nadzór budowlany nie wyda pozwolenia na użytkowanie, przez co nie możesz legalnie zamieszkać w domu.',
+        '**Przy sprzedaży i wynajmie:** notariusz ma obowiązek zażądać świadectwa przy akcie notarialnym. Dla kupującego to twardy dowód na to, ile będzie kosztowało ogrzewanie domu, co jest silnym argumentem cenowym.',
+        '**Pewność prawna:** nasze dokumenty są sporządzane przez uprawnionych audytorów i rejestrowane w centralnym rejestrze charakterystyki energetycznej budynków (MRiT), co gwarantuje ich ważność przez 10 lat.'
       ]
     },
     {
-      type: 'paragraph',
-      value: 'Nasze świadectwa są sporządzane wyłącznie przez **uprawnionych i wpisanych do centralnego rejestru audytorów**, co daje Ci 100% gwarancję ich poprawności i zgodności z prawem. Z nami masz pewność, że ostatni etap formalności przebiegnie gładko i bez niespodzianek.'
+       // LINK
+       type: 'paragraph',
+       value: '**Ważne dla inwestora:** certyfikat to test jakości izolacji. Zobacz, jak budujemy, żeby wyniki były doskonałe: [Technologia domów energooszczędnych WT2021 >](/baza-wiedzy/domy-energooszczedne-technologia)'
     }
   ],
+  // Zdjęcie zostaje Twoje stare
   imageSrc: '/images/uslugi/uslugi-techniczne/etapy/swiadectwa-energetyczne.webp',
-  imageAlt: 'Audytor energetyczny przekazujący świadectwo charakterystyki energetycznej właścicielowi nowego domu'
+  imageAlt: 'Analiza energetyczna budynku do odbioru PINB'
 },
 // Krok 5: Ekspertyzy i Doradztwo Techniczne
 
@@ -1895,32 +1958,28 @@ contactCTA: {
   id: 'ekspertyzy-techniczne',
   number: 5,
   icon: 'search',
-  label: 'Ekspertyzy Techniczne',
-  title: 'Opinie i Ekspertyzy Techniczne',
+  label: 'Diagnostyka',
+  title: 'Ekspertyzy i opinie techniczne',
   content: [
     {
       type: 'paragraph',
-      value: 'Nie każda inwestycja to budowa od zera. Często największym wyzwaniem jest ocena stanu istniejącego budynku – przed zakupem, w trakcie remontu lub gdy pojawią się niepokojące problemy, takie jak pęknięcia czy wilgoć. W takich sytuacjach potrzebna jest nie opinia, a **fachowa ekspertyza techniczna oparta na wiedzy i dowodach.**'
-    },
-    {
-      type: 'paragraph',
-      value: 'Nasi inżynierowie i rzeczoznawcy budowlani działają jak lekarze-diagności dla nieruchomości. Świadczymy usługi eksperckie w kluczowych sytuacjach:'
+      value: 'Rynek wtórny to ryzyko ukrytych wad, zwłaszcza w regionie narażonym na wstrząsy górnicze. Wykonujemy szczegółowe ekspertyzy techniczne, weryfikując nośność konstrukcji, stan izolacji oraz przyczyny degradacji budynku. Używamy profesjonalnego sprzętu pomiarowego (kamery termowizyjne, skanery wilgotności), zamieniając domysły na twarde dane.'
     },
     {
       type: 'list',
       items: [
-        '**Audyt Techniczny Przed Zakupem:** Planujesz kupić dom z rynku wtórnego? Nasza szczegółowa ekspertyza to najważniejsza polisa ubezpieczeniowa. Sprawdzimy stan konstrukcji, dachu, instalacji i izolacji, dostarczając Ci raport, który pozwoli **uniknąć zakupu "skarbonki bez dna"** i skutecznie negocjować cenę.',
-        '**Opinie Techniczne i Diagnoza Problemów:** Pojawiły się pęknięcia na ścianach? Czujesz wilgoć w piwnicy? Znajdziemy przyczynę problemu. Nasza opinia techniczna precyzyjnie określa źródło wady i przedstawia zalecenia naprawcze.',
-        '**Wsparcie w Sporach Sądowych:** Nasze ekspertyzy to **oficjalne dokumenty o mocy dowodowej**, które mogą być kluczowym argumentem w sporach z deweloperami, wykonawcami czy w procesach o odszkodowanie.'
+        '**Audyt przed zakupem:** weryfikujemy stan domów "z drugiej ręki". Oceniamy, czy pęknięcia elewacji to tylko kosmetyka, czy poważne naruszenie konstrukcji (np. przez szkody górnicze). Nasz raport to twardy argument do obniżenia ceny zakupu nieruchomości.',
+        '**Diagnostyka zawilgoceń:** precyzyjnie określamy źródło wilgoci (woda gruntowa, awaria instalacji czy mostek termiczny) i dobieramy technologię osuszania oraz naprawy izolacji.',
+        '**Odbiory i spory:** przygotowujemy opinie techniczne niezbędne w sporach z deweloperami lub nierzetelnymi wykonawcami. Dokumentujemy błędy wykonawcze zgodnie ze sztuką budowlaną, co stanowi podstawę do roszczeń.'
       ]
     },
     {
       type: 'paragraph',
-      value: 'Decyzje dotyczące nieruchomości warte są setki tysięcy złotych. Nie podejmuj ich w oparciu o przypuszczenia. **Zainwestuj w wiedzę ekspercką**, która da Ci pewność, spokój i twarde argumenty.'
+      value: 'Ekspertyza kosztuje ułamek wartości domu, a pozwala uniknąć zakupu obiektu, którego remont przekroczy koszt budowy nowego. Działamy na terenie Śląska i Małopolski.'
     }
   ],
   imageSrc: '/images/uslugi/uslugi-techniczne/etapy/ekspertyzy-techniczne.webp',
-  imageAlt: 'Ekspert budowlany CoreLTB Builders badający pęknięcie na ścianie w istniejącym budynku'
+  imageAlt: 'Rzeczoznawca budowlany wykonujący ekspertyzę techniczną pęknięcia ściany'
 }
       ]
     },
@@ -2015,144 +2074,100 @@ contactCTA: {
         },
       ],
     },
-    // Sekcja FAQ dla filaru "Ekspertyzy i Pomiary Budowlane"
 
+// Sekcja 4: FAQ (Pytania Techniczne i Prawne - Wersja 2026 SEO)
 servicesAccordion: {
   header: {
-    label: 'NAJCZĘŚCIEJ ZADAWANE PYTANIA',
-    title: 'Odpowiedzi na Kluczowe Pytania Techniczne',
-    description: 'Sprawdź najważniejsze informacje, które pomogą Ci podjąć świadomą i bezpieczną decyzję. Podzieliliśmy pytania na kategorie, aby łatwiej znaleźć to, czego szukasz.',
+    label: 'FAQ INŻYNIERSKIE',
+    title: 'Geodezja i geologia w pytaniach',
+    description: 'Odpowiedzi na techniczne aspekty przygotowania inwestycji, które najczęściej słyszymy od Inwestorów.',
   },
   services: [
-    // GEODEZJA I GEOLOGIA
+    // --- GEODEZJA ---
     {
-      iconName: 'map',
-      title: 'Jaki jest cennik usług geodety?',
+      iconName: 'map', 
+      title: 'Ile kosztuje i ile trwa mapa do celów projektowych (MDCP)?',
       content: [
         {
           type: 'paragraph',
-          value: 'Koszt usług geodezyjnych zależy od specyfiki zlecenia, w tym wielkości działki, ukształtowania terenu oraz zakresu prac, takich jak mapa do celów projektowych czy wytyczenie budynku. Precyzyjna wycena wymaga analizy potrzeb konkretnej inwestycji.'
+          value: 'Dla standardowej działki jednorodzinnej na Śląsku koszt to zazwyczaj **1400–2000 zł netto**. Cena i czas zależą od powiatowego ośrodka dokumentacji (ODGiK).'
         },
         {
           type: 'paragraph',
-          value: 'Zamiast sztywnego cennika, w naszej firmie rekomendujemy indywidualne oszacowanie kosztów podczas bezpłatnej konsultacji technicznej, co pozwala uniknąć niedomówień i błędów w budżecie.'
+          value: '**Czas oczekiwania:** Średnio 3-6 tygodni. Nie da się tego przyspieszyć "za dopłatą", ponieważ jest to procedura urzędowa. Zalecamy zlecenie mapy geodecie natychmiast po zakupie gruntu.'
         }
       ]
     },
+    // --- GEOLOGIA (Money Keyword: Szkody Górnicze) ---
+    {
+      iconName: 'mountain', 
+      title: 'Czy badania geotechniczne wykryją szkody górnicze?',
+      content: [
+        {
+          type: 'paragraph',
+          value: '**Nie bezpośrednio.** Odwierty geotechniczne pokazują, co fizycznie jest w ziemi (glina, piasek, woda). Kategorię szkód (I-IV) ustala się na podstawie **Opinii Geologiczno-Górniczej** z kopalni (PGG/WUG).'
+        },
+        {
+          type: 'paragraph',
+          value: 'Dopiero połączenie tych dwóch dokumentów (Wyniki wierceń + Opinia o szkodach) pozwala konstruktorowi dobrać bezpieczne fundamenty (często płytę), które nie pękną przy wstrząsie.'
+        }
+      ]
+    },
+    // --- KOSZTY (Value Engineering) ---
     {
       iconName: 'coins',
-      title: 'Ile kosztuje wznowienie granic działki?',
+      title: 'Dlaczego warto zapłacić za odwierty geologiczne?',
       content: [
         {
           type: 'paragraph',
-          value: 'Koszt wznowienia granic zależy od stanu dokumentacji w ośrodku geodezyjnym (ODGiK) oraz liczby punktów granicznych. Rynkowe stawki za standardową działkę zazwyczaj zaczynają się od **2000–2500 zł netto** za pierwsze cztery punkty, a każdy kolejny to wydatek rzędu 150–300 zł.'
+          value: 'Badanie gruntu to koszt rzędu 1500–2000 zł. Rezygnacja z niego to oszczędność pozorna. Jeśli konstruktor nie zna gruntu, zakłada "najgorszy wariant" i przewymiarowuje fundamenty, co kosztuje Cię dodatkowe 10-15 tys. zł w betonie i stali.'
         },
         {
           type: 'paragraph',
-          value: 'Ostateczna cena jest ustalana indywidualnie po weryfikacji dostępnych materiałów archiwalnych, co pozwala precyzyjnie określić pracochłonność procedury i wyeliminować ryzyko błędów prawnych.'
+          value: 'Nasze motto: **Badamy grunt, żeby nie topić Twoich pieniędzy w błocie.**'
+        }
+      ]
+    },
+    // --- KOSZTORYS (Bankowość) ---
+    {
+      iconName: 'landmark',
+      title: 'Czym różni się kosztorys inwestorski od bankowego?',
+      content: [
+        {
+          type: 'paragraph',
+          value: '**Kosztorys bankowy** jest uproszczony i musi pasować do formularzy banku, aby analityk mógł uruchomić kredyt (bazuje na wskaźnikach).'
+        },
+        {
+          type: 'paragraph',
+          value: '**Kosztorys inwestorski (wykonawczy)** jest precyzyjny co do śrubki. Służy do tego, abyś wiedział, ile realnie wydasz. W CoreLTB przygotowujemy dokumentację zgodną z cenami rynkowymi 2026, eliminując ryzyko niedoszacowania inwestycji.'
+        }
+      ]
+    },
+    // --- PRAWO/CERTYFIKATY ---
+    {
+      iconName: 'fileBadge',
+      title: 'Kiedy obowiązkowe jest Świadectwo Energetyczne?',
+      content: [
+        {
+          type: 'paragraph',
+          value: 'Zgodnie z przepisami, świadectwo jest wymagane przy **zawiadomieniu o zakończeniu budowy** (odbiorze w PINB). Bez tego dokumentu zarejestrowanego w centralnym rejestrze, nadzór budowlany nie wyda pozwolenia na użytkowanie.'
+        },
+        {
+          type: 'paragraph',
+          value: 'Dla naszych klientów wystawiamy ten dokument systemowo, po wykonaniu audytu powykonawczego (często sprawdzamy też szczelność budynku kamerą termowizyjną).'
         }
       ]
     },
     {
-        iconName: 'users',
-        title: 'Kto płaci za geodetę przy ustalaniu granic?',
-        content: [
-          {
-            type: 'paragraph',
-            value: 'Zgodnie z praktyką rynkową koszt ponosi strona zlecająca usługę, czyli najczęściej inwestor chcący precyzyjnie określić teren inwestycji. W przypadku administracyjnego rozgraniczenia spornych granic, Kodeks Cywilny (art. 152) przewiduje podział kosztów po połowie między sąsiadami.'
-          },
-          {
-            type: 'paragraph',
-            value: 'Zazwyczaj jednak, przy wznowieniu znaków granicznych, płaci wyłącznie inicjator, co pozwala szybko zabezpieczyć proces budowlany przed błędami lokalizacyjnymi.'
-          }
-        ]
-      },
-    {
-      iconName: 'alertCircle',
-      title: 'Czy badanie gruntu przed budową jest obowiązkowe?',
+      iconName: 'search', // Ekspertyzy
+      title: 'Czy wykonujecie audyty domów z rynku wtórnego?',
       content: [
         {
           type: 'paragraph',
-          value: '**Tak, opinia geotechniczna jest obecnie obligatoryjnym dokumentem wymaganym przez prawo budowlane do uzyskania pozwolenia na budowę.** Badanie to precyzyjnie określa nośność gruntu oraz poziom wód gruntowych, co pozwala na dobranie odpowiednich fundamentów.'
-        },
-        {
-          type: 'paragraph',
-          value: 'Wykonanie odwiertów przed rozpoczęciem prac eliminuje ryzyko nierównomiernego osiadania budynku i pękania ścian, chroniąc inwestora przed kosztownymi naprawami w przyszłości.'
+          value: 'Tak. Kupno domu na Śląsku "na oko" to błąd. Wykonujemy **ekspertyzy techniczne** weryfikujące: zawilgocenia (kamerą termowizyjną), spękania murów od szkód górniczych oraz stan więźby dachowej. Raport z takiej wizyty często pozwala wynegocjować obniżkę ceny nieruchomości znacznie przewyższającą koszt naszej usługi.'
         }
       ]
-    },
-    {
-      iconName: 'clock',
-      title: 'Ile się czeka na badanie gruntu?',
-      content: [
-        {
-          type: 'paragraph',
-          value: 'Realizacja badań geotechnicznych to proces dwuetapowy. **Prace terenowe**, czyli wykonanie odwiertów, zajmują zazwyczaj **jeden dzień**.'
-        },
-        {
-          type: 'paragraph',
-          value: 'Kluczowy jest jednak czas na opracowanie kameralne i analizę wyników – standardowo trwa to **od 7 do 14 dni roboczych**. W CoreLTB kładziemy nacisk na ten etap, gdyż jest on niezbędny do precyzyjnego określenia nośności podłoża i poziomu wód gruntowych.'
-        }
-      ]
-    },
-    {
-      iconName: 'coins',
-      title: 'Ile kosztuje badanie gruntu pod budowę?',
-      content: [
-        {
-          type: 'paragraph',
-          value: 'Koszt standardowego badania geotechnicznego pod dom jednorodzinny waha się zazwyczaj w przedziale **od 1500 do 2500 zł**. Ostateczna cena zależy od liczby i głębokości odwiertów (zwykle 3-4 punkty badawcze) oraz stopnia skomplikowania warunków gruntowych.'
-        },
-        {
-          type: 'paragraph',
-          value: 'Jest to kluczowa inwestycja, która pozwala precyzyjnie dobrać fundamenty, eliminując ryzyko pękania ścian czy problemów z wodami gruntowymi.'
-        }
-      ]
-    },
-
-    // KOSZTORYSY
-    {
-      iconName: 'fileCheck',
-      title: 'Kiedy wymagany jest kosztorys inwestorski?',
-      content: [
-        {
-          type: 'paragraph',
-          value: 'Kosztorys inwestorski jest **prawnie wymagany przy zamówieniach publicznych** oraz **obligatoryjny dla banków** przy ubieganiu się o kredyt budowlany i rozliczaniu transz. W inwestycjach prywatnych pełni kluczową funkcję kontrolną.'
-        },
-        {
-          type: 'paragraph',
-          value: 'W CoreLTB Builders traktujemy ten dokument jako finansowy fundament budowy – pozwala on zweryfikować rynkowość ofert wykonawców, uniknąć przepłacania i zapewnia twarde dane do negocjacji cenowych.'
-        }
-      ]
-    },
-    {
-      iconName: 'wallet',
-      title: 'Ile kosztuje kosztorys do banku?',
-      content: [
-        {
-          type: 'paragraph',
-          value: 'Profesjonalne przygotowanie kosztorysu pod kredyt hipoteczny to zazwyczaj wydatek rzędu **500–1500 zł netto**. Ostateczna kwota zależy od metrażu budynku, stopnia skomplikowania projektu oraz specyficznych wymagań banku.'
-        },
-        {
-          type: 'paragraph',
-          value: 'Warto zadbać o rzetelność tego dokumentu, aby uniknąć niedoszacowania budowy, co może skutkować wstrzymaniem wypłaty transz w trakcie realizacji inwestycji.'
-        }
-      ]
-    },
-    {
-        iconName: 'userCheck',
-        title: 'Kto przygotowuje kosztorys inwestorski?',
-        content: [
-          {
-            type: 'paragraph',
-            value: 'Kosztorys inwestorski sporządza **wykwalifikowany kosztorysant**, który łączy wiedzę o technologiach budowlanych z aktualną znajomością cen rynkowych. Opracowanie to powstaje na podstawie projektu budowlanego oraz przedmiaru robót.'
-          },
-          {
-            type: 'paragraph',
-            value: 'Dokument ten precyzyjnie określa wartość prac, stanowiąc fundament do weryfikacji ofert wykonawców. Profesjonalny kosztorys pozwala uniknąć przepłacania, gdyż różnice w ofertach firm mogą sięgać nawet 30% wartości inwestycji.'
-          }
-        ]
-      },
+    }
   ]
 },
 
@@ -2179,227 +2194,242 @@ servicesAccordion: {
     createdAt: '2025-10-28T10:00:00Z',
     updatedAt: '2025-10-28T10:00:00Z',
   },
-    // === WYKOŃCZENIA I ARANŻACJE ===
-  {
-    slug: 'wykonczenia-i-aranzacje',
-    id: 'wykonczenia-i-aranzacje',
-    category: 'Wykończenia',
-    title: 'Wykończenie Domu pod Klucz',
+// ============================================
+// 5. WYKOŃCZENIA (Filar B2C)
+// ============================================
+{
+  slug: 'wykonczenia-i-aranzacje', // PRZYWRÓCONE TWOJE ID
+  id: 'wykonczenia-i-aranzacje',   // PRZYWRÓCONE TWOJE ID
+  category: 'Wykończenia i aranżacje',
+  title: 'Wykończenia i aranżacje wnętrz',
 
-    // PageHeader
-    pageHeader: {
-      title: 'Wykończenie Domu pod Klucz',
-      watermarkText: 'WYKOŃCZENIA',
-      backgroundImage: '/images/uslugi/wykonczenia-i-aranzacje/hero.webp',
-      breadcrumbs: [
-        { label: 'Strona główna', href: '/' },
-        { label: 'Oferta', href: '/oferta' },
-        { label: 'Wykończenie Domu pod Klucz', href: '' },
-      ],
-    },
+  // Listing (karta na stronie /oferta)
+  listing: {
+    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800',
+    title: 'Wykończenia i aranżacje',
+    description: 'Prace \'pod klucz\' z preferencyjnym 8% VAT na materiały. Instalacje, posadzki, gładzie maszynowe – bez szukania ekip.',
+    features: [
+      'Najwyższej jakości materiały',
+      'Dbałość o każdy detal',
+    ],
+  },
 
-    // Sekcja 1: EmotionalHero
-    emotionalHero: {
-      label: 'WYKOŃCZENIA I ARANŻACJE',
-      headline: 'Od Pustych Ścian do Domu Pełnego Życia',
-      subtitle:
-        'Etap wykończeniowy to moment, w którym budynek zamienia się w prawdziwy dom – Twój dom. To ekscytujący czas, ale także logistyczne wyzwanie, pełne decyzji i potencjalnych pułapek. W CoreLTB Builders zdejmujemy z Ciebie cały ciężar. Prowadzimy Cię od pustych ścian do w pełni wykończonego, gotowego do zamieszkania wnętrza, gwarantując budżet, termin i bezkompromisową jakość.',
-      benefits: [
-        'Jeden partner i pełna odpowiedzialność za wszystkie etapy prac',
-        'Gwarancja stałej ceny i terminu na samym starcie',
-        'Dostęp do naszych sprawdzonych, wyspecjalizowanych ekip wykonawczych',
-      ],
-      // CTA Box
-      ctaBoxTitle: '☎ Otrzymaj Wstępny Kosztorys Wykończenia',
-      ctaBoxBenefits: [
-        'Oszacujemy budżet potrzebny na wykończenie Twojego domu',
-        'Przedstawimy harmonogram i optymalną kolejność prac',
-        'Doradzimy w kwestii materiałów i najnowszych trendów',
-        'Odpowiemy na wszystkie Twoje pytania i wątpliwości',
-      ],
-      ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
-      ctaBoxButtons: [
-        {
-          text: 'Zadzwoń do Nas',
-          href: 'tel:+48123456789',
-        },
-        {
-          text: 'Napisz do Nas',
-          href: '#kontakt',
-        },
-      ],
-    },
-// Sekcja 2: PhilosophyTimeline (Nowa Wersja)
+  // PageHeader
+  pageHeader: {
+    title: 'Kompleksowe wykończenia wnętrz  pod klucz',
+    watermarkText: 'REALIZACJA WNĘTRZ',
+    // UWAGA: Sprawdź czy plik leży tutaj, czy w folderze 'wykonczenia'. 
+    // Zostawiam zgodne ze slugiem, jeśli masz inne - podmień tylko to.
+    backgroundImage: '/images/uslugi/wykonczenia-i-aranzacje/hero.webp', 
+    breadcrumbs: [
+      { label: 'Strona główna', href: '/' },
+      { label: 'Oferta', href: '/oferta' },
+      { label: 'Wykończenia i aranżacje', href: '' },
+    ],
+  },
 
+  // Sekcja 1: HERO - Argumentacja Finansowa i Logistyczna
+  emotionalHero: {
+    label: 'WYKOŃCZENIA POD KLUCZ • ŚLĄSK I MAŁOPOLSKA',
+    headline: [
+      'Jeden wykonawca',
+      'zamiast pięciu różnych ekip'
+    ],
+    subtitle:
+      'Etap wykończeniowy generuje najwięcej problemów logistycznych. Jako generalny wykonawca eliminujemy konieczność koordynowania hydraulika, płytkarza i stolarza. Przejmujemy klucze do stanu deweloperskiego i oddajemy gotowe, posprzątane wnętrze. Dajemy jedną, zbiorczą rękojmię na całość prac.',
+    
+    benefits: [
+      'VAT 8% na materiały (realna oszczędność 15% względem zakupów w markecie)',
+      'Gwarancja stałej ceny ryczałtowej za całość robocizny i chemii budowlanej',
+      'Koordynacja branżowa (elektryk i tynkarz w jednym harmonogramie)',
+    ],
+    
+    // CTA Box - Konkret finansowy + Weryfikacja techniczna
+    ctaBoxTitle: 'Kosztorys prac wykończeniowych',
+    ctaBoxBenefits: [
+      'Odbiór techniczny tynków i wylewek przed startem prac (geometria)',
+      'Wycena "na gotowo" (z klejami, gruntami i transportem)',
+      'Dobór materiałów (płytki, panele) w założonym budżecie',
+      'Realny harmonogram wejścia i wyjścia ekip',
+    ],
+    ctaBoxSubtext: 'Otrzymaj precyzyjną wycenę opartą o pomiar laserowy.',
+    ctaBoxButtons: [
+      {
+        text: 'Umów pomiar i wycenę',
+        href: 'tel:+48123456789',
+        variant: 'primary',
+      },
+      {
+        text: 'Wyślij rzut mieszkania',
+        href: '#kontakt',
+        variant: 'secondary',
+      },
+    ],
+  },
+// Sekcja 2: DLACZEGO WARTO (Filozofia Wykonawcza)
 philosophyTimeline: {
   header: {
-    label: 'TWOJE SPOKOJNE WYKOŃCZENIE',
-    title: 'Jeden Partner od Projektu po Ostatni Szczegół',
-    description: 'Proces wykończenia domu bywa bardziej stresujący niż cała budowa. Rozumiemy to. Dlatego stworzyliśmy system, w którym jeden, w pełni odpowiedzialny partner bierze na siebie cały ciężar, zapewniając Ci spokój, kontrolę nad budżetem i bezkompromisową jakość.',
+    label: 'SYSTEM REALIZACJI WNĘTRZ',
+    title: 'Generalne wykonawstwo zamiast "pilnowania ekip"', // Konkret
+    description: 'Wykończenie to logistyka setek produktów i koordynacja 5-7 różnych branż. W CoreLTB Builders zastępujemy chaos "systemu gospodarczego" (gdzie Ty jesteś kierownikiem budowy) profesjonalnym procesem "fit-out". Przejmujemy klucze i odpowiedzialność.',
   },
   items: [
     {
       number: 1,
       iconName: 'users',
-      title: 'Pełna Koordynacja, Twój Całkowity Spokój',
-      description: 'Zapomnij o logistycznym koszmarze. Jeden dedykowany Project Manager z CoreLTB koordynuje pracę wszystkich naszych sprawdzonych ekip – od hydraulika po stolarza. Ty masz jeden numer telefonu, stały wgląd w postępy i zero stresu związanego z umawianiem i pilnowaniem terminów.'
+      title: 'Eliminacja kolizji branżowych', // Małe litery!
+      description: 'Hydraulik nie czeka na ścianki działowe, a parkieciarz nie wchodzi na mokrą posadzkę. Nasz koordynator zarządza harmonogramem liniowo. Eliminujemy klasyczną "spychologię" i przerzucanie winy między glazurnikiem a instalatorem.',
     },
     {
       number: 2,
       iconName: 'fileCheck',
-      title: 'Gwarancja Budżetu i Terminu na Starcie',
-      description: 'Zanim zaczniemy, otrzymujesz od nas szczegółowy, wiążący kosztorys i harmonogram prac. Cena i termin, które ustalamy, są ostateczne. Koniec z finansowymi niespodziankami na ostatniej prostej. Z nami wiesz dokładnie, ile zapłacisz i kiedy wprowadzisz się do gotowego domu.'
+      title: 'Umowa na stałą kwotę (ryczałt)',
+      description: 'Wycena "na oko" to standard u małych ekip. U nas podpisujesz precyzyjną umowę z przedmiarem robót. Cena za m² gładzi czy montażu płytek jest zablokowana w dniu startu, co chroni Twój portfel przed nieplanowanymi wydatkami.',
     },
     {
       number: 3,
-      iconName: 'award',
-      title: 'Jakość Potwierdzona Pisemną Gwarancją',
-      description: 'Pracujemy wyłącznie na naszych, wyspecjalizowanych i zaufanych zespołach wykonawczych. Każdy etap – od gładzi po montaż armatury – jest objęty naszą wieloletnią, pisemną gwarancją. Z nami masz pewność, że jakość jest bezkompromisowa i będzie służyć Ci przez lata.'
+      iconName: 'ruler', // Ikona miarki/jakości (award jest zbyt ogólne)
+      title: 'Techniczne odbiory jakości',
+      description: 'Nie uznajemy "jakoś to będzie". Używamy laserów krzyżowych do weryfikacji płaszczyzn i lamp inspekcyjnych przy gładziach. Otrzymujesz standard wykonania zgodny z normami budowlanymi, objęty pisemną rękojmią firmy.',
     }
   ],
+  // Twoja ścieżka do zdjęcia - NIE RUSZAM JEJ
   image: {
     src: '/images/uslugi/wykonczenia-i-aranzacje/dlaczego-warto.webp',
-    alt: 'Wykończenie domu',
+    alt: 'Koordynator CoreLTB weryfikujący jakość gładzi lampą inspekcyjną',
   },
 },
 cooperationTimelineNoLine: {
   header: {
-    label: 'PROCES "POD KLUCZ"',
-    title: 'Kluczowe Etapy Wykończenia',
-    description: 'Ostatni etap budowy to podróż od surowych, pustych ścian do w pełni funkcjonalnego domu, w którym chcesz żyć. Poniżej przedstawiamy kluczowe etapy naszego procesu "pod klucz" – od precyzyjnego budżetu i spójnej aranżacji, aż po mistrzowską jakość wykonania. Zobacz, jak krok po kroku przekształcamy Twoją wizję w rzeczywistość.',
+    label: 'MODEL REALIZACJI',
+    title: 'Prace wykończeniowe etap po etapie',
+    description: 'Nie zaczynamy prac "na żywioł". Proces fit-out (wykończenia) dzielimy na etapy logiczne, aby uniknąć kolizji między tynkarzem, hydraulikiem a stolarzem.',
+    theme: 'light',
   },
   steps: [
     {
       id: 'kosztorys-wykonczeniowy',
       number: 1,
       icon: 'fileCheck',
-      label: 'Zakres i Budżet',
-      title: 'Zakres i Szczegółowy Kosztorys',
+      label: 'Wycena',
+      title: 'Inwentaryzacja i kosztorys wykonawczy',
       content: [
         {
           type: 'paragraph',
-          value: 'To najważniejszy etap, który stanowi fundament naszej współpracy i Twojego bezpieczeństwa finansowego. Zanim rozpoczniemy jakiekolwiek prace, spotykamy się, aby precyzyjnie zdefiniować Twoje oczekiwania i potrzeby. Nie ma tu miejsca na domysły.'
-        },
-        {
-          type: 'paragraph',
-          value: 'Na podstawie szczegółowych ustaleń dotyczących standardu materiałów i zakresu prac, przygotowujemy **transparentny i wiążący kosztorys**. Otrzymujesz od nas dokument, który zawiera m.in.:'
+          value: 'Dobre wykończenie zaczyna się od weryfikacji tego, co zostawił deweloper. Przed przygotowaniem wyceny wykonujemy **inwentaryzację z natury**. Sprawdzamy kąty ścian, poziomy wylewek i wilgotność tynków.'
         },
         {
           type: 'list',
           items: [
-            'Szczegółowy wykaz wszystkich prac wraz z ich wyceną.',
-            'Zestawienie wybranych materiałów wykończeniowych (ilość i cena).',
-            'Ostateczną, gwarantowaną cenę za całość usługi.',
-            'Wiążący harmonogram, określający czas trwania poszczególnych etapów.'
+            'szczegółowy przedmiar robót (ilość m² gładzi, mb płytek).',
+            'koszty chemii budowlanej (nie martwisz się o braki).',
+            'logistykę dostaw i wniesienia (ukryty koszt).'
           ]
         },
         {
-          type: 'paragraph',
-          value: 'Dzięki temu już na samym starcie masz **100% pewności co do finalnego kosztu i terminu zakończenia prac.** Koniec z finansowymi niespodziankami na ostatniej prostej.'
+           // 🔥 KLUCZOWY LINK: Odsyłamy do usługi odbiorów
+           type: 'paragraph',
+           value: '**Odbierasz mieszkanie?** Sprawdź naszą usługę [Profesjonalne Odbiory Techniczne od Dewelopera](/oferta/uslugi-techniczne)'
         }
       ],
       imageSrc: '/images/uslugi/wykonczenia-i-aranzacje/etapy/kosztorys.webp',
-      imageAlt: 'Projektant CoreLTB Builders omawiający szczegółowy kosztorys wykończenia z klientami'
+      imageAlt: 'Inżynier wykonujący pomiary laserowe do kosztorysu wykończeniowego'
     },
-    // Krok 2: Projekt i Aranżacja Wnętrz
+// Krok 2: Projekt i Dokumentacja (Wersja Inżynierska)
+{
+  id: 'aranzacja-wnetrz',
+          number: 2,
+          icon: 'draftingCompass',
+          label: 'Dokumentacja',
+          title: 'Projekt wykonawczy i dobór materiałów',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'W CoreLTB tworzymy **projekt wykonawczy**, który jest techniczną mapą drogową. Weryfikujemy Twoją wizję pod kątem instalacyjnym i budżetowym, unikając materiałów, które zrujnują portfel.'
+            },
+            {
+              type: 'list',
+              items: [
+                '**kłady ścian:** precyzyjne rozrysowanie płytek (brak brzydkich docinek).',
+                '**mapa punktów:** wymiarowane rzuty elektryki i hydrauliki.',
+                '**zestawienie materiałowe:** pełna lista zakupowa.'
+              ]
+            },
+            {
+               // 🔥 LINK DO WIEDZY: Koszty wykończenia
+               type: 'paragraph',
+               value: `**Planujesz budżet?** Zobacz: [Ile kosztuje wykończenie mieszkania pod klucz w ${CURRENT_YEAR}? (Raport)](/baza-wiedzy/koszty-wykonczenia-pod-klucz-2026)`
+            }
+          ],
+          imageSrc: '/images/uslugi/wykonczenia-i-aranzacje/etapy/aranzacja.webp',
+          imageAlt: 'Architekt wnętrz CoreLTB omawiający projekt wykonawczy'
+        },
+// Krok 3: Logistyka i Koordynacja
+{
+  id: 'harmonogram-prac',
+  number: 3,
+  icon: 'calendar',
+  label: 'Logistyka',
+  title: 'Kolejność technologiczna prac',
+  content: [
     {
-      id: 'aranzacja-wnetrz',
-      number: 2,
-      icon: 'paintBrush',
-      label: 'Aranżacja',
-      title: 'Projekt i Aranżacja Wnętrz',
-      content: [
-        {
-          type: 'paragraph',
-          value: 'To etap, na którym Twoja wizja nabiera realnych kształtów, kolorów i faktur. Nasz doświadczony projektant wnętrz nie narzuca swojego stylu, lecz staje się Twoim partnerem i przewodnikiem w świecie designu. Pomagamy przekuć setki inspiracji w jeden, spójny i – co najważniejsze – **funkcjonalny projekt, idealnie dopasowany do Twojego stylu życia i budżetu.**'
-        },
-        {
-          type: 'paragraph',
-          value: 'W ramach współpracy projektowej zapewniamy:'
-        },
-        {
-          type: 'list',
-          items: [
-            '**Opracowanie układu funkcjonalnego:** Tworzymy "instrukcję obsługi" dla Twojego domu – optymalizujemy układ pomieszczeń, planujemy ergonomię w kuchni i łazience oraz dbamy o wygodną komunikację.',
-            '**Wspólny dobór stylu i materiałów:** Razem z Tobą tworzymy moodboardy, dobieramy kolorystykę, podłogi, płytki i wszystkie kluczowe elementy wykończenia, dbając o spójność całej koncepcji.',
-            '**Fotorealistyczne wizualizacje 3D:** Nie musisz sobie niczego wyobrażać. Otrzymujesz od nas realistyczne obrazy swoich przyszłych wnętrz. To narzędzie, które pozwala Ci podejmować świadome decyzje i uniknąć kosztownych pomyłek.',
-            '**Pełną dokumentację techniczną:** Przygotowujemy szczegółowe rysunki dla wykonawców – od układu płytek, przez projekt oświetlenia, aż po rozmieszczenie punktów elektrycznych i hydraulicznych.'
-          ]
-        },
-        {
-          type: 'paragraph',
-          value: 'Dobry projekt wnętrza to nie tylko estetyka. To **przemyślana inżynieria przestrzeni**, która sprawia, że dom jest nie tylko piękny, ale przede wszystkim wygodny do życia.'
-        }
-      ],
-      imageSrc: '/images/uslugi/wykonczenia-i-aranzacje/etapy/aranzacja.webp',
-      imageAlt: 'Projektantka wnętrz CoreLTB prezentuje klientom wizualizację 3D salonu na tablecie'
+      type: 'paragraph',
+      value: 'Błąd w harmonogramie (np. zbyt wczesny montaż drzwi) to gwarancja uszkodzeń. W CoreLTB Builders zastępujemy przypadkowość ścisłym procesem liniowym. Monitorujemy wilgotność posadzek (pomiar CM) przed wpuszczeniem parkieciarzy i synchronizujemy dostawy materiałów w systemie Just-in-Time, aby nic nie niszczało na budowie.'
     },
-    // Krok 3: Harmonogram i Prawidłowa Kolejność Prac
     {
-      id: 'harmonogram-prac',
-      number: 3,
-      icon: 'calendar',
-      label: 'Harmonogram',
-      title: 'Harmonogram i Prawidłowa Kolejność Prac',
-      content: [
-        {
-          type: 'paragraph',
-          value: 'Chaotyczne prace wykończeniowe to prosta droga do zniszczeń, opóźnień i niepotrzebnych kosztów. W CoreLTB Builders każdą realizację opieramy na **szczegółowym harmonogramie i żelaznej zasadzie prawidłowej kolejności prac**. To nasza mapa drogowa, która gwarantuje, że proces przebiega sprawnie, logicznie i bez przykrych niespodzianek.'
-        },
-        {
-          type: 'paragraph',
-          value: 'Nasz proces jest uporządkowany zgodnie z fundamentalną regułą sztuki budowlanej – od prac "mokrych" i "brudnych" do "czystych" i finalnych:'
-        },
-        {
-          type: 'list',
-          items: [
-            '**Instalacje.** Najpierw rozprowadzamy wszystkie ukryte "nerwy" domu: instalacje elektryczne, hydrauliczne, wentylacyjne i teletechniczne.',
-            '**Tynki i Wylewki.** Następnie przechodzimy do prac mokrych. Wykonujemy tynki na ścianach i wylewki na podłogach. Ten etap wymaga odpowiedniego czasu na wyschnięcie.',
-            '**Gładzie i Malowanie.** Po wyschnięciu, przygotowujemy idealnie gładkie powierzchnie ścian i sufitów (gładzie), a następnie wykonujemy pierwsze malowanie gruntujące i kolor.',
-            '**Podłogi, Płytki i Drzwi.** Na czystych i suchych powierzchniach montujemy finalne okładziny: podłogi (panele, parkiety), płytki w łazienkach i kuchni, a na końcu montujemy drzwi wewnętrzne.',
-            '**Biały Montaż i Wykończenia.** Ostatni etap to precyzyjne prace wykończeniowe: montaż gniazdek, oświetlenia, armatury łazienkowej (umywalki, toalety), a także listew przypodłogowych i innych detali.'
-          ]
-        },
-        {
-          type: 'paragraph',
-          value: 'Dzięki ścisłemu przestrzeganiu tej kolejności, **minimalizujemy ryzyko uszkodzenia już wykonanych prac** i gwarantujemy najwyższą jakość finalnego efektu. Z nami wiesz nie tylko CO robimy, ale także KIEDY i DLACZEGO.'
-        }
-      ],
-      imageSrc: '/images/uslugi/wykonczenia-i-aranzacje/etapy/harmonogram.webp',
-      imageAlt: 'Project Manager CoreLTB Builders prezentuje klientom harmonogram prac wykończeniowych na tablecie'
+      type: 'paragraph',
+      value: 'Proces dzielimy na strefy, eliminując kolizje między ekipami:'
     },
-    // Krok 4: Realizacja – Prace Wykończeniowe
+    {
+      type: 'list',
+      items: [
+        '**przeróbki instalacyjne:** dostosowanie punktów wod-kan i gniazdek do projektu wnętrz przed rozpoczęciem prac glazurniczych.',
+        '**prace brudne:** wykonanie gładzi, zabudowy G-K oraz układanie płytek w łazienkach (zabezpieczenie okien przed pyłem).',
+        '**malowanie i podłogi:** gruntowanie, malowanie i montaż podłóg twardych (dopiero po zakończeniu prac pylących).',
+        '**montaż czysty:** osadzanie ościeżnic, drzwi wewnętrznych, listew i armatury oraz białego osprzętu elektrycznego.'
+      ]
+    },
+    {
+      type: 'paragraph',
+      value: 'Taki układ gwarantuje, że podłoga nie zostanie porysowana, a ościeżnice drzwiowe nie napęcznieją od wilgoci z gładzi.'
+    }
+  ],
+  // Zostawiam Twoją ścieżkę
+  imageSrc: '/images/uslugi/wykonczenia-i-aranzacje/etapy/harmonogram.webp',
+  imageAlt: 'Kierownik projektu kontrolujący postęp prac wykończeniowych'
+},
+    // Krok 4: Wykonawstwo i Nadzór
     {
       id: 'realizacja-wykonczeniowa',
       number: 4,
       icon: 'hammer',
-      label: 'Realizacja',
-      title: 'Realizacja – Mistrzowska Jakość Wykonania',
+      label: 'Wykonawstwo',
+      title: 'Specjalizacja brygad i nadzór techniczny',
       content: [
         {
           type: 'paragraph',
-          value: 'To etap, w którym projekt zamienia się w rzeczywistość, a jakość wykonania staje się kluczowa. Sukces zależy od doświadczenia, precyzji i koordynacji. W CoreLTB Builders opieramy naszą pracę na fundamentalnej zasadzie: **każde zadanie wykonuje wyspecjalizowany w nim zespół.**'
+          value: 'Jakość wykończenia tkwi w detalu, którego często nie widać na pierwszy rzut oka. W CoreLTB odchodzimy od modelu "złotej rączki". Prace realizują wąsko wyspecjalizowane brygady branżowe, a nad całością czuwa inżynier koordynujący (nie musisz sam pilnować ekip).'
         },
         {
           type: 'paragraph',
-          value: 'Nie wierzymy w "fachowców od wszystkiego". Nasz proces realizacyjny to harmonijna współpraca wyspecjalizowanych ekip pod nadzorem jednego Project Managera:'
+          value: 'Nasz standard wykonawczy obejmuje:'
         },
         {
           type: 'list',
           items: [
-            '**Instalatorzy:** Precyzyjnie rozprowadzają instalacje hydrauliczne i elektryczne zgodnie z projektem, gwarantując ich bezawaryjne działanie na lata.',
-            '**Tynkarze i Posadzkarze:** Tworzą idealnie równe i gładkie powierzchnie ścian i podłóg, które są perfekcyjną bazą dla dalszych prac.',
-            '**Malarze i Płytkarze:** Z rzemieślniczą precyzją dbają o każdy detal – od idealnie pomalowanych ścian, po równe fugi i perfekcyjne wykończenie łazienek.',
-            '**Stolarze i Montażyści:** Finalizują dzieło, montując podłogi, drzwi, listwy i inne elementy z najwyższą starannością.'
+            '**wyprowadzenie geometrii:** prostowanie kątów ścian (niezbędne pod zabudowy meblowe i wanny) oraz weryfikacja płaszczyzn gładzi światłem bocznym.',
+            '**glazurnictwo precyzyjne:** układanie gresów wielkoformatowych i spieków, szlifowanie narożników 45° (jolly) zamiast listew, systemowe hydroizolacje w łazienkach.',
+            '**montaż końcowy:** osadzanie drzwi bezklamkowych/ukrytych, biały montaż armatury oraz precyzyjne docinanie listew przypodłogowych.'
           ]
         },
         {
           type: 'paragraph',
-          value: 'Dzięki pracy na **własnych, sprawdzonych zespołach**, mamy pełną kontrolę nad jakością i terminowością na każdym etapie. To nasza gwarancja, że efekt końcowy będzie nie tylko piękny, ale przede wszystkim trwały i wykonany zgodnie z najwyższymi standardami sztuki budowlanej.'
+           value: '**Planujesz otoczenie domu?** Wykończyliśmy środek, zajmiemy się też zewnątrz. Sprawdź: [Podjazdy, Ogrodzenia i Ogrody w CoreLTB Builders](/oferta/zagospodarowanie-terenu)'
         }
       ],
+      // Zostawiam Twoją ścieżkę
       imageSrc: '/images/uslugi/wykonczenia-i-aranzacje/etapy/realizacja.webp',
-      imageAlt: 'Ekipa wykończeniowa CoreLTB Builders podczas prac montażowych'
+      imageAlt: 'Ekipa wykończeniowa podczas precyzyjnego montażu zabudowy'
     }
   ]
 },
@@ -2407,173 +2437,85 @@ cooperationTimelineNoLine: {
     // Sekcja 5: ServicesAccordion (FAQ)
     servicesAccordion: {
       header: {
-        label: 'NAJCZĘŚCIEJ ZADAWANE PYTANIA',
-        title: 'Wykończenie pod Klucz - Odpowiedzi na Kluczowe Pytania',
-        description: 'Znajdź odpowiedzi na najważniejsze pytania dotyczące kosztów, terminów i zakresu prac wykończeniowych.',
+        label: 'FAQ INWESTORA',
+        title: 'Koszty i logistyka wykończenia',
+        description: 'Odpowiedzi na pytania o pieniądze i organizację prac "pod klucz".',
       },
       services: [
+        // --- FINANSE ---
         {
           iconName: 'wallet',
-          title: 'Ile kosztuje wykończenie domu pod klucz?',
+          title: 'Dlaczego usługa z materiałem jest tańsza niż zakupy w markecie?',
           content: [
             {
               type: 'paragraph',
-              value: 'Koszt wykończenia domu pod klucz zależy od wybranego standardu materiałów oraz zakresu prac, dlatego nie istnieje jedna uniwersalna stawka. Ostateczna cena jest ustalana indywidualnie podczas bezpłatnej konsultacji, co pozwala na przygotowanie szczegółowego i wiążącego kosztorysu.'
-            },
-            {
-              type: 'paragraph',
-              value: 'Taki model współpracy **gwarantuje stałość ceny oraz terminu na piśmie**, eliminując ryzyko nieprzewidzianych wydatków i zapewniając pełną kontrolę nad budżetem od samego początku inwestycji.'
+              value: 'To prosta matematyka podatkowa. Kupując płytki czy kleje w sklepie, płacisz 23% VAT. Zlecając nam usługę kompleksową (Generalne Wykonawstwo), płacisz **tylko 8% VAT** (dla budownictwa mieszkaniowego do 300 m²). To oznacza oszczędność rzędu kilkunastu tysięcy złotych, która pokrywa dużą część kosztów robocizny.'
             }
           ]
         },
         {
           iconName: 'coins',
-          title: 'Jaki jest koszt wykończenia domu 100m²?',
+          title: `Ile kosztuje wykończenie m² w standardzie ${CURRENT_YEAR}?`,
           content: [
             {
               type: 'paragraph',
-              value: 'Całkowity koszt wykończenia domu o powierzchni 100m² zależy od wybranego standardu materiałów i zakresu prac, zazwyczaj mieszcząc się w rynkowym przedziale **2500–4500 zł za m²**. Oznacza to orientacyjny budżet rzędu **250–450 tys. zł**.'
+              value: 'Rynek ustabilizował się na poziomie **2500–4500 zł brutto za m² podłogi**. Ta kwota obejmuje projekt, robociznę oraz materiały wykończeniowe średniej i wyższej klasy. Ostateczny koszt zależy od ilości "mokrych pomieszczeń" (łazienek), które są najdroższe w realizacji.'
             },
             {
               type: 'paragraph',
-              value: 'Precyzyjna, wiążąca kwota ustalana jest jednak indywidualnie na podstawie szczegółowego kosztorysu. Takie podejście pozwala zagwarantować stałą cenę przed rozpoczęciem robót i uniknąć nieprzewidzianych wydatków w trakcie realizacji.'
-            }
-          ]
-        },
-        {
-          iconName: 'home',
-          title: 'Jaki jest stan wykończenia pod klucz?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Stan pod klucz to doprowadzenie nieruchomości do momentu **pełnej gotowości do zamieszkania**. Zakres obejmuje wszystkie niezbędne prace wykończeniowe: od wykonania gładzi i malowania, przez ułożenie podłóg i montaż drzwi, aż po kompletne wyposażenie łazienek wraz z armaturą.'
-            },
-            {
-              type: 'paragraph',
-              value: 'Decydując się na ten standard w naszej firmie, zyskujesz pewność koordynacji – inwestor otrzymuje w **100% funkcjonalne wnętrze**, a my bierzemy na siebie pełną logistykę, nadzór nad ekipami i dostawami materiałów.'
-            }
-          ]
-        },
-        {
-          iconName: 'clipboard',
-          title: 'Co wchodzi w prace wykończeniowe?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Prace wykończeniowe to kompleksowy proces przekształcenia surowego budynku w funkcjonalny dom. Obejmują one pełen zakres działań:'
-            },
-            {
-              type: 'list',
-              items: [
-                '**Prace instalacyjne** – hydraulika, elektryka, wentylacja',
-                '**Wykończenie powierzchni** – gładzie, malowanie, układanie płytek i podłóg',
-                '**Montaż końcowy** – armatura, drzwi, zabudowa stolarska'
-              ]
-            },
-            {
-              type: 'paragraph',
-              value: 'W modelu „pod klucz" kluczowym elementem jest także **pełna koordynacja logistyczna** ekip i dostaw materiałów, zapewniająca realizację zgodnie z ustalonym budżetem i harmonogramem.'
-            }
-          ]
-        },
-        {
-          iconName: 'clock',
-          title: 'Ile trwa wykończenie domu od stanu deweloperskiego?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Standardowy czas kompleksowego wykończenia domu wynosi zazwyczaj **od 3 do 6 miesięcy**, w zależności od metrażu i skomplikowania aranżacji. Czas ten obejmuje etap projektowy, kompletację materiałów oraz właściwe prace wykonawcze.'
-            },
-            {
-              type: 'paragraph',
-              value: 'U Nas w modelu współpracy "pod klucz" szczegółowy harmonogram jest ustalany na początku, co pozwala na precyzyjne określenie daty odbioru i zapewnia **pisemną gwarancję dotrzymania terminu**.'
-            }
-          ]
-        },
-        {
-          iconName: 'checkCircle',
-          title: 'Czy wykończenie pod klucz się opłaca?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Wykończenie pod klucz **opłaca się przede wszystkim dla osób ceniących swój czas i spokój**. Eliminuje konieczność samodzielnego szukania i koordynowania wielu ekip, negocjowania cen materiałów oraz ciągłego kontrolowania postępu prac.'
-            },
-            {
-              type: 'paragraph',
-              value: 'Dodatkową wartością jest **gwarancja stałej ceny i terminu** – wiesz dokładnie, ile zapłacisz i kiedy wprowadzisz się do gotowego domu. Skontaktuj się z nami, aby uzyskać szczegółową wycenę dla Twojej inwestycji.'
-            }
-          ]
-        },
-        {
-          iconName: 'fileCheck',
-          title: 'Jaka jest kolejność prac wykończeniowych?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Proces wykończenia pod klucz obejmuje **4 główne etapy** realizowane w ściśle określonej kolejności:'
-            },
-            {
-              type: 'list',
-              items: [
-                '**Etap 1:** Weryfikacja budżetu i przygotowanie projektu aranżacji',
-                '**Etap 2:** Przeróbki instalacyjne i prace mokre (tynki, wylewki)',
-                '**Etap 3:** Wykończenie ścian, podłóg i montaż stolarki',
-                '**Etap 4:** Montaż armatury, oświetlenia i mebli na wymiar'
-              ]
-            },
-            {
-              type: 'paragraph',
-              value: 'Zachowanie tej sekwencji eliminuje błędy logistyczne i pozwala na dotrzymanie stałego terminu zakończenia inwestycji.'
-            }
-          ]
-        },
-        {
-          iconName: 'trendingUp',
-          title: 'Co jest najdroższe w wykończeniu domu?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Najdroższym elementem wykończenia są zazwyczaj **łazienki oraz kuchnia**. Ze względu na kosztowne materiały (płytki, armatura), sprzęt AGD i zabudowę meblową na wymiar, pomieszczenia te mogą pochłonąć nawet **40-50% całego budżetu**.'
-            },
-            {
-              type: 'paragraph',
-              value: 'Znaczącą pozycją jest także profesjonalna robocizna, stanowiąca często około **30-40% kosztów całkowitych**. Ostateczna cena zależy jednak zawsze od wybranego standardu materiałów oraz stopnia skomplikowania projektu aranżacji.'
-            }
-          ]
-        },
-        {
-          iconName: 'coins',
-          title: 'Jak obliczyć koszt wykończenia domu?',
-          content: [
-            {
-              type: 'paragraph',
-              value: 'Dokładne obliczenie kosztu wymaga sporządzenia **szczegółowego kosztorysu** opartego na projekcie wnętrz i specyfikacji materiałowej. Szacunkowo przyjmuje się stawki za metr kwadratowy powierzchni podłogi:'
-            },
-            {
-              type: 'list',
-              items: [
-                '**Standard ekonomiczny:** od około 1500 zł/m²',
-                '**Standard średni:** 2500–3500 zł/m²',
-                '**Standard premium:** ponad 3500 zł/m²'
-              ]
-            },
-            {
-              type: 'paragraph',
-              value: 'Ostateczna kwota zależy od klasy materiałów oraz zakresu prac, dlatego **najbezpieczniejszym rozwiązaniem jest uzyskanie wiążącej wyceny** od wykonawcy przed rozpoczęciem realizacji.'
+              value: 'W CoreLTB wycena nie jest "szacunkiem", ale **ofertą ryczałtową**. Gwarantujemy, że cena nie zmieni się w trakcie prac.'
             }
           ]
         },
         {
           iconName: 'piggyBank',
-          title: 'Czy 300 tys. wystarczy na wykończenie domu?',
+          title: 'Czy 300 tys. zł wystarczy na wykończenie domu 120m²?',
           content: [
             {
               type: 'paragraph',
-              value: 'Tak, **300 tys. zł to realny budżet**, pod warunkiem dopasowania metrażu do standardu. Obecnie średni koszt kompleksowego wykończenia waha się w granicach **2500–3500 zł za m²**.'
-            },
+              value: '**Tak, to bezpieczny budżet na wysoki standard.** Przy 120m² daje to średnią ok. 2500 zł/m². Pozwala to na zastosowanie gresów wielkoformatowych, dobrej armatury podtynkowej i podłóg drewnianych lub winylowych wysokiej klasy. Dokładny zakres ustalamy w Kosztorysie Ofertowym przed podpisaniem umowy.'
+            }
+          ]
+        },
+        // --- PROCES ---
+        {
+          iconName: 'home',
+          title: 'Co dokładnie oznacza "stan pod klucz"?',
+          content: [
             {
               type: 'paragraph',
-              value: 'Dla domu o powierzchni **100–120 m²** taka kwota pozwala na wysoki standard, natomiast przy większych powierzchniach może wymagać kompromisów materiałowych. Ostateczna wycena zawsze wymaga szczegółowego kosztorysu uwzględniającego zakres prac i wybrane materiały.'
+              value: 'Dla nas oznacza to mieszkanie gotowe do wniesienia mebli ruchomych (sofa, łóżko). W ramach usługi wykonujemy: gładzie, malowanie, podłogi, łazienki "na gotowo" (z białym montażem), osadzenie drzwi wewnętrznych. Po zakończeniu prac sprzątamy i utylizujemy odpady. Opcjonalnie wykonujemy też zabudowy stoujące.'
+            }
+          ]
+        },
+        {
+          iconName: 'clock',
+          title: 'Ile trwa realizacja (Fit-out)?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Dzięki pracy równoległej naszych ekip (bez czekania na "wolne terminy"), standardowe wykończenie domu trwa **3-4 miesiące** od wejścia na budowę. Gwarantujemy ten termin karami umownymi w kontrakcie.'
+            }
+          ]
+        },
+        {
+          iconName: 'checkCircle',
+          title: 'Kto odpowiada za jakość (gwarancja)?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'W modelu gospodarczym odpowiedzialność się rozmywa. W CoreLTB otrzymujesz **jedną zbiorczą rękojmię (gwarancję)** na całość prac. Jeśli pęknie fuga lub zacznie kapać kran – dzwonisz do nas, a nie szukasz hydraulika sprzed roku.'
+            }
+          ]
+        },
+        // --- LOGISTYKA ---
+        {
+          iconName: 'trendingUp',
+          title: 'Co jest najdroższe w wykończeniu?',
+          content: [
+            {
+              type: 'paragraph',
+              value: 'Zdecydowanie łazienki i kuchnia. Te pomieszczenia generują ok. **50% kosztów** całej "wykończeniówki". Wynika to ze skomplikowania prac (hydroizolacje, przeróbki hydrauliczne) oraz cen materiałów (płytki, armatura). Salon i sypialnie są relatywnie tanie.'
             }
           ]
         }
@@ -2584,7 +2526,7 @@ cooperationTimelineNoLine: {
     testimonials: {
       header: {
         label: 'CO MÓWIĄ NASI KLIENCI',
-        title: 'Spokój i Zaufanie na Ostatniej Prostej',
+        title: 'Spokój i zaufanie na ostatniej prostej',
         description: 'Poznaj historie inwestorów, którzy powierzyli nam wykończenie swoich domów i przekonali się, że ten etap może przebiegać sprawnie, terminowo i bezstresowo.',
         theme: 'light' as const,
       },
@@ -2696,6 +2638,17 @@ cooperationTimelineNoLine: {
     category: 'Prace Zewnętrzne',
     title: 'Zagospodarowanie Terenu',
 
+    // Listing (karta na stronie /oferta)
+    listing: {
+      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800',
+      title: 'Zagospodarowanie terenu',
+      description: 'Przekształcamy przestrzeń wokół budynków w funkcjonalne i estetyczne otoczenie, realizując ogrody, drogi i ogrodzenia.',
+      features: [
+        'Projektowanie ogrodów i otoczenia',
+        'Budowa dróg dojazdowych i ogrodzeń',
+      ],
+    },
+
     // Sekcja 1: PageHeader (TODO: uzupełnij dane)
     pageHeader: {
       title: 'Zagospodarowanie Terenu',
@@ -2707,274 +2660,278 @@ cooperationTimelineNoLine: {
         { label: 'Zagospodarowanie Terenu', href: '' },
       ],
     },
+// Sekcja 2: HERO - Prace Ziemne i Brukarskie
+emotionalHero: {
+  label: 'PRACE ZIEMNE I BRUKARSTWO • ŚLĄSK/MAŁOPOLSKA',
+  headline: 'Zamieniamy plac budowy w gotowy teren',
+  subtitle:
+    'Oddanie kluczy to nie koniec logistyki. W regionie, gdzie dominują grunty nieprzepuszczalne (gliny) i tereny ze spadkiem, zagospodarowanie to przede wszystkim inżynieria wodna. Wchodzimy z własnym sprzętem zaraz po demontażu rusztowań. Kształtujemy spadki, wykonujemy drenaże i układamy nawierzchnie na podbudowie drogowej, która nie "siądzie" po pierwszej zimie.',
+  benefits: [
+    'Własny park maszynowy (koparki, zagęszczarki) – nie czekasz na wynajem sprzętu',
+    'Kompleksowość: od drenażu opaskowego, przez podbudowę, aż po ogrodzenie systemowe',
+    'Projekt ukształtowania terenu (bilans mas ziemnych) w cenie realizacji',
+  ],
+  // CTA Box - Konkret techniczny (Pomiary)
+  ctaBoxTitle: 'Zamów pomiar niwelacyjny',
+  ctaBoxBenefits: [
+    'ocena spadków terenu i kierunków spływu wód opadowych',
+    'weryfikacja gruntu rodzimego (czy wymaga wymiany pod kostkę)',
+    'kosztorys materiałowy (kruszywa, kostka, stal ogrodzeniowa)',
+    'dobór technologii odwodnienia (studnie chłonne vs kanalizacja deszczowa)',
+  ],
+  ctaBoxSubtext: 'Wizyta techniczna na działce w promieniu działania firmy.',
+  ctaBoxButtons: [
+    { text: 'Umów pomiar', href: 'tel:+48123456789', variant: 'primary' },
+    { text: 'Poproś o wycenę', href: '#kontakt', variant: 'secondary' },
+  ],
+},
 
-    // Sekcja 2: EmotionalHero
-    emotionalHero: {
-      label: 'ZAGOSPODAROWANIE TERENU',
-      headline: 'Twój Dom Nie Kończy Się Na Drzwiach Wejściowych',
-      subtitle:
-        'Masz już wymarzony dom, ale wokół wciąż panuje budowlany chaos? W CoreLTB Builders zamieniamy błoto i wykopy w funkcjonalną przestrzeń. Zagospodarowanie terenu to dla nas inżynieria spotykająca estetykę. Od niwelacji i odwodnienia, przez solidne podjazdy, aż po taras – tworzymy spójne otoczenie, które podnosi wartość Twojej inwestycji i daje Ci upragniony odpoczynek.',
-      benefits: [
-        'Pełna obsługa: prace ziemne, brukarstwo, ogrodzenia i tarasy',
-        'Prawidłowe odwodnienie terenu chroniące fundamenty',
-        'Projekt wykonawczy spójny ze stylem Twojego domu',
-      ],
-      ctaBoxTitle: '☎ Zamów Bezpłatną Wizję Lokalną i Wycenę',
-      ctaBoxBenefits: [
-        'Ocenimy zakres niezbędnych prac ziemnych i niwelacyjnych',
-        'Zaproponujemy funkcjonalny układ podjazdów i ścieżek',
-        'Doradzimy w kwestii ogrodzenia, tarasu i systemów odwodnienia',
-        'Otrzymasz kosztorys bez ukrytych opłat dodatkowych',
-      ],
-      ctaBoxSubtext: 'Dojeżdżamy do klienta. Rozmowa do niczego nie zobowiązuje.',
-      ctaBoxButtons: [
-        { text: 'Zadzwoń do Nas', href: 'tel:+48123456789', variant: 'primary' as const },
-        { text: 'Napisz do Nas', href: '#kontakt', variant: 'secondary' as const },
-      ],
+// Sekcja 2: USP - TECHNOLOGIA I WODA
+philosophyTimeline: {
+  header: {
+    label: 'STANDARD WYKONAWCZY',
+    title: 'Dlaczego nasze podjazdy nie "siadają" po zimie?', // Konkretny problem
+    description:
+      'To prosta fizyka: kostka brukowa jest tylko tak trwała, jak to, co leży pod nią. Na gruntach wysadzinowych (glinach), które dominują w naszym regionie, kluczem jest wymiana gruntu. Nie oszczędzamy na kruszywie – stosujemy podbudowę drogową zagęszczaną warstwowo, co daje gwarancję stabilności pod ciężkimi samochodami.',
+  },
+  items: [
+    {
+      number: 1,
+      iconName: 'layers', // Ikona warstw (lepsza niż linijka)
+      title: 'Stabilizacja gruntu i korytowanie', // Małe litery w treści
+      description:
+        'Usuwamy grunt rodzimy (humus/glina) do głębokości min. 40-50 cm. Stosujemy geowłókniny separacyjne i warstwową podbudowę z kruszyw łamanych o frakcjach klinujących (0-31mm / 0-63mm). Każda warstwa jest zagęszczana płytą wibracyjną o dużym nacisku, co eliminuje powstawanie kolein.',
     },
-
-    // Sekcja 3: PhilosophyTimeline
-    philosophyTimeline: {
-      header: {
-        label: 'JAKOŚĆ I TECHNOLOGIA',
-        title: 'Fundament, Którego Nie Widać, a Czuć Latami',
-        description:
-          'Efektowny podjazd to tylko wierzchołek góry lodowej. Prawdziwa jakość kryje się pod ziemią. W CoreLTB Builders wyznajemy zasadę: najpierw inżynieria i hydrogeologia, potem estetyka. Dzięki temu Twoje otoczenie jest nie tylko piękną wizytówką domu, ale trwałym systemem odpornym na wodę, mróz i obciążenia.',
-
-      },
-      items: [
-        {
-          number: 1,
-          iconName: 'ruler' as const,
-          title: 'Prace Ziemne i Stabilizacja Gruntu',
-          description:
-            'Zanim położymy pierwszą kostkę, wykonujemy tytaniczną pracę pod powierzchnią. Analizujemy nośność gruntu, wykonujemy niwelację i dbamy o perfekcyjne odwodnienie. Dzięki solidnej podbudowie i zachowaniu spadków, masz 100% pewności, że nawierzchnia nie zapadnie się, a woda opadowa nie zagrozi fundamentom.',
-        },
-        {
-          number: 2,
-          iconName: 'layoutGrid' as const,
-          title: 'Funkcjonalność Przestrzeni na Pierwszym Miejscu',
-          description:
-            'Projektujemy przestrzeń do życia, nie na wystawę. Optymalizujemy szerokość podjazdów dla Twoich aut, planujemy wygodne ciągi piesze i logicznie rozmieszczamy strefy relaksu. Dbamy o to, by układ ścieżek był intuicyjny, a taras zapewniał intymność. Wszystko to dla Twojej wygody.',
-        },
-        {
-          number: 3,
-          iconName: 'checkCircle' as const,
-          title: 'Jeden Partner od Kostki Brukowej po Trawnik',
-          description:
-            'Bierzemy na siebie cały, złożony proces. Od "twardych" prac inżynieryjnych – brukarstwa, ogrodzeń, odwodnienia – aż po "miękkie" wykończenie w postaci niwelacji terenu i założenia trawnika. Jeden partner to jedna odpowiedzialność i gwarancja spójnego, perfekcyjnego efektu końcowego.',
-        },
-      ],
-      image: {
-        src: '/images/uslugi/zagospodarowanie-terenu/filozofia.webp',
-        alt: 'Ekspert CoreLTB Builders omawia z klientami plan zagospodarowania ich działki na tablecie',
-      },
+    {
+      number: 2,
+      iconName: 'waves', // Ikona wody (Hydro)
+      title: 'Zarządzanie wodą opadową',
+      description:
+        'Każdy m² kostki to woda, którą trzeba odprowadzić. Nie robimy podjazdów "na płasko". Wytyczamy spadki (1-2%) w kierunku odwodnień liniowych lub terenów chłonnych. Wpinamy rynny do studni chłonnych lub kanalizacji deszczowej, aby uniknąć błota wokół domu.',
     },
+    {
+      number: 3,
+      iconName: 'combine', // Ikona Integracji/Systemu (zamiast checkCircle)
+      title: 'Integracja ogrodzenia i bram',
+      description:
+        'Traktujemy otoczenie jako system. Fundament ogrodzenia jest zintegrowany z bramą przesuwną i furtką (wypuszczamy peszle pod domofon i napęd na etapie "brudnym"). Dzięki temu elektryk nie musi później rozbierać gotowego chodnika, by podłączyć kable.',
+    },
+  ],
+  // Zostawiam Twoją ścieżkę
+  image: {
+    src: '/images/uslugi/zagospodarowanie-terenu/filozofia.webp',
+    alt: 'Inżynier dokonujący niwelacji terenu niwelatorem laserowym przed brukowaniem',
+  },
+},
 
     // Sekcja 4: CooperationTimelineNoLine (6 kroków)
-    cooperationTimelineNoLine: {
-      header: {
-        label: 'ETAPY PRAC',
-        title: 'Od Projektu do Efektu: Twój Teren w Rękach Prefesionalistów',
-        description:
-          'Przejrzysty harmonogram to podstawa spokoju inwestora. Zobacz, jak zamieniamy surowy plac budowy w uporządkowaną przestrzeń. Nie improwizujemy – stosujemy sprawdzone procedury budowlane, dzięki którym każdy metr kwadratowy Twojej działki zyskuje na funkcjonalności i wartości.',
-      },
-      steps: [
+// Krok 1: Brukarstwo (Inżynieria Drogowa)
+cooperationTimelineNoLine: {
+  header: {
+    label: 'HARMONOGRAM REALIZACJI',
+    title: 'Od błota do gotowego ogrodu',
+    description:
+      'Proces zagospodarowania terenu to nie "sadzenie roślin", tylko ciężkie prace inżynieryjne. Koordynujemy operatorów koparek, dostawy kruszyw i brukarzy w jednym ciągu logicznym, aby uniknąć przestojów.',
+  },
+  steps: [
+    {
+      id: 'brukarstwo',
+      number: 1,
+      icon: 'layoutGrid', 
+      label: 'Nawierzchnie',
+      title: 'Brukarstwo i podbudowy drogowe',
+      content: [
         {
-          id: 'brukarstwo',
-          number: 1,
-          icon: 'layoutGrid' as const,
-          label: 'Brukarstwo',
-          title: 'Podjazdy, Ścieżki i Tarasy',
-          content: [
-            {
-              type: 'paragraph',
-              value:
-                'Podjazd to wizytówka Twojego domu, a taras to jego serce w letnie dni. Kluczem do ich trwałości nie jest jednak sama kostka, a to, co niewidoczne pod nią. W CoreLTB Builders podchodzimy do brukarstwa jak inżynierowie – naszym priorytetem jest stworzenie solidnej i stabilnej podstawy, która zapobiegnie zapadaniu się nawierzchni przez dekady.',
-            },
-            {
-              type: 'paragraph',
-              value: 'Stawiamy na technologię warstwową i sprawdzone materiały:',
-            },
-            {
-              type: 'list',
-              items: [
-                '**Głębokie Korytowanie i Podbudowa:** Nie oszczędzamy na gruncie. Wykonujemy wykop na odpowiednią głębokość i stosujemy wielowarstwową podbudowę z certyfikowanych kruszyw łamanych, mechanicznie zagęszczanych.',
-                '**Odwodnienie i Spadki:** Laserowo wyznaczamy niwelację terenu. Projektujemy spadki i montujemy odwodnienia liniowe tak, by woda błyskawicznie znikała z nawierzchni, chroniąc ją przed erozją mrozową.',
-                '**Precyzja Układania i Cięcia:** Niezależnie czy wybierasz kostkę betonową, granit, czy wielkoformatowe płyty gresowe – dbamy o idealną geometrię spoin i estetykę docięć przy krawężnikach.',
-                '**Stabilizacja i Fugowanie:** Całość "zamykamy" profesjonalnym wibrowaniem i spoinowaniem (piaskiem lub fugą żywiczną), co blokuje przesuwanie się elementów i ogranicza wyrastanie chwastów.',
-              ],
-            },
-          ],
-          imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/brukarstwo.webp',
-          imageAlt: 'Zespół CoreLTB Builders profesjonalnie układa kostkę brukową na podjeździe',
+          type: 'paragraph',
+          value:
+            'Podjazd musi wytrzymać obciążenie kilku ton. Na śląskich i małopolskich glinach kluczem do trwałości jest **wymiana gruntu**. Nie układamy kostki "na piasku". Stosujemy pełną technologię drogową, która gwarantuje, że nawierzchnia nie pofaluje się (nie powstają koleiny) i nie zostanie wysadzona przez mróz.'
         },
         {
-          id: 'ogrodzenia',
-          number: 2,
-          icon: 'gate' as const,
-          label: 'Ogrodzenia i Bramy',
-          title: 'Ogrodzenia i Bramy',
-          content: [
-            {
-              type: 'paragraph',
-              value:
-                'Ogrodzenie to nie tylko wyznaczenie granic działki – to "rama" dla Twojej architektury i pierwsza linia bezpieczeństwa. Wielu inwestorów martwi się pękającymi murkami czy rdzewiejącymi przęsłami po kilku zimach. W CoreLTB Builders eliminujemy te ryzyka na starcie. Nasze ogrodzenia to konstrukcje inżynierskie: stabilne, zbrojone i idealnie skomponowane z elewacją budynku.',
-            },
-            {
-              type: 'paragraph',
-              value: 'Stawiamy na trwałość i kompleksową obsługę inwestycji:',
-            },
-            {
-              type: 'list',
-              items: [
-                '**Fundamenty Poniżej Strefy Przemarzania:** To klucz do trwałości. Wykonujemy głębokie, zbrojone ławy fundamentowe z dylatacjami, dzięki czemu mróz nie wysadza konstrukcji, a murki nie pękają.',
-                '**Systemy Modułowe i Nowoczesne Przęsła:** Specjalizujemy się w montażu gładkich bloków modułowych, ogrodzeń palisadowych i żaluzjowych. Dbamy o to, by stal była ocynkowana i malowana proszkowo, co gwarantuje spokój od korozji na lata.',
-                '**Bramy i Automatyka (Smart Home):** Montujemy bramy przesuwne i skrzydłowe. Co ważne – przewody pod domofon, oświetlenie i napędy rozprowadzamy na etapie prac ziemnych, więc nie musisz zrywać kostki, by podłączyć wideodomofon.',
-              ],
-            },
-            {
-              type: 'paragraph',
-              value:
-                'Wybierając nas, zyskujesz spójność: podjazd i ogrodzenie powstają w jednej linii stylistycznej i technicznej, bez konfliktów między różnymi ekipami.',
-            },
-          ],
-          imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/ogrodzenia.webp',
-          imageAlt: 'Zespół CoreLTB Builders profesjonalnie montujący nowoczesne ogrodzenie panelowe',
+          type: 'paragraph',
+          value: 'Nasz standard wykonawczy obejmuje:'
         },
         {
-          id: 'odwodnienie',
-          number: 3,
-          icon: 'umbrella' as const,
-          label: 'Gospodarka Wodna',
-          title: 'Ochrona Fundamentów i Suchy Teren',
-          content: [
-            {
-              type: 'paragraph',
-              value:
-                'Woda to cichy zabójca budynków i nawierzchni. Ignorowanie gospodarki wodnej kończy się zawilgoconymi ścianami, zapadającą się kostką i błotem zamiast trawnika. W CoreLTB Builders podchodzimy do tematu hydrotechnicznie. Zanim położymy nawierzchnię, projektujemy system, który skutecznie zarządza każdą kroplą deszczu, chroniąc Twój majątek.',
-            },
-            {
-              type: 'paragraph',
-              value: 'Stosujemy nowoczesne rozwiązania melioracyjne i retencyjne:',
-            },
-            {
-              type: 'list',
-              items: [
-                '**Zagospodarowanie Wody z Dachu (Retencja):** Nie pozwalamy wodzie marnować się ani niszczyć elewacji. Odprowadzamy deszczówkę do studni chłonnych, skrzynek rozsączających lub podziemnych zbiorników retencyjnych. Zyskujesz darmową wodę do ogrodu i suchy teren wokół domu.',
-                '**Drenaż Opaskowy Budynku:** To "polisa ubezpieczeniowa" dla Twoich murów. Jeśli warunki gruntowe tego wymagają, instalujemy system rur drenarskich wokół ław fundamentowych, który obniża poziom wód gruntowych i zapobiega podciąganiu wilgoci kapilarnej.',
-                '**Odwodnienia Liniowe i Punktowe:** Na podjazdach montujemy korytka o odpowiedniej klasie obciążenia (odporne na najazd aut). Zapobiegają one tworzeniu się niebezpiecznych lodowisk zimą i wypłukiwaniu fug, co jest częstą przyczyną degradacji nawierzchni.',
-              ],
-            },
-            {
-              type: 'paragraph',
-              value:
-                'Dobrze zaprojektowane odwodnienie jest niewidoczne dla oka, ale kluczowe dla trwałości inwestycji. Z nami masz pewność, że nawet podczas oberwania chmury, Twój garaż i piwnica pozostaną suche.',
-            },
+          type: 'list',
+          items: [
+            '**korytowanie i stabilizacja:** wybranie humusu (min. 40-50 cm), ułożenie geowłókniny separacyjnej (zapobiega mieszaniu się warstw) i wykonanie podbudowy z kruszyw łamanych klinujących.',
+            '**zagęszczanie warstwowe:** używamy ciężkich zagęszczarek płytowych (powyżej 200 kg), aby "zabetonować" kruszywo mechanicznie przed ułożeniem kostki.',
+            '**niwelacja laserowa:** wyznaczamy precyzyjne spadki (1-2%), kierując wodę deszczową do odwodnień liniowych lub na teren chłonny (z dala od murów budynku).',
+            '**spoinowanie:** oprócz piasku płukanego, stosujemy fugi żywiczne (przepuszczalne dla wody, ale odporne na wyrastanie chwastów i wypłukiwanie).'
           ],
-          imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/odwodnienie.webp',
-          imageAlt: 'Pracownik CoreLTB Builders układa rurę drenażową w wykopie wokół fundamentów',
+        },
+      ],
+      imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/brukarstwo.webp',
+      imageAlt: 'Zagęszczanie podbudowy pod kostkę brukową ciężkim sprzętem'
+    },
+    {
+      id: 'ogrodzenia',
+      number: 2,
+      icon: 'gate', 
+      label: 'Ogrodzenia',
+      title: 'Systemy ogrodzeniowe i bramy',
+      content: [
+        {
+          type: 'paragraph',
+          value:
+            'Ogrodzenie to konstrukcja budowlana narażona na silne parcie wiatru i pracę gruntu. Na gruntach wysadzinowych (gliny typowe dla Południa), kluczem nie jest wygląd przęsła, ale to, co pod ziemią. W CoreLTB Builders traktujemy fundament ogrodzenia z taką samą powagą jak fundament domu – musi być zbrojony i wykonany poniżej strefy zamarzania, aby murki nie pękały po pierwszej zwi.'
         },
         {
-          id: 'niwelacja-terenu',
-          number: 4,
-          icon: 'areaChart' as const,
-          label: 'Niwelacja Terenu',
-          title: 'Kształtowanie Terenu i Przygotowanie Pod Ogród',
-          content: [
-            {
-              type: 'paragraph',
-              value:
-                'Po zakończeniu budowy działka często przypomina pobojowisko pełne gliny i ukrytego gruzu. W CoreLTB Builders nie tylko wyrównujemy powierzchnię – my przywracamy jej biologiczną użyteczność. Niwelacja to dla nas proces inżynieryjny: modelujemy teren tak, aby był bezpieczny dla budynku (odpływ wody) i gotowy na przyjęcie roślinności.',
-            },
-            {
-              type: 'paragraph',
-              value: 'Działamy kompleksowo, używając ciężkiego sprzętu i precyzyjnej optyki:',
-            },
-            {
-              type: 'list',
-              items: [
-                '**Niwelacja Laserowa i Spadki:** "Na oko" to za mało. Używamy niwelatorów laserowych, aby z milimetrową precyzją ukształtować teren. Tworzymy mikrospadki, które w niewidoczny sposób odprowadzają wodę opadową z dala od elewacji i tarasu, zapobiegając tworzeniu się kałuż.',
-                '**Oczyszczanie i Profilowanie:** Usuwamy pozostałości budowlane i wymieniamy grunt tam, gdzie jest to konieczne. Modelujemy skarpy, nasypy czy wypłaszczenia, tworząc solidną bazę pod przyszłą architekturę ogrodową.',
-                '**Humusowanie (Warstwa Wegetacyjna):** Na odpowiednio ukształtowane podłoże rozścielamy warstwę żyznej ziemi (czarnoziem/humus). To kluczowy etap – bez niego nawet najdroższy trawnik z rolki nie przetrwa. My tworzymy idealne środowisko dla korzeni.',
-              ],
-            },
-            {
-              type: 'paragraph',
-              value:
-                'Efekt? Idealnie równy teren (jak stół), przygotowany pod siew trawy lub nasadzenia, który jest łatwy w koszeniu i nie sprawia problemów z zastoinami wodnymi po ulewach.',
-            },
-          ],
-          imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/niwelacja.webp',
-          imageAlt: 'Spychacz CoreLTB Builders równa teren po zakończeniu budowy domu',
+          type: 'paragraph',
+          value: 'Realizujemy ogrodzenia systemowo:'
         },
         {
-          id: 'trawniki-i-nawadnianie',
-          number: 5,
-          icon: 'leaf' as const,
-          label: 'Trawnik i Nawadnianie',
-          title: 'Inteligentny Ogród i Perfekcyjna Murawa',
-          content: [
-            {
-              type: 'paragraph',
-              value:
-                'Piękny trawnik to w 30% natura, a w 70% inżynieria i woda. Ręczne podlewanie jest nieefektywne i czasochłonne. W CoreLTB Builders wdrażamy rozwiązania "Smart Garden". Tworzymy systemy, które same dbają o kondycję roślin, a Tobie oddają cenne godziny wolnego czasu. Instalujemy technologię pod ziemią, by na powierzchni cieszyć oko idealną zielenią.',
-            },
-            {
-              type: 'paragraph',
-              value: 'Nasze podejście łączy wygodę z biologią roślin:',
-            },
-            {
-              type: 'list',
-              items: [
-                '**Automatyczne Systemy Nawadniania:** Projektujemy sekcje zraszaczy i linii kroplujących dopasowane do nasadzeń. Stosujemy sterowniki i czujniki deszczu. System podlewa ogród wczesnym rankiem – to optymalna pora, która ogranicza parowanie, ale pozwala trawie obeschnąć przed upałem, co zapobiega rozwojowi grzybów.',
-                '**Trawnik z Rolki lub Siewu + Siatka na Krety:** Oferujemy natychmiastowy efekt "zielonego dywanu" (rolka) lub tańsze rozwiązanie z siewu. Co kluczowe – pod trawnikiem montujemy mocną siatkę przeciw kretom, co jest standardem chroniącym Twoją inwestycję przed zniszczeniem.',
-                '**Logiczna Kolejność Prac:** Najpierw rury i kable, potem siatka i ziemia, na końcu trawa. Wykonując to kompleksowo u jednego wykonawcy, masz pewność, że system nawadniania nie zostanie uszkodzony podczas prac ziemnych, a trawa przyjmie się idealnie.',
-              ],
-            },
-            {
-              type: 'paragraph',
-              value:
-                'Inwestycja w automatyczne nawadnianie zwraca się nie tylko w niższych rachunkach za wodę (precyzyjne dawkowanie), ale przede wszystkim w Twoim świętym spokoju. Zapomnij o bieganiu z wężem ogrodowym.',
-            },
+          type: 'list',
+          items: [
+            '**fundamenty liniowe:** wykonujemy wykopy poniżej strefy przemarzania gruntu (80-120 cm), stosując dylatacje obwodowe, co zabezpiecza betonowe cokoły przed pękaniem od mrozu.',
+            '**systemy modułowe:** montujemy ogrodzenia z pustaków gładkich/łupanych oraz stalowe przęsła (wyłącznie ocynk ogniowy + malowanie proszkowe), co daje realną gwarancję antykorozyjną.',
+            '**automatyka zintegrowana:** przewody pod napędy bram, domofon i elektrozamek rozprowadzamy w ziemi jeszcze przed ułożeniem kostki, unikając demontażu nowej nawierzchni przez elektryka.'
           ],
-          imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/trawniki-nawadnianie.webp',
-          imageAlt: 'Pracownik CoreLTB Builders układa trawę z rolki na przygotowanym terenie',
         },
         {
-          id: 'oswietlenie-ogrodowe',
-          number: 6,
-          icon: 'lightbulb' as const,
-          label: 'Oświetlenia Ogrodu',
-          title: 'Bezpieczeństwo i Klimat po Zmroku',
-          content: [
-            {
-              type: 'paragraph',
-              value:
-                'Oświetlenie ogrodu to temat, który inwestorzy często zostawiają "na później". To błąd, który kończy się zrywaniem nowej kostki lub ryciem w gotowym trawniku. W CoreLTB Builders planujemy instalacje elektryczne równolegle z pracami ziemnymi. Traktujemy światło jako element bezpieczeństwa oraz "biżuterię" dla Twojego domu.',
-            },
-            {
-              type: 'paragraph',
-              value: 'Nasze instalacje łączą pragmatyzm z estetyką:',
-            },
-            {
-              type: 'list',
-              items: [
-                '**Okablowanie przed Nawierzchnią:** Kładziemy odpowiednie kable ziemne (YKY) i rury osłonowe jeszcze na etapie podbudowy. Dzięki temu masz gotowe punkty pod lampy, gniazdka zewnętrzne czy napęd bramy, bez niszczenia ogrodu w przyszłości.',
-                '**Bezpieczeństwo i Funkcja:** Projektujemy oświetlenie ciągów komunikacyjnych. Stosujemy wytrzymałe oprawy najazdowe w podjeździe (odporne na ciężar aut) oraz słupki przy ścieżkach, co eliminuje ryzyko potknięcia i skutecznie odstrasza intruzów.',
-                '**Iluminacja i Sceny Świetlne:** Wydobywamy potencjał ogrodu nocą. Podświetlamy korony drzew, elewację budynku czy murki oporowe. Tworzymy głębię widoku, którą możesz podziwiać z salonu przez cały rok.',
-                '**Automatyka i Energooszczędność:** Stosujemy technologię LED i inteligentne sterowanie (zegary astronomiczne, czujniki ruchu). Światło włącza się samo, gdy jest potrzebne, a Ty nie martwisz się o wysokie rachunki za prąd.',
-              ],
-            },
-            {
-              type: 'paragraph',
-              value:
-                'Dobrze dobrane oświetlenie to kropka nad "i". Sprawia, że Twój dom wygląda luksusowo, a powrót z pracy po zmroku staje się przyjemnością, a nie błądzeniem w ciemnościach.',
-            },
-          ],
-          imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/oswietlenie.webp',
-          imageAlt: 'Oświetlenie ogrodowe CoreLTB Builders pięknie podświetlające ogród i dom po zmroku',
+          type: 'paragraph',
+          value:
+            'Dzięki temu, że wykonuje to jeden zespół, masz pewność, że poziomy bramy idealnie zgrają się z poziomem podjazdu (zero progów i kałuż przy wjeździe).'
         },
+      ],
+      imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/ogrodzenia.webp',
+      imageAlt: 'Montaż nowoczesnego ogrodzenia modułowego i bramy przesuwnej na podjeździe'
+    },
+    {
+      id: 'odwodnienie',
+      number: 3,
+      icon: 'waves', // Zmieniam 'umbrella' na 'waves' (bardziej inżyniersko)
+      label: 'Hydrotechnika', // Brzmi bardziej pro niż "Gospodarka Wodna"
+      title: 'Odwodnienie, drenaże i retencja',
+      content: [
+        {
+          type: 'paragraph',
+          value:
+            'Na nieprzepuszczalnych gruntach Śląska i Małopolski (gdzie dominują gliny), woda opadowa nie wsiąka w podłoże, lecz spływa w stronę fundamentów. Ignorowanie tego faktu to gwarancja wilgoci w garażu. W CoreLTB nie działamy "na oko". Projektujemy systemy odwodnień, dopasowując je do chłonności gruntu.'
+        },
+        {
+          type: 'paragraph',
+          value: 'Realizujemy kompleksowe roboty odwodnieniowe:'
+        },
+        {
+          type: 'list',
+          items: [
+            '**zagospodarowanie deszczówki:** zgodnie z prawem wodnym, woda z dachu musi zostać na działce. Montujemy studnie chłonne betonowe lub systemowe skrzynki rozsączające, które przejmują zrzut wody z rynien.',
+            '**drenaż opaskowy:** jeśli wymagają tego warunki geologiczne, wykonujemy drenaż wokół ław fundamentowych (rura w otulinie + obsypka żwirowa), odcinając dopływ wód gruntowych do murów.',
+            '**odwodnienia liniowe:** w nawierzchni podjazdu montujemy korytka o klasie obciążenia B125 (odporne na najazd samochodów osobowych), zapobiegając tworzeniu się kałuż i lodu przy bramie garażowej.'
+          ],
+        },
+        {
+           // STRATEGICZNY LINK DO USŁUGI WSPIERAJĄCEJ
+           // Klient z mokrą działką musi kliknąć tutaj!
+          type: 'paragraph',
+          value:
+            '**Stoi Ci woda na działce?** Przed doborem studni warto wykonać badanie gruntu. Sprawdź: [Usługi Geologiczne i Geotechnika w CoreLTB](/oferta/uslugi-techniczne)'
+        },
+      ],
+      imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/odwodnienie.webp',
+      imageAlt: 'Montaż studni chłonnej i drenażu opaskowego przy domu jednorodzinnym',
+    },
+    {
+      id: 'niwelacja-terenu',
+      number: 4,
+      icon: 'tractor', // Zmień ikonę na 'tractor' (lub shovel), areaChart nie pasuje do koparki
+      label: 'Niwelacja',
+      title: 'Profilowanie terenu i humusowanie',
+      content: [
+        {
+          type: 'paragraph',
+          value:
+            'Ostatni etap budowy to logistyka ciężkiego sprzętu. Wchodzimy, aby wyprowadzić rzędne terenu. W CoreLTB Builders traktujemy to zadanie geodezyjnie: musimy zgubić różnice wysokości działki, zachowując bezpieczny spływ wód od budynku, a jednocześnie nie "zakopując" ogrodzenia czy sąsiadów.'
+        },
+        {
+          type: 'paragraph',
+          value: 'Nasz standard prac ziemnych obejmuje:'
+        },
+        {
+          type: 'list',
+          items: [
+            '**bilans mas ziemnych:** weryfikujemy, czy ziemię z wykopów da się rozplantować, czy (co częste przy śląskich glinach) należy ją wywieźć i dowieźć lżejszy grunt z zewnątrz.',
+            '**mikroniwelacja laserowa:** profilowanie spadków z dokładnością do centymetrów, co eliminuje powstawanie "zastoin wodnych" (kałuż) na środku przyszłego trawnika.',
+            '**humusowanie (10-15 cm):** mechaniczne rozścielenie warstwy wegetacyjnej (odsianego humusu). To minimum technologiczne, aby trawa się ukorzeniła na twardym podłożu.'
+          ],
+        },
+        {
+          // 🔥 KLUCZOWY LINK (Cost-Anchor): Klient tutaj pyta o pieniądze.
+          type: 'paragraph',
+          value:
+            `**Planujesz budżet na koniec budowy?** Sprawdź realne koszty (wywrotki ziemi, roboczogodziny sprzętu): [Ile kosztuje zagospodarowanie działki 1000m² w ${CURRENT_YEAR}? (Analiza)](/baza-wiedzy/koszt-zagospodarowania-dzialki-2026)`
+        },
+      ],
+      imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/niwelacja.webp',
+      imageAlt: 'Niwelacja terenu i rozkładanie humusu maszyną budowlaną po budowie'
+    },
+    {
+      id: 'trawniki-i-nawadnianie',
+      number: 5,
+      icon: 'leaf',
+      label: 'Nawadnianie', // Zmiana etykiety na bardziej techniczną
+      title: 'Systemy nawadniania i trawniki',
+      content: [
+        {
+          type: 'paragraph',
+          value:
+            'Ogród bez wody na Śląsku nie przetrwa. Gliny w lecie pękają, a piaski (Jura) wysychają. Nie bawimy się w "ręczne podlewanie". Wdrażamy systemy automatyczne oparte na bilansie wodnym. Rury i sekcje kładziemy PRZED humusowaniem, żeby nie niszczyć wykonanej niwelacji.'
+        },
+        {
+          type: 'paragraph',
+          value: 'Instalujemy technologię:'
+        },
+        {
+          type: 'list',
+          items: [
+            '**automatyka strefowa:** podział na sekcje zraszaczy (trawnik) i linie kroplujące (rabaty) sterowane zegarem astronomicznym.',
+            '**biologia murawy:** zakładamy trawniki z siewu na odpowiednim podłożu (humus min. 10-15 cm) lub z rolki (efekt natychmiastowy) z obowiązkową siatką na krety.',
+            '**retencja wody:** tam gdzie to możliwe, wykorzystujemy darmową wodę opadową z Twojego zbiornika retencyjnego, zamiast drogiej wody wodociągowej.'
+          ],
+        },
+        {
+          type: 'paragraph',
+          value:
+            'Precyzyjne nawadnianie (kropelkowe) to oszczędność wody rzędu 50% względem tradycyjnego węża. Trawnik nie jest przelany, ani spalony słońcem.'
+        },
+      ],
+      imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/trawniki-nawadnianie.webp',
+      imageAlt: 'Montaż systemu nawadniania i układanie trawnika z rolki'
+    },
+    
+    {
+      id: 'oswietlenie-ogrodowe',
+      number: 6,
+      icon: 'lightbulb',
+      label: 'Elektryka', // Bardziej pasuje do kabla YKY
+      title: 'Oświetlenie zewnętrzne i sterowanie',
+      content: [
+        {
+          type: 'paragraph',
+          value:
+            'Brak kabli na etapie "ziemi" to najdroższy błąd w ogrodzie. Często widzimy gotowe trawniki rozkopywane, by podłączyć lampkę. W CoreLTB kładziemy rury osłonowe (aroty) równolegle z drenażami i krawężnikami, eliminując późniejszą dewastację.'
+        },
+        {
+          type: 'paragraph',
+          value: 'Realizujemy elektrykę terenu:'
+        },
+        {
+          type: 'list',
+          items: [
+            '**kable ziemne (YKY):** instalujemy okablowanie w osłonach, odporne na wilgoć i gryzonie.',
+            '**bezpieczeństwo:** oświetlenie najazdowe w podjeździe i słupki przy ścieżkach to wymóg bezpieczeństwa, a nie tylko estetyka.',
+            '**sterowanie zmierzchowe:** lampy uruchamiają się automatycznie po zachodzie słońca, tworząc strefę bezpieczeństwa wokół domu.'
+          ],
+        },
+        {
+          // CROSS-SELL: Odsyłamy do wykończeń (instalacje wewnętrzne) zamiast duplikować link do cennika terenu
+          type: 'paragraph',
+          value: '**Planujesz też wykończenie wnętrz?** Instalacje zewnętrzne to dopiero początek. Sprawdź: [Wykończenie domu pod klucz — od instalacji po aranżację >](/oferta/wykonczenia-i-aranzacje)'
+        },
+      ],
+      imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/oswietlenie.webp',
+      imageAlt: 'Podświetlenie ogrodu i elewacji systemem lamp najazdowych'
+    },
       ],
     },
 
@@ -3241,3 +3198,10 @@ cooperationTimelineNoLine: {
 
 export const getServiceV2BySlug = (slug: string): ServiceV2 | undefined =>
   allServicesV2.find((s) => s.slug === slug);
+
+/** Zwraca dane listingowe (karty) dla strony /oferta – gotowe do AnimatedServiceGrid. */
+export const getAllServicesListingData = () =>
+  allServicesV2.map((s) => ({
+    ...s.listing,
+    href: `/oferta/${s.slug}`,
+  }));

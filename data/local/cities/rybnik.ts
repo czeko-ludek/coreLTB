@@ -1,0 +1,296 @@
+import type { CityData } from '../types';
+
+export const rybnikData: CityData = {
+  slug: 'rybnik',
+  cityName: 'Rybnik',
+  cityNameLocative: 'Rybniku',
+
+  meta: {
+    title: 'Budowa Domów Rybnik – Generalny Wykonawca | CoreLTB Builders',
+    description: 'Profesjonalna budowa domów w Rybniku. Specjalizujemy się w terenach górniczych. Płyty fundamentowe, wzmocnione konstrukcje, pełne zabezpieczenia. ✓ 15 lat doświadczenia ✓ Gwarancja',
+  },
+
+  pageHeader: {
+    title: 'Budowa Domów Rybnik',
+    backgroundImage: '/images/local/rybnik/hero.webp',
+  },
+
+  emotionalHero: {
+    label: 'BUDOWA DOMÓW RYBNIK',
+    headline: ['Budujesz Dom w Rybniku?', 'Teren Górniczy Wymaga Specjalistów'],
+    subtitle: 'Rybnik to teren górniczy kategorii II-IV. Standardowy projekt katalogowy nie wystarczy – potrzebujesz wykonawcy, który zna lokalne uwarunkowania i zabezpieczy Twój dom przed skutkami eksploatacji górniczej.',
+    benefits: [
+      'Specjalizacja w budowie na terenach górniczych (kat. II-IV)',
+      'Płyty fundamentowe i wzmocnione konstrukcje jako standard',
+      '15 lat doświadczenia w powiecie rybnickim',
+    ],
+    ctaBoxTitle: '☎ Umów Bezpłatną Konsultację',
+    ctaBoxBenefits: [
+      'Ocenimy kategorię terenu górniczego Twojej działki',
+      'Dobierzemy odpowiednie rozwiązania konstrukcyjne',
+      'Przedstawimy realny kosztorys budowy',
+      'Odpowiemy na wszystkie Twoje pytania',
+    ],
+    ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
+    ctaBoxButtons: [
+      { text: 'Zadzwoń do Nas', variant: 'secondary' },
+      { text: 'Napisz do Nas', href: '/kontakt', variant: 'secondary' },
+    ],
+  },
+
+  // expertise: merge localSpecifics from old data into new ExpertiseCard[] format
+  // Old localSpecifics had 3 items: Płyta fundamentowa, Trzpienie i wieńce, Dylatacje
+  expertise: {
+    header: {
+      label: 'SPECYFIKA BUDOWY W RYBNIKU',
+      title: 'Szkody górnicze i teren',
+      description: 'Działalność kopalń KWK Chwałowice czy KWK Jankowice powoduje deformacje terenu. Dla źle zaprojektowanego domu mogą być wyrokiem.',
+      align: 'left',
+      theme: 'light',
+    },
+    cards: [
+      {
+        icon: 'layers',
+        title: 'Płyta fundamentowa',
+        description: 'Przy III i IV kategorii szkód górniczych to jedyne dopuszczalne rozwiązanie. Płyta 25-30 cm, zbrojona górą i dołem, zachowuje się jak sztywna tratwa.',
+        details: [
+          'Gdy grunt pod budynkiem się rozstępuje lub zapada, płyta przenosi naprężenia, chroniąc ściany przed pękaniem. Koszt wyższy o 15-20% od ław, ale eliminuje ryzyko uszkodzeń strukturalnych wartych setki tysięcy złotych.',
+        ],
+      },
+      {
+        icon: 'shield',
+        title: 'Trzpienie i wieńce żelbetowe',
+        description: 'To pionowe słupy ukryte w ścianach, które łączą fundament z wieńcem dachowym. W standardowym domu jest ich 4-6, w domu na szkodach górniczych – nawet **12-16 sztuk**.',
+        details: [
+          'Każdy strop musi być opasany żelbetowym wieńcem. Często stosujemy też wieńce w połowie wysokości ścian parteru (przy wysokich kondygnacjach). Dzięki temu zapewniamy budynkowi sztywność przestrzenną potrzebną do przetrwania wstrząsów górniczych.',
+        ],
+      },
+      {
+        icon: 'settings',
+        title: 'Dylatacje konstrukcyjne',
+        description: 'Budynek musi być oddzielony od tarasów, schodów zewnętrznych i garaży. Jeśli grunt osiądzie, te elementy muszą pracować niezależnie, aby nie rozerwać bryły domu.',
+        details: [
+          'W dzielnicach takich jak Niedobczyce, Niewiadom czy Boguszowice grunt "pracuje" – dlatego każde rozwiązanie inżynieryjne musi być przemyślane i dostosowane do kategorii szkód górniczych określonej w badaniach geologicznych.',
+        ],
+      },
+    ],
+    image: {
+      src: '/images/local/rybnik/hero.webp',
+      alt: 'Budowa domu na terenach górniczych w Rybniku',
+    },
+  },
+
+  // whyUsOverride because Rybnik has unique whyUs points different from shared
+  whyUsOverride: {
+    competencies: [
+      {
+        icon: 'mapPin',
+        title: 'Lokalna ekspertyza',
+        description: 'Znamy grunty w Rybniku lepiej niż ktokolwiek inny. Wiemy, gdzie występuje glina, gdzie kurzawka, a gdzie szkody górnicze są najbardziej aktywne.',
+      },
+      {
+        icon: 'trendingUp',
+        title: 'Analiza TCO (Total Cost of Ownership)',
+        description: 'Nie budujemy "najtaniej", budujemy tak, aby eksploatacja domu była tania. Pokazujemy, jak inwestycja w lepsze ocieplenie czy płytę fundamentową zwraca się w niższych rachunkach.',
+      },
+      {
+        icon: 'building',
+        title: 'Własne zaplecze',
+        description: 'Posiadamy własne szalunki systemowe, stemple i narzędzia. Nie jesteśmy pośrednikiem, który tylko "załatwia ludzi".',
+      },
+      {
+        icon: 'shieldCheck',
+        title: 'Gwarancja stałej ceny',
+        description: 'Po podpisaniu umowy i ustaleniu zakresu, cena jest stała. Chronimy Twój budżet przed niespodziankami w trakcie budowy.',
+      },
+    ],
+  },
+
+  districts: {
+    header: {
+      label: 'GDZIE BUDUJEMY',
+      title: 'Dzielnice Rybnika i okolice',
+      description: 'Działamy lokalnie, co ma kluczowe znaczenie dla logistyki i kosztów. Znamy specyfikę wąskich dróg dojazdowych w starszych dzielnicach oraz warunki gruntowe na nowych osiedlach.',
+      align: 'left',
+      theme: 'light',
+    },
+    items: [
+      { label: 'Orzepowice' }, { label: 'Golejów' }, { label: 'Rybnicka Kuźnia' },
+      { label: 'Popielów' }, { label: 'Radziejów' }, { label: 'Chwałowice' },
+      { label: 'Boguszowice' }, { label: 'Zamysłów' }, { label: 'Zebrzydowice' },
+      { label: 'Niewiadom' }, { label: 'Jejkowice' }, { label: 'Lyski' },
+      { label: 'Gaszowice' }, { label: 'Świerklany' },
+    ],
+    hubDescription: 'Realizujemy inwestycje we wszystkich dzielnicach Rybnika oraz w ościennych gminach powiatu rybnickiego. Znamy specyfikę terenu górniczego oraz lokalne warunki gruntowe.',
+  },
+
+  faq: {
+    header: {
+      label: 'NAJCZĘŚCIEJ ZADAWANE PYTANIA',
+      title: 'Odpowiadamy na Twoje wątpliwości',
+      align: 'left',
+      theme: 'light',
+    },
+    items: [
+      {
+        question: 'Ile kosztuje budowa domu 100–150 m² w Rybniku w 2025 roku i czy budżet 400–600 tys. zł wystarczy na realizację pod klucz?',
+        content: [
+          { type: 'paragraph', value: 'Realizacja domu 100–150 m² w standardzie pod klucz w 2025 roku zazwyczaj przekracza 700 tys. zł. Budżet 400–600 tys. zł pozwoli raczej na doprowadzenie inwestycji do stanu deweloperskiego. W CoreLTB pomagamy optymalizować projekt, jednak przy obecnych stawkach na Śląsku, pełne wykończenie w tej kwocie wymagałoby znacznych kompromisów jakościowych.' },
+        ],
+      },
+      {
+        question: 'Czy realizujecie budowy na terenach szkód górniczych i jak dobieracie odpowiednie zabezpieczenia konstrukcji?',
+        content: [
+          { type: 'paragraph', value: 'Jak najbardziej, realizujemy inwestycje na terenach objętych wpływami eksploatacji górniczej. Zabezpieczenia konstrukcyjne, takie jak płyta fundamentowa czy wzmocnione wieńce, dobieramy indywidualnie na podstawie kategorii szkód określonej w badaniach geologicznych. Dzięki temu zapewniamy pełną stabilność budynku i odporność na ewentualne deformacje podłoża.' },
+        ],
+      },
+      {
+        question: 'Czy oferta obejmuje kompleksową budowę domu – od stanu zero, przez stan surowy zamknięty, aż po wykończenie pod klucz?',
+        content: [
+          { type: 'paragraph', value: 'Jak najbardziej, specjalizujemy się w generalnym wykonawstwie, przejmując pełną odpowiedzialność za proces inwestycyjny. W CoreLTB realizujemy budowy kompleksowo: od robót ziemnych i fundamentów, przez stan surowy, aż po finalne wykończenie pod klucz. Dzięki temu zyskują Państwo gwarancję ciągłości prac oraz spójności technologicznej na każdym etapie powstawania domu.' },
+        ],
+      },
+      {
+        question: 'Jaki projekt domu wychodzi najtaniej w budowie i co generuje największe koszty podczas inwestycji?',
+        content: [
+          { type: 'paragraph', value: 'Najtańszy w realizacji jest dom o prostej, zwartej bryle na planie prostokąta, przekryty dachem dwuspadowym. Rezygnacja z piwnicy, balkonów i lukarn pozwala na znaczne oszczędności. W strukturze wydatków dominującą pozycję zajmują roboty konstrukcyjne stanu surowego, natomiast standard wykończenia wnętrz jest elementem, który najłatwiej może przekroczyć założony budżet.' },
+        ],
+      },
+      {
+        question: 'W jakich dzielnicach Rybnika budujecie domy i czy pomagacie w ocenie potencjału inwestycyjnego działki?',
+        content: [
+          { type: 'paragraph', value: 'Realizujemy inwestycje we wszystkich dzielnicach Rybnika, zarówno w centrum, jak i w zielonych lokalizacjach podmiejskich. Weryfikacja gruntu to nasz standard – specjaliści CoreLTB analizują warunki geotechniczne oraz zapisy MPZP, precyzyjnie określając możliwości zabudowy. Taka wstępna ekspertyza pozwala uniknąć ukrytych kosztów i potwierdza opłacalność przedsięwzięcia.' },
+        ],
+      },
+    ],
+  },
+
+  // Rybnik has additional sections: energooszczednosc + formalnosci
+  additionalSections: [
+    {
+      id: 'etapy-realizacji',
+      header: {
+        label: 'ETAPY REALIZACJI',
+        title: 'Co oferujemy?',
+        description: 'Jako inwestorzy zastępczy i generalny wykonawca, nie dzielimy budowy na przypadkowe zlecenia. Realizujemy proces systemowo, co pozwala nam utrzymać ciągłość prac i płynność dostaw materiałów.',
+        align: 'left',
+        theme: 'light',
+      },
+      cards: [
+        {
+          icon: 'building',
+          title: 'Stan Surowy Otwarty (SSO)',
+          description: 'To etap, w którym budynek uzyskuje swoją formę konstrukcyjną. W warunkach rybnickich kluczowa jest precyzja wykonania elementów żelbetowych.',
+          details: [
+            'Realizujemy roboty ziemne i fundamentowe (na terenach szkód górniczych standardem jest **płyta fundamentowa** 120-150 kg stali/m³), murujemy ściany z certyfikowanych materiałów, wylewamy stropy monolityczne oraz montujemy więźbę dachową (drewno klasy C24).',
+          ],
+        },
+        {
+          icon: 'hardHat',
+          title: 'Stan Deweloperski',
+          description: 'Najczęściej wybierany zakres współpracy. Budynek jest z zewnątrz gotowy, a w środku przygotowany do prac wykończeniowych.',
+          details: [
+            'Montujemy okna 3-szybowe (Uw <0,9 W/m²K) w ciepłym montażu, rozprowadzamy instalacje (elektryka, Smart Home/KNX, wod-kan, ogrzewanie podłogowe), wykonujemy tynki i wylewki oraz ocieplamy budynek styropianem grafitowym 20 cm z tynkiem silikonowym odpornym na smog.',
+          ],
+        },
+        {
+          icon: 'keyRound',
+          title: 'Budowa pod klucz',
+          description: 'Dla inwestorów ceniących czas, oferujemy pełne wykończenie. Przejmujemy koordynację glazurników, parkieciarzy i malarzy.',
+          details: [
+            'Wykonujemy kompleksowe wykończenie łazienek, układamy podłogi (panele/deski/płytki), montujemy drzwi wewnętrzne, malujemy ściany farbami lateksowymi i przekazujemy klucze do wysprzątanego domu gotowego do wniesienia mebli.',
+          ],
+        },
+      ],
+      image: {
+        src: '/images/local/rybnik/etapy-budowy.webp',
+        alt: 'Etapy budowy domu w Rybniku - od stanu surowego do wykończenia pod klucz',
+      },
+    },
+    {
+      id: 'energooszczednosc',
+      header: {
+        label: 'ENERGOOSZCZĘDNOŚĆ',
+        title: 'Nowoczesne rozwiązania dla Rybnika',
+        description: 'Rybnik, mimo wielu działań antysmogowych, wciąż boryka się z problemem jakości powietrza w sezonie grzewczym. Budując nowy dom, musisz myśleć nie tylko o cieple, ale o jakości powietrza, którym oddychasz wewnątrz.',
+        align: 'left',
+        theme: 'light',
+      },
+      cards: [
+        {
+          icon: 'wind',
+          title: 'Rekuperacja – dlaczego warto?',
+          description: 'Wentylacja grawitacyjna w Rybniku to wpuszczanie smogu do domu. Wentylacja mechaniczna z odzyskiem ciepła filtruje powietrze nawiewane, zatrzymując ponad **80-90% pyłów zawieszonych PM10 i PM2.5**.',
+          details: [
+            'Rekuperator odzyskuje do 90% ciepła z powietrza wywiewanego, co realnie obniża zapotrzebowanie na ogrzewanie o **15-20 kWh/m²/rok**. Instalację kanałów wentylacyjnych najlepiej zaplanować przed wylaniem stropów.',
+          ],
+        },
+        {
+          icon: 'zap',
+          title: 'Pompy ciepła i nowoczesne ogrzewanie',
+          description: 'Odchodzimy całkowicie od paliw stałych. W naszych realizacjach standardem są powietrzne pompy ciepła lub gruntowe pompy ciepła (z odwiertami pionowymi).',
+          details: [
+            'Pompa ciepła działa najefektywniej przy zasilaniu rzędu 30-35°C. Dlatego w całym domu stosujemy ogrzewanie płaszczyznowe (podłogówka), rezygnując z grzejników. Dach projektujemy tak, aby zoptymalizować połać południową pod panele PV. Połączenie pompy ciepła z instalacją 6-10 kWp pozwala zredukować koszty ogrzewania i CWU do poziomu **kilkuset złotych rocznie**.',
+          ],
+        },
+        {
+          icon: 'leafIcon',
+          title: 'Standard WT 2021 i ekologia',
+          description: 'Nowoczesne budownictwo (WT 2021) to nie tylko wymóg prawny, to kwestia zdrowia i niskich rachunków.',
+          details: [
+            'Stosujemy ocieplenie styropianem grafitowym min. 20 cm (lambda 0,031-0,033), okna 3-szybowe (Uw <0,9 W/m²K) oraz szczelną obudowę budynku. Dzięki temu Twój dom będzie ciepły zimą, chłodny latem i tani w eksploatacji przez całe życie.',
+          ],
+        },
+      ],
+    },
+    {
+      id: 'formalnosci',
+      header: {
+        label: 'FORMALNOŚCI',
+        title: 'Jak pomagamy w procedurach?',
+        description: 'Budowa domu to w 30% biurokracja, a w 70% inżynieria. Wielu inwestorów traci miesiące na walkę z urzędami. My przejmujemy ten ciężar.',
+        align: 'left',
+        theme: 'light',
+      },
+      cards: [
+        {
+          icon: 'fileText',
+          title: 'Adaptacja projektu i pozwolenie na budowę',
+          description: 'Kupując gotowy projekt, otrzymujesz dokumentację uniwersalną. Aby stała się ona projektem budowlanym, musi zostać zaadaptowana przez lokalnego architekta.',
+          details: [
+            'Występujemy do odpowiedniej kopalni (PGG/JSW) o opinię geologiczną. Nasz konstruktor przelicza obciążenia i projektuje wzmocnienia fundamentów adekwatne do kategorii szkód. Koordynujemy pracę geodety. Kompletujemy dokumentację i składamy wniosek o pozwolenie na budowę, monitorując jego status aż do uprawomocnienia. Procedury w Urzędzie Miasta Rybnik są nam dobrze znane.',
+          ],
+        },
+        {
+          icon: 'clipboard',
+          title: 'Kierownik budowy i dziennik budowy',
+          description: 'Zgodnie z Prawem Budowlanym, każda budowa musi mieć kierownika. U nas Kierownik Budowy to nie figurant, który pojawia się tylko po wpis do dziennika.',
+          details: [
+            'To inżynier obecny przy każdym kluczowym etapie: odbiór zbrojenia fundamentów (przed zalaniem betonem), kontrola trzpieni i wieńców, sprawdzenie więźby dachowej, nadzór nad izolacjami przeciwwilgociowymi. Prowadzimy rzetelny Dziennik Budowy, dokumentując postępy prac, użyte materiały (klasy betonu, certyfikaty stali) oraz warunki atmosferyczne.',
+          ],
+        },
+        {
+          icon: 'checkCircle',
+          title: 'Odbiór końcowy i przekazanie',
+          description: 'Po zakończeniu prac organizujemy odbiór końcowy z Twoim udziałem. Sprawdzamy każdy detal, testujemy wszystkie instalacje.',
+          details: [
+            'Przekazujemy komplet dokumentacji powykonawczej, gwarancji i instrukcji obsługi. Dzięki temu masz pełną kontrolę nad inwestycją i spokój na lata.',
+          ],
+        },
+      ],
+    },
+  ],
+
+  nearbyCities: [
+    { name: 'Wodzisław Śląski', slug: 'wodzislaw-slaski', context: '20 km na południe' },
+    { name: 'Gliwice', slug: 'gliwice', context: '40 km na wschód' },
+    { name: 'Mikołów', slug: 'mikolow', context: '35 km na wschód' },
+  ],
+
+  areaServed: [
+    'Rybnik', 'Orzepowice', 'Golejów', 'Rybnicka Kuźnia', 'Popielów',
+    'Radziejów', 'Chwałowice', 'Boguszowice', 'Zamysłów', 'Zebrzydowice',
+    'Niewiadom', 'Niedobczyce', 'Jejkowice', 'Lyski', 'Gaszowice', 'Świerklany',
+  ],
+  geoCoordinates: { latitude: '50.0972', longitude: '18.5463' },
+};
