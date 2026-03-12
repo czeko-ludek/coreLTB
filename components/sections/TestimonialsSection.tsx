@@ -141,12 +141,10 @@ export function TestimonialsSection({ header, testimonials }: TestimonialsSectio
           <SectionHeader {...header} align="center" theme="light" />
         </div>
 
-        {/* Masonry Grid */}
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+        {/* Grid 2×2 (mobile 1 col, tablet+ 2 col) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {testimonials.map((testimonial, index) => (
-            <div key={`${testimonial.author.name}-${index}`} className="break-inside-avoid">
-              <TestimonialCard {...testimonial} index={index} />
-            </div>
+            <TestimonialCard key={`${testimonial.author.name}-${index}`} {...testimonial} index={index} />
           ))}
         </div>
       </div>

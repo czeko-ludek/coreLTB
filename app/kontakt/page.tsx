@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { BentoContactSection, ContactInfo } from "@/components/sections";
-import { PageHeader, Breadcrumbs } from "@/components/shared";
+import { Breadcrumbs } from "@/components/shared";
 
 export const metadata: Metadata = {
 	title: "Kontakt - CoreLTB Builders",
@@ -9,16 +9,6 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-	const pageHeaderData = {
-		title: "Kontakt",
-		watermarkText: "KONTAKT",
-		backgroundImage: "/images/uslugi.webp",
-		breadcrumbs: [
-			{ label: "Strona Główna", href: "/" },
-			{ label: "Kontakt", href: "/kontakt" },
-		],
-	};
-
 	const contactInfo: ContactInfo = {
 		phone: "+48 573 568 300",
 		email: "biuro@thebuilders.pl",
@@ -27,7 +17,6 @@ export default function ContactPage() {
 
 	return (
 		<main>
-			<PageHeader {...pageHeaderData} />
 			<Breadcrumbs
 				items={[
 					{ label: "Strona główna", href: "/" },
