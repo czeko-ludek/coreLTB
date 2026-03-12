@@ -1,0 +1,23 @@
+# ============================================
+# Cloudflare Pages — Security & Cache Headers
+# ============================================
+
+# Security headers dla wszystkich stron
+/*
+  X-DNS-Prefetch-Control: on
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Cache dla obrazów (1 rok)
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache dla statycznych assetów Next.js (1 rok)
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache dla fontów (1 rok)
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *

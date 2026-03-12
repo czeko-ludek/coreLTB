@@ -4,6 +4,9 @@ import { allProjects } from '@/data/projects';
 import { getAllLocalPageSlugs } from '@/data/local';
 import { companyData } from '@/data/company-data';
 
+// Wymagane dla output: 'export' (static HTML)
+export const dynamic = 'force-static';
+
 const BASE_URL = companyData.url;
 
 export default function sitemap(): MetadataRoute.Sitemap {
