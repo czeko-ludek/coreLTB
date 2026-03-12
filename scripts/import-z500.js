@@ -375,7 +375,11 @@ function classifyImages(images) {
 
 /**
  * Build rooms array for a given storey from PageData.project.rooms.
- * Each room: { id, room: { name }, usable_area, storey }
+ * Each room: { id, room: { name, summed }, usable_area, net_area, storey }
+ *
+ * Area priority: usable_area when > 0, otherwise net_area (fallback for
+ * garages, utility rooms and stairs where usable_area = 0).
+ * Rooms with 0 area after fallback are excluded from the list.
  */
 function buildRooms(rooms, storey) {
   if (!Array.isArray(rooms)) return [];
@@ -383,10 +387,14 @@ function buildRooms(rooms, storey) {
   return rooms
     .filter(r => r.storey === storey)
     .sort((a, b) => (a.no || 0) - (b.no || 0))
-    .map(r => ({
-      name: r.room?.name || `Pomieszczenie ${r.no}`,
-      area: `${r.usable_area} m\u00B2`,
-    }));
+    .map(r => {
+      const area = (r.usable_area && r.usable_area > 0) ? r.usable_area : (r.net_area || 0);
+      return {
+        name: r.room?.name || `Pomieszczenie ${r.no}`,
+        area: `${area} m\u00B2`,
+      };
+    })
+    .filter(r => !r.area.startsWith('0 '));
 }
 
 /**
