@@ -1,0 +1,24 @@
+{
+  "actions": [
+    {
+      "id": "001",
+      "date": "2026-03-12",
+      "type": "setup",
+      "description": "Podłączenie domeny do GSC, konfiguracja SEO Agenta",
+      "pages": ["*"],
+      "keywords": [],
+      "status": "active",
+      "notes": "Inicjalna konfiguracja — baseline"
+    }
+  ],
+  "_schema": {
+    "id": "Unikalny numer zmiany",
+    "date": "YYYY-MM-DD",
+    "type": "setup | content | technical | schema | links | speed | redirect",
+    "description": "Opis zmiany",
+    "pages": "Dotknięte URLe (lub ['*'] = cały serwis)",
+    "keywords": "Targetowane frazy (opcjonalne)",
+    "status": "active | reverted | superseded",
+    "notes": "Dodatkowe komentarze"
+  }
+}

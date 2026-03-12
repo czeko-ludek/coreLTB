@@ -1,0 +1,54 @@
+{
+  "site": {
+    "domain": "coreltb.pl",
+    "siteUrl": "sc-domain:coreltb.pl",
+    "name": "CoreLTB Builders"
+  },
+  "ga4": {
+    "propertyId": "",
+    "comment": "Format: properties/XXXXXXXX — uzupełnij po podłączeniu GA4"
+  },
+  "gsc": {
+    "siteUrl": "sc-domain:coreltb.pl",
+    "comment": "Zmień na https://coreltb.pl/ jeśli weryfikacja przez URL prefix"
+  },
+  "defaults": {
+    "days": 28,
+    "compareDays": 28,
+    "rowLimit": 50,
+    "minImpressions": 10
+  },
+  "keywordGroups": {
+    "budowa-domow": ["budowa dom", "budowa domu", "budujemy domy", "firma budowlana"],
+    "projekty-domow": ["projekt domu", "projekty domów", "dom z500", "projekt z500"],
+    "pod-klucz": ["dom pod klucz", "budowa pod klucz", "pod klucz"],
+    "sso": ["stan surowy otwarty", "sso", "stan surowy"],
+    "deweloperski": ["stan deweloperski", "wykończenie deweloperskie"],
+    "slask": ["budowa domu śląsk", "śląsk", "silesia"],
+    "rybnik": ["rybnik", "budowa domu rybnik", "firma budowlana rybnik"],
+    "katowice": ["katowice", "budowa domu katowice"],
+    "tychy": ["tychy", "budowa domu tychy"],
+    "wodzislaw": ["wodzisław śląski", "wodzisław", "budowa domu wodzisław"],
+    "gliwice": ["gliwice", "budowa domu gliwice"]
+  },
+  "thresholds": {
+    "positionDropAlert": 5,
+    "ctrDropAlertPct": 20,
+    "impressionDropAlertPct": 30,
+    "clickDropAlertPct": 25,
+    "minClicksForAlert": 5,
+    "newKeywordMinImpressions": 5,
+    "lostKeywordMinPrevImpressions": 10,
+    "opportunityMinImpressions": 100,
+    "opportunityMaxCtr": 0.03
+  },
+  "correlation": {
+    "minDaysForEffect": 3,
+    "daysForConclusion": 7,
+    "significantChangePct": 20
+  },
+  "output": {
+    "dir": "./reports",
+    "latestFile": "./reports/latest-report.md"
+  }
+}

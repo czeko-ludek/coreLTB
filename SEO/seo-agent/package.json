@@ -1,0 +1,18 @@
+{
+  "name": "elever-seo-agent",
+  "version": "1.0.0",
+  "description": "SEO Agent - GSC + GA4 analytics for Elever (CoreLTB)",
+  "main": "agent.js",
+  "scripts": {
+    "report": "node agent.js",
+    "report:7d": "node agent.js --days 7",
+    "report:28d": "node agent.js --days 28",
+    "report:90d": "node agent.js --days 90",
+    "actions": "node agent.js --actions",
+    "setup": "node setup.js"
+  },
+  "dependencies": {
+    "googleapis": "^144.0.0",
+    "dotenv": "^16.4.7"
+  }
+}

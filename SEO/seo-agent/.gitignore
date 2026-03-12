@@ -1,0 +1,9 @@
+# Credentials — NIGDY nie commituj
+credentials/
+*.json.bak
+
+# Raporty (generowane automatycznie)
+reports/
+
+# Node
+node_modules/
