@@ -29,6 +29,12 @@ export default function Home() {
 			{ src: "/images/hero/slide-3.webp", alt: "Realizacja CoreLTB Builders" },
 			{ src: "/images/hero/slide-4.webp", alt: "Wykończenie wnętrz pod klucz" },
 		],
+		mobileImages: [
+			{ src: "/images/hero/slide-1-mobile.webp", alt: "Budowa domu na płycie fundamentowej Śląsk" },
+			{ src: "/images/hero/slide-2-mobile.webp", alt: "Nowoczesny dom jednorodzinny realizacja Rybnik" },
+			{ src: "/images/hero/slide-3-mobile.webp", alt: "Realizacja CoreLTB Builders" },
+			{ src: "/images/hero/slide-4-mobile.webp", alt: "Wykończenie wnętrz pod klucz" },
+		],
 		primaryButton: { text: "Poznaj ofertę", href: "/oferta" },
 	};
 
@@ -170,28 +176,28 @@ export default function Home() {
 			{
 				name: "HUB ROW (Baza Wodzisław)",
 				cities: [
-					{ label: "Wodzisław Śląski", href: "/obszar-dzialania/budowa-domow-wodzislaw-slaski" },
-					{ label: "Rybnik", href: "/obszar-dzialania/budowa-domow-rybnik" },
-					{ label: "Żory", href: "/obszar-dzialania/budowa-domow-zory" },
-					{ label: "Jastrzębie-Zdrój", href: "/obszar-dzialania/budowa-domow-jastrzebie-zdroj" },
+					{ label: "Wodzisław Śląski", href: "/obszar-dzialania/wodzislaw-slaski" },
+					{ label: "Rybnik", href: "/obszar-dzialania/rybnik" },
+					{ label: "Żory" },
+					{ label: "Jastrzębie-Zdrój" },
 				],
 			},
 			{
 				name: "HUB AGLOMERACJA (Baza Jaworzno)",
 				cities: [
-					{ label: "Jaworzno (HQ)", href: "/obszar-dzialania/budowa-domow-jaworzno" },
-					{ label: "Katowice", href: "/obszar-dzialania/budowa-domow-katowice" },
-					{ label: "Gliwice", href: "/obszar-dzialania/budowa-domow-gliwice" },
-					{ label: "Tychy", href: "/obszar-dzialania/budowa-domow-tychy" },
-					{ label: "Mikołów", href: "/obszar-dzialania/budowa-domow-mikolow" },
+					{ label: "Jaworzno (HQ)", href: "/obszar-dzialania/jaworzno" },
+					{ label: "Katowice", href: "/obszar-dzialania/katowice" },
+					{ label: "Gliwice", href: "/obszar-dzialania/gliwice" },
+					{ label: "Tychy", href: "/obszar-dzialania/tychy" },
+					{ label: "Mikołów", href: "/obszar-dzialania/mikolow" },
 				],
 			},
 			{
 				name: "HUB MAŁOPOLSKA",
 				cities: [
-					{ label: "Chrzanów", href: "/obszar-dzialania/budowa-domow-chrzanow" },
-					{ label: "Kraków", href: "/obszar-dzialania/budowa-domow-krakow" },
-					{ label: "Oświęcim", href: "/obszar-dzialania/budowa-domow-oswiecim" },
+					{ label: "Chrzanów" },
+					{ label: "Kraków" },
+					{ label: "Oświęcim" },
 				],
 			},
 		],
@@ -211,6 +217,7 @@ export default function Home() {
 			price: project.price,
 			surfaceArea: project.surfaceArea,
 			technology: project.technology,
+			source: project.source,
 		})),
 	};
 

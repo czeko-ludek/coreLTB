@@ -12,6 +12,7 @@ export interface HeroSectionProps {
   subtitle: string;
   primaryButton: { text: string; href: string };
   images: Array<{ src: string; alt: string }>;
+  mobileImages?: Array<{ src: string; alt: string }>;
   // Backward compatibility - single image converted to array
   backgroundImage?: string;
 }
@@ -22,6 +23,7 @@ export function HeroSection({
   subtitle,
   primaryButton,
   images: imagesProp,
+  mobileImages: mobileImagesProp,
   backgroundImage,
 }: HeroSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -32,6 +34,9 @@ export function HeroSection({
     : backgroundImage
       ? [{ src: backgroundImage, alt: 'Hero background' }]
       : [{ src: '/slide-1.webp', alt: 'Hero background' }];
+
+  // Mobile images — fallback to desktop images
+  const mobileImages = mobileImagesProp?.length ? mobileImagesProp : images;
 
   // Auto-advance every 4 seconds (synced with Ken Burns animation)
   useEffect(() => {
@@ -49,7 +54,7 @@ export function HeroSection({
       <div className="md:hidden -mt-[96px]">
         {/* Obraz - full-width, wjeżdża pod sticky header (88px = header 72px + py-2 padding 16px) */}
         <div className="relative h-[50vh] overflow-hidden">
-          {images.map((image, index) => (
+          {mobileImages.map((image, index) => (
             <motion.div
               key={`m-${index}-${currentIndex === index ? 'active' : 'inactive'}`}
               className="absolute inset-0"
@@ -85,8 +90,6 @@ export function HeroSection({
             className="absolute inset-0 z-[2] pointer-events-none"
             style={{ boxShadow: 'inset 0 0 60px 20px rgba(0,0,0,0.45)' }}
           />
-          {/* Bottom fade into beige */}
-          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background-beige to-transparent z-[3]" />
         </div>
 
         {/* Tekst + CTA pod obrazem */}
