@@ -81,7 +81,7 @@ export function ProjectModificationCTA() {
                 ].map((feature, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                      <Icon name="check" className="text-primary" size="xs" />
+                      <Icon name="check" className="text-primary" size="sm" />
                     </div>
                     <span className="text-zinc-300 text-sm md:text-base">
                       {feature}
