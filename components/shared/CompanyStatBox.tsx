@@ -31,7 +31,7 @@ export function CompanyStatBox({ stats }: CompanyStatBoxProps) {
           <div
             key={index}
             className={clsx(
-              'p-4 md:p-6 flex-1',
+              'p-3 md:p-6 flex-1',
               {
                 'bg-white': stat.variant === 'dark',
                 'bg-primary': stat.variant === 'primary',
@@ -41,7 +41,7 @@ export function CompanyStatBox({ stats }: CompanyStatBoxProps) {
             <div className="space-y-1 md:space-y-2">
               <div
                 className={clsx(
-                  'text-3xl md:text-5xl lg:text-6xl font-bold leading-tight',
+                  'text-xl md:text-5xl lg:text-6xl font-bold leading-tight',
                   {
                     'text-text-primary': stat.variant === 'dark',
                     'text-white': stat.variant === 'primary',

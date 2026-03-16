@@ -35,7 +35,7 @@ const headerData = {
     { label: "Blog", href: "/blog" },
     { label: "Kontakt", href: "/kontakt" },
   ],
-  searchEnabled: true,
+  searchEnabled: false,
   ctaButton: { text: "Wycena", href: "/kontakt" },
   megaMenuItems: [
     {

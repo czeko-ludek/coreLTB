@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { clsx } from 'clsx';
 import { TimelineNav, TimelineNavItem, TimelineStepNoLine, SectionHeader, SectionHeaderProps } from '@/components/shared';
 import { IconName } from '@/components/ui';
 
@@ -65,21 +66,21 @@ export function CooperationTimelineSectionNoLine({
   };
 
   return (
-    <section className="py-16 lg:py-24 relative overflow-hidden bg-background-beige">
-      <div className="container mx-auto px-4">
+    <section className="py-10 md:py-16 lg:py-24 relative overflow-hidden bg-background-beige">
+      <div className="md:container mx-auto px-0 md:px-4">
         {/* Header with SectionHeader */}
-        <div ref={headlineRef} className={headlineInView ? 'animate-fade-in-up' : 'opacity-0'}
+        <div ref={headlineRef} className={clsx('px-4 md:px-0', headlineInView ? 'animate-fade-in-up' : 'opacity-0')}
             style={{ animationDelay: '0.1s' }}>
           <SectionHeader {...header} align="center" theme="light" />
         </div>
 
         {/* Navigation */}
-        <div ref={navRef} className={navInView ? 'animate-fade-in-up' : 'opacity-0'} style={{ animationDelay: '0.3s' }}>
+        <div ref={navRef} className={clsx('px-4 md:px-0', navInView ? 'animate-fade-in-up' : 'opacity-0')} style={{ animationDelay: '0.3s' }}>
           <TimelineNav items={navItems} activeStep={activeStep} />
         </div>
 
-        {/* Timeline Content - Zigzag Layout */}
-        <div className="mt-12 lg:mt-16 space-y-8 lg:space-y-12">
+        {/* Timeline Content - Zigzag Layout (kafelki edge-to-edge na mobile) */}
+        <div className="mt-8 md:mt-12 lg:mt-16 space-y-6 md:space-y-8 lg:space-y-12">
           {steps.map((step, index) => (
             <TimelineStepNoLine
               key={step.id}

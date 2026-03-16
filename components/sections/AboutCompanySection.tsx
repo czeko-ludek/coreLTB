@@ -51,24 +51,31 @@ export function AboutCompanySection({
     <section ref={sectionRef} className="py-20 bg-surface-light">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          {/* Left: Image with Stats Overlay */}
-          <div className={`relative w-full aspect-square rounded-xl overflow-hidden lg:max-w-[590px] mx-auto lg:mx-0 shadow-2xl ring-1 ring-black/5 animate-curtain-reveal ${isVisible ? 'curtain-animate' : ''}`}>
-            {/* Background Image */}
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              priority
-              fetchPriority="high"
-            />
+          {/* Left: Image + Stats */}
+          <div>
+            <div className={`relative w-full aspect-square rounded-2xl overflow-hidden lg:max-w-[590px] mx-auto lg:mx-0 shadow-2xl ring-1 ring-black/5 animate-curtain-reveal ${isVisible ? 'curtain-animate' : ''}`}>
+              {/* Background Image */}
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+                fetchPriority="high"
+              />
 
-            {/* Subtle gradient overlay for better box visibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+              {/* Subtle gradient overlay for better box visibility */}
+              <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
 
-            {/* Stats Box Overlay - positioned at bottom with spacing */}
-            <div className="absolute bottom-6 left-6 right-6 z-10">
+              {/* Stats Box Overlay - desktop only */}
+              <div className="hidden md:block absolute bottom-6 left-6 right-6 z-10">
+                <CompanyStatBox {...stats} />
+              </div>
+            </div>
+
+            {/* Stats pod obrazem — mobile only */}
+            <div className="md:hidden mt-4">
               <CompanyStatBox {...stats} />
             </div>
           </div>

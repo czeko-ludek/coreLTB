@@ -33,7 +33,7 @@ export function SectionHeader({
       
       <h2
         className={clsx(
-          'text-h2 font-bold',
+          'text-xl md:text-h2 font-bold',
           {
             'text-white': theme === 'dark',
             'text-text-primary': theme === 'light',
@@ -42,9 +42,9 @@ export function SectionHeader({
       >
         {title}
       </h2>
-      
+
       {description && (
-        <p className="text-body-lg text-text-secondary">
+        <p className="text-sm md:text-body-lg text-text-secondary">
           {description}
         </p>
       )}

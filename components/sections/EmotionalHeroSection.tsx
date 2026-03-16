@@ -29,16 +29,17 @@ export const EmotionalHeroSection: React.FC<EmotionalHeroSectionProps> = ({
   ctaBoxButtons,
 }) => {
   return (
-    <section id="emotional-hero" className="py-6 md:py-8 bg-background-beige">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8">
+    <section id="emotional-hero" className="py-0 md:py-6 bg-white md:bg-background-beige">
+      <div className="md:container mx-auto px-0 md:px-6 lg:px-8">
         <div
-          className="bg-white rounded-xl shadow-lg p-8 md:p-12 lg:p-16 animate-fade-in-up"
+          className="bg-white md:rounded-xl md:shadow-lg px-4 py-5 md:p-9 lg:p-12 animate-fade-in-up"
           style={{ animationDelay: '0.3s' }}
         >
-          {/* Grid layout: tekst po lewej, CTA Box po prawej */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 items-start">
-            {/* Lewa kolumna - tekst */}
-            <div>
+          {/* Grid layout: tekst po lewej, CTA Box po prawej (desktop) */}
+          {/* Mobile: CTA box PIERWSZY (order-first), tekst DRUGI */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-5 lg:gap-9 items-start">
+            {/* Lewa kolumna - tekst (na mobile: order-2, pod CTA) */}
+            <div className="order-2 lg:order-1">
               {/* Label (złoty akcent) */}
               <div className="animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
                 <SectionLabel className="mb-4">{label}</SectionLabel>
@@ -46,7 +47,7 @@ export const EmotionalHeroSection: React.FC<EmotionalHeroSectionProps> = ({
 
               {/* Headline (H2 - główny nagłówek sekcji, H1 jest w PageHeader) */}
               <h2
-                className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-4 md:mb-6 leading-tight animate-fade-in-up"
+                className="text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary mb-3 md:mb-4 leading-tight animate-fade-in-up"
                 style={{ animationDelay: '0.5s' }}
               >
                 {Array.isArray(headline) ? (
@@ -63,7 +64,7 @@ export const EmotionalHeroSection: React.FC<EmotionalHeroSectionProps> = ({
 
               {/* Subtitle */}
               <p
-                className="text-lg md:text-xl text-text-secondary leading-relaxed animate-fade-in-up"
+                className="text-base md:text-lg text-text-secondary leading-relaxed animate-fade-in-up"
                 style={{ animationDelay: '0.6s' }}
               >
                 {subtitle}
@@ -71,7 +72,7 @@ export const EmotionalHeroSection: React.FC<EmotionalHeroSectionProps> = ({
 
               {/* Benefits (opcjonalne) - 2-3 bullet points */}
               {benefits && benefits.length > 0 && (
-                <ul className="mt-6 md:mt-8 space-y-3">
+                <ul className="mt-4 md:mt-6 space-y-2.5">
                   {benefits.map((benefit, index) => (
                     <li
                       key={index}
@@ -92,14 +93,14 @@ export const EmotionalHeroSection: React.FC<EmotionalHeroSectionProps> = ({
               )}
             </div>
 
-            {/* Prawa kolumna - CTA Box z fadeInRight */}
+            {/* Prawa kolumna - CTA Box (na mobile: order-1, PIERWSZY widoczny) */}
             <div
-              className="w-full lg:w-auto lg:min-w-[380px] lg:max-w-[420px] animate-fade-in-right"
+              className="order-1 lg:order-2 w-full lg:w-auto lg:min-w-[456px] lg:max-w-[516px] animate-fade-in-right"
               style={{ animationDelay: '0.5s' }}
             >
-              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-6 md:p-7 border-2 border-primary/20 h-full flex flex-col">
+              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-5 md:p-6 border-2 border-primary/20 h-full flex flex-col">
                 {/* Tytuł */}
-                <h3 className="text-lg md:text-xl font-bold text-text-primary mb-4 text-center">
+                <h3 className="text-base md:text-lg font-bold text-text-primary mb-3 text-center">
                   {ctaBoxTitle}
                 </h3>
 
@@ -107,7 +108,7 @@ export const EmotionalHeroSection: React.FC<EmotionalHeroSectionProps> = ({
                 <p className="text-sm md:text-base font-semibold text-text-primary mb-3">
                   Podczas konsultacji:
                 </p>
-                <ul className="space-y-2.5 mb-4 flex-grow">
+                <ul className="space-y-2 mb-3 flex-grow">
                   {ctaBoxBenefits.map((benefit, index) => (
                     <li key={index} className="flex items-start gap-2.5">
                       <Icon
@@ -123,7 +124,7 @@ export const EmotionalHeroSection: React.FC<EmotionalHeroSectionProps> = ({
                 </ul>
 
                 {/* Subtext */}
-                <p className="text-xs md:text-sm text-text-secondary text-center mb-4 italic">
+                <p className="text-xs md:text-sm text-text-secondary text-center mb-3 italic">
                   {ctaBoxSubtext}
                 </p>
 

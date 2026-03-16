@@ -143,20 +143,21 @@ export function ServiceShowcaseSection({ header, services }: ServiceShowcaseSect
                   index === activeIndex && animationPhase === 'enter' ? 'service-enter-active' : ''
                 }`}
               >
-                <div className="p-8 lg:p-12 flex flex-col justify-center h-full" style={{ minHeight: '500px' }}>
-                  <div className="space-y-6">
-                    <h2 className="text-4xl lg:text-5xl font-bold leading-tight text-gray-900">
+                <div className="p-5 md:p-8 lg:p-12 flex flex-col justify-center h-full" style={{ minHeight: 'auto' }}>
+                  <div className="space-y-3 md:space-y-6">
+                    <h2 className="text-lg md:text-4xl lg:text-5xl font-bold leading-tight text-gray-900">
                       {service.title}
                     </h2>
-                    <p className="text-lg text-gray-700 leading-relaxed">
+                    <p className="text-sm md:text-lg text-gray-700 leading-relaxed">
                       {service.description}
                     </p>
-                    <div className="pt-4">
+                    <div className="pt-2 md:pt-4">
                       <Button
                         variant="outline"
-                        size="lg"
+                        size="sm"
                         href={service.href}
                         rightIcon={<Icon name="arrowRight" size="sm" />}
+                        className="md:!text-base md:!px-6 md:!py-3"
                       >
                         Zobacz Szczegóły
                       </Button>
@@ -167,12 +168,11 @@ export function ServiceShowcaseSection({ header, services }: ServiceShowcaseSect
 
               {/* Right: Image Box */}
               <div
-                className={`relative rounded-2xl overflow-hidden shadow-2xl transition-all ${
+                className={`relative aspect-square md:aspect-auto md:min-h-[500px] rounded-2xl overflow-hidden shadow-2xl transition-all ${
                   index === activeIndex && animationPhase === 'exit' ? 'service-exit-active' : ''
                 } ${
                   index === activeIndex && animationPhase === 'enter' ? 'service-enter-active' : ''
                 }`}
-                style={{ minHeight: '500px' }}
               >
                 <Image
                   src={service.image}

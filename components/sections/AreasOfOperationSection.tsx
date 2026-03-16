@@ -143,14 +143,14 @@ export const AreasOfOperationSection: React.FC<AreasOfOperationSectionProps> = (
 		: null;
 
 	return (
-		<section id={id} className="bg-background-beige py-16 sm:py-20">
+		<section id={id} className="bg-background-beige py-8 md:py-16 sm:py-20">
 			<div className="mx-auto max-w-[83rem] px-4 sm:px-6 lg:px-8">
 
 				{/* ═══════════════════════════════════════
 				    SHARED: Section Header
 				   ═══════════════════════════════════════ */}
 				<motion.div
-					className="mb-12"
+					className="mb-6 md:mb-12"
 					variants={fadeInUp}
 					initial="hidden"
 					whileInView="visible"
@@ -308,54 +308,61 @@ export const AreasOfOperationSection: React.FC<AreasOfOperationSectionProps> = (
 				{/* ═══════════════════════════════════════
 				    MOBILE (<lg): Hub Cards with city links
 				   ═══════════════════════════════════════ */}
-				<div ref={mobileRef} className="lg:hidden">
-					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-						{hubs.map((hub, index) => (
-							<article
-								key={index}
-								className={clsx(
-									'bg-white rounded-2xl p-6 shadow-sm border border-border-light',
-									mobileInView ? 'animate-fade-in-up' : 'opacity-0',
-								)}
-								style={{ animationDelay: `${0.15 + index * 0.1}s` }}
-							>
-								{/* Hub icon + name */}
-								<div className="flex items-center gap-3 mb-4">
-									<div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-										<Icon
-											name={hubIcons[index % hubIcons.length]}
-											className="text-primary"
-											size="md"
-										/>
-									</div>
-									<h3 className="text-base font-semibold text-text-primary leading-tight">
-										{hub.name}
-									</h3>
+				<div ref={mobileRef} className="lg:hidden space-y-5">
+					{hubs.map((hub, index) => (
+						<div
+							key={index}
+							className={clsx(
+								mobileInView ? 'animate-fade-in-up' : 'opacity-0',
+							)}
+							style={{ animationDelay: `${0.15 + index * 0.1}s` }}
+						>
+							{/* Hub name */}
+							<div className="flex items-center gap-2 mb-3">
+								<div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+									<Icon
+										name={hubIcons[index % hubIcons.length]}
+										className="text-primary"
+										size="sm"
+									/>
 								</div>
+								<h3 className="text-sm font-semibold text-text-primary">
+									{hub.name}
+								</h3>
+							</div>
 
-								{/* Cities list */}
-								<ul className="space-y-1.5">
-									{hub.cities.map((city, cityIndex) => (
-										<li key={cityIndex}>
+							{/* Cities as button-style cards */}
+							<div className="grid grid-cols-2 gap-2">
+								{hub.cities.map((city, cityIndex) => {
+									const classes = "flex items-center gap-2.5 rounded-lg border border-gray-200 bg-white px-3 py-2.5 transition-all";
+									if (city.href) {
+										return (
 											<Link
+												key={cityIndex}
 												href={city.href}
-												className="group flex items-center gap-2 text-sm text-gray-600 hover:text-primary transition-colors"
+												className={`${classes} hover:border-primary hover:shadow-sm`}
 											>
-												<span className="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:bg-primary transition-colors shrink-0" />
-												{city.label}
+												<Icon name="mapPin" className="h-4 w-4 text-primary shrink-0" />
+												<span className="text-xs font-medium text-zinc-800">{city.label}</span>
 											</Link>
-										</li>
-									))}
-								</ul>
-							</article>
-						))}
-					</div>
+										);
+									}
+									return (
+										<div key={cityIndex} className={`${classes} opacity-60`}>
+											<Icon name="mapPin" className="h-4 w-4 text-gray-400 shrink-0" />
+											<span className="text-xs font-medium text-zinc-500">{city.label}</span>
+										</div>
+									);
+								})}
+							</div>
+						</div>
+					))}
 				</div>
 
 				{/* CTA link — shared (both viewports) */}
 				<div
 					className={clsx(
-						'mt-10 text-center',
+						'mt-6 md:mt-10 text-center',
 						mobileInView ? 'animate-fade-in-up' : 'opacity-0',
 						'lg:opacity-100 lg:animate-none',
 					)}
@@ -363,7 +370,7 @@ export const AreasOfOperationSection: React.FC<AreasOfOperationSectionProps> = (
 				>
 					<Link
 						href="/obszar-dzialania"
-						className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-dark transition-colors"
+						className="inline-flex items-center justify-center gap-2 bg-zinc-900 text-white font-bold px-5 py-2.5 rounded-sm text-xs uppercase tracking-wider hover:bg-zinc-800 transition-colors"
 					>
 						Zobacz pełną mapę i wszystkie lokalizacje
 						<Icon name="arrowRight" size="sm" />

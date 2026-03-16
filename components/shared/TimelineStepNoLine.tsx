@@ -139,7 +139,7 @@ export function TimelineStepNoLine({
       {/* Layout Zigzag - Mobile: stack, Desktop: flex row/row-reverse */}
       <div
         className={clsx(
-          'flex flex-col gap-6',
+          'flex flex-col gap-0 md:gap-6',
           'lg:flex-row lg:items-center lg:gap-12',
           isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'
         )}
@@ -147,19 +147,19 @@ export function TimelineStepNoLine({
         {/* Biały Box z Tekstem */}
         <div
           className={clsx(
-            'flex-1 bg-white rounded-3xl p-6 md:p-8 lg:p-10 shadow-lg',
+            'flex-1 bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 lg:p-10 shadow-none md:shadow-lg',
             isVisible ? 'animate-fade-in-up' : 'opacity-0'
           )}
           style={{ animationDelay: '0.1s' }}
         >
           {/* Label + Tytuł */}
-          <div className="mb-6">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wide">
+          <div className="mb-4 md:mb-6">
+            <span className="text-xs md:text-sm font-semibold text-primary uppercase tracking-wide">
               {label}
             </span>
             <h3
               className={clsx(
-                'text-xl md:text-2xl lg:text-3xl font-bold transition-colors duration-300 mt-1',
+                'text-base md:text-2xl lg:text-3xl font-bold transition-colors duration-300 mt-1',
                 isActive ? 'text-primary' : 'text-gray-900'
               )}
             >
@@ -168,7 +168,7 @@ export function TimelineStepNoLine({
           </div>
 
           {/* Treść */}
-          <div className="text-gray-600 leading-relaxed text-base lg:text-lg">
+          <div className="text-gray-600 leading-relaxed text-sm md:text-base lg:text-lg">
             {content.map((block, index) => renderContentBlock(block, index))}
           </div>
         </div>
@@ -181,7 +181,7 @@ export function TimelineStepNoLine({
           )}
           style={{ animationDelay: '0.25s' }}
         >
-          <div className="relative w-full aspect-[4/3] lg:aspect-[16/12] rounded-3xl overflow-hidden shadow-xl ring-1 ring-black/5">
+          <div className="relative w-full aspect-[4/3] lg:aspect-[16/12] rounded-2xl md:rounded-3xl overflow-hidden shadow-none md:shadow-xl md:ring-1 md:ring-black/5">
             <Image
               src={imageSrc}
               alt={imageAlt}

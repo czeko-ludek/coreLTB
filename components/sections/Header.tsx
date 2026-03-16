@@ -21,6 +21,16 @@ export interface HeaderProps {
   megaMenuItems?: MegaMenuItem[];
 }
 
+// Ikony dla linków nawigacji mobile
+const navIconMap: Record<string, string> = {
+  '/': 'home',
+  '/o-nas': 'users',
+  '/oferta': 'briefcase',
+  '/projekty': 'building',
+  '/blog': 'fileText',
+  '/kontakt': 'mail',
+};
+
 export function Header({
   topBar,
   logo,
@@ -31,6 +41,7 @@ export function Header({
 }: HeaderProps) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [ofertaExpanded, setOfertaExpanded] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -216,38 +227,137 @@ export function Header({
         </div>
         </header>
 
-        {/* Mobile Menu Overlay - Fixed position, always rendered for smooth animation */}
+        {/* Mobile Menu - Slide-in drawer z lewej */}
+        {/* Overlay tło */}
         <div
-          className={`
-            fixed inset-x-0 top-[72px] md:top-[147px] bottom-0 z-40 lg:hidden
-            bg-white
-            transition-all duration-300 ease-out
-            ${mobileMenuOpen
-              ? 'opacity-100 translate-y-0 pointer-events-auto'
-              : 'opacity-0 -translate-y-4 pointer-events-none'
-            }
+          className={`fixed inset-0 bg-black/40 z-[60] lg:hidden transition-opacity duration-300 ${
+            mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+          onClick={closeMobileMenu}
+        />
+
+        {/* Drawer */}
+        <div
+          className={`fixed top-0 right-0 bottom-0 w-full bg-white z-[70] lg:hidden
+            shadow-2xl overflow-y-auto
+            transition-transform duration-300 ease-out
+            ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}
           `}
         >
-          <div className="container mx-auto px-6 py-6 overflow-y-auto h-full">
-            <nav className="flex flex-col space-y-1">
-              {navLinks.map((link, index) => {
-                const isActive = pathname === link.href;
+          {/* Logo + zamknij */}
+          <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+            <Link href="/" onClick={closeMobileMenu} className="relative w-[56px] h-[50px]">
+              <Image src={logo.src} alt={logo.alt} fill className="object-contain" sizes="56px" />
+            </Link>
+            <button
+              onClick={closeMobileMenu}
+              className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
+              aria-label="Zamknij menu"
+            >
+              <Icon name="x" size="md" />
+            </button>
+          </div>
+
+          {/* Nawigacja */}
+          <nav className="px-4 py-6 flex flex-col gap-1">
+            {navLinks.filter(link => link.href !== '/').map((link, index) => {
+              const isActive = pathname === link.href || (link.href === '/oferta' && pathname.startsWith('/oferta'));
+              const isOferta = link.href === '/oferta';
+              const iconName = navIconMap[link.href] || 'arrowRight';
+
+              if (isOferta && megaMenuItems.length > 0) {
                 return (
-                  <Link
-                    key={index}
-                    href={link.href}
-                    onClick={closeMobileMenu}
-                    className={`text-base font-semibold transition-colors px-4 py-3 rounded-xl ${
-                      isActive
-                        ? 'text-primary bg-primary/10'
-                        : 'text-gray-700 hover:text-primary hover:bg-gray-50'
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
+                  <div key={index}>
+                    {/* Oferta — klik rozwija/zwija submenu */}
+                    <button
+                      onClick={() => setOfertaExpanded(!ofertaExpanded)}
+                      className={`w-full flex items-center justify-between px-4 py-4 rounded-xl text-base font-semibold transition-colors ${
+                        isActive ? 'text-primary bg-primary/5' : 'text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                          isActive ? 'bg-primary/10 text-primary' : 'bg-gray-100 text-gray-500'
+                        }`}>
+                          <Icon name={iconName as import('@/components/ui').IconName} size="md" />
+                        </div>
+                        {link.label}
+                      </div>
+                      <Icon
+                        name="chevronDown"
+                        size="md"
+                        className={`text-gray-400 transition-transform duration-200 ${ofertaExpanded ? 'rotate-180' : ''}`}
+                      />
+                    </button>
+
+                    {/* Rozwinięte podkategorie */}
+                    <div className={`overflow-hidden transition-all duration-300 ${
+                      ofertaExpanded ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
+                    }`}>
+                      <div className="ml-7 pl-4 border-l-2 border-primary/20 py-2 flex flex-col gap-1">
+                        {megaMenuItems.map((item, subIndex) => (
+                          <Link
+                            key={subIndex}
+                            href={item.href}
+                            onClick={closeMobileMenu}
+                            className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-colors ${
+                              pathname === item.href
+                                ? 'text-primary bg-primary/5'
+                                : 'text-gray-600 hover:text-primary hover:bg-gray-50'
+                            }`}
+                          >
+                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                              pathname === item.href ? 'bg-primary/10 text-primary' : 'bg-gray-50 text-gray-400'
+                            }`}>
+                              <Icon name={item.icon as import('@/components/ui').IconName} size="sm" />
+                            </div>
+                            {item.title}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 );
-              })}
-            </nav>
+              }
+
+              return (
+                <Link
+                  key={index}
+                  href={link.href}
+                  onClick={closeMobileMenu}
+                  className={`flex items-center gap-4 px-4 py-4 rounded-xl text-base font-semibold transition-colors ${
+                    isActive ? 'text-primary bg-primary/5' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                    isActive ? 'bg-primary/10 text-primary' : 'bg-gray-100 text-gray-500'
+                  }`}>
+                    <Icon name={iconName as import('@/components/ui').IconName} size="md" />
+                  </div>
+                  {link.label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* CTA + kontakt na dole */}
+          <div className="px-6 py-5 mt-auto border-t border-gray-100">
+            <Link
+              href="/kontakt"
+              onClick={closeMobileMenu}
+              className="flex items-center justify-center gap-2 w-full bg-primary text-zinc-900 font-bold py-3.5 rounded-xl text-base mb-5"
+            >
+              Darmowa wycena
+              <Icon name="arrowRight" size="sm" />
+            </Link>
+            <a href={`tel:${topBar.phone.replace(/\s/g, '')}`} className="flex items-center gap-3 py-2.5 text-base font-medium text-gray-700">
+              <Icon name="phone" size="md" className="text-primary" />
+              {topBar.phone}
+            </a>
+            <a href={`mailto:${topBar.email}`} className="flex items-center gap-3 py-2.5 text-base font-medium text-gray-700">
+              <Icon name="mail" size="md" className="text-primary" />
+              {topBar.email}
+            </a>
           </div>
         </div>
 
