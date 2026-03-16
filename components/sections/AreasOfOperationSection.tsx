@@ -25,7 +25,7 @@ import { clsx } from 'clsx';
 
 export interface AreasCity {
 	label: string;
-	href: string;
+	href?: string;
 }
 
 export interface AreasHub {
