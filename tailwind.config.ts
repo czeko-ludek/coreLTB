@@ -76,7 +76,7 @@ const config: Config = {
         // Dodatkowe wartości spacing jeśli potrzeba
       },
       animation: {
-        marquee: 'marquee 30s linear infinite',
+        marquee: 'marquee 40s linear infinite',
       },
       keyframes: {
         marquee: {

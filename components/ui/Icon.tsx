@@ -93,6 +93,7 @@ import {
   Waves,
   Combine,
   Tractor,
+  MessageCircle,
 } from 'lucide-react';
 
 const iconMap = {
@@ -192,6 +193,7 @@ const iconMap = {
   waves: Waves,
   combine: Combine,
   tractor: Tractor,
+  messageCircle: MessageCircle,
 };
 
 export type IconName = keyof typeof iconMap;
