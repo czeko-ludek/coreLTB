@@ -226,7 +226,7 @@ export function calculateEstimate(config: CalculatorConfig): EstimateBreakdown {
       label: 'Stan Deweloperski',
       description: 'Kompletne instalacje, tynki, wylewki, elewacja z ociepleniem — dom gotowy do wykończenia wnętrz.',
       includedItems: [
-        'Rekuperacja — centrala z kanałami i anemostatami',
+        'Wentylacja mechaniczna z odzyskiem ciepła',
         heatingName,
         'Tynki gipsowe maszynowe (Knauf / Baumit)',
         'Izolacja posadzki — styropian EPS 150',
