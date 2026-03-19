@@ -607,7 +607,7 @@ servicesAccordion: {
               {
                 // LINK SEO: Pozwolenie na budowę (Volume: 50, trend rosnący nieskończoność)
                 type: 'paragraph',
-                value: '**Checklista inwestora:** Sprawdź procedurę: [Pozwolenie na budowę krok po kroku](/baza-wiedzy/pozwolenie-na-budowe)'
+                value: '**Checklista inwestora:** Sprawdź procedurę: Pozwolenie na budowę krok po kroku'
               }
             ],
             imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/pozwolenie-na-budowe.webp',
@@ -635,7 +635,7 @@ servicesAccordion: {
             {
               // STRATEGICZNY LINK - KLIENT CHCE WIEDZIEĆ "ILE?"
               type: 'paragraph',
-              value: `**Planujesz budżet na ${CURRENT_YEAR}?** Sprawdź naszą analizę rynku: [Ile realnie kosztuje budowa domu (SSO / Pod Klucz)?](/baza-wiedzy/koszt-budowy-domu-2026-cennik)`
+              value: `**Planujesz budżet na ${CURRENT_YEAR}?** Sprawdź naszą analizę rynku: Ile realnie kosztuje budowa domu (SSO / Pod Klucz)?`
             }
           ],
           imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/wsparcie-finansowanie.webp',
@@ -663,7 +663,7 @@ servicesAccordion: {
             {
               // SUPER WAŻNY LINK - Chroni przed niedomówieniami
               type: 'paragraph',
-              value: '**Uniknij nieporozumień:** Zobacz [Checklista prac (120 pkt): Standard Deweloperski >](/baza-wiedzy/stan-deweloperski-co-to-jest)'
+              value: '**Uniknij nieporozumień:** Zobacz Checklista prac (120 pkt): Standard Deweloperski'
             }
           ],
           imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/realizacja-budowy.webp',
@@ -994,7 +994,7 @@ philosophyTimeline: {
             {
                // STRATEGICZNY LINK DO ARTYKUŁU
                type: 'paragraph',
-               value: '**Technologia:** Zobacz, jakie rozwiązania obniżą Twoje rachunki: [Domy energooszczędne i zwrot z inwestycji](/baza-wiedzy/domy-energooszczedne-technologia)'
+               value: '**Technologia:** Zobacz, jakie rozwiązania obniżą Twoje rachunki: Domy energooszczędne i zwrot z inwestycji'
             }
           ],
           imageSrc: '/images/uslugi/projektowanie/etapy/adaptacja.webp',
@@ -1026,7 +1026,7 @@ philosophyTimeline: {
             {
               // STRATEGICZNY LINK: Przekierowanie do analizy cen
               type: 'paragraph',
-              value: `**Planujesz finanse?** Zobacz nasz aktualny: [Raport kosztów budowy domu ${CURRENT_YEAR}](/baza-wiedzy/koszt-budowy-domu-2026-cennik)`
+              value: `**Planujesz finanse?** Zobacz nasz aktualny: Raport kosztów budowy domu ${CURRENT_YEAR}`
             }
           ],
           imageSrc: '/images/uslugi/projektowanie/etapy/koszty.webp',
@@ -1062,7 +1062,7 @@ philosophyTimeline: {
             {
                // STRATEGICZNY LINK DO ARTYKUŁU EDUKACYJNEGO
                type: 'paragraph',
-               value: `**Co dokładnie dostaniesz w teczce?** Sprawdź checklistę: [Co musi zawierać projekt budowlany ${CURRENT_YEAR}?](/baza-wiedzy/co-zawiera-projekt-budowlany)`
+               value: `**Co dokładnie dostaniesz w teczce?** Sprawdź checklistę: Co musi zawierać projekt budowlany ${CURRENT_YEAR}?`
             }
           ],
           // Twoje oryginalne pliki
@@ -1393,7 +1393,7 @@ philosophyTimeline: {
           {
             // LINK SEO (Silos Tematyczny)
             type: 'paragraph',
-            value: '**Wciąż nie masz pewności kogo potrzebujesz?** Przeczytaj analizę: [Kiedy warto zatrudnić Inspektora Nadzoru i ile to kosztuje? >](/baza-wiedzy/kierownik-budowy-czy-inspektor-nadzoru)'
+            value: '**Wciąż nie masz pewności kogo potrzebujesz?** Przeczytaj analizę: Kiedy warto zatrudnić Inspektora Nadzoru i ile to kosztuje?'
           }
         ],
         imageSrc: '/images/uslugi/nadzor-i-doradztwo/etapy/kierownik-vs-inspektor.webp',
@@ -1426,7 +1426,7 @@ philosophyTimeline: {
             {
                // LINK DO KLASTRA: EDUKACJA
                type: 'paragraph',
-               value: '**Za co odpowiada kierownik?** Sprawdź pełną listę obowiązków: [Rola Kierownika Budowy w procesie inwestycyjnym >](/baza-wiedzy/obowiazki-kierownika-budowy)'
+               value: '**Za co odpowiada kierownik?** Sprawdź pełną listę obowiązków: Rola Kierownika Budowy w procesie inwestycyjnym'
             }
           ],
           // Twoje oryginalne zdjęcie
@@ -1463,7 +1463,7 @@ philosophyTimeline: {
             {
                 // LINK DO ARTYKUŁU O PUŁAPKACH
                 type: 'paragraph',
-                value: '**Na co uważać przy wyborze ekipy?** Przeczytaj: [5 najczęstszych błędów wykonawczych, które wykrywa Inspektor](/baza-wiedzy/bledy-na-budowie-nadzor)'
+                value: '**Na co uważać przy wyborze ekipy?** Przeczytaj: 5 najczęstszych błędów wykonawczych, które wykrywa Inspektor'
             }
           ],
           imageSrc: '/images/uslugi/nadzor-i-doradztwo/etapy/inspektor-nadzoru.webp',
@@ -1496,7 +1496,7 @@ philosophyTimeline: {
             {
               // WAŻNY LINK - Przykład usterek
               type: 'paragraph',
-              value: '**Efekt:** Otrzymujesz Protokół Usterek, który jest podstawą prawną do żądania napraw. Zobacz: [Lista najczęstszych usterek deweloperskich na Śląsku](/baza-wiedzy/najczestsze-usterki-przy-odbiorze)'
+              value: '**Efekt:** Otrzymujesz Protokół Usterek, który jest podstawą prawną do żądania napraw. Zobacz: Lista najczęstszych usterek deweloperskich na Śląsku'
             }
           ],
           imageSrc: '/images/uslugi/nadzor-i-doradztwo/etapy/odbiory-techniczne.webp',
@@ -1552,7 +1552,7 @@ servicesAccordion: {
         {
            // LINK SEO: USTERKI DEWELOPERSKIE
            type: 'paragraph',
-           value: '**Idziesz na odbiór sam?** Zobacz, co możesz przeoczyć: [Lista najczęstszych usterek deweloperskich na Śląsku](/baza-wiedzy/najczestsze-usterki-przy-odbiorze)'
+           value: '**Idziesz na odbiór sam?** Zobacz, co możesz przeoczyć: Lista najczęstszych usterek deweloperskich na Śląsku'
         }
       ]
     },
@@ -1914,7 +1914,7 @@ cooperationTimelineNoLine: {
         {
           // LINK: Baza wiedzy (Technologia/Geologia)
           type: 'paragraph',
-          value: '**Budujesz na szkodach górniczych?** Sprawdź, jak dobrać fundamenty: [Szkody górnicze a fundamenty – poradnik inżyniera](/baza-wiedzy/fundamenty-na-szkodach-gorniczych)'
+          value: '**Budujesz na szkodach górniczych?** Sprawdź, jak dobrać fundamenty: Szkody górnicze a fundamenty – poradnik inżyniera'
         }
       ],
       imageSrc: '/images/uslugi/uslugi-techniczne/etapy/geologia.webp',
@@ -1941,7 +1941,7 @@ cooperationTimelineNoLine: {
     {
        // KLUCZOWY LINK - Wysyłamy klienta do cennika
        type: 'paragraph',
-       value: `**Sprawdź realia:** Ile naprawdę kosztuje dom w ${CURRENT_YEAR}? [Zobacz Raport Kosztów Budowy (Analiza Rynku)](/baza-wiedzy/koszt-budowy-domu-2026-cennik)`
+       value: `**Sprawdź realia:** Ile naprawdę kosztuje dom w ${CURRENT_YEAR}? Zobacz Raport Kosztów Budowy (Analiza Rynku)`
     }
   ],
   imageSrc: '/images/uslugi/uslugi-techniczne/etapy/kosztorysowanie.webp',
@@ -1970,7 +1970,7 @@ cooperationTimelineNoLine: {
     {
        // LINK
        type: 'paragraph',
-       value: '**Ważne dla inwestora:** certyfikat to test jakości izolacji. Zobacz, jak budujemy, żeby wyniki były doskonałe: [Technologia domów energooszczędnych WT2021 >](/baza-wiedzy/domy-energooszczedne-technologia)'
+       value: '**Ważne dla inwestora:** certyfikat to test jakości izolacji. Zobacz, jak budujemy, żeby wyniki były doskonałe: Technologia domów energooszczędnych WT2021'
     }
   ],
   // Zdjęcie zostaje Twoje stare
@@ -2383,7 +2383,7 @@ cooperationTimelineNoLine: {
             {
                // 🔥 LINK DO WIEDZY: Koszty wykończenia
                type: 'paragraph',
-               value: `**Planujesz budżet?** Zobacz: [Ile kosztuje wykończenie mieszkania pod klucz w ${CURRENT_YEAR}? (Raport)](/baza-wiedzy/koszty-wykonczenia-pod-klucz-2026)`
+               value: `**Planujesz budżet?** Zobacz: Ile kosztuje wykończenie mieszkania pod klucz w ${CURRENT_YEAR}? (Raport)`
             }
           ],
           imageSrc: '/images/uslugi/wykonczenia-i-aranzacje/etapy/aranzacja.webp',
@@ -2884,7 +2884,7 @@ cooperationTimelineNoLine: {
           // 🔥 KLUCZOWY LINK (Cost-Anchor): Klient tutaj pyta o pieniądze.
           type: 'paragraph',
           value:
-            `**Planujesz budżet na koniec budowy?** Sprawdź realne koszty (wywrotki ziemi, roboczogodziny sprzętu): [Ile kosztuje zagospodarowanie działki 1000m² w ${CURRENT_YEAR}? (Analiza)](/baza-wiedzy/koszt-zagospodarowania-dzialki-2026)`
+            `**Planujesz budżet na koniec budowy?** Sprawdź realne koszty (wywrotki ziemi, roboczogodziny sprzętu): Ile kosztuje zagospodarowanie działki 1000m² w ${CURRENT_YEAR}? (Analiza)`
         },
       ],
       imageSrc: '/images/uslugi/zagospodarowanie-terenu/etapy/niwelacja.webp',

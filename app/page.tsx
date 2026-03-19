@@ -108,7 +108,7 @@ export default function Home() {
 				description:
 					"Twarde dane przed zakupem działki. Odwierty geotechniczne, badanie nośności gruntu, mapy do celów projektowych (MDCP).",
 				image: "/images/uslugi/showcase/uslugi-techniczne.webp",
-				href: "/oferta/uslugi-techniczne-w-budownictwie",
+				href: "/oferta/uslugi-techniczne",
 			},
 			{
 				iconName: "paintBrush" as const,

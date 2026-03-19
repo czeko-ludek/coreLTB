@@ -33,7 +33,7 @@ export const gliwiceData: CityData = {
     ],
     ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
     ctaBoxButtons: [
-      { text: 'Zadzwoń do Nas', variant: 'secondary' },
+      { text: 'Zadzwoń do Nas', href: 'tel:+48664123757', variant: 'secondary' },
       { text: 'Napisz do Nas', href: '#kontakt', variant: 'secondary' },
     ],
   },
@@ -143,6 +143,18 @@ export const gliwiceData: CityData = {
         question: 'Jak sprawdzić kategorię szkód górniczych działki?',
         content: [
           { type: 'paragraph', value: 'Aktualną kategorię terenu potwierdza **opinia geologiczno-górnicza**, którą wydaje lokalny zakład wydobywczy lub Okręgowy Urząd Górniczy. W ramach współpracy kompleksowo adaptujemy dokumentację do uzyskanej klasy szkód. Stosujemy niezbędne wzmocnienia, zapewniając pełne bezpieczeństwo konstrukcji.' },
+        ],
+      },
+      {
+        question: 'Ile kosztuje budowa domu 100–150 m² w Gliwicach w 2026 roku?',
+        content: [
+          { type: 'paragraph', value: 'Dom jednorodzinny **100–150 m²** w stanie deweloperskim to w Gliwicach wydatek **4 500–6 200 zł/m²**, a [realizacja pod klucz](/oferta/kompleksowa-budowa-domow) zamyka się w przedziale **6 500–8 500 zł/m²**. Na ostateczną cenę wpływa rodzaj fundamentu — na terenach po KWK Sośnica czy Gliwice zbrojona płyta fundamentowa podnosi koszt o **15–25%** względem tradycyjnych ław. W CoreLTB pracujemy w modelu ryczałtowym ze **stałą ceną w umowie**, niezależnie od wahań cen materiałów.' },
+        ],
+      },
+      {
+        question: 'Ile trwa budowa domu od fundamentów do stanu deweloperskiego w Gliwicach?',
+        content: [
+          { type: 'paragraph', value: 'Sam [stan deweloperski](/oferta/kompleksowa-budowa-domow) osiągamy w **5–8 miesięcy** od rozpoczęcia robót ziemnych. Etap fundamentów i stanu zerowego to **3–6 tygodni**, stan surowy otwarty kolejne **2–3 miesiące**, zamknięcie budynku (dach, okna, brama) dodatkowe 4–6 tygodni, a instalacje z tynkami — **6–8 tygodni**. Pełna realizacja pod klucz z [wykończeniem wnętrz](/oferta/wykonczenia-i-aranzacje) zajmuje łącznie **8–12 miesięcy**. Bliskość naszej bazy pozwala na codzienny nadzór i eliminację przestojów logistycznych.' },
         ],
       },
     ],

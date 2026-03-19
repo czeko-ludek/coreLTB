@@ -3,6 +3,7 @@ import { Manrope, Funnel_Sans } from "next/font/google";
 import "./globals.css";
 import { Header, Footer } from "@/components/sections";
 import { ErrorBoundary } from "@/components/shared";
+import { FloatingPhoneCTA } from "@/components/ui/FloatingPhoneCTA";
 import { companyData } from "@/data/company-data";
 
 const manrope = Manrope({ subsets: ["latin"], display: "swap" });
@@ -26,7 +27,7 @@ const headerData = {
       { platform: "linkedin" as const, href: "https://linkedin.com" },
     ],
   },
-  logo: { src: "/logo.webp", alt: "CoreLTB Builders" },
+  logo: { src: "/images/logo-black.webp", alt: "CoreLTB Builders" },
   navLinks: [
     { label: "Strona główna", href: "/" },
     { label: "O nas", href: "/o-nas" },
@@ -79,7 +80,7 @@ const headerData = {
 
 // Footer data
 const footerData = {
-  logo: { src: "/logo.webp", alt: "CoreLTB Builders" },
+  logo: { src: "/images/logo-white.webp", alt: "CoreLTB Builders" },
   about: "Generalny wykonawca domów jednorodzinnych na Śląsku, w Małopolsce i na Opolszczyźnie. Od 2005 roku łączymy rzemieślniczą dokładność z profesjonalnym zarządzaniem projektami.",
   topBar: {
     phone: "+48 664 123 757",
@@ -176,6 +177,7 @@ export default function RootLayout({
           {children}
         </ErrorBoundary>
         <Footer {...footerData} />
+        <FloatingPhoneCTA />
       </body>
     </html>
   );

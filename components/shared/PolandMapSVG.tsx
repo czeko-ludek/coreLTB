@@ -257,7 +257,7 @@ export function PolandMapSVG({
     // Update circles
     allCircles.forEach((circle) => {
       const voiv = (circle as unknown as HTMLElement).dataset.voivodeship;
-      circle.classList.remove('miasto-visible', 'miasto-preview');
+      circle.classList.remove('miasto-visible', 'miasto-preview', 'miasto-idle');
 
       if (voiv === targetVoivodeship) {
         if (view === 'zoomed') {
@@ -265,6 +265,9 @@ export function PolandMapSVG({
         } else if (view === 'overview' && hoveredVoivodeship) {
           circle.classList.add('miasto-preview');
         }
+      } else if (view === 'overview' && !hoveredVoivodeship) {
+        // No voivodeship hovered — show all cities as gray dots
+        circle.classList.add('miasto-idle');
       }
     });
 

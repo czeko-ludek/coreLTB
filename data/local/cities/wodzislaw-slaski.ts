@@ -33,8 +33,8 @@ export const wodzislawData: CityData = {
     ],
     ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
     ctaBoxButtons: [
-      { text: 'Zadzwoń do Nas', variant: 'secondary' },
-      { text: 'Napisz do Nas', href: '/kontakt', variant: 'secondary' },
+      { text: 'Zadzwoń do Nas', href: 'tel:+48664123757', variant: 'secondary' },
+      { text: 'Napisz do Nas', href: '#kontakt', variant: 'secondary' },
     ],
   },
 
@@ -213,6 +213,18 @@ export const wodzislawData: CityData = {
           { type: 'paragraph', value: 'Budując dom dzisiaj, musisz myśleć o jego wartości za 10-15 lat. Unia Europejska wprowadza dyrektywę EPBD, która dąży do budownictwa bezemisyjnego. Domy, które nie będą spełniać rygorystycznych norm energetycznych, stracą na wartości rynkowej i będą trudne do sprzedania.' },
           { type: 'paragraph', value: 'Dlatego w CoreLTB Builders nie budujemy "na minimum normowe". Promujemy rozwiązania, które wyprzedzają obecne Warunki Techniczne (WT 2021). Skupiamy się na **szczelności powietrznej** budynku. Nieszczelny dom to straty ciepła, których nie zatrzyma nawet najgrubszy styropian. Zalecamy wykonanie **Blower Door Test** (testu szczelności) przed tynkami, aby wykryć i uszczelnić wszelkie przedmuchy.' },
           { type: 'paragraph', value: 'Montujemy rekuperację (często z odzyskiem wilgoci - entalpią), co staje się standardem w nowoczesnym budownictwie. Twój dom ma być aktywem, a nie obciążeniem finansowym.' },
+        ],
+      },
+      {
+        question: 'Ile kosztuje budowa domu w Wodzisławiu Śląskim w 2026 roku?',
+        content: [
+          { type: 'paragraph', value: 'Dom jednorodzinny **100–150 m²** w stanie deweloperskim to w Wodzisławiu wydatek rzędu **4 300–5 800 zł/m²**, a [realizacja pod klucz](/oferta/kompleksowa-budowa-domow) zamyka się w **6 500–8 500 zł/m²**. Region ROW ma nieco niższe ceny robocizny niż aglomeracja katowicka, ale specyfika gruntowa (gliny, kurzawka) może wymagać droższego fundamentu. W CoreLTB Builders pracujemy na **stałej cenie ryczałtowej** — koszt nie rośnie nawet gdy ceny stali pójdą w górę.' },
+        ],
+      },
+      {
+        question: 'Czy szkody górnicze w rejonie ROW wykluczają budowę domu jednorodzinnego?',
+        content: [
+          { type: 'paragraph', value: 'Absolutnie nie. Budujemy na terenach objętych wpływami eksploatacji górniczej w całym rejonie ROW — od Wodzisławia przez Radlin po Gorzyce. Klucz to prawidłowe rozpoznanie podłoża: zlecamy [badania geotechniczne](/oferta/uslugi-techniczne) i analizę opinii geologiczno-górniczej. Na tej podstawie konstruktor projektuje odpowiednie zabezpieczenia — najczęściej **płytę fundamentową** z wzmocnionym zbrojeniem i dylatacjami. Mamy bazę sprzętową w Wodzisławiu, więc nadzór nad fundamentami prowadzimy codziennie, bez przestojów logistycznych.' },
         ],
       },
     ],

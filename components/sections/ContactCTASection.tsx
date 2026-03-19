@@ -48,7 +48,7 @@ export const ContactCTASection: React.FC<ContactCTASectionProps> = ({
   });
 
   return (
-    <section ref={ref} className="bg-background-beige py-8 sm:py-12">
+    <section id="kontakt" ref={ref} className="bg-background-beige py-8 sm:py-12">
       <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
           {/* Left: Content */}

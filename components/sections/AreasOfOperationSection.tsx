@@ -14,7 +14,6 @@ import {
 	MapCity,
 	mapVoivodeships,
 	getVoivodeshipById,
-	getMapStats,
 } from '@/data/map-data';
 import { fadeInUp, scaleIn, fadeIn } from '@/lib/animations';
 import { clsx } from 'clsx';
@@ -86,8 +85,6 @@ export const AreasOfOperationSection: React.FC<AreasOfOperationSectionProps> = (
 	const [activeVoivodeship, setActiveVoivodeship] = useState<VoivodeshipId | null>(null);
 	const [hoveredVoivodeship, setHoveredVoivodeship] = useState<VoivodeshipId | null>(null);
 	const [tooltip, setTooltip] = useState<TooltipState | null>(null);
-
-	const stats = getMapStats();
 
 	/* — map handlers — */
 	const handleVoivodeshipClick = useCallback(
@@ -271,23 +268,7 @@ export const AreasOfOperationSection: React.FC<AreasOfOperationSectionProps> = (
 						)}
 					</motion.div>
 
-					{/* Legend */}
-					<div className="absolute bottom-4 right-4 z-20">
-						<div className="map-legend">
-							<div className="map-legend-item">
-								<span className="map-legend-dot active" />
-								<span className="map-legend-text">
-									Aktywne strony ({stats.citiesWithPages})
-								</span>
-							</div>
-							<div className="map-legend-item">
-								<span className="map-legend-dot coming-soon" />
-								<span className="map-legend-text">
-									Wkrótce ({stats.citiesComingSoon})
-								</span>
-							</div>
-						</div>
-					</div>
+					{/* Legend removed — clean map */}
 
 					{/* Instructions (overview) */}
 					{view === 'overview' && (

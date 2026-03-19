@@ -33,7 +33,7 @@ export const katowiceData: CityData = {
     ],
     ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
     ctaBoxButtons: [
-      { text: 'Zadzwoń do Nas', variant: 'secondary' },
+      { text: 'Zadzwoń do Nas', href: 'tel:+48664123757', variant: 'secondary' },
       { text: 'Napisz do Nas', href: '#kontakt', variant: 'secondary' },
     ],
   },

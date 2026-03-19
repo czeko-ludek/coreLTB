@@ -33,7 +33,7 @@ export const jaworznoData: CityData = {
     ],
     ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
     ctaBoxButtons: [
-      { text: 'Zadzwoń do Nas', variant: 'secondary' },
+      { text: 'Zadzwoń do Nas', href: 'tel:+48664123757', variant: 'secondary' },
       { text: 'Napisz do Nas', href: '#kontakt', variant: 'secondary' },
     ],
   },
@@ -200,6 +200,30 @@ export const jaworznoData: CityData = {
         question: 'W czym wyręczamy inwestora w formalościach?',
         content: [
           { type: 'paragraph', value: '**Mapy do celów projektowych:** Współpracujemy ze sprawdzonymi lokalnymi geodetami. **Warunki zabudowy / MPZP:** Analizujemy Miejscowy Plan Zagospodarowania Przestrzennego, aby sprawdzić, jaki dom można wybudować na Twojej działce (kąt dachu, wysokość kalenicy, kolor elewacji). **Uzgodnienia branżowe:** Załatwiamy warunki przyłączeniowe mediów (woda, prąd, gaz) u lokalnych dostawców (Tauron, Wodociągi Jaworzno). **Kierownik Budowy:** Zapewniamy nadzór uprawnionego [kierownika budowy w Jaworznie](/kierownik-budowy-jaworzno) (od 5 000 zł), który prowadzi Dziennik Budowy i odpowiada karnie za zgodność realizacji ze sztuką budowlaną. **Odbiory końcowe:** Kompletujemy dokumentację powykonawczą niezbędną do uzyskania pozwolenia na użytkowanie w Powiatowym Inspektoracie Nadzoru Budowlanego.' },
+        ],
+      },
+      {
+        question: 'Ile kosztuje budowa domu 100–150 m² w Jaworznie i od czego zależy ostateczna cena?',
+        content: [
+          { type: 'paragraph', value: 'Realizacja domu **100–150 m²** w Jaworznie w stanie deweloperskim to wydatek rzędu **4 500–6 000 zł/m²**, a [pod klucz](/oferta/kompleksowa-budowa-domow) — **6 500–8 500 zł/m²**. Finalną cenę kształtują trzy czynniki: warunki gruntowe (na terenach pogórniczych KWK Sobieski zbrojona płyta fundamentowa kosztuje więcej niż tradycyjne ławy), złożoność bryły domu oraz standard wykończenia. W CoreLTB pracujemy w modelu ryczałtowym — podpisujesz umowę ze **stałą ceną**, która nie rośnie w trakcie budowy.' },
+        ],
+      },
+      {
+        question: 'Ile trwa budowa domu pod klucz w Jaworznie?',
+        content: [
+          { type: 'paragraph', value: 'Standardowa realizacja domu jednorodzinnego od robót ziemnych do przekazania kluczy zajmuje **8–12 miesięcy**. Sam [stan surowy zamknięty](/oferta/kompleksowa-budowa-domow) to **3–5 miesięcy** w zależności od pory roku i metrażu. Etap wykończeniowy ([wykończenia wnętrz](/oferta/wykonczenia-i-aranzacje)) dodaje kolejne 3–4 miesiące. W Jaworznie dysponujemy bazą operacyjną, więc dojazd ekip i logistyka materiałów nie generują przestojów — co przekłada się na dotrzymywanie harmonogramu.' },
+        ],
+      },
+      {
+        question: 'Czy na pogórniczych gruntach KWK Sobieski w Jaworznie można bezpiecznie budować dom?',
+        content: [
+          { type: 'paragraph', value: 'Tak — pod warunkiem prawidłowego rozpoznania podłoża. Tereny po KWK Sobieski charakteryzują się występowaniem pustek poeksploatacyjnych i deformacji nieciągłych. Przed projektem zlecamy **badania geotechniczne** i analizę mapy terenów pogórniczych. Na tej podstawie konstruktor dobiera odpowiedni fundament — najczęściej **zbrojoną płytę fundamentową**, która rozkłada obciążenia równomiernie. Mamy doświadczenie w budowie na takich gruntach w dzielnicach Jeleń, Byczyna i Dąbrowa Narodowa.' },
+        ],
+      },
+      {
+        question: 'Co oznacza budowa domu pod klucz i czym różni się od stanu deweloperskiego?',
+        content: [
+          { type: 'paragraph', value: '**Stan deweloperski** to budynek gotowy do wykończenia — z tynkami wewnętrznymi, wylewkami, oknami, instalacjami, ale bez podłóg, białego montażu i malowania. **Pod klucz** oznacza dom gotowy do zamieszkania — z [wykończeniem wnętrz](/oferta/wykonczenia-i-aranzacje), łazienkami, kuchnią i oświetleniem. W CoreLTB realizujemy oba warianty. Klienci z Jaworzna najczęściej wybierają stan deweloperski i zlecają nam wykończenie w drugim etapie, co pozwala rozłożyć wydatki w czasie.' },
         ],
       },
     ],

@@ -524,22 +524,13 @@ export const CalculatorForm = () => {
 
         {/* ─── RIGHT: Form ─── */}
         <div className="bg-background-light">
-          {/* Mobile hero */}
-          <div className="lg:hidden bg-background-dark px-5 pt-10 pb-8 text-center">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <Image src="/images/logo-white.webp" alt="CoreLTB" width={40} height={40} className="rounded-lg" />
-              <span className="text-white font-bold text-body-md font-heading">CoreLTB Builders</span>
-            </div>
-            <CalculatorHero />
-          </div>
-
           <form
             onSubmit={handleSubmit}
             className="px-5 md:px-8 lg:px-10 xl:px-14 py-8 md:py-10 lg:py-12"
             noValidate
           >
-            {/* H1 — desktop only */}
-            <div className="hidden lg:block mb-8">
+            {/* H1 */}
+            <div className="mb-8">
               <h1 className="text-h3 xl:text-display font-bold font-heading text-text-primary leading-tight">
                 Bezpłatna Wycena{' '}
                 <span className="text-primary">Budowy Domu</span>

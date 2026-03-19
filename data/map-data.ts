@@ -100,7 +100,7 @@ const slaskieCities: MapCity[] = [
   createCity('gliwice', 'Gliwice', 'Gliwice', 'gliwice', 'slaskie', 679, 1109),
   createCity('zabrze', 'Zabrze', 'Zabrze', 'zabrze', 'slaskie', 708, 1103),
   createCity('mikolow', 'Mikołów', 'Mikołów', 'mikolow', 'slaskie', 711, 1148),
-  createCity('jastrzebie-zdroj', 'Jastrzębie-Zdrój', 'Jastrzębie-Zdrój', 'jastrzebie-zdroj', 'slaskie', 650, 1205),
+  createCity('jastrzebie-zdroj', 'Jastrzębie-Zdrój', 'Jastrzębie-Zdrój', 'jastrzebie-zdroj', 'slaskie', 655, 1190),
   createCity('raciborz', 'Racibórz', 'Racibórz', 'raciborz', 'slaskie', 624, 1170),
 ];
 

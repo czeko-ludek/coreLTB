@@ -33,7 +33,7 @@ export const mikolowData: CityData = {
     ],
     ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
     ctaBoxButtons: [
-      { text: 'Zadzwoń do Nas', variant: 'secondary' },
+      { text: 'Zadzwoń do Nas', href: 'tel:+48664123757', variant: 'secondary' },
       { text: 'Napisz do Nas', href: '#kontakt', variant: 'secondary' },
     ],
   },
@@ -202,6 +202,18 @@ export const mikolowData: CityData = {
         question: 'Jakie rodzaje domów są obecnie najchętniej budowane w Mikołowie i na które projekty jest największy popyt?',
         content: [
           { type: 'paragraph', value: 'W Mikołowie inwestorzy najchętniej wybierają obecnie domy typu **"nowoczesna stodoła"** oraz kompaktowe **parterówki o powierzchni do 120 m²**. Klienci stawiają na prostą bryłę i energooszczędność. W CORE LTB Builders zauważamy również rosnący popyt na projekty z płaskim dachem, które doskonale wpisują się w lokalny krajobraz, łącząc funkcjonalność z minimalizmem.' },
+        ],
+      },
+      {
+        question: 'Ile trwa budowa domu pod klucz w Mikołowie i co wpływa na terminowość?',
+        content: [
+          { type: 'paragraph', value: '[Budowa domu pod klucz](/oferta/kompleksowa-budowa-domow) w Mikołowie trwa **8–12 miesięcy** od robót ziemnych do przekazania kluczy. Stan surowy zamknięty osiągamy w **3–5 miesięcy**, wykończenie wnętrz to kolejne 3–4 miesiące. Na terminowość wpływa przede wszystkim pora rozpoczęcia (optymalnie marzec–kwiecień), kompletność dokumentacji projektowej i warunki gruntowe. W Mikołowie — na pograniczu stref górniczych i stabilnych — czas fundamentowania może się różnić o 2–3 tygodnie w zależności od dzielnic.' },
+        ],
+      },
+      {
+        question: 'Czym różni się budowa pod klucz od stanu deweloperskiego i który wariant wybrać?',
+        content: [
+          { type: 'paragraph', value: '**Stan deweloperski** to budynek z tynkami, wylewkami, oknami i instalacjami — gotowy do [wykończenia wnętrz](/oferta/wykonczenia-i-aranzacje). **Pod klucz** oznacza dom gotowy do zamieszkania — z podłogami, łazienkami, kuchnią i oświetleniem. Wariant deweloperski wybierają klienci, którzy chcą rozłożyć wydatki w czasie lub samodzielnie dopilnować aranżacji. Pod klucz to rozwiązanie dla tych, którym zależy na jednym wykonawcy i jednym harmonogramie. W Mikołowie realizujemy oba modele — z gwarancją stałej ceny na każdy etap.' },
         ],
       },
     ],

@@ -167,7 +167,14 @@
       "Bash(mv \"hydroizilackja-2.webp\" \"hydroizolacja-fundamenty-2.webp\")",
       "Bash(mv \"płyta fundamentowa.webp\" \"plyta-fundamentowa.webp\")",
       "Bash(mv \"płyta fundamentowa zalana.webp\" \"plyta-fundamentowa-zalana.webp\")",
-      "Bash(mv \"wykop pod budowę.webp\" \"wykop-pod-budowe.webp\")"
+      "Bash(mv \"wykop pod budowę.webp\" \"wykop-pod-budowe.webp\")",
+      "Bash(ping:*)",
+      "Bash(netsh advfirewall:*)",
+      "Bash(nslookup:*)",
+      "Bash(for slug:*)",
+      "Read(//d/CORE LTB/elever/public/images/projekty/**)",
+      "WebFetch(domain:dompelenenergii.pl)",
+      "Bash(del:*)"
     ],
     "deny": [],
     "ask": []

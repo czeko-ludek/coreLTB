@@ -33,7 +33,7 @@ export const tychyData: CityData = {
     ],
     ctaBoxSubtext: 'Konsultacja jest bezpłatna i niezobowiązująca.',
     ctaBoxButtons: [
-      { text: 'Zadzwoń do Nas', variant: 'secondary' },
+      { text: 'Zadzwoń do Nas', href: 'tel:+48664123757', variant: 'secondary' },
       { text: 'Napisz do Nas', href: '#kontakt', variant: 'secondary' },
     ],
   },
@@ -228,6 +228,24 @@ export const tychyData: CityData = {
         question: 'Jakie są moje prawa – rękojmia vs gwarancja?',
         content: [
           { type: 'paragraph', value: 'Jako legalnie działająca firma, udzielamy pisemnej gwarancji na wykonane prace. **Konstrukcja:** Gwarancja na szczelność i stabilność konstrukcji (zgodnie z KC). **Rękojmia:** Ustawowa odpowiedzialność za wady fizyczne. **Polisa OC:** Posiadamy ubezpieczenie OC działalności gospodarczej. Jeśli przypadkowo uszkodzimy mienie sąsiada lub materiał, szkoda pokrywana jest z polisy, a nie z Twojej kieszeni.' },
+        ],
+      },
+      {
+        question: 'Ile kosztuje budowa domu 100–150 m² w Tychach w 2026 roku?',
+        content: [
+          { type: 'paragraph', value: 'Dom jednorodzinny **100–150 m²** w stanie deweloperskim to w Tychach wydatek rzędu **4 500–6 000 zł/m²**, natomiast [realizacja pod klucz](/oferta/kompleksowa-budowa-domow) zamyka się w przedziale **6 500–8 500 zł/m²**. Na cenę wpływa przede wszystkim rodzaj fundamentu (na terenach z kategorią szkód górniczych płyta fundamentowa jest droższa niż ławy), standard materiałów wykończeniowych oraz złożoność bryły. W CoreLTB podpisujemy umowę ryczałtową — znasz ostateczny koszt przed wbiciem pierwszej łopaty.' },
+        ],
+      },
+      {
+        question: 'Ile trwa budowa domu od fundamentów do wprowadzenia się?',
+        content: [
+          { type: 'paragraph', value: 'Typowa realizacja domu jednorodzinnego w Tychach zajmuje **8–12 miesięcy** od robót ziemnych do przekazania kluczy. [Stan surowy zamknięty](/oferta/kompleksowa-budowa-domow) osiągamy w **3–5 miesięcy**, a [wykończenie wnętrz](/oferta/wykonczenia-i-aranzacje) to dodatkowe 3–4 miesiące. Kluczowe dla terminowości jest rozpoczęcie prac wiosną (marzec–kwiecień) — wtedy sezon budowlany pozwala zamknąć dach przed zimą. Dzięki bliskiej lokalizacji naszych baz (Jaworzno) logistyka materiałów nie generuje przestojów.' },
+        ],
+      },
+      {
+        question: 'Jaki fundament wybrać w Tychach — płytę fundamentową czy tradycyjne ławy?',
+        content: [
+          { type: 'paragraph', value: 'Wybór zależy od warunków gruntowych konkretnej działki. Tychy leżą na pograniczu GOP — w dzielnicach takich jak Urbanowice czy Czułów mogą występować wpływy eksploatacji górniczej, gdzie rekomendujemy **płytę fundamentową zbrojną**. W stabilniejszych lokalizacjach (np. Żwaków, Jaroszowice) często wystarczą tradycyjne ławy, co obniża koszt o **15–25%**. Decyzję podejmujemy zawsze na podstawie [badań geotechnicznych](/oferta/uslugi-techniczne) — nie zgadujemy.' },
         ],
       },
     ],

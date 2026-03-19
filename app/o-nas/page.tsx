@@ -32,7 +32,7 @@ export default function AboutPage() {
 			"Nie jesteśmy anonimowym tworem. Posiadamy realne bazy sprzętowe w Jaworznie i Wodzisławiu Śląskim, co pozwala nam kontrolować logistykę na całym Południu. Nie sprzedajemy marzeń o domu – dostarczamy bezpieczny, terminowo zrealizowany budynek oparty na solidnej umowie ryczałtowej.",
 		],
 		image: {
-			src: "/images/logo.webp",
+			src: "/images/logo-black.webp",
 			alt: "Logo CoreLTB Builders",
 		},
 		philosophyCards: [

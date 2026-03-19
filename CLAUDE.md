@@ -5,6 +5,9 @@
 - Branch: v3, Main: master
 - Polish language content, SEO-focused
 
+## Landing Pages & Conversion Strategy
+Full strategy doc: **`docs/LANDING-PAGES-STRATEGY.md`** — describes all conversion landing pages (calculator `/wycena`, consultation `/umow-konsultacje`, plot analysis `/analiza-dzialki`), CTA mapping across the site, GA4 event naming, Google Ads campaign structure, and backend API routes for form handling. Reference this file when building any new LP, changing CTA destinations, or setting up analytics/ads.
+
 ## Local Pages System (data/local/)
 Scalable system for city-specific landing pages at `/obszar-dzialania/[slug]`.
 

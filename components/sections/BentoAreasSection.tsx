@@ -7,7 +7,7 @@ import { Icon } from '@/components/ui';
 
 interface City {
     label: string;
-    url: string;
+    url?: string;
 }
 
 interface Hub {
@@ -69,15 +69,24 @@ export const BentoAreasSection: React.FC<BentoAreasSectionProps> = ({ header, hu
                             <div className="bg-gray-50 rounded-2xl p-5 border border-gray-100">
                                 <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Obszar działania</p>
                                 <div className="flex flex-wrap gap-2">
-                                    {hub.cities.map((city, cityIndex) => (
-                                        <Link
-                                            key={cityIndex}
-                                            href={city.url}
-                                            className="block px-4 py-2 bg-white text-text-dark rounded-lg font-semibold text-sm border border-gray-200 transition-all hover:bg-primary hover:text-white hover:border-primary hover:shadow-md text-center"
-                                        >
-                                            {city.label}
-                                        </Link>
-                                    ))}
+                                    {hub.cities.map((city, cityIndex) =>
+                                        city.url ? (
+                                            <Link
+                                                key={cityIndex}
+                                                href={city.url}
+                                                className="block px-4 py-2 bg-white text-text-dark rounded-lg font-semibold text-sm border border-gray-200 transition-all hover:bg-primary hover:text-white hover:border-primary hover:shadow-md text-center"
+                                            >
+                                                {city.label}
+                                            </Link>
+                                        ) : (
+                                            <span
+                                                key={cityIndex}
+                                                className="block px-4 py-2 bg-white text-gray-400 rounded-lg font-semibold text-sm border border-gray-100 text-center"
+                                            >
+                                                {city.label}
+                                            </span>
+                                        )
+                                    )}
                                 </div>
                             </div>
                         </div>

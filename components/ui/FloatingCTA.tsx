@@ -85,6 +85,7 @@ export const FloatingCTA: React.FC<FloatingCTAProps> = ({
       href={href}
       className={`
         fixed bottom-6 right-6 z-50
+        hidden lg:flex
         bg-primary text-white
         px-4 md:px-6 py-3 md:py-4
         rounded-xl

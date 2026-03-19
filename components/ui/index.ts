@@ -16,5 +16,8 @@ export { Portal } from './Portal';
 export { FloatingCTA } from './FloatingCTA';
 // Note: FloatingCTAProps is not exported from FloatingCTA.tsx (internal interface)
 
+export { FloatingPhoneCTA } from './FloatingPhoneCTA';
+// Note: FloatingPhoneCTAProps is not exported from FloatingPhoneCTA.tsx (internal interface)
+
 export { InputField } from './InputField';
 // Note: InputFieldProps is not exported from InputField.tsx (internal interface)

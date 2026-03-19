@@ -11,8 +11,8 @@ import { PolandMapSVG } from '@/components/shared/PolandMapSVG';
 import {
   VoivodeshipId,
   MapCity,
+  mapVoivodeships,
   getVoivodeshipById,
-  getMapStats,
 } from '@/data/map-data';
 import {
   fadeInUp,
@@ -58,9 +58,6 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
   const [activeVoivodeship, setActiveVoivodeship] = useState<VoivodeshipId | null>(null);
   const [hoveredVoivodeship, setHoveredVoivodeship] = useState<VoivodeshipId | null>(null);
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);
-
-  // Get map stats for legend
-  const stats = getMapStats();
 
   // Handlers
   const handleVoivodeshipClick = useCallback((voivodeshipId: VoivodeshipId) => {
@@ -145,6 +142,46 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
           whileInView="visible"
           viewport={mapViewportConfig}
         >
+          {/* Voivodeship Pills — always visible at top */}
+          <div className="relative z-20 flex items-center justify-center gap-3 pt-5 pb-2 px-6">
+            {mapVoivodeships.map((voiv) => {
+              const isActive = activeVoivodeship === voiv.id;
+              const isHovered = hoveredVoivodeship === voiv.id;
+
+              return (
+                <button
+                  key={voiv.id}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleVoivodeshipClick(voiv.id);
+                  }}
+                  onMouseEnter={() => handleVoivodeshipHover(voiv.id)}
+                  onMouseLeave={() => handleVoivodeshipHover(null)}
+                  className={clsx(
+                    'group flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer',
+                    isActive
+                      ? 'bg-primary text-white shadow-md'
+                      : isHovered
+                        ? 'bg-primary/15 text-primary'
+                        : 'bg-gray-100 text-gray-600 hover:bg-primary/10 hover:text-primary',
+                  )}
+                >
+                  <span
+                    className={clsx(
+                      'w-2 h-2 rounded-full transition-colors duration-200',
+                      isActive
+                        ? 'bg-white'
+                        : isHovered
+                          ? 'bg-primary'
+                          : 'bg-gray-400 group-hover:bg-primary',
+                    )}
+                  />
+                  <span>Woj. {voiv.name}</span>
+                </button>
+              );
+            })}
+          </div>
+
           {/* Back Button (zoomed mode only) */}
           {view === 'zoomed' && (
             <motion.button
@@ -162,21 +199,6 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
             </motion.button>
           )}
 
-          {/* Active Voivodeship Name (zoomed mode) */}
-          {view === 'zoomed' && activeVoivName && (
-            <motion.div
-              className={clsx(
-                'absolute top-4 left-1/2 -translate-x-1/2 z-20',
-                'px-4 py-2 bg-primary/10 rounded-full',
-                'text-sm font-bold text-primary uppercase tracking-wider'
-              )}
-              variants={fadeIn}
-              initial="hidden"
-              animate="visible"
-            >
-              Województwo {activeVoivName}
-            </motion.div>
-          )}
 
           {/* SVG Map */}
           <motion.div
@@ -220,23 +242,6 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
             )}
           </motion.div>
 
-          {/* Legend */}
-          <div className="absolute bottom-4 right-4 z-20">
-            <div className="map-legend">
-              <div className="map-legend-item">
-                <span className="map-legend-dot active" />
-                <span className="map-legend-text">
-                  Aktywne strony ({stats.citiesWithPages})
-                </span>
-              </div>
-              <div className="map-legend-item">
-                <span className="map-legend-dot coming-soon" />
-                <span className="map-legend-text">
-                  Wkrótce ({stats.citiesComingSoon})
-                </span>
-              </div>
-            </div>
-          </div>
 
           {/* Instructions (overview mode) */}
           {view === 'overview' && (

@@ -39,15 +39,14 @@ export {
 
 // --- Źródła projektów ---
 import type { Project } from './types';
-import { manualProjects } from './manual';
 import { galeriadomowProjects } from './galeriadomow';
 import { z500Projects } from './z500';
 
 // --- Złączona tablica wszystkich projektów ---
+// Z500 pierwsze (mniejszy katalog, wyższa jakość wizualizacji), potem Galeria Domów
 export const allProjects: Project[] = [
-  ...manualProjects,
-  ...galeriadomowProjects,
   ...z500Projects,
+  ...galeriadomowProjects,
 ];
 
 // --- Lookup helpers ---
