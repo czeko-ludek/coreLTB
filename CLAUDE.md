@@ -28,12 +28,33 @@ Scalable system for city-specific landing pages at `/obszar-dzialania/[slug]`.
 
 **Old file:** `data/local-pages.ts` is deprecated (still exists but no imports reference it)
 
+## Calculator / Wycena Page (`/wycena`)
+Lead generation landing page with cost calculator at `app/wycena/page.tsx`.
+
+**Architecture:**
+- `data/pricing.ts` — pricing engine: `calculateEstimate()`, material/labor/equipment breakdown per construction stage, geometric quantity calculations. Types: `CalculatorConfig`, `EstimateBreakdown`, `StageBreakdown`, `MaterialItem`. Labels: `WALL_LABELS`, `ROOF_LABELS`, `FLOOR_LABELS`, `GARAGE_LABELS`, `FINISH_LABELS`, `HEATING_LABELS`
+- `components/sections/calculator/CalculatorForm.tsx` — main form + estimate document. `useReducer` for form state (area, floors, wallType, roofType, garage, finish, heating, contact fields). Generates professional estimate PDF with logo, ref number, per-stage material tables, print CSS
+- `components/sections/calculator/CalculatorHero.tsx` — mobile-only hero header (white text on dark bg)
+- `components/sections/calculator/CalculatorTrustBar.tsx` — 4 trust badges (200+ domów, stała cena, gwarancja terminu, 5 lat gwarancji)
+- `components/sections/calculator/CalculatorTestimonials.tsx` — 8 testimonials, CSS marquee infinite scroll
+- `components/sections/calculator/CalculatorSteps.tsx` — "Od wyceny do budowy w 3 krokach"
+- `components/sections/calculator/HideHeader.tsx` — hides global header on desktop only (lg+), SSR inline `<style>` for zero flash
+- `components/ui/OptionCard.tsx` — reusable selection card for calculator options
+
+**Config options:** area (80-500 m², slider + manual input), floors (parterowy/piętrowy), wall type (silikat/ceramika/beton komórkowy), roof type (dwuspadowy/czterospadowy/kopertowy), garage (brak/jedno/dwustanowiskowy), finish standard (SSO/deweloperski/pod klucz), heating type (gazowe/pompa ciepła/elektryczne)
+
+**Mobile specifics:** Header hidden, custom hamburger menu + drawer (identical to Header component). Slider hidden, area input only. Estimate sections stack vertically.
+
+**Ads config:** See `docs/ads.md` for Google Ads / Meta Ads / analytics configuration.
+
 ## Key Files
 - `app/obszar-dzialania/[slug]/page.tsx` — local page route (Layout A)
 - `lib/schema/generators.ts` — Schema.org JSON-LD (FAQPage, Service, BreadcrumbList, LocalBusiness)
 - `app/sitemap.ts` — imports from `@/data/local`
 - `data/servicesV2.ts` — service definitions
 - `data/company-data.ts` — company info, telephone, email, schema helpers
+- `data/pricing.ts` — calculator pricing engine, material quantities, labels
+- `app/wycena/page.tsx` — calculator landing page route
 
 ## SEO Agent (SEO/seo-agent/)
 Node.js agent pulling real data from Google Search Console + GA4, generating Markdown reports.

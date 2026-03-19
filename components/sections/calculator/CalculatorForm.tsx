@@ -25,6 +25,7 @@ import {
   type EstimateBreakdown,
   type CalculatorConfig,
 } from '@/data/pricing';
+import { companyData } from '@/data/company-data';
 
 // ─── State ──────────────────────────────────────────────
 
@@ -52,13 +53,13 @@ type FormAction =
   | { type: 'CLEAR_ERRORS' };
 
 const initialState: FormState = {
-  area: 140,
-  floors: 'parterowy',
-  wallType: 'ceramika',
-  roofType: 'dwuspadowy',
-  garage: 'brak',
-  finish: 'deweloperski',
-  heating: 'gazowe',
+  area: 0,
+  floors: '' as FloorType,
+  wallType: '' as WallType,
+  roofType: '' as RoofType,
+  garage: '' as GarageType,
+  finish: '' as FinishType,
+  heating: '' as HeatingType,
   name: '',
   phone: '',
   email: '',
@@ -99,11 +100,11 @@ function formatPrice(n: number): string {
 
 function generateRefNumber(): string {
   const now = new Date();
-  const y = now.getFullYear().toString().slice(-2);
-  const m = (now.getMonth() + 1).toString().padStart(2, '0');
-  const d = now.getDate().toString().padStart(2, '0');
   const rand = Math.floor(Math.random() * 9000 + 1000);
-  return `WYC-${y}${m}${d}-${rand}`;
+  const d = now.getDate();
+  const m = now.getMonth() + 1;
+  const y = now.getFullYear();
+  return `${rand}/${d}/${m}/${y}`;
 }
 
 // ─── Component ──────────────────────────────────────────
@@ -129,23 +130,28 @@ export const CalculatorForm = () => {
     dispatch({ type: 'SET_FIELD', field, value });
   };
 
-  // Conditional logic
-  const availableFloors: FloorType[] =
-    state.roofType === 'plaski'
-      ? ['parterowy', 'pietrowy']
-      : ['parterowy', 'poddasze', 'pietrowy'];
+  // Conditional logic — poddasze always visible, wielospadowy always available
+  const availableFloors: FloorType[] = ['parterowy', 'poddasze', 'pietrowy'];
 
-  if (!availableFloors.includes(state.floors) && state.floors === 'poddasze') {
-    set('floors', 'parterowy');
-  }
-
+  // Plaski dach not available with poddasze (no attic space under flat roof)
   const availableRoofs: RoofType[] =
     state.floors === 'poddasze'
       ? ['dwuspadowy', 'wielospadowy']
       : ['plaski', 'dwuspadowy', 'wielospadowy'];
 
+  // If user switches to poddasze while plaski is selected, auto-switch roof
+  if (state.floors === 'poddasze' && state.roofType === 'plaski') {
+    set('roofType', 'dwuspadowy');
+  }
+
   function validate(): Record<string, string> {
     const errors: Record<string, string> = {};
+    if (!state.area || state.area < 80) errors.area = 'Podaj powierzchnię (min. 80 m²)';
+    if (!state.floors) errors.floors = 'Wybierz kondygnację';
+    if (!state.wallType) errors.wallType = 'Wybierz typ ścian';
+    if (!state.roofType) errors.roofType = 'Wybierz typ dachu';
+    if (!state.finish) errors.finish = 'Wybierz standard wykończenia';
+    if (!state.heating) errors.heating = 'Wybierz typ ogrzewania';
     if (!state.name.trim() || state.name.trim().length < 3) errors.name = 'Podaj imię i nazwisko';
     if (!state.phone.trim() || !/^[\d\s+()-]{9,15}$/.test(state.phone.replace(/\s/g, '')))
       errors.phone = 'Podaj prawidłowy numer telefonu';
@@ -155,6 +161,15 @@ export const CalculatorForm = () => {
     if (!state.consentContact) errors.consentContact = 'Wymagana zgoda';
     return errors;
   }
+
+  // Loading modal steps
+  const [loadingStep, setLoadingStep] = useState(-1);
+  const loadingSteps = [
+    'Analizujemy parametry budynku…',
+    'Obliczamy ilości materiałów…',
+    'Kalkulujemy koszty robocizny…',
+    'Przygotowujemy Twoją wycenę…',
+  ];
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -178,10 +193,16 @@ export const CalculatorForm = () => {
     };
 
     const result = calculateEstimate(config);
-    await new Promise((resolve) => setTimeout(resolve, 800));
+
+    // Animated loading steps
+    for (let i = 0; i < loadingSteps.length; i++) {
+      setLoadingStep(i);
+      await new Promise((resolve) => setTimeout(resolve, 1250));
+    }
 
     setEstimate(result);
     setSubmittedConfig(config);
+    setLoadingStep(-1);
     setIsSubmitting(false);
 
     setTimeout(() => {
@@ -198,7 +219,7 @@ export const CalculatorForm = () => {
   if (estimate && submittedConfig) {
     const today = new Date();
     const validUntil = new Date(today);
-    validUntil.setDate(validUntil.getDate() + 30);
+    validUntil.setDate(validUntil.getDate() + 14);
 
     return (
       <section className="bg-gray-100 min-h-screen py-8 md:py-14 print:bg-white print:py-0 print:min-h-0">
@@ -223,10 +244,10 @@ export const CalculatorForm = () => {
               print:shadow-none print:border-0 print:rounded-none"
             id="estimate-pdf"
           >
-            {/* Document Header with Logo */}
+            {/* Document Header — Company info + estimate number */}
             <div className="bg-background-dark p-8 md:p-10 print:p-10">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div className="flex items-center gap-4">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
+                <div className="flex flex-col sm:flex-row sm:items-start gap-4">
                   <Image
                     src="/images/logo-white.webp"
                     alt="CoreLTB Builders"
@@ -235,8 +256,14 @@ export const CalculatorForm = () => {
                     className="rounded-xl flex-shrink-0"
                   />
                   <div>
-                    <h1 className="text-white font-bold text-h5 md:text-h3 font-heading">CoreLTB Builders</h1>
+                    <h1 className="text-white font-bold text-h5 md:text-h3 font-heading">{companyData.name}</h1>
                     <p className="text-gray-300 text-body-xs md:text-body-sm mt-0.5">Generalny Wykonawca Domów Jednorodzinnych</p>
+                    <div className="mt-2 text-body-xs text-gray-400">
+                      <p>{companyData.address.streetAddress}, {companyData.address.postalCode} {companyData.address.addressLocality}</p>
+                      <p>tel. +48 664 123 757</p>
+                      <p>{companyData.email}</p>
+                      <p>coreltb.pl</p>
+                    </div>
                   </div>
                 </div>
                 <div className="md:text-right flex gap-3 md:block text-body-xs md:text-body-sm">
@@ -273,25 +300,41 @@ export const CalculatorForm = () => {
               </div>
             </div>
 
+            {/* Wstęp — introduction paragraph */}
+            <div className="px-5 md:px-10 py-5 border-b border-gray-200">
+              <p className="text-body-sm text-gray-700 leading-relaxed">
+                Szanowni Państwo, dziękujemy za zainteresowanie usługami {companyData.name}.
+                Poniżej przedstawiamy wstępną wycenę budowy domu jednorodzinnego o powierzchni <strong>{submittedConfig.area} m²</strong>.
+                Kalkulacja obejmuje materiały budowlane, robociznę, sprzęt oraz nadzór budowlany.
+                Ceny są cenami netto i mogą ulec zmianie po analizie projektu architektonicznego oraz warunków gruntowych na działce.
+              </p>
+            </div>
+
             {/* Total — Hero */}
             <div className="print-total px-5 md:px-10 py-5 md:py-6 border-b border-gray-200">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                {/* Left: label + price */}
+                {/* Left: prices */}
                 <div>
                   <p className="text-body-xs uppercase tracking-widest text-gray-500 font-semibold mb-1">
                     Szacunkowy koszt budowy
                   </p>
                   <p className="print-total-price text-h3 md:text-h1 font-bold text-text-primary font-heading leading-tight">
-                    {formatPrice(estimate.total.min)} – {formatPrice(estimate.total.max)}
+                    {formatPrice(estimate.totalPoRabacie.min)} – {formatPrice(estimate.totalPoRabacie.max)}
                   </p>
-                  <p className="print-total-unit text-body-sm text-gray-500 font-normal mt-0.5">złotych netto</p>
+                  <p className="print-total-unit text-body-sm text-gray-500 font-normal mt-0.5">
+                    złotych netto <span className="text-green-600 font-semibold">(po rabacie {Math.round(estimate.rabat * 100)}%)</span>
+                  </p>
+                  <p className="text-body-xs text-gray-400 mt-1">
+                    brutto po rabacie: {formatPrice(estimate.totalPoRabacieBrutto.min)} – {formatPrice(estimate.totalPoRabacieBrutto.max)} zł (8% VAT)
+                  </p>
                 </div>
                 {/* Right: meta stats */}
                 <div className="flex flex-wrap gap-x-4 gap-y-1 md:flex-col md:gap-2 md:items-end md:text-right">
                   {[
                     { icon: 'calendar' as const, text: `${estimate.czasRealizacji.min}–${estimate.czasRealizacji.max} miesięcy` },
                     { icon: 'ruler' as const, text: `${submittedConfig.area} m²` },
-                    { icon: 'coins' as const, text: `~${formatPrice(Math.round((estimate.total.min + estimate.total.max) / 2 / submittedConfig.area))} zł/m²` },
+                    { icon: 'coins' as const, text: `~${formatPrice(Math.round((estimate.totalPoRabacie.min + estimate.totalPoRabacie.max) / 2 / submittedConfig.area))} zł/m²` },
+                    { icon: 'shieldCheck' as const, text: `Gwarancja do ${estimate.gwarancja.konstrukcja / 12} lat` },
                   ].map((item) => (
                     <span key={item.icon} className="flex items-center gap-1.5 text-body-xs md:text-body-sm text-gray-700 font-medium">
                       <Icon name={item.icon} size="sm" className="text-primary" />
@@ -327,16 +370,16 @@ export const CalculatorForm = () => {
               </div>
             </div>
 
-            {/* Cost breakdown — per stage with materials */}
+            {/* Cost breakdown — per stage with included work items */}
             <div className="print-stages px-8 md:px-10 py-8 border-b border-gray-200">
               <h3 className="text-body-sm uppercase tracking-widest text-gray-500 font-semibold mb-6 flex items-center gap-2.5">
                 <Icon name="list" size="md" className="text-primary" />
-                Szczegółowe rozbicie kosztów
+                Zakres prac i kosztorys
               </h3>
 
-              <div className="space-y-6">
+              <div className="space-y-5">
                 {estimate.stages.map((stage, idx) => {
-                  const icons = ['mountain', 'layers', 'home', 'keyRound', 'zap', 'paintBrush'] as const;
+                  const icons = ['mountain', 'layers', 'home', 'keyRound', 'paintBrush'] as const;
                   const stageIcon = icons[idx] || 'home';
                   return (
                     <div key={stage.label} className="print-stage-card border border-gray-200 rounded-xl overflow-hidden">
@@ -348,42 +391,25 @@ export const CalculatorForm = () => {
                           </div>
                           <span className="text-body-sm md:text-body-md font-bold text-text-primary">{stage.label}</span>
                         </div>
-                        <span className="text-body-sm md:text-body-md font-bold text-primary tabular-nums mt-1 sm:mt-0 ml-12 sm:ml-0">
-                          {formatPrice(stage.total.min)} – {formatPrice(stage.total.max)} zł
+                        <span className="text-body-sm md:text-body-md font-bold text-text-primary tabular-nums mt-1 sm:mt-0 ml-12 sm:ml-0">
+                          {formatPrice(Math.round((stage.total.min + stage.total.max) / 2))} zł
                         </span>
                       </div>
 
-                      {/* Materials table */}
+                      {/* Description + Included items */}
                       <div className="print-stage-body px-4 md:px-5 py-3">
-                        <p className="text-body-xs uppercase tracking-wider text-gray-400 font-semibold mb-2">Materiały</p>
-                        {stage.materials.map((mat) => (
-                          <div key={mat.name} className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-1.5 text-body-sm border-b border-gray-100 last:border-0">
-                            <span className="text-gray-700">{mat.name}</span>
-                            <span className="text-gray-500 tabular-nums text-body-xs mt-0.5 sm:mt-0 sm:ml-4 flex-shrink-0">
-                              {mat.quantity} {mat.unit} × {formatPrice(mat.unitPrice)} zł = <strong className="text-gray-800">{formatPrice(mat.total)} zł</strong>
-                            </span>
-                          </div>
-                        ))}
-
-                        {/* Robocizna + Sprzęt */}
-                        <div className="mt-2 pt-2 border-t border-dashed border-gray-200 space-y-1.5">
-                          <div className="flex items-center justify-between text-body-sm">
-                            <span className="text-gray-500 flex items-center gap-1.5">
-                              <Icon name="users" size="sm" className="text-gray-400" />
-                              Robocizna
-                            </span>
-                            <strong className="text-gray-800 tabular-nums">{formatPrice(stage.robocizna)} zł</strong>
-                          </div>
-                          {stage.sprzet > 0 && (
-                            <div className="flex items-center justify-between text-body-sm">
-                              <span className="text-gray-500 flex items-center gap-1.5">
-                                <Icon name="construction" size="sm" className="text-gray-400" />
-                                Sprzęt i transport
-                              </span>
-                              <strong className="text-gray-800 tabular-nums">{formatPrice(stage.sprzet)} zł</strong>
-                            </div>
-                          )}
-                        </div>
+                        {stage.description && (
+                          <p className="text-body-xs text-gray-500 mb-3 leading-relaxed">{stage.description}</p>
+                        )}
+                        <p className="text-body-xs uppercase tracking-wider text-gray-400 font-semibold mb-2">Zakres prac</p>
+                        <ul className="space-y-1.5">
+                          {stage.includedItems.map((item) => (
+                            <li key={item} className="flex items-start gap-2 text-body-sm text-gray-700">
+                              <Icon name="check" size="sm" className="text-primary flex-shrink-0 mt-0.5 w-3.5 h-3.5" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
                   );
@@ -398,48 +424,70 @@ export const CalculatorForm = () => {
                       </div>
                       <span className="text-body-sm md:text-body-md font-bold text-text-primary">Garaż</span>
                     </div>
-                    <span className="text-body-sm md:text-body-md font-bold text-primary tabular-nums mt-1 sm:mt-0 ml-12 sm:ml-0">
-                      {formatPrice(estimate.garaz.min)} – {formatPrice(estimate.garaz.max)} zł
+                    <span className="text-body-sm md:text-body-md font-bold text-text-primary tabular-nums mt-1 sm:mt-0 ml-12 sm:ml-0">
+                      {formatPrice(Math.round((estimate.garaz.min + estimate.garaz.max) / 2))} zł
                     </span>
                   </div>
                 )}
               </div>
 
-              {/* Summary: materiały / robocizna / sprzęt */}
-              <div className="print-summary mt-6 pt-4 border-t border-gray-200 space-y-2 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:text-center">
-                <div className="flex justify-between sm:block">
-                  <p className="text-body-xs text-gray-400 uppercase tracking-wide">Materiały</p>
-                  <p className="text-body-sm sm:text-body-md font-bold text-text-primary sm:mt-1">{formatPrice(estimate.materialTotal)} zł</p>
-                </div>
-                <div className="flex justify-between sm:block">
-                  <p className="text-body-xs text-gray-400 uppercase tracking-wide">Robocizna</p>
-                  <p className="text-body-sm sm:text-body-md font-bold text-text-primary sm:mt-1">{formatPrice(estimate.robociznaTotal)} zł</p>
-                </div>
-                <div className="flex justify-between sm:block">
-                  <p className="text-body-xs text-gray-400 uppercase tracking-wide">Sprzęt</p>
-                  <p className="text-body-sm sm:text-body-md font-bold text-text-primary sm:mt-1">{formatPrice(estimate.sprzetTotal)} zł</p>
-                </div>
-              </div>
-
               {/* TOTAL */}
-              <div className="print-total-row flex flex-col sm:flex-row sm:items-center sm:justify-between pt-4 mt-4 border-t-2 border-primary">
-                <span className="text-body-md sm:text-h5 font-bold text-text-primary">RAZEM</span>
-                <span className="text-h5 font-bold text-primary tabular-nums">
-                  {formatPrice(estimate.total.min)} – {formatPrice(estimate.total.max)} zł
-                </span>
+              <div className="print-total-row pt-5 mt-5 border-t-2 border-primary space-y-2">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                  <span className="text-body-sm text-gray-500">Kwota netto</span>
+                  <span className="text-body-md font-bold text-text-primary tabular-nums">
+                    {formatPrice(estimate.total.min)} – {formatPrice(estimate.total.max)} zł
+                  </span>
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                  <span className="text-body-sm text-gray-500">Kwota brutto (8% VAT)</span>
+                  <span className="text-body-md font-semibold text-gray-600 tabular-nums">
+                    {formatPrice(estimate.totalBrutto.min)} – {formatPrice(estimate.totalBrutto.max)} zł
+                  </span>
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-primary/5 -mx-4 md:-mx-5 px-4 md:px-5 py-3 rounded-lg">
+                  <span className="text-body-md sm:text-h5 font-bold text-primary">Po rabacie ({Math.round(estimate.rabat * 100)}%) netto</span>
+                  <span className="text-h5 font-bold text-primary tabular-nums">
+                    {formatPrice(estimate.totalPoRabacie.min)} – {formatPrice(estimate.totalPoRabacie.max)} zł
+                  </span>
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-primary/5 -mx-4 md:-mx-5 px-4 md:px-5 py-2 rounded-lg">
+                  <span className="text-body-sm font-semibold text-primary/80">Po rabacie brutto</span>
+                  <span className="text-body-md font-bold text-primary/80 tabular-nums">
+                    {formatPrice(estimate.totalPoRabacieBrutto.min)} – {formatPrice(estimate.totalPoRabacieBrutto.max)} zł
+                  </span>
+                </div>
               </div>
             </div>
 
+            {/* Gwarancja */}
+            <div className="px-5 md:px-10 py-4 border-b border-gray-200">
+              <p className="text-body-sm text-gray-700 leading-relaxed">
+                <Icon name="shieldCheck" size="sm" className="text-primary inline mr-1.5 -mt-0.5" />
+                Na prace konstrukcyjne udzielamy <strong>{estimate.gwarancja.konstrukcja} miesięcy</strong> gwarancji,
+                na pozostałe prace budowlane <strong>{estimate.gwarancja.pozostale} miesięcy</strong> gwarancji.
+                Urządzenia objęte są dodatkową 12-miesięczną pogwarancyjną obsługą serwisową.
+              </p>
+            </div>
+
             {/* Disclaimers */}
-            <div className="print-disclaimers px-8 md:px-10 py-6 bg-gray-50">
+            <div className="print-disclaimers px-5 md:px-10 py-6 bg-gray-50">
               <div className="space-y-2.5 text-body-sm text-gray-600 leading-relaxed">
                 <p>
-                  <strong className="text-gray-800">Uwaga:</strong> Wycena ma charakter orientacyjny i została wygenerowana na podstawie uśrednionych
-                  cen rynkowych dla regionu Śląska i Małopolski. Dokładna kalkulacja wymaga analizy projektu architektonicznego
-                  i warunków gruntowych.
+                  <strong className="text-gray-800">Uwaga:</strong> Powyższy zakres prac nie zawiera w cenie przygotowania terenów zewnętrznych,
+                  wykonania przyłączy wod-kan, prądowych, gazowych oraz zagospodarowania terenów zewnętrznych.
+                  W cenie nie uwzględniono wykonania drogi dojazdowej oraz ogrodzenia terenu budowy.
                 </p>
-                <p>Ceny netto. Podane kwoty nie zawierają: projektu architektonicznego, przyłączy mediów, opłat administracyjnych.</p>
-                <p>Ważność wyceny: <strong className="text-gray-800">{validUntil.toLocaleDateString('pl-PL')}</strong> (30 dni od wygenerowania).</p>
+                <p>
+                  Wycena ma charakter orientacyjny i została sporządzona na podstawie parametrów wprowadzonych w kalkulatorze.
+                  Dokładna kalkulacja wymaga analizy projektu architektonicznego i warunków gruntowych na działce.
+                </p>
+                <p>
+                  Z wyrazami szacunku,<br />
+                  <strong className="text-gray-800">Zespół {companyData.name}</strong>
+                </p>
+                <p>Ważność wyceny: <strong className="text-gray-800">{validUntil.toLocaleDateString('pl-PL')}</strong> (14 dni od wygenerowania).</p>
+                <p className="text-body-xs text-gray-400 italic">Niniejsza oferta nie stanowi oferty handlowej w rozumieniu Kodeksu Cywilnego.</p>
               </div>
             </div>
 
@@ -448,7 +496,7 @@ export const CalculatorForm = () => {
               <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-body-sm text-gray-300">
                 <div className="flex items-center gap-3">
                   <Image src="/images/logo-white.webp" alt="CoreLTB" width={28} height={28} className="rounded-lg" />
-                  <span>CoreLTB Sp. z o.o. · ul. Grunwaldzka 34a, 43-600 Jaworzno</span>
+                  <span>{companyData.legalName} · {companyData.address.streetAddress}, {companyData.address.postalCode} {companyData.address.addressLocality}</span>
                 </div>
                 <div className="flex items-center gap-5">
                   <span className="flex items-center gap-1.5">
@@ -457,7 +505,7 @@ export const CalculatorForm = () => {
                   </span>
                   <span className="flex items-center gap-1.5">
                     <Icon name="mail" size="sm" className="text-primary" />
-                    coreltb@gmail.com
+                    {companyData.email}
                   </span>
                 </div>
               </div>
@@ -660,7 +708,7 @@ export const CalculatorForm = () => {
                     Powierzchnia użytkowa
                   </label>
                   <div className="bg-primary/10 text-primary font-bold px-4 py-1.5 rounded-lg text-h5 tabular-nums">
-                    {state.area} m²
+                    {state.area > 0 ? `${state.area} m²` : '— m²'}
                   </div>
                 </div>
 
@@ -699,7 +747,7 @@ export const CalculatorForm = () => {
                       min={80}
                       max={500}
                       step={5}
-                      value={state.area}
+                      value={state.area || 80}
                       onChange={(e) => set('area', Number(e.target.value))}
                       className="w-full h-2.5 bg-gray-200 rounded-full appearance-none cursor-pointer accent-primary
                         [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-7 [&::-webkit-slider-thumb]:h-7
@@ -961,6 +1009,73 @@ export const CalculatorForm = () => {
           </form>
         </div>
       </div>
+
+      {/* Loading Modal */}
+      {isSubmitting && loadingStep >= 0 && (
+        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-[90%] mx-4 p-10 md:p-12 text-center animate-in">
+            {/* Logo */}
+            <div className="flex justify-center mb-6">
+              <Image
+                src="/images/logo-black.webp"
+                alt="CoreLTB"
+                width={80}
+                height={80}
+                className="rounded-none"
+              />
+            </div>
+
+            {/* Greeting */}
+            <h3 className="text-h4 md:text-h3 font-bold font-heading text-text-primary mb-2">
+              {state.name ? `${state.name.split(' ')[0]}, przygotowujemy Twoją wycenę` : 'Przygotowujemy Twoją wycenę'}
+            </h3>
+            <p className="text-body-md text-text-muted mb-8">
+              Każda wycena jest kalkulowana indywidualnie na podstawie aktualnych cen materiałów i robocizny.
+            </p>
+
+            {/* Progress steps */}
+            <div className="space-y-3 text-left mb-8">
+              {loadingSteps.map((step, i) => (
+                <div
+                  key={i}
+                  className={`flex items-center gap-3 transition-all duration-500 ${
+                    i < loadingStep
+                      ? 'opacity-100'
+                      : i === loadingStep
+                      ? 'opacity-100'
+                      : 'opacity-30'
+                  }`}
+                >
+                  {i < loadingStep ? (
+                    <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                      <Icon name="check" size="sm" className="text-white w-3.5 h-3.5" />
+                    </div>
+                  ) : i === loadingStep ? (
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <span className="w-5 h-5 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+                    </div>
+                  ) : (
+                    <div className="w-6 h-6 rounded-full bg-gray-200 flex-shrink-0" />
+                  )}
+                  <span className={`text-body-sm ${
+                    i <= loadingStep ? 'text-text-primary font-medium' : 'text-gray-400'
+                  }`}>
+                    {step}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Progress bar */}
+            <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-primary rounded-full transition-all duration-700 ease-out"
+                style={{ width: `${((loadingStep + 1) / loadingSteps.length) * 100}%` }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
