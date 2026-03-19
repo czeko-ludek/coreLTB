@@ -79,71 +79,87 @@ const headerData = {
 
 // Footer data
 const footerData = {
-  contactInfo: [
-    {
-      iconName: "phone" as const,
-      title: "Zadzwoń",
-      content: "+48 664 123 757",
-    },
-    {
-      iconName: "clock" as const,
-      title: "Godziny otwarcia",
-      content: "Pn - Pt: 8:00 - 18:00",
-    },
-    {
-      iconName: "mail" as const,
-      title: "Pomoc",
-      content: "kontakt@coreltb.pl",
-    },
-    {
-      iconName: "mapPin" as const,
-      title: "Adres",
-      content: "Coreltb Builders sp. z o.o., ul. Wałowa 55, 44-300 Wodzisław Śląski",
-    },
-  ],
   logo: { src: "/logo.webp", alt: "CoreLTB Builders" },
-  about: "Budujemy marzenia i konstruujemy przyszłość. Jesteśmy zobowiązani do dostarczania wyjątkowych usług budowlanych.",
-  linkGroups: [
+  about: "Generalny wykonawca domów jednorodzinnych na Śląsku, w Małopolsce i na Opolszczyźnie. Od 2005 roku łączymy rzemieślniczą dokładność z profesjonalnym zarządzaniem projektami.",
+  topBar: {
+    phone: "+48 664 123 757",
+    phoneHref: "tel:+48664123757",
+    email: "coreltb@gmail.com",
+    hours: "Pn–Pt 8:00–18:00",
+  },
+  companyLinks: [
+    { label: "O nas", href: "/o-nas" },
+    { label: "Realizacje", href: "/projekty" },
+    { label: "Obszar działania", href: "/obszar-dzialania" },
+    { label: "Kontakt", href: "/kontakt" },
+  ],
+  serviceLinks: [
+    { label: "Budowa domów", href: "/oferta/kompleksowa-budowa-domow" },
+    { label: "Projektowanie", href: "/oferta/projektowanie" },
+    { label: "Nadzór i doradztwo", href: "/oferta/nadzor-i-doradztwo" },
+    { label: "Usługi techniczne", href: "/oferta/uslugi-techniczne" },
+    { label: "Zagospodarowanie terenu", href: "/oferta/zagospodarowanie-terenu" },
+  ],
+  areas: {
+    title: "Obszar Działania",
+    titleHref: "/obszar-dzialania",
+    columns: [
+      {
+        subtitle: "Śląskie",
+        links: [
+          { label: "Katowice", href: "/obszar-dzialania/katowice" },
+          { label: "Gliwice", href: "/obszar-dzialania/gliwice" },
+          { label: "Zabrze", href: "/obszar-dzialania/zabrze" },
+          { label: "Tychy", href: "/obszar-dzialania/tychy" },
+          { label: "Mikołów", href: "/obszar-dzialania/mikolow" },
+          { label: "Jaworzno", href: "/obszar-dzialania/jaworzno" },
+          { label: "Rybnik", href: "/obszar-dzialania/rybnik" },
+          { label: "Wodzisław Śl.", href: "/obszar-dzialania/wodzislaw-slaski" },
+          { label: "Żory", href: "/obszar-dzialania/zory" },
+          { label: "Jastrzębie-Zdrój", href: "/obszar-dzialania/jastrzebie-zdroj" },
+          { label: "Racibórz", href: "/obszar-dzialania/raciborz" },
+        ],
+      },
+      {
+        subtitle: "Małopolskie",
+        links: [
+          { label: "Kraków", href: "/obszar-dzialania/krakow" },
+          { label: "Chrzanów", href: "/obszar-dzialania/chrzanow" },
+          { label: "Oświęcim", href: "/obszar-dzialania/oswiecim" },
+          { label: "Olkusz", href: "/obszar-dzialania/olkusz" },
+        ],
+      },
+      {
+        subtitle: "Opolskie",
+        links: [
+          { label: "Opole", href: "/obszar-dzialania/opole" },
+          { label: "Kędzierzyn-Koźle", href: "/obszar-dzialania/kedzierzyn-kozle" },
+        ],
+      },
+    ],
+  },
+  locations: [
     {
-      title: "Przydatne linki",
-      links: [
-        { label: "O nas", href: "/o-nas" },
-        { label: "Nasze usługi", href: "/oferta" },
-        { label: "Projekty", href: "/projekty" },
-        { label: "Kontakt", href: "/kontakt" },
-      ],
+      name: "Baza Jaworzno (HQ)",
+      address: "ul. Grunwaldzka 34a, 43-600 Jaworzno",
     },
     {
-      title: "Obszar Działania",
-      titleHref: "/obszar-dzialania",
-      links: [
-        { label: "Rybnik", href: "/obszar-dzialania/rybnik" },
-        { label: "Katowice", href: "/obszar-dzialania/katowice" },
-        { label: "Tychy", href: "/obszar-dzialania/tychy" },
-        { label: "Jaworzno", href: "/obszar-dzialania/jaworzno" },
-        { label: "Wodzisław Śląski", href: "/obszar-dzialania/wodzislaw-slaski" },
-      ],
+      name: "Baza Wodzisław Śl.",
+      address: "ul. Wałowa 55, 44-300 Wodzisław Śląski",
     },
   ],
-  newsletter: {
-    title: "Newsletter",
-    description: "Zapisz się do naszego newslettera, aby otrzymywać najnowsze informacje i oferty.",
-    placeholder: "Twój email",
-  },
+  socials: [
+    { platform: "facebook" as const, href: "https://facebook.com" },
+    { platform: "instagram" as const, href: "https://instagram.com" },
+    { platform: "linkedin" as const, href: "https://linkedin.com" },
+  ],
   bottomBar: {
-    copyright: `Copyright © ${new Date().getFullYear()} CoreLTB Builders. Wszelkie prawa zastrzeżone.`,
+    copyright: `© ${new Date().getFullYear()} CoreLTB Builders sp. z o.o. Wszelkie prawa zastrzeżone.`,
     links: [
       { label: "Regulamin", href: "/terms" },
       { label: "Polityka prywatności", href: "/privacy" },
     ],
   },
-  socials: [
-    { platform: "facebook" as const, href: "https://facebook.com" },
-    { platform: "twitter" as const, href: "https://twitter.com" },
-    { platform: "instagram" as const, href: "https://instagram.com" },
-    { platform: "linkedin" as const, href: "https://linkedin.com" },
-    { platform: "youtube" as const, href: "https://youtube.com" },
-  ],
 };
 
 export default function RootLayout({

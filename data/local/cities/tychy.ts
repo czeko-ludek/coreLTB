@@ -17,17 +17,17 @@ export const tychyData: CityData = {
 
   emotionalHero: {
     label: 'BUDOWA DOMÓW TYCHY',
-    headline: ['Budujesz Dom w Tychach?', 'Lokalna Specjalizacja Ma Znaczenie'],
-    subtitle: 'Tychy i okolice to teren, gdzie grunty gliniaste i wpływy górnicze wymagają specjalistycznego podejścia. Nie jesteśmy pośrednikiem – dysponujemy własnym zapleczem i realizujemy domy od 8 do 14 miesięcy.',
+    headline: ['Budujesz dom w Tychach?', 'Własne ekipy, stała cena, pełna kontrola'],
+    subtitle: 'Budujemy domy jednorodzinne w Tychach i okolicach — od stanu zero do klucza. Nie jesteśmy pośrednikiem: mamy własne ekipy, sprzęt i zaplecze logistyczne. Realizacja w 8-14 miesięcy ze stałą ceną w umowie.',
     benefits: [
       'Własne zaplecze sprzętowe i ekipy (bez pośredników)',
-      'Specjalizacja w trudnych gruntach i terenach górniczych',
+      'Technologia dobrana do warunków gruntowych Twojej działki',
       'Realizacja od stanu zero do klucza w 8-14 miesięcy',
     ],
     ctaBoxTitle: '☎ Umów Bezpłatną Konsultację',
     ctaBoxBenefits: [
-      'Ocenimy specyfikę Twojej działki i gruntu',
-      'Sprawdzimy kategorię terenu górniczego',
+      'Ocenimy warunki gruntowe Twojej działki',
+      'Dobierzemy optymalną technologię fundamentu',
       'Przedstawimy realny harmonogram i kosztorys',
       'Odpowiemy na wszystkie Twoje pytania',
     ],
@@ -109,7 +109,7 @@ export const tychyData: CityData = {
       },
     ],
     image: {
-      src: '/images/local/tychy/hero.webp',
+      src: '/images/local/shared/specyfika-plyta.webp',
       alt: 'Budowa domu w Tychach – specyfika terenów górniczych',
     },
   },

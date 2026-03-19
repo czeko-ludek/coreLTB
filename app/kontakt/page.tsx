@@ -22,7 +22,7 @@ export default function ContactPage() {
 					{ label: "Strona główna", href: "/" },
 					{ label: "Kontakt" },
 				]}
-				className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8"
+				className="container mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2"
 			/>
 			<BentoContactSection contactInfo={contactInfo} />
 		</main>

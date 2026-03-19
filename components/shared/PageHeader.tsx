@@ -18,8 +18,8 @@ export function PageHeader({
   backgroundImage,
 }: PageHeaderProps) {
   return (
-    <div className="px-4 md:px-[50px] mt-8">
-      <section className="relative h-[350px] md:h-[450px] overflow-hidden rounded-3xl shadow-2xl">
+    <div className="px-4 md:px-[50px] mt-3 md:mt-8">
+      <section className="relative h-[187px] md:h-[340px] overflow-hidden rounded-3xl shadow-2xl">
         {/* 1. Background Image with zoom animation */}
         <Image
           src={backgroundImage}

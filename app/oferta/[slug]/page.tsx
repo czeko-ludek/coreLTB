@@ -68,31 +68,18 @@ export default async function ServicePageV2({
 
   return (
     <main>
-      {/* ====== MOBILE HEADER: kompaktowe breadcrumbs + H1 (full-width, bez kafelka) ====== */}
-      <div className="md:hidden bg-white pt-4 pb-2 px-4">
-        {/* Breadcrumbs — kompaktowe */}
-        <Breadcrumbs
-          items={breadcrumbItems}
-          className="text-xs [&_ol]:text-xs [&_ol]:gap-1 mb-2"
-        />
-        {/* H1 — kompaktowy, bez obrazka hero */}
-        <h1 className="text-2xl font-bold text-text-primary leading-tight">
-          {service.pageHeader.title}
-        </h1>
-      </div>
+      {/* Breadcrumbs — nad hero */}
+      <Breadcrumbs
+        items={breadcrumbItems}
+        className="container mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2"
+      />
 
-      {/* ====== DESKTOP HEADER: pełny PageHeader z hero image ====== */}
-      <div className="hidden md:block">
-        <PageHeader
-          title={service.pageHeader.title}
-          watermarkText={service.pageHeader.watermarkText}
-          backgroundImage={service.pageHeader.backgroundImage}
-        />
-        <Breadcrumbs
-          items={breadcrumbItems}
-          className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8"
-        />
-      </div>
+      {/* PageHeader z hero image — mobile + desktop */}
+      <PageHeader
+        title={service.pageHeader.title}
+        watermarkText={service.pageHeader.watermarkText}
+        backgroundImage={service.pageHeader.backgroundImage}
+      />
 
       {/* Sekcja 1: CTA box pierwszy na mobile, tekst drugi */}
       <EmotionalHeroSection {...service.emotionalHero} />

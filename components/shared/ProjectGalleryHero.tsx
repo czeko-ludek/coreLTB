@@ -8,14 +8,22 @@ import type { Swiper as SwiperType } from 'swiper';
 import { Icon, Portal } from '@/components/ui';
 import { useToggle } from '@/hooks/useToggle';
 import { useMirrorMode } from '@/contexts/MirrorModeContext';
+import { type ProjectSource } from '@/data/projects';
+
+/** Label kolekcji — kolor tła zależny od źródła */
+const SOURCE_BADGE: Record<string, { label: string; bg: string }> = {
+  z500:         { label: 'Z500',          bg: '#d9308a' },
+  galeriadomow: { label: 'Galeria Domów', bg: '#e75c55' },
+};
 
 export interface ProjectGalleryHeroProps {
   slug: string;
   alt: string;
   galleryImageCount: number;
+  source?: ProjectSource;
 }
 
-export function ProjectGalleryHero({ slug, alt, galleryImageCount }: ProjectGalleryHeroProps) {
+export function ProjectGalleryHero({ slug, alt, galleryImageCount, source }: ProjectGalleryHeroProps) {
   const [isLightboxOpen, , setIsLightboxOpen] = useToggle(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
@@ -54,12 +62,14 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount }: ProjectGall
     return () => window.removeEventListener('keydown', handleEscape);
   }, [isLightboxOpen, closeLightbox]);
 
+  const sourceBadge = source ? SOURCE_BADGE[source] : undefined;
+
   return (
     <>
       {/* Gallery - Mobile: Main + 2 Small, Desktop: Grid */}
-      <section className="py-6 md:py-8 px-4 md:px-8 lg:px-[50px]">
+      <section className="py-4 md:py-6 px-4 md:px-6 lg:px-[38px]">
         {/* Mobile: Main Image + 2 Smaller Images Below */}
-        <div className="lg:hidden space-y-4">
+        <div className="lg:hidden space-y-3">
           {/* Main Large Image */}
           <div
             className="relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
@@ -73,14 +83,25 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount }: ProjectGall
               sizes="100vw"
               priority
             />
+            {/* Badge kolekcji - lewy górny (mobile) */}
+            {sourceBadge && (
+              <div className="absolute top-3 left-3 z-10">
+                <span
+                  className="text-white text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-md shadow-sm"
+                  style={{ backgroundColor: sourceBadge.bg }}
+                >
+                  {sourceBadge.label}
+                </span>
+              </div>
+            )}
           </div>
 
           {/* 2 Smaller Images Below - Side by Side */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
             {allImages.slice(1, 3).map((src, index) => (
               <div
                 key={index}
-                className="relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
+                className="relative aspect-[4/3] rounded-lg overflow-hidden cursor-pointer"
                 onClick={() => openLightbox(index + 1)}
               >
                 <Image
@@ -104,10 +125,10 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount }: ProjectGall
         </div>
 
         {/* Desktop: Grid Layout */}
-        <div className="hidden lg:grid grid-cols-3 gap-4">
+        <div className="hidden lg:grid grid-cols-3 gap-3">
           {/* Main Large Image - Left (2 columns on desktop) */}
           <div
-            className="col-span-2 relative h-[576px] rounded-xl overflow-hidden cursor-pointer group"
+            className="col-span-2 relative h-[432px] rounded-xl overflow-hidden cursor-pointer group"
             onClick={() => openLightbox(0)}
           >
             <Image
@@ -119,10 +140,21 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount }: ProjectGall
               priority
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+            {/* Badge kolekcji - lewy górny (desktop) */}
+            {sourceBadge && (
+              <div className="absolute top-4 left-4 z-10">
+                <span
+                  className="text-white text-sm font-bold uppercase tracking-wide px-4 py-2 rounded-md shadow-md"
+                  style={{ backgroundColor: sourceBadge.bg }}
+                >
+                  {sourceBadge.label}
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Right Side - 2 Smaller Images */}
-          <div className="grid grid-cols-1 gap-4 h-[576px]">
+          <div className="grid grid-cols-1 gap-3 h-[432px]">
             {allImages.slice(1, 3).map((src, index) => (
               <div
                 key={index}

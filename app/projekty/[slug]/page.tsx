@@ -72,6 +72,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           slug={project.slug}
           alt={project.alt}
           galleryImageCount={project.galleryImageCount}
+          source={project.source}
         />
 
         {/* Introduction Section with Price and CTA */}

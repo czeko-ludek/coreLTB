@@ -34,8 +34,11 @@ export function FAQTwoColumnsSection({
   header,
   items,
 }: FAQTwoColumnsSectionProps) {
-  const [activeIndex, setActiveIndex] = useState<number | null>(items.length > 0 ? 0 : null);
   const [isMobile, setIsMobile] = useState(false);
+  // Na mobile startujemy z null (żeby bottom sheet nie wyskakiwał od razu),
+  // na desktop z 0 (żeby prawa kolumna nie była pusta)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [hasInitialized, setHasInitialized] = useState(false);
 
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -46,12 +49,18 @@ export function FAQTwoColumnsSection({
   // Check if mobile on mount and resize
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      // Przy pierwszym renderze: na desktop otwórz pytanie 1, na mobile zostaw zamknięte
+      if (!hasInitialized && items.length > 0) {
+        setActiveIndex(mobile ? null : 0);
+        setHasInitialized(true);
+      }
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  }, [hasInitialized, items.length]);
 
   // Prevent body scroll when bottom sheet is open on mobile
   useEffect(() => {

@@ -48,6 +48,16 @@ const existingPageSlugs = new Set([
   'jaworzno',
   'mikolow',
   'gliwice',
+  'zabrze',
+  'zory',
+  'jastrzebie-zdroj',
+  'raciborz',
+  'chrzanow',
+  'krakow',
+  'oswiecim',
+  'olkusz',
+  'opole',
+  'kedzierzyn-kozle',
 ]);
 
 /**
@@ -86,28 +96,30 @@ const slaskieCities: MapCity[] = [
   createCity('katowice', 'Katowice', 'Katowice', 'katowice', 'slaskie', 738, 1132),
   createCity('tychy', 'Tychy', 'Tychy', 'tychy', 'slaskie', 734, 1158),
   createCity('jaworzno', 'Jaworzno', 'Jaworzno', 'jaworzno', 'slaskie', 771, 1142),
-  createCity('zory', 'Żory', 'Żory', null, 'slaskie', 688, 1174),
+  createCity('zory', 'Żory', 'Żory', 'zory', 'slaskie', 688, 1174),
   createCity('gliwice', 'Gliwice', 'Gliwice', 'gliwice', 'slaskie', 679, 1109),
-  createCity('zabrze', 'Zabrze', 'Zabrze', null, 'slaskie', 708, 1103),
+  createCity('zabrze', 'Zabrze', 'Zabrze', 'zabrze', 'slaskie', 708, 1103),
   createCity('mikolow', 'Mikołów', 'Mikołów', 'mikolow', 'slaskie', 711, 1148),
+  createCity('jastrzebie-zdroj', 'Jastrzębie-Zdrój', 'Jastrzębie-Zdrój', 'jastrzebie-zdroj', 'slaskie', 650, 1205),
+  createCity('raciborz', 'Racibórz', 'Racibórz', 'raciborz', 'slaskie', 624, 1170),
 ];
 
 /**
  * Województwo Małopolskie
  */
 const malopolskieCities: MapCity[] = [
-  createCity('krakow', 'Kraków', 'Kraków', null, 'malopolskie', 877, 1171),
-  createCity('chrzanow', 'Chrzanów', 'Chrzanów', null, 'malopolskie', 795, 1166),
-  createCity('oswiecim', 'Oświęcim', 'Oświęcim', null, 'malopolskie', 766, 1197),
-  createCity('olkusz', 'Olkusz', 'Olkusz', null, 'malopolskie', 825, 1105),
+  createCity('krakow', 'Kraków', 'Kraków', 'krakow', 'malopolskie', 877, 1171),
+  createCity('chrzanow', 'Chrzanów', 'Chrzanów', 'chrzanow', 'malopolskie', 795, 1166),
+  createCity('oswiecim', 'Oświęcim', 'Oświęcim', 'oswiecim', 'malopolskie', 766, 1197),
+  createCity('olkusz', 'Olkusz', 'Olkusz', 'olkusz', 'malopolskie', 825, 1105),
 ];
 
 /**
  * Województwo Opolskie
  */
 const opolskieCities: MapCity[] = [
-  createCity('opole', 'Opole', 'Opole', null, 'opolskie', 579, 1021),
-  createCity('kedzierzyn-kozle', 'Kędzierzyn-Koźle', 'Kędzierzyn-Koźle', null, 'opolskie', 617, 1100),
+  createCity('opole', 'Opole', 'Opole', 'opole', 'opolskie', 579, 1021),
+  createCity('kedzierzyn-kozle', 'Kędzierzyn-Koźle', 'Kędzierzyn-Koźle', 'kedzierzyn-kozle', 'opolskie', 617, 1100),
 ];
 
 /**

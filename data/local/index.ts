@@ -14,6 +14,16 @@ import { katowiceData } from './cities/katowice';
 import { jaworznoData } from './cities/jaworzno';
 import { mikolowData } from './cities/mikolow';
 import { gliwiceData } from './cities/gliwice';
+import { zabrzeData } from './cities/zabrze';
+import { zoryData } from './cities/zory';
+import { jastrzebieData } from './cities/jastrzebie-zdroj';
+import { raciborzData } from './cities/raciborz';
+import { chrzanowData } from './cities/chrzanow';
+import { krakowData } from './cities/krakow';
+import { oswiecimData } from './cities/oswiecim';
+import { olkuszData } from './cities/olkusz';
+import { opoleData } from './cities/opole';
+import { kedzierzynData } from './cities/kedzierzyn-kozle';
 
 // ── Registry ──
 const allCities: CityData[] = [
@@ -24,6 +34,16 @@ const allCities: CityData[] = [
   jaworznoData,
   mikolowData,
   gliwiceData,
+  zabrzeData,
+  zoryData,
+  jastrzebieData,
+  raciborzData,
+  chrzanowData,
+  krakowData,
+  oswiecimData,
+  olkuszData,
+  opoleData,
+  kedzierzynData,
 ];
 
 // ─── Placeholder Replacement ──────────────────────────────────────

@@ -436,6 +436,7 @@ export function ProjectsListingSection({
                       estimatedBuildCost={project.estimatedBuildCost}
                       price={project.price}
                       thumbnailSrc={project.thumbnailSrc}
+                      source={project.source}
                       inView={inView}
                       delay={index < 6 ? 0.3 + index * 0.08 : 0}
                       priority={currentPage === 1 && index < 3}

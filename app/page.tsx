@@ -178,8 +178,9 @@ export default function Home() {
 				cities: [
 					{ label: "Wodzisław Śląski", href: "/obszar-dzialania/wodzislaw-slaski" },
 					{ label: "Rybnik", href: "/obszar-dzialania/rybnik" },
-					{ label: "Żory" },
-					{ label: "Jastrzębie-Zdrój" },
+					{ label: "Żory", href: "/obszar-dzialania/zory" },
+					{ label: "Jastrzębie-Zdrój", href: "/obszar-dzialania/jastrzebie-zdroj" },
+					{ label: "Racibórz", href: "/obszar-dzialania/raciborz" },
 				],
 			},
 			{
@@ -190,14 +191,23 @@ export default function Home() {
 					{ label: "Gliwice", href: "/obszar-dzialania/gliwice" },
 					{ label: "Tychy", href: "/obszar-dzialania/tychy" },
 					{ label: "Mikołów", href: "/obszar-dzialania/mikolow" },
+					{ label: "Zabrze", href: "/obszar-dzialania/zabrze" },
 				],
 			},
 			{
 				name: "HUB MAŁOPOLSKA",
 				cities: [
-					{ label: "Chrzanów" },
-					{ label: "Kraków" },
-					{ label: "Oświęcim" },
+					{ label: "Chrzanów", href: "/obszar-dzialania/chrzanow" },
+					{ label: "Kraków", href: "/obszar-dzialania/krakow" },
+					{ label: "Oświęcim", href: "/obszar-dzialania/oswiecim" },
+					{ label: "Olkusz", href: "/obszar-dzialania/olkusz" },
+				],
+			},
+			{
+				name: "HUB OPOLSKIE",
+				cities: [
+					{ label: "Opole", href: "/obszar-dzialania/opole" },
+					{ label: "Kędzierzyn-Koźle", href: "/obszar-dzialania/kedzierzyn-kozle" },
 				],
 			},
 		],

@@ -2,6 +2,13 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@/components/ui';
+import { type ProjectSource } from '@/data/projects';
+
+/** Label kolekcji — kolor tła zależny od źródła */
+const SOURCE_BADGE: Record<string, { label: string; bg: string }> = {
+  z500:         { label: 'Z500',          bg: '#d9308a' },
+  galeriadomow: { label: 'Galeria Domów', bg: '#e75c55' },
+};
 
 export interface ProjectCardProps {
   slug: string;
@@ -10,6 +17,7 @@ export interface ProjectCardProps {
   price: string;
   surfaceArea: string;
   technology: string;
+  source?: ProjectSource;
 }
 
 export function ProjectCard({
@@ -19,8 +27,10 @@ export function ProjectCard({
   price,
   surfaceArea,
   technology,
+  source,
 }: ProjectCardProps) {
   const thumbnailPath = `/images/projekty/${slug}/thumbnail.webp`;
+  const sourceBadge = source ? SOURCE_BADGE[source] : undefined;
 
   return (
     <Link
@@ -36,6 +46,18 @@ export function ProjectCard({
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
         />
+
+        {/* Badge kolekcji - lewy górny */}
+        {sourceBadge && (
+          <div className="absolute top-3 left-3 z-10">
+            <span
+              className="text-white text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-md shadow-sm"
+              style={{ backgroundColor: sourceBadge.bg }}
+            >
+              {sourceBadge.label}
+            </span>
+          </div>
+        )}
 
         {/* Technology badge - bottom right */}
         <div className="absolute bottom-4 right-4 z-10">

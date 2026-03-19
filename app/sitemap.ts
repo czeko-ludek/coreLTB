@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { allServicesV2 } from '@/data/servicesV2';
 import { allProjects } from '@/data/projects';
 import { getAllLocalPageSlugs } from '@/data/local';
+import { getAllNadzorSlugs } from '@/data/nadzor';
 import { companyData } from '@/data/company-data';
 
 // Wymagane dla output: 'export' (static HTML)
@@ -82,5 +83,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...servicePages, ...projectPages, ...localPages];
+  // Strony nadzoru per-miasto (/kierownik-budowy-[miasto])
+  const nadzorPages: MetadataRoute.Sitemap = getAllNadzorSlugs().map((slug) => ({
+    url: `${BASE_URL}/${slug}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...servicePages, ...projectPages, ...localPages, ...nadzorPages];
 }

@@ -116,7 +116,12 @@
               <text x="777" y="1145" class="label">Jaworzno</text>
               <circle cx="877" cy="1171" r="4" class="miasto"/>
               <text x="884" y="1174" class="label">Kraków</text>
-            <circle cx="795" cy="1166" r="4" class="miasto"/><text x="802" y="1169" class="label">Chrzanów</text><circle cx="766" cy="1197" r="4" class="miasto"/><text x="773" y="1200" class="label">Oświęcim</text><circle cx="825" cy="1105" r="4" class="miasto"/><text x="832" y="1108" class="label">Olkusz</text><circle cx="579" cy="1021" r="4" class="miasto"/><text x="586" y="1024" class="label">Opole</text><circle cx="617" cy="1100" r="4" class="miasto"/><text x="624" y="1103" class="label">Kędzierzyn-Koźle</text></g>
+            <circle cx="795" cy="1166" r="4" class="miasto"/><text x="802" y="1169" class="label">Chrzanów</text><circle cx="766" cy="1197" r="4" class="miasto"/><text x="773" y="1200" class="label">Oświęcim</text><circle cx="825" cy="1105" r="4" class="miasto"/><text x="832" y="1108" class="label">Olkusz</text><circle cx="579" cy="1021" r="4" class="miasto"/><text x="586" y="1024" class="label">Opole</text><circle cx="617" cy="1100" r="4" class="miasto"/><text x="624" y="1103" class="label">Kędzierzyn-Koźle</text>
+              <circle cx="650" cy="1205" r="4" class="miasto"/>
+              <text x="622" y="1210" class="label">Jastrzębie-Zdrój</text>
+              <circle cx="624" cy="1170" r="4" class="miasto"/>
+              <text x="589" y="1173" class="label">Racibórz</text>
+            </g>
             <!-- MIASTA ŚLĄSKIEGO -->
               <g id="miasta-slaskie">
               </g>

@@ -17,17 +17,17 @@ export const rybnikData: CityData = {
 
   emotionalHero: {
     label: 'BUDOWA DOMÓW RYBNIK',
-    headline: ['Budujesz Dom w Rybniku?', 'Teren Górniczy Wymaga Specjalistów'],
-    subtitle: 'Rybnik to teren górniczy kategorii II-IV. Standardowy projekt katalogowy nie wystarczy – potrzebujesz wykonawcy, który zna lokalne uwarunkowania i zabezpieczy Twój dom przed skutkami eksploatacji górniczej.',
+    headline: ['Budujesz dom w Rybniku?', 'Mamy tu bazę i 15 lat doświadczenia'],
+    subtitle: 'Rybnik to nasz teren — budujemy tu domy od stanu zero do klucza od ponad 15 lat. Znamy każdą dzielnicę, lokalne warunki gruntowe i urzędy. Dobieramy technologię do Twojej działki — nie do uśrednionej kategorii z mapy.',
     benefits: [
-      'Specjalizacja w budowie na terenach górniczych (kat. II-IV)',
-      'Płyty fundamentowe i wzmocnione konstrukcje jako standard',
       '15 lat doświadczenia w powiecie rybnickim',
+      'Technologia fundamentu dobrana do warunków Twojej działki',
+      'Stała cena w umowie — bez niespodzianek w trakcie budowy',
     ],
     ctaBoxTitle: '☎ Umów Bezpłatną Konsultację',
     ctaBoxBenefits: [
-      'Ocenimy kategorię terenu górniczego Twojej działki',
-      'Dobierzemy odpowiednie rozwiązania konstrukcyjne',
+      'Ocenimy warunki gruntowe Twojej działki',
+      'Dobierzemy optymalną technologię fundamentu',
       'Przedstawimy realny kosztorys budowy',
       'Odpowiemy na wszystkie Twoje pytania',
     ],
@@ -75,7 +75,7 @@ export const rybnikData: CityData = {
       },
     ],
     image: {
-      src: '/images/local/rybnik/hero.webp',
+      src: '/images/local/shared/specyfika-plyta.webp',
       alt: 'Budowa domu na terenach górniczych w Rybniku',
     },
   },
@@ -203,7 +203,7 @@ export const rybnikData: CityData = {
         },
       ],
       image: {
-        src: '/images/local/rybnik/etapy-budowy.webp',
+        src: '/images/local/shared/etapy-gornicze.webp',
         alt: 'Etapy budowy domu w Rybniku - od stanu surowego do wykończenia pod klucz',
       },
     },

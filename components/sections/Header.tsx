@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -72,8 +72,23 @@ export function Header({
     setMobileMenuOpen(false);
   }, []);
 
+  // Measure header height → CSS variable for sticky elements
+  const headerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const update = () => {
+      document.documentElement.style.setProperty('--header-height', `${el.offsetHeight}px`);
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   return (
     <div
+      ref={headerRef}
       className={`sticky top-0 z-50 transition-[padding] duration-300 px-0 md:px-[50px] ${
         isScrolled ? '' : 'py-2 md:py-4'
       }`}

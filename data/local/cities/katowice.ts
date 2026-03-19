@@ -17,16 +17,16 @@ export const katowiceData: CityData = {
 
   emotionalHero: {
     label: 'BUDOWA DOMÓW KATOWICE',
-    headline: ['Budujesz Dom w Katowicach?', 'Mamy Bazę Logistyczną Tuż Obok'],
-    subtitle: 'Realizujemy budowę domu jednorodzinnego w 12-18 miesięcy. Nasza baza jest w sąsiedztwie Katowic – dojazd na Podlesie, Zarzecze czy Kostuchnę zajmuje nam kilkanaście minut. Zero zbędnych kosztów transportu.',
+    headline: ['Budujesz dom w Katowicach?', 'Mamy bazę logistyczną tuż obok'],
+    subtitle: 'Budujemy domy jednorodzinne w Katowicach — od Podlesia po Zarzecze. Nasza baza jest kilkanaście minut stąd, co oznacza szybką reakcję na budowie i zero kosztów dojazdu. Realizacja w 12-18 miesięcy ze stałą ceną w umowie.',
     benefits: [
-      'Stan deweloperski od 5500-6500 zł/m² netto (2026)',
+      'Stan deweloperski od 5 500–6 500 zł/m² netto (2026)',
       'Lokalna baza logistyczna = szybka reakcja na budowie',
-      'Specjalizacja w terenach górniczych Katowic',
+      'Technologia dobrana do warunków gruntowych Twojej działki',
     ],
     ctaBoxTitle: '☎ Umów Bezpłatną Konsultację',
     ctaBoxBenefits: [
-      'Ocenimy specyfikę terenu górniczego Twojej działki',
+      'Ocenimy warunki gruntowe Twojej działki',
       'Przedstawimy realny harmonogram 12-18 miesięcy',
       'Przygotujemy wstępny kosztorys inwestycji',
       'Odpowiemy na wszystkie Twoje pytania',
@@ -62,12 +62,12 @@ export const katowiceData: CityData = {
         title: 'Adaptacja projektu do kategorii terenu',
         description: 'Każdy "gotowy" projekt domu wymaga adaptacji do warunków miejscowych. W Katowicach inżynier adaptujący musi uwzględnić przyspieszenia poziome gruntu, krzywiznę terenu oraz odkształcenia poziome.',
         details: [
-          'Realizując inwestycję z nami, masz pewność, że **kierownik budowy** dopilnuje zgodności wykonania z tymi zaostrzonymi rygorami. Nie oszczędzamy na betonie i stali tam, gdzie decyduje się stabilność Twojego domu.',
+          'Realizując inwestycję z nami, masz pewność, że **kierownik budowy** dopilnuje zgodności wykonania z tymi zaostrzonymi rygorami. Nie oszczędzamy na betonie i stali tam, gdzie decyduje się stabilność Twojego domu. [Kierownik budowy Katowice — cennik od 5 000 zł →](/kierownik-budowy-katowice)',
         ],
       },
     ],
     image: {
-      src: '/images/local/katowice/specyfika-budowy-w-katowice.webp',
+      src: '/images/local/shared/specyfika-zbrojenie.webp',
       alt: 'Szkody górnicze w Katowicach - fundamenty i zabezpieczenia',
     },
   },
@@ -119,18 +119,38 @@ export const katowiceData: CityData = {
           ],
         },
         {
+          icon: 'paintBrush',
+          title: 'Etap 2: Stan Surowy Zamknięty (SSZ) – 2 do 4 tygodni',
+          description: 'Zamknięcie bryły budynku pozwala na prowadzenie prac wewnątrz niezależnie od pogody. To krótki, ale kluczowy etap.',
+          details: [
+            '**Okna:** Montaż stolarki okiennej w technologii "ciepłego montażu" (taśmy paroszczelne + paroprzepuszczalne). Okna 3-szybowe o Uw ≤ 0,9 W/m²K.',
+            '**Drzwi wejściowe:** Instalacja drzwi o podwyższonej odporności na włamanie (klasa RC2 lub wyższa).',
+            '**Brama garażowa:** Montaż bramy segmentowej z napędem i izolacją termiczną.',
+          ],
+        },
+        {
           icon: 'clipboard',
-          title: 'Etap 2: Stan Deweloperski – 5 do 7 miesięcy',
+          title: 'Etap 3: Stan Deweloperski – 5 do 7 miesięcy',
           description: 'To moment, w którym budynek "zwalnia", ale dzieje się w nim najwięcej prac instalacyjnych.',
           details: [
-            '**Stolarka otworowa:** Montaż okien i drzwi (uszczelnienie budynku) – **2-3 dni**.',
-            '**Instalacje:** Rozprowadzenie elektryki, hydrauliki, rekuperacji – **3-5 tygodni**.',
-            '**Tynki i wylewki:** Wykonanie tynków wewnętrznych i wylewek podłogowych wymaga czasu na wyschnięcie. Technologicznie musimy odczekać minimum **4-6 tygodni** przed rozpoczęciem prac wykończeniowych, aby wilgotność podłoża spadła poniżej **3-4% CM**.',
+            '**Instalacje:** Rozprowadzenie elektryki, hydrauliki, ogrzewania podłogowego i rekuperacji – **3-5 tygodni**.',
+            '**Tynki i wylewki:** Wykonanie tynków wewnętrznych i wylewek podłogowych wymaga czasu na wyschnięcie. Technologicznie musimy odczekać minimum **4-6 tygodni**, aby wilgotność podłoża spadła poniżej **3-4% CM**.',
+            '**Ocieplenie:** Montaż styropianu grafitowego (20 cm) lub wełny mineralnej na elewacji + tynk silikonowy.',
+          ],
+        },
+        {
+          icon: 'keyRound',
+          title: 'Etap 4: Budowa Pod Klucz – 2 do 3 miesięcy',
+          description: 'Opcja dla inwestorów, którzy chcą wprowadzić się do w pełni gotowego domu bez koordynowania ekip wykończeniowych.',
+          details: [
+            '**Łazienki i kuchnia:** Kompleksowe wykończenie — płytki, biały montaż, armatura.',
+            '**Podłogi i drzwi:** Układanie paneli, desek lub płytek. Montaż drzwi wewnętrznych.',
+            '**Malowanie i detale:** Malowanie ścian farbami lateksowymi, montaż listew przypodłogowych, oświetlenia i gniazdek dekoracyjnych.',
           ],
         },
       ],
       image: {
-        src: '/images/local/katowice/etapy-realizacji.webp',
+        src: '/images/local/shared/etapy-gornicze.webp',
         alt: 'Etapy budowy domu w Katowicach - harmonogram 2026',
       },
     },

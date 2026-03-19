@@ -81,10 +81,10 @@ export function ProjectFilterSidebar({
     <div
       className={clsx(
         'bg-white rounded-3xl shadow-[0_0_20px_rgba(0,0,0,0.05)] p-6',
-        'lg:sticky lg:top-24',
+        'lg:sticky',
         inView ? 'animate-fade-in-up' : 'opacity-0'
       )}
-      style={{ animationDelay: '0.2s' }}
+      style={{ animationDelay: '0.2s', top: 'var(--header-height, 120px)' }}
     >
       {/* Wyniki */}
       <div className="pb-4 border-b border-zinc-100 mb-2">

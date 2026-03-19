@@ -17,17 +17,17 @@ export const mikolowData: CityData = {
 
   emotionalHero: {
     label: 'BUDOWA DOMÓW MIKOŁÓW',
-    headline: ['Budujesz Dom w Mikołowie?', 'Lokalny Wykonawca to Klucz do Sukcesu'],
-    subtitle: 'Znamy specyfikę gruntów w całym powiecie mikołowskim – od centrum po sołectwa. Zabezpieczamy budynki przed szkodami górniczymi (kat. III-IV). Realizacja w 8-12 miesięcy do stanu deweloperskiego.',
+    headline: ['Budujesz dom w Mikołowie?', 'Solidna budowa od lokalnego wykonawcy'],
+    subtitle: 'Budujemy domy w Mikołowie i powiecie mikołowskim — od centrum po sołectwa. Znamy lokalny teren i dobieramy technologię do warunków Twojej działki. Stan deweloperski od 5 500 zł/m², realizacja w 8-12 miesięcy.',
     benefits: [
-      'Koszt stanu deweloperskiego od 5500-7200 zł/m² netto (2026)',
-      'Specjalizacja w terenach poeksploatacyjnych (KWK Bolesław Śmiały)',
+      'Stan deweloperski od 5 500–7 200 zł/m² netto (2026)',
+      'Znajomość warunków gruntowych w całym powiecie mikołowskim',
       'Pełna odpowiedzialność logistyczna, prawna i techniczna',
     ],
     ctaBoxTitle: '☎ Umów Bezpłatną Konsultację',
     ctaBoxBenefits: [
-      'Zweryfikujemy MPZP i kategorię terenu górniczego',
-      'Ocenimy potrzebę badań geotechnicznych',
+      'Ocenimy warunki gruntowe Twojej działki',
+      'Sprawdzimy MPZP i warunki zabudowy',
       'Przedstawimy harmonogram i kosztorys',
       'Odpowiemy na wszystkie Twoje pytania',
     ],
@@ -75,7 +75,7 @@ export const mikolowData: CityData = {
       },
     ],
     image: {
-      src: '/images/local/mikolow/specyfika-mikolow.webp',
+      src: '/images/local/shared/specyfika-plyta.webp',
       alt: 'Specyfika budowy w Mikołowie - szkody górnicze i teren pagórkowaty',
     },
   },
@@ -150,7 +150,7 @@ export const mikolowData: CityData = {
         },
       ],
       image: {
-        src: '/images/local/mikolow/etapy-budowy.webp',
+        src: '/images/local/shared/etapy-gornicze.webp',
         alt: 'Etapy budowy domu w Mikołowie - harmonogram realizacji',
       },
     },

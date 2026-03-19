@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { clsx } from 'clsx';
 import { SectionHeader } from '@/components/shared';
@@ -17,21 +17,38 @@ export interface BentoContactSectionProps {
     contactInfo: ContactInfo;
 }
 
+const offices = [
+    {
+        id: 'wodzislaw',
+        label: 'Wodzisław Śląski',
+        address: 'ul. Wałowa 55, 44-300 Wodzisław Śląski',
+        mapSrc: 'https://maps.google.com/maps?q=Wa%C5%82owa+55,+44-300+Wodzis%C5%82aw+%C5%9Al%C4%85ski&t=&z=15&ie=UTF8&iwloc=&output=embed',
+    },
+    {
+        id: 'jaworzno',
+        label: 'Jaworzno',
+        address: 'Grunwaldzka 34a, 43-600 Jaworzno',
+        mapSrc: 'https://maps.google.com/maps?q=CoreLTB+Builders+Grunwaldzka+34a+43-600+Jaworzno&t=&z=15&ie=UTF8&iwloc=&output=embed',
+    },
+];
+
 export const BentoContactSection: React.FC<BentoContactSectionProps> = ({
     contactInfo,
 }) => {
+    const [activeOffice, setActiveOffice] = useState(0);
     const { ref, inView } = useInView({
         threshold: 0.1,
         triggerOnce: true,
         rootMargin: '50px 0px',
     });
 
+    const currentOffice = offices[activeOffice];
+
     return (
-        <section ref={ref} className="bg-background-beige py-16 sm:py-20 lg:py-24">
-            {/* Widened container: max-w-[90rem] is approx 1440px, 20% wider than 7xl (1280px) would be ~1536px (2xl) */}
+        <section ref={ref} className="bg-background-beige pt-0 pb-8 sm:pt-1 sm:pb-10 lg:pt-2 lg:pb-12">
             <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
                 <div className={clsx(
-                    'mb-12',
+                    'mb-6',
                     inView ? 'animate-fade-in-up' : 'opacity-0'
                 )} style={{ animationDelay: '0.1s' }}>
                     <SectionHeader
@@ -43,88 +60,167 @@ export const BentoContactSection: React.FC<BentoContactSectionProps> = ({
                     />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[minmax(180px,auto)]">
-                    {/* 1. Intro Box - Top Left */}
-                    <BentoGridItem
-                        colSpan={2}
-                        className={clsx(
-                            "flex flex-col justify-center bg-primary text-gray-900 border-none",
-                            inView ? 'animate-fade-in-up' : 'opacity-0'
-                        )}
-                        style={{ animationDelay: '0.2s' }}
-                    >
-                        <div className="space-y-4">
-                            <div className="h-12 w-12 rounded-full bg-black/10 flex items-center justify-center backdrop-blur-sm">
-                                <Icon name="helpCircle" className="text-gray-900" />
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-4">
+                    {/* LEFT COLUMN: info cards */}
+                    <div className="flex flex-col gap-4">
+                        {/* Masz pytania? */}
+                        <BentoGridItem
+                            className={clsx(
+                                "bg-primary text-gray-900 border-none",
+                                inView ? 'animate-fade-in-up' : 'opacity-0'
+                            )}
+                            style={{ animationDelay: '0.2s' }}
+                        >
+                            <div className="flex items-start gap-4">
+                                <div className="h-11 w-11 rounded-full bg-black/10 flex items-center justify-center shrink-0">
+                                    <Icon name="helpCircle" className="text-gray-900" />
+                                </div>
+                                <div>
+                                    <h3 className="text-lg font-bold mb-1">Masz pytania?</h3>
+                                    <p className="text-gray-900/80 text-sm leading-relaxed font-medium">
+                                        Nasz zespół ekspertów czeka na Twoją wiadomość. Odpowiadamy na wszystkie zapytania w ciągu 24 godzin.
+                                    </p>
+                                </div>
                             </div>
-                            <h3 className="text-2xl font-bold">Masz pytania?</h3>
-                            <p className="text-gray-900/80 leading-relaxed font-medium">
-                                Nasz zespół ekspertów czeka na Twoją wiadomość. Odpowiadamy na wszystkie zapytania w ciągu 24 godzin.
-                            </p>
-                        </div>
-                    </BentoGridItem>
+                        </BentoGridItem>
 
-                    {/* 2. Contact Form - Right Column (Spans 3 rows vertically) */}
+                        {/* Zadzwoń + Email — jeden kafelek */}
+                        <BentoGridItem
+                            className={clsx(
+                                inView ? 'animate-fade-in-up' : 'opacity-0'
+                            )}
+                            style={{ animationDelay: '0.3s' }}
+                        >
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <a href={`tel:${contactInfo.phone.replace(/\s/g, '')}`} className="flex items-center gap-3 group">
+                                    <div className="h-11 w-11 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 shrink-0 group-hover:scale-110 transition-transform">
+                                        <Icon name="phone" className="text-white" size="sm" />
+                                    </div>
+                                    <div>
+                                        <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-0.5">Zadzwoń do nas</p>
+                                        <p className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">{contactInfo.phone}</p>
+                                    </div>
+                                </a>
+                                <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-3 group sm:border-l sm:border-gray-100 sm:pl-4">
+                                    <div className="h-11 w-11 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 shrink-0 group-hover:scale-110 transition-transform">
+                                        <Icon name="mail" className="text-white" size="sm" />
+                                    </div>
+                                    <div>
+                                        <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-0.5">Napisz do nas</p>
+                                        <p className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">{contactInfo.email}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </BentoGridItem>
+
+                        {/* Mapa z przełącznikiem lokalizacji */}
+                        {/* Mapa */}
+                        <BentoGridItem
+                            className={clsx(
+                                "relative !p-0 overflow-hidden min-h-[200px] flex-1",
+                                inView ? 'animate-fade-in-up' : 'opacity-0'
+                            )}
+                            style={{ animationDelay: '0.4s' }}
+                        >
+                            <div className="absolute inset-0 bg-gray-200">
+                                <iframe
+                                    key={currentOffice.id}
+                                    src={currentOffice.mapSrc}
+                                    width="100%"
+                                    height="100%"
+                                    style={{ border: 0 }}
+                                    allowFullScreen
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                />
+                            </div>
+                        </BentoGridItem>
+
+                        {/* Przełącznik biur — pod mapą */}
+                        <div className={clsx(
+                            'flex flex-col gap-2 px-1',
+                            inView ? 'animate-fade-in-up' : 'opacity-0'
+                        )} style={{ animationDelay: '0.5s' }}>
+                            <span className="text-xs font-bold uppercase tracking-wider text-gray-400">Nasze biura</span>
+                            <div className="flex items-center gap-2">
+                                {offices.map((office, idx) => (
+                                    <button
+                                        key={office.id}
+                                        onClick={() => setActiveOffice(idx)}
+                                        className={clsx(
+                                            'flex items-center gap-2 px-4 py-2.5 rounded-xl border transition-all duration-300 text-sm font-bold',
+                                            activeOffice === idx
+                                                ? 'bg-primary border-primary text-gray-900 shadow-md shadow-primary/20'
+                                                : 'bg-white border-gray-200 text-gray-500 hover:border-primary hover:text-primary'
+                                        )}
+                                    >
+                                        <Icon name="mapPin" size="sm" />
+                                        {office.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* RIGHT COLUMN: formularz */}
                     <BentoGridItem
-                        colSpan={2}
-                        rowSpan={3}
                         className={clsx(
                             "flex flex-col",
                             inView ? 'animate-fade-in-up' : 'opacity-0'
                         )}
                         style={{ animationDelay: '0.3s' }}
                     >
-                        <div className="mb-6">
-                            <h3 className="text-xl font-bold text-gray-900">Formularz Kontaktowy</h3>
-                            <p className="text-gray-500 text-sm mt-1">Wypełnij formularz, a my zajmiemy się resztą.</p>
+                        <div className="mb-4">
+                            <h3 className="text-lg font-bold text-gray-900">Formularz Kontaktowy</h3>
+                            <p className="text-gray-500 text-sm mt-0.5">Wypełnij formularz, a my zajmiemy się resztą.</p>
                         </div>
 
-                        <form className="space-y-4 flex-grow flex flex-col justify-between">
-                            <div className="space-y-4">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div className="space-y-1.5">
+                        <form className="space-y-3 flex-grow flex flex-col">
+                            <div className="space-y-3 flex-grow">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div className="space-y-1">
                                         <label htmlFor="name" className="text-xs font-semibold uppercase tracking-wider text-gray-500 ml-1">Imię i nazwisko</label>
                                         <input
                                             type="text"
                                             id="name"
                                             placeholder="Jan Kowalski"
-                                            className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:border-primary focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-inherit"
+                                            className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm focus:border-primary focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-inherit"
                                         />
                                     </div>
-                                    <div className="space-y-1.5">
-                                        <label htmlFor="phone" className="text-xs font-semibold uppercase tracking-wider text-gray-500 ml-1">Telefon</label>
+                                    <div className="space-y-1">
+                                        <label htmlFor="contact-phone" className="text-xs font-semibold uppercase tracking-wider text-gray-500 ml-1">Telefon</label>
                                         <input
                                             type="tel"
-                                            id="phone"
+                                            id="contact-phone"
                                             placeholder="+48 000 000 000"
-                                            className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:border-primary focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-inherit"
+                                            className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm focus:border-primary focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-inherit"
                                         />
                                     </div>
                                 </div>
 
-                                <div className="space-y-1.5">
-                                    <label htmlFor="email" className="text-xs font-semibold uppercase tracking-wider text-gray-500 ml-1">E-mail</label>
+                                <div className="space-y-1">
+                                    <label htmlFor="contact-email" className="text-xs font-semibold uppercase tracking-wider text-gray-500 ml-1">E-mail</label>
                                     <input
                                         type="email"
-                                        id="email"
+                                        id="contact-email"
                                         placeholder="jan@example.com"
-                                        className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:border-primary focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-inherit"
+                                        className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm focus:border-primary focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-inherit"
                                     />
                                 </div>
 
-                                <div className="space-y-1.5">
+                                <div className="space-y-1 flex-grow flex flex-col">
                                     <label htmlFor="message" className="text-xs font-semibold uppercase tracking-wider text-gray-500 ml-1">Wiadomość</label>
                                     <textarea
                                         id="message"
-                                        rows={6}
+                                        rows={5}
                                         placeholder="Opisz nam swój projekt..."
-                                        className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:border-primary focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-none font-inherit"
+                                        className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm focus:border-primary focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-none font-inherit flex-grow"
                                     />
                                 </div>
 
                                 <div className="flex items-center gap-4">
                                     <label className="flex items-center gap-2 cursor-pointer group/file">
-                                        <div className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center group-hover/file:bg-primary/10 transition-colors">
+                                        <div className="h-9 w-9 rounded-full bg-gray-100 flex items-center justify-center group-hover/file:bg-primary/10 transition-colors">
                                             <Icon name="paperclip" className="text-gray-500 group-hover/file:text-primary transition-colors" size="sm" />
                                         </div>
                                         <span className="text-sm font-medium text-gray-600 group-hover/file:text-primary transition-colors">Załącz projekt</span>
@@ -132,8 +228,8 @@ export const BentoContactSection: React.FC<BentoContactSectionProps> = ({
                                     </label>
                                 </div>
 
-                                <div className="flex items-start gap-3 pt-2">
-                                    <div className="flex h-6 items-center">
+                                <div className="flex items-start gap-3">
+                                    <div className="flex h-5 items-center">
                                         <input
                                             id="gdpr"
                                             name="gdpr"
@@ -142,7 +238,7 @@ export const BentoContactSection: React.FC<BentoContactSectionProps> = ({
                                             className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
                                         />
                                     </div>
-                                    <div className="text-sm leading-6">
+                                    <div className="text-xs leading-5">
                                         <label htmlFor="gdpr" className="font-medium text-gray-600">
                                             Wyrażam zgodę na przetwarzanie danych osobowych <span className="text-red-500">*</span>
                                         </label>
@@ -150,82 +246,13 @@ export const BentoContactSection: React.FC<BentoContactSectionProps> = ({
                                 </div>
                             </div>
 
-                            <Button variant="primary" size="lg" className="w-full mt-4 shadow-lg shadow-primary/20">
+                            <Button variant="primary" size="md" className="w-full mt-2 shadow-lg shadow-primary/20">
                                 Wyślij Wiadomość
                             </Button>
                         </form>
                     </BentoGridItem>
-
-                    {/* 3. Phone Box */}
-                    <BentoGridItem
-                        className={clsx(
-                            "flex flex-col justify-between group cursor-pointer hover:bg-gray-50",
-                            inView ? 'animate-fade-in-up' : 'opacity-0'
-                        )}
-                        style={{ animationDelay: '0.4s' }}
-                    >
-                        <div className="h-14 w-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 transition-transform group-hover:scale-110">
-                            <Icon name="phone" className="text-white" size="md" />
-                        </div>
-                        <div>
-                            <p className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-2">Zadzwoń do nas</p>
-                            <p className="text-2xl font-bold text-gray-900">{contactInfo.phone}</p>
-                        </div>
-                    </BentoGridItem>
-
-                    {/* 4. Email Box */}
-                    <BentoGridItem
-                        className={clsx(
-                            "flex flex-col justify-between group cursor-pointer hover:bg-gray-50",
-                            inView ? 'animate-fade-in-up' : 'opacity-0'
-                        )}
-                        style={{ animationDelay: '0.5s' }}
-                    >
-                        <div className="h-14 w-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 transition-transform group-hover:scale-110">
-                            <Icon name="mail" className="text-white" size="md" />
-                        </div>
-                        <div>
-                            <p className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-2">Napisz do nas</p>
-                            <p className="text-xl font-bold text-gray-900 break-all">{contactInfo.email}</p>
-                        </div>
-                    </BentoGridItem>
-
-                    {/* 5. Address/Map Box - Bottom Left */}
-                    <BentoGridItem
-                        colSpan={2}
-                        className={clsx(
-                            "relative !p-0 overflow-hidden group min-h-[450px]",
-                            inView ? 'animate-fade-in-up' : 'opacity-0'
-                        )}
-                        style={{ animationDelay: '0.6s' }}
-                    >
-                        <div className="absolute inset-0 bg-gray-200">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2578.508774828688!2d18.465833!3d50.001667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4711467475130b0d%3A0x6a0c50766308360!2sWa%C5%82owa%2055%2C%2044-300%20Wodzis%C5%82aw%20%C5%9Al%C4%85ski!5e0!3m2!1spl!2spl!4v1700000000000!5m2!1spl!2spl"
-                                width="100%"
-                                height="100%"
-                                style={{ border: 0 }}
-                                allowFullScreen
-                                loading="lazy"
-                                referrerPolicy="no-referrer-when-downgrade"
-                                className="transition-all duration-700"
-                            />
-                        </div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 flex flex-col justify-end">
-                            <div className="flex items-start gap-3">
-                                <div className="h-10 w-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center shrink-0">
-                                    <Icon name="mapPin" className="text-white" />
-                                </div>
-                                <div>
-                                    <p className="text-xs font-bold uppercase tracking-wider text-white/70 mb-1">Siedziba Firmy</p>
-                                    <p className="text-xl font-bold text-white leading-tight">{contactInfo.address}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </BentoGridItem>
-
                 </div>
             </div>
-        </section >
+        </section>
     );
 };

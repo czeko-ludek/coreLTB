@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { Icon } from '@/components/ui';
-import { type ProjectCategory, type ProjectTechnology } from '@/data/projects';
+import { type ProjectCategory, type ProjectTechnology, type ProjectSource } from '@/data/projects';
 
 export interface ProjectListingCardProps {
   slug: string;
@@ -17,10 +17,17 @@ export interface ProjectListingCardProps {
   estimatedBuildCost?: string;
   price: string;
   thumbnailSrc?: string;
+  source?: ProjectSource;
   inView?: boolean;
   delay?: number;
   priority?: boolean;
 }
+
+/** Label kolekcji — kolor tła zależny od źródła */
+const SOURCE_BADGE: Record<string, { label: string; bg: string }> = {
+  z500:         { label: 'Z500',          bg: '#d9308a' },
+  galeriadomow: { label: 'Galeria Domów', bg: '#e75c55' },
+};
 
 // O(1) lookup — zawiera WSZYSTKIE możliwe kategorie (nie tylko filtrowalne)
 const CATEGORY_LABEL: Record<string, string> = {
@@ -40,10 +47,12 @@ export const ProjectListingCard = React.memo(function ProjectListingCard({
   estimatedBuildCost,
   price,
   thumbnailSrc,
+  source,
   inView = true,
   delay = 0,
   priority = false,
 }: ProjectListingCardProps) {
+  const sourceBadge = source ? SOURCE_BADGE[source] : undefined;
   const imageSrc = thumbnailSrc || `/images/projekty/${slug}/thumbnail.webp`;
 
   return (
@@ -67,6 +76,18 @@ export const ProjectListingCard = React.memo(function ProjectListingCard({
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
+
+        {/* Badge kolekcji - lewy górny */}
+        {sourceBadge && (
+          <div className="absolute top-3 left-3 z-10">
+            <span
+              className="text-white text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-md shadow-sm"
+              style={{ backgroundColor: sourceBadge.bg }}
+            >
+              {sourceBadge.label}
+            </span>
+          </div>
+        )}
 
         {/* Badge technologii - prawy dolny */}
         <div className="absolute bottom-4 right-4 z-10">

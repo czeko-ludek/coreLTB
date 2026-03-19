@@ -127,14 +127,16 @@ export default function AboutPage() {
 
 	return (
 		<main>
-			<PageHeader {...pageHeaderData} />
+			{/* Breadcrumbs — nad hero */}
 			<Breadcrumbs
 				items={[
 					{ label: "Strona główna", href: "/" },
 					{ label: "O nas" },
 				]}
-				className="mx-auto max-w-[80rem] px-4 sm:px-6 lg:px-8 pt-8"
+				className="container mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2"
 			/>
+
+			<PageHeader {...pageHeaderData} />
 			<AboutIntroSection {...aboutIntroData} />
 			<CompetenciesSection {...competenciesData} />
 			<BusinessResponsibilitySection {...businessResponsibilityData} />

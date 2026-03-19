@@ -17,17 +17,17 @@ export const jaworznoData: CityData = {
 
   emotionalHero: {
     label: 'BUDOWA DOMÓW JAWORZNO',
-    headline: ['Budujesz Dom w Jaworznie?', 'Znamy Każdy Zakamarek Tego Terenu'],
-    subtitle: 'Nasza baza operacyjna jest w regionie – doskonale znamy specyfikę gruntów od Jelenia po Ciężkowice. Wiemy, gdzie występują pustki pogórnicze i jak zabezpieczyć Twój dom. Realizacja w 8-12 miesięcy.',
+    headline: ['Budujesz dom w Jaworznie?', 'Znamy każdą dzielnicę od lat'],
+    subtitle: 'Budujemy domy w Jaworznie od Jelenia po Ciężkowice — z technologią dobraną do warunków Twojej działki. Baza operacyjna w regionie oznacza szybki dojazd i stały nadzór na budowie. Realizacja w 8-12 miesięcy ze stałą ceną.',
     benefits: [
-      'Znajomość lokalnych warunków gruntowych (pustki pogórnicze)',
-      'Gwarancja stałej ceny – zabezpieczenie przed inflacją materiałów',
+      'Baza w regionie — szybki dojazd i stały nadzór na budowie',
+      'Gwarancja stałej ceny — zabezpieczenie przed inflacją materiałów',
       'Realizacja od stanu zero do deweloperskiego w 8-12 miesięcy',
     ],
     ctaBoxTitle: '☎ Umów Bezpłatną Konsultację',
     ctaBoxBenefits: [
-      'Sprawdzimy specyfikę gruntu Twojej działki',
-      'Ocenimy ewentualne zagrożenia pogórnicze',
+      'Ocenimy warunki gruntowe Twojej działki',
+      'Dobierzemy optymalną technologię fundamentu',
       'Przedstawimy kosztorys z gwarancją stałej ceny',
       'Odpowiemy na wszystkie Twoje pytania',
     ],
@@ -88,7 +88,7 @@ export const jaworznoData: CityData = {
       },
     ],
     image: {
-      src: '/images/local/jaworzno/hero.webp',
+      src: '/images/local/shared/specyfika-wykop.webp',
       alt: 'Budowa domu w Jaworznie – specyfika gruntów pogórniczych',
     },
   },
@@ -199,7 +199,7 @@ export const jaworznoData: CityData = {
       {
         question: 'W czym wyręczamy inwestora w formalościach?',
         content: [
-          { type: 'paragraph', value: '**Mapy do celów projektowych:** Współpracujemy ze sprawdzonymi lokalnymi geodetami. **Warunki zabudowy / MPZP:** Analizujemy Miejscowy Plan Zagospodarowania Przestrzennego, aby sprawdzić, jaki dom można wybudować na Twojej działce (kąt dachu, wysokość kalenicy, kolor elewacji). **Uzgodnienia branżowe:** Załatwiamy warunki przyłączeniowe mediów (woda, prąd, gaz) u lokalnych dostawców (Tauron, Wodociągi Jaworzno). **Kierownik Budowy:** Zapewniamy nadzór uprawnionego kierownika, który prowadzi Dziennik Budowy i odpowiada karnie za zgodność realizacji ze sztuką budowlaną. **Odbiory końcowe:** Kompletujemy dokumentację powykonawczą niezbędną do uzyskania pozwolenia na użytkowanie w Powiatowym Inspektoracie Nadzoru Budowlanego.' },
+          { type: 'paragraph', value: '**Mapy do celów projektowych:** Współpracujemy ze sprawdzonymi lokalnymi geodetami. **Warunki zabudowy / MPZP:** Analizujemy Miejscowy Plan Zagospodarowania Przestrzennego, aby sprawdzić, jaki dom można wybudować na Twojej działce (kąt dachu, wysokość kalenicy, kolor elewacji). **Uzgodnienia branżowe:** Załatwiamy warunki przyłączeniowe mediów (woda, prąd, gaz) u lokalnych dostawców (Tauron, Wodociągi Jaworzno). **Kierownik Budowy:** Zapewniamy nadzór uprawnionego [kierownika budowy w Jaworznie](/kierownik-budowy-jaworzno) (od 5 000 zł), który prowadzi Dziennik Budowy i odpowiada karnie za zgodność realizacji ze sztuką budowlaną. **Odbiory końcowe:** Kompletujemy dokumentację powykonawczą niezbędną do uzyskania pozwolenia na użytkowanie w Powiatowym Inspektoracie Nadzoru Budowlanego.' },
         ],
       },
     ],

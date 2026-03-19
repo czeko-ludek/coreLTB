@@ -84,7 +84,8 @@ export interface ContactCTAData {
 // Logistyka i Zasięg (AreasSection)
 export interface CityData {
   label: string;
-  url: string;
+  url?: string;
+  context?: string;
 }
 
 export interface HubData {
@@ -742,11 +743,11 @@ servicesAccordion: {
           iconName: 'mountain' as const,
           description: 'Specjalizacja: Fundamenty na trudnych gruntach gliniastych i górniczych (kat. I-IV).',
           cities: [
-            { label: 'Wodzisław Śląski', url: '/obszar-dzialania/budowa-domow-wodzislaw-slaski' },
-            { label: 'Rybnik', url: '/obszar-dzialania/budowa-domow-rybnik' },
-            { label: 'Żory', url: '/obszar-dzialania/budowa-domow-zory' },
-            { label: 'Racibórz', url: '/obszar-dzialania/budowa-domow-raciborz' },
-            { label: 'Jastrzębie-Zdrój', url: '/obszar-dzialania/budowa-domow-jastrzebie-zdroj' },
+            { label: 'Wodzisław Śląski', url: '/obszar-dzialania/wodzislaw-slaski' },
+            { label: 'Rybnik', url: '/obszar-dzialania/rybnik' },
+            { label: 'Żory' },
+            { label: 'Racibórz' },
+            { label: 'Jastrzębie-Zdrój' },
           ]
         },
         {
@@ -755,11 +756,11 @@ servicesAccordion: {
           iconName: 'building' as const,
           description: 'Logistyka materiałowa A4/S1. Szybki start inwestycji w Katowicach, Tychach i Małopolsce.',
           cities: [
-            { label: 'Jaworzno', url: '/obszar-dzialania/budowa-domow-jaworzno' },
-            { label: 'Katowice', url: '/obszar-dzialania/budowa-domow-katowice' },
-            { label: 'Tychy', url: '/obszar-dzialania/budowa-domow-tychy' },
-            { label: 'Gliwice', url: '/obszar-dzialania/budowa-domow-gliwice' },
-            { label: 'Mikołów', url: '/obszar-dzialania/budowa-domow-mikolow' },
+            { label: 'Jaworzno', url: '/obszar-dzialania/jaworzno' },
+            { label: 'Katowice', url: '/obszar-dzialania/katowice' },
+            { label: 'Tychy', url: '/obszar-dzialania/tychy' },
+            { label: 'Gliwice', url: '/obszar-dzialania/gliwice' },
+            { label: 'Mikołów', url: '/obszar-dzialania/mikolow' },
           ]
         }
       ]
@@ -1695,7 +1696,31 @@ servicesAccordion: {
       ],
     },
 
-    // Sekcja 6: ContactCTA
+    // Sekcja 6: Obszary działania — kierownik budowy w miastach
+    areasData: {
+      header: {
+        label: 'KIEROWNIK BUDOWY W TWOIM MIEŚCIE',
+        title: 'Nadzór budowlany na Śląsku',
+        description: 'Działamy w całym województwie śląskim. Wybierz swoje miasto i sprawdź cennik oraz zakres usług kierownika budowy.',
+        align: 'center' as const,
+        theme: 'light' as const,
+      },
+      hubs: [
+        {
+          hubName: 'Miasta',
+          subLabel: '',
+          iconName: 'mapPin' as const,
+          description: 'Sprawdź szczegółowy cennik i zakres usług kierownika budowy w Twoim mieście.',
+          cities: [
+            { label: 'Katowice', url: '/kierownik-budowy-katowice', context: 'Cennik od 5 000 zł' },
+            { label: 'Jaworzno', url: '/kierownik-budowy-jaworzno', context: 'Cennik od 5 000 zł' },
+            { label: 'Wodzisław Śląski', url: '/kierownik-budowy-wodzislaw-slaski', context: 'Cennik od 5 000 zł' },
+          ]
+        }
+      ]
+    },
+
+    // Sekcja 7: ContactCTA
     contactCTA: {
       header: {
         label: 'ZABEZPIECZ SWOJĄ INWESTYCJĘ',

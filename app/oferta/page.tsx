@@ -38,18 +38,20 @@ export default function OfferPage() {
 
 	return (
 		<main>
-			{/* 1. Page Header - Inżynierski konkret */}
-			<PageHeader
-				title="Usługi Budowlane"
-				watermarkText="OFERTA"
-				backgroundImage="/images/uslugi.webp"
-			/>
+			{/* Breadcrumbs — nad hero */}
 			<Breadcrumbs
 				items={[
 					{ label: "Strona główna", href: "/" },
 					{ label: "Oferta", href: "/oferta" },
 				]}
-				className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8"
+				className="container mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2"
+			/>
+
+			{/* 1. Page Header - Inżynierski konkret */}
+			<PageHeader
+				title="Usługi Budowlane"
+				watermarkText="OFERTA"
+				backgroundImage="/images/uslugi.webp"
 			/>
 
 			{/* 2. Intro - Czyste i lokalne (Śląsk / Kraków / Rybnik) */}

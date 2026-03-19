@@ -17,16 +17,16 @@ export const wodzislawData: CityData = {
 
   emotionalHero: {
     label: 'BUDOWA DOMÓW WODZISŁAW ŚLĄSKI',
-    headline: ['Planujesz Budowę w Wodzisławiu?', 'Znamy Ten Teren od 15 Lat'],
-    subtitle: 'Powiat wodzisławski to teren górniczy, gdzie standardowe projekty często zawodzą. Potrzebujesz wykonawcy z doświadczeniem w budowie na deformujących się gruntach – my realizujemy domy od stanu zero do klucza.',
+    headline: ['Planujesz budowę w Wodzisławiu?', 'Mamy tu bazę i własne ekipy'],
+    subtitle: 'Wodzisław Śląski to nasz dom — tu mamy bazę sprzętową i własne brygady budowlane. Budujemy domy od stanu zero do klucza, znamy każdą dzielnicę i lokalne warunki gruntowe. 15 lat doświadczenia w powiecie wodzisławskim.',
     benefits: [
       '15 lat doświadczenia w powiecie wodzisławskim',
-      'Technologia murowana odporna na wstrząsy górnicze',
+      'Własne ekipy i sprzęt — bez pośredników',
       'Jeden partner = pełna odpowiedzialność za efekt końcowy',
     ],
     ctaBoxTitle: '☎ Umów Bezpłatną Konsultację',
     ctaBoxBenefits: [
-      'Sprawdzimy kategorię terenu górniczego Twojej działki',
+      'Ocenimy warunki gruntowe Twojej działki',
       'Dobierzemy optymalną technologię budowy',
       'Przedstawimy harmonogram i kosztorys',
       'Odpowiemy na wszystkie Twoje pytania',
@@ -87,7 +87,7 @@ export const wodzislawData: CityData = {
       },
     ],
     image: {
-      src: '/images/local/wodzislaw-slaski/hero.webp',
+      src: '/images/local/shared/specyfika-plyta.webp',
       alt: 'Budowa domu na szkodach górniczych w Wodzisławiu Śląskim',
     },
   },
@@ -201,7 +201,7 @@ export const wodzislawData: CityData = {
           { type: 'paragraph', value: 'Po uzyskaniu PnB (Pozwolenia na Budowę), przejmujemy plac budowy.' },
           { type: 'list', items: [
             '**Ogrodzenie i zaplecze:** Zabezpieczamy teren, ustawiamy toaletę, organizujemy przyłącze prądu budowlanego (prowizorkę).',
-            '**Kierownik Budowy:** Nasz kierownik prowadzi Dziennik Budowy (coraz częściej w formie elektronicznej EDB), nadzoruje kluczowe etapy (zbrojenie, betonowanie) i odpowiada za zgodność prac z projektem.',
+            '**Kierownik Budowy:** Nasz [kierownik budowy w Wodzisławiu](/kierownik-budowy-wodzislaw-slaski) (od 5 000 zł) prowadzi Dziennik Budowy (coraz częściej w formie elektronicznej EDB), nadzoruje kluczowe etapy (zbrojenie, betonowanie) i odpowiada za zgodność prac z projektem.',
             '**Odbiory częściowe:** Każdy etap (fundamenty, ściany, dach) kończy się odbiorem wewnętrznym. Nie zakrywamy instalacji tynkiem, dopóki nie przejdą prób ciśnieniowych i nie wykonamy dokumentacji fotograficznej instalacji podtynkowych.',
             '**Czystość:** Utrzymujemy porządek na budowie. Segregujemy odpady budowlane i zapewniamy kontenery na gruz.',
           ]},

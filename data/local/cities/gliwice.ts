@@ -17,16 +17,16 @@ export const gliwiceData: CityData = {
 
   emotionalHero: {
     label: 'BUDOWA DOMÓW GLIWICE',
-    headline: ['Budujesz Dom w Gliwicach?', 'Teren Górniczy Wymaga Specjalistów'],
-    subtitle: 'Gliwice i powiat gliwicki to teren z kategoriami szkód I-IV i gruntami nasypowymi. Przejmujemy pełną odpowiedzialność za proces budowy – od adaptacji projektu po odbiory techniczne. Realizacja w 12-18 miesięcy.',
+    headline: ['Budujesz dom w Gliwicach?', 'Przejmujemy odpowiedzialność za całą budowę'],
+    subtitle: 'Budujemy domy jednorodzinne w Gliwicach i powiecie gliwickim — od projektu po odbiór w PINB. Znamy lokalny teren i dobieramy technologię do warunków Twojej działki. Realizacja w 12-18 miesięcy ze stałą ceną w umowie.',
     benefits: [
-      'Specjalizacja w terenach górniczych (kategorie I-IV)',
-      'Wzmocnione fundamenty i płyty jako standard',
+      'Pełna odpowiedzialność — jeden wykonawca, jeden kosztorys',
+      'Technologia dobrana do warunków gruntowych Twojej działki',
       'Gwarancja stałej ceny i terminowości w umowie',
     ],
     ctaBoxTitle: '☎ Umów Bezpłatną Konsultację',
     ctaBoxBenefits: [
-      'Sprawdzimy kategorię szkód górniczych Twojej działki',
+      'Ocenimy warunki gruntowe Twojej działki',
       'Dobierzemy optymalną technologię posadowienia',
       'Przedstawimy harmonogram i kosztorys',
       'Odpowiemy na wszystkie Twoje pytania',
@@ -65,7 +65,7 @@ export const gliwiceData: CityData = {
       },
     ],
     image: {
-      src: '/images/local/gliwice/specyfika-budowy-w-gliwice.webp',
+      src: '/images/local/shared/specyfika-zbrojenie.webp',
       alt: 'Specyfika budowy w Gliwicach - szkody górnicze i trudne grunty',
     },
   },
@@ -190,7 +190,7 @@ export const gliwiceData: CityData = {
         },
       ],
       image: {
-        src: '/images/local/gliwice/etapy-realizacji.webp',
+        src: '/images/local/shared/etapy-gornicze.webp',
         alt: 'Etapy budowy domu w Gliwicach - od fundamentów po stan zamknięty',
       },
     },
@@ -225,7 +225,7 @@ export const gliwiceData: CityData = {
         },
       ],
       image: {
-        src: '/images/local/gliwice/formalnosci.webp',
+        src: '/images/local/shared/etapy-standard.webp',
         alt: 'Formalności budowlane w Gliwicach - wsparcie dla inwestora',
       },
     },

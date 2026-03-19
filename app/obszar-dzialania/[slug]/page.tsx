@@ -83,19 +83,19 @@ export default async function LocalPage({
   return (
     <>
       <main>
-        {/* 1. PageHeader — panorama hero */}
-        <PageHeader
-          title={page.pageHeader.title}
-          backgroundImage={page.pageHeader.backgroundImage}
-        />
-
-        {/* 2. Breadcrumbs */}
+        {/* 1. Breadcrumbs — nad hero */}
         <Breadcrumbs
           items={page.pageHeader.breadcrumbs.map((crumb, i, arr) => ({
             label: crumb.label,
             href: i < arr.length - 1 ? crumb.href : undefined,
           }))}
-          className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8"
+          className="container mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2"
+        />
+
+        {/* 2. PageHeader — panorama hero */}
+        <PageHeader
+          title={page.pageHeader.title}
+          backgroundImage={page.pageHeader.backgroundImage}
         />
 
         {/* 3. EmotionalHeroSection — headline + CTA box */}
