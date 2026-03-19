@@ -12,23 +12,23 @@ const trustItems = [
  */
 export const CalculatorHero = () => {
   return (
-    <div className="text-center mb-10 md:mb-14">
-      <h1 className="text-h3 md:text-display lg:text-hero font-bold font-heading leading-tight">
+    <div className="text-center">
+      <h1 className="text-h3 font-bold font-heading leading-tight text-white">
         Bezpłatna Wycena{' '}
         <span className="text-primary">Budowy Domu</span>
       </h1>
 
-      <p className="mt-4 text-body-md md:text-body-lg text-text-secondary max-w-2xl mx-auto">
+      <p className="mt-3 text-body-md text-white/70 max-w-md mx-auto">
         Skonfiguruj parametry domu, zostaw numer —
         oddzwonimy z&nbsp;dokładną wyceną w&nbsp;24h
       </p>
 
       {/* Trust bar */}
-      <div className="mt-6 md:mt-8 flex flex-wrap items-center justify-center gap-5 md:gap-8">
+      <div className="mt-5 flex flex-wrap items-center justify-center gap-4">
         {trustItems.map((item) => (
           <div
             key={item.text}
-            className="flex items-center gap-2 text-body-sm text-text-secondary"
+            className="flex items-center gap-2 text-body-sm text-white/60"
           >
             <Icon name={item.icon} size="sm" className="text-primary" />
             <span>{item.text}</span>

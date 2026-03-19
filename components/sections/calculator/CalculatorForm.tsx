@@ -530,10 +530,14 @@ export const CalculatorForm = () => {
             noValidate
           >
             {/* H1 */}
-            <div className="mb-8">
+            <div className="mb-8 text-center lg:text-left">
+              <div className="lg:hidden flex justify-center mb-6">
+                <Image src="/images/logo-black.webp" alt="CoreLTB" width={104} height={104} className="rounded-none" />
+              </div>
               <h1 className="text-h3 xl:text-display font-bold font-heading text-text-primary leading-tight">
-                Bezpłatna Wycena{' '}
-                <span className="text-primary">Budowy Domu</span>
+                Bezpłatna wycena
+                <br />
+                <span className="text-primary">budowy domu</span>
               </h1>
               <p className="mt-3 text-body-md text-text-secondary">
                 Skonfiguruj dom i otrzymaj wycenę w&nbsp;60&nbsp;sekund
