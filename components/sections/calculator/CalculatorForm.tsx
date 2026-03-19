@@ -275,7 +275,7 @@ export const CalculatorForm = () => {
             </div>
 
             {/* Client info bar */}
-            <div className="bg-gray-50 px-5 md:px-10 py-4 md:py-5 border-b border-gray-200">
+            <div className="print-client-bar bg-gray-50 px-5 md:px-10 py-4 md:py-5 border-b border-gray-200">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 text-body-sm">
                 <div>
                   <span className="text-gray-500 block text-body-xs uppercase tracking-wide mb-0.5">Klient</span>
@@ -301,7 +301,7 @@ export const CalculatorForm = () => {
             </div>
 
             {/* Wstęp — introduction paragraph */}
-            <div className="px-5 md:px-10 py-5 border-b border-gray-200">
+            <div className="print-wstep px-5 md:px-10 py-5 border-b border-gray-200">
               <p className="text-body-sm text-gray-700 leading-relaxed">
                 Szanowni Państwo, dziękujemy za zainteresowanie usługami {companyData.name}.
                 Poniżej przedstawiamy wstępną wycenę budowy domu jednorodzinnego o powierzchni <strong>{submittedConfig.area} m²</strong>.
@@ -319,13 +319,13 @@ export const CalculatorForm = () => {
                     Szacunkowy koszt budowy
                   </p>
                   <p className="print-total-price text-h3 md:text-h1 font-bold text-text-primary font-heading leading-tight">
-                    {formatPrice(estimate.totalPoRabacie.min)} – {formatPrice(estimate.totalPoRabacie.max)}
+                    {formatPrice(Math.round((estimate.totalPoRabacie.min + estimate.totalPoRabacie.max) / 2))}
                   </p>
                   <p className="print-total-unit text-body-sm text-gray-500 font-normal mt-0.5">
                     złotych netto <span className="text-green-600 font-semibold">(po rabacie {Math.round(estimate.rabat * 100)}%)</span>
                   </p>
                   <p className="text-body-xs text-gray-400 mt-1">
-                    brutto po rabacie: {formatPrice(estimate.totalPoRabacieBrutto.min)} – {formatPrice(estimate.totalPoRabacieBrutto.max)} zł (8% VAT)
+                    brutto po rabacie: {formatPrice(Math.round((estimate.totalPoRabacieBrutto.min + estimate.totalPoRabacieBrutto.max) / 2))} zł (8% VAT)
                   </p>
                 </div>
                 {/* Right: meta stats */}
@@ -436,63 +436,65 @@ export const CalculatorForm = () => {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                   <span className="text-body-sm text-gray-500">Kwota netto</span>
                   <span className="text-body-md font-bold text-text-primary tabular-nums">
-                    {formatPrice(estimate.total.min)} – {formatPrice(estimate.total.max)} zł
+                    {formatPrice(Math.round((estimate.total.min + estimate.total.max) / 2))} zł
                   </span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                   <span className="text-body-sm text-gray-500">Kwota brutto (8% VAT)</span>
                   <span className="text-body-md font-semibold text-gray-600 tabular-nums">
-                    {formatPrice(estimate.totalBrutto.min)} – {formatPrice(estimate.totalBrutto.max)} zł
+                    {formatPrice(Math.round((estimate.totalBrutto.min + estimate.totalBrutto.max) / 2))} zł
                   </span>
                 </div>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-primary/5 -mx-4 md:-mx-5 px-4 md:px-5 py-3 rounded-lg">
-                  <span className="text-body-md sm:text-h5 font-bold text-primary">Po rabacie ({Math.round(estimate.rabat * 100)}%) netto</span>
-                  <span className="text-h5 font-bold text-primary tabular-nums">
-                    {formatPrice(estimate.totalPoRabacie.min)} – {formatPrice(estimate.totalPoRabacie.max)} zł
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-green-50 border border-green-200 -mx-4 md:-mx-5 px-4 md:px-5 py-3 rounded-lg">
+                  <span className="text-body-md sm:text-h5 font-bold text-text-primary">Po rabacie ({Math.round(estimate.rabat * 100)}%) netto</span>
+                  <span className="text-h5 font-bold text-text-primary tabular-nums">
+                    {formatPrice(Math.round((estimate.totalPoRabacie.min + estimate.totalPoRabacie.max) / 2))} zł
                   </span>
                 </div>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-primary/5 -mx-4 md:-mx-5 px-4 md:px-5 py-2 rounded-lg">
-                  <span className="text-body-sm font-semibold text-primary/80">Po rabacie brutto</span>
-                  <span className="text-body-md font-bold text-primary/80 tabular-nums">
-                    {formatPrice(estimate.totalPoRabacieBrutto.min)} – {formatPrice(estimate.totalPoRabacieBrutto.max)} zł
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-green-50 border border-green-200 -mx-4 md:-mx-5 px-4 md:px-5 py-2 rounded-lg">
+                  <span className="text-body-sm font-bold text-text-primary">Po rabacie brutto</span>
+                  <span className="text-body-md font-bold text-text-primary tabular-nums">
+                    {formatPrice(Math.round((estimate.totalPoRabacieBrutto.min + estimate.totalPoRabacieBrutto.max) / 2))} zł
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Gwarancja */}
-            <div className="px-5 md:px-10 py-4 border-b border-gray-200">
-              <p className="text-body-sm text-gray-700 leading-relaxed">
-                <Icon name="shieldCheck" size="sm" className="text-primary inline mr-1.5 -mt-0.5" />
-                Na prace konstrukcyjne udzielamy <strong>{estimate.gwarancja.konstrukcja} miesięcy</strong> gwarancji,
-                na pozostałe prace budowlane <strong>{estimate.gwarancja.pozostale} miesięcy</strong> gwarancji.
-                Urządzenia objęte są dodatkową 12-miesięczną pogwarancyjną obsługą serwisową.
-              </p>
-            </div>
-
-            {/* Disclaimers */}
-            <div className="print-disclaimers px-5 md:px-10 py-6 bg-gray-50">
-              <div className="space-y-2.5 text-body-sm text-gray-600 leading-relaxed">
-                <p>
-                  <strong className="text-gray-800">Uwaga:</strong> Powyższy zakres prac nie zawiera w cenie przygotowania terenów zewnętrznych,
-                  wykonania przyłączy wod-kan, prądowych, gazowych oraz zagospodarowania terenów zewnętrznych.
-                  W cenie nie uwzględniono wykonania drogi dojazdowej oraz ogrodzenia terenu budowy.
+            {/* Gwarancja + Disclaimers + Footer — keep together on print */}
+            <div className="print-ending-block">
+              {/* Gwarancja */}
+              <div className="print-gwarancja px-5 md:px-10 py-4 border-b border-gray-200">
+                <p className="text-body-sm text-gray-700 leading-relaxed">
+                  <Icon name="shieldCheck" size="sm" className="text-primary inline mr-1.5 -mt-0.5" />
+                  Na prace konstrukcyjne udzielamy <strong>{estimate.gwarancja.konstrukcja} miesięcy</strong> gwarancji,
+                  na pozostałe prace budowlane <strong>{estimate.gwarancja.pozostale} miesięcy</strong> gwarancji.
+                  Urządzenia objęte są dodatkową 12-miesięczną pogwarancyjną obsługą serwisową.
                 </p>
-                <p>
-                  Wycena ma charakter orientacyjny i została sporządzona na podstawie parametrów wprowadzonych w kalkulatorze.
-                  Dokładna kalkulacja wymaga analizy projektu architektonicznego i warunków gruntowych na działce.
-                </p>
-                <p>
-                  Z wyrazami szacunku,<br />
-                  <strong className="text-gray-800">Zespół {companyData.name}</strong>
-                </p>
-                <p>Ważność wyceny: <strong className="text-gray-800">{validUntil.toLocaleDateString('pl-PL')}</strong> (14 dni od wygenerowania).</p>
-                <p className="text-body-xs text-gray-400 italic">Niniejsza oferta nie stanowi oferty handlowej w rozumieniu Kodeksu Cywilnego.</p>
               </div>
-            </div>
 
-            {/* Document Footer */}
-            <div className="print-footer px-8 md:px-10 py-5 border-t border-gray-200 bg-background-dark">
+              {/* Disclaimers */}
+              <div className="print-disclaimers px-5 md:px-10 py-6 bg-gray-50">
+                <div className="space-y-2.5 text-body-sm text-gray-600 leading-relaxed">
+                  <p>
+                    <strong className="text-gray-800">Uwaga:</strong> Powyższy zakres prac nie zawiera w cenie przygotowania terenów zewnętrznych,
+                    wykonania przyłączy wod-kan, prądowych, gazowych oraz zagospodarowania terenów zewnętrznych.
+                    W cenie nie uwzględniono wykonania drogi dojazdowej oraz ogrodzenia terenu budowy.
+                  </p>
+                  <p>
+                    Wycena ma charakter orientacyjny i została sporządzona na podstawie parametrów wprowadzonych w kalkulatorze.
+                    Dokładna kalkulacja wymaga analizy projektu architektonicznego i warunków gruntowych na działce.
+                  </p>
+                  <p>
+                    Z wyrazami szacunku,<br />
+                    <strong className="text-gray-800">Zespół {companyData.name}</strong>
+                  </p>
+                  <p>Ważność wyceny: <strong className="text-gray-800">{validUntil.toLocaleDateString('pl-PL')}</strong> (14 dni od wygenerowania).</p>
+                  <p className="text-body-xs text-gray-400 italic">Niniejsza oferta nie stanowi oferty handlowej w rozumieniu Kodeksu Cywilnego.</p>
+                </div>
+              </div>
+
+              {/* Document Footer */}
+              <div className="print-footer px-8 md:px-10 py-5 border-t border-gray-200 bg-background-dark">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-body-sm text-gray-300">
                 <div className="flex items-center gap-3">
                   <Image src="/images/logo-white.webp" alt="CoreLTB" width={28} height={28} className="rounded-lg" />
@@ -510,6 +512,7 @@ export const CalculatorForm = () => {
                 </div>
               </div>
             </div>
+            </div>{/* /print-ending-block */}
           </div>
 
           {/* Action buttons */}
