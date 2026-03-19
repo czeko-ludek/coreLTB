@@ -383,8 +383,8 @@ export const FLOOR_LABELS: Record<FloorType, string> = {
 
 export const GARAGE_LABELS: Record<GarageType, string> = {
   brak: 'Brak',
-  jednostanowiskowy: 'Jednostanowiskowy',
-  dwustanowiskowy: 'Dwustanowiskowy',
+  jednostanowiskowy: 'Jedno\u00ADstanowiskowy',
+  dwustanowiskowy: 'Dwu\u00ADstanowiskowy',
 };
 
 export const FINISH_LABELS: Record<FinishType, string> = {

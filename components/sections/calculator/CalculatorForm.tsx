@@ -1,8 +1,11 @@
 'use client';
 
-import { useState, useReducer, useRef, useCallback } from 'react';
+import { useState, useReducer, useRef, useCallback, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Icon } from '@/components/ui/Icon';
+import type { IconName } from '@/components/ui/Icon';
 import { OptionCard } from '@/components/ui/OptionCard';
 import { CalculatorHero } from './CalculatorHero';
 import {
@@ -81,6 +84,15 @@ function reducer(state: FormState, action: FormAction): FormState {
 
 const areaPresets = [100, 120, 140, 160, 180, 200];
 
+// Nav links — identyczne z Header
+const mobileNavLinks: { label: string; href: string; icon: IconName }[] = [
+  { label: 'Strona główna', href: '/', icon: 'home' },
+  { label: 'O nas', href: '/o-nas', icon: 'users' },
+  { label: 'Oferta', href: '/oferta', icon: 'briefcase' },
+  { label: 'Projekty', href: '/projekty', icon: 'building' },
+  { label: 'Kontakt', href: '/kontakt', icon: 'mail' },
+];
+
 function formatPrice(n: number): string {
   return n.toLocaleString('pl-PL');
 }
@@ -103,7 +115,15 @@ export const CalculatorForm = () => {
   const [submittedConfig, setSubmittedConfig] = useState<CalculatorConfig | null>(null);
   const [refNumber] = useState(() => generateRefNumber());
   const [areaInput, setAreaInput] = useState('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
 
   const set = (field: string, value: string | number | boolean | File | null) => {
     dispatch({ type: 'SET_FIELD', field, value });
@@ -205,31 +225,31 @@ export const CalculatorForm = () => {
           >
             {/* Document Header with Logo */}
             <div className="bg-background-dark p-8 md:p-10 print:p-10">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-5">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div className="flex items-center gap-4">
                   <Image
                     src="/images/logo-white.webp"
                     alt="CoreLTB Builders"
                     width={64}
                     height={64}
-                    className="rounded-xl"
+                    className="rounded-xl flex-shrink-0"
                   />
                   <div>
-                    <h1 className="text-white font-bold text-h4 md:text-h3 font-heading">CoreLTB Builders</h1>
-                    <p className="text-gray-300 text-body-sm mt-1">Generalny Wykonawca Domów Jednorodzinnych</p>
+                    <h1 className="text-white font-bold text-h5 md:text-h3 font-heading">CoreLTB Builders</h1>
+                    <p className="text-gray-300 text-body-xs md:text-body-sm mt-0.5">Generalny Wykonawca Domów Jednorodzinnych</p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="text-primary font-bold text-body-md uppercase tracking-wider">Wycena wstępna</p>
-                  <p className="text-gray-400 text-body-sm mt-1.5">Nr: {refNumber}</p>
-                  <p className="text-gray-400 text-body-sm">{today.toLocaleDateString('pl-PL')}</p>
+                <div className="md:text-right flex gap-3 md:block text-body-xs md:text-body-sm">
+                  <p className="text-primary font-bold uppercase tracking-wider">Wycena wstępna</p>
+                  <p className="text-gray-400">Nr: {refNumber}</p>
+                  <p className="text-gray-400">{today.toLocaleDateString('pl-PL')}</p>
                 </div>
               </div>
             </div>
 
             {/* Client info bar */}
-            <div className="bg-gray-50 px-8 md:px-10 py-5 border-b border-gray-200">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-body-sm">
+            <div className="bg-gray-50 px-5 md:px-10 py-4 md:py-5 border-b border-gray-200">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 text-body-sm">
                 <div>
                   <span className="text-gray-500 block text-body-xs uppercase tracking-wide mb-0.5">Klient</span>
                   <span className="font-semibold text-text-primary">{state.name}</span>
@@ -254,26 +274,26 @@ export const CalculatorForm = () => {
             </div>
 
             {/* Total — Hero */}
-            <div className="print-total px-8 md:px-10 py-6 border-b border-gray-200">
-              <div className="flex items-center justify-between">
+            <div className="print-total px-5 md:px-10 py-5 md:py-6 border-b border-gray-200">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 {/* Left: label + price */}
                 <div>
                   <p className="text-body-xs uppercase tracking-widest text-gray-500 font-semibold mb-1">
                     Szacunkowy koszt budowy
                   </p>
-                  <p className="print-total-price text-h2 md:text-h1 font-bold text-text-primary font-heading leading-tight">
+                  <p className="print-total-price text-h3 md:text-h1 font-bold text-text-primary font-heading leading-tight">
                     {formatPrice(estimate.total.min)} – {formatPrice(estimate.total.max)}
                   </p>
                   <p className="print-total-unit text-body-sm text-gray-500 font-normal mt-0.5">złotych netto</p>
                 </div>
                 {/* Right: meta stats */}
-                <div className="flex flex-col gap-2 items-end text-right">
+                <div className="flex flex-wrap gap-x-4 gap-y-1 md:flex-col md:gap-2 md:items-end md:text-right">
                   {[
                     { icon: 'calendar' as const, text: `${estimate.czasRealizacji.min}–${estimate.czasRealizacji.max} miesięcy` },
                     { icon: 'ruler' as const, text: `${submittedConfig.area} m²` },
                     { icon: 'coins' as const, text: `~${formatPrice(Math.round((estimate.total.min + estimate.total.max) / 2 / submittedConfig.area))} zł/m²` },
                   ].map((item) => (
-                    <span key={item.icon} className="flex items-center gap-1.5 text-body-sm text-gray-700 font-medium">
+                    <span key={item.icon} className="flex items-center gap-1.5 text-body-xs md:text-body-sm text-gray-700 font-medium">
                       <Icon name={item.icon} size="sm" className="text-primary" />
                       {item.text}
                     </span>
@@ -288,7 +308,7 @@ export const CalculatorForm = () => {
                 <Icon name="settings" size="sm" className="text-primary" />
                 Parametry konfiguracji
               </h3>
-              <div className="grid grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-2">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-6 gap-y-2">
                 {[
                   ['Powierzchnia', `${submittedConfig.area} m²`],
                   ['Kondygnacje', FLOOR_LABELS[submittedConfig.floors]],
@@ -321,25 +341,25 @@ export const CalculatorForm = () => {
                   return (
                     <div key={stage.label} className="print-stage-card border border-gray-200 rounded-xl overflow-hidden">
                       {/* Stage header */}
-                      <div className="print-stage-header flex items-center justify-between bg-gray-50 px-5 py-3.5">
+                      <div className="print-stage-header flex flex-col sm:flex-row sm:items-center sm:justify-between bg-gray-50 px-4 md:px-5 py-3">
                         <div className="flex items-center gap-3">
                           <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                             <Icon name={stageIcon} size="md" className="text-primary" />
                           </div>
-                          <span className="text-body-md font-bold text-text-primary">{stage.label}</span>
+                          <span className="text-body-sm md:text-body-md font-bold text-text-primary">{stage.label}</span>
                         </div>
-                        <span className="text-body-md font-bold text-primary tabular-nums">
+                        <span className="text-body-sm md:text-body-md font-bold text-primary tabular-nums mt-1 sm:mt-0 ml-12 sm:ml-0">
                           {formatPrice(stage.total.min)} – {formatPrice(stage.total.max)} zł
                         </span>
                       </div>
 
                       {/* Materials table */}
-                      <div className="print-stage-body px-5 py-3">
+                      <div className="print-stage-body px-4 md:px-5 py-3">
                         <p className="text-body-xs uppercase tracking-wider text-gray-400 font-semibold mb-2">Materiały</p>
                         {stage.materials.map((mat) => (
-                          <div key={mat.name} className="flex items-center justify-between py-1.5 text-body-sm">
+                          <div key={mat.name} className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-1.5 text-body-sm border-b border-gray-100 last:border-0">
                             <span className="text-gray-700">{mat.name}</span>
-                            <span className="text-gray-500 tabular-nums text-body-xs flex-shrink-0 ml-4">
+                            <span className="text-gray-500 tabular-nums text-body-xs mt-0.5 sm:mt-0 sm:ml-4 flex-shrink-0">
                               {mat.quantity} {mat.unit} × {formatPrice(mat.unitPrice)} zł = <strong className="text-gray-800">{formatPrice(mat.total)} zł</strong>
                             </span>
                           </div>
@@ -371,14 +391,14 @@ export const CalculatorForm = () => {
 
                 {/* Garaż */}
                 {estimate.garaz.max > 0 && (
-                  <div className="flex items-center justify-between py-4 px-5 border border-gray-200 rounded-xl bg-gray-50">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 px-4 md:px-5 border border-gray-200 rounded-xl bg-gray-50">
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                         <Icon name="home" size="md" className="text-primary" />
                       </div>
-                      <span className="text-body-md font-bold text-text-primary">Garaż</span>
+                      <span className="text-body-sm md:text-body-md font-bold text-text-primary">Garaż</span>
                     </div>
-                    <span className="text-body-md font-bold text-primary tabular-nums">
+                    <span className="text-body-sm md:text-body-md font-bold text-primary tabular-nums mt-1 sm:mt-0 ml-12 sm:ml-0">
                       {formatPrice(estimate.garaz.min)} – {formatPrice(estimate.garaz.max)} zł
                     </span>
                   </div>
@@ -386,24 +406,24 @@ export const CalculatorForm = () => {
               </div>
 
               {/* Summary: materiały / robocizna / sprzęt */}
-              <div className="print-summary mt-6 pt-4 border-t border-gray-200 grid grid-cols-3 gap-4 text-center">
-                <div>
+              <div className="print-summary mt-6 pt-4 border-t border-gray-200 space-y-2 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:text-center">
+                <div className="flex justify-between sm:block">
                   <p className="text-body-xs text-gray-400 uppercase tracking-wide">Materiały</p>
-                  <p className="text-body-md font-bold text-text-primary mt-1">{formatPrice(estimate.materialTotal)} zł</p>
+                  <p className="text-body-sm sm:text-body-md font-bold text-text-primary sm:mt-1">{formatPrice(estimate.materialTotal)} zł</p>
                 </div>
-                <div>
+                <div className="flex justify-between sm:block">
                   <p className="text-body-xs text-gray-400 uppercase tracking-wide">Robocizna</p>
-                  <p className="text-body-md font-bold text-text-primary mt-1">{formatPrice(estimate.robociznaTotal)} zł</p>
+                  <p className="text-body-sm sm:text-body-md font-bold text-text-primary sm:mt-1">{formatPrice(estimate.robociznaTotal)} zł</p>
                 </div>
-                <div>
+                <div className="flex justify-between sm:block">
                   <p className="text-body-xs text-gray-400 uppercase tracking-wide">Sprzęt</p>
-                  <p className="text-body-md font-bold text-text-primary mt-1">{formatPrice(estimate.sprzetTotal)} zł</p>
+                  <p className="text-body-sm sm:text-body-md font-bold text-text-primary sm:mt-1">{formatPrice(estimate.sprzetTotal)} zł</p>
                 </div>
               </div>
 
               {/* TOTAL */}
-              <div className="print-total-row flex items-center justify-between pt-5 mt-4 border-t-2 border-primary">
-                <span className="text-h5 font-bold text-text-primary">RAZEM</span>
+              <div className="print-total-row flex flex-col sm:flex-row sm:items-center sm:justify-between pt-4 mt-4 border-t-2 border-primary">
+                <span className="text-body-md sm:text-h5 font-bold text-text-primary">RAZEM</span>
                 <span className="text-h5 font-bold text-primary tabular-nums">
                   {formatPrice(estimate.total.min)} – {formatPrice(estimate.total.max)} zł
                 </span>
@@ -506,13 +526,15 @@ export const CalculatorForm = () => {
             {/* Bottom bar — logo + text */}
             <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
               <div className="flex items-center gap-5">
-                <Image
-                  src="/images/logo-white.webp"
-                  alt="CoreLTB"
-                  width={90}
-                  height={90}
-                  className="rounded-2xl shadow-lg opacity-90 flex-shrink-0"
-                />
+                <Link href="/">
+                  <Image
+                    src="/images/logo-white.webp"
+                    alt="CoreLTB — strona główna"
+                    width={90}
+                    height={90}
+                    className="rounded-2xl shadow-lg opacity-90 flex-shrink-0 hover:opacity-100 transition-opacity"
+                  />
+                </Link>
                 <div>
                   <p className="text-white/90 text-body-lg font-semibold font-heading">Budujemy jak dla siebie</p>
                   <p className="text-white/60 text-body-sm mt-1">200+ domów na Śląsku i w Małopolsce od 2005 roku</p>
@@ -524,6 +546,95 @@ export const CalculatorForm = () => {
 
         {/* ─── RIGHT: Form ─── */}
         <div className="bg-background-light">
+          {/* Mobile top bar — logo + hamburger */}
+          <div className="lg:hidden flex items-center justify-between px-5 pt-5">
+            <Link href="/">
+              <Image src="/images/logo-black.webp" alt="CoreLTB" width={64} height={64} className="rounded-none" />
+            </Link>
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(true)}
+              className="text-gray-700 hover:text-primary transition-colors p-1.5"
+              aria-label="Otwórz menu"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Mobile menu drawer — identyczny z Header */}
+          <div
+            className={`fixed inset-0 bg-black/40 z-[60] lg:hidden transition-opacity duration-300 ${
+              mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            }`}
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div
+            className={`fixed top-0 right-0 bottom-0 w-full bg-white z-[70] lg:hidden
+              shadow-2xl overflow-y-auto transition-transform duration-300 ease-out
+              ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}
+            `}
+          >
+            {/* Logo + zamknij */}
+            <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+              <Link href="/" onClick={() => setMobileMenuOpen(false)} className="relative w-[56px] h-[50px]">
+                <Image src="/images/logo-black.webp" alt="CoreLTB" fill className="object-contain" sizes="56px" />
+              </Link>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
+                aria-label="Zamknij menu"
+              >
+                <Icon name="x" size="md" />
+              </button>
+            </div>
+
+            {/* Nawigacja */}
+            <nav className="px-4 py-6 flex flex-col gap-1">
+              {mobileNavLinks.filter(link => link.href !== '/').map((link) => {
+                const isActive = pathname === link.href || (link.href === '/oferta' && pathname.startsWith('/oferta'));
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex items-center gap-4 px-4 py-4 rounded-xl text-base font-semibold transition-colors ${
+                      isActive ? 'text-primary bg-primary/5' : 'text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                      isActive ? 'bg-primary/10 text-primary' : 'bg-gray-100 text-gray-500'
+                    }`}>
+                      <Icon name={link.icon} size="md" />
+                    </div>
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* CTA + kontakt na dole */}
+            <div className="px-6 py-5 mt-auto border-t border-gray-100">
+              <Link
+                href="/kontakt"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 w-full bg-primary text-zinc-900 font-bold py-3.5 rounded-xl text-base mb-5"
+              >
+                Darmowa wycena
+                <Icon name="arrowRight" size="sm" />
+              </Link>
+              <a href="tel:+48664123757" className="flex items-center gap-3 py-2.5 text-base font-medium text-gray-700">
+                <Icon name="phone" size="md" className="text-primary" />
+                +48 664 123 757
+              </a>
+              <a href="mailto:coreltb@gmail.com" className="flex items-center gap-3 py-2.5 text-base font-medium text-gray-700">
+                <Icon name="mail" size="md" className="text-primary" />
+                coreltb@gmail.com
+              </a>
+            </div>
+          </div>
+
           <form
             onSubmit={handleSubmit}
             className="px-5 md:px-8 lg:px-10 xl:px-14 py-8 md:py-10 lg:py-12"
@@ -531,9 +642,6 @@ export const CalculatorForm = () => {
           >
             {/* H1 */}
             <div className="mb-8 text-center lg:text-left">
-              <div className="lg:hidden flex justify-center mb-6">
-                <Image src="/images/logo-black.webp" alt="CoreLTB" width={104} height={104} className="rounded-none" />
-              </div>
               <h1 className="text-h3 xl:text-display font-bold font-heading text-text-primary leading-tight">
                 Bezpłatna wycena
                 <br />
@@ -556,7 +664,7 @@ export const CalculatorForm = () => {
                   </div>
                 </div>
 
-                {/* Editable input (left) + Slider */}
+                {/* Editable input + Slider (slider hidden on mobile) */}
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-1.5 bg-white border-2 border-gray-200 focus-within:border-primary rounded-lg px-3 py-2 shadow-sm flex-shrink-0">
                     <input
@@ -585,7 +693,7 @@ export const CalculatorForm = () => {
                     <span className="text-text-muted font-medium text-body-sm">m²</span>
                   </div>
 
-                  <div className="flex-1">
+                  <div className="flex-1 hidden md:block">
                     <input
                       type="range"
                       min={80}

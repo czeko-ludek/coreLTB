@@ -61,7 +61,7 @@ export const OptionCard: React.FC<OptionCardProps> = ({
 
       {/* Label */}
       <span
-        className={`text-sm text-center leading-tight transition-colors duration-200 ${
+        className={`text-xs md:text-sm text-center leading-tight break-words hyphens-auto transition-colors duration-200 ${
           selected ? 'font-semibold text-text-primary' : 'text-text-secondary'
         }`}
       >
