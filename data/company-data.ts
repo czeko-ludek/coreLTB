@@ -66,7 +66,7 @@ export const companyData: CompanyData = {
   description: "Generalny Wykonawca domów jednorodzinnych. Specjalizujemy się w budownictwie na terenach górniczych Śląska i Małopolski. Od 2005 roku łączymy rzemieślniczą dokładność z profesjonalnym zarządzaniem projektami.",
   url: "https://coreltb.pl",
   telephone: "+48664123757",
-  email: "coreltb@gmail.com",
+  email: "biuro@coreltb.pl",
   foundingDate: "2005-01-01",
   priceRange: "$$$",
   currenciesAccepted: "PLN",

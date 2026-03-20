@@ -545,6 +545,24 @@
     text-wrap: balance;
   }
 
+  /* Fade in + slide up — scroll-reveal and page-load animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+      filter: blur(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
   /* Hero Image Zoom - subtle zoom out effect on load */
   @keyframes heroImageZoom {
     0% {
@@ -558,6 +576,36 @@
   .animate-hero-zoom {
     animation: heroImageZoom 1.2s ease-out forwards;
     will-change: transform;
+  }
+
+  /* Ken Burns zoom — plays on active hero slide */
+  @keyframes kenBurnsZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.15); }
+  }
+
+  /* Fade in — generic opacity 0→1 */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Hero text stagger — fade in + slide up */
+  @keyframes heroTextIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* SVG circle progress — strokeDashoffset 100→0 */
+  @keyframes circleProgress {
+    from { stroke-dashoffset: 100; }
+    to { stroke-dashoffset: 0; }
   }
 
   /* Curtain reveal animation - gold paper slides revealing gray, then gray slides revealing image */

@@ -15,7 +15,7 @@ const nextConfig = {
   // ✅ Optymalizacje dla Next.js 15
   experimental: {
     // Optymalizuje importy pakietów (zmniejsza bundle size)
-    optimizePackageImports: ['lucide-react', 'swiper', 'framer-motion'],
+    optimizePackageImports: ['lucide-react', 'swiper'],
   },
 
   // ✅ Trailing slash - bez slasha na końcu URL (lepsze dla SEO)

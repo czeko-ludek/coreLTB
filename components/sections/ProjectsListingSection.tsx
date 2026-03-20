@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useCallback, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
 import clsx from 'clsx';
@@ -17,10 +18,12 @@ import {
   projectCategories,
   projectTechnologies,
   projectSources,
+  garageOptions,
   sortOptions,
   type ProjectListingItem,
   type ProjectFilters,
   type SortOption,
+  type GarageFilter,
 } from '@/data/projects';
 
 const PROJECTS_PER_PAGE = 24;
@@ -56,6 +59,7 @@ function buildUrl(
   if (filters.technology.length)  params.set('technology', filters.technology.join(','));
   if (filters.category.length)    params.set('category',   filters.category.join(','));
   if (filters.source.length)      params.set('source',     filters.source.join(','));
+  if (filters.garage.length)      params.set('garage',     filters.garage.join(','));
   if (filters.surfaceRange)       params.set('surface',    filters.surfaceRange);
   if (sortBy !== 'newest')        params.set('sort',       sortBy);   // default pominięty
   if (page > 1)                   params.set('page',       String(page)); // page=1 pominięta
@@ -81,6 +85,7 @@ function parseFiltersFromURL(sp: URLSearchParams): {
       technology: parseList(sp.get('technology')) as ProjectFilters['technology'],
       category:   parseList(sp.get('category'))   as ProjectFilters['category'],
       source:     parseList(sp.get('source'))      as ProjectFilters['source'],
+      garage:     parseList(sp.get('garage'))       as ProjectFilters['garage'],
       surfaceRange: sp.get('surface') || null,
     },
     sort: (sp.get('sort') || 'newest') as SortOption,
@@ -111,7 +116,7 @@ export function ProjectsListingSection({
   }, [searchParams]);
 
   const [filters, setFilters] = useState<ProjectFilters>(
-    urlState?.filters ?? initialFilters ?? { technology: [], category: [], surfaceRange: null, source: [] }
+    urlState?.filters ?? initialFilters ?? { technology: [], category: [], surfaceRange: null, source: [], garage: [] }
   );
   const [sortBy, setSortBy] = useState<SortOption>(urlState?.sort ?? initialSort);
   const [currentPage, setCurrentPage] = useState(urlState?.page ?? initialPage);
@@ -144,7 +149,7 @@ export function ProjectsListingSection({
 
   // Pełny reset — jeden router.replace zamiast dwóch (brak stale closure)
   const handleReset = useCallback(() => {
-    const empty: ProjectFilters = { technology: [], category: [], surfaceRange: null, source: [] };
+    const empty: ProjectFilters = { technology: [], category: [], surfaceRange: null, source: [], garage: [] };
     setFilters(empty);
     setSortBy('newest');
     setCurrentPage(1);
@@ -185,6 +190,9 @@ export function ProjectsListingSection({
     source: Object.fromEntries(
       projectSources.map(s => [s.id, countProjectsByFilter(projects, 'source', s.id)])
     ),
+    garage: Object.fromEntries(
+      garageOptions.map(g => [g.id, countProjectsByFilter(projects, 'garage', g.id)])
+    ),
   }), [projects]);
 
   // Licznik aktywnych filtrów (dla mobile button)
@@ -192,6 +200,7 @@ export function ProjectsListingSection({
     filters.technology.length +
     filters.category.length +
     filters.source.length +
+    filters.garage.length +
     (filters.surfaceRange ? 1 : 0);
 
   // Generowanie numerów stron do wyświetlenia (max 7 pozycji z wielokropkami)
@@ -507,30 +516,74 @@ export function ProjectsListingSection({
           </div>
         </div>
 
-        {/* CTA Banner */}
-        <div
-          className={clsx(
-            'mt-12 md:mt-16 bg-gradient-to-r from-primary to-primary-dark rounded-3xl p-8 md:p-12',
-            inView ? 'animate-fade-in-up' : 'opacity-0'
-          )}
-          style={{ animationDelay: '0.5s' }}
-        >
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                Nie znalazłeś odpowiedniego projektu?
-              </h3>
-              <p className="text-white/80">
-                Skontaktuj się z nami - pomożemy dobrać projekt idealny dla Twoich potrzeb.
-              </p>
-            </div>
-            <Link
-              href="/kontakt"
-              className="flex-shrink-0 inline-flex items-center gap-2 px-8 py-4 bg-white text-primary rounded-xl font-semibold hover:bg-zinc-100 transition-colors"
+        {/* CTA — Kalkulator wyceny (dwukolumnowy, styl ContactCTA) */}
+        <div className="mt-12 md:mt-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+            {/* Left: Content */}
+            <div
+              className={clsx(
+                'bg-zinc-900 rounded-2xl overflow-hidden',
+                inView ? 'animate-fade-in-up' : 'opacity-0'
+              )}
+              style={{ animationDelay: '0.5s' }}
             >
-              Umów konsultację
-              <Icon name="arrowRight" size="sm" />
-            </Link>
+              <div className="p-6 md:p-8 lg:p-10 flex flex-col justify-center h-full">
+                <span className="text-primary font-bold text-xs uppercase tracking-[0.2em] block mb-3">
+                  Kalkulator Budowy
+                </span>
+                <h3 className="text-2xl md:text-4xl lg:text-5xl font-black text-white leading-[0.95] mb-4">
+                  ILE KOSZTUJE
+                  <br />
+                  <span className="text-primary">BUDOWA?</span>
+                </h3>
+                <p className="text-zinc-400 text-sm md:text-base lg:text-lg mb-4 md:mb-6 max-w-xl leading-relaxed">
+                  Skonfiguruj parametry domu i otrzymaj{' '}
+                  <strong className="text-white">szczegółowy kosztorys budowy</strong> w 60 sekund.
+                </p>
+                <div className="flex flex-col gap-2.5 mb-6">
+                  {[
+                    'Wycena w 60 sekund',
+                    'Rozbicie na etapy: SSO, deweloperski, pod klucz',
+                    'Stała cena w umowie ryczałtowej',
+                  ].map((feature, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                        <Icon name="check" className="text-primary" size="sm" />
+                      </div>
+                      <span className="text-zinc-300 text-sm md:text-base">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                <div>
+                  <Link
+                    href="/wycena"
+                    className="group inline-flex items-center gap-3 bg-primary hover:bg-white text-zinc-900 font-bold text-sm px-6 py-3 rounded-sm transition-all duration-300 uppercase tracking-wider"
+                  >
+                    Oblicz koszt budowy
+                    <div className="h-7 w-7 rounded-full bg-zinc-900 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                      <Icon name="arrowRight" className="text-white" size="sm" />
+                    </div>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Image */}
+            <div
+              className={clsx(
+                'relative min-h-[250px] md:min-h-[300px] rounded-2xl overflow-hidden',
+                inView ? 'animate-fade-in-up' : 'opacity-0'
+              )}
+              style={{ animationDelay: '0.65s' }}
+            >
+              <Image
+                src="/images/cta.webp"
+                alt="Kalkulator kosztów budowy domu — CoreLTB Builders"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
           </div>
         </div>
       </div>

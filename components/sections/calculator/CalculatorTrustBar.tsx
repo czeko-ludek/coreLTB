@@ -18,7 +18,7 @@ const items: { icon: IconName; title: string; description: string }[] = [
   },
   {
     icon: 'shieldCheck',
-    title: '5 lat gwarancji',
+    title: '10 lat gwarancji',
     description: 'Na konstrukcję i materiały użyte w budowie',
   },
 ];

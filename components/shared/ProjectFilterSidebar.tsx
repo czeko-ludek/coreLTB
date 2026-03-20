@@ -6,11 +6,13 @@ import {
   projectCategories,
   projectTechnologies,
   projectSources,
+  garageOptions,
   surfaceRanges,
   type ProjectFilters,
   type ProjectTechnology,
   type ProjectCategory,
   type ProjectSource,
+  type GarageFilter,
 } from '@/data/projects';
 import { FilterSection } from './FilterSection';
 
@@ -21,6 +23,7 @@ export interface ProjectFilterSidebarProps {
     technology: Record<string, number>;
     category: Record<string, number>;
     source: Record<string, number>;
+    garage: Record<string, number>;
   };
   totalResults: number;
   inView?: boolean;
@@ -55,6 +58,13 @@ export function ProjectFilterSidebar({
     onFiltersChange({ ...filters, source: newSource });
   };
 
+  const handleGarageChange = (g: GarageFilter, checked: boolean) => {
+    const newGarage = checked
+      ? [...filters.garage, g]
+      : filters.garage.filter(v => v !== g);
+    onFiltersChange({ ...filters, garage: newGarage });
+  };
+
   // Handler dla radio (powierzchnia)
   const handleSurfaceChange = (surfaceId: string | null) => {
     onFiltersChange({ ...filters, surfaceRange: surfaceId });
@@ -67,6 +77,7 @@ export function ProjectFilterSidebar({
       category: [],
       surfaceRange: null,
       source: [],
+      garage: [],
     });
   };
 
@@ -75,7 +86,8 @@ export function ProjectFilterSidebar({
     filters.technology.length > 0 ||
     filters.category.length > 0 ||
     filters.surfaceRange !== null ||
-    filters.source.length > 0;
+    filters.source.length > 0 ||
+    filters.garage.length > 0;
 
   return (
     <div
@@ -169,6 +181,33 @@ export function ProjectFilterSidebar({
               </span>
               <span className="text-xs text-text-muted">
                 ({projectCounts.source[src.id] || 0})
+              </span>
+            </label>
+          ))}
+        </div>
+      </FilterSection>
+
+      {/* Garaż */}
+      <FilterSection title="Garaż">
+        <div className="space-y-2">
+          {garageOptions.map((opt) => (
+            <label
+              key={opt.id}
+              className="flex items-center gap-3 cursor-pointer group"
+            >
+              <input
+                type="checkbox"
+                checked={filters.garage.includes(opt.id as GarageFilter)}
+                onChange={(e) =>
+                  handleGarageChange(opt.id as GarageFilter, e.target.checked)
+                }
+                className="w-4 h-4 rounded accent-primary"
+              />
+              <span className="text-sm text-text-secondary group-hover:text-text-primary transition-colors flex-1">
+                {opt.label}
+              </span>
+              <span className="text-xs text-text-muted">
+                ({projectCounts.garage[opt.id] || 0})
               </span>
             </label>
           ))}
