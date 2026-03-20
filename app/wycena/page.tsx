@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { HideHeader } from '@/components/sections/calculator/HideHeader';
 import { CalculatorForm } from '@/components/sections/calculator/CalculatorForm';
 import { CalculatorTrustBar } from '@/components/sections/calculator/CalculatorTrustBar';
@@ -21,7 +22,9 @@ export default function WycenaPage() {
   return (
     <main>
       <HideHeader />
-      <CalculatorForm />
+      <Suspense>
+        <CalculatorForm />
+      </Suspense>
       <CalculatorTrustBar />
       <CalculatorTestimonials />
       <CalculatorSteps />
@@ -57,7 +60,7 @@ export default function WycenaPage() {
       <ContactCTASection
         contactInfo={{
           phone: '+48 664 123 757',
-          email: 'coreltb@gmail.com',
+          email: 'biuro@coreltb.pl',
         }}
       />
     </main>

@@ -52,30 +52,22 @@ export function AboutCompanySection({
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Left: Image + Stats */}
-          <div>
-            <div className={`relative w-full aspect-square rounded-2xl overflow-hidden lg:max-w-[590px] mx-auto lg:mx-0 shadow-2xl ring-1 ring-black/5 animate-curtain-reveal ${isVisible ? 'curtain-animate' : ''}`}>
-              {/* Background Image */}
+          <div className="lg:max-w-[590px] mx-auto lg:mx-0">
+            <div className={`relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/5 bg-zinc-900 animate-curtain-reveal ${isVisible ? 'curtain-animate' : ''}`}>
+              {/* Logo */}
               <Image
-                src={image.src}
-                alt={image.alt}
+                src="/images/logo-white.webp"
+                alt="CoreLTB Builders — Generalne Wykonawstwo"
                 fill
-                className="object-cover"
+                className="object-contain p-12 md:p-20"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority
                 fetchPriority="high"
               />
-
-              {/* Subtle gradient overlay for better box visibility */}
-              <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
-
-              {/* Stats Box Overlay - desktop only */}
-              <div className="hidden md:block absolute bottom-6 left-6 right-6 z-10">
-                <CompanyStatBox {...stats} />
-              </div>
             </div>
 
-            {/* Stats pod obrazem — mobile only */}
-            <div className="md:hidden mt-4">
+            {/* Stats pod obrazem — wyrównane do szerokości obrazu */}
+            <div className="mt-4">
               <CompanyStatBox {...stats} />
             </div>
           </div>

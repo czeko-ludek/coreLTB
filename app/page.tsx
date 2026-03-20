@@ -83,7 +83,7 @@ export default function Home() {
 				title: "Kompleksowa budowa domów",
 				description:
 					"Generalne wykonawstwo (SSO / Deweloperka) w reżimie WT2026. Płyty fundamentowe, systemowe dylatacje, materiał z hurtowni w cenie.",
-				image: "/images/uslugi/showcase/budowa-domow.webp",
+				image: "/images/uslugi/kompleksowa-budowa-domow/timeline/odbior-gwarancja.webp",
 				href: "/oferta/kompleksowa-budowa-domow",
 			},
 			{
@@ -107,7 +107,7 @@ export default function Home() {
 				title: "Geologia i geodezja",
 				description:
 					"Twarde dane przed zakupem działki. Odwierty geotechniczne, badanie nośności gruntu, mapy do celów projektowych (MDCP).",
-				image: "/images/uslugi/showcase/uslugi-techniczne.webp",
+				image: "/images/uslugi/uslugi-techniczne/etapy/geodezja.webp",
 				href: "/oferta/uslugi-techniczne",
 			},
 			{
@@ -115,7 +115,7 @@ export default function Home() {
 				title: "Wykończenia wnętrz",
 				description:
 					"Prace 'pod klucz' z preferencyjnym 8% VAT na materiały. Jedna ekipa, jeden harmonogram i odpowiedzialność za cały proces.",
-				image: "/images/uslugi/showcase/wykonczenia.webp",
+				image: "/images/uslugi/wykonczenia-i-aranzacje/etapy/aranzacja.webp",
 				href: "/oferta/wykonczenia-i-aranzacje",
 			},
 			{
@@ -123,7 +123,7 @@ export default function Home() {
 				title: "Zagospodarowanie terenu",
 				description:
 					"Odwodnienie liniowe, podbudowy pod ciężki sprzęt, brukarstwo i ogrodzenia. Finalizujemy inwestycję z dbałością o spadki terenu.",
-				image: "/images/uslugi/showcase/zagospodarowanie.webp",
+				image: "/images/uslugi/kompleksowa-budowa-domow/timeline/zagospodarowanie-terenu.webp",
 				href: "/oferta/zagospodarowanie-terenu",
 			},
 		],
@@ -288,6 +288,7 @@ export default function Home() {
 			phone: companyData.telephone,
 			email: companyData.email,
 		},
+		primaryButton: { text: "Wyceń Budowę", href: "/wycena" },
 		socials: [
 			{ platform: "facebook" as const, href: "https://facebook.com" },
 			{ platform: "instagram" as const, href: "https://instagram.com" },

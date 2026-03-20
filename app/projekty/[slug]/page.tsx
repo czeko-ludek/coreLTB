@@ -1,12 +1,11 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { getProjectBySlug, allProjects } from '@/data/projects';
+import { getProjectBySlug, allProjects, buildCalculatorUrl } from '@/data/projects';
 import {
   ProjectGalleryHero,
   ProjectIntroduction,
   ProjectTabs,
   ProjectFloorPlans,
-  ProjectOptimalPrice,
   ProjectModificationCTA,
   RelatedProjectsSection,
 } from '@/components/shared';
@@ -85,6 +84,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           price={project.price}
           availability={project.availability}
           hasMirror={project.hasMirror}
+          calculatorUrl={buildCalculatorUrl(project)}
         />
 
         {/* Specifications Tabs (bez zakładki "Koszty") */}
@@ -104,15 +104,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           elevationWidth={project.elevationWidth}
         />
       </MirrorModeProvider>
-
-      {/* Optimal Price Display — only if cost data available */}
-      {project.costCalculation && project.costCalculation.items.length > 0 && (
-      <ProjectOptimalPrice
-        title={project.costCalculation.title}
-        stageName="Stan surowy zamknięty"
-        price={project.costCalculation.items.find(item => item.name === 'Stan surowy zamknięty')?.prices.min || 'N/A'}
-      />
-      )}
 
       {/* CTA for Project Modifications */}
       <ProjectModificationCTA />

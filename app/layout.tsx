@@ -13,13 +13,41 @@ export const metadata: Metadata = {
   metadataBase: new URL(companyData.url),
   title: "CoreLTB Builders - Zbuduj Swój Wymarzony Projekt z Nami",
   description: "Profesjonalne usługi budowlane. Dostarczamy klientom większą przejrzystość projektów, lepszy wgląd i mniej chaosu.",
+  icons: {
+    icon: [
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+  openGraph: {
+    type: "website",
+    locale: "pl_PL",
+    siteName: "CoreLTB Builders",
+    title: "CoreLTB Builders — Generalne Wykonawstwo Domów na Śląsku",
+    description: "Budowa domów pod klucz na Śląsku, w Małopolsce i na Opolszczyźnie. 15 lat doświadczenia, 150+ oddanych inwestycji. Stała cena w umowie.",
+    images: [
+      {
+        url: "/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "CoreLTB Builders — Kompleksowa budowa domów",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CoreLTB Builders — Generalne Wykonawstwo Domów na Śląsku",
+    description: "Budowa domów pod klucz na Śląsku. 15 lat doświadczenia, 150+ oddanych inwestycji.",
+    images: ["/images/og-image.jpg"],
+  },
 };
 
 // Header data
 const headerData = {
   topBar: {
     phone: "+48 664 123 757",
-    email: "kontakt@coreltb.pl",
+    email: "biuro@coreltb.pl",
     socials: [
       { platform: "facebook" as const, href: "https://facebook.com" },
       { platform: "twitter" as const, href: "https://twitter.com" },
@@ -37,7 +65,7 @@ const headerData = {
     { label: "Kontakt", href: "/kontakt" },
   ],
   searchEnabled: false,
-  ctaButton: { text: "Wycena", href: "/kontakt" },
+  ctaButton: { text: "Wycena", href: "/wycena" },
   megaMenuItems: [
     {
       icon: "home" as const,
@@ -85,7 +113,7 @@ const footerData = {
   topBar: {
     phone: "+48 664 123 757",
     phoneHref: "tel:+48664123757",
-    email: "coreltb@gmail.com",
+    email: "biuro@coreltb.pl",
     hours: "Pn–Pt 8:00–18:00",
   },
   companyLinks: [

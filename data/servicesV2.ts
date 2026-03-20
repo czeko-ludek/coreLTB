@@ -64,13 +64,14 @@ export interface FAQ {
 export interface ContactInfo {
   phone: string;
   email: string;
-  address: string;
+  address?: string;
 }
 
 export interface ContactCTAData {
   header: SectionHeaderProps;
   faqs?: FAQ[];
   contactInfo: ContactInfo;
+  primaryButton?: { text: string; href: string };
   ctaTitle?: string; // Opcjonalny tytuł CTA Box (np. "☎ Umów Konsultację (30 min)")
   ctaBenefits?: string[]; // Opcjonalne 4 bullet points benefitów konsultacji
   ctaSubtext?: string; // Opcjonalny tekst pod benefitami
@@ -226,7 +227,7 @@ export const allServicesV2: ServiceV2[] = [
 
     // Listing (karta na stronie /oferta)
     listing: {
-      image: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=800',
+      image: '/images/uslugi/kompleksowa-budowa-domow/timeline/odbior-gwarancja.webp',
       title: 'Generalne wykonawstwo domów (SSO / deweloperski / pod klucz)',
       description: 'Generalne wykonawstwo (SSO / Deweloperka) w reżimie WT2026. Płyty fundamentowe, dylatacje pod szkody górnicze, stała cena.',
       features: [
@@ -279,13 +280,13 @@ export const allServicesV2: ServiceV2[] = [
       ctaBoxSubtext: 'Konsultacja techniczna z Inżynierem Kontraktu.',
       ctaBoxButtons: [
         {
-          text: 'Umów analizę działki', // Konkretna akcja
-          href: 'tel:+48123456789',
+          text: 'Wyceń budowę online',
+          href: '/wycena',
           variant: 'primary',
         },
         {
-          text: 'Zamów wycenę online',
-          href: '#kontakt',
+          text: 'Umów konsultację',
+          href: '/umow-konsultacje?usluga=budowa',
           variant: 'secondary',
         },
       ],
@@ -513,7 +514,7 @@ servicesAccordion: {
             content: [
               {
                 type: 'paragraph',
-                value: 'Zakup działki na Śląsku bez sprawdzenia gruntu to ryzyko. Grunty wysadzinowe (gliny) i **szkody górnicze** (kategorie I-IV) wpływają na koszty. Analizujemy grunt przed startem, bo różnica w cenie między ławą a **płytą fundamentową** jest znacząca.'
+                value: 'Zakup działki na Śląsku bez sprawdzenia gruntu to ryzyko. Grunty wysadzinowe (gliny) i **szkody górnicze** (kategorie I-IV) wpływają na koszty. Analizujemy grunt przed startem, bo różnica w cenie między ławą a **[płytą fundamentową](/blog/plyta-fundamentowa-tereny-gornicze)** jest znacząca.'
               },
               {
                 type: 'list',
@@ -771,14 +772,14 @@ servicesAccordion: {
       header: {
         label: 'SKONTAKTUJ SIĘ Z NAMI',
         title: 'Gotowy na pierwszy krok?',
-        description: 'Wypełnij formularz, a odezwiemy się w ciągu 24 godzin.',
+        description: 'Sprawdź koszt budowy w naszym kalkulatorze lub umów rozmowę z inżynierem.',
         theme: 'light' as const,
       },
       contactInfo: {
-        phone: '+48 123 456 789',
-        email: 'kontakt@coreltb.pl',
-        address: 'ul. Budowlana 12, 30-001 Kraków',
+        phone: '+48 664 123 757',
+        email: 'biuro@coreltb.pl',
       },
+      primaryButton: { text: 'Wyceń budowę', href: '/wycena' },
     },
 
     // SEO
@@ -844,15 +845,15 @@ emotionalHero: {
   ],
   ctaBoxSubtext: 'Konsultacja techniczna z inżynierem, nie handlowcem.',
   ctaBoxButtons: [
-    { 
-      text: 'Umów analizę działki', 
-      href: 'tel:+48123456789', 
-      variant: 'primary' 
+    {
+      text: 'Umów konsultację',
+      href: '/umow-konsultacje?usluga=projektowanie',
+      variant: 'primary'
     },
-    { 
-      text: 'Wyceń projekt', 
-      href: '#kontakt', 
-      variant: 'secondary' 
+    {
+      text: 'Zadzwoń do nas',
+      href: 'tel:+48664123757',
+      variant: 'secondary'
     },
   ],
 },
@@ -1115,7 +1116,7 @@ servicesAccordion: {
       content: [
         {
           type: 'paragraph',
-          value: 'To nasza codzienność. Standardowy projekt nie przejdzie w starostwie bez **adaptacji konstrukcyjnej** do kategorii szkód (I-IV). Nasz konstruktor przeliczy fundamenty (najczęściej na płytę fundamentową) i zaprojektuje niezbędne dylatacje/wieńce, zgodnie z wytycznymi GIG i lokalnym prawem geologicznym.'
+          value: 'To nasza codzienność. Standardowy projekt nie przejdzie w starostwie bez **adaptacji konstrukcyjnej** do kategorii szkód (I-IV). Nasz konstruktor przeliczy fundamenty (najczęściej na płytę fundamentową) i zaprojektuje niezbędne dylatacje/wieńce, zgodnie z wytycznami GIG i lokalnym prawem geologicznym. Więcej: [Płyta fundamentowa na terenach górniczych](/blog/plyta-fundamentowa-tereny-gornicze).'
         }
       ]
     },
@@ -1238,13 +1239,13 @@ contactCTA: {
   header: {
     label: 'SKONTAKTUJ SIĘ Z NAMI',
     title: 'Masz pytania? Napisz lub zadzwoń',
-    description: 'Wypełnij formularz, a odezwiemy się w ciągu 24 godzin.',
+    description: 'Umów konsultację z architektem — pomożemy wybrać i zaadaptować projekt.',
   },
   contactInfo: {
-    phone: '+48 123 456 789',
-    email: 'kontakt@coreltb.pl',
-    address: 'ul. Przykładowa 123, Warszawa',
+    phone: '+48 664 123 757',
+    email: 'biuro@coreltb.pl',
   },
+  primaryButton: { text: 'Umów Konsultację', href: '/umow-konsultacje?usluga=projektowanie' },
 },
 
     // SEO
@@ -1314,13 +1315,13 @@ emotionalHero: {
   ctaBoxSubtext: 'Ochrona kapitału przed błędami wykonawczymi.',
   ctaBoxButtons: [
     {
-      text: 'Wyceń nadzór',
-      href: 'tel:+48123456789', 
+      text: 'Umów konsultację',
+      href: '/umow-konsultacje?usluga=nadzor',
       variant: 'primary',
     },
     {
-      text: 'Zamów odbiór',
-      href: '#kontakt',
+      text: 'Zadzwoń do nas',
+      href: 'tel:+48664123757',
       variant: 'secondary',
     },
   ],
@@ -1728,10 +1729,10 @@ servicesAccordion: {
         description: 'Umów bezpłatną konsultację i dowiedz się, jak chronimy Twoją budowę przed kosztownymi błędami.',
       },
       contactInfo: {
-        phone: '+48 123 456 789',
-        email: 'kontakt@coreltb.pl',
-        address: 'ul. Przykładowa 123, Warszawa',
+        phone: '+48 664 123 757',
+        email: 'biuro@coreltb.pl',
       },
+      primaryButton: { text: 'Umów Konsultację', href: '/umow-konsultacje?usluga=nadzor' },
     },
 
     // SEO
@@ -1752,7 +1753,7 @@ servicesAccordion: {
 
   // Listing (karta na stronie /oferta)
   listing: {
-    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800',
+    image: '/images/uslugi/uslugi-techniczne/etapy/geodezja.webp',
     title: 'Usługi techniczne: geologia, geodezja, kosztorys',
     description: 'Twarde dane przed startem. Odwierty geotechniczne, badanie nośności glin, mapy MDCP i tyczenie osi budynków.',
     features: [
@@ -1800,13 +1801,13 @@ servicesAccordion: {
     ctaBoxSubtext: 'Raport techniczny niezbędny do rozpoczęcia budowy.',
     ctaBoxButtons: [
       {
-        text: 'Zleć badania gruntu',
-        href: 'tel:+48123456789',
+        text: 'Zamów analizę działki',
+        href: '/analiza-dzialki',
         variant: 'primary',
       },
       {
-        text: 'Zapytaj o geodetę',
-        href: '#kontakt',
+        text: 'Zadzwoń do nas',
+        href: 'tel:+48664123757',
         variant: 'secondary',
       },
     ],
@@ -1914,7 +1915,7 @@ cooperationTimelineNoLine: {
         {
           // LINK: Baza wiedzy (Technologia/Geologia)
           type: 'paragraph',
-          value: '**Budujesz na szkodach górniczych?** Sprawdź, jak dobrać fundamenty: Szkody górnicze a fundamenty – poradnik inżyniera'
+          value: '**Budujesz na szkodach górniczych?** Sprawdź, jak dobrać fundamenty: [Płyta fundamentowa na terenach górniczych — poradnik inżyniera](/blog/plyta-fundamentowa-tereny-gornicze)'
         }
       ],
       imageSrc: '/images/uslugi/uslugi-techniczne/etapy/geologia.webp',
@@ -2202,13 +2203,13 @@ servicesAccordion: {
         label: 'ZBUDUJ NA PEWNYCH FUNDAMENTACH',
         title: 'Każdy Dom Zaczyna Się od Danych',
         description:
-          'Umów bezpłatną konsultację i dowiedz się, jakie badania i pomiary są kluczowe dla Twojej inwestycji.',
+          'Zamów analizę działki — sprawdzimy grunt, MPZP i uzbrojenie zanim wydasz pół miliona złotych.',
       },
       contactInfo: {
-        phone: '+48 123 456 789',
-        email: 'kontakt@coreltb.pl',
-        address: 'ul. Przykładowa 123, Warszawa',
+        phone: '+48 664 123 757',
+        email: 'biuro@coreltb.pl',
       },
+      primaryButton: { text: 'Zamów Analizę Działki', href: '/analiza-dzialki' },
     },
 
     // SEO
@@ -2230,7 +2231,7 @@ servicesAccordion: {
 
   // Listing (karta na stronie /oferta)
   listing: {
-    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800',
+    image: '/images/uslugi/wykonczenia-i-aranzacje/etapy/aranzacja.webp',
     title: 'Wykończenia i aranżacje',
     description: 'Prace \'pod klucz\' z preferencyjnym 8% VAT na materiały. Instalacje, posadzki, gładzie maszynowe – bez szukania ekip.',
     features: [
@@ -2280,13 +2281,13 @@ servicesAccordion: {
     ctaBoxSubtext: 'Otrzymaj precyzyjną wycenę opartą o pomiar laserowy.',
     ctaBoxButtons: [
       {
-        text: 'Umów pomiar i wycenę',
-        href: 'tel:+48123456789',
+        text: 'Umów konsultację',
+        href: '/umow-konsultacje?usluga=wykonczenia',
         variant: 'primary',
       },
       {
-        text: 'Wyślij rzut mieszkania',
-        href: '#kontakt',
+        text: 'Zadzwoń do nas',
+        href: 'tel:+48664123757',
         variant: 'secondary',
       },
     ],
@@ -2631,18 +2632,18 @@ cooperationTimelineNoLine: {
       ],
     },
 
-    // Sekcja 6: ContactCTA (WYMAGANE - TODO: dostosuj treść)
+    // Sekcja 6: ContactCTA
     contactCTA: {
       header: {
         label: 'ZACZNIJMY TWORZYĆ TWOJE WNĘTRZE',
         title: 'Gotowy na Wykończenie Marzeń?',
-        description: 'Umów się na bezpłatną konsultację, a my przygotujemy dla Ciebie wstępny kosztorys i harmonogram prac wykończeniowych dla Twojego domu.',
+        description: 'Umów się na bezpłatną konsultację, a my przygotujemy wstępny kosztorys i harmonogram prac wykończeniowych.',
       },
       contactInfo: {
-        phone: '+48 123 456 789',
-        email: 'kontakt@coreltb.pl',
-        address: 'ul. Przykładowa 123, Warszawa',
+        phone: '+48 664 123 757',
+        email: 'biuro@coreltb.pl',
       },
+      primaryButton: { text: 'Umów Konsultację', href: '/umow-konsultacje?usluga=wykonczenia' },
     },
 
     // SEO
@@ -2665,7 +2666,7 @@ cooperationTimelineNoLine: {
 
     // Listing (karta na stronie /oferta)
     listing: {
-      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800',
+      image: '/images/uslugi/kompleksowa-budowa-domow/timeline/zagospodarowanie-terenu.webp',
       title: 'Zagospodarowanie terenu',
       description: 'Przekształcamy przestrzeń wokół budynków w funkcjonalne i estetyczne otoczenie, realizując ogrody, drogi i ogrodzenia.',
       features: [
@@ -2674,7 +2675,7 @@ cooperationTimelineNoLine: {
       ],
     },
 
-    // Sekcja 1: PageHeader (TODO: uzupełnij dane)
+    // Sekcja 1: PageHeader
     pageHeader: {
       title: 'Zagospodarowanie Terenu',
       watermarkText: 'TEREN',
@@ -2706,8 +2707,8 @@ emotionalHero: {
   ],
   ctaBoxSubtext: 'Wizyta techniczna na działce w promieniu działania firmy.',
   ctaBoxButtons: [
-    { text: 'Umów pomiar', href: 'tel:+48123456789', variant: 'primary' },
-    { text: 'Poproś o wycenę', href: '#kontakt', variant: 'secondary' },
+    { text: 'Umów konsultację', href: '/umow-konsultacje?usluga=inne', variant: 'primary' },
+    { text: 'Zadzwoń do nas', href: 'tel:+48664123757', variant: 'secondary' },
   ],
 },
 
@@ -3201,13 +3202,13 @@ cooperationTimelineNoLine: {
         label: 'ZACZNIJMY TWORZYĆ TWÓJ OGRÓD',
         title: 'Gotowy na Zagospodarowanie Działki?',
         description:
-          'Umów się na bezpłatną konsultację, a my przygotujemy dla Ciebie wstępną koncepcję zagospodarowania terenu oraz kosztorys prac.',
+          'Umów się na bezpłatną konsultację, a my przygotujemy wstępną koncepcję zagospodarowania terenu oraz kosztorys prac.',
       },
       contactInfo: {
-        phone: '+48 123 456 789',
-        email: 'kontakt@coreltb.pl',
-        address: 'ul. Przykładowa 123, Warszawa',
+        phone: '+48 664 123 757',
+        email: 'biuro@coreltb.pl',
       },
+      primaryButton: { text: 'Umów Konsultację', href: '/umow-konsultacje?usluga=inne' },
     },
 
     // SEO

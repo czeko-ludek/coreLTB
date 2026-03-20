@@ -37,7 +37,7 @@ export const OptionCard: React.FC<OptionCardProps> = ({
         relative flex flex-col items-center justify-center gap-2
         p-4 rounded-xl border-2 cursor-pointer
         transition-all duration-200 ease-out
-        min-h-[100px] md:min-h-[120px]
+        min-h-[110px] md:min-h-[130px]
         active:scale-95
         ${
           selected

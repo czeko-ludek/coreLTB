@@ -3,10 +3,11 @@
 import { useState, useReducer, useRef, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { Icon } from '@/components/ui/Icon';
 import type { IconName } from '@/components/ui/Icon';
 import { OptionCard } from '@/components/ui/OptionCard';
+import { calculatorIcons } from '@/components/ui/CalculatorIcons';
 import { CalculatorHero } from './CalculatorHero';
 import {
   calculateEstimate,
@@ -127,6 +128,38 @@ export const CalculatorForm = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  // Pre-fill calculator from URL params (e.g., /wycena?area=120&floors=parterowy&roofType=dwuspadowy...)
+  useEffect(() => {
+    const areaParam = searchParams.get('area');
+    if (areaParam) {
+      const parsed = parseInt(areaParam, 10);
+      if (!isNaN(parsed) && parsed >= 80 && parsed <= 500) {
+        dispatch({ type: 'SET_FIELD', field: 'area', value: parsed });
+        setAreaInput(String(parsed));
+      }
+    }
+
+    // Valid values for each field
+    const validValues: Record<string, string[]> = {
+      floors: ['parterowy', 'poddasze', 'pietrowy'],
+      wallType: ['beton_komorkowy', 'ceramika', 'silikat'],
+      roofType: ['plaski', 'dwuspadowy', 'wielospadowy'],
+      garage: ['brak', 'jednostanowiskowy', 'dwustanowiskowy'],
+      finish: ['sso', 'deweloperski', 'pod_klucz'],
+      heating: ['gazowe', 'pompa_ciepla', 'pelet'],
+      foundation: ['plyta', 'lawy'],
+      basement: ['brak', 'czesciowa', 'cala'],
+    };
+
+    for (const [field, allowed] of Object.entries(validValues)) {
+      const val = searchParams.get(field);
+      if (val && allowed.includes(val)) {
+        dispatch({ type: 'SET_FIELD', field, value: val });
+      }
+    }
+  }, [searchParams]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -217,26 +250,55 @@ export const CalculatorForm = () => {
     setLoadingStep(-1);
     setIsSubmitting(false);
 
-    setTimeout(() => {
-      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Send lead email
+    try {
+      await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'calculator',
+          data: {
+            name: state.name,
+            phone: state.phone,
+            email: state.email || undefined,
+            location: state.location || undefined,
+            area: state.area,
+            floors: FLOOR_LABELS[config.floors],
+            wallType: WALL_LABELS[config.wallType],
+            roofType: ROOF_LABELS[config.roofType],
+            foundation: FOUNDATION_LABELS[config.foundation],
+            basement: BASEMENT_LABELS[config.basement],
+            garage: GARAGE_LABELS[config.garage],
+            finish: FINISH_LABELS[config.finish],
+            heating: HEATING_LABELS[config.heating],
+            estimateTotal: `${formatPrice(Math.round((result.total.min + result.total.max) / 2))} zl netto`,
+            estimateTotalBrutto: `${formatPrice(Math.round((result.totalBrutto.min + result.totalBrutto.max) / 2))} zl brutto`,
+          },
+        }),
+      });
+    } catch (err) {
+      console.error('[Calculator] Email send error:', err);
+    }
+
+    // TODO: GA4 event — track lead conversion
+    // trackEvent('generate_lead', { form: 'calculator', area: state.area, finish: state.finish });
   }
 
   function handlePrint() {
     window.print();
   }
 
-  // ─── Success / Result View — Professional Estimate Document ──
+  // ─── Estimate result data ──
 
-  if (estimate && submittedConfig) {
-    const today = new Date();
-    const validUntil = new Date(today);
-    validUntil.setDate(validUntil.getDate() + 14);
+  const estimateToday = estimate ? new Date() : null;
+  const estimateValidUntil = estimateToday ? (() => { const d = new Date(estimateToday); d.setDate(d.getDate() + 14); return d; })() : null;
 
-    return (
-      <section className="bg-gray-100 min-h-screen py-8 md:py-14 print:bg-white print:py-0 print:min-h-0">
-        <div ref={resultRef} className="container mx-auto px-4 md:px-6 max-w-4xl print:max-w-none print:px-0">
-
+  // ─── Render ────────────────────────────────────────
+  // Store the estimate document JSX for use inside the right panel
+  const estimateDocument = (estimate && submittedConfig && estimateToday && estimateValidUntil) ? (
+    <div ref={resultRef} className="px-5 md:px-8 lg:px-10 xl:px-14 py-8 md:py-10 lg:py-12 print:p-0">
           {/* Screen-only: Thank you header */}
           <div className="text-center mb-8 print:hidden">
             <div className="w-16 h-16 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-5">
@@ -281,7 +343,7 @@ export const CalculatorForm = () => {
                 <div className="md:text-right flex gap-3 md:block text-body-xs md:text-body-sm">
                   <p className="text-primary font-bold uppercase tracking-wider">Wycena wstępna</p>
                   <p className="text-gray-400">Nr: {refNumber}</p>
-                  <p className="text-gray-400">{today.toLocaleDateString('pl-PL')}</p>
+                  <p className="text-gray-400">{estimateToday!.toLocaleDateString('pl-PL')}</p>
                 </div>
               </div>
             </div>
@@ -388,7 +450,7 @@ export const CalculatorForm = () => {
             <div className="print-stages px-8 md:px-10 py-8 border-b border-gray-200">
               <h3 className="text-body-sm uppercase tracking-widest text-gray-500 font-semibold mb-6 flex items-center gap-2.5">
                 <Icon name="list" size="md" className="text-primary" />
-                Zakres prac i kosztorys
+                Zakres prac
               </h3>
 
               <div className="space-y-5">
@@ -398,16 +460,11 @@ export const CalculatorForm = () => {
                   return (
                     <div key={stage.label} className="print-stage-card border border-gray-200 rounded-xl overflow-hidden">
                       {/* Stage header */}
-                      <div className="print-stage-header flex flex-col sm:flex-row sm:items-center sm:justify-between bg-gray-50 px-4 md:px-5 py-3">
-                        <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                            <Icon name={stageIcon} size="md" className="text-primary" />
-                          </div>
-                          <span className="text-body-sm md:text-body-md font-bold text-text-primary">{stage.label}</span>
+                      <div className="print-stage-header flex items-center gap-3 bg-gray-50 px-4 md:px-5 py-3">
+                        <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <Icon name={stageIcon} size="md" className="text-primary" />
                         </div>
-                        <span className="text-body-sm md:text-body-md font-bold text-text-primary tabular-nums mt-1 sm:mt-0 ml-12 sm:ml-0">
-                          {formatPrice(Math.round((stage.total.min + stage.total.max) / 2))} zł
-                        </span>
+                        <span className="text-body-sm md:text-body-md font-bold text-text-primary">{stage.label}</span>
                       </div>
 
                       {/* Description + Included items */}
@@ -476,7 +533,7 @@ export const CalculatorForm = () => {
                     Z wyrazami szacunku,<br />
                     <strong className="text-gray-800">Zespół {companyData.name}</strong>
                   </p>
-                  <p>Ważność wyceny: <strong className="text-gray-800">{validUntil.toLocaleDateString('pl-PL')}</strong> (14 dni od wygenerowania).</p>
+                  <p>Ważność wyceny: <strong className="text-gray-800">{estimateValidUntil!.toLocaleDateString('pl-PL')}</strong> (14 dni od wygenerowania).</p>
                   <p className="text-body-xs text-gray-400 italic">Niniejsza oferta nie stanowi oferty handlowej w rozumieniu Kodeksu Cywilnego.</p>
                 </div>
               </div>
@@ -537,12 +594,8 @@ export const CalculatorForm = () => {
             <Icon name="chevronLeft" size="sm" />
             Wróć do kalkulatora
           </button>
-        </div>
-      </section>
-    );
-  }
-
-  // ─── Form View ────────────────────────────────────────
+    </div>
+  ) : null;
 
   return (
     <section className="min-h-screen">
@@ -656,7 +709,7 @@ export const CalculatorForm = () => {
             {/* CTA + kontakt na dole */}
             <div className="px-6 py-5 mt-auto border-t border-gray-100">
               <Link
-                href="/kontakt"
+                href="/wycena"
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center justify-center gap-2 w-full bg-primary text-zinc-900 font-bold py-3.5 rounded-xl text-base mb-5"
               >
@@ -667,13 +720,14 @@ export const CalculatorForm = () => {
                 <Icon name="phone" size="md" className="text-primary" />
                 +48 664 123 757
               </a>
-              <a href="mailto:coreltb@gmail.com" className="flex items-center gap-3 py-2.5 text-base font-medium text-gray-700">
+              <a href="mailto:biuro@coreltb.pl" className="flex items-center gap-3 py-2.5 text-base font-medium text-gray-700">
                 <Icon name="mail" size="md" className="text-primary" />
-                coreltb@gmail.com
+                biuro@coreltb.pl
               </a>
             </div>
           </div>
 
+          {estimateDocument ? estimateDocument : (
           <form
             onSubmit={handleSubmit}
             className="px-5 md:px-8 lg:px-10 xl:px-14 py-8 md:py-10 lg:py-12"
@@ -779,51 +833,63 @@ export const CalculatorForm = () => {
             {/* ─── Section 2: Konfiguracja ─── */}
             <FormSection number="2" title="Konfiguracja domu">
               <OptionGroup label="Kondygnacje">
-                {availableFloors.map((floor) => (
-                  <OptionCard
-                    key={floor}
-                    label={FLOOR_LABELS[floor]}
-                    icon={floor === 'pietrowy' ? 'building' : 'home'}
-                    selected={state.floors === floor}
-                    onClick={() => set('floors', floor)}
-                  />
-                ))}
+                {availableFloors.map((floor) => {
+                  const SvgIcon = calculatorIcons[floor];
+                  return (
+                    <OptionCard
+                      key={floor}
+                      label={FLOOR_LABELS[floor]}
+                      svgContent={SvgIcon ? <SvgIcon /> : undefined}
+                      selected={state.floors === floor}
+                      onClick={() => set('floors', floor)}
+                    />
+                  );
+                })}
               </OptionGroup>
 
               <OptionGroup label="Materiał murowy" className="mt-6">
-                {(Object.keys(WALL_LABELS) as WallType[]).map((wall) => (
-                  <OptionCard
-                    key={wall}
-                    label={WALL_LABELS[wall]}
-                    icon="layers"
-                    selected={state.wallType === wall}
-                    onClick={() => set('wallType', wall)}
-                  />
-                ))}
+                {(Object.keys(WALL_LABELS) as WallType[]).map((wall) => {
+                  const SvgIcon = calculatorIcons[wall];
+                  return (
+                    <OptionCard
+                      key={wall}
+                      label={WALL_LABELS[wall]}
+                      svgContent={SvgIcon ? <SvgIcon /> : undefined}
+                      selected={state.wallType === wall}
+                      onClick={() => set('wallType', wall)}
+                    />
+                  );
+                })}
               </OptionGroup>
 
               <OptionGroup label="Typ dachu" className="mt-6">
-                {availableRoofs.map((roof) => (
-                  <OptionCard
-                    key={roof}
-                    label={ROOF_LABELS[roof]}
-                    icon="home"
-                    selected={state.roofType === roof}
-                    onClick={() => set('roofType', roof)}
-                  />
-                ))}
+                {availableRoofs.map((roof) => {
+                  const SvgIcon = calculatorIcons[roof];
+                  return (
+                    <OptionCard
+                      key={roof}
+                      label={ROOF_LABELS[roof]}
+                      svgContent={SvgIcon ? <SvgIcon /> : undefined}
+                      selected={state.roofType === roof}
+                      onClick={() => set('roofType', roof)}
+                    />
+                  );
+                })}
               </OptionGroup>
 
               <OptionGroup label="Typ fundamentu" className="mt-6">
-                {(Object.keys(FOUNDATION_LABELS) as FoundationType[]).map((f) => (
-                  <OptionCard
-                    key={f}
-                    label={FOUNDATION_LABELS[f]}
-                    icon="mountain"
-                    selected={state.foundation === f}
-                    onClick={() => set('foundation', f)}
-                  />
-                ))}
+                {(Object.keys(FOUNDATION_LABELS) as FoundationType[]).map((f) => {
+                  const SvgIcon = calculatorIcons[f];
+                  return (
+                    <OptionCard
+                      key={f}
+                      label={FOUNDATION_LABELS[f]}
+                      svgContent={SvgIcon ? <SvgIcon /> : undefined}
+                      selected={state.foundation === f}
+                      onClick={() => set('foundation', f)}
+                    />
+                  );
+                })}
               </OptionGroup>
 
               <OptionGroup label="Piwnica" className="mt-6">
@@ -831,7 +897,8 @@ export const CalculatorForm = () => {
                   <OptionCard
                     key={b}
                     label={BASEMENT_LABELS[b]}
-                    icon={b === 'brak' ? 'x' : 'layers'}
+                    svgContent={b === 'brak' ? <calculatorIcons.basement_brak /> : undefined}
+                    icon={b !== 'brak' ? 'layers' : undefined}
                     selected={state.basement === b}
                     onClick={() => set('basement', b)}
                   />
@@ -855,6 +922,7 @@ export const CalculatorForm = () => {
                 ))}
               </OptionGroup>
 
+
               <div className="mt-3 bg-primary/5 border border-primary/20 rounded-xl p-4">
                 <p className="text-body-xs text-text-secondary leading-relaxed">
                   {state.finish === 'sso' && (
@@ -870,27 +938,35 @@ export const CalculatorForm = () => {
               </div>
 
               <OptionGroup label="Ogrzewanie" className="mt-6">
-                {(Object.keys(HEATING_LABELS) as HeatingType[]).map((h) => (
-                  <OptionCard
-                    key={h}
-                    label={HEATING_LABELS[h]}
-                    icon={h === 'gazowe' ? 'zap' : h === 'pompa_ciepla' ? 'wind' : 'construction'}
-                    selected={state.heating === h}
-                    onClick={() => set('heating', h)}
-                  />
-                ))}
+                {(Object.keys(HEATING_LABELS) as HeatingType[]).map((h) => {
+                  const SvgIcon = h !== 'pompa_ciepla' ? calculatorIcons[h as 'gazowe' | 'pelet'] : undefined;
+                  return (
+                    <OptionCard
+                      key={h}
+                      label={HEATING_LABELS[h]}
+                      svgContent={SvgIcon ? <SvgIcon /> : undefined}
+                      icon={h === 'pompa_ciepla' ? 'wind' : undefined}
+                      selected={state.heating === h}
+                      onClick={() => set('heating', h)}
+                    />
+                  );
+                })}
               </OptionGroup>
 
               <OptionGroup label="Garaż" className="mt-6">
-                {(Object.keys(GARAGE_LABELS) as GarageType[]).map((g) => (
-                  <OptionCard
-                    key={g}
-                    label={GARAGE_LABELS[g]}
-                    icon={g === 'brak' ? 'x' : 'home'}
-                    selected={state.garage === g}
-                    onClick={() => set('garage', g)}
-                  />
-                ))}
+                {(Object.keys(GARAGE_LABELS) as GarageType[]).map((g) => {
+                  const key = g === 'brak' ? 'garaz_brak' as const : g;
+                  const SvgIcon = calculatorIcons[key];
+                  return (
+                    <OptionCard
+                      key={g}
+                      label={GARAGE_LABELS[g]}
+                      svgContent={SvgIcon ? <SvgIcon className={g === 'dwustanowiskowy' ? 'w-[3.6rem] h-[3.45rem]' : 'w-12 h-12'} /> : undefined}
+                      selected={state.garage === g}
+                      onClick={() => set('garage', g)}
+                    />
+                  );
+                })}
               </OptionGroup>
             </FormSection>
 
@@ -1022,6 +1098,7 @@ export const CalculatorForm = () => {
               </p>
             </FormSection>
           </form>
+          )}
         </div>
       </div>
 

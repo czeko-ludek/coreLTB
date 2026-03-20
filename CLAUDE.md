@@ -4,9 +4,133 @@
 - Next.js App Router website for CoreLTB Builders (home construction, Silesia region, Poland)
 - Branch: v3, Main: master
 - Polish language content, SEO-focused
+- No Framer Motion — all animations use CSS transitions/keyframes + `useInView` from `react-intersection-observer`
 
 ## Landing Pages & Conversion Strategy
-Full strategy doc: **`docs/LANDING-PAGES-STRATEGY.md`** — describes all conversion landing pages (calculator `/wycena`, consultation `/umow-konsultacje`, plot analysis `/analiza-dzialki`), CTA mapping across the site, GA4 event naming, Google Ads campaign structure, and backend API routes for form handling. Reference this file when building any new LP, changing CTA destinations, or setting up analytics/ads.
+Full strategy doc: **`docs/LANDING-PAGES-STRATEGY.md`** — describes all conversion landing pages, CTA mapping, GA4 events, Google Ads campaigns, backend API routes.
+
+### Funnel Architecture
+```
+AWARENESS (SEO / Ads)
+  Strona glowna, /obszar-dzialania/*, /oferta/*, /projekty
+      |
+CONSIDERATION
+  /wycena (LP1) — "Ile to kosztuje?" — P0, kalkulator budowy
+  /umow-konsultacje (LP2) — "Chce porozmawiac" — P1, formularz kontekstowy
+  /analiza-dzialki (LP3) — "Mam dzialke, co dalej?" — P2
+  /kontakt (LP4) — catch-all, dane kontaktowe
+      |
+LEAD -> Spotkanie na budowie / w biurze
+```
+
+### CTA Design Pattern
+All CTAs across the site use a consistent two-column dark design:
+- Left: `bg-zinc-900` with label, H2/H3, description, bullet points, link button
+- Right: `<Image>` with `/images/cta.webp`
+- Used in: `ProjectModificationCTA`, `/projekty` listing CTA, `ContactCTASection`
+- **Do NOT use** golden gradient banners — they were removed in v3
+
+## Projects System (data/projects/)
+
+### Data Sources
+- `data/projects/galeriadomow.ts` — ~230 projects from GaleriaDomow XML import
+- `data/projects/z500.ts` — ~20 projects from Z500
+- `data/projects/manual.ts` — manually added projects
+- `data/projects/index.ts` — merges all sources, exports `allProjects`, `getProjectBySlug()`
+
+### Project Type (`Project`)
+Key fields: `slug`, `id`, `title`, `category`, `technology`, `surfaceArea`, `price`, `availability`, `specifications[]`, `floorPlans[]`, `garage?`, `source?`
+
+### Filtering & Sorting (`/projekty`)
+- **Categories:** parterowy, pietrowy (maps to z-poddaszem + dwulokalowy + jednorodzinny), z-poddaszem, dwulokalowy
+- **Garage filter:** z-garazem / bez-garazu (checkbox)
+- **Technology:** MUROWANY / DREWNIANY
+- **Source:** galeriadomow / z500
+- **Surface ranges:** 100-150, 150-200, 200+
+- **Sort:** newest, price-asc/desc, area-asc/desc
+- Components: `ProjectsListingSection` (main), `ProjectFilterSidebar` (desktop), `MobileFilterDrawer`
+
+### Project Detail Page (`/projekty/[slug]`)
+Components in order:
+1. `ProjectGalleryHero` — image gallery with lightbox
+2. `ProjectIntroduction` — breadcrumbs, ID badge, surface area, price, technology, mirror toggle, **"Poznaj cene budowy" button**
+3. `ProjectTabs` — specification tabs (excluding "Koszty")
+4. `ProjectFloorPlans` — floor plan images with room lists
+5. `ProjectElevations` — elevation images, cross section, site plan
+6. `ProjectModificationCTA` — "Studio Adaptacji" dark CTA
+7. `RelatedProjectsSection` — related projects carousel
+
+### Calculator Pre-fill System (Project -> /wycena)
+**`buildCalculatorUrl(project)`** in `data/projects/helpers.ts` — extracts data from a Project and builds a `/wycena?params` URL with pre-filled calculator fields.
+
+**Mapping (5 of 9 fields auto-filled):**
+
+| Calculator field | Source | Mapping logic |
+|---|---|---|
+| `area` | `project.surfaceArea` | `parseSurfaceArea()` -> round |
+| `floors` | `project.category` | parterowy->parterowy, z-poddaszem->poddasze, pietrowy/dwulokalowy->pietrowy |
+| `wallType` | hardcoded | always `silikat` (CoreLTB standard) |
+| `roofType` | `specifications["Rodzaj dachu"]` | dwuspadowy->dwuspadowy, czterospadowy->wielospadowy; Z500 fallback: angle <=5deg->plaski |
+| `garage` | `project.garage` OR specs/floorPlans | 1-stanowiskowy->jednostanowiskowy, 2-stanowiskowy->dwustanowiskowy; Z500: infers from "Powierzchnia garazu" spec or "Garaz" room (>30m2=dwustanowiskowy) |
+| `foundation` | `specifications["Posadowienie"]` | default `lawy`; plyta if spec contains "plyta" |
+| `basement` | hardcoded | always `brak` |
+| `heating` | — | user must choose |
+| `finish` | — | user must choose |
+
+**Flow:** `ProjectIntroduction` receives `calculatorUrl` prop -> renders "Poznaj cene budowy" button -> links to `/wycena?area=120&floors=parterowy&wallType=silikat&roofType=dwuspadowy&garage=jednostanowiskowy&foundation=lawy&basement=brak` -> `CalculatorForm` reads all params via `useSearchParams()` and pre-fills form state.
+
+**Data availability differences:**
+- **GaleriaDomow:** has `project.garage` field, `Rodzaj dachu` in specs, no `Posadowienie`
+- **Z500:** no `garage` field (inferred from specs/floorPlans), has `Kat nachylenia dachu` + `Posadowienie` in specs
+
+## Landing Pages — Shared Layout & Components
+
+All conversion LPs (`/wycena`, `/umow-konsultacje`, `/analiza-dzialki`) share the same two-column layout:
+- **Left:** Sticky full-height image with dark overlay, logo, tagline (hidden on mobile)
+- **Right:** Scrollable form panel with mobile top bar (logo + hamburger) and mobile menu drawer
+- **Success view:** Right panel swaps to success message (left image stays). Smooth scroll to top. "Wróć do formularza" button resets.
+- **No emoji icons anywhere** — all icons use `<Icon>` component (Lucide-based)
+
+**Shared section components** (`components/sections/shared/`):
+- `LPTrustBar.tsx` — 4 trust badges (200+ domów, Stała cena, Gwarancja terminu, 10 lat gwarancji). Accepts optional `items` prop.
+- `LPTestimonials.tsx` — 8 testimonials, CSS marquee with hover pause. Accepts optional `title` and `testimonials` props.
+- `LPSteps.tsx` — Dark bg, numbered steps with icons and dashed connectors. Auto `md:grid-cols-3` or `md:grid-cols-4`. Supports `time` badge and `subtitle`.
+
+**Section order on all LPs:** Form → LPTrustBar → LPTestimonials → page-specific content → LPSteps → FAQ → ContactCTA
+
+**HideHeader** (`components/sections/calculator/HideHeader.tsx`) — hides global header on desktop (lg+), SSR inline `<style>`. Used on all LPs.
+
+## Calculator / Wycena Page (`/wycena`)
+Lead generation landing page with cost calculator at `app/wycena/page.tsx`.
+
+**Architecture:**
+- `data/pricing.ts` — pricing engine: `calculateEstimate()`, material/labor/equipment breakdown per construction stage, geometric quantity calculations. Types: `CalculatorConfig`, `EstimateBreakdown`, `StageBreakdown`. Labels: `WALL_LABELS`, `ROOF_LABELS`, `FLOOR_LABELS`, `GARAGE_LABELS`, `FINISH_LABELS`, `HEATING_LABELS`
+- `components/sections/calculator/CalculatorForm.tsx` — main form + estimate document (rendered inside right panel, not separate page). `useReducer` for form state. Reads URL params via `useSearchParams()` (wrapped in `<Suspense>` in page.tsx). Estimate shows total price only (no per-stage prices), zakres prac per stage.
+- `components/sections/calculator/CalculatorHero.tsx` — mobile-only hero header (white text on dark bg)
+- `components/sections/calculator/CalculatorTrustBar.tsx` — 4 trust badges
+- `components/sections/calculator/CalculatorTestimonials.tsx` — 8 testimonials, CSS marquee
+- `components/sections/calculator/CalculatorSteps.tsx` — "Od wyceny do budowy w 3 krokach"
+- `components/ui/OptionCard.tsx` — reusable selection card
+
+**Config options:** area (80-500 m2), floors (parterowy/poddasze/pietrowy), wall type (silikat/ceramika/beton komorkowy), roof type (plaski/dwuspadowy/wielospadowy), garage (brak/jedno/dwustanowiskowy), finish (SSO/deweloperski/pod klucz), heating (gazowe/pompa ciepla/pelet), foundation (plyta/lawy), basement (brak/czesciowa/cala)
+
+**URL pre-fill:** Accepts query params for all config fields. Validated against allowed values before applying. Used by project detail pages via `buildCalculatorUrl()`.
+
+**Mobile specifics:** Header hidden, custom hamburger menu + drawer. Slider hidden, area input only. Estimate sections stack vertically.
+
+## Consultation Page (`/umow-konsultacje`)
+- `components/sections/consultation/ConsultationForm.tsx` — service type selection (6 OptionCards: budowa, projektowanie, nadzor, techniczne, wykonczenia, inne), contextual questions per service, location dropdown, contact preference, file upload, consents
+- URL auto-fill: `?usluga=nadzor&miasto=katowice` via `useSearchParams()` (wrapped in `<Suspense>`)
+- Page-specific content: "Dlaczego konsultacja z inżynierem?" (3 Icon cards)
+
+## Plot Analysis Page (`/analiza-dzialki`)
+- `components/sections/plot-analysis/PlotAnalysisForm.tsx` — address (required), plot number, land register, MPZP status (tak/nie/nie_wiem buttons), contact fields, notes
+- Green badge "Bezpłatna przy podpisaniu umowy na budowę" (no icon)
+- Page-specific content: "Co obejmuje analiza?" (6 Icon cards), "Ile kosztuje?" (2-column: green 0 zł card + stacked pricing cards)
+
+## Contact Page (`/kontakt`)
+- `components/sections/contact/ContactRoutingCards.tsx` — 3 routing cards directing to LPs: "Chcę wycenę" → /wycena, "Chcę porozmawiać" → /umow-konsultacje, "Mam działkę" → /analiza-dzialki
+- Correct phone: +48 664 123 757, email: biuro@coreltb.pl
 
 ## Local Pages System (data/local/)
 Scalable system for city-specific landing pages at `/obszar-dzialania/[slug]`.
@@ -24,90 +148,129 @@ Scalable system for city-specific landing pages at `/obszar-dzialania/[slug]`.
 **Local page components** in `components/sections/local/`:
 - ServicePillarsSection, MidPageCTA, LocalExpertiseSection, WhyUsSection
 - PartnerLogosMarquee, DistrictsSection, NearbyCitiesSection
-- **BuildingStagesSection** — dedicated timeline component for `etapy-realizacji` additionalSections. Numbered steps with dashed connecting line, keyword-based pillar interlinking (SSO/Deweloperski/Pod Klucz → `/oferta/kompleksowa-budowa-domow`). Routed in page.tsx by `section.id === 'etapy-realizacji'`; other additionalSections still use LocalExpertiseSection.
+- **BuildingStagesSection** — timeline component for `etapy-realizacji` additionalSections
 
 **Old file:** `data/local-pages.ts` is deprecated (still exists but no imports reference it)
 
-## Calculator / Wycena Page (`/wycena`)
-Lead generation landing page with cost calculator at `app/wycena/page.tsx`.
+## Ads & Analytics (`docs/ads.md`)
 
-**Architecture:**
-- `data/pricing.ts` — pricing engine: `calculateEstimate()`, material/labor/equipment breakdown per construction stage, geometric quantity calculations. Types: `CalculatorConfig`, `EstimateBreakdown`, `StageBreakdown`, `MaterialItem`. Labels: `WALL_LABELS`, `ROOF_LABELS`, `FLOOR_LABELS`, `GARAGE_LABELS`, `FINISH_LABELS`, `HEATING_LABELS`
-- `components/sections/calculator/CalculatorForm.tsx` — main form + estimate document. `useReducer` for form state (area, floors, wallType, roofType, garage, finish, heating, contact fields). Generates professional estimate PDF with logo, ref number, per-stage material tables, print CSS
-- `components/sections/calculator/CalculatorHero.tsx` — mobile-only hero header (white text on dark bg)
-- `components/sections/calculator/CalculatorTrustBar.tsx` — 4 trust badges (200+ domów, stała cena, gwarancja terminu, 5 lat gwarancji)
-- `components/sections/calculator/CalculatorTestimonials.tsx` — 8 testimonials, CSS marquee infinite scroll
-- `components/sections/calculator/CalculatorSteps.tsx` — "Od wyceny do budowy w 3 krokach"
-- `components/sections/calculator/HideHeader.tsx` — hides global header on desktop only (lg+), SSR inline `<style>` for zero flash
-- `components/ui/OptionCard.tsx` — reusable selection card for calculator options
+### Platforms Status
+| Platform | Status |
+|---|---|
+| Google Search Console | Done (coreltb.pl, dawidFC@gmail.com) |
+| GA4 | TODO — need Measurement ID (G-XXXXXXXXXX) |
+| Google Tag Manager | TODO — container to create & embed in `app/layout.tsx` |
+| Google Ads | TODO — account to create |
+| Meta Pixel | TODO — pixel to create & embed |
 
-**Config options:** area (80-500 m², slider + manual input), floors (parterowy/piętrowy), wall type (silikat/ceramika/beton komórkowy), roof type (dwuspadowy/czterospadowy/kopertowy), garage (brak/jedno/dwustanowiskowy), finish standard (SSO/deweloperski/pod klucz), heating type (gazowe/pompa ciepła/elektryczne)
+### Planned Campaigns
+- **Search:** "budowa domu wycena", "kalkulator budowy domu" -> `/wycena`
+- **Local Search:** "budowa domu [miasto]" -> `/wycena`
+- **Brand:** "coreltb", "core ltb" -> `/`
+- **Remarketing (Google+Meta):** visitors of `/wycena` who didn't submit -> `/wycena`
+- **Meta Lookalike:** from calculator conversions -> `/wycena`
+- **Meta Awareness:** interests: budowa domu -> `/projekty`
 
-**Mobile specifics:** Header hidden, custom hamburger menu + drawer (identical to Header component). Slider hidden, area input only. Estimate sections stack vertically.
+### Conversion Events (GA4 + Ads)
+| Event | Trigger |
+|---|---|
+| `calculator_lead` | Form submit on `/wycena` (PRIMARY) |
+| `calculator_start` | First param change in calculator |
+| `calculator_call` | Phone click from calculator |
+| `contact_form_submit` | Form submit on `/kontakt` |
+| `phone_click` | Any phone number click |
 
-**Ads config:** See `docs/ads.md` for Google Ads / Meta Ads / analytics configuration.
+### UTM Convention
+`utm_source=google|facebook`, `utm_medium=cpc|social`, `utm_campaign={typ}-{miasto}-{data}`, `utm_content={wariant}`
+
+### Implementation TODO
+- [ ] Create GTM container, embed in `app/layout.tsx`
+- [ ] Create `lib/analytics.ts` with `trackEvent()` / `trackLead()` helpers
+- [ ] Add event tracking to `CalculatorForm.tsx` (submit + PDF)
+- [ ] Add event tracking to contact form
+- [ ] Configure GA4 property + Measurement ID
+- [ ] Configure conversion goals in Google Ads
+- [ ] Create Meta Pixel, embed, configure audiences
+- [ ] Test events in GA4 DebugView + Meta Events Manager
+
+## Lead Email System
+
+**API endpoint:** `app/api/lead/route.ts` — unified POST endpoint, accepts `{ source, data }`:
+
+| Source | Form | Email subject prefix |
+|--------|------|---------------------|
+| `calculator` | `/wycena` | `[Wycena]` — config + estimate total |
+| `consultation` | `/umow-konsultacje` | `[Konsultacja]` — service + city |
+| `plot_analysis` | `/analiza-dzialki` | `[Analiza działki]` — address |
+
+**Email delivery:** Resend SDK (`npm: resend`)
+- `lib/email/send.ts` — Resend wrapper, reads `RESEND_API_KEY`, `LEAD_NOTIFICATION_EMAIL`, `LEAD_FROM_EMAIL` from `.env.local`
+- `lib/email/templates.ts` — HTML email templates per form type. Brand colors (#1a1a1a dark, #dfbb68 gold). Logo placeholder ready for post-deploy.
+- `.env.local` — API key + recipient config (gitignored)
+
+**Domain verification:** `coreltb.pl` in Resend (region: us-east-1). DNS records (DKIM, SPF, MX, DMARC) configured in Cyberfolks panel. After verification, change `LEAD_FROM_EMAIL` to `leady@coreltb.pl` and `LEAD_NOTIFICATION_EMAIL` to `biuro@coreltb.pl`.
+
+**Each form POSTs to `/api/lead`** with try/catch — user always sees success even if email fails (graceful degradation). Console logs errors server-side.
 
 ## Key Files
-- `app/obszar-dzialania/[slug]/page.tsx` — local page route (Layout A)
-- `lib/schema/generators.ts` — Schema.org JSON-LD (FAQPage, Service, BreadcrumbList, LocalBusiness)
+- `app/wycena/page.tsx` — calculator LP (with `<Suspense>`)
+- `app/umow-konsultacje/page.tsx` — consultation LP (with `<Suspense>`)
+- `app/analiza-dzialki/page.tsx` — plot analysis LP
+- `app/kontakt/page.tsx` — contact page with routing cards
+- `app/api/lead/route.ts` — unified lead API endpoint
+- `app/projekty/[slug]/page.tsx` — project detail page
+- `app/projekty/page.tsx` — projects listing (RSC)
+- `app/obszar-dzialania/[slug]/page.tsx` — local page route
+- `components/sections/shared/` — LPTrustBar, LPTestimonials, LPSteps
+- `components/sections/consultation/ConsultationForm.tsx` — consultation form
+- `components/sections/plot-analysis/PlotAnalysisForm.tsx` — plot analysis form
+- `components/sections/calculator/CalculatorForm.tsx` — calculator form + estimate
+- `lib/email/send.ts` — Resend email wrapper
+- `lib/email/templates.ts` — HTML email templates (brand colors)
+- `data/projects/helpers.ts` — filter/sort/parse + `buildCalculatorUrl()`
+- `data/projects/types.ts` — Project, ProjectListingItem, filter types
+- `data/pricing.ts` — calculator pricing engine
+- `data/company-data.ts` — company info (email: biuro@coreltb.pl, phone: +48 664 123 757)
+- `lib/schema/generators.ts` — Schema.org JSON-LD
 - `app/sitemap.ts` — imports from `@/data/local`
 - `data/servicesV2.ts` — service definitions
-- `data/company-data.ts` — company info, telephone, email, schema helpers
-- `data/pricing.ts` — calculator pricing engine, material quantities, labels
-- `app/wycena/page.tsx` — calculator landing page route
+- `docs/ads.md` — ads & analytics config
+- `docs/LANDING-PAGES-STRATEGY.md` — full funnel strategy
 
 ## SEO Agent (SEO/seo-agent/)
 Node.js agent pulling real data from Google Search Console + GA4, generating Markdown reports.
-Domena: **coreltb.pl** | GSC: ✅ podłączone | GA4: ⏳ do podłączenia po deploy
+Domena: **coreltb.pl** | GSC: Done | GA4: TODO
 
 **Architecture:**
 ```
 SEO/
-├── seo-agent/                ← Agent (Node.js, googleapis)
-│   ├── agent.js              ← CLI orkiestrator
-│   ├── config.json           ← konfiguracja (coreltb.pl, progi, grupy fraz)
-│   ├── seo-actions.json      ← rejestr zmian SEO (korelacja z efektami)
+├── seo-agent/
+│   ├── agent.js              <- CLI orchestrator
+│   ├── config.json           <- config (coreltb.pl, thresholds, keyword groups)
+│   ├── seo-actions.json      <- SEO change log (correlates with effects)
 │   ├── lib/
-│   │   ├── auth.js           ← OAuth2 ADC auth (konto dawidFC@gmail.com)
-│   │   ├── gsc.js            ← 5 raportów GSC
-│   │   ├── ga4.js            ← 5 raportów GA4 (do podłączenia)
-│   │   ├── analyzer.js       ← top movers, grupy fraz, szanse, alerty, korelacja
-│   │   └── formatter.js      ← raport Markdown (11 sekcji po polsku)
-│   ├── credentials/          ← (gitignored)
-│   └── reports/              ← (gitignored)
-└── analizy/                  ← Zapisane analizy SEO (ręczne + automatyczne)
-    └── YYYY-MM-DD-opis.md    ← konwencja nazw
+│   │   ├── auth.js, gsc.js, ga4.js, analyzer.js, formatter.js
+│   ├── credentials/          <- (gitignored)
+│   └── reports/              <- (gitignored)
+└── analizy/                  <- Saved SEO analyses
+    └── YYYY-MM-DD-opis.md
 ```
 
-**Auth:** OAuth2 User Credentials (ADC) z `%APPDATA%/gcloud/application_default_credentials.json`.
-Konto: `dawidFC@gmail.com` — dodany jako właściciel w GSC coreltb.pl.
-Jeśli token wygaśnie: `py "D:\NEXUS V2\credentials\setup_analytics_adc.py"` (scopy: analytics.readonly + webmasters.readonly).
+**Auth:** OAuth2 ADC from `%APPDATA%/gcloud/application_default_credentials.json` (dawidFC@gmail.com).
+Token refresh: `py "D:\NEXUS V2\credentials\setup_analytics_adc.py"`
 
-**Komendy agenta:**
+**Commands:**
 ```bash
-node SEO/seo-agent/agent.js                  # raport 28 dni (domyślnie)
-node SEO/seo-agent/agent.js --days 7         # raport 7 dni
-node SEO/seo-agent/agent.js --days 90        # raport 90 dni
-node SEO/seo-agent/agent.js --gsc-only       # tylko GSC (bez GA4)
-node SEO/seo-agent/agent.js --test-auth      # test połączenia GSC + GA4
-node SEO/seo-agent/agent.js --actions        # pokaż rejestr zmian SEO
+node SEO/seo-agent/agent.js                  # 28-day report (default)
+node SEO/seo-agent/agent.js --days 7         # 7-day report
+node SEO/seo-agent/agent.js --gsc-only       # GSC only (no GA4)
+node SEO/seo-agent/agent.js --test-auth      # test connection
+node SEO/seo-agent/agent.js --actions        # show SEO change log
 ```
 
-**Jak wykonać analizę SEO (dla przyszłych agentów):**
-1. Uruchom: `node SEO/seo-agent/agent.js --days 28 --gsc-only`
-2. Przeczytaj raport: `SEO/seo-agent/reports/latest-report.md`
-3. Zapisz analizę z wnioskami: `SEO/analizy/YYYY-MM-DD-opis.md`
-4. Po każdej zmianie SEO dodaj wpis do `seo-actions.json` (agent koreluje zmiany z efektami)
-
-**Rejestr zmian SEO (`seo-actions.json`):**
-Po KAŻDEJ zmianie SEO (content, technical, schema, redirect) dodaj wpis z datą, typem i opisem.
-Agent koreluje zmiany z efektami: POTWIERDZONE / PRAWDOPODOBNE / ZA_WCZESNIE / BRAK_EFEKTU / NEGATYWNE.
-
-**Grupy fraz w config.json:** budowa-domow, projekty-domow, pod-klucz, sso, deweloperski, slask, rybnik, katowice, tychy, wodzislaw, gliwice
-
-**11 sekcji raportu:** Przegląd GSC, Przegląd GA4, Grupy słów kluczowych, Top movers keywords (↑↓✨❌), Top movers strony, Źródła ruchu, Kraje, Urządzenia, Wpływ zmian SEO, Szanse, Alerty
+**SEO change log (`seo-actions.json`):** After EVERY SEO change, add entry with date, type, description. Agent correlates changes with effects.
 
 **TODO po deploy:**
-- [ ] Podłączyć GA4 → wpisać `propertyId` w `config.json`
-- [ ] Poprosić Venet o transfer/dostęp do historycznych danych GSC
-- [ ] Ustawić przekierowania ze starej struktury URL
+- [ ] Connect GA4 -> add `propertyId` to `config.json`
+- [ ] Request historical GSC data from Venet
+- [ ] Set up redirects from old URL structure

@@ -17,12 +17,14 @@ export type {
   SurfaceRange,
   ProjectFilters,
   ProjectListingItem,
+  GarageFilter,
 } from './types';
 
 export {
   projectCategories,
   projectTechnologies,
   projectSources,
+  garageOptions,
   surfaceRanges,
   sortOptions,
 } from './types';
@@ -31,6 +33,7 @@ export {
 export {
   parseEstimatedCost,
   parseSurfaceArea,
+  buildCalculatorUrl,
   toListingItem,
   filterProjects,
   sortProjects,

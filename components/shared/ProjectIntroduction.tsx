@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Button, Icon } from '@/components/ui';
+import { Icon } from '@/components/ui';
 import { MirrorToggle } from './MirrorToggle';
 
 export interface ProjectIntroductionProps {
@@ -12,6 +12,8 @@ export interface ProjectIntroductionProps {
   price: string;
   availability: string;
   hasMirror?: boolean;
+  /** Full /wycena URL with pre-filled calculator params */
+  calculatorUrl?: string;
 }
 
 export function ProjectIntroduction({
@@ -23,6 +25,7 @@ export function ProjectIntroduction({
   price,
   availability,
   hasMirror,
+  calculatorUrl,
 }: ProjectIntroductionProps) {
   return (
     <section className="py-6 md:py-8 bg-background-beige">
@@ -61,12 +64,6 @@ export function ProjectIntroduction({
                   <span className="text-text-secondary text-xs uppercase tracking-wide font-medium">Powierzchnia:</span>
                   <span className="font-bold text-text-primary text-base md:text-lg leading-tight">{surfaceArea}</span>
                 </div>
-                {estimatedBuildCost && (
-                <div className="bg-white rounded-lg px-4 py-3 md:px-8 md:py-5 border border-primary/20 hover:border-primary/40 hover:shadow-md transition-all duration-300 h-auto md:h-[72px] flex flex-col justify-center w-full sm:w-auto">
-                  <span className="text-text-secondary text-xs uppercase tracking-wide font-medium">Kosztorys:</span>
-                  <span className="font-bold text-text-primary text-base md:text-lg leading-tight">{estimatedBuildCost}</span>
-                </div>
-                )}
               </div>
             </div>
 
@@ -102,12 +99,15 @@ export function ProjectIntroduction({
               )}
             </div>
 
-            {/* CTA Button - Only ZAMAWIAM */}
-            <div className="flex gap-4">
-              <Button variant="primary" size="lg" href="/kontakt">
-                ZAMAWIAM
-              </Button>
-            </div>
+            {/* CTA Button */}
+            <Link
+              href={calculatorUrl || '/wycena'}
+              className="bg-primary hover:bg-primary-dark rounded-lg px-6 py-3 md:px-8 md:py-4 transition-all duration-300 flex items-center gap-2 group"
+            >
+              <Icon name="calculator" size="md" className="text-white" />
+              <span className="font-bold text-white text-sm md:text-base">Poznaj cenę budowy</span>
+              <Icon name="arrowRight" size="sm" className="text-white group-hover:translate-x-0.5 transition-transform" />
+            </Link>
           </div>
         </div>
       </div>
