@@ -52,6 +52,7 @@ interface FormState {
   consentData: boolean;
   consentContact: boolean;
   errors: Record<string, string>;
+  projectName: string;
 }
 
 type FormAction =
@@ -77,6 +78,7 @@ const initialState: FormState = {
   consentData: false,
   consentContact: false,
   errors: {},
+  projectName: '',
 };
 
 function reducer(state: FormState, action: FormAction): FormState {
@@ -159,6 +161,12 @@ export const CalculatorForm = () => {
       if (val && allowed.includes(val)) {
         dispatch({ type: 'SET_FIELD', field, value: val });
       }
+    }
+
+    // Project name — passed from project detail page via buildCalculatorUrl()
+    const projektParam = searchParams.get('projekt');
+    if (projektParam) {
+      dispatch({ type: 'SET_FIELD', field: 'projectName', value: projektParam });
     }
   }, [searchParams]);
 
@@ -293,6 +301,7 @@ export const CalculatorForm = () => {
             heating: HEATING_LABELS[config.heating],
             estimateTotal: `${formatPrice(Math.round((result.total.min + result.total.max) / 2))} zl netto`,
             estimateTotalBrutto: `${formatPrice(Math.round((result.totalBrutto.min + result.totalBrutto.max) / 2))} zl brutto`,
+            projektName: state.projectName || undefined,
             website: honeypotRef.current?.value || '',
           },
         }),
@@ -397,7 +406,7 @@ export const CalculatorForm = () => {
             <div className="print-wstep px-5 md:px-10 py-5 border-b border-gray-200">
               <p className="text-body-sm text-gray-700 leading-relaxed">
                 Szanowni Państwo, dziękujemy za zainteresowanie usługami {companyData.name}.
-                Poniżej przedstawiamy wstępną wycenę budowy domu jednorodzinnego o powierzchni <strong>{submittedConfig.area} m²</strong>.
+                Poniżej przedstawiamy wstępną wycenę budowy domu jednorodzinnego{state.projectName ? <> wg projektu <strong>{state.projectName}</strong></> : null} o powierzchni <strong>{submittedConfig.area} m²</strong>.
                 Kalkulacja obejmuje materiały budowlane, robociznę, sprzęt oraz nadzór budowlany.
                 Ceny są cenami netto i mogą ulec zmianie po analizie projektu architektonicznego oraz warunków gruntowych na działce.
               </p>
@@ -446,6 +455,7 @@ export const CalculatorForm = () => {
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-6 gap-y-2">
                 {[
+                  ...(state.projectName ? [['Projekt', state.projectName]] : []),
                   ['Powierzchnia', `${submittedConfig.area} m²`],
                   ['Kondygnacje', FLOOR_LABELS[submittedConfig.floors]],
                   ['Ściany', WALL_LABELS[submittedConfig.wallType]],

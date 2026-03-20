@@ -121,6 +121,9 @@ export function buildCalculatorUrl(project: Project): string {
   // 7. Basement — default to brak (no data in projects)
   params.set('basement', 'brak');
 
+  // 8. Project name — pass to calculator for display in estimate
+  if (project.title) params.set('projekt', project.title);
+
   return `/wycena?${params.toString()}`;
 }
 

@@ -120,6 +120,7 @@ export interface CalculatorLeadData {
   heating: string;
   estimateTotal?: string;
   estimateTotalBrutto?: string;
+  projektName?: string;
 }
 
 export function calculatorEmailTemplate(data: CalculatorLeadData): { subject: string; html: string } {
@@ -132,6 +133,7 @@ export function calculatorEmailTemplate(data: CalculatorLeadData): { subject: st
     row('E-mail', data.email),
     row('Lokalizacja', data.location),
     sectionHeader('Konfiguracja budynku'),
+    row('Projekt', data.projektName),
     row('Powierzchnia', `${data.area} m\u00B2`),
     row('Kondygnacje', data.floors),
     row('Ściany', data.wallType),
@@ -152,7 +154,7 @@ export function calculatorEmailTemplate(data: CalculatorLeadData): { subject: st
   ].join('');
 
   return {
-    subject: `[Wycena] ${data.name} — ${data.area} m², ${data.finish}`,
+    subject: `[Wycena] ${data.name} — ${data.area} m², ${data.finish}${data.projektName ? ` (${data.projektName})` : ''}`,
     html: wrapTemplate('Kalkulator Wyceny', 'Nowy lead z kalkulatora', rows, timestamp),
   };
 }
