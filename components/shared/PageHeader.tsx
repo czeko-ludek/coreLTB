@@ -1,8 +1,5 @@
-'use client';
-
 import React from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 
 export interface PageHeaderProps {
   title: string;
@@ -36,24 +33,24 @@ export function PageHeader({
 
         {/* 3. Centered Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10">
-          <motion.h1
-            initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+          <h1
             className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 leading-tight px-2"
+            style={{
+              animation: 'fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both',
+            }}
           >
             {title}
-          </motion.h1>
+          </h1>
 
           {subtitle && (
-            <motion.p
-              initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+            <p
               className="text-base sm:text-lg md:text-xl text-white/80 max-w-2xl px-2"
+              style={{
+                animation: 'fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both',
+              }}
             >
               {subtitle}
-            </motion.p>
+            </p>
           )}
         </div>
 

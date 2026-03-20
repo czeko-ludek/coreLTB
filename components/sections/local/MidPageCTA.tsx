@@ -3,9 +3,8 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import { Icon } from '@/components/ui';
-import { fadeInUp, viewportConfig } from '@/lib/animations';
 
 export interface MidPageCTAProps {
   headline: string;
@@ -15,18 +14,26 @@ export interface MidPageCTAProps {
   buttons: Array<{ text: string; href: string; variant: 'primary' | 'outline-white' }>;
 }
 
+const fadeStyle = (delay?: number): React.CSSProperties => ({
+  transitionProperty: 'opacity, transform',
+  transitionDuration: '600ms',
+  transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+  ...(delay != null && { transitionDelay: `${delay}ms` }),
+});
+
 export function MidPageCTA({ headline, highlightedText, phone, image, buttons }: MidPageCTAProps) {
+  const { ref: leftRef, inView: leftInView } = useInView({ triggerOnce: true, threshold: 0.15 });
+  const { ref: rightRef, inView: rightInView } = useInView({ triggerOnce: true, threshold: 0.15 });
+
   return (
     <section className="py-6 md:py-8 bg-background-beige">
       <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
           {/* Left: Content */}
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportConfig}
-            className="bg-zinc-900 rounded-2xl overflow-hidden"
+          <div
+            ref={leftRef}
+            className={`bg-zinc-900 rounded-2xl overflow-hidden ${leftInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            style={fadeStyle()}
           >
             <div className="p-6 md:p-8 lg:p-10 flex flex-col justify-center h-full">
               <span className="text-primary font-bold text-xs uppercase tracking-[0.2em] block mb-3">
@@ -83,16 +90,13 @@ export function MidPageCTA({ headline, highlightedText, phone, image, buttons }:
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right: Image */}
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportConfig}
-            transition={{ delay: 0.15 }}
-            className="relative min-h-[300px] rounded-2xl overflow-hidden"
+          <div
+            ref={rightRef}
+            className={`relative min-h-[300px] rounded-2xl overflow-hidden ${rightInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            style={fadeStyle(150)}
           >
             <Image
               src={image || '/images/cta.webp'}
@@ -101,7 +105,7 @@ export function MidPageCTA({ headline, highlightedText, phone, image, buttons }:
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
