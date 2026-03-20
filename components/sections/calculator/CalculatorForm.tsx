@@ -16,12 +16,16 @@ import {
   GARAGE_LABELS,
   FINISH_LABELS,
   HEATING_LABELS,
+  FOUNDATION_LABELS,
+  BASEMENT_LABELS,
   type WallType,
   type RoofType,
   type FloorType,
   type GarageType,
   type FinishType,
   type HeatingType,
+  type FoundationType,
+  type BasementType,
   type EstimateBreakdown,
   type CalculatorConfig,
 } from '@/data/pricing';
@@ -37,6 +41,8 @@ interface FormState {
   garage: GarageType;
   finish: FinishType;
   heating: HeatingType;
+  foundation: FoundationType;
+  basement: BasementType;
   name: string;
   phone: string;
   email: string;
@@ -60,6 +66,8 @@ const initialState: FormState = {
   garage: '' as GarageType,
   finish: '' as FinishType,
   heating: '' as HeatingType,
+  foundation: '' as FoundationType,
+  basement: '' as BasementType,
   name: '',
   phone: '',
   email: '',
@@ -152,6 +160,8 @@ export const CalculatorForm = () => {
     if (!state.roofType) errors.roofType = 'Wybierz typ dachu';
     if (!state.finish) errors.finish = 'Wybierz standard wykończenia';
     if (!state.heating) errors.heating = 'Wybierz typ ogrzewania';
+    if (!state.foundation) errors.foundation = 'Wybierz typ fundamentu';
+    if (!state.basement) errors.basement = 'Wybierz opcję piwnicy';
     if (!state.name.trim() || state.name.trim().length < 3) errors.name = 'Podaj imię i nazwisko';
     if (!state.phone.trim() || !/^[\d\s+()-]{9,15}$/.test(state.phone.replace(/\s/g, '')))
       errors.phone = 'Podaj prawidłowy numer telefonu';
@@ -190,6 +200,8 @@ export const CalculatorForm = () => {
       garage: state.garage,
       finish: state.finish,
       heating: state.heating,
+      foundation: state.foundation,
+      basement: state.basement,
     };
 
     const result = calculateEstimate(config);
@@ -319,13 +331,13 @@ export const CalculatorForm = () => {
                     Szacunkowy koszt budowy
                   </p>
                   <p className="print-total-price text-h3 md:text-h1 font-bold text-text-primary font-heading leading-tight">
-                    {formatPrice(Math.round((estimate.totalPoRabacie.min + estimate.totalPoRabacie.max) / 2))}
+                    {formatPrice(Math.round((estimate.total.min + estimate.total.max) / 2))}
                   </p>
                   <p className="print-total-unit text-body-sm text-gray-500 font-normal mt-0.5">
-                    złotych netto <span className="text-green-600 font-semibold">(po rabacie {Math.round(estimate.rabat * 100)}%)</span>
+                    złotych netto
                   </p>
                   <p className="text-body-xs text-gray-400 mt-1">
-                    brutto po rabacie: {formatPrice(Math.round((estimate.totalPoRabacieBrutto.min + estimate.totalPoRabacieBrutto.max) / 2))} zł (8% VAT)
+                    brutto: {formatPrice(Math.round((estimate.totalBrutto.min + estimate.totalBrutto.max) / 2))} zł (8% VAT)
                   </p>
                 </div>
                 {/* Right: meta stats */}
@@ -333,7 +345,7 @@ export const CalculatorForm = () => {
                   {[
                     { icon: 'calendar' as const, text: `${estimate.czasRealizacji.min}–${estimate.czasRealizacji.max} miesięcy` },
                     { icon: 'ruler' as const, text: `${submittedConfig.area} m²` },
-                    { icon: 'coins' as const, text: `~${formatPrice(Math.round((estimate.totalPoRabacie.min + estimate.totalPoRabacie.max) / 2 / submittedConfig.area))} zł/m²` },
+                    { icon: 'coins' as const, text: `~${formatPrice(Math.round((estimate.total.min + estimate.total.max) / 2 / submittedConfig.area))} zł/m²` },
                     { icon: 'shieldCheck' as const, text: `Gwarancja do ${estimate.gwarancja.konstrukcja / 12} lat` },
                   ].map((item) => (
                     <span key={item.icon} className="flex items-center gap-1.5 text-body-xs md:text-body-sm text-gray-700 font-medium">
@@ -357,8 +369,10 @@ export const CalculatorForm = () => {
                   ['Kondygnacje', FLOOR_LABELS[submittedConfig.floors]],
                   ['Ściany', WALL_LABELS[submittedConfig.wallType]],
                   ['Typ dachu', ROOF_LABELS[submittedConfig.roofType]],
+                  ['Fundament', FOUNDATION_LABELS[submittedConfig.foundation]],
                   ['Standard', FINISH_LABELS[submittedConfig.finish]],
                   ['Ogrzewanie', HEATING_LABELS[submittedConfig.heating]],
+                  ['Piwnica', BASEMENT_LABELS[submittedConfig.basement]],
                   ['Garaż', GARAGE_LABELS[submittedConfig.garage]],
                   ...(state.location ? [['Lokalizacja', state.location]] : []),
                 ].map(([label, value]) => (
@@ -415,46 +429,20 @@ export const CalculatorForm = () => {
                   );
                 })}
 
-                {/* Garaż */}
-                {estimate.garaz.max > 0 && (
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 px-4 md:px-5 border border-gray-200 rounded-xl bg-gray-50">
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Icon name="home" size="md" className="text-primary" />
-                      </div>
-                      <span className="text-body-sm md:text-body-md font-bold text-text-primary">Garaż</span>
-                    </div>
-                    <span className="text-body-sm md:text-body-md font-bold text-text-primary tabular-nums mt-1 sm:mt-0 ml-12 sm:ml-0">
-                      {formatPrice(Math.round((estimate.garaz.min + estimate.garaz.max) / 2))} zł
-                    </span>
-                  </div>
-                )}
               </div>
 
               {/* TOTAL */}
               <div className="print-total-row pt-5 mt-5 border-t-2 border-primary space-y-2">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                  <span className="text-body-sm text-gray-500">Kwota netto</span>
-                  <span className="text-body-md font-bold text-text-primary tabular-nums">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-green-50 border border-green-200 -mx-4 md:-mx-5 px-4 md:px-5 py-3 rounded-lg">
+                  <span className="text-body-md sm:text-h5 font-bold text-text-primary">Kwota netto</span>
+                  <span className="text-h5 font-bold text-text-primary tabular-nums">
                     {formatPrice(Math.round((estimate.total.min + estimate.total.max) / 2))} zł
                   </span>
                 </div>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                  <span className="text-body-sm text-gray-500">Kwota brutto (8% VAT)</span>
-                  <span className="text-body-md font-semibold text-gray-600 tabular-nums">
-                    {formatPrice(Math.round((estimate.totalBrutto.min + estimate.totalBrutto.max) / 2))} zł
-                  </span>
-                </div>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-green-50 border border-green-200 -mx-4 md:-mx-5 px-4 md:px-5 py-3 rounded-lg">
-                  <span className="text-body-md sm:text-h5 font-bold text-text-primary">Po rabacie ({Math.round(estimate.rabat * 100)}%) netto</span>
-                  <span className="text-h5 font-bold text-text-primary tabular-nums">
-                    {formatPrice(Math.round((estimate.totalPoRabacie.min + estimate.totalPoRabacie.max) / 2))} zł
-                  </span>
-                </div>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-green-50 border border-green-200 -mx-4 md:-mx-5 px-4 md:px-5 py-2 rounded-lg">
-                  <span className="text-body-sm font-bold text-text-primary">Po rabacie brutto</span>
+                  <span className="text-body-sm font-bold text-text-primary">Kwota brutto (8% VAT)</span>
                   <span className="text-body-md font-bold text-text-primary tabular-nums">
-                    {formatPrice(Math.round((estimate.totalPoRabacieBrutto.min + estimate.totalPoRabacieBrutto.max) / 2))} zł
+                    {formatPrice(Math.round((estimate.totalBrutto.min + estimate.totalBrutto.max) / 2))} zł
                   </span>
                 </div>
               </div>
@@ -825,6 +813,30 @@ export const CalculatorForm = () => {
                   />
                 ))}
               </OptionGroup>
+
+              <OptionGroup label="Typ fundamentu" className="mt-6">
+                {(Object.keys(FOUNDATION_LABELS) as FoundationType[]).map((f) => (
+                  <OptionCard
+                    key={f}
+                    label={FOUNDATION_LABELS[f]}
+                    icon="mountain"
+                    selected={state.foundation === f}
+                    onClick={() => set('foundation', f)}
+                  />
+                ))}
+              </OptionGroup>
+
+              <OptionGroup label="Piwnica" className="mt-6">
+                {(Object.keys(BASEMENT_LABELS) as BasementType[]).map((b) => (
+                  <OptionCard
+                    key={b}
+                    label={BASEMENT_LABELS[b]}
+                    icon={b === 'brak' ? 'x' : 'layers'}
+                    selected={state.basement === b}
+                    onClick={() => set('basement', b)}
+                  />
+                ))}
+              </OptionGroup>
             </FormSection>
 
             <SectionDivider />
@@ -862,7 +874,7 @@ export const CalculatorForm = () => {
                   <OptionCard
                     key={h}
                     label={HEATING_LABELS[h]}
-                    icon={h === 'gazowe' ? 'zap' : h === 'pompa_ciepla' ? 'wind' : 'lightbulb'}
+                    icon={h === 'gazowe' ? 'zap' : h === 'pompa_ciepla' ? 'wind' : 'construction'}
                     selected={state.heating === h}
                     onClick={() => set('heating', h)}
                   />

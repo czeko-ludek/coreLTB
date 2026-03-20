@@ -1,17 +1,15 @@
 /**
  * PRICING CONFIG — Kalkulator wyceny budowy domu
  *
- * Ceny oparte na rzeczywistych wycenach CoreLTB Builders (Śląsk/Małopolska, 2026).
- * Referencja: Wycena_5199 — 114 m² parterowy → ~790k netto (deweloperski)
+ * Stawki per m² (netto) — addytywne komponenty.
+ * Total = (fundamenty + ściany + więźba + poziomy + piwnica + ogrzewanie + garaż) × m²
  *
- * Format wyceny: etapy z ceną ryczałtową + lista prac (bez rozbicia na materiały/robociznę).
- *
- * Etapy budowy wg nomenklatury CoreLTB:
- * 1. Stan Zero (fundamenty, prace ziemne, kanalizacja podposadzkowa)
- * 2. Stan Surowy Otwarty (ściany, strop, dach, kominy, ocieplenie dachu)
- * 3. Stan Surowy Zamknięty (stolarka okienna/drzwiowa, instalacje)
- * 4. Stan Deweloperski (tynki, wylewki, elewacja, ogrzewanie, rekuperacja)
- * 5. Pod klucz (podłogi, glazura, malowanie, biały montaż)
+ * Etapy budowy wg nomenklatury CoreLTB — grupują stawki do prezentacji:
+ * 1. Stan Zero — fundamenty + piwnica
+ * 2. Stan Surowy Otwarty — ściany + więźba + poziomy
+ * 3. Stan Surowy Zamknięty — garaż (base overhead: okna, drzwi, instalacje)
+ * 4. Stan Deweloperski — ogrzewanie + tynki, wylewki, elewacja
+ * 5. Pod klucz — wykończenie wnętrz
  */
 
 // ─── Types ──────────────────────────────────────────────
@@ -21,7 +19,9 @@ export type RoofType = 'plaski' | 'dwuspadowy' | 'wielospadowy';
 export type FloorType = 'parterowy' | 'poddasze' | 'pietrowy';
 export type GarageType = 'brak' | 'jednostanowiskowy' | 'dwustanowiskowy';
 export type FinishType = 'sso' | 'deweloperski' | 'pod_klucz';
-export type HeatingType = 'gazowe' | 'pompa_ciepla' | 'elektryczne';
+export type HeatingType = 'gazowe' | 'pompa_ciepla' | 'pelet';
+export type FoundationType = 'plyta' | 'lawy';
+export type BasementType = 'brak' | 'czesciowa' | 'cala';
 
 export interface CalculatorConfig {
   area: number;
@@ -31,6 +31,8 @@ export interface CalculatorConfig {
   garage: GarageType;
   finish: FinishType;
   heating: HeatingType;
+  foundation: FoundationType;
+  basement: BasementType;
 }
 
 export interface StageBreakdown {
@@ -43,115 +45,113 @@ export interface StageBreakdown {
 
 export interface EstimateBreakdown {
   stages: StageBreakdown[];
-  garaz: { min: number; max: number };
   total: { min: number; max: number };
   totalBrutto: { min: number; max: number };
-  rabat: number; // % rabatu
-  totalPoRabacie: { min: number; max: number };
-  totalPoRabacieBrutto: { min: number; max: number };
   czasRealizacji: { min: number; max: number };
   gwarancja: { konstrukcja: number; pozostale: number }; // miesiące
 }
 
-// ─── Pricing Data ───────────────────────────────────────
+// ─── Stawki per m² (netto) ──────────────────────────────
 
 const SPREAD = 0.06; // ±6% zakres
 const VAT = 0.08; // 8% VAT na budowę domów mieszkalnych
-const RABAT = 0.08; // 8% standardowy rabat
 
 const TIME_BASE = { min: 10, max: 14 }; // miesiące dla ~140m²
 
-/**
- * Bazowe stawki per m² (netto) — kalibrowane na wycenie 114m² parterowy deweloperski = ~790k
- *
- * Referencja (Wycena 5199, 114m²):
- * Stan Zero:         202 133 zł → ~1 773 zł/m²
- * Stan Surowy Otwarty: 291 948 zł → ~2 561 zł/m²
- * Stan Surowy Zamknięty: 108 403 zł → ~951 zł/m²
- * Stan Deweloperski:  251 297 zł → ~2 204 zł/m²
- * TOTAL:             853 781 zł → ~6 935 zł/m² (deweloperski, ze wszystkim)
- */
-const BASE_RATES_PER_M2 = {
-  stanZero: 1773,
-  sso: 2561,
-  ssz: 951,
-  deweloperski: 2204,
-  podKlucz: 850, // wykończenie pod klucz (podłogi, glazura, biały montaż, malowanie)
+/** Fundamenty — zł/m² */
+const FOUNDATION_RATES: Record<FoundationType, number> = {
+  plyta: 1000,
+  lawy: 750,
 };
 
-/** Modyfikatory za typ kondygnacji (wpływ na koszty konstrukcji) */
-const FLOOR_MODIFIERS: Record<FloorType, { stanZero: number; sso: number; ssz: number }> = {
-  parterowy: { stanZero: 1.0, sso: 1.0, ssz: 1.0 },
-  poddasze: { stanZero: 0.85, sso: 1.12, ssz: 1.05 },
-  pietrowy: { stanZero: 0.8, sso: 1.18, ssz: 1.08 },
+/** Ściany — zł/m² */
+const WALL_RATES: Record<WallType, number> = {
+  beton_komorkowy: 900,
+  ceramika: 1100,
+  silikat: 1300,
 };
 
-/** Modyfikatory za typ ścian */
-const WALL_MODIFIERS: Record<WallType, number> = {
-  beton_komorkowy: 1.0,
-  ceramika: 1.06,
-  silikat: 0.95,
+/** Więźba dachowa — zł/m² */
+const ROOF_RATES: Record<RoofType, number> = {
+  plaski: 900,
+  dwuspadowy: 800,
+  wielospadowy: 1000,
 };
 
-/** Modyfikatory za typ dachu */
-const ROOF_MODIFIERS: Record<RoofType, number> = {
-  plaski: 0.88,
-  dwuspadowy: 1.0,
-  wielospadowy: 1.15,
+/** Poziomy domu — zł/m² */
+const FLOOR_RATES: Record<FloorType, number> = {
+  parterowy: 800,
+  poddasze: 950,
+  pietrowy: 1200,
 };
 
-/** Modyfikator ogrzewania (wpływ na etap deweloperski) */
-const HEATING_MODIFIERS: Record<HeatingType, number> = {
-  gazowe: 1.0,
-  pompa_ciepla: 1.12,
-  elektryczne: 0.92,
+/** Piwnica — zł/m² */
+const BASEMENT_RATES: Record<BasementType, number> = {
+  brak: 500,
+  czesciowa: 750,
+  cala: 1000,
 };
 
-/** Koszt garażu (ryczałt, netto) */
-const GARAGE_COST: Record<GarageType, { min: number; max: number }> = {
-  brak: { min: 0, max: 0 },
-  jednostanowiskowy: { min: 38000, max: 52000 },
-  dwustanowiskowy: { min: 62000, max: 82000 },
+/** Ogrzewanie — zł/m² */
+const HEATING_RATES: Record<HeatingType, number> = {
+  pompa_ciepla: 900,
+  gazowe: 700,
+  pelet: 800,
+};
+
+/** Garaż — zł/m² */
+const GARAGE_RATES: Record<GarageType, number> = {
+  brak: 500,
+  jednostanowiskowy: 750,
+  dwustanowiskowy: 1000,
 };
 
 // ─── Calculator ─────────────────────────────────────────
 
 export function calculateEstimate(config: CalculatorConfig): EstimateBreakdown {
-  const { area, floors, wallType, roofType, garage, finish, heating } = config;
-
-  const floorMod = FLOOR_MODIFIERS[floors];
-  const wallMod = WALL_MODIFIERS[wallType];
-  const roofMod = ROOF_MODIFIERS[roofType];
-  const heatingMod = HEATING_MODIFIERS[heating];
+  const { area, floors, wallType, roofType, garage, finish, heating, foundation, basement } = config;
 
   const stages: StageBreakdown[] = [];
 
-  // ─── 1. STAN ZERO ───
+  // ─── 1. STAN ZERO (fundamenty + piwnica) ───
   {
-    const base = area * BASE_RATES_PER_M2.stanZero * floorMod.stanZero;
-    const total = Math.round(base);
+    const rate = FOUNDATION_RATES[foundation] + BASEMENT_RATES[basement];
+    const total = Math.round(area * rate);
+
+    const foundationName = foundation === 'plyta'
+      ? 'Płyta fundamentowa żelbetowa z izolacją'
+      : 'Ławy fundamentowe żelbetowe z izolacją';
+
+    const items: string[] = [
+      'Kierownik Budowy i Inżynier Budowy',
+      'Geodeta — wytyczenie obiektu',
+      'Geotechnik — badanie gruntu',
+      foundationName,
+      'Kanalizacja podposadzkowa',
+      'Hydroizolacja fundamentów',
+      'Podsypka piaskowo-żwirowa (podbudowa)',
+    ];
+
+    if (basement !== 'brak') {
+      items.push(
+        basement === 'cala'
+          ? 'Piwnica pod całym domem — ściany, izolacja, schody'
+          : 'Piwnica pod częścią domu — ściany, izolacja, schody'
+      );
+    }
 
     stages.push({
       label: 'Stan Zero',
-      description: 'Prace ziemne, fundamenty, kanalizacja podposadzkowa oraz nadzór budowlany.',
-      includedItems: [
-        'Kierownik Budowy i Inżynier Budowy',
-        'Geodeta — wytyczenie obiektu',
-        'Geotechnik — badanie gruntu',
-        'Kanalizacja Podposadzkowa',
-        'Płyta Fundamentowa żelbetowa z izolacją',
-        'Prace Ziemne — wykopy, niwelacja, zagęszczanie',
-        'Hydroizolacja fundamentów',
-        'Podsypka piaskowo-żwirowa (podbudowa)',
-      ],
+      description: 'Fundamenty, kanalizacja podposadzkowa oraz nadzór budowlany.',
+      includedItems: items,
       total: spreadRange(total),
     });
   }
 
-  // ─── 2. STAN SUROWY OTWARTY ───
+  // ─── 2. STAN SUROWY OTWARTY (ściany + więźba + poziomy) ───
   {
-    const base = area * BASE_RATES_PER_M2.sso * floorMod.sso * wallMod * roofMod;
-    const total = Math.round(base);
+    const rate = WALL_RATES[wallType] + ROOF_RATES[roofType] + FLOOR_RATES[floors];
+    const total = Math.round(area * rate);
 
     const roofName = roofType === 'plaski'
       ? 'Dach płaski z membraną PVC'
@@ -192,39 +192,49 @@ export function calculateEstimate(config: CalculatorConfig): EstimateBreakdown {
     });
   }
 
-  // ─── 3. STAN SUROWY ZAMKNIĘTY ───
+  // ─── 3. STAN SUROWY ZAMKNIĘTY (garaż / overhead) ───
   {
-    const base = area * BASE_RATES_PER_M2.ssz * floorMod.ssz;
-    const total = Math.round(base);
+    const rate = GARAGE_RATES[garage];
+    const total = Math.round(area * rate);
+
+    const items: string[] = [
+      'Okna PCV trzyszybowe (Oknoplast / Krispol / Eko-Okna)',
+      'Instalacja Elektryczna — kompletna z rozdzielnią',
+      'Instalacja Wod-Kan — kompletna',
+      'Drzwi zewnętrzne antywłamaniowe Gerda',
+      'Parapety wewnętrzne i zewnętrzne',
+    ];
+
+    if (garage !== 'brak') {
+      items.push(
+        garage === 'jednostanowiskowy'
+          ? 'Garaż jednostanowiskowy'
+          : 'Garaż dwustanowiskowy'
+      );
+    }
 
     stages.push({
       label: 'Stan Surowy Zamknięty',
-      description: 'Montaż stolarki okiennej i drzwiowej oraz kompletne instalacje wewnętrzne.',
-      includedItems: [
-        'Okna PCV trzyszybowe (Oknoplast / Krispol / Eko-Okna)',
-        'Instalacja Elektryczna — kompletna z rozdzielnią',
-        'Instalacja Wod-Kan — kompletna',
-        'Drzwi zewnętrzne antywłamaniowe Gerda',
-        'Parapety wewnętrzne i zewnętrzne',
-      ],
+      description: 'Montaż stolarki okiennej i drzwiowej, instalacje wewnętrzne oraz garaż.',
+      includedItems: items,
       total: spreadRange(total),
     });
   }
 
-  // ─── 4. STAN DEWELOPERSKI (jeśli wybrany) ───
+  // ─── 4. STAN DEWELOPERSKI (ogrzewanie) — jeśli wybrany ───
   if (finish === 'deweloperski' || finish === 'pod_klucz') {
-    const base = area * BASE_RATES_PER_M2.deweloperski * heatingMod;
-    const total = Math.round(base);
+    const rate = HEATING_RATES[heating];
+    const total = Math.round(area * rate);
 
     const heatingName = heating === 'gazowe'
       ? 'Ogrzewanie gazowe — kocioł kondensacyjny + podłogówka'
       : heating === 'pompa_ciepla'
         ? 'Pompa ciepła powietrze-woda + ogrzewanie podłogowe'
-        : 'Ogrzewanie elektryczne — grzejniki + podłogówka';
+        : 'Ogrzewanie na pelet — kocioł z podajnikiem + podłogówka';
 
     stages.push({
       label: 'Stan Deweloperski',
-      description: 'Kompletne instalacje, tynki, wylewki, elewacja z ociepleniem — dom gotowy do wykończenia wnętrz.',
+      description: 'Ogrzewanie, tynki, wylewki, elewacja z ociepleniem — dom gotowy do wykończenia wnętrz.',
       includedItems: [
         'Wentylacja mechaniczna z odzyskiem ciepła',
         heatingName,
@@ -239,10 +249,11 @@ export function calculateEstimate(config: CalculatorConfig): EstimateBreakdown {
     });
   }
 
-  // ─── 5. POD KLUCZ (jeśli wybrany) ───
+  // ─── 5. POD KLUCZ — jeśli wybrany ───
   if (finish === 'pod_klucz') {
-    const base = area * BASE_RATES_PER_M2.podKlucz;
-    const total = Math.round(base);
+    // Pod klucz dodaje stałą stawkę 850 zł/m² na wykończenie
+    const rate = 850;
+    const total = Math.round(area * rate);
 
     stages.push({
       label: 'Wykończenie pod klucz',
@@ -259,28 +270,21 @@ export function calculateEstimate(config: CalculatorConfig): EstimateBreakdown {
   }
 
   // ─── Totals ───
-  const garageCost = GARAGE_COST[garage || 'brak'];
   const stagesSum = stages.reduce((s, st) => s + (st.total.min + st.total.max) / 2, 0);
-  const totalBase = stagesSum + (garageCost.min + garageCost.max) / 2;
 
-  const totalNetto = { min: round5k(totalBase * (1 - SPREAD)), max: round5k(totalBase * (1 + SPREAD)) };
+  const totalNetto = { min: round5k(stagesSum * (1 - SPREAD)), max: round5k(stagesSum * (1 + SPREAD)) };
   const totalBrutto = { min: Math.round(totalNetto.min * (1 + VAT)), max: Math.round(totalNetto.max * (1 + VAT)) };
-  const totalPoRabacie = { min: round5k(totalNetto.min * (1 - RABAT)), max: round5k(totalNetto.max * (1 - RABAT)) };
-  const totalPoRabacieBrutto = { min: Math.round(totalPoRabacie.min * (1 + VAT)), max: Math.round(totalPoRabacie.max * (1 + VAT)) };
 
   const timeScale = area / 140;
   const finishTimeAdd = finish === 'pod_klucz' ? 3 : finish === 'deweloperski' ? 1 : 0;
-  const timeMin = Math.round(TIME_BASE.min * Math.sqrt(timeScale)) + finishTimeAdd;
-  const timeMax = Math.round(TIME_BASE.max * Math.sqrt(timeScale)) + finishTimeAdd;
+  const basementTimeAdd = basement === 'cala' ? 2 : basement === 'czesciowa' ? 1 : 0;
+  const timeMin = Math.round(TIME_BASE.min * Math.sqrt(timeScale)) + finishTimeAdd + basementTimeAdd;
+  const timeMax = Math.round(TIME_BASE.max * Math.sqrt(timeScale)) + finishTimeAdd + basementTimeAdd;
 
   return {
     stages,
-    garaz: garageCost,
     total: totalNetto,
     totalBrutto,
-    rabat: RABAT,
-    totalPoRabacie,
-    totalPoRabacieBrutto,
     czasRealizacji: { min: timeMin, max: timeMax },
     gwarancja: { konstrukcja: 120, pozostale: 60 },
   };
@@ -336,5 +340,16 @@ export const FINISH_LABELS: Record<FinishType, string> = {
 export const HEATING_LABELS: Record<HeatingType, string> = {
   gazowe: 'Ogrzewanie gazowe',
   pompa_ciepla: 'Pompa ciepła',
-  elektryczne: 'Ogrzewanie elektryczne',
+  pelet: 'Ogrzewanie na pelet',
+};
+
+export const FOUNDATION_LABELS: Record<FoundationType, string> = {
+  plyta: 'Płyta fundamentowa',
+  lawy: 'Ławy fundamentowe',
+};
+
+export const BASEMENT_LABELS: Record<BasementType, string> = {
+  brak: 'Brak',
+  czesciowa: 'Pod częścią domu',
+  cala: 'Pod całym domem',
 };
