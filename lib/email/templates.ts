@@ -59,7 +59,7 @@ function wrapTemplate(badgeText: string, title: string, rows: string, timestamp:
     <div style="padding: 20px 32px; background: ${BRAND.dark}; text-align: center;">
       <p style="margin: 0; color: #666666; font-size: 12px; line-height: 1.5;">
         <span style="color: ${BRAND.gold};">CoreLTB Builders</span> · Generalny Wykonawca
-        <br />ul. Wilcza 2, 43-600 Jaworzno · +48 664 123 757
+        <br />ul. Grunwaldzka 34a, 43-600 Jaworzno · +48 664 123 757
         <br /><a href="https://coreltb.pl" style="color: ${BRAND.gold}; text-decoration: none;">coreltb.pl</a>
       </p>
     </div>
