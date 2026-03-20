@@ -160,6 +160,19 @@ export const ConsultationForm = () => {
     const errors = validate();
     if (Object.keys(errors).length > 0) {
       dispatch({ type: 'SET_ERRORS', errors });
+
+      // Scroll to service selection if missing
+      if (errors.service) {
+        const el = document.querySelector('[data-option-group="service"]');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.remove('animate-error-pulse');
+          void (el as HTMLElement).offsetWidth;
+          el.classList.add('animate-error-pulse');
+          return;
+        }
+      }
+
       const firstErrorField = document.querySelector('[data-error="true"]');
       firstErrorField?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
@@ -418,20 +431,25 @@ export const ConsultationForm = () => {
 
             {/* ─── Section 1: Wybór usługi ─── */}
             <FormSection number="1" title="Czego dotyczy zapytanie?">
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                {SERVICE_OPTIONS.map((opt) => (
-                  <OptionCard
-                    key={opt.value}
-                    label={opt.label}
-                    icon={opt.icon}
-                    selected={state.service === opt.value}
-                    onClick={() => set('service', opt.value)}
-                  />
-                ))}
+              <div
+                className={`rounded-xl transition-all duration-300 ${state.errors.service ? 'animate-error-pulse p-2 -m-2' : ''}`}
+                data-option-group="service"
+              >
+                {state.errors.service && (
+                  <p className="mb-2 text-body-xs text-red-500 font-semibold">Wybierz temat zapytania</p>
+                )}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                  {SERVICE_OPTIONS.map((opt) => (
+                    <OptionCard
+                      key={opt.value}
+                      label={opt.label}
+                      icon={opt.icon}
+                      selected={state.service === opt.value}
+                      onClick={() => set('service', opt.value)}
+                    />
+                  ))}
+                </div>
               </div>
-              {state.errors.service && (
-                <p className="mt-2 text-body-xs text-red-500" data-error="true">{state.errors.service}</p>
-              )}
             </FormSection>
 
             {/* ─── Contextual questions based on service ─── */}
