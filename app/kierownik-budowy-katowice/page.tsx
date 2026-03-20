@@ -291,6 +291,7 @@ export default function KierownikBudowyKatowicePage() {
             phone: companyData.telephone,
             email: companyData.email,
           }}
+          primaryButton={{ text: 'Umów Nadzór', href: '/umow-konsultacje?usluga=nadzor&miasto=katowice' }}
         />
       </main>
 

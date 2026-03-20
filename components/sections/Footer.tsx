@@ -242,11 +242,11 @@ export function Footer({
                 Planujesz budowę domu? Skontaktuj się z nami — przygotujemy wycenę w&nbsp;48h.
               </p>
               <Link
-                href="/kontakt"
+                href="/wycena"
                 className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors"
               >
-                <Icon name="mail" size="sm" />
-                Napisz do nas
+                <Icon name="calculator" size="sm" />
+                Wyceń budowę
               </Link>
             </div>
           </div>

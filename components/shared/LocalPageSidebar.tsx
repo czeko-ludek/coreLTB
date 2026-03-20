@@ -94,7 +94,7 @@ export function LocalPageSidebar({
               Zadzwoń
             </a>
             <Link
-              href="/kontakt"
+              href="/umow-konsultacje"
               className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium text-sm bg-white/20 hover:bg-white/30 text-white transition-colors"
             >
               <Icon name="mail" size="sm" />

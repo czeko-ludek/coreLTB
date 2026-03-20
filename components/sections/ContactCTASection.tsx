@@ -38,7 +38,7 @@ export const ContactCTASection: React.FC<ContactCTASectionProps> = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   header, // Ignored - kept for backward compatibility
   contactInfo,
-  primaryButton = { text: 'Umów Konsultację', href: '/kontakt' },
+  primaryButton = { text: 'Umów Konsultację', href: '/umow-konsultacje' },
   socials,
 }) => {
   const { ref, inView } = useInView({

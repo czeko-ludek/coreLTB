@@ -23,7 +23,7 @@ export const sharedNadzorTemplate: SharedNadzorTemplate = {
       'Wycena na podstawie projektu — zawsze darmowa. Konsultacja telefoniczna niezobowiązująca.',
     ctaBoxButtons: [
       { text: 'Zadzwoń: Wyceń Nadzór', variant: 'secondary' },
-      { text: 'Wyślij Projekt (PDF)', href: '#kontakt', variant: 'secondary' },
+      { text: 'Wyślij Projekt (PDF)', href: '/umow-konsultacje?usluga=nadzor', variant: 'secondary' },
     ],
   },
 

@@ -287,6 +287,7 @@ export default function ObszarDzialaniaPage() {
           phone: companyData.telephone,
           email: companyData.email,
         }}
+        primaryButton={{ text: 'Wyceń Budowę', href: '/wycena' }}
         socials={[
           { platform: 'facebook', href: 'https://facebook.com/coreltb' },
           { platform: 'instagram', href: 'https://instagram.com/coreltb' },

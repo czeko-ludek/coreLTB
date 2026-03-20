@@ -94,6 +94,20 @@ import {
   Combine,
   Tractor,
   MessageCircle,
+  Square,
+  House,
+  BrickWall,
+  Box,
+  Triangle,
+  Pyramid,
+  RectangleHorizontal,
+  Columns3,
+  Ban,
+  Car,
+  Flame,
+  ThermometerSnowflake,
+  FlameKindling,
+  SquareDashedBottom,
 } from 'lucide-react';
 
 const iconMap = {
@@ -194,6 +208,20 @@ const iconMap = {
   combine: Combine,
   tractor: Tractor,
   messageCircle: MessageCircle,
+  square: Square,
+  house: House,
+  brickWall: BrickWall,
+  box: Box,
+  triangle: Triangle,
+  pyramid: Pyramid,
+  rectangleHorizontal: RectangleHorizontal,
+  columns3: Columns3,
+  ban: Ban,
+  car: Car,
+  flame: Flame,
+  thermometerSnowflake: ThermometerSnowflake,
+  flameKindling: FlameKindling,
+  squareDashedBottom: SquareDashedBottom,
 };
 
 export type IconName = keyof typeof iconMap;

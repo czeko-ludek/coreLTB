@@ -163,6 +163,7 @@ export default async function LocalPage({
             phone: companyData.telephone,
             email: companyData.email,
           }}
+          primaryButton={{ text: 'Umów Konsultację', href: `/umow-konsultacje?miasto=${slug}` }}
         />
       </main>
 

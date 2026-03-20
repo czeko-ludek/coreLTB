@@ -291,6 +291,7 @@ export default function KierownikBudowyWodzislawPage() {
             phone: companyData.telephone,
             email: companyData.email,
           }}
+          primaryButton={{ text: 'Umów Nadzór', href: '/umow-konsultacje?usluga=nadzor&miasto=wodzislaw-slaski' }}
         />
       </main>
 

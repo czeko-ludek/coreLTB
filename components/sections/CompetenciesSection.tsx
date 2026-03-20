@@ -47,7 +47,7 @@ export function CompetenciesSection({
 
           <h2
             className={clsx(
-              'text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight',
+              'text-h3 md:text-h2 lg:text-display font-bold font-heading text-white leading-tight',
               inView ? 'animate-fade-in-up' : 'opacity-0'
             )}
             style={{ animationDelay: '0.2s' }}
@@ -83,7 +83,7 @@ export function CompetenciesSection({
                 {/* Text */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-baseline justify-between gap-4 mb-2">
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white group-hover:text-primary transition-colors duration-300">
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold font-heading text-white group-hover:text-primary transition-colors duration-300">
                       {comp.title}
                     </h3>
                     <span className="hidden sm:block text-sm font-mono font-bold text-zinc-600 flex-shrink-0">

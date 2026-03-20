@@ -79,7 +79,7 @@ export function BusinessResponsibilitySection({
 
             {/* Content */}
             <div className="flex-1 min-w-0">
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 leading-tight">
+              <h3 className="text-xl sm:text-2xl font-bold font-heading text-white mb-2 leading-tight">
                 {heroCard.title}
               </h3>
               <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
@@ -109,7 +109,7 @@ export function BusinessResponsibilitySection({
               </div>
 
               {/* Title */}
-              <h3 className="text-lg font-bold text-text-primary mb-2 leading-tight">
+              <h3 className="text-lg font-bold font-heading text-text-primary mb-2 leading-tight">
                 {card.title}
               </h3>
 

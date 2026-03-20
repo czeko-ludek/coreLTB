@@ -122,7 +122,7 @@ export default async function ServicePageV2({
       {/* Sticky FloatingCTA - pojawia się gdy użytkownik scrolluje poniżej EmotionalHeroSection */}
       <FloatingCTA
         text="Umów bezpłatną konsultację"
-        href="/kontakt"
+        href="/umow-konsultacje"
         hideWhenSectionVisible="emotional-hero"
       />
     </main>

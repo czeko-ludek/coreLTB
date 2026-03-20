@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
 import { clsx } from 'clsx';
 import { SectionHeader } from '@/components/shared';
 import { Button, Icon } from '@/components/ui';
+import type { IconName } from '@/components/ui/Icon';
 import { BentoGridItem } from '@/components/shared/BentoGridItem';
 
 export interface ContactInfo {
@@ -63,24 +65,37 @@ export const BentoContactSection: React.FC<BentoContactSectionProps> = ({
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-4">
                     {/* LEFT COLUMN: info cards */}
                     <div className="flex flex-col gap-4">
-                        {/* Masz pytania? */}
+                        {/* Masz pytania? — routing links */}
                         <BentoGridItem
                             className={clsx(
-                                "bg-primary text-gray-900 border-none",
                                 inView ? 'animate-fade-in-up' : 'opacity-0'
                             )}
                             style={{ animationDelay: '0.2s' }}
                         >
-                            <div className="flex items-start gap-4">
-                                <div className="h-11 w-11 rounded-full bg-black/10 flex items-center justify-center shrink-0">
-                                    <Icon name="helpCircle" className="text-gray-900" />
-                                </div>
-                                <div>
-                                    <h3 className="text-lg font-bold mb-1">Masz pytania?</h3>
-                                    <p className="text-gray-900/80 text-sm leading-relaxed font-medium">
-                                        Nasz zespół ekspertów czeka na Twoją wiadomość. Odpowiadamy na wszystkie zapytania w ciągu 24 godzin.
-                                    </p>
-                                </div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-1">Masz pytania?</h3>
+                            <p className="text-gray-500 text-sm leading-relaxed mb-5">
+                                Wybierz, czego szukasz — przekierujemy Cię na odpowiednią stronę.
+                            </p>
+                            <div className="space-y-2">
+                                {([
+                                    { icon: 'calculator' as IconName, label: 'Chcę wycenę budowy', href: '/wycena' },
+                                    { icon: 'phone' as IconName, label: 'Chcę porozmawiać z inżynierem', href: '/umow-konsultacje' },
+                                    { icon: 'map' as IconName, label: 'Mam działkę do sprawdzenia', href: '/analiza-dzialki' },
+                                ]).map((route) => (
+                                    <Link
+                                        key={route.href}
+                                        href={route.href}
+                                        className="group flex items-center gap-3 rounded-xl border border-gray-200 px-4 py-3 hover:bg-primary/5 hover:border-primary/30 transition-all duration-200"
+                                    >
+                                        <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                                            <Icon name={route.icon} size="sm" className="text-primary" />
+                                        </div>
+                                        <span className="text-sm font-semibold text-gray-900 group-hover:text-primary transition-colors flex-1">
+                                            {route.label}
+                                        </span>
+                                        <Icon name="arrowRight" size="sm" className="text-gray-400 group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                                    </Link>
+                                ))}
                             </div>
                         </BentoGridItem>
 

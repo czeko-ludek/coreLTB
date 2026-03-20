@@ -7,7 +7,6 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { Icon } from '@/components/ui/Icon';
 import type { IconName } from '@/components/ui/Icon';
 import { OptionCard } from '@/components/ui/OptionCard';
-import { calculatorIcons } from '@/components/ui/CalculatorIcons';
 import { CalculatorHero } from './CalculatorHero';
 import {
   calculateEstimate,
@@ -834,12 +833,12 @@ export const CalculatorForm = () => {
             <FormSection number="2" title="Konfiguracja domu">
               <OptionGroup label="Kondygnacje">
                 {availableFloors.map((floor) => {
-                  const SvgIcon = calculatorIcons[floor];
+                  const iconMap: Record<string, IconName> = { parterowy: 'square', poddasze: 'house', pietrowy: 'building' };
                   return (
                     <OptionCard
                       key={floor}
                       label={FLOOR_LABELS[floor]}
-                      svgContent={SvgIcon ? <SvgIcon /> : undefined}
+                      icon={iconMap[floor]}
                       selected={state.floors === floor}
                       onClick={() => set('floors', floor)}
                     />
@@ -849,12 +848,12 @@ export const CalculatorForm = () => {
 
               <OptionGroup label="Materiał murowy" className="mt-6">
                 {(Object.keys(WALL_LABELS) as WallType[]).map((wall) => {
-                  const SvgIcon = calculatorIcons[wall];
+                  const iconMap: Record<string, IconName> = { beton_komorkowy: 'layoutGrid', ceramika: 'brickWall', silikat: 'box' };
                   return (
                     <OptionCard
                       key={wall}
                       label={WALL_LABELS[wall]}
-                      svgContent={SvgIcon ? <SvgIcon /> : undefined}
+                      icon={iconMap[wall]}
                       selected={state.wallType === wall}
                       onClick={() => set('wallType', wall)}
                     />
@@ -864,12 +863,12 @@ export const CalculatorForm = () => {
 
               <OptionGroup label="Typ dachu" className="mt-6">
                 {availableRoofs.map((roof) => {
-                  const SvgIcon = calculatorIcons[roof];
+                  const iconMap: Record<string, IconName> = { plaski: 'minus', dwuspadowy: 'triangle', wielospadowy: 'pyramid' };
                   return (
                     <OptionCard
                       key={roof}
                       label={ROOF_LABELS[roof]}
-                      svgContent={SvgIcon ? <SvgIcon /> : undefined}
+                      icon={iconMap[roof]}
                       selected={state.roofType === roof}
                       onClick={() => set('roofType', roof)}
                     />
@@ -879,12 +878,12 @@ export const CalculatorForm = () => {
 
               <OptionGroup label="Typ fundamentu" className="mt-6">
                 {(Object.keys(FOUNDATION_LABELS) as FoundationType[]).map((f) => {
-                  const SvgIcon = calculatorIcons[f];
+                  const iconMap: Record<string, IconName> = { plyta: 'rectangleHorizontal', lawy: 'columns3' };
                   return (
                     <OptionCard
                       key={f}
                       label={FOUNDATION_LABELS[f]}
-                      svgContent={SvgIcon ? <SvgIcon /> : undefined}
+                      icon={iconMap[f]}
                       selected={state.foundation === f}
                       onClick={() => set('foundation', f)}
                     />
@@ -893,16 +892,18 @@ export const CalculatorForm = () => {
               </OptionGroup>
 
               <OptionGroup label="Piwnica" className="mt-6">
-                {(Object.keys(BASEMENT_LABELS) as BasementType[]).map((b) => (
-                  <OptionCard
-                    key={b}
-                    label={BASEMENT_LABELS[b]}
-                    svgContent={b === 'brak' ? <calculatorIcons.basement_brak /> : undefined}
-                    icon={b !== 'brak' ? 'layers' : undefined}
-                    selected={state.basement === b}
-                    onClick={() => set('basement', b)}
-                  />
-                ))}
+                {(Object.keys(BASEMENT_LABELS) as BasementType[]).map((b) => {
+                  const iconMap: Record<string, IconName> = { brak: 'ban', czesciowa: 'squareDashedBottom', cala: 'square' };
+                  return (
+                    <OptionCard
+                      key={b}
+                      label={BASEMENT_LABELS[b]}
+                      icon={iconMap[b]}
+                      selected={state.basement === b}
+                      onClick={() => set('basement', b)}
+                    />
+                  );
+                })}
               </OptionGroup>
             </FormSection>
 
@@ -911,15 +912,18 @@ export const CalculatorForm = () => {
             {/* ─── Section 3: Wykończenie i dodatkowe ─── */}
             <FormSection number="3" title="Standard i wyposażenie">
               <OptionGroup label="Standard budowy">
-                {(Object.keys(FINISH_LABELS) as FinishType[]).map((f) => (
-                  <OptionCard
-                    key={f}
-                    label={FINISH_LABELS[f]}
-                    icon={f === 'sso' ? 'construction' : f === 'deweloperski' ? 'home' : 'keyRound'}
-                    selected={state.finish === f}
-                    onClick={() => set('finish', f)}
-                  />
-                ))}
+                {(Object.keys(FINISH_LABELS) as FinishType[]).map((f) => {
+                  const iconMap: Record<string, IconName> = { sso: 'hammer', deweloperski: 'house', pod_klucz: 'keyRound' };
+                  return (
+                    <OptionCard
+                      key={f}
+                      label={FINISH_LABELS[f]}
+                      icon={iconMap[f]}
+                      selected={state.finish === f}
+                      onClick={() => set('finish', f)}
+                    />
+                  );
+                })}
               </OptionGroup>
 
 
@@ -939,13 +943,12 @@ export const CalculatorForm = () => {
 
               <OptionGroup label="Ogrzewanie" className="mt-6">
                 {(Object.keys(HEATING_LABELS) as HeatingType[]).map((h) => {
-                  const SvgIcon = h !== 'pompa_ciepla' ? calculatorIcons[h as 'gazowe' | 'pelet'] : undefined;
+                  const iconMap: Record<string, IconName> = { gazowe: 'flame', pompa_ciepla: 'thermometerSnowflake', pelet: 'flameKindling' };
                   return (
                     <OptionCard
                       key={h}
                       label={HEATING_LABELS[h]}
-                      svgContent={SvgIcon ? <SvgIcon /> : undefined}
-                      icon={h === 'pompa_ciepla' ? 'wind' : undefined}
+                      icon={iconMap[h]}
                       selected={state.heating === h}
                       onClick={() => set('heating', h)}
                     />
@@ -954,19 +957,21 @@ export const CalculatorForm = () => {
               </OptionGroup>
 
               <OptionGroup label="Garaż" className="mt-6">
-                {(Object.keys(GARAGE_LABELS) as GarageType[]).map((g) => {
-                  const key = g === 'brak' ? 'garaz_brak' as const : g;
-                  const SvgIcon = calculatorIcons[key];
-                  return (
-                    <OptionCard
-                      key={g}
-                      label={GARAGE_LABELS[g]}
-                      svgContent={SvgIcon ? <SvgIcon className={g === 'dwustanowiskowy' ? 'w-[3.6rem] h-[3.45rem]' : 'w-12 h-12'} /> : undefined}
-                      selected={state.garage === g}
-                      onClick={() => set('garage', g)}
-                    />
-                  );
-                })}
+                {(Object.keys(GARAGE_LABELS) as GarageType[]).map((g) => (
+                  <OptionCard
+                    key={g}
+                    label={GARAGE_LABELS[g]}
+                    icon={g !== 'dwustanowiskowy' ? (g === 'brak' ? 'ban' : 'car') as IconName : undefined}
+                    svgContent={g === 'dwustanowiskowy' ? (
+                      <div className="flex gap-1">
+                        <Icon name="car" size="xl" />
+                        <Icon name="car" size="xl" />
+                      </div>
+                    ) : undefined}
+                    selected={state.garage === g}
+                    onClick={() => set('garage', g)}
+                  />
+                ))}
               </OptionGroup>
             </FormSection>
 

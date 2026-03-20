@@ -98,7 +98,7 @@ export function ProjectModificationCTA() {
                 )}
               >
                 <Link
-                  href="/kontakt"
+                  href="/umow-konsultacje?usluga=projektowanie"
                   className="group inline-flex items-center gap-3 bg-primary hover:bg-white text-zinc-900 font-bold text-sm px-6 py-3 rounded-sm transition-all duration-300 uppercase tracking-wider"
                 >
                   Zamów Zmiany

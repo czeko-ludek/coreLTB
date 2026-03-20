@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { Icon } from '@/components/ui';
 
 export interface HeroSectionProps {
@@ -50,24 +49,28 @@ export function HeroSection({
 
   return (
     <>
-      {/* ====== MOBILE: obraz na górze (do samej góry ekranu), tekst pod spodem ====== */}
+      {/* ====== MOBILE: obraz na gorze (do samej gory ekranu), tekst pod spodem ====== */}
       <div className="md:hidden -mt-[96px]">
-        {/* Obraz - full-width, wjeżdża pod sticky header (88px = header 72px + py-2 padding 16px) */}
+        {/* Obraz - full-width, wjezdza pod sticky header */}
         <div className="relative h-[50vh] overflow-hidden">
           {mobileImages.map((image, index) => (
-            <motion.div
-              key={`m-${index}-${currentIndex === index ? 'active' : 'inactive'}`}
+            <div
+              key={`m-${index}`}
               className="absolute inset-0"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: index === currentIndex ? 1 : 0 }}
-              transition={{ opacity: { duration: 1.2, ease: 'easeInOut' } }}
+              style={{
+                opacity: index === currentIndex ? 1 : 0,
+                transition: 'opacity 1.2s ease-in-out',
+              }}
             >
-              <motion.div
+              <div
                 className="absolute inset-0"
-                initial={{ scale: 1.0 }}
-                animate={index === currentIndex ? { scale: 1.15 } : { scale: 1.0 }}
-                transition={{ scale: { duration: 4, ease: 'linear' } }}
                 key={`m-zoom-${index}-${currentIndex}`}
+                style={{
+                  animation: index === currentIndex
+                    ? 'kenBurnsZoom 4s linear forwards'
+                    : 'none',
+                  transform: index === currentIndex ? undefined : 'scale(1)',
+                }}
               >
                 <Image
                   src={image.src}
@@ -78,8 +81,8 @@ export function HeroSection({
                   sizes="100vw"
                   quality={60}
                 />
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           ))}
           {/* Cinematic Overlay - jak na desktop */}
           <div className="absolute inset-0 z-[1]">
@@ -94,42 +97,34 @@ export function HeroSection({
 
         {/* Tekst + CTA pod obrazem */}
         <div className="px-4 pt-3 pb-8 relative z-10 bg-background-beige text-center">
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-primary font-bold text-xs uppercase tracking-[0.2em] mb-2 block"
+          <span
+            className="text-primary font-bold text-xs uppercase tracking-[0.2em] mb-2 block opacity-0"
+            style={{ animation: 'fadeIn 0.5s ease-out 0.3s forwards' }}
           >
             {tagline}
-          </motion.span>
+          </span>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-[29px] font-black text-zinc-900 leading-[1.05] mb-3"
+          <h1
+            className="text-[29px] font-black text-zinc-900 leading-[1.05] mb-3 opacity-0"
+            style={{ animation: 'heroTextIn 0.8s ease-out 0.4s forwards' }}
           >
             {title.split(' ').slice(0, -1).join(' ')}{' '}
             <span className="text-primary">{title.split(' ').slice(-1)}</span>
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-base text-zinc-500 leading-relaxed mb-5"
+          <p
+            className="text-base text-zinc-500 leading-relaxed mb-5 opacity-0"
+            style={{ animation: 'fadeIn 0.5s ease-out 0.5s forwards' }}
           >
             {subtitle}
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="flex flex-col items-center gap-2.5"
+          <div
+            className="flex flex-col items-center gap-2.5 opacity-0"
+            style={{ animation: 'heroTextIn 0.5s ease-out 0.7s forwards' }}
           >
             <Link
-              href="/kontakt"
+              href="/wycena"
               className="inline-flex items-center justify-center gap-1.5 bg-primary text-zinc-900 font-bold py-2.5 rounded-sm text-sm w-full max-w-[280px] uppercase tracking-wider"
             >
               Darmowa wycena
@@ -141,7 +136,7 @@ export function HeroSection({
               {primaryButton.text}
               <Icon name="arrowRight" size="sm" className="group-hover:translate-x-1 transition-transform" />
             </Link>
-          </motion.div>
+          </div>
         </div>
       </div>
 
@@ -150,25 +145,23 @@ export function HeroSection({
         <section className="relative min-h-[53vh] flex flex-col justify-center overflow-hidden bg-zinc-900 rounded-2xl">
           {/* Background Images with Zoom & Fade - Ken Burns style */}
           {images.map((image, index) => (
-            <motion.div
-              key={`${index}-${currentIndex === index ? 'active' : 'inactive'}`}
+            <div
+              key={`d-${index}`}
               className="absolute inset-0"
-              initial={{ opacity: 0 }}
-              animate={{
+              style={{
                 opacity: index === currentIndex ? 1 : 0,
-              }}
-              transition={{
-                opacity: { duration: 1.2, ease: 'easeInOut' },
+                transition: 'opacity 1.2s ease-in-out',
               }}
             >
-              <motion.div
+              <div
                 className="absolute inset-0"
-                initial={{ scale: 1.0 }}
-                animate={index === currentIndex ? { scale: 1.15 } : { scale: 1.0 }}
-                transition={{
-                  scale: { duration: 4, ease: 'linear' },
-                }}
                 key={`zoom-${index}-${currentIndex}`}
+                style={{
+                  animation: index === currentIndex
+                    ? 'kenBurnsZoom 4s linear forwards'
+                    : 'none',
+                  transform: index === currentIndex ? undefined : 'scale(1)',
+                }}
               >
                 <Image
                   src={image.src}
@@ -179,8 +172,8 @@ export function HeroSection({
                   sizes="100vw"
                   quality={60}
                 />
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           ))}
 
           {/* Cinematic Overlay */}
@@ -198,39 +191,33 @@ export function HeroSection({
           {/* Content */}
           <div className="container mx-auto px-10 relative z-10 py-12">
             <div className="max-w-2xl">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
+              <div
+                className="opacity-0"
+                style={{ animation: 'heroTextIn 0.8s ease-out 0.3s forwards' }}
               >
                 <span className="text-primary font-bold text-xs uppercase tracking-[0.3em] mb-4 block">
                   {tagline}
                 </span>
-              </motion.div>
+              </div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 1 }}
-                className="text-4xl lg:text-5xl font-black text-white leading-[0.95] mb-4"
+              <h1
+                className="text-4xl lg:text-5xl font-black text-white leading-[0.95] mb-4 opacity-0"
+                style={{ animation: 'heroTextIn 1s ease-out 0.5s forwards' }}
               >
                 {title.split(' ').slice(0, -1).join(' ')}{' '}
                 <span className="text-primary">{title.split(' ').slice(-1)}</span>
-              </motion.h1>
+              </h1>
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-                className="text-base text-white/60 max-w-lg mb-6 leading-relaxed"
+              <p
+                className="text-base text-white/60 max-w-lg mb-6 leading-relaxed opacity-0"
+                style={{ animation: 'fadeIn 0.6s ease-out 0.6s forwards' }}
               >
                 {subtitle}
-              </motion.p>
+              </p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1, duration: 0.6 }}
+              <div
+                className="opacity-0"
+                style={{ animation: 'heroTextIn 0.6s ease-out 1s forwards' }}
               >
                 <Link
                   href={primaryButton.href}
@@ -239,17 +226,15 @@ export function HeroSection({
                   {primaryButton.text}
                   <Icon name="arrowRight" size="sm" className="group-hover:translate-x-1 transition-transform" />
                 </Link>
-              </motion.div>
+              </div>
             </div>
           </div>
 
           {/* Circular Progress Indicators */}
           {images.length > 1 && (
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.2, duration: 0.6 }}
-              className="absolute bottom-6 right-6 z-20 flex flex-col gap-2.5"
+            <div
+              className="absolute bottom-6 right-6 z-20 flex flex-col gap-2.5 opacity-0"
+              style={{ animation: 'fadeIn 0.6s ease-out 1.2s forwards' }}
             >
               {images.map((_, index) => (
                 <button
@@ -267,7 +252,8 @@ export function HeroSection({
                       strokeWidth="2"
                     />
                     {index === currentIndex && (
-                      <motion.circle
+                      <circle
+                        key={currentIndex}
                         cx="20"
                         cy="20"
                         r="16"
@@ -275,10 +261,10 @@ export function HeroSection({
                         stroke="#dfbb68"
                         strokeWidth="2.5"
                         strokeDasharray="100"
-                        initial={{ strokeDashoffset: 100 }}
-                        animate={{ strokeDashoffset: 0 }}
-                        transition={{ duration: 4, ease: 'linear' }}
-                        key={currentIndex}
+                        strokeDashoffset="100"
+                        style={{
+                          animation: 'circleProgress 4s linear forwards',
+                        }}
                       />
                     )}
                   </svg>
@@ -291,7 +277,7 @@ export function HeroSection({
                   </span>
                 </button>
               ))}
-            </motion.div>
+            </div>
           )}
 
           {/* Bottom Gradient */}

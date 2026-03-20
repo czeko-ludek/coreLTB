@@ -81,7 +81,7 @@ export const sharedTemplate: SharedLocalTemplate = {
     phone: '+48 664 123 757',
     buttons: [
       { text: 'Zadzwoń do nas', href: 'tel:+48664123757', variant: 'primary' },
-      { text: 'Napisz wiadomość', href: '/kontakt', variant: 'outline-white' },
+      { text: 'Umów konsultację', href: '/umow-konsultacje', variant: 'outline-white' },
     ],
   },
 

@@ -6,13 +6,11 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Button, Icon } from '@/components/ui';
 import { MegaMenu, MegaMenuItem } from '@/components/shared';
-import { PLATFORM_NAMES } from '@/lib/utils';
-
 export interface HeaderProps {
   topBar: {
     phone: string;
     email: string;
-    socials: Array<{ platform: 'facebook' | 'twitter' | 'instagram' | 'linkedin'; href: string }>;
+    socials?: Array<{ platform: 'facebook' | 'twitter' | 'instagram' | 'linkedin'; href: string }>;
   };
   logo: { src: string; alt: string };
   navLinks: Array<{ label: string; href: string }>;
@@ -102,45 +100,8 @@ export function Header({
             ? 'rounded-b-lg md:rounded-b-lg shadow-lg'
             : 'rounded-lg md:rounded-lg shadow-lg'
         }`} style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
-        {/* Top Bar - Hidden on Mobile */}
-        <div className="bg-gray-50 hidden md:block border-b border-gray-200">
-          <div className="container mx-auto px-6">
-            <div className="flex items-center justify-between py-2 text-sm">
-              {/* Contact Info */}
-              <div className="flex items-center gap-6 text-gray-700">
-                <div className="flex items-center gap-2">
-                  <Icon name="phone" size="sm" className="text-primary" />
-                  <span className="font-medium">{topBar.phone}</span>
-                </div>
-                <span className="text-primary font-bold">•</span>
-                <div className="flex items-center gap-2">
-                  <Icon name="mail" size="sm" className="text-primary" />
-                  <span className="font-medium">{topBar.email}</span>
-                </div>
-              </div>
-
-              {/* Social Links */}
-              <div className="flex items-center gap-2.5">
-                <span className="text-primary text-sm mr-2 font-semibold">Śledź nas:</span>
-                {topBar.socials.map((social, index) => (
-                    <a
-                      key={index}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Odwiedź nasz profil na ${PLATFORM_NAMES[social.platform]}`}
-                      className="text-gray-600 hover:text-primary transition-colors"
-                    >
-                      <Icon name={social.platform} size="sm" />
-                    </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Main Navigation */}
-        <div className="bg-white border-t border-gray-200 md:border-t-0">
+        <div className="bg-white">
           <div className="container mx-auto px-6">
             <div className="flex items-center justify-between py-2 min-h-[72px] md:min-h-[107px]">
               {/* Logo - Responsive sizing */}
@@ -358,7 +319,7 @@ export function Header({
           {/* CTA + kontakt na dole */}
           <div className="px-6 py-5 mt-auto border-t border-gray-100">
             <Link
-              href="/kontakt"
+              href="/wycena"
               onClick={closeMobileMenu}
               className="flex items-center justify-center gap-2 w-full bg-primary text-zinc-900 font-bold py-3.5 rounded-xl text-base mb-5"
             >
