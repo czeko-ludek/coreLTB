@@ -143,7 +143,7 @@ Scalable system for city-specific landing pages at `/obszar-dzialania/[slug]`.
 
 **Adding a new city:** Create `data/local/cities/{slug}.ts` exporting `CityData`, add import to `index.ts` `allCities[]`, add hero image.
 
-**7 cities:** rybnik, wodzislaw-slaski, tychy, katowice, jaworzno, mikolow, gliwice
+**11 cities:** rybnik, wodzislaw-slaski, tychy, katowice, jaworzno, mikolow, gliwice, zabrze, zory, jastrzebie-zdroj, raciborz
 
 **Local page components** in `components/sections/local/`:
 - ServicePillarsSection, MidPageCTA, LocalExpertiseSection, WhyUsSection
@@ -193,9 +193,11 @@ Scalable system for city-specific landing pages at `/obszar-dzialania/[slug]`.
 - [ ] Create Meta Pixel, embed, configure audiences
 - [ ] Test events in GA4 DebugView + Meta Events Manager
 
-## Lead Email System
+## Lead Email System (Cloudflare Pages Functions)
 
-**API endpoint:** `app/api/lead/route.ts` — unified POST endpoint, accepts `{ source, data }`:
+**Architecture:** Since the site uses `output: 'export'` (fully static HTML), Next.js API routes don't work. Email sending is handled by a **Cloudflare Pages Function** — a serverless endpoint that runs alongside the static site.
+
+**API endpoint:** `functions/api/lead.ts` — Cloudflare Pages Function at `POST /api/lead`, accepts `{ source, data }`:
 
 | Source | Form | Email subject prefix |
 |--------|------|---------------------|
@@ -203,21 +205,54 @@ Scalable system for city-specific landing pages at `/obszar-dzialania/[slug]`.
 | `consultation` | `/umow-konsultacje` | `[Konsultacja]` — service + city |
 | `plot_analysis` | `/analiza-dzialki` | `[Analiza działki]` — address |
 
-**Email delivery:** Resend SDK (`npm: resend`)
-- `lib/email/send.ts` — Resend wrapper, reads `RESEND_API_KEY`, `LEAD_NOTIFICATION_EMAIL`, `LEAD_FROM_EMAIL` from `.env.local`
-- `lib/email/templates.ts` — HTML email templates per form type. Brand colors (#1a1a1a dark, #dfbb68 gold). Logo placeholder ready for post-deploy.
-- `.env.local` — API key + recipient config (gitignored)
+**IMPORTANT:** The function is fully standalone — no imports from `lib/` or other project files. It contains its own email templates, validation, and security logic inline.
 
-**Domain verification:** `coreltb.pl` in Resend (region: us-east-1). DNS records (DKIM, SPF, MX, DMARC) configured in Cyberfolks panel. After verification, change `LEAD_FROM_EMAIL` to `leady@coreltb.pl` and `LEAD_NOTIFICATION_EMAIL` to `biuro@coreltb.pl`.
+**Email delivery:** Resend REST API (direct `fetch` to `https://api.resend.com/emails`) — NOT the Resend SDK (can't use npm packages in Pages Functions easily).
+
+**Cloudflare env vars** (set in Cloudflare Dashboard → Settings → Environment variables, for BOTH Production AND Preview):
+- `RESEND_API_KEY` — Resend API key
+- `LEAD_NOTIFICATION_EMAIL` — recipient (currently `biuro@coreltb.pl`)
+- `LEAD_FROM_EMAIL` — sender address
+- Compatibility flag: `nodejs_compat`
+
+**Build config** (Cloudflare Dashboard):
+- Build command: `npm run build` (NOT `npx @cloudflare/next-on-pages` — that generates `_worker.js` which overrides `functions/`)
+- Build output directory: `out`
+
+**Security (3 layers):**
+1. **Origin check** — Referer/Origin header must match `ALLOWED_ORIGINS` list (coreltb.pl, localhost, pages.dev subdomains)
+2. **Rate limiting** — 5 requests/IP/minute via in-memory Map (per-isolate, basic protection)
+3. **Honeypot field** — hidden `website` input in all 3 forms; if filled (by bots), returns fake `200 OK` without sending email
 
 **Each form POSTs to `/api/lead`** with try/catch — user always sees success even if email fails (graceful degradation). Console logs errors server-side.
+
+**Deprecated files** (no longer imported, can be cleaned up):
+- `lib/email/send.ts` — old Resend SDK wrapper
+- `lib/email/templates.ts` — old HTML templates (now inline in `functions/api/lead.ts`)
+- `app/api/lead/route.ts` — deleted (didn't work with static export)
+
+## Form Validation & UX
+
+**Phone validation** (`lib/validation.ts`):
+- `validatePolishPhone(raw)` — strips non-digits, removes +48/48 prefix, validates 9 digits, first digit must be 2-8, rejects fake patterns (all same digits like 111111111, sequential like 123456789)
+- `formatPolishPhone(raw)` — formats to "XXX XXX XXX"
+- Used by all 3 form components (calculator, consultation, plot analysis)
+
+**Scroll-to-error with red pulse** (calculator + consultation forms):
+- When user submits with missing required OptionGroup selections, form scrolls to first error and flashes red 3 times
+- CSS animation in `app/globals.css`: `@keyframes errorPulse` — 3x red `box-shadow` pulse in 1.5s
+- Class `.animate-error-pulse` applied temporarily via JS, removed on `animationend`
+- OptionGroups have `data-option-group="{field}"` attribute for scroll targeting
+- Calculator: all 8 OptionGroups support error pulse
+- Consultation: service type selection grid supports error pulse
 
 ## Key Files
 - `app/wycena/page.tsx` — calculator LP (with `<Suspense>`)
 - `app/umow-konsultacje/page.tsx` — consultation LP (with `<Suspense>`)
 - `app/analiza-dzialki/page.tsx` — plot analysis LP
 - `app/kontakt/page.tsx` — contact page with routing cards
-- `app/api/lead/route.ts` — unified lead API endpoint
+- `functions/api/lead.ts` — Cloudflare Pages Function for lead emails (standalone, no imports)
+- `lib/validation.ts` — shared phone validation (`validatePolishPhone`, `formatPolishPhone`)
 - `app/projekty/[slug]/page.tsx` — project detail page
 - `app/projekty/page.tsx` — projects listing (RSC)
 - `app/obszar-dzialania/[slug]/page.tsx` — local page route
@@ -225,8 +260,6 @@ Scalable system for city-specific landing pages at `/obszar-dzialania/[slug]`.
 - `components/sections/consultation/ConsultationForm.tsx` — consultation form
 - `components/sections/plot-analysis/PlotAnalysisForm.tsx` — plot analysis form
 - `components/sections/calculator/CalculatorForm.tsx` — calculator form + estimate
-- `lib/email/send.ts` — Resend email wrapper
-- `lib/email/templates.ts` — HTML email templates (brand colors)
 - `data/projects/helpers.ts` — filter/sort/parse + `buildCalculatorUrl()`
 - `data/projects/types.ts` — Project, ProjectListingItem, filter types
 - `data/pricing.ts` — calculator pricing engine
