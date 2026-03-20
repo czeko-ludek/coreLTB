@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Icon } from '@/components/ui/Icon';
 import type { IconName } from '@/components/ui/Icon';
+import { validatePolishPhone } from '@/lib/validation';
 
 // ─── Types ──────────────────────────────────────────────
 
@@ -91,8 +92,8 @@ export const PlotAnalysisForm = () => {
     const errors: Record<string, string> = {};
     if (!state.address.trim()) errors.address = 'Podaj adres lub lokalizację działki';
     if (!state.name.trim() || state.name.trim().length < 3) errors.name = 'Podaj imię i nazwisko';
-    if (!state.phone.trim() || !/^[\d\s+()-]{9,15}$/.test(state.phone.replace(/\s/g, '')))
-      errors.phone = 'Podaj prawidłowy numer telefonu';
+    if (!state.phone.trim() || !validatePolishPhone(state.phone))
+      errors.phone = 'Podaj prawidłowy polski numer telefonu (9 cyfr)';
     if (state.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email))
       errors.email = 'Podaj prawidłowy adres e-mail';
     if (!state.consentData) errors.consentData = 'Wymagana zgoda';

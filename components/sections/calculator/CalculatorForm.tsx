@@ -30,6 +30,7 @@ import {
   type CalculatorConfig,
 } from '@/data/pricing';
 import { companyData } from '@/data/company-data';
+import { validatePolishPhone } from '@/lib/validation';
 
 // ─── State ──────────────────────────────────────────────
 
@@ -195,8 +196,8 @@ export const CalculatorForm = () => {
     if (!state.foundation) errors.foundation = 'Wybierz typ fundamentu';
     if (!state.basement) errors.basement = 'Wybierz opcję piwnicy';
     if (!state.name.trim() || state.name.trim().length < 3) errors.name = 'Podaj imię i nazwisko';
-    if (!state.phone.trim() || !/^[\d\s+()-]{9,15}$/.test(state.phone.replace(/\s/g, '')))
-      errors.phone = 'Podaj prawidłowy numer telefonu';
+    if (!state.phone.trim() || !validatePolishPhone(state.phone))
+      errors.phone = 'Podaj prawidłowy polski numer telefonu (9 cyfr)';
     if (state.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email))
       errors.email = 'Podaj prawidłowy adres e-mail';
     if (!state.consentData) errors.consentData = 'Wymagana zgoda';
@@ -218,6 +219,23 @@ export const CalculatorForm = () => {
     const errors = validate();
     if (Object.keys(errors).length > 0) {
       dispatch({ type: 'SET_ERRORS', errors });
+
+      // Find first missing option group or input error and scroll to it
+      const optionFields = ['floors', 'wallType', 'roofType', 'foundation', 'basement', 'finish', 'heating'];
+      const firstMissingOption = optionFields.find(f => errors[f]);
+      if (firstMissingOption) {
+        const el = document.querySelector(`[data-option-group="${firstMissingOption}"]`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Re-trigger animation by removing and re-adding class
+          el.classList.remove('animate-error-pulse');
+          void (el as HTMLElement).offsetWidth; // force reflow
+          el.classList.add('animate-error-pulse');
+          return;
+        }
+      }
+
+      // Fallback: scroll to first data-error input
       const firstErrorField = document.querySelector('[data-error="true"]');
       firstErrorField?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
@@ -831,7 +849,7 @@ export const CalculatorForm = () => {
 
             {/* ─── Section 2: Konfiguracja ─── */}
             <FormSection number="2" title="Konfiguracja domu">
-              <OptionGroup label="Kondygnacje">
+              <OptionGroup label="Kondygnacje" field="floors" hasError={!!state.errors.floors}>
                 {availableFloors.map((floor) => {
                   const iconMap: Record<string, IconName> = { parterowy: 'square', poddasze: 'house', pietrowy: 'building' };
                   return (
@@ -846,7 +864,7 @@ export const CalculatorForm = () => {
                 })}
               </OptionGroup>
 
-              <OptionGroup label="Materiał murowy" className="mt-6">
+              <OptionGroup label="Materiał murowy" className="mt-6" field="wallType" hasError={!!state.errors.wallType}>
                 {(Object.keys(WALL_LABELS) as WallType[]).map((wall) => {
                   const iconMap: Record<string, IconName> = { beton_komorkowy: 'layoutGrid', ceramika: 'brickWall', silikat: 'box' };
                   return (
@@ -861,7 +879,7 @@ export const CalculatorForm = () => {
                 })}
               </OptionGroup>
 
-              <OptionGroup label="Typ dachu" className="mt-6">
+              <OptionGroup label="Typ dachu" className="mt-6" field="roofType" hasError={!!state.errors.roofType}>
                 {availableRoofs.map((roof) => {
                   const iconMap: Record<string, IconName> = { plaski: 'minus', dwuspadowy: 'triangle', wielospadowy: 'pyramid' };
                   return (
@@ -876,7 +894,7 @@ export const CalculatorForm = () => {
                 })}
               </OptionGroup>
 
-              <OptionGroup label="Typ fundamentu" className="mt-6">
+              <OptionGroup label="Typ fundamentu" className="mt-6" field="foundation" hasError={!!state.errors.foundation}>
                 {(Object.keys(FOUNDATION_LABELS) as FoundationType[]).map((f) => {
                   const iconMap: Record<string, IconName> = { plyta: 'rectangleHorizontal', lawy: 'columns3' };
                   return (
@@ -891,7 +909,7 @@ export const CalculatorForm = () => {
                 })}
               </OptionGroup>
 
-              <OptionGroup label="Piwnica" className="mt-6">
+              <OptionGroup label="Piwnica" className="mt-6" field="basement" hasError={!!state.errors.basement}>
                 {(Object.keys(BASEMENT_LABELS) as BasementType[]).map((b) => {
                   const iconMap: Record<string, IconName> = { brak: 'ban', czesciowa: 'squareDashedBottom', cala: 'square' };
                   return (
@@ -911,7 +929,7 @@ export const CalculatorForm = () => {
 
             {/* ─── Section 3: Wykończenie i dodatkowe ─── */}
             <FormSection number="3" title="Standard i wyposażenie">
-              <OptionGroup label="Standard budowy">
+              <OptionGroup label="Standard budowy" field="finish" hasError={!!state.errors.finish}>
                 {(Object.keys(FINISH_LABELS) as FinishType[]).map((f) => {
                   const iconMap: Record<string, IconName> = { sso: 'hammer', deweloperski: 'house', pod_klucz: 'keyRound' };
                   return (
@@ -941,7 +959,7 @@ export const CalculatorForm = () => {
                 </p>
               </div>
 
-              <OptionGroup label="Ogrzewanie" className="mt-6">
+              <OptionGroup label="Ogrzewanie" className="mt-6" field="heating" hasError={!!state.errors.heating}>
                 {(Object.keys(HEATING_LABELS) as HeatingType[]).map((h) => {
                   const iconMap: Record<string, IconName> = { gazowe: 'flame', pompa_ciepla: 'thermometerSnowflake', pelet: 'flameKindling' };
                   return (
@@ -956,7 +974,7 @@ export const CalculatorForm = () => {
                 })}
               </OptionGroup>
 
-              <OptionGroup label="Garaż" className="mt-6">
+              <OptionGroup label="Garaż" className="mt-6" field="garage" hasError={!!state.errors.garage}>
                 {(Object.keys(GARAGE_LABELS) as GarageType[]).map((g) => (
                   <OptionCard
                     key={g}
@@ -1207,15 +1225,23 @@ function OptionGroup({
   label,
   children,
   className = '',
+  field,
+  hasError,
 }: {
   label: string;
   children: React.ReactNode;
   className?: string;
+  field?: string;
+  hasError?: boolean;
 }) {
   return (
-    <div className={className}>
-      <label className="text-body-sm font-semibold text-text-primary block mb-2.5">
+    <div
+      className={`${className} rounded-xl transition-all duration-300 ${hasError ? 'animate-error-pulse p-2 -m-2' : ''}`}
+      data-option-group={field}
+    >
+      <label className={`text-body-sm font-semibold block mb-2.5 transition-colors ${hasError ? 'text-red-500' : 'text-text-primary'}`}>
         {label}
+        {hasError && <span className="ml-2 text-body-xs font-normal text-red-400">— wybierz opcję</span>}
       </label>
       <div className="grid grid-cols-3 gap-2.5">
         {children}

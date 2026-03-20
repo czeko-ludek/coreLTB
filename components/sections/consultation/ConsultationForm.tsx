@@ -8,6 +8,7 @@ import { Icon } from '@/components/ui/Icon';
 import type { IconName } from '@/components/ui/Icon';
 import { OptionCard } from '@/components/ui/OptionCard';
 import { companyData } from '@/data/company-data';
+import { validatePolishPhone } from '@/lib/validation';
 
 // ─── Types ──────────────────────────────────────────────
 
@@ -145,8 +146,8 @@ export const ConsultationForm = () => {
     const errors: Record<string, string> = {};
     if (!state.service) errors.service = 'Wybierz temat zapytania';
     if (!state.name.trim() || state.name.trim().length < 3) errors.name = 'Podaj imię i nazwisko';
-    if (!state.phone.trim() || !/^[\d\s+()-]{9,15}$/.test(state.phone.replace(/\s/g, '')))
-      errors.phone = 'Podaj prawidłowy numer telefonu';
+    if (!state.phone.trim() || !validatePolishPhone(state.phone))
+      errors.phone = 'Podaj prawidłowy polski numer telefonu (9 cyfr)';
     if (state.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email))
       errors.email = 'Podaj prawidłowy adres e-mail';
     if (!state.consentData) errors.consentData = 'Wymagana zgoda';
