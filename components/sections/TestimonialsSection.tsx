@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { SectionHeader, SectionHeaderProps } from '@/components/shared';
 import { Icon } from '@/components/ui';
@@ -30,7 +29,7 @@ const getCardSize = (quote: string): 'lg' | 'md' | 'sm' => {
   return 'sm';
 };
 
-// Single Testimonial Card with animations
+// Single Testimonial Card — pure CSS animation, no Framer Motion
 function TestimonialCard({
   quote,
   author,
@@ -38,6 +37,7 @@ function TestimonialCard({
   index
 }: TestimonialCardProps & { index: number }) {
   const size = getCardSize(quote);
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.15 });
 
   const paddingClass = {
     lg: 'p-8',
@@ -46,16 +46,22 @@ function TestimonialCard({
   }[size];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
+    <div
+      ref={ref}
       className={clsx(
         'relative bg-white rounded-2xl shadow-lg overflow-hidden group',
-        'border border-zinc-100 hover:shadow-xl hover:border-primary/20 transition-all duration-300',
-        paddingClass
+        'border border-zinc-100 hover:shadow-xl hover:border-primary/20',
+        'transition-[shadow,border-color] duration-300',
+        paddingClass,
+        // CSS fade-in: start invisible, animate when inView
+        inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
       )}
+      style={{
+        transitionProperty: 'opacity, transform, box-shadow, border-color',
+        transitionDuration: '600ms',
+        transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        transitionDelay: `${index * 80}ms`,
+      }}
     >
       {/* Decorative gradient corner */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/5 to-transparent pointer-events-none" />
@@ -114,29 +120,28 @@ function TestimonialCard({
           </span>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 export function TestimonialsSection({ header, testimonials }: TestimonialsSectionProps) {
-  const { ref, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section
-      ref={ref}
-      className="relative py-16 lg:py-24 overflow-hidden bg-background-beige"
-    >
+    <section className="relative py-16 lg:py-24 overflow-hidden bg-background-beige">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div
+          ref={ref}
           className={clsx(
-            'mb-12 lg:mb-16',
-            inView ? 'animate-fade-in-up' : 'opacity-0'
+            'mb-12 lg:mb-16 transition-all duration-600',
+            inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           )}
-          style={{ animationDelay: '0.1s' }}
+          style={{
+            transitionProperty: 'opacity, transform',
+            transitionDuration: '600ms',
+            transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+          }}
         >
           <SectionHeader {...header} align="center" theme="light" />
         </div>

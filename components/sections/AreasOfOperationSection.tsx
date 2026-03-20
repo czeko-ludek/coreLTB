@@ -4,7 +4,6 @@ import React, { useState, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
-import { motion } from 'framer-motion';
 import { SectionHeader } from '@/components/shared';
 import { Icon } from '@/components/ui';
 import { MapTooltip } from '@/components/ui/MapTooltip';
@@ -15,7 +14,6 @@ import {
 	mapVoivodeships,
 	getVoivodeshipById,
 } from '@/data/map-data';
-import { fadeInUp, scaleIn, fadeIn } from '@/lib/animations';
 import { clsx } from 'clsx';
 
 /* ────────────────────────────────────────────
@@ -55,10 +53,11 @@ interface TooltipState {
 	position: { x: number; y: number };
 }
 
-const mapViewportConfig = {
-	once: true,
-	margin: '-50px 0px',
-	amount: 0.2,
+/* CSS transition style for fade-in-up on scroll */
+const cssTransitionStyle = {
+	transitionProperty: 'opacity, transform',
+	transitionDuration: '600ms',
+	transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
 } as const;
 
 /* ────────────────────────────────────────────
@@ -78,6 +77,10 @@ export const AreasOfOperationSection: React.FC<AreasOfOperationSectionProps> = (
 		triggerOnce: true,
 		rootMargin: '50px 0px',
 	});
+
+	/* — desktop: inView triggers for CSS transitions — */
+	const { ref: headerRef, inView: headerInView } = useInView({ triggerOnce: true, threshold: 0.2 });
+	const { ref: mapContainerRef, inView: mapContainerInView } = useInView({ triggerOnce: true, threshold: 0.15 });
 
 	/* — desktop: map state — */
 	const tooltipContainerRef = useRef<HTMLDivElement>(null);
@@ -146,12 +149,13 @@ export const AreasOfOperationSection: React.FC<AreasOfOperationSectionProps> = (
 				{/* ═══════════════════════════════════════
 				    SHARED: Section Header
 				   ═══════════════════════════════════════ */}
-				<motion.div
-					className="mb-6 md:mb-12"
-					variants={fadeInUp}
-					initial="hidden"
-					whileInView="visible"
-					viewport={mapViewportConfig}
+				<div
+					ref={headerRef}
+					className={clsx(
+						'mb-6 md:mb-12',
+						headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6',
+					)}
+					style={cssTransitionStyle}
 				>
 					<SectionHeader
 						label={header.label}
@@ -160,17 +164,18 @@ export const AreasOfOperationSection: React.FC<AreasOfOperationSectionProps> = (
 						align="center"
 						theme="light"
 					/>
-				</motion.div>
+				</div>
 
 				{/* ═══════════════════════════════════════
 				    DESKTOP (lg+): Interactive SVG Map
 				   ═══════════════════════════════════════ */}
-				<motion.div
-					className="hidden lg:block relative bg-white rounded-3xl shadow-[0_0_20px_rgba(0,0,0,0.05)] overflow-hidden map-wrapper"
-					variants={fadeInUp}
-					initial="hidden"
-					whileInView="visible"
-					viewport={mapViewportConfig}
+				<div
+					ref={mapContainerRef}
+					className={clsx(
+						'hidden lg:block relative bg-white rounded-3xl shadow-[0_0_20px_rgba(0,0,0,0.05)] overflow-hidden map-wrapper',
+						mapContainerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6',
+					)}
+					style={cssTransitionStyle}
 				>
 					{/* Voivodeship Pills — always visible at top */}
 					<div className="relative z-20 flex items-center justify-center gap-3 pt-5 pb-2 px-6">
@@ -214,31 +219,31 @@ export const AreasOfOperationSection: React.FC<AreasOfOperationSectionProps> = (
 
 					{/* Back Button (zoomed mode) */}
 					{view === 'zoomed' && (
-						<motion.button
+						<button
 							onClick={handleBackClick}
-							className="map-back-button absolute top-4 left-4 z-20"
-							variants={fadeIn}
-							initial="hidden"
-							animate="visible"
+							className="map-back-button absolute top-4 left-4 z-20 animate-[fadeIn_400ms_ease-out_forwards]"
 						>
 							<Icon name="chevronLeft" size="sm" />
 							<span>Wszystkie województwa</span>
-						</motion.button>
+						</button>
 					)}
 
 					{/* SVG Map */}
-					<motion.div
+					<div
 						ref={tooltipContainerRef}
-						className="relative aspect-[16/9] p-6"
+						className={clsx(
+							'relative aspect-[16/9] p-6',
+							mapContainerInView ? 'opacity-100 scale-100' : 'opacity-0 scale-95',
+						)}
 						onClick={view === 'zoomed' ? handleBackClick : undefined}
 						style={{
 							cursor: view === 'zoomed' ? 'pointer' : 'default',
 							transformOrigin: 'center center',
+							transitionProperty: 'opacity, transform',
+							transitionDuration: '600ms',
+							transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+							transitionDelay: '150ms',
 						}}
-						variants={scaleIn}
-						initial="hidden"
-						whileInView="visible"
-						viewport={mapViewportConfig}
 					>
 						<PolandMapSVG
 							view={view}
@@ -266,7 +271,7 @@ export const AreasOfOperationSection: React.FC<AreasOfOperationSectionProps> = (
 						{tooltip && view === 'zoomed' && (
 							<MapTooltip cityId={tooltip.cityId} position={tooltip.position} />
 						)}
-					</motion.div>
+					</div>
 
 					{/* Legend removed — clean map */}
 
@@ -284,7 +289,7 @@ export const AreasOfOperationSection: React.FC<AreasOfOperationSectionProps> = (
 							<span>Kliknij lub najedź na mapę / etykietę powyżej</span>
 						</div>
 					)}
-				</motion.div>
+				</div>
 
 				{/* ═══════════════════════════════════════
 				    MOBILE (<lg): Hub Cards with city links

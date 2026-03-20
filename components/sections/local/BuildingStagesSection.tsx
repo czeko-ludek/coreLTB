@@ -3,10 +3,9 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import { Icon, IconName } from '@/components/ui';
 import { SectionHeader, SectionHeaderProps } from '@/components/shared/SectionHeader';
-import { fadeInUp, viewportConfig } from '@/lib/animations';
 
 interface ExpertiseCard {
   icon: IconName;
@@ -62,20 +61,27 @@ function formatRichText(text: string): string {
     );
 }
 
+// ─── Fade transition style helper ───────────────────────────────
+
+const fadeStyle = (delay?: number): React.CSSProperties => ({
+  transitionProperty: 'opacity, transform',
+  transitionDuration: '600ms',
+  transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+  ...(delay != null && { transitionDelay: `${delay}ms` }),
+});
+
 // ─── Stage Card ─────────────────────────────────────────────────
 
 function StageCard({ card, index }: { card: ExpertiseCard; index: number }) {
   const pillar = getPillarLink(card.title);
   const stepNumber = String(index + 1).padStart(2, '0');
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.15 });
 
   return (
-    <motion.div
-      variants={fadeInUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={viewportConfig}
-      transition={{ delay: index * 0.08 }}
-      className="relative bg-white rounded-2xl p-6 shadow-sm border border-zinc-100 hover:shadow-md hover:border-primary/20 transition-all duration-300 overflow-hidden group"
+    <div
+      ref={ref}
+      className={`relative bg-white rounded-2xl p-6 shadow-sm border border-zinc-100 hover:shadow-md hover:border-primary/20 transition-[shadow,border-color] duration-300 overflow-hidden group ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+      style={fadeStyle(index * 80)}
     >
       {/* Big background number */}
       <span
@@ -135,19 +141,26 @@ function StageCard({ card, index }: { card: ExpertiseCard; index: number }) {
           <span>→ {pillar.label}</span>
         </Link>
       )}
-    </motion.div>
+    </div>
   );
 }
 
 // ─── Main Section ───────────────────────────────────────────────
 
 export function BuildingStagesSection({ header, cards, image }: BuildingStagesSectionProps) {
+  const { ref: headerRef, inView: headerInView } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const { ref: imageRef, inView: imageInView } = useInView({ triggerOnce: true, threshold: 0.15 });
+
   return (
     <section className="bg-zinc-50 py-16 lg:py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={viewportConfig}>
+        <div
+          ref={headerRef}
+          className={headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
+          style={fadeStyle()}
+        >
           <SectionHeader {...header} />
-        </motion.div>
+        </div>
 
         {/* Cards grid — 1 col mobile, 2 col tablet, 3 col desktop */}
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
@@ -158,12 +171,10 @@ export function BuildingStagesSection({ header, cards, image }: BuildingStagesSe
 
         {/* Optional image — shown below grid as full-width banner */}
         {image && (
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportConfig}
-            className="mt-10 rounded-2xl overflow-hidden shadow-lg"
+          <div
+            ref={imageRef}
+            className={`mt-10 rounded-2xl overflow-hidden shadow-lg ${imageInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            style={fadeStyle()}
           >
             <Image
               src={image.src}
@@ -172,7 +183,7 @@ export function BuildingStagesSection({ header, cards, image }: BuildingStagesSe
               height={500}
               className="w-full h-auto object-cover max-h-[400px]"
             />
-          </motion.div>
+          </div>
         )}
       </div>
     </section>

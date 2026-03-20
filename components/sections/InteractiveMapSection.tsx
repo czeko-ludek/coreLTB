@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import { clsx } from 'clsx';
 import { Icon } from '@/components/ui';
 import { MapTooltip } from '@/components/ui/MapTooltip';
@@ -14,12 +14,13 @@ import {
   mapVoivodeships,
   getVoivodeshipById,
 } from '@/data/map-data';
-import {
-  fadeInUp,
-  scaleIn,
-  fadeIn,
-  viewportConfig,
-} from '@/lib/animations';
+
+/* CSS transition style for fade-in-up on scroll */
+const cssTransitionStyle = {
+  transitionProperty: 'opacity, transform',
+  transitionDuration: '600ms',
+  transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+} as const;
 
 interface InteractiveMapSectionProps {
   header: {
@@ -49,6 +50,10 @@ interface TooltipState {
  */
 export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
   const router = useRouter();
+
+  // CSS transition inView hooks
+  const { ref: headerRef, inView: headerInView } = useInView({ triggerOnce: true, threshold: 0.2 });
+  const { ref: mapContainerRef, inView: mapContainerInView } = useInView({ triggerOnce: true, threshold: 0.15 });
 
   // Ref for tooltip positioning (non-transformed container)
   const tooltipContainerRef = useRef<HTMLDivElement>(null);
@@ -105,25 +110,19 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
     ? getVoivodeshipById(activeVoivodeship)?.name
     : null;
 
-  // Custom viewport config for this section (threshold 0.2)
-  const mapViewportConfig = {
-    once: true,
-    margin: '-50px 0px',
-    amount: 0.2,
-  };
-
   return (
     <section
       className="hidden lg:block bg-background-beige py-16 sm:py-20"
     >
       <div className="mx-auto max-w-[83rem] px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          className="mb-12"
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={mapViewportConfig}
+        <div
+          ref={headerRef}
+          className={clsx(
+            'mb-12',
+            headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6',
+          )}
+          style={cssTransitionStyle}
         >
           <SectionHeader
             label={header.label}
@@ -132,15 +131,16 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
             align="center"
             theme="light"
           />
-        </motion.div>
+        </div>
 
         {/* Map Container */}
-        <motion.div
-          className="relative bg-white rounded-3xl shadow-[0_0_20px_rgba(0,0,0,0.05)] overflow-hidden map-wrapper"
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={mapViewportConfig}
+        <div
+          ref={mapContainerRef}
+          className={clsx(
+            'relative bg-white rounded-3xl shadow-[0_0_20px_rgba(0,0,0,0.05)] overflow-hidden map-wrapper',
+            mapContainerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6',
+          )}
+          style={cssTransitionStyle}
         >
           {/* Voivodeship Pills — always visible at top */}
           <div className="relative z-20 flex items-center justify-center gap-3 pt-5 pb-2 px-6">
@@ -184,35 +184,36 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
 
           {/* Back Button (zoomed mode only) */}
           {view === 'zoomed' && (
-            <motion.button
+            <button
               onClick={handleBackClick}
               className={clsx(
                 'map-back-button',
-                'absolute top-4 left-4 z-20'
+                'absolute top-4 left-4 z-20',
+                'animate-[fadeIn_400ms_ease-out_forwards]',
               )}
-              variants={fadeIn}
-              initial="hidden"
-              animate="visible"
             >
               <Icon name="chevronLeft" size="sm" />
               <span>Wszystkie województwa</span>
-            </motion.button>
+            </button>
           )}
 
 
           {/* SVG Map */}
-          <motion.div
+          <div
             ref={tooltipContainerRef}
-            className="relative aspect-[16/9] p-6"
+            className={clsx(
+              'relative aspect-[16/9] p-6',
+              mapContainerInView ? 'opacity-100 scale-100' : 'opacity-0 scale-95',
+            )}
             onClick={view === 'zoomed' ? handleBackClick : undefined}
             style={{
               cursor: view === 'zoomed' ? 'pointer' : 'default',
-              transformOrigin: 'center center'
+              transformOrigin: 'center center',
+              transitionProperty: 'opacity, transform',
+              transitionDuration: '600ms',
+              transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+              transitionDelay: '150ms',
             }}
-            variants={scaleIn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportConfig}
           >
             <PolandMapSVG
               view={view}
@@ -240,7 +241,7 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
             {tooltip && view === 'zoomed' && (
               <MapTooltip cityId={tooltip.cityId} position={tooltip.position} />
             )}
-          </motion.div>
+          </div>
 
 
           {/* Instructions (overview mode) */}
@@ -257,7 +258,7 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
               <span>Kliknij na województwo, aby zobaczyć miasta</span>
             </div>
           )}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
