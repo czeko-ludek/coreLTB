@@ -77,6 +77,7 @@ export const PlotAnalysisForm = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const successRef = useRef<HTMLDivElement>(null);
+  const honeypotRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -128,6 +129,7 @@ export const PlotAnalysisForm = () => {
             landRegister: state.landRegister || undefined,
             mpzp: state.mpzp || undefined,
             notes: state.notes || undefined,
+            website: honeypotRef.current?.value || '',
           },
         }),
       });
@@ -490,6 +492,12 @@ export const PlotAnalysisForm = () => {
                   label="Wyrażam zgodę na kontakt telefoniczny i mailowy w celu omówienia wyników analizy."
                   required
                 />
+              </div>
+
+              {/* Honeypot */}
+              <div className="absolute opacity-0 pointer-events-none" style={{ position: 'absolute', left: '-9999px' }} aria-hidden="true" tabIndex={-1}>
+                <label htmlFor="plot-website">Website</label>
+                <input ref={honeypotRef} type="text" id="plot-website" name="website" autoComplete="off" tabIndex={-1} />
               </div>
 
               {/* Submit */}

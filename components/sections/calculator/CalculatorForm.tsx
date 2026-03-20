@@ -127,6 +127,7 @@ export const CalculatorForm = () => {
   const [areaInput, setAreaInput] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
+  const honeypotRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -292,6 +293,7 @@ export const CalculatorForm = () => {
             heating: HEATING_LABELS[config.heating],
             estimateTotal: `${formatPrice(Math.round((result.total.min + result.total.max) / 2))} zl netto`,
             estimateTotalBrutto: `${formatPrice(Math.round((result.totalBrutto.min + result.totalBrutto.max) / 2))} zl brutto`,
+            website: honeypotRef.current?.value || '',
           },
         }),
       });
@@ -1092,6 +1094,12 @@ export const CalculatorForm = () => {
                   label="Wyrażam zgodę na kontakt telefoniczny i mailowy w celu przedstawienia oferty i omówienia szczegółów wyceny."
                   required
                 />
+              </div>
+
+              {/* Honeypot — hidden from humans, bots fill it */}
+              <div className="absolute opacity-0 pointer-events-none" style={{ position: 'absolute', left: '-9999px' }} aria-hidden="true" tabIndex={-1}>
+                <label htmlFor="website">Website</label>
+                <input ref={honeypotRef} type="text" id="website" name="website" autoComplete="off" tabIndex={-1} />
               </div>
 
               {/* Submit */}

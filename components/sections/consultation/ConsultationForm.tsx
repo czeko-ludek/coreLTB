@@ -113,6 +113,7 @@ export const ConsultationForm = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const successRef = useRef<HTMLDivElement>(null);
+  const honeypotRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -194,6 +195,7 @@ export const ConsultationForm = () => {
             city: state.city || undefined,
             contactPref: state.contactPref || undefined,
             notes: state.notes || undefined,
+            website: honeypotRef.current?.value || '',
             hasPlot: state.hasPlot || undefined,
             hasProject: state.hasProject || undefined,
             area: state.plannedArea ? `${state.plannedArea} m²` : undefined,
@@ -726,6 +728,12 @@ export const ConsultationForm = () => {
                   label="Wyrażam zgodę na kontakt telefoniczny i mailowy w celu przedstawienia oferty i omówienia szczegółów."
                   required
                 />
+              </div>
+
+              {/* Honeypot */}
+              <div className="absolute opacity-0 pointer-events-none" style={{ position: 'absolute', left: '-9999px' }} aria-hidden="true" tabIndex={-1}>
+                <label htmlFor="cons-website">Website</label>
+                <input ref={honeypotRef} type="text" id="cons-website" name="website" autoComplete="off" tabIndex={-1} />
               </div>
 
               {/* Submit */}
