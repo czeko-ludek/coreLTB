@@ -1,6 +1,13 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+let resend: Resend | null = null;
+
+function getResend(): Resend {
+  if (!resend) {
+    resend = new Resend(process.env.RESEND_API_KEY || '');
+  }
+  return resend;
+}
 
 interface SendLeadEmailParams {
   subject: string;
@@ -11,7 +18,7 @@ export async function sendLeadEmail({ subject, html }: SendLeadEmailParams) {
   const to = process.env.LEAD_NOTIFICATION_EMAIL || 'biuro@coreltb.pl';
   const from = process.env.LEAD_FROM_EMAIL || 'onboarding@resend.dev';
 
-  const { data, error } = await resend.emails.send({
+  const { data, error } = await getResend().emails.send({
     from: `CoreLTB Leady <${from}>`,
     to: [to],
     subject,
