@@ -40,7 +40,7 @@ export interface ProjectCostTable {
 
 // --- Typy Filtrowania i Sortowania ---
 
-export type ProjectCategory = 'jednorodzinny' | 'dwulokalowy' | 'z-poddaszem' | 'parterowy';
+export type ProjectCategory = 'jednorodzinny' | 'dwulokalowy' | 'z-poddaszem' | 'parterowy' | 'pietrowy';
 export type ProjectTechnology = 'MUROWANY' | 'DREWNIANY';
 export type SortOption = 'newest' | 'price-asc' | 'price-desc' | 'area-asc' | 'area-desc';
 
@@ -54,11 +54,15 @@ export interface SurfaceRange {
   max: number | null;
 }
 
+/** Filtr garaż */
+export type GarageFilter = 'z-garazem' | 'bez-garazu';
+
 export interface ProjectFilters {
   technology: ProjectTechnology[];
   category: ProjectCategory[];
   surfaceRange: string | null;
   source: ProjectSource[];
+  garage: GarageFilter[];
 }
 
 /**
@@ -83,6 +87,8 @@ export interface ProjectListingItem {
   costNum: number;
   /** Precomputed numeric surface area — fast sort/filter, no string parsing at runtime */
   areaNum: number;
+  /** Whether the project includes a garage (precomputed for filtering) */
+  hasGarage: boolean;
 }
 
 // --- Główny Typ Projektu ---
@@ -127,9 +133,15 @@ export interface Project {
 // --- Stałe Konfiguracyjne ---
 
 export const projectCategories = [
-  { id: 'dwulokalowy', label: 'Dwulokalowy' },
-  { id: 'z-poddaszem', label: 'Z poddaszem' },
   { id: 'parterowy', label: 'Parterowy' },
+  { id: 'pietrowy', label: 'Piętrowy' },
+  { id: 'z-poddaszem', label: 'Z poddaszem' },
+  { id: 'dwulokalowy', label: 'Dwulokalowy' },
+] as const;
+
+export const garageOptions = [
+  { id: 'z-garazem', label: 'Z garażem' },
+  { id: 'bez-garazu', label: 'Bez garażu' },
 ] as const;
 
 export const projectTechnologies = [
