@@ -5,6 +5,35 @@ import { ProjectSpecificationTab } from '@/data/projects';
 import { hasDefinition, getDefinition } from '@/data/definitions';
 import { InfoTooltip } from './InfoTooltip';
 
+/**
+ * Formats description text by bolding labels before colons.
+ * "Ściany zewnętrzne: pustak..." → <strong>Ściany zewnętrzne:</strong> pustak...
+ * Only matches labels at the start of a line (after newline or beginning of string).
+ */
+function formatDescription(text: string): React.ReactNode[] {
+  // Split by lines, process each
+  const lines = text.split('\n');
+  const result: React.ReactNode[] = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    if (i > 0) result.push('\n');
+    const line = lines[i];
+    // Match pattern: starts with a capitalized word(s) followed by colon
+    const match = line.match(/^([A-ZĄĆĘŁŃÓŚŹŻ][^:]{0,60}:)\s*/i);
+    if (match) {
+      result.push(
+        <strong key={`b-${i}`} className="font-bold">{match[1]}</strong>,
+        ' ',
+        line.slice(match[0].length)
+      );
+    } else {
+      result.push(line);
+    }
+  }
+
+  return result;
+}
+
 export interface ProjectTabsProps {
   specifications: ProjectSpecificationTab[];
 }
@@ -58,7 +87,9 @@ export function ProjectTabs({ specifications }: ProjectTabsProps) {
                     {hasInfo && definition && <InfoTooltip definition={definition} />}
                   </dt>
                   <dd className="text-sm md:text-base font-semibold text-text-primary whitespace-pre-line leading-relaxed">
-                    {item.value}
+                    {specifications[activeTabIndex].title === 'Opis funkcjonalny'
+                      ? formatDescription(item.value)
+                      : item.value}
                   </dd>
                 </div>
               );

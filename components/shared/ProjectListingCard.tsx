@@ -23,10 +23,11 @@ export interface ProjectListingCardProps {
   priority?: boolean;
 }
 
-/** Label kolekcji — kolor tła zależny od źródła */
-const SOURCE_BADGE: Record<string, { label: string; bg: string }> = {
-  z500:         { label: 'Z500',          bg: '#d9308a' },
-  galeriadomow: { label: 'Galeria Domów', bg: '#e75c55' },
+/** Label kolekcji — kolor i styl zależny od źródła */
+const SOURCE_BADGE: Record<string, { label: string; color: string; outline?: boolean }> = {
+  z500:         { label: 'Z500',          color: '#d9308a' },
+  galeriadomow: { label: 'Galeria Domów', color: '#e75c55' },
+  malachit:     { label: 'Malachit',      color: '#CF006D', outline: true },
 };
 
 // O(1) lookup — zawiera WSZYSTKIE możliwe kategorie (nie tylko filtrowalne)
@@ -81,8 +82,11 @@ export const ProjectListingCard = React.memo(function ProjectListingCard({
         {sourceBadge && (
           <div className="absolute top-3 left-3 z-10">
             <span
-              className="text-white text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-md shadow-sm"
-              style={{ backgroundColor: sourceBadge.bg }}
+              className="text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-md shadow-sm"
+              style={sourceBadge.outline
+                ? { backgroundColor: '#fff', color: sourceBadge.color, border: `2px solid ${sourceBadge.color}` }
+                : { backgroundColor: sourceBadge.color, color: '#fff' }
+              }
             >
               {sourceBadge.label}
             </span>

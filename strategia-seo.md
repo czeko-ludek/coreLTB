@@ -17,6 +17,7 @@
 6. [Implementacja Techniczna](#6-implementacja-techniczna)
 7. [Metryki i Monitoring](#7-metryki-i-monitoring)
 8. [Workflow dla Agenta SEO](#8-workflow-dla-agenta-seo)
+9. [SEO Title & Meta — Wzorce dla stron projektow](#9-seo-title--meta--wzorce-dla-stron-projektow)
 
 ---
 
@@ -2246,8 +2247,85 @@ Common errors:
 
 ---
 
+## 9. SEO TITLE & META — WZORCE DLA STRON PROJEKTOW
+
+**Data wdrozenia:** 2026-03-21
+**Pliki:** `data/projects/helpers.ts` (generatory), `app/projekty/[slug]/page.tsx` (metadata + schema)
+
+### 9.1 Research konkurencji (marzec 2026)
+
+| Serwis | Wzorzec title | Przyklad |
+|---|---|---|
+| GaleriaDomow | `Projekt domu - [Nazwa] ([Pow]m2) - Brand` | Projekt domu - Dom przy Diamentowej (155.00m2) - GaleriaDomow.pl |
+| Z500 | `Projekt domu [Kod] [Opis cech]` | Projekt domu Zx143 Dom jednorodzinny z pelnym pietrem i garazem dwustanowiskowym. |
+| ARCHON+ | `Projekt domu [Nazwa] - Brand` | Projekt domu Dom w droserach (GE) - ARCHON+ |
+| Extradom | `Projekt domu [Nazwa] [Pow] m2 - Brand` | Projekt domu Format 166 m2 - EXTRADOM |
+
+**Wnioski:**
+- Wszyscy front-loaduja "Projekt domu" (fraza #1 w branzy)
+- Nikt nie daje CTA ani kosztu budowy w title
+- Nikt nie daje kategorii (parterowy/pietrowy)
+- Powierzchnia jest standardem (GaleriaDomow, Extradom)
+
+### 9.2 Nasz wzorzec (wdrozony)
+
+**Strona projektu (`/projekty/[slug]`):**
+
+```
+Title:       Projekt domu [Nazwa] · [Pow] m2 [kategoria] | Wycen w 60s · CoreLTB
+Description: Projekt domu [Nazwa] – [Pow] m2, dom [kategoria], technologia: [tech].
+             [Garaz X, Y pokoi.] Wycen koszt budowy w 60 sekund kalkulatorem online.
+             Rzuty, elewacje, specyfikacja techniczna. CoreLTB Builders.
+OG Title:    Projekt domu [Nazwa] · [Pow] m2 [kategoria]
+```
+
+**Przyklad realny:**
+```
+Title:       Projekt domu Dom przy Jesionowej · 120 m2 parterowy | Wycen w 60s · CoreLTB
+Description: Projekt domu Dom przy Jesionowej – 120 m2, dom parterowy, technologia:
+             murowany. Garaz 1-stanowiskowy, 5 pokoi. Wycen koszt budowy w 60 sekund
+             kalkulatorem online. Rzuty, elewacje, specyfikacja techniczna. CoreLTB Builders.
+```
+
+**Strona listingu (`/projekty`):**
+
+```
+Title:       Projekty Domow 2026 – Katalog [N]+ projektow | Wycen budowe online
+Description: Katalog [N]+ gotowych projektow domow jednorodzinnych. Domy parterowe,
+             pietrowe, z poddaszem – z kalkulatorem kosztow budowy. CoreLTB Builders.
+```
+
+### 9.3 Przewagi SEO vs konkurencja
+
+| Element | Konkurencja | My | Efekt |
+|---|---|---|---|
+| "Projekt domu" prefix | tak | tak | Match z fraza #1 |
+| Powierzchnia | czesc | tak | Long-tail "projekt domu 120m2" |
+| Kategoria | nikt | tak | Match na "projekt domu parterowego" |
+| CTA w title | nikt | "Wycen w 60s" | Wyzszy CTR, unikalny wyroznik |
+| Koszt budowy w desc | nikt | kalkulator CTA | Odpowiedz na intencje usera |
+| Brand | wszyscy | CoreLTB | Budowanie rozpoznawalnosci |
+
+### 9.4 Schema.org na stronach projektow
+
+Kazda strona `/projekty/[slug]` emituje JSON-LD z grafem:
+
+1. **Product** — nazwa, opis, obraz, cena projektu (Offer), wlasciwosci (powierzchnia, kategoria, technologia, pokoje, garaz)
+2. **BreadcrumbList** — Strona glowna > Projekty domow > [Nazwa projektu]
+
+### 9.5 Implementacja techniczna
+
+Generatory w `data/projects/helpers.ts`:
+- `getCategoryLabel(category)` — etykieta kategorii (parterowy, pietrowy, z poddaszem, dwulokalowy)
+- `generateProjectSeoTitle(project)` — title tag
+- `generateProjectSeoDescription(project)` — meta description
+
+Eksportowane przez `data/projects/index.ts`, uzywane w `app/projekty/[slug]/page.tsx` w `generateMetadata()`.
+
+---
+
 **KONIEC DOKUMENTU**
 
-**Data ostatniej aktualizacji:** 2025-12-10
-**Wersja:** 2.0 (Kompletna - Semantic SEO)
-**Następny review:** 2026-01-01
+**Data ostatniej aktualizacji:** 2026-03-21
+**Wersja:** 3.0 (+ SEO Title wzorce projektow)
+**Nastepny review:** 2026-04-01

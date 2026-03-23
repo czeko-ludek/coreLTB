@@ -7,22 +7,31 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import { Icon } from '@/components/ui';
+import type { ProjectSource } from '@/data/projects';
+
+/** Label kolekcji — kolor i styl zależny od źródła */
+const SOURCE_BADGE: Record<string, { label: string; color: string; outline?: boolean }> = {
+  z500:         { label: 'Z500',          color: '#d9308a' },
+  galeriadomow: { label: 'Galeria Domów', color: '#e75c55' },
+  malachit:     { label: 'Malachit',      color: '#CF006D', outline: true },
+};
 
 export interface RelatedProject {
   slug: string;
   title: string;
   surfaceArea: string;
   price: string;
+  source?: ProjectSource;
 }
 
 export interface RelatedProjectsSectionProps {
-  currentProjectSlug: string; // Slug aktualnego projektu (żeby go wykluczyć)
-  allProjects: RelatedProject[];
+  currentProjectSlug: string;
+  allProjects: RelatedProject[]; // Pre-sorted similar projects (max 8)
 }
 
 export function RelatedProjectsSection({
   currentProjectSlug,
-  allProjects,
+  allProjects: relatedProjects,
 }: RelatedProjectsSectionProps) {
   const [swiperInstance, setSwiperInstance] = React.useState<SwiperType | null>(null);
   const [isMounted, setIsMounted] = React.useState(false);
@@ -30,12 +39,6 @@ export function RelatedProjectsSection({
   React.useEffect(() => {
     setIsMounted(true);
   }, []);
-
-  // Memoize — przelicza się tylko gdy lista projektów lub aktualny slug się zmieni
-  const relatedProjects = useMemo(
-    () => allProjects.filter((p) => p.slug !== currentProjectSlug).slice(0, 4),
-    [allProjects, currentProjectSlug]
-  );
 
   if (!isMounted) {
     return (
@@ -100,7 +103,9 @@ export function RelatedProjectsSection({
             onSwiper={setSwiperInstance}
             className="related-projects-swiper pb-12"
           >
-            {relatedProjects.map((project) => (
+            {relatedProjects.map((project) => {
+              const sourceBadge = project.source ? SOURCE_BADGE[project.source] : undefined;
+              return (
               <SwiperSlide key={project.slug}>
                 <Link href={`/projekty/${project.slug}`}>
                   <div className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
@@ -113,6 +118,20 @@ export function RelatedProjectsSection({
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       />
+                      {/* Badge kolekcji - lewy górny */}
+                      {sourceBadge && (
+                        <div className="absolute top-3 left-3 z-10">
+                          <span
+                            className="text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-md shadow-sm"
+                            style={sourceBadge.outline
+                              ? { backgroundColor: '#fff', color: sourceBadge.color, border: `2px solid ${sourceBadge.color}` }
+                              : { backgroundColor: sourceBadge.color, color: '#fff' }
+                            }
+                          >
+                            {sourceBadge.label}
+                          </span>
+                        </div>
+                      )}
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                     </div>
 
@@ -152,7 +171,8 @@ export function RelatedProjectsSection({
                   </div>
                 </Link>
               </SwiperSlide>
-            ))}
+              );
+            })}
           </Swiper>
 
           {/* Navigation Arrows - Desktop */}

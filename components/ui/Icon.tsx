@@ -108,6 +108,8 @@ import {
   ThermometerSnowflake,
   FlameKindling,
   SquareDashedBottom,
+  Handshake,
+  ExternalLink,
 } from 'lucide-react';
 
 const iconMap = {
@@ -222,6 +224,8 @@ const iconMap = {
   thermometerSnowflake: ThermometerSnowflake,
   flameKindling: FlameKindling,
   squareDashedBottom: SquareDashedBottom,
+  handshake: Handshake,
+  externalLink: ExternalLink,
 };
 
 export type IconName = keyof typeof iconMap;

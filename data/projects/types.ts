@@ -45,7 +45,7 @@ export type ProjectTechnology = 'MUROWANY' | 'DREWNIANY';
 export type SortOption = 'newest' | 'price-asc' | 'price-desc' | 'area-asc' | 'area-desc';
 
 /** Źródło/wydawca projektu */
-export type ProjectSource = 'galeriadomow' | 'z500' | 'own';
+export type ProjectSource = 'galeriadomow' | 'z500' | 'malachit' | 'own';
 
 export interface SurfaceRange {
   id: string;
@@ -151,6 +151,7 @@ export const projectTechnologies = [
 export const projectSources = [
   { id: 'galeriadomow', label: 'Galeria Domów' },
   { id: 'z500', label: 'Z500' },
+  { id: 'malachit', label: 'Malachit' },
 ] as const;
 
 export const surfaceRanges: SurfaceRange[] = [

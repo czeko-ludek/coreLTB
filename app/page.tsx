@@ -8,10 +8,11 @@ import {
 	ServiceShowcaseSection,
 	TestimonialsSection,
 	AreasOfOperationSection,
-	// PartnersSection, // Disabled - missing images
 } from "@/components/sections";
+import { PartnerLogosMarquee } from "@/components/sections/local/PartnerLogosMarquee";
 import { companyData } from "@/data/company-data";
 import { allProjects } from "@/data/projects";
+import { allPartnerLogos } from "@/data/partners";
 import { blogPosts } from "@/data/blog-data";
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -318,6 +319,10 @@ export default function Home() {
 			<HowItWorksSection {...howItWorksData} />
 			<ProjectsSection {...projectsData} />
 			<TestimonialsSection {...testimonialsData} />
+			<PartnerLogosMarquee
+				label="Wspolpracujemy z najlepszymi"
+				logos={allPartnerLogos}
+			/>
 			<ContactCTASection {...ctaData} />
 			<BlogSection {...blogData} />
 		</main>

@@ -5,13 +5,16 @@ import { allProjects, toListingItem } from '@/data/projects';
 import { companyData } from '@/data/company-data';
 
 export const metadata: Metadata = {
-  title: 'Projekty Domów - Katalog | CoreLTB Builders',
+  title: `Projekty Domów 2026 – Katalog ${allProjects.length}+ projektów | Wyceń budowę online`,
   description:
-    'Przeglądaj nasze projekty domów jednorodzinnych. Filtruj według technologii, kategorii i powierzchni. Znajdź idealny projekt dla siebie.',
+    `Katalog ${allProjects.length}+ gotowych projektów domów jednorodzinnych. Domy parterowe, pietrowe, z poddaszem – z kalkulatorem kosztow budowy. Filtruj wg powierzchni, kategorii i technologii. CoreLTB Builders.`,
+  alternates: {
+    canonical: `${companyData.url}/projekty`,
+  },
   openGraph: {
-    title: 'Projekty Domów - Katalog | CoreLTB Builders',
+    title: `Projekty Domow – Katalog ${allProjects.length}+ projektow z kalkulatorem budowy`,
     description:
-      'Przeglądaj nasze projekty domów jednorodzinnych. Filtruj według technologii, kategorii i powierzchni.',
+      `Przegladaj ${allProjects.length}+ gotowych projektow domow jednorodzinnych. Filtruj wg technologii, kategorii i powierzchni. Wycen koszt budowy w 60 sekund.`,
     url: `${companyData.url}/projekty`,
     type: 'website',
   },

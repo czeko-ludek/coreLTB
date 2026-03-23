@@ -10,10 +10,11 @@ import { useToggle } from '@/hooks/useToggle';
 import { useMirrorMode } from '@/contexts/MirrorModeContext';
 import { type ProjectSource } from '@/data/projects';
 
-/** Label kolekcji — kolor tła zależny od źródła */
-const SOURCE_BADGE: Record<string, { label: string; bg: string }> = {
-  z500:         { label: 'Z500',          bg: '#d9308a' },
-  galeriadomow: { label: 'Galeria Domów', bg: '#e75c55' },
+/** Label kolekcji — kolor i styl zależny od źródła */
+const SOURCE_BADGE: Record<string, { label: string; color: string; outline?: boolean }> = {
+  z500:         { label: 'Z500',          color: '#d9308a' },
+  galeriadomow: { label: 'Galeria Domów', color: '#e75c55' },
+  malachit:     { label: 'Malachit',      color: '#CF006D', outline: true },
 };
 
 export interface ProjectGalleryHeroProps {
@@ -26,7 +27,9 @@ export interface ProjectGalleryHeroProps {
 export function ProjectGalleryHero({ slug, alt, galleryImageCount, source }: ProjectGalleryHeroProps) {
   const [isLightboxOpen, , setIsLightboxOpen] = useToggle(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  const thumbsContainerRef = React.useRef<HTMLDivElement>(null);
   const { getMirrorPath } = useMirrorMode();
 
   // Standard paths — stable, only recomputes when slug/count changes
@@ -43,8 +46,35 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount, source }: Pro
     [standardImages, getMirrorPath]
   );
 
+  // Scroll thumbnail strip so the active thumb is visible
+  const scrollThumbIntoView = useCallback((index: number) => {
+    const container = thumbsContainerRef.current;
+    if (!container) return;
+    const thumb = container.children[index] as HTMLElement | undefined;
+    if (!thumb) return;
+    const containerRect = container.getBoundingClientRect();
+    const thumbRect = thumb.getBoundingClientRect();
+    // If thumb is outside visible area, scroll to center it
+    if (thumbRect.left < containerRect.left || thumbRect.right > containerRect.right) {
+      thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }, []);
+
+  const handleSlideChange = useCallback((swiper: SwiperType) => {
+    const idx = swiper.realIndex;
+    setCurrentSlide(idx);
+    scrollThumbIntoView(idx);
+  }, [scrollThumbIntoView]);
+
+  const goToSlide = useCallback((index: number) => {
+    if (swiperInstance) {
+      swiperInstance.slideToLoop(index);
+    }
+  }, [swiperInstance]);
+
   const openLightbox = useCallback((index: number) => {
     setActiveIndex(index);
+    setCurrentSlide(index);
     setIsLightboxOpen(true);
   }, [setIsLightboxOpen]);
 
@@ -87,8 +117,11 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount, source }: Pro
             {sourceBadge && (
               <div className="absolute top-3 left-3 z-10">
                 <span
-                  className="text-white text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-md shadow-sm"
-                  style={{ backgroundColor: sourceBadge.bg }}
+                  className="text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-md shadow-sm"
+                  style={sourceBadge.outline
+                    ? { backgroundColor: '#fff', color: sourceBadge.color, border: `2px solid ${sourceBadge.color}` }
+                    : { backgroundColor: sourceBadge.color, color: '#fff' }
+                  }
                 >
                   {sourceBadge.label}
                 </span>
@@ -144,8 +177,11 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount, source }: Pro
             {sourceBadge && (
               <div className="absolute top-4 left-4 z-10">
                 <span
-                  className="text-white text-sm font-bold uppercase tracking-wide px-4 py-2 rounded-md shadow-md"
-                  style={{ backgroundColor: sourceBadge.bg }}
+                  className="text-sm font-bold uppercase tracking-wide px-4 py-2 rounded-md shadow-md"
+                  style={sourceBadge.outline
+                    ? { backgroundColor: '#fff', color: sourceBadge.color, border: `2px solid ${sourceBadge.color}` }
+                    : { backgroundColor: sourceBadge.color, color: '#fff' }
+                  }
                 >
                   {sourceBadge.label}
                 </span>
@@ -187,18 +223,23 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount, source }: Pro
       {/* Lightbox Modal */}
       {isLightboxOpen && (
         <Portal>
-          <div className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center">
-            {/* Close Button */}
-            <button
-              onClick={closeLightbox}
-              className="absolute top-4 right-4 md:top-6 md:right-6 z-[10000] w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors duration-300"
-              aria-label="Zamknij galerię"
-            >
-              <Icon name="x" size="md" className="text-white md:w-6 md:h-6" />
-            </button>
+          <div className="fixed inset-0 z-[9999] bg-black/95 flex flex-col">
+            {/* Close Button + Counter */}
+            <div className="flex items-center justify-between px-4 md:px-6 pt-4 md:pt-6 pb-2 flex-shrink-0">
+              <span className="text-white/70 font-medium text-xs md:text-sm">
+                {currentSlide + 1} / {allImages.length}
+              </span>
+              <button
+                onClick={closeLightbox}
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors duration-300"
+                aria-label="Zamknij galerię"
+              >
+                <Icon name="x" size="md" className="text-white md:w-6 md:h-6" />
+              </button>
+            </div>
 
-            {/* Swiper Slider */}
-            <div className="w-full h-full flex items-center justify-center px-4 md:px-16">
+            {/* Main image area */}
+            <div className="relative flex-1 min-h-0 px-4 md:px-16">
               <Swiper
                 modules={[Navigation]}
                 spaceBetween={20}
@@ -210,6 +251,7 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount, source }: Pro
                   nextEl: '.lightbox-next',
                 }}
                 onSwiper={setSwiperInstance}
+                onSlideChange={handleSlideChange}
                 className="w-full h-full"
               >
                 {allImages.map((src, index) => (
@@ -246,11 +288,36 @@ export function ProjectGalleryHero({ slug, alt, galleryImageCount, source }: Pro
               )}
             </div>
 
-            {/* Image Counter */}
-            <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 bg-white/10 px-3 py-1.5 md:px-4 md:py-2 rounded-lg">
-              <span className="text-white font-medium text-xs md:text-sm">
-                {(swiperInstance?.realIndex ?? activeIndex) + 1} / {allImages.length}
-              </span>
+            {/* Thumbnail strip */}
+            <div className="flex-shrink-0 px-4 md:px-16 py-3 md:py-4">
+              <div
+                ref={thumbsContainerRef}
+                className="flex gap-2 overflow-x-auto scrollbar-hide justify-start md:justify-center py-1"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                {allImages.map((src, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    className={`relative flex-shrink-0 w-[92px] h-[69px] md:w-[116px] md:h-[87px] rounded-lg transition-all duration-200 ${
+                      currentSlide === index
+                        ? 'ring-2 ring-primary ring-offset-2 ring-offset-black/95 opacity-100'
+                        : 'opacity-50 hover:opacity-80'
+                    }`}
+                    aria-label={`Zdjęcie ${index + 1}`}
+                  >
+                    <div className="relative w-full h-full rounded-lg overflow-hidden">
+                    <Image
+                      src={src}
+                      alt={`Miniatura ${index + 1}`}
+                      fill
+                      className="object-cover"
+                      sizes="116px"
+                    />
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </Portal>

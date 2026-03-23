@@ -37,7 +37,21 @@ export function HeroSection({
   // Mobile images — fallback to desktop images
   const mobileImages = mobileImagesProp?.length ? mobileImagesProp : images;
 
-  // Auto-advance every 4 seconds (synced with Ken Burns animation)
+  // Track per-slide activation key — only changes when a slide BECOMES active,
+  // not when it becomes inactive (so outgoing zoom animation keeps running).
+  const [slideKeys, setSlideKeys] = useState<number[]>(() =>
+    images.map((_, i) => (i === 0 ? 1 : 0))
+  );
+
+  useEffect(() => {
+    setSlideKeys((prev) => {
+      const next = [...prev];
+      next[currentIndex] = Date.now();
+      return next;
+    });
+  }, [currentIndex]);
+
+  // Auto-advance every 4 seconds
   useEffect(() => {
     if (images.length <= 1) return;
 
@@ -64,12 +78,9 @@ export function HeroSection({
             >
               <div
                 className="absolute inset-0"
-                key={`m-zoom-${index}-${currentIndex}`}
+                key={`m-zoom-${index}-${slideKeys[index]}`}
                 style={{
-                  animation: index === currentIndex
-                    ? 'kenBurnsZoom 4s linear forwards'
-                    : 'none',
-                  transform: index === currentIndex ? undefined : 'scale(1)',
+                  animation: 'kenBurnsZoom 6s linear forwards',
                 }}
               >
                 <Image
@@ -155,12 +166,9 @@ export function HeroSection({
             >
               <div
                 className="absolute inset-0"
-                key={`zoom-${index}-${currentIndex}`}
+                key={`zoom-${index}-${slideKeys[index]}`}
                 style={{
-                  animation: index === currentIndex
-                    ? 'kenBurnsZoom 4s linear forwards'
-                    : 'none',
-                  transform: index === currentIndex ? undefined : 'scale(1)',
+                  animation: 'kenBurnsZoom 6s linear forwards',
                 }}
               >
                 <Image

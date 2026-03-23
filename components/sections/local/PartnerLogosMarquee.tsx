@@ -2,10 +2,15 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 export interface PartnerLogoItem {
   name: string;
   image?: string;
+  /** Scale multiplier for square/tall logos (default 1). */
+  scale?: number;
+  /** Slug for anchor link (scrolls to #slug on click). */
+  slug?: string;
 }
 
 export interface PartnerLogosMarqueeProps {
@@ -17,6 +22,9 @@ export function PartnerLogosMarquee({
   label = 'Zaufali nam',
   logos,
 }: PartnerLogosMarqueeProps) {
+  const pathname = usePathname();
+  const isPartnersPage = pathname === '/partnerzy';
+
   // Duplicate logos for seamless loop
   const doubled = [...logos, ...logos];
 
@@ -34,27 +42,52 @@ export function PartnerLogosMarquee({
         <div className="absolute right-0 top-0 bottom-0 w-16 lg:w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
         {/* Scrolling track */}
-        <div className="flex animate-marquee">
-          {doubled.map((logo, i) => (
-            <div
-              key={`${logo.name}-${i}`}
-              className="flex-shrink-0 mx-6 lg:mx-10 flex items-center justify-center h-10"
-            >
-              {logo.image ? (
-                <Image
-                  src={logo.image}
-                  alt={logo.name}
-                  width={120}
-                  height={40}
-                  className="h-8 lg:h-10 w-auto object-contain grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                />
-              ) : (
-                <span className="text-zinc-300 font-bold text-sm lg:text-base tracking-wide whitespace-nowrap hover:text-zinc-500 transition-colors duration-300">
-                  {logo.name}
-                </span>
-              )}
-            </div>
-          ))}
+        <div className="flex items-center animate-marquee">
+          {doubled.map((logo, i) => {
+            const scale = logo.scale ?? 1;
+            const h = Math.round(56 * scale);
+            const w = Math.round(160 * scale);
+
+            const img = logo.image ? (
+              <Image
+                src={logo.image}
+                alt={logo.name}
+                width={w}
+                height={h}
+                className="w-auto object-contain hover:scale-110 transition-transform duration-300"
+                style={{ height: `${h}px` }}
+              />
+            ) : (
+              <span className="text-zinc-300 font-bold text-sm lg:text-base tracking-wide whitespace-nowrap hover:text-zinc-500 transition-colors duration-300">
+                {logo.name}
+              </span>
+            );
+
+            return (
+              <div
+                key={`${logo.name}-${i}`}
+                className="flex-shrink-0 mx-6 lg:mx-10 flex items-center justify-center"
+              >
+                {logo.slug ? (
+                  <a
+                    href={isPartnersPage ? `#${logo.slug}` : `/partnerzy#${logo.slug}`}
+                    className="cursor-pointer"
+                    onClick={isPartnersPage ? (e) => {
+                      e.preventDefault();
+                      const el = document.getElementById(logo.slug!);
+                      if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                      }
+                    } : undefined}
+                  >
+                    {img}
+                  </a>
+                ) : (
+                  img
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

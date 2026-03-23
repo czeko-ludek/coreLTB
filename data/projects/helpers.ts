@@ -1,8 +1,67 @@
 // data/projects/helpers.ts
 // Funkcje filtrowania, sortowania i parsowania projektów
 
-import type { Project, ProjectListingItem, ProjectFilters, SortOption, ProjectSource, GarageFilter } from './types';
+import type { Project, ProjectListingItem, ProjectFilters, SortOption, ProjectSource, ProjectCategory, GarageFilter } from './types';
 import { surfaceRanges } from './types';
+
+// ---------------------------------------------------------------------------
+// SEO helpers — title, description, category labels
+// ---------------------------------------------------------------------------
+
+const CATEGORY_LABELS: Record<ProjectCategory, string> = {
+  parterowy: 'parterowy',
+  pietrowy: 'pietrowy',
+  'z-poddaszem': 'z poddaszem',
+  dwulokalowy: 'dwulokalowy',
+  jednorodzinny: 'jednorodzinny',
+};
+
+/** Human-readable category label for SEO (lowercase, Polish) */
+export function getCategoryLabel(category: ProjectCategory): string {
+  return CATEGORY_LABELS[category] || category;
+}
+
+/**
+ * Generates an SEO-optimized <title> for a project detail page.
+ *
+ * Pattern: "Projekt domu [Name] · [Area] m² [category] | Wyceń w 60s"
+ * Example: "Projekt domu Dom przy Jesionowej · 120 m² parterowy | Wyceń w 60s"
+ *
+ * Targets:
+ * - "projekt domu" keyword front-loaded (highest volume phrase)
+ * - Surface area as modifier (long-tail: "projekt domu 120m2")
+ * - Category for "projekt domu parterowego" style queries
+ * - "Wyceń w 60s" as unique CTR hook (no competitor does this)
+ */
+export function generateProjectSeoTitle(project: Project): string {
+  const area = Math.round(parseSurfaceArea(project.surfaceArea));
+  const category = getCategoryLabel(project.category);
+  return `Projekt domu ${project.title} · ${area} m² ${category} | Wyceń w 60s · CoreLTB`;
+}
+
+/**
+ * Generates an SEO-optimized meta description for a project detail page.
+ *
+ * ~150 chars, includes: name, area, category, technology, CTA with calculator.
+ * Optionally includes garage info and room count for richer snippets.
+ */
+export function generateProjectSeoDescription(project: Project): string {
+  const area = Math.round(parseSurfaceArea(project.surfaceArea));
+  const category = getCategoryLabel(project.category);
+  const tech = project.technology.toLowerCase();
+
+  // Build feature chips: garage, rooms
+  const features: string[] = [];
+  if (project.garage && !project.garage.includes('brak')) {
+    features.push(`garaż ${project.garage}`);
+  }
+  if (project.roomCount && project.roomCount > 0) {
+    features.push(`${project.roomCount} pokoi`);
+  }
+  const featuresStr = features.length > 0 ? ` ${features.join(', ')}.` : '';
+
+  return `Projekt domu ${project.title} – ${area} m², dom ${category}, technologia: ${tech}.${featuresStr} Wyceń koszt budowy w 60 sekund kalkulatorem online. Rzuty, elewacje, specyfikacja techniczna. CoreLTB Builders.`;
+}
 
 /**
  * Parsuje string ceny "984 tys. zł" lub "810 000 zł" na liczbę

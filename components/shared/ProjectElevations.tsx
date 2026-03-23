@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Icon, Portal } from '@/components/ui';
 import { useMirrorMode } from '@/contexts/MirrorModeContext';
@@ -38,6 +38,7 @@ export function ProjectElevations({
 }: ProjectElevationsProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const thumbsRef = useRef<HTMLDivElement>(null);
   const { getMirrorPath } = useMirrorMode();
 
   // Memoize computed image lists — recomputes when props or mirror mode change
@@ -63,6 +64,24 @@ export function ProjectElevations({
 
   const imageCount = allImages.length;
 
+  // Scroll thumbnail strip so the active thumb is visible
+  const scrollThumbIntoView = useCallback((index: number) => {
+    const container = thumbsRef.current;
+    if (!container) return;
+    const thumb = container.children[index] as HTMLElement | undefined;
+    if (!thumb) return;
+    const containerRect = container.getBoundingClientRect();
+    const thumbRect = thumb.getBoundingClientRect();
+    if (thumbRect.left < containerRect.left || thumbRect.right > containerRect.right) {
+      thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }, []);
+
+  const goToSlide = useCallback((index: number) => {
+    setActiveIndex(index);
+    scrollThumbIntoView(index);
+  }, [scrollThumbIntoView]);
+
   // Stable handler references with useCallback
   const openLightbox = useCallback((index: number) => {
     setActiveIndex(index);
@@ -72,13 +91,21 @@ export function ProjectElevations({
   const closeLightbox = useCallback(() => setLightboxOpen(false), []);
 
   const goNext = useCallback(
-    () => setActiveIndex((prev) => (prev + 1) % imageCount),
-    [imageCount]
+    () => setActiveIndex((prev) => {
+      const next = (prev + 1) % imageCount;
+      scrollThumbIntoView(next);
+      return next;
+    }),
+    [imageCount, scrollThumbIntoView]
   );
 
   const goPrev = useCallback(
-    () => setActiveIndex((prev) => (prev - 1 + imageCount) % imageCount),
-    [imageCount]
+    () => setActiveIndex((prev) => {
+      const next = (prev - 1 + imageCount) % imageCount;
+      scrollThumbIntoView(next);
+      return next;
+    }),
+    [imageCount, scrollThumbIntoView]
   );
 
   // Keyboard navigation for lightbox
@@ -242,58 +269,87 @@ export function ProjectElevations({
       {/* Lightbox Modal */}
       {lightboxOpen && (
         <Portal>
-          <div
-            className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center"
-            onClick={closeLightbox}
-          >
-            {/* Close button */}
-            <button
-              onClick={closeLightbox}
-              className="absolute top-4 right-4 z-[10000] w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-              aria-label="Zamknij"
-            >
-              <Icon name="x" size="md" className="text-white" />
-            </button>
-
-            {/* Navigation arrows */}
-            {imageCount > 1 && (
-              <>
-                <button
-                  onClick={(e) => { e.stopPropagation(); goPrev(); }}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-[10000] w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-                  aria-label="Poprzedni"
-                >
-                  <Icon name="chevronLeft" size="lg" className="text-white" />
-                </button>
-                <button
-                  onClick={(e) => { e.stopPropagation(); goNext(); }}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-[10000] w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-                  aria-label="Następny"
-                >
-                  <Icon name="chevronRight" size="lg" className="text-white" />
-                </button>
-              </>
-            )}
-
-            {/* Image */}
-            <div
-              className="relative w-full h-full max-w-5xl max-h-[80vh] mx-4"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={allImages[activeIndex].src}
-                alt={allImages[activeIndex].label}
-                fill
-                className="object-contain"
-                sizes="90vw"
-                priority
-              />
+          <div className="fixed inset-0 z-[9999] bg-black/95 flex flex-col">
+            {/* Top bar: label + counter + close */}
+            <div className="flex items-center justify-between px-4 md:px-6 pt-4 md:pt-6 pb-2 flex-shrink-0">
+              <div>
+                <p className="text-white font-medium text-sm md:text-base">{allImages[activeIndex].label}</p>
+                <p className="text-white/60 text-xs md:text-sm">{activeIndex + 1} / {imageCount}</p>
+              </div>
+              <button
+                onClick={closeLightbox}
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+                aria-label="Zamknij"
+              >
+                <Icon name="x" size="md" className="text-white" />
+              </button>
             </div>
 
-            {/* Label & counter */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[10000] text-center">
-              <p className="text-white font-medium text-base mb-1">{allImages[activeIndex].label}</p>
-              <p className="text-white/60 text-sm">{activeIndex + 1} / {imageCount}</p>
+            {/* Main image area */}
+            <div className="relative flex-1 min-h-0 px-4 md:px-16 flex items-center justify-center">
+              {/* Navigation arrows */}
+              {imageCount > 1 && (
+                <>
+                  <button
+                    onClick={goPrev}
+                    className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-[10000] w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+                    aria-label="Poprzedni"
+                  >
+                    <Icon name="chevronLeft" size="md" className="text-white md:w-6 md:h-6" />
+                  </button>
+                  <button
+                    onClick={goNext}
+                    className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-[10000] w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+                    aria-label="Następny"
+                  >
+                    <Icon name="chevronRight" size="md" className="text-white md:w-6 md:h-6" />
+                  </button>
+                </>
+              )}
+
+              {/* Image */}
+              <div className="relative w-full h-full max-w-5xl">
+                <Image
+                  src={allImages[activeIndex].src}
+                  alt={allImages[activeIndex].label}
+                  fill
+                  className="object-contain"
+                  sizes="90vw"
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* Thumbnail strip */}
+            <div className="flex-shrink-0 px-4 md:px-16 py-3 md:py-4">
+              <div
+                ref={thumbsRef}
+                className="flex gap-2 overflow-x-auto scrollbar-hide justify-start md:justify-center py-1"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                {allImages.map((img, index) => (
+                  <button
+                    key={img.src}
+                    onClick={() => goToSlide(index)}
+                    className={`relative flex-shrink-0 w-[92px] h-[69px] md:w-[116px] md:h-[87px] rounded-lg transition-all duration-200 ${
+                      activeIndex === index
+                        ? 'ring-2 ring-primary ring-offset-2 ring-offset-black/95 opacity-100'
+                        : 'opacity-50 hover:opacity-80'
+                    }`}
+                    aria-label={img.label}
+                  >
+                    <div className="relative w-full h-full rounded-lg overflow-hidden">
+                      <Image
+                        src={img.src}
+                        alt={img.label}
+                        fill
+                        className="object-cover"
+                        sizes="116px"
+                      />
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </Portal>

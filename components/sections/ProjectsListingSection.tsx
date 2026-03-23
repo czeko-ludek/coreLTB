@@ -52,10 +52,12 @@ function buildUrl(
   pathname: string,
   filters: ProjectFilters,
   sortBy: SortOption,
-  page: number
+  page: number,
+  search?: string
 ): string {
   const params = new URLSearchParams();
 
+  if (search)                     params.set('q',          search);
   if (filters.technology.length)  params.set('technology', filters.technology.join(','));
   if (filters.category.length)    params.set('category',   filters.category.join(','));
   if (filters.source.length)      params.set('source',     filters.source.join(','));
@@ -120,38 +122,53 @@ export function ProjectsListingSection({
   );
   const [sortBy, setSortBy] = useState<SortOption>(urlState?.sort ?? initialSort);
   const [currentPage, setCurrentPage] = useState(urlState?.page ?? initialPage);
+  const [searchQuery, setSearchQuery] = useState(searchParams?.get('q') ?? '');
   const [isMobileFilterOpen, toggleMobileFilter, setIsMobileFilterOpen] = useToggle(false);
   const [isSortDropdownOpen, toggleSortDropdown, setIsSortDropdownOpen] = useToggle(false);
 
+  // Debounced URL sync for search (avoid spamming router on every keystroke)
+  const searchTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+
   // Ref do scrollowania na górę gridu przy zmianie strony
   const gridTopRef = useRef<HTMLDivElement>(null);
+
+  // Search — reset strony + debounced URL sync
+  const handleSearchChange = useCallback((value: string) => {
+    setSearchQuery(value);
+    setCurrentPage(1);
+    clearTimeout(searchTimerRef.current);
+    searchTimerRef.current = setTimeout(() => {
+      router.replace(buildUrl(pathname, filters, sortBy, 1, value.trim()), { scroll: false });
+    }, 300);
+  }, [filters, sortBy, pathname, router]);
 
   // Filtry — reset strony + sync URL
   const handleFiltersChange = useCallback((newFilters: ProjectFilters) => {
     setFilters(newFilters);
     setCurrentPage(1);
-    router.replace(buildUrl(pathname, newFilters, sortBy, 1), { scroll: false });
-  }, [sortBy, pathname, router]);
+    router.replace(buildUrl(pathname, newFilters, sortBy, 1, searchQuery.trim()), { scroll: false });
+  }, [sortBy, searchQuery, pathname, router]);
 
   // Sort — reset strony + sync URL
   const handleSortChange = useCallback((newSort: SortOption) => {
     setSortBy(newSort);
     setCurrentPage(1);
-    router.replace(buildUrl(pathname, filters, newSort, 1), { scroll: false });
-  }, [filters, pathname, router]);
+    router.replace(buildUrl(pathname, filters, newSort, 1, searchQuery.trim()), { scroll: false });
+  }, [filters, searchQuery, pathname, router]);
 
   // Strona — scroll do góry + sync URL
   const goToPage = useCallback((page: number) => {
     setCurrentPage(page);
-    router.replace(buildUrl(pathname, filters, sortBy, page), { scroll: false });
+    router.replace(buildUrl(pathname, filters, sortBy, page, searchQuery.trim()), { scroll: false });
     gridTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, [filters, sortBy, pathname, router]);
+  }, [filters, sortBy, searchQuery, pathname, router]);
 
   // Pełny reset — jeden router.replace zamiast dwóch (brak stale closure)
   const handleReset = useCallback(() => {
     const empty: ProjectFilters = { technology: [], category: [], surfaceRange: null, source: [], garage: [] };
     setFilters(empty);
     setSortBy('newest');
+    setSearchQuery('');
     setCurrentPage(1);
     router.replace(pathname, { scroll: false }); // czyste URL bez parametrów
   }, [pathname, router]);
@@ -166,11 +183,20 @@ export function ProjectsListingSection({
     rootMargin: '50px 0px',
   });
 
-  // Filtrowanie i sortowanie projektów
+  // Filtrowanie i sortowanie projektów (+ wyszukiwanie po nazwie)
   const filteredProjects = useMemo(() => {
-    const filtered = filterProjects(projects, filters);
-    return sortProjects(filtered, sortBy);
-  }, [projects, filters, sortBy]);
+    let result = filterProjects(projects, filters);
+
+    // Wyszukiwanie — case-insensitive match na title lub id
+    const q = searchQuery.trim().toLowerCase();
+    if (q) {
+      result = result.filter(p =>
+        p.title.toLowerCase().includes(q) || p.id.toLowerCase().includes(q)
+      );
+    }
+
+    return sortProjects(result, sortBy);
+  }, [projects, filters, sortBy, searchQuery]);
 
   // Paginacja
   const totalPages = Math.ceil(filteredProjects.length / PROJECTS_PER_PAGE);
@@ -276,58 +302,82 @@ export function ProjectsListingSection({
           </p>
         </div>
 
-        {/* Mobile Filter Button + Sorting */}
+        {/* Mobile: Search + Filter + Sorting */}
         <div
           className={clsx(
-            'lg:hidden mb-6 flex gap-3',
+            'lg:hidden mb-6 flex flex-col gap-3',
             inView ? 'animate-fade-in-up' : 'opacity-0'
           )}
           style={{ animationDelay: '0.2s' }}
         >
-          <button
-            onClick={() => setIsMobileFilterOpen(true)}
-            className="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-white rounded-xl border border-zinc-200 text-sm font-medium text-text-primary hover:border-primary transition-colors"
-            aria-expanded={isMobileFilterOpen}
-          >
-            <Icon name="filter" size="sm" />
-            Filtry
-            {activeFiltersCount > 0 && (
-              <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full ml-1">
-                {activeFiltersCount}
-              </span>
-            )}
-          </button>
-          {/* Mobile Sort Dropdown */}
+          {/* Mobile Search */}
           <div className="relative">
-            <button
-              onClick={toggleSortDropdown}
-              className="flex items-center gap-2 py-3 px-4 bg-white rounded-xl border border-zinc-200 text-sm font-medium text-text-primary hover:border-primary transition-colors"
-            >
-              <Icon name="arrowUpDown" size="sm" />
-              <span className="hidden sm:inline">{currentSortOption?.label}</span>
-              <Icon name={isSortDropdownOpen ? 'chevronUp' : 'chevronDown'} size="sm" />
-            </button>
-            {isSortDropdownOpen && (
-              <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-lg border border-zinc-200 py-2 z-30">
-                {sortOptions.map((option) => (
-                  <button
-                    key={option.id}
-                    onClick={() => {
-                      handleSortChange(option.id as SortOption);
-                      setIsSortDropdownOpen(false);
-                    }}
-                    className={clsx(
-                      'w-full text-left px-4 py-2 text-sm transition-colors',
-                      sortBy === option.id
-                        ? 'bg-primary/10 text-primary font-medium'
-                        : 'text-text-secondary hover:bg-zinc-50'
-                    )}
-                  >
-                    {option.label}
-                  </button>
-                ))}
-              </div>
+            <Icon name="search" size="sm" className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={e => handleSearchChange(e.target.value)}
+              placeholder="Szukaj projektu po nazwie..."
+              className="w-full py-3 pl-10 pr-9 bg-white rounded-xl border border-zinc-200 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => handleSearchChange('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary transition-colors"
+                aria-label="Wyczyść wyszukiwanie"
+              >
+                <Icon name="x" size="sm" />
+              </button>
             )}
+          </div>
+
+          {/* Mobile Filter + Sort row */}
+          <div className="flex gap-3">
+            <button
+              onClick={() => setIsMobileFilterOpen(true)}
+              className="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-white rounded-xl border border-zinc-200 text-sm font-medium text-text-primary hover:border-primary transition-colors"
+              aria-expanded={isMobileFilterOpen}
+            >
+              <Icon name="filter" size="sm" />
+              Filtry
+              {activeFiltersCount > 0 && (
+                <span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full ml-1">
+                  {activeFiltersCount}
+                </span>
+              )}
+            </button>
+            {/* Mobile Sort Dropdown */}
+            <div className="relative">
+              <button
+                onClick={toggleSortDropdown}
+                className="flex items-center gap-2 py-3 px-4 bg-white rounded-xl border border-zinc-200 text-sm font-medium text-text-primary hover:border-primary transition-colors"
+              >
+                <Icon name="arrowUpDown" size="sm" />
+                <span className="hidden sm:inline">{currentSortOption?.label}</span>
+                <Icon name={isSortDropdownOpen ? 'chevronUp' : 'chevronDown'} size="sm" />
+              </button>
+              {isSortDropdownOpen && (
+                <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-lg border border-zinc-200 py-2 z-30">
+                  {sortOptions.map((option) => (
+                    <button
+                      key={option.id}
+                      onClick={() => {
+                        handleSortChange(option.id as SortOption);
+                        setIsSortDropdownOpen(false);
+                      }}
+                      className={clsx(
+                        'w-full text-left px-4 py-2 text-sm transition-colors',
+                        sortBy === option.id
+                          ? 'bg-primary/10 text-primary font-medium'
+                          : 'text-text-secondary hover:bg-zinc-50'
+                      )}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
@@ -346,14 +396,36 @@ export function ProjectsListingSection({
 
           {/* Projects Grid */}
           <div ref={gridTopRef} className="scroll-mt-6">
-            {/* Desktop Sort Dropdown */}
+            {/* Desktop Search + Sort row */}
             <div
               className={clsx(
-                'hidden lg:flex justify-end mb-6 relative z-40',
+                'hidden lg:flex items-center justify-between gap-4 mb-6 relative z-40',
                 inView ? 'animate-fade-in-up' : 'opacity-0'
               )}
               style={{ animationDelay: '0.25s' }}
             >
+              {/* Search input */}
+              <div className="relative w-72">
+                <Icon name="search" size="sm" className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={e => handleSearchChange(e.target.value)}
+                  placeholder="Szukaj projektu po nazwie..."
+                  className="w-full py-2.5 pl-10 pr-9 bg-white rounded-xl border border-zinc-200 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors shadow-sm"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => handleSearchChange('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary transition-colors"
+                    aria-label="Wyczyść wyszukiwanie"
+                  >
+                    <Icon name="x" size="sm" />
+                  </button>
+                )}
+              </div>
+
+              {/* Sort dropdown */}
               <div className="relative">
                 <button
                   onClick={toggleSortDropdown}
@@ -403,7 +475,9 @@ export function ProjectsListingSection({
                   Brak wyników
                 </h3>
                 <p className="text-text-secondary mb-6">
-                  Nie znaleziono projektów spełniających wybrane kryteria.
+                  {searchQuery.trim()
+                    ? `Nie znaleziono projektów dla „${searchQuery.trim()}".`
+                    : 'Nie znaleziono projektów spełniających wybrane kryteria.'}
                 </p>
                 <button
                   onClick={handleReset}

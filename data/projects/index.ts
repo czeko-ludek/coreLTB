@@ -38,17 +38,22 @@ export {
   filterProjects,
   sortProjects,
   countProjectsByFilter,
+  getCategoryLabel,
+  generateProjectSeoTitle,
+  generateProjectSeoDescription,
 } from './helpers';
 
 // --- Źródła projektów ---
 import type { Project } from './types';
 import { galeriadomowProjects } from './galeriadomow';
 import { z500Projects } from './z500';
+import { malachitProjects } from './malachit';
 
 // --- Złączona tablica wszystkich projektów ---
-// Z500 pierwsze (mniejszy katalog, wyższa jakość wizualizacji), potem Galeria Domów
+// Z500 pierwsze (mniejszy katalog, wyższa jakość wizualizacji), potem Malachit, potem Galeria Domów
 export const allProjects: Project[] = [
   ...z500Projects,
+  ...malachitProjects,
   ...galeriadomowProjects,
 ];
 
