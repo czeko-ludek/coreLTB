@@ -18,8 +18,8 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react', 'swiper'],
   },
 
-  // ✅ Trailing slash - bez slasha na końcu URL (lepsze dla SEO)
-  trailingSlash: false,
+  // ✅ Trailing slash - foldery z index.html (niezawodne na Cloudflare Pages)
+  trailingSlash: true,
 
   // ✅ Powered by header - wyłączony dla bezpieczeństwa
   poweredByHeader: false,

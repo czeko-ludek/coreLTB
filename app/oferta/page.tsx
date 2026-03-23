@@ -59,7 +59,7 @@ export default function OfferPage() {
 				<div className="container mx-auto max-w-4xl">
 					<SectionHeader
 						label="MODEL DESIGN & BUILD"
-						title="Generalne wykonawstwo i usługi inżynierskie w Polsce Południowej"
+						title="Budowa domów i usługi inżynierskie w Polsce Południowej"
 						description="Od analizy działki w Rybniku po odbiór kluczy w Krakowie. Skalujemy proces budowlany, dostarczając kompletny pakiet usług pod jednym dachem: projektowanie, wykonawstwo, nadzór oraz logistykę."
 						align="center"
 						theme="light"

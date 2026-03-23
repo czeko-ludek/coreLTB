@@ -228,8 +228,8 @@ export const allServicesV2: ServiceV2[] = [
     // Listing (karta na stronie /oferta)
     listing: {
       image: '/images/uslugi/kompleksowa-budowa-domow/timeline/odbior-gwarancja.webp',
-      title: 'Generalne wykonawstwo domów (SSO / deweloperski / pod klucz)',
-      description: 'Generalne wykonawstwo (SSO / Deweloperka) w reżimie WT2026. Płyty fundamentowe, dylatacje pod szkody górnicze, stała cena.',
+      title: 'Budowa domów (SSO / deweloperski / pod klucz)',
+      description: 'Budowa domów (SSO / Deweloperka) w reżimie WT2026. Płyty fundamentowe, dylatacje pod szkody górnicze, stała cena.',
       features: [
         'Indywidualne projekty architektoniczne',
         'Gwarancja jakości i terminowości',
