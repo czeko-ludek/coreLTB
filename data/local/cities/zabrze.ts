@@ -6,7 +6,7 @@ export const zabrzeData: CityData = {
   cityNameLocative: 'Zabrzu',
 
   meta: {
-    title: 'Budowa Domów Zabrze – Generalny Wykonawca 2026 | CoreLTB Builders',
+    title: 'Budowa Domów Zabrze – Pod Klucz 2026 | CoreLTB Builders',
     description: 'Budowa domu jednorodzinnego w Zabrzu. Specjalizacja w terenach pogórniczych (KWK Makoszowy, Sośnica). Stan deweloperski od 5500 zł/m². ✓ Technologia murowana ✓ Gwarancja stałej ceny ✓ 12-18 miesięcy',
   },
 

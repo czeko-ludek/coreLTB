@@ -3,8 +3,8 @@ import Link from "next/link";
 import { companyData } from "@/data/company-data";
 
 export const metadata: Metadata = {
-  title: "Polityka prywatnosci - CoreLTB Builders",
-  description: "Polityka prywatnosci serwisu internetowego CoreLTB Builders. Informacje o przetwarzaniu danych osobowych.",
+  title: "Polityka prywatności - CoreLTB Builders",
+  description: "Polityka prywatności serwisu internetowego CoreLTB Builders. Informacje o przetwarzaniu danych osobowych.",
   robots: { index: false, follow: false },
 };
 
@@ -13,7 +13,7 @@ export default function PrivacyPage() {
     <main className="bg-background-light min-h-screen">
       <div className="max-w-3xl mx-auto px-4 py-16 sm:py-24">
         <h1 className="text-3xl sm:text-4xl font-bold text-zinc-900 mb-2">
-          Polityka prywatnosci
+          Polityka prywatności
         </h1>
         <p className="text-zinc-500 mb-12">
           Ostatnia aktualizacja: 23 marca 2026

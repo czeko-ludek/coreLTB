@@ -6,7 +6,7 @@ export const zoryData: CityData = {
   cityNameLocative: 'Żorach',
 
   meta: {
-    title: 'Budowa Domów Żory – Generalny Wykonawca 2026 | CoreLTB Builders',
+    title: 'Budowa Domów Żory – Pod Klucz 2026 | CoreLTB Builders',
     description:
       'Budowa domu jednorodzinnego w Żorach. Znamy specyfikę gruntów pogórniczych i stabilnych dzielnic. Płyty fundamentowe, SSO, stan deweloperski i pod klucz. ✓ 15 lat doświadczenia ✓ Gwarancja stałej ceny',
   },

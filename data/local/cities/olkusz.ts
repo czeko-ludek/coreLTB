@@ -6,7 +6,7 @@ export const olkuszData: CityData = {
   cityNameLocative: 'Olkuszu',
 
   meta: {
-    title: 'Budowa Domów Olkusz – Generalny Wykonawca 2026 | CoreLTB Builders',
+    title: 'Budowa Domów Olkusz – Pod Klucz 2026 | CoreLTB Builders',
     description:
       'Budowa domu jednorodzinnego w Olkuszu i powiecie olkuskim. Znamy specyfikę krasową Jury i dziedzictwo pogórnicze regionu. ✓ Baza 25 km (Jaworzno) ✓ Gwarancja stałej ceny ✓ 8-12 miesięcy realizacji',
   },

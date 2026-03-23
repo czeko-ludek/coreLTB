@@ -14,9 +14,10 @@ import { AnimatedServiceGrid } from "@/components/shared/AnimatedServiceGrid";
 import { getAllServicesListingData } from "@/data/servicesV2";
 
 export const metadata: Metadata = {
-	title: "Usługi Budowlane i Projektowe - Śląsk, Małopolska | CoreLTB",
+	title: "Usługi Budowlane i Projektowe — Śląsk, Małopolska | CoreLTB Builders",
 	description:
-		"Generalny wykonawca domów. Oferujemy projektowanie, budowę pod klucz, nadzór inwestorski oraz badania geologiczne. Obsługujemy Śląsk i Małopolskę.",
+		"Budowa domów pod klucz, projektowanie, nadzór inwestorski i badania geologiczne. Kompleksowa obsługa inwestycji na Śląsku i w Małopolsce. 150+ realizacji.",
+	alternates: { canonical: "https://coreltb.pl/oferta" },
 };
 
 export default function OfferPage() {

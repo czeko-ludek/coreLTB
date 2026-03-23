@@ -185,11 +185,11 @@ export function Header({
                   </button>
                 )}
                 
-                <Button 
-                  variant="primary" 
-                  size="sm"
+                <Button
+                  variant="primary"
+                  size="md"
                   href={ctaButton.href}
-                  rightIcon={<Icon name="arrowRight" size="sm" />}
+                  leftIcon={<Icon name="calculator" size="sm" />}
                 >
                   {ctaButton.text}
                 </Button>

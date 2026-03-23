@@ -223,7 +223,7 @@ export const allServicesV2: ServiceV2[] = [
     slug: 'kompleksowa-budowa-domow',
     id: 'kompleksowa-budowa-domow',
     category: 'Kompleksowa budowa domów',
-    title: 'Generalny Wykonawca Domów Śląsk', // Zmiana pod SEO!
+    title: 'Budowa Domów Pod Klucz — Śląsk', // Zmiana pod SEO!
 
     // Listing (karta na stronie /oferta)
     listing: {
@@ -239,8 +239,8 @@ export const allServicesV2: ServiceV2[] = [
     // PageHeader
     pageHeader: {
       // TU ZMIANA: Hybryda Fraz (Vol: 5000 + 500)
-      title: 'Kompleksowa budowa domów: Generalny wykonawca',
-      watermarkText: 'GENERALNY WYKONAWCA', 
+      title: 'Kompleksowa budowa domów pod klucz',
+      watermarkText: 'BUDOWA DOMÓW',
       backgroundImage: '/images/uslugi/kompleksowa-budowa-domow/hero.webp',
       breadcrumbs: [
         { label: 'Strona główna', href: '/' },

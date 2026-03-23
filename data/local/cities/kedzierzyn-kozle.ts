@@ -6,7 +6,7 @@ export const kedzierzynData: CityData = {
   cityNameLocative: 'Kędzierzynie-Koźlu',
 
   meta: {
-    title: 'Budowa Domów Kędzierzyn-Koźle – Generalny Wykonawca 2026 | CoreLTB Builders',
+    title: 'Budowa Domów Kędzierzyn-Koźle – Pod Klucz 2026 | CoreLTB Builders',
     description:
       'Budowa domu jednorodzinnego w Kędzierzynie-Koźlu i powiecie kędzierzyńsko-kozielskim. Znamy specyfikę gruntów nadodrzańskich regionu. ✓ Doświadczenie na Śląsku i Opolszczyźnie ✓ Gwarancja stałej ceny ✓ 8-14 miesięcy realizacji',
   },

@@ -6,7 +6,7 @@ export const gliwiceData: CityData = {
   cityNameLocative: 'Gliwicach',
 
   meta: {
-    title: 'Budowa Domów Gliwice – Generalny Wykonawca 2026 | CoreLTB Builders',
+    title: 'Budowa Domów Gliwice – Pod Klucz 2026 | CoreLTB Builders',
     description: 'Budowa domu jednorodzinnego w Gliwicach. Specjalizacja w terenach górniczych (kategorie I-IV). Płyty fundamentowe, wzmocnione konstrukcje. ✓ 12-18 miesięcy realizacji ✓ Gwarancja stałej ceny ✓ Własne brygady',
   },
 

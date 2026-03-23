@@ -7,9 +7,10 @@ import {
 import { PageHeader, Breadcrumbs } from "@/components/shared";
 
 export const metadata: Metadata = {
-	title: "O firmie - Generalny Wykonawca Śląsk i Małopolska | CoreLTB",
+	title: "O firmie — Budowa Domów Śląsk i Małopolska | CoreLTB Builders",
 	description:
 		"Poznaj inżynierów stojących za marką CoreLTB. 15 lat doświadczenia w budownictwie na Śląsku i w Małopolsce, własne zaplecze sprzętowe i transparentny model Design & Build.",
+	alternates: { canonical: "https://coreltb.pl/o-nas" },
 };
 
 export default function AboutPage() {

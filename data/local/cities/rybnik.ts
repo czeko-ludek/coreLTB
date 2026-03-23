@@ -6,7 +6,7 @@ export const rybnikData: CityData = {
   cityNameLocative: 'Rybniku',
 
   meta: {
-    title: 'Budowa Domów Rybnik – Generalny Wykonawca | CoreLTB Builders',
+    title: 'Budowa Domów Rybnik – Pod Klucz 2026 | CoreLTB Builders',
     description: 'Profesjonalna budowa domów w Rybniku. Specjalizujemy się w terenach górniczych. Płyty fundamentowe, wzmocnione konstrukcje, pełne zabezpieczenia. ✓ 15 lat doświadczenia ✓ Gwarancja',
   },
 

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
 	AboutCompanySection,
 	BlogSection,
@@ -15,12 +16,21 @@ import { allProjects } from "@/data/projects";
 import { allPartnerLogos } from "@/data/partners";
 import { blogPosts } from "@/data/blog-data";
 
+export const metadata: Metadata = {
+	title: "Budowa Domów Pod Klucz — Śląsk i Małopolska | CoreLTB Builders",
+	description:
+		"Budowa domów jednorodzinnych od projektu po klucz. 15 lat doświadczenia, 150+ oddanych inwestycji, stała cena w umowie. Rybnik, Katowice, Jaworzno i cały Śląsk.",
+	alternates: {
+		canonical: companyData.url,
+	},
+};
+
 const CURRENT_YEAR = new Date().getFullYear();
 
 export default function Home() {
 	// Hero Section Data (Money Keywords w H1)
 	const heroData = {
-		tagline: "GENERALNY WYKONAWCA • ŚLĄSK I MAŁOPOLSKA",
+		tagline: "BUDOWA DOMÓW • ŚLĄSK I MAŁOPOLSKA",
 		title: "Kompleksowa budowa domów i inwestycje pod klucz",
 		subtitle:
 			"Zastępujemy chaos systemu gospodarczego inżynierskim procesem. Przejmujemy 100% logistyki: od analizy gruntu, przez stan surowy, aż po odbiór budynku w PINB.",

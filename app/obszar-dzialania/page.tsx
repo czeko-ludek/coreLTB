@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   title: 'Obszar Działania - Budowa Domów Śląsk, Małopolska i Opolskie | CoreLTB Builders',
   description:
     'Budujemy domy jednorodzinne na terenie województw śląskiego, małopolskiego i opolskiego. Sprawdź, czy działamy w Twoim mieście. Rybnik, Katowice, Tychy, Jaworzno, Wodzisław Śląski i okolice.',
+  alternates: { canonical: `${companyData.url}/obszar-dzialania` },
   openGraph: {
     title: 'Obszar Działania | CoreLTB Builders',
     description:

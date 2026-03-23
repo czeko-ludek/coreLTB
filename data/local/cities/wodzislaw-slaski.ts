@@ -6,7 +6,7 @@ export const wodzislawData: CityData = {
   cityNameLocative: 'Wodzisławiu Śląskim',
 
   meta: {
-    title: 'Budowa Domów Wodzisław Śląski – Generalny Wykonawca | CoreLTB Builders',
+    title: 'Budowa Domów Wodzisław Śląski – Pod Klucz 2026 | CoreLTB Builders',
     description: 'Profesjonalna budowa domów w Wodzisławiu Śląskim. Specjalizujemy się w terenach górniczych. Płyty fundamentowe, wzmocnione konstrukcje. ✓ 15 lat doświadczenia ✓ Gwarancja',
   },
 

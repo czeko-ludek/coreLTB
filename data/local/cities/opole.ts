@@ -6,7 +6,7 @@ export const opoleData: CityData = {
   cityNameLocative: 'Opolu',
 
   meta: {
-    title: 'Budowa Domów Opole – Generalny Wykonawca 2026 | CoreLTB Builders',
+    title: 'Budowa Domów Opole – Pod Klucz 2026 | CoreLTB Builders',
     description:
       'Budowa domu jednorodzinnego w Opolu i powiecie opolskim. Znamy specyfikę gruntów nadodrzańskich i zagrożenie powodziowe. ✓ Doświadczenie na Śląsku i Opolszczyźnie ✓ Gwarancja stałej ceny ✓ 8-14 miesięcy realizacji',
   },

@@ -6,7 +6,7 @@ export const raciborzData: CityData = {
   cityNameLocative: 'Raciborzu',
 
   meta: {
-    title: 'Budowa Domów Racibórz – Generalny Wykonawca 2026 | CoreLTB Builders',
+    title: 'Budowa Domów Racibórz – Pod Klucz 2026 | CoreLTB Builders',
     description:
       'Budowa domu jednorodzinnego w Raciborzu. Specjalizacja w gruntach zalewowych Odry i napływowych. Hydroizolacja, drenaż, fundamenty na trudnym podłożu. ✓ 15 lat doświadczenia ✓ Gwarancja stałej ceny',
   },

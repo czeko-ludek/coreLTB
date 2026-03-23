@@ -63,7 +63,7 @@ export const companyData: CompanyData = {
   name: "CoreLTB Builders",
   legalName: "CoreLTB Sp. z o.o.",
   alternateName: "CORE LTB",
-  description: "Generalny Wykonawca domów jednorodzinnych. Specjalizujemy się w budownictwie na terenach górniczych Śląska i Małopolski. Od 2005 roku łączymy rzemieślniczą dokładność z profesjonalnym zarządzaniem projektami.",
+  description: "Budowa domów jednorodzinnych pod klucz. Specjalizujemy się w budownictwie na terenach górniczych Śląska i Małopolski. Od 2005 roku łączymy rzemieślniczą dokładność z profesjonalnym zarządzaniem projektami.",
   url: "https://coreltb.pl",
   telephone: "+48664123757",
   email: "biuro@coreltb.pl",

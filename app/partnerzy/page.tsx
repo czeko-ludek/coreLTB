@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: 'Nasi Partnerzy — Firmy, z którymi budujemy | CoreLTB Builders',
   description:
     'Poznaj zaufanych partnerów CoreLTB Builders: dostawców materiałów budowlanych, biura nieruchomości, biura projektowe i firmy OZE na Śląsku i w Małopolsce.',
+  alternates: { canonical: 'https://coreltb.pl/partnerzy' },
   openGraph: {
     title: 'Nasi Partnerzy | CoreLTB Builders',
     description:

@@ -9,6 +9,7 @@ import { companyData } from '@/data/company-data';
 export const metadata: Metadata = {
   title: 'Baza Wiedzy - Porady i Przewodniki Budowlane | CoreLTB Builders',
   description: 'Dziennik budowy, porady ekspertów, realizacje i nowości z branży budowlanej. Dowiedz się więcej o budowie domów na terenach górniczych Śląska.',
+  alternates: { canonical: 'https://coreltb.pl/baza-wiedzy' },
   openGraph: {
     title: 'Baza Wiedzy - Porady i Przewodniki Budowlane | CoreLTB Builders',
     description: 'Dziennik budowy, porady ekspertów, realizacje i nowości z branży budowlanej.',

@@ -6,7 +6,7 @@ export const krakowData: CityData = {
   cityNameLocative: 'Krakowie',
 
   meta: {
-    title: 'Budowa Domów Kraków – Generalny Wykonawca 2026 | CoreLTB Builders',
+    title: 'Budowa Domów Kraków – Pod Klucz 2026 | CoreLTB Builders',
     description:
       'Budowa domu jednorodzinnego w Krakowie. Znamy specyfikę południowych dzielnic — MPZP, warunki gruntowe, procedury konserwatorskie. ✓ Stan deweloperski od 6 000 zł/m² ✓ Gwarancja stałej ceny ✓ 10-16 miesięcy',
   },

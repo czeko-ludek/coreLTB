@@ -6,7 +6,7 @@ export const chrzanowData: CityData = {
   cityNameLocative: 'Chrzanowie',
 
   meta: {
-    title: 'Budowa Domów Chrzanów – Generalny Wykonawca 2026 | CoreLTB Builders',
+    title: 'Budowa Domów Chrzanów – Pod Klucz 2026 | CoreLTB Builders',
     description:
       'Budowa domu jednorodzinnego w Chrzanowie i powiecie chrzanowskim. Znamy specyfikę krasową i pogórniczą regionu. ✓ Baza 15 km (Jaworzno) ✓ Gwarancja stałej ceny ✓ 8-12 miesięcy realizacji',
   },

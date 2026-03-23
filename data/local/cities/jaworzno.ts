@@ -6,7 +6,7 @@ export const jaworznoData: CityData = {
   cityNameLocative: 'Jaworznie',
 
   meta: {
-    title: 'Budowa Domów Jaworzno – Generalny Wykonawca | CoreLTB Builders',
+    title: 'Budowa Domów Jaworzno – Pod Klucz 2026 | CoreLTB Builders',
     description: 'Kompleksowa budowa domów w Jaworznie. Specjalizacja w terenach pogórniczych i trudnych gruntach. ✓ Lokalny wykonawca ✓ Gwarancja ✓ Stała cena',
   },
 

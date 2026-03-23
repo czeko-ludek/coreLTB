@@ -6,7 +6,7 @@ export const mikolowData: CityData = {
   cityNameLocative: 'Mikołowie',
 
   meta: {
-    title: 'Budowa Domów Mikołów – Kompleksowa Realizacja 2026 | CoreLTB Builders',
+    title: 'Budowa Domów Mikołów – Pod Klucz 2026 | CoreLTB Builders',
     description: 'Budowa domu jednorodzinnego w Mikołowie. Koszt stanu deweloperskiego od 5500-7200 zł/m². Specjalizacja w szkodach górniczych (KWK Bolesław Śmiały). ✓ Lokalna firma ✓ Gwarancja stałej ceny ✓ 8-12 miesięcy realizacji',
   },
 

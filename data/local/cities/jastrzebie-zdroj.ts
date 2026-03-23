@@ -6,7 +6,7 @@ export const jastrzebieData: CityData = {
   cityNameLocative: 'Jastrzębiu-Zdroju',
 
   meta: {
-    title: 'Budowa Domów Jastrzębie-Zdrój – Generalny Wykonawca 2026 | CoreLTB Builders',
+    title: 'Budowa Domów Jastrzębie-Zdrój – Pod Klucz 2026 | CoreLTB Builders',
     description:
       'Budowa domu w Jastrzębiu-Zdroju na aktywnych terenach górniczych JSW. Płyty fundamentowe, wzmocnione konstrukcje, pełna koordynacja z KWK Borynia-Zofiówka-Bzie i Pniówek. ✓ 15 lat doświadczenia ✓ Gwarancja stałej ceny',
   },

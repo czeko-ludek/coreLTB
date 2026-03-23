@@ -6,7 +6,7 @@ export const katowiceData: CityData = {
   cityNameLocative: 'Katowicach',
 
   meta: {
-    title: 'Budowa Domów Katowice – Kompleksowe Wykonawstwo 2026 | CoreLTB Builders',
+    title: 'Budowa Domów Katowice – Pod Klucz 2026 | CoreLTB Builders',
     description: 'Budowa domu jednorodzinnego w Katowicach. Koszt stanu deweloperskiego od 5500-6500 zł/m². Specjalizacja w terenach górniczych. ✓ Lokalna baza logistyczna ✓ Gwarancja stałej ceny ✓ 12-18 miesięcy realizacji',
   },
 

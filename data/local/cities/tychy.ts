@@ -6,7 +6,7 @@ export const tychyData: CityData = {
   cityNameLocative: 'Tychach',
 
   meta: {
-    title: 'Budowa Domów Tychy – Generalny Wykonawca | CoreLTB Builders',
+    title: 'Budowa Domów Tychy – Pod Klucz 2026 | CoreLTB Builders',
     description: 'Profesjonalna budowa domów w Tychach. Specjalizacja w terenach górniczych i trudnych gruntach. ✓ Doświadczenie ✓ Gwarancja ✓ Terminowość',
   },
 

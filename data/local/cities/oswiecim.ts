@@ -6,7 +6,7 @@ export const oswiecimData: CityData = {
   cityNameLocative: 'Oświęcimiu',
 
   meta: {
-    title: 'Budowa Domów Oświęcim – Generalny Wykonawca 2026 | CoreLTB Builders',
+    title: 'Budowa Domów Oświęcim – Pod Klucz 2026 | CoreLTB Builders',
     description:
       'Budowa domu jednorodzinnego w Oświęcimiu i powiecie oświęcimskim. Znamy specyfikę gruntów zalewowych Wisły i Soły. ✓ Baza 30 km (Jaworzno) ✓ Gwarancja stałej ceny ✓ 8-12 miesięcy realizacji',
   },
