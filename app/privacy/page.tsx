@@ -28,7 +28,7 @@ export default function PrivacyPage() {
             <ol className="list-decimal pl-6 space-y-2 text-zinc-700">
               <li>
                 Administratorem danych osobowych jest {companyData.legalName},
-                z siedziba pod adresem: {companyData.address.streetAddress},{" "}
+                z siedzibą pod adresem: {companyData.address.streetAddress},{" "}
                 {companyData.address.postalCode} {companyData.address.addressLocality}
                 {" "}(dalej: &bdquo;Administrator&rdquo;).
               </li>
@@ -62,13 +62,13 @@ export default function PrivacyPage() {
               &sect;2. Cel i podstawa przetwarzania danych
             </h2>
             <p className="text-zinc-700 mb-3">
-              Dane osobowe sa przetwarzane w nastepujacych celach:
+              Dane osobowe są przetwarzane w następujących celach:
             </p>
             <ol className="list-decimal pl-6 space-y-2 text-zinc-700">
               <li>
-                <strong>Obsluga zapytan z formularzy kontaktowych</strong> (kalkulator
-                wyceny, formularz konsultacji, formularz analizy dzialki) — na
-                podstawie art. 6 ust. 1 lit. b RODO (podejmowanie dzialan na zadanie
+                <strong>Obsługa zapytań z formularzy kontaktowych</strong> (kalkulator
+                wyceny, formularz konsultacji, formularz analizy działki) — na
+                podstawie art. 6 ust. 1 lit. b RODO (podejmowanie działań na żądanie
                 osoby przed zawarciem umowy) oraz art. 6 ust. 1 lit. f RODO (prawnie
                 uzasadniony interes Administratora).
               </li>
@@ -77,11 +77,11 @@ export default function PrivacyPage() {
                 ust. 1 lit. f RODO (prawnie uzasadniony interes Administratora).
               </li>
               <li>
-                <strong>Realizacja umow</strong> o roboty budowlane i uslugi — na
+                <strong>Realizacja umów</strong> o roboty budowlane i usługi — na
                 podstawie art. 6 ust. 1 lit. b RODO.
               </li>
               <li>
-                <strong>Cele analityczne</strong> (poprawa jakosci uslug, statystyki
+                <strong>Cele analityczne</strong> (poprawa jakości usług, statystyki
                 ruchu) — na podstawie art. 6 ust. 1 lit. f RODO.
               </li>
             </ol>
@@ -93,20 +93,20 @@ export default function PrivacyPage() {
               &sect;3. Zakres zbieranych danych
             </h2>
             <p className="text-zinc-700 mb-3">
-              W ramach formularzy kontaktowych zbieramy nastepujace dane:
+              W ramach formularzy kontaktowych zbieramy następujące dane:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-zinc-700">
-              <li>imie i nazwisko,</li>
+              <li>imię i nazwisko,</li>
               <li>numer telefonu,</li>
               <li>adres e-mail,</li>
               <li>preferowana lokalizacja budowy,</li>
               <li>parametry budowy (w przypadku kalkulatora wyceny),</li>
-              <li>adres dzialki (w przypadku formularza analizy dzialki),</li>
-              <li>tresc wiadomosci / dodatkowe uwagi.</li>
+              <li>adres działki (w przypadku formularza analizy działki),</li>
+              <li>treść wiadomości / dodatkowe uwagi.</li>
             </ul>
             <p className="text-zinc-700 mt-3">
-              Podanie danych jest dobrowolne, lecz niezbedne do realizacji celu,
-              w jakim sa zbierane.
+              Podanie danych jest dobrowolne, lecz niezbędne do realizacji celu,
+              w jakim są zbierane.
             </p>
           </section>
 
@@ -117,16 +117,16 @@ export default function PrivacyPage() {
             </h2>
             <ol className="list-decimal pl-6 space-y-2 text-zinc-700">
               <li>
-                Dane z formularzy kontaktowych sa przechowywane przez okres niezbedny
-                do obslugi zapytania, nie dluzej niz 12 miesiecy od ostatniego kontaktu.
+                Dane z formularzy kontaktowych są przechowywane przez okres niezbędny
+                do obsługi zapytania, nie dłużej niż 12 miesięcy od ostatniego kontaktu.
               </li>
               <li>
-                Dane zwiazane z realizacja umow — przez okres trwania umowy oraz
-                okres wymagany przepisami prawa (w szczegolnosci przepisy podatkowe
+                Dane związane z realizacją umów — przez okres trwania umowy oraz
+                okres wymagany przepisami prawa (w szczególności przepisy podatkowe
                 i rachunkowe).
               </li>
               <li>
-                Dane analityczne (cookies) — zgodnie z okresem waznosci plikow
+                Dane analityczne (cookies) — zgodnie z okresem ważności plików
                 cookies (patrz &sect;6).
               </li>
             </ol>
@@ -139,12 +139,12 @@ export default function PrivacyPage() {
             </h2>
             <ol className="list-decimal pl-6 space-y-2 text-zinc-700">
               <li>
-                Dane moga byc udostepniane nastepujacym kategoriom odbiorcow:
+                Dane mogą być udostępniane następującym kategoriom odbiorców:
                 <ul className="list-disc pl-6 mt-2 space-y-1">
-                  <li>dostawcy uslug hostingowych (Cloudflare, Inc.),</li>
-                  <li>dostawcy uslug e-mail (Resend),</li>
-                  <li>dostawcy narzedzi analitycznych (Google Analytics),</li>
-                  <li>podmioty uprawnione na podstawie przepisow prawa.</li>
+                  <li>dostawcy usług hostingowych (Cloudflare, Inc.),</li>
+                  <li>dostawcy usług e-mail (Resend),</li>
+                  <li>dostawcy narzędzi analitycznych (Google Analytics),</li>
+                  <li>podmioty uprawnione na podstawie przepisów prawa.</li>
                 </ul>
               </li>
               <li>
@@ -160,26 +160,26 @@ export default function PrivacyPage() {
             </h2>
             <ol className="list-decimal pl-6 space-y-2 text-zinc-700">
               <li>
-                Serwis wykorzystuje pliki cookies w celu zapewnienia prawidlowego
-                dzialania strony oraz zbierania danych analitycznych.
+                Serwis wykorzystuje pliki cookies w celu zapewnienia prawidłowego
+                działania strony oraz zbierania danych analitycznych.
               </li>
               <li>
                 Rodzaje stosowanych cookies:
                 <ul className="list-disc pl-6 mt-2 space-y-1">
                   <li>
-                    <strong>Niezbedne</strong> — wymagane do prawidlowego dzialania
+                    <strong>Niezbędne</strong> — wymagane do prawidłowego działania
                     Serwisu (sesja, preferencje).
                   </li>
                   <li>
-                    <strong>Analityczne</strong> — sluzace do analizy ruchu
-                    i zachowan Uzytkownikow (Google Analytics).
+                    <strong>Analityczne</strong> — służące do analizy ruchu
+                    i zachowań Użytkowników (Google Analytics).
                   </li>
                 </ul>
               </li>
               <li>
-                Uzytkownik moze zarzadzac plikami cookies za pomoca ustawien
-                przegladarki internetowej. Wylaczenie cookies moze ograniczyc
-                funkcjonalnosc Serwisu.
+                Użytkownik może zarządzać plikami cookies za pomocą ustawień
+                przeglądarki internetowej. Wyłączenie cookies może ograniczyć
+                funkcjonalność Serwisu.
               </li>
             </ol>
           </section>
@@ -187,25 +187,25 @@ export default function PrivacyPage() {
           {/* §7 */}
           <section>
             <h2 className="text-xl font-semibold text-zinc-900 mb-3">
-              &sect;7. Prawa osoby, której dane dotycza
+              &sect;7. Prawa osoby, której dane dotyczą
             </h2>
             <p className="text-zinc-700 mb-3">
-              Kazdej osobie, której dane sa przetwarzane, przysluguja nastepujace prawa:
+              Każdej osobie, której dane są przetwarzane, przysługują następujące prawa:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-zinc-700">
-              <li>prawo dostepu do danych (art. 15 RODO),</li>
+              <li>prawo dostępu do danych (art. 15 RODO),</li>
               <li>prawo do sprostowania danych (art. 16 RODO),</li>
-              <li>prawo do usuniecia danych (art. 17 RODO),</li>
+              <li>prawo do usunięcia danych (art. 17 RODO),</li>
               <li>prawo do ograniczenia przetwarzania (art. 18 RODO),</li>
               <li>prawo do przenoszenia danych (art. 20 RODO),</li>
               <li>prawo do sprzeciwu (art. 21 RODO),</li>
               <li>
-                prawo do wniesienia skargi do Prezesa Urzedu Ochrony Danych
+                prawo do wniesienia skargi do Prezesa Urzędu Ochrony Danych
                 Osobowych (ul. Stawki 2, 00-193 Warszawa).
               </li>
             </ul>
             <p className="text-zinc-700 mt-3">
-              W celu realizacji powyzszych praw prosimy o kontakt na adres:{" "}
+              W celu realizacji powyższych praw prosimy o kontakt na adres:{" "}
               <a href={`mailto:${companyData.email}`} className="text-primary hover:underline">
                 {companyData.email}
               </a>
@@ -216,16 +216,16 @@ export default function PrivacyPage() {
           {/* §8 */}
           <section>
             <h2 className="text-xl font-semibold text-zinc-900 mb-3">
-              &sect;8. Bezpieczenstwo danych
+              &sect;8. Bezpieczeństwo danych
             </h2>
             <ol className="list-decimal pl-6 space-y-2 text-zinc-700">
               <li>
-                Administrator stosuje odpowiednie srodki techniczne i organizacyjne
-                w celu ochrony danych osobowych przed nieuprawnionym dostepem,
-                utrata lub zniszczeniem.
+                Administrator stosuje odpowiednie środki techniczne i organizacyjne
+                w celu ochrony danych osobowych przed nieuprawnionym dostępem,
+                utratą lub zniszczeniem.
               </li>
               <li>
-                Komunikacja z Serwisem jest szyfrowana protokolem SSL/TLS.
+                Komunikacja z Serwisem jest szyfrowana protokołem SSL/TLS.
               </li>
             </ol>
           </section>
@@ -233,16 +233,16 @@ export default function PrivacyPage() {
           {/* §9 */}
           <section>
             <h2 className="text-xl font-semibold text-zinc-900 mb-3">
-              &sect;9. Zmiany Polityki prywatnosci
+              &sect;9. Zmiany Polityki prywatności
             </h2>
             <ol className="list-decimal pl-6 space-y-2 text-zinc-700">
               <li>
                 Administrator zastrzega sobie prawo do zmiany niniejszej Polityki
-                prywatnosci. Zmiany wchodza w zycie z chwila opublikowania w Serwisie.
+                prywatności. Zmiany wchodzą w życie z chwilą opublikowania w Serwisie.
               </li>
               <li>
-                O istotnych zmianach Uzytkownik zostanie poinformowany za
-                posrednictwem Serwisu.
+                O istotnych zmianach Użytkownik zostanie poinformowany za
+                pośrednictwem Serwisu.
               </li>
             </ol>
           </section>
@@ -253,7 +253,7 @@ export default function PrivacyPage() {
             href="/"
             className="text-primary hover:underline font-medium"
           >
-            &larr; Strona glowna
+            &larr; Strona główna
           </Link>
           <Link
             href="/terms"

@@ -23,25 +23,25 @@ export default function TermsPage() {
           {/* §1 */}
           <section>
             <h2 className="text-xl font-semibold text-zinc-900 mb-3">
-              &sect;1. Postanowienia ogolne
+              &sect;1. Postanowienia ogólne
             </h2>
             <ol className="list-decimal pl-6 space-y-2 text-zinc-700">
               <li>
-                Niniejszy Regulamin okresla zasady korzystania z serwisu internetowego
-                dostepnego pod adresem{" "}
+                Niniejszy Regulamin określa zasady korzystania z serwisu internetowego
+                dostępnego pod adresem{" "}
                 <a href={companyData.url} className="text-primary hover:underline">
                   {companyData.url.replace("https://", "")}
                 </a>{" "}
                 (dalej: &bdquo;Serwis&rdquo;).
               </li>
               <li>
-                Wlascicielem i administratorem Serwisu jest {companyData.legalName},
-                z siedziba pod adresem: {companyData.address.streetAddress},{" "}
+                Właścicielem i administratorem Serwisu jest {companyData.legalName},
+                z siedzibą pod adresem: {companyData.address.streetAddress},{" "}
                 {companyData.address.postalCode} {companyData.address.addressLocality},
                 NIP: 6322046389 (dalej: &bdquo;Usługodawca&rdquo;).
               </li>
               <li>
-                Korzystanie z Serwisu oznacza akceptacje niniejszego Regulaminu.
+                Korzystanie z Serwisu oznacza akceptację niniejszego Regulaminu.
               </li>
             </ol>
           </section>
@@ -49,26 +49,26 @@ export default function TermsPage() {
           {/* §2 */}
           <section>
             <h2 className="text-xl font-semibold text-zinc-900 mb-3">
-              &sect;2. Zakres uslug
+              &sect;2. Zakres usług
             </h2>
             <ol className="list-decimal pl-6 space-y-2 text-zinc-700">
               <li>
-                Serwis umozliwia zapoznanie sie z oferta Usługodawcy w zakresie
-                budowy domow jednorodzinnych, projektowania, nadzoru budowlanego,
-                uslug technicznych, wykonczenia wnetrz oraz zagospodarowania terenu.
+                Serwis umożliwia zapoznanie się z ofertą Usługodawcy w zakresie
+                budowy domów jednorodzinnych, projektowania, nadzoru budowlanego,
+                usług technicznych, wykończenia wnętrz oraz zagospodarowania terenu.
               </li>
               <li>
-                Za posrednictwem Serwisu Uzytkownik moze:
+                Za pośrednictwem Serwisu Użytkownik może:
                 <ul className="list-disc pl-6 mt-2 space-y-1">
-                  <li>przegladac oferte i realizacje Usługodawcy,</li>
-                  <li>korzystac z kalkulatora wyceny budowy domu,</li>
-                  <li>przesylac zapytania poprzez formularze kontaktowe,</li>
-                  <li>umawiac konsultacje z inzynierem.</li>
+                  <li>przeglądać ofertę i realizacje Usługodawcy,</li>
+                  <li>korzystać z kalkulatora wyceny budowy domu,</li>
+                  <li>przesyłać zapytania poprzez formularze kontaktowe,</li>
+                  <li>umawiać konsultacje z inżynierem.</li>
                 </ul>
               </li>
               <li>
-                Uslugi swiadczone droga elektroniczna sa bezplatne. Uslugi budowlane
-                realizowane sa na podstawie odrebnych umow.
+                Usługi świadczone drogą elektroniczną są bezpłatne. Usługi budowlane
+                realizowane są na podstawie odrębnych umów.
               </li>
             </ol>
           </section>
@@ -80,15 +80,15 @@ export default function TermsPage() {
             </h2>
             <ol className="list-decimal pl-6 space-y-2 text-zinc-700">
               <li>
-                Do korzystania z Serwisu wymagane jest urzadzenie z dostepem do
-                Internetu oraz przegladarka internetowa obslugujaca JavaScript.
+                Do korzystania z Serwisu wymagane jest urządzenie z dostępem do
+                Internetu oraz przeglądarka internetowa obsługująca JavaScript.
               </li>
               <li>
-                Uzytkownik zobowiazuje sie do korzystania z Serwisu zgodnie
-                z obowiazujacym prawem i dobrymi obyczajami.
+                Użytkownik zobowiązuje się do korzystania z Serwisu zgodnie
+                z obowiązującym prawem i dobrymi obyczajami.
               </li>
               <li>
-                Zabronione jest dostarczanie tresci o charakterze bezprawnym.
+                Zabronione jest dostarczanie treści o charakterze bezprawnym.
               </li>
             </ol>
           </section>
@@ -100,19 +100,19 @@ export default function TermsPage() {
             </h2>
             <ol className="list-decimal pl-6 space-y-2 text-zinc-700">
               <li>
-                Przesylajac formularz kontaktowy, Uzytkownik wyraża zgode na
-                przetwarzanie podanych danych osobowych w celu obslugi zapytania.
+                Przesyłając formularz kontaktowy, Użytkownik wyraża zgodę na
+                przetwarzanie podanych danych osobowych w celu obsługi zapytania.
               </li>
               <li>
-                Szczegolowe informacje o przetwarzaniu danych osobowych znajduja sie
+                Szczegółowe informacje o przetwarzaniu danych osobowych znajdują się
                 w{" "}
                 <Link href="/privacy" className="text-primary hover:underline">
-                  Polityce prywatnosci
+                  Polityce prywatności
                 </Link>
                 .
               </li>
               <li>
-                Usługodawca doklada staran, aby odpowiedziec na zapytanie
+                Usługodawca dokłada starań, aby odpowiedzieć na zapytanie
                 w terminie 2 dni roboczych.
               </li>
             </ol>
@@ -121,16 +121,16 @@ export default function TermsPage() {
           {/* §5 */}
           <section>
             <h2 className="text-xl font-semibold text-zinc-900 mb-3">
-              &sect;5. Wlasnosc intelektualna
+              &sect;5. Własność intelektualna
             </h2>
             <ol className="list-decimal pl-6 space-y-2 text-zinc-700">
               <li>
-                Wszelkie tresci zamieszczone w Serwisie, w tym teksty, grafiki,
-                zdjecia, logotypy i projekty, stanowia wlasnosc Usługodawcy lub
-                zostaly wykorzystane za zgoda uprawnionych podmiotow.
+                Wszelkie treści zamieszczone w Serwisie, w tym teksty, grafiki,
+                zdjęcia, logotypy i projekty, stanowią własność Usługodawcy lub
+                zostały wykorzystane za zgodą uprawnionych podmiotów.
               </li>
               <li>
-                Kopiowanie, rozpowszechnianie lub wykorzystywanie tresci Serwisu
+                Kopiowanie, rozpowszechnianie lub wykorzystywanie treści Serwisu
                 bez pisemnej zgody Usługodawcy jest zabronione.
               </li>
             </ol>
@@ -143,7 +143,7 @@ export default function TermsPage() {
             </h2>
             <ol className="list-decimal pl-6 space-y-2 text-zinc-700">
               <li>
-                Reklamacje dotyczace funkcjonowania Serwisu mozna zgłaszac na adres
+                Reklamacje dotyczące funkcjonowania Serwisu można zgłaszać na adres
                 e-mail:{" "}
                 <a
                   href={`mailto:${companyData.email}`}
@@ -154,11 +154,11 @@ export default function TermsPage() {
                 lub pisemnie na adres siedziby Usługodawcy.
               </li>
               <li>
-                Reklamacja powinna zawierac opis problemu oraz dane kontaktowe
-                zgłaszajacego.
+                Reklamacja powinna zawierać opis problemu oraz dane kontaktowe
+                zgłaszającego.
               </li>
               <li>
-                Usługodawca rozpatrzy reklamacje w terminie 14 dni od jej otrzymania.
+                Usługodawca rozpatrzy reklamację w terminie 14 dni od jej otrzymania.
               </li>
             </ol>
           </section>
@@ -166,20 +166,20 @@ export default function TermsPage() {
           {/* §7 */}
           <section>
             <h2 className="text-xl font-semibold text-zinc-900 mb-3">
-              &sect;7. Postanowienia koncowe
+              &sect;7. Postanowienia końcowe
             </h2>
             <ol className="list-decimal pl-6 space-y-2 text-zinc-700">
               <li>
                 Usługodawca zastrzega sobie prawo do zmiany niniejszego Regulaminu.
-                Zmiany wchodza w zycie z chwila opublikowania w Serwisie.
+                Zmiany wchodzą w życie z chwilą opublikowania w Serwisie.
               </li>
               <li>
-                W sprawach nieuregulowanych niniejszym Regulaminem zastosowanie maja
+                W sprawach nieuregulowanych niniejszym Regulaminem zastosowanie mają
                 przepisy prawa polskiego.
               </li>
               <li>
-                Wszelkie spory wynikajace z korzystania z Serwisu beda rozstrzygane
-                przez sad wlasciwy dla siedziby Usługodawcy.
+                Wszelkie spory wynikające z korzystania z Serwisu będą rozstrzygane
+                przez sąd właściwy dla siedziby Usługodawcy.
               </li>
             </ol>
           </section>
@@ -190,7 +190,7 @@ export default function TermsPage() {
             href="/"
             className="text-primary hover:underline font-medium"
           >
-            &larr; Wróc do strony głównej
+            &larr; Wróć do strony głównej
           </Link>
         </div>
       </div>
