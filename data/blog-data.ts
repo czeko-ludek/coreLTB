@@ -29,7 +29,7 @@ import type {
 
 export const blogBreadcrumbs: Breadcrumb[] = [
   { label: 'Strona główna', href: '/' },
-  { label: 'Blog' },
+  { label: 'Baza wiedzy' },
 ];
 
 // =============================================================================
@@ -69,7 +69,29 @@ export const blogPosts: BlogPost[] = [
       role: 'Inżynier Konstrukcji',
       avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
-    href: '/blog/plyta-fundamentowa-tereny-gornicze',
+    href: '/baza-wiedzy/plyta-fundamentowa-tereny-gornicze',
+  },
+
+  // ============= MARZEC 2026 =============
+  {
+    id: 'dom-energooszczedny-slask',
+    image: {
+      src: '/images/blog/dom-energooszczedny/hero.webp',
+      alt: 'Nowoczesny dom energooszczędny z fotowoltaiką na dachu i pompą ciepła — widok od frontu',
+    },
+    category: 'Technologia',
+    categoryId: 'technologia',
+    date: '23 Marca, 2026',
+    dateTimestamp: Date.parse('2026-03-23'),
+    readTime: '14 min czytania',
+    title: 'Dom energooszczędny — kompletny przewodnik budowy 2026',
+    excerpt: 'Czym jest dom energooszczędny, jakie wymagania musi spełniać i co zmienią nowe WT 2026? Parametry techniczne, materiały, koszty budowy, dotacje i praktyczne wskazówki od generalnego wykonawcy.',
+    author: {
+      name: 'Michał Krawczyk',
+      role: 'Inżynier Konstrukcji',
+      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+    href: '/baza-wiedzy/dom-energooszczedny-slask',
   },
 ];
 
@@ -375,9 +397,16 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
       content: 'Przygotujemy dla Ciebie szczegółową, transparentną wycenę, która uwzględnia wszystkie niezbędne wzmocnienia i materiały. U nas nie ma ukrytych kosztów – cena w umowie jest ceną ostateczną za uzgodniony zakres prac. Zabezpiecz swoją przyszłość na solidnym fundamencie.',
     },
     {
-      type: 'callout',
-      variant: 'tip',
-      content: '<strong>Bezpłatna konsultacja:</strong> Skontaktuj się z nami telefonicznie lub przez formularz kontaktowy. Ocenimy Twoją działkę i dobierzemy optymalne rozwiązanie konstrukcyjne.',
+      type: 'cta',
+      ctaHref: '/wycena',
+      ctaIcon: 'calculator',
+      ctaLabel: 'Oblicz koszt budowy',
+    },
+    {
+      type: 'cta',
+      ctaHref: '/analiza-dzialki',
+      ctaIcon: 'mapPin',
+      ctaLabel: 'Zamów analizę działki',
     },
 
     // =============================================================================
@@ -412,6 +441,438 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'quote',
       content: 'Inwestycja w solidny fundament to inwestycja w bezpieczeństwo całego domu. Na terenach górniczych nie warto oszczędzać na tym etapie budowy – to decyzja na całe życie.',
+      caption: 'Michał Krawczyk, Inżynier Konstrukcji CoreLTB Builders',
+    },
+  ],
+
+  // =============================================================================
+  // ARTYKUŁ: Dom energooszczędny — kompletny przewodnik budowy 2026
+  // =============================================================================
+  'dom-energooszczedny-slask': [
+
+    // ── INTRO ──────────────────────────────────────────────────────
+    {
+      type: 'paragraph',
+      content: '<strong>20 września 2026 roku</strong> wchodzą w życie nowe Warunki Techniczne (WT 2026), które zaostrzają wymagania energetyczne dla budynków mieszkalnych. Dla każdego, kto planuje budowę domu, oznacza to jedno: standard energooszczędny przestaje być wyborem — staje się przepisem. W tym przewodniku wyjaśniamy, czym jest dom energooszczędny, co dokładnie zmienią nowe regulacje i ile to kosztuje w praktyce.',
+    },
+
+    // ── SEKCJA 1 — Definicja ──────────────────────────────────────
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Czym jest dom energooszczędny?',
+    },
+    {
+      type: 'paragraph',
+      content: 'Dom energooszczędny to budynek, który zużywa znacznie mniej energii do ogrzewania, chłodzenia i wentylacji niż standardowa konstrukcja. Kluczowym miernikiem jest <strong>wskaźnik EP</strong> — zapotrzebowanie na nieodnawialną energię pierwotną, wyrażone w kWh/(m²·rok).',
+    },
+    {
+      type: 'paragraph',
+      content: 'Według obecnych przepisów (WT 2021) dom jednorodzinny nie może przekraczać <strong>EP = 70 kWh/(m²·rok)</strong>. W praktyce dobrze zaprojektowany dom energooszczędny osiąga <strong>40–55 kWh/(m²·rok)</strong>, co przekłada się na rachunki za ogrzewanie rzędu <strong>2 000–3 000 zł rocznie</strong> dla domu 120 m².',
+    },
+    {
+      type: 'callout',
+      variant: 'info',
+      content: '<strong>Wskaźnik EP — co oznacza w praktyce?</strong> EP uwzględnia nie tylko energię zużytą w budynku, ale też straty przy jej wytwarzaniu i przesyle. Dlatego pompa ciepła (zasilana prądem z OZE) daje niższy EP niż kocioł gazowy, mimo że oba mogą ogrzewać dom tak samo skutecznie.',
+    },
+
+    // ── SEKCJA 2 — Energooszczędny vs pasywny ────────────────────
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Dom energooszczędny a pasywny — czym się różnią?',
+    },
+    {
+      type: 'paragraph',
+      content: 'Obydwa pojęcia dotyczą budynków o obniżonym zapotrzebowaniu na energię, ale różnica jest znaczna:',
+    },
+    {
+      type: 'list',
+      items: [
+        '<strong>Dom energooszczędny:</strong> EP ≤ 70 kWh/(m²·rok) (WT 2021) lub ≤ 55 kWh/(m²·rok) (kierunek WT 2026). Koszt budowy wyższy o <strong>10–15%</strong> od standardowego. Wymaga dobrej izolacji, szczelności i rekuperacji.',
+        '<strong>Dom pasywny:</strong> EP ≤ 15 kWh/(m²·rok). Koszt budowy wyższy o <strong>25–40%</strong>. Wymaga ekstremalnej szczelności (n50 ≤ 0,6), izolacji 30–40 cm, okien o U ≤ 0,7 i certyfikacji PHI.',
+        '<strong>Dom standardowy (WT 2021):</strong> EP ≤ 70 kWh/(m²·rok). Spełnia minimum przepisów, ale bez zapasu na przyszłe regulacje.',
+      ],
+    },
+    {
+      type: 'paragraph',
+      content: 'Dla większości inwestorów <strong>dom energooszczędny</strong> to złoty środek — realne oszczędności bez przesadnych kosztów budowy. Dom pasywny ma sens w skrajnie zimnych lokalizacjach lub gdy inwestor planuje certyfikację (np. pod kredyt „zielony").',
+    },
+
+    // ── SEKCJA 3 — WT 2026 (GŁÓWNA OŚ) ──────────────────────────
+    {
+      type: 'heading',
+      level: 2,
+      content: 'WT 2026 — co się zmienia od 20 września?',
+    },
+    {
+      type: 'paragraph',
+      content: 'Ministerstwo Rozwoju i Technologii przygotowuje <strong>całkowicie nowe rozporządzenie</strong> w sprawie warunków technicznych budynków, zastępujące wielokrotnie nowelizowany dokument z 2002 roku. Nowe WT 2026 wchodzą w życie <strong>20 września 2026 r.</strong> i opierają się na czterech filarach: energooszczędność, bezpieczeństwo pożarowe, akustyka i dostępność.',
+    },
+    {
+      type: 'heading',
+      level: 3,
+      content: 'Zaostrzenie wymagań energetycznych',
+    },
+    {
+      type: 'paragraph',
+      content: 'Najważniejsze zmiany dla inwestorów budujących domy jednorodzinne:',
+    },
+    {
+      type: 'list',
+      items: [
+        '<strong>Wskaźnik EP</strong> — spodziewane obniżenie z 70 do ok. <strong>55 kWh/(m²·rok)</strong>, co de facto wymusza stosowanie OZE (pompa ciepła, fotowoltaika)',
+        '<strong>Współczynnik U ścian zewnętrznych</strong> — obecne 0,20 W/(m²·K) prawdopodobnie spadnie do <strong>0,17 W/(m²·K)</strong>, co oznacza grubszą izolację (min. 20–25 cm styropianu grafitowego lub wełny)',
+        '<strong>Standard bezemisyjny</strong> — nowe budynki mają zbliżać się do zerowej emisji, co promuje pompy ciepła i fotowoltaikę jako główne źródła energii',
+        '<strong>Automatyka budynkowa</strong> — obowiązkowy monitoring zużycia energii w wybranych typach obiektów',
+        '<strong>Bezpieczeństwo pożarowe ETICS</strong> — surowsze wymagania dla systemów ociepleń, wymóg pasów ogniowych z wełny mineralnej',
+      ],
+    },
+    {
+      type: 'callout',
+      variant: 'warning',
+      content: '<strong>Data graniczna: 20 września 2026.</strong> Liczy się data złożenia <strong>kompletnego wniosku o pozwolenie na budowę</strong>, nie data jego wydania. Wniosek złożony 19 września = budujesz po starych WT 2021. Wniosek złożony 21 września = nowe, droższe wymagania WT 2026. Jeśli planujesz budowę — czas na decyzję się kurczy.',
+    },
+    {
+      type: 'heading',
+      level: 3,
+      content: 'Ile więcej kosztują nowe wymagania?',
+    },
+    {
+      type: 'paragraph',
+      content: 'Branża szacuje wzrost kosztów budowy o <strong>10–15%</strong>, czyli <strong>25 000–50 000 zł</strong> więcej na dom jednorodzinny. Największe pozycje:',
+    },
+    {
+      type: 'list',
+      items: [
+        '<strong>Termoizolacja</strong> (grubsze warstwy, droższe materiały): +25 000–50 000 zł',
+        '<strong>Wentylacja z rekuperacją</strong> (w praktyce obowiązkowa przy EP 55): +15 000–35 000 zł',
+        '<strong>Izolacyjność akustyczna</strong> (zabudowa bliźniacza/szeregowa): +7 000–25 000 zł',
+      ],
+    },
+    {
+      type: 'callout',
+      variant: 'tip',
+      content: '<strong>Nasza rekomendacja:</strong> Niezależnie od daty złożenia wniosku, projektuj dom z parametrami WT 2026 już teraz. U ścian 0,17 zamiast 0,20, EP poniżej 55. Różnica w kosztach jest niewielka, a zyskujesz niższe rachunki i wyższą wartość nieruchomości na lata.',
+    },
+
+    // ── SEKCJA 4 — Wymagania techniczne ──────────────────────────
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Wymagania techniczne domu energooszczędnego',
+    },
+    {
+      type: 'heading',
+      level: 3,
+      content: 'Izolacja termiczna — ściany, dach, fundament',
+    },
+    {
+      type: 'paragraph',
+      content: 'Izolacja to fundament (dosłownie) energooszczędności. Kluczowe wartości współczynnika przenikania ciepła <strong>U</strong> [W/(m²·K)]:',
+    },
+    {
+      type: 'list',
+      items: [
+        '<strong>Ściany zewnętrzne:</strong> U ≤ 0,20 (WT 2021) → rekomendowane U ≤ 0,17 (WT 2026). W praktyce: 20–25 cm styropianu grafitowego (λ = 0,031) lub wełny mineralnej na bloczku silikatowym/ceramicznym.',
+        '<strong>Dach / stropodach:</strong> U ≤ 0,15. Minimum 25–30 cm wełny mineralnej lub pianki PIR między krokwiami + dodatkowa warstwa.',
+        '<strong>Podłoga na gruncie:</strong> U ≤ 0,30. Izolacja XPS min. 15 cm pod płytą fundamentową lub na ławach.',
+        '<strong>Okna:</strong> U ≤ 0,90 (WT 2021) → rekomendowane U ≤ 0,80. Trzyszybowe pakiety z ramą o ciepłym dystansie.',
+      ],
+    },
+    {
+      type: 'heading',
+      level: 3,
+      content: 'Szczelność powietrzna budynku',
+    },
+    {
+      type: 'paragraph',
+      content: 'Nawet najlepsza izolacja nie pomoże, jeśli ciepło ucieka przez nieszczelności. Dom energooszczędny powinien osiągać wynik testu <strong>blower door n50 ≤ 1,5 1/h</strong> (dom pasywny: ≤ 0,6). Kluczowe detale: ciągłość folii paroizolacyjnej, uszczelnienie przejść instalacyjnych, szczelny montaż okien w warstwie izolacji.',
+    },
+    {
+      type: 'heading',
+      level: 3,
+      content: 'Rekuperacja — wentylacja z odzyskiem ciepła',
+    },
+    {
+      type: 'paragraph',
+      content: 'Przy szczelnym budynku wentylacja grawitacyjna nie działa — potrzebna jest <strong>wentylacja mechaniczna z rekuperacją</strong>. Centrala odzyskuje <strong>80–95% ciepła</strong> z powietrza wywiewanego i podgrzewa nim świeże powietrze nawiewane. Efekt: świeże, przefiltrowane powietrze bez otwierania okien i bez strat ciepła.',
+    },
+    {
+      type: 'paragraph',
+      content: 'Rekuperacja ma jeszcze jedną, często pomijaną zaletę: <strong>filtracja powietrza</strong>. W regionach o złej jakości powietrza (południe Polski, aglomeracje) filtry F7 lub HEPA w centrali skutecznie zatrzymują pyły PM2.5 i PM10. To nie gadżet — to ochrona zdrowia domowników.',
+    },
+    // TODO: OBRAZ — rekuperator
+    {
+      type: 'image',
+      src: '/images/blog/dom-energooszczedny/rekuperacja.webp',
+      alt: 'Centrala rekuperacyjna z filtrem — wentylacja mechaniczna z odzyskiem ciepła w domu energooszczędnym',
+      caption: 'Rekuperator odzyskuje 80–95% ciepła z powietrza wywiewanego — obowiązkowy element domu energooszczędnego',
+    },
+
+    // ── SEKCJA 5 — Materiały ─────────────────────────────────────
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Z czego budować dom energooszczędny?',
+    },
+    {
+      type: 'heading',
+      level: 3,
+      content: 'Ściany — silikat, ceramika, beton komórkowy czy szkielet?',
+    },
+    {
+      type: 'paragraph',
+      content: 'Każda z popularnych technologii pozwala osiągnąć standard energooszczędny, ale różnią się one właściwościami użytkowymi:',
+    },
+    {
+      type: 'list',
+      items: [
+        '<strong>Bloczki silikatowe</strong> (Silka) — nasza preferowana technologia w CoreLTB. Doskonała akumulacja ciepła (mur „magazynuje" ciepło w dzień i oddaje w nocy), wysoka izolacyjność akustyczna, ściana nośna 18 cm + ocieplenie. Idealne do gęstej zabudowy.',
+        '<strong>Ceramika</strong> (Porotherm, Leier) — popularna, dobra akumulacja, nieco grubsza ściana. Sprawdzone rozwiązanie w budownictwie jednorodzinnym.',
+        '<strong>Beton komórkowy</strong> (Ytong, Solbet) — lekki, łatwy w obróbce, ale niższa akumulacja ciepła. Wymaga starannego wykończenia (podatny na wilgoć).',
+        '<strong>Szkielet drewniany</strong> — najszybsza budowa, bardzo dobre parametry U przy mniejszej grubości ściany. Ograniczona akumulacja ciepła, wymaga idealnej paroizolacji.',
+      ],
+    },
+    {
+      type: 'heading',
+      level: 3,
+      content: 'Fundamenty — ława czy płyta?',
+    },
+    {
+      type: 'paragraph',
+      content: '<strong>Płyta fundamentowa</strong> z izolacją XPS od spodu eliminuje mostki termiczne w strefie cokołu i ułatwia montaż ogrzewania podłogowego. Na terenach o trudnych warunkach gruntowych (szkody górnicze, gliny, grunty zalewowe) jest jedynym bezpiecznym rozwiązaniem. Szczegółowo opisaliśmy to w artykule: <a href="/baza-wiedzy/plyta-fundamentowa-tereny-gornicze">Płyta fundamentowa na terenach górniczych</a>.',
+    },
+    {
+      type: 'paragraph',
+      content: '<strong>Ławy fundamentowe</strong> ze wzmocnioną izolacją cokołu sprawdzają się na stabilnych gruntach. Tańsze o ok. 30–50 zł/m², ale wymagają starannego rozwiązania mostka termicznego na styku ław, ścian i posadzki.',
+    },
+
+    // ── SEKCJA 6 — Systemy grzewcze ─────────────────────────────
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Systemy grzewcze i OZE',
+    },
+    {
+      type: 'heading',
+      level: 3,
+      content: 'Pompa ciepła powietrze-woda',
+    },
+    {
+      type: 'paragraph',
+      content: 'To obecnie <strong>dominujące rozwiązanie</strong> w budownictwie energooszczędnym — i jedyne, które realistycznie pozwala spełnić EP ≤ 55 kWh/(m²·rok) bez fotowoltaiki. Współczynnik COP <strong>3,5–4,5</strong> oznacza, że z 1 kWh prądu uzyskujemy 3,5–4,5 kWh ciepła. Roczny koszt ogrzewania domu 120 m²: <strong>2 000–3 000 zł</strong>.',
+    },
+    {
+      type: 'heading',
+      level: 3,
+      content: 'Fotowoltaika — synergia z pompą ciepła',
+    },
+    {
+      type: 'paragraph',
+      content: 'Instalacja <strong>5–8 kWp</strong> (koszt ok. 20 000–30 000 zł po dotacjach) w połączeniu z pompą ciepła pozwala osiągnąć niemal zerowe rachunki za ogrzewanie i ciepłą wodę. WT 2026 nie narzucają obowiązku montażu PV na domach jednorodzinnych, ale obniżony wskaźnik EP sprawia, że fotowoltaika staje się <strong>de facto standardem</strong>.',
+    },
+    // TODO: OBRAZ — pompa ciepła + PV
+    {
+      type: 'image',
+      src: '/images/blog/dom-energooszczedny/pompa-ciepla-fotowoltaika.webp',
+      alt: 'Pompa ciepła powietrze-woda obok domu jednorodzinnego z instalacją fotowoltaiczną na dachu',
+      caption: 'Pompa ciepła + fotowoltaika — tandem, który pozwala spełnić wymagania WT 2026 i obniżyć rachunki do minimum',
+    },
+    {
+      type: 'heading',
+      level: 3,
+      content: 'Ogrzewanie podłogowe niskotemperaturowe',
+    },
+    {
+      type: 'paragraph',
+      content: 'Pompa ciepła najefektywniej współpracuje z <strong>ogrzewaniem podłogowym</strong> (temperatura zasilania 30–35°C vs 55–70°C dla grzejników). Podłogówka równomiernie rozprowadza ciepło, eliminuje grzejniki pod oknami i doskonale pasuje do płyty fundamentowej — pętle grzewcze zatapiane są bezpośrednio w wylewce.',
+    },
+
+    // ── SEKCJA 7 — Koszty ────────────────────────────────────────
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Ile kosztuje budowa domu energooszczędnego?',
+    },
+    {
+      type: 'paragraph',
+      content: 'Budowa domu energooszczędnego jest droższa o ok. <strong>10–15%</strong> w porównaniu z domem spełniającym jedynie minimum WT 2021. Różnica wynika głównie z lepszej izolacji, stolarki, rekuperacji i pompy ciepła. Ale te dodatkowe <strong>50 000–80 000 zł</strong> zwracają się w ciągu <strong>5–8 lat</strong> dzięki niższym rachunkom.',
+    },
+    {
+      type: 'callout',
+      variant: 'info',
+      content: '<strong>Orientacyjne koszty budowy domu energooszczędnego 120 m² (2026):</strong><br>Stan surowy otwarty: <strong>250 000–320 000 zł</strong><br>Stan surowy zamknięty: <strong>350 000–430 000 zł</strong><br>Stan deweloperski: <strong>450 000–560 000 zł</strong><br>Pod klucz: <strong>550 000–700 000 zł</strong><br><br><em>Ceny dla domu parterowego z pompą ciepła i rekuperacją. Zależą od lokalizacji, gruntu i standardu wykończenia.</em>',
+    },
+    {
+      type: 'cta',
+      ctaHref: '/wycena',
+      ctaIcon: 'calculator',
+      ctaLabel: 'Oblicz koszt budowy',
+    },
+
+    // ── SEKCJA 8 — Dotacje ───────────────────────────────────────
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Dotacje i dofinansowanie w 2026 roku',
+    },
+    {
+      type: 'paragraph',
+      content: 'Budując dom energooszczędny, możesz odzyskać znaczną część dodatkowych kosztów:',
+    },
+    {
+      type: 'list',
+      items: [
+        '<strong>Moje Ciepło</strong> — dotacja do <strong>21 000 zł</strong> na pompę ciepła w nowym budynku (warunek: EP ≤ norma WT i świadectwo energetyczne klasy A).',
+        '<strong>Mój Prąd</strong> — dofinansowanie instalacji fotowoltaicznej, magazynu energii i systemu zarządzania energią.',
+        '<strong>Czyste Powietrze</strong> — obejmuje m.in. rekuperację, stolarkę okienną i pompę ciepła. Kwoty zależą od dochodu.',
+        '<strong>Ulga termomodernizacyjna</strong> — odliczenie od podatku do <strong>53 000 zł</strong> na materiały i usługi związane z termomodernizacją (dotyczy istniejących budynków, ale warto znać przy rozbudowie).',
+      ],
+    },
+
+    // ── SEKCJA 9 — Południe Polski ───────────────────────────────
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Budowa na południu Polski — na co uważać',
+    },
+    {
+      type: 'paragraph',
+      content: 'Polska południowa (Śląsk, Małopolska, Opolszczyzna) stawia przed inwestorami kilka dodatkowych wyzwań, które wpływają na projektowanie domu energooszczędnego:',
+    },
+    {
+      type: 'list',
+      items: [
+        '<strong>Strefa klimatyczna III</strong> — obliczeniowa temperatura zewnętrzna <strong>-20°C</strong>. Dłuższe sezony grzewcze niż w zachodniej Polsce. Izolacja musi mieć zapas — projektujemy z U = 0,17 zamiast 0,20.',
+        '<strong>Tereny górnicze (Śląsk)</strong> — na działkach objętych szkodami górniczymi jedynym bezpiecznym fundamentem jest <strong>płyta fundamentowa</strong> z izolacją XPS. Płyta jednocześnie eliminuje mostki termiczne, co jest korzystne dla energooszczędności.',
+        '<strong>Jakość powietrza</strong> — stężenia PM2.5 i PM10 regularnie przekraczają normy, szczególnie zimą. Rekuperacja z filtracją F7/HEPA staje się nie opcją, a <strong>koniecznością zdrowotną</strong>.',
+        '<strong>Grunty</strong> — gliny na Śląsku, grunty zalewowe w dolinach Wisły i Soły (Małopolska), tereny krasowe (Jura). Każdy typ wymaga innego podejścia do fundamentu i hydroizolacji.',
+      ],
+    },
+    {
+      type: 'paragraph',
+      content: 'Budujemy domy na południu Polski od ponad 15 lat. Znamy lokalne warunki, współpracujemy z geologami i konstruktorami. Jeśli budujesz w <a href="/obszar-dzialania/katowice">Katowicach</a>, <a href="/obszar-dzialania/rybnik">Rybniku</a> czy <a href="/obszar-dzialania/krakow">Krakowie</a> — rozumiemy specyfikę Twojego terenu.',
+    },
+    {
+      type: 'cta',
+      ctaHref: '/analiza-dzialki',
+      ctaIcon: 'mapPin',
+      ctaLabel: 'Zamów analizę działki',
+    },
+    // TODO: OBRAZ — budowa na południu
+    {
+      type: 'image',
+      src: '/images/blog/dom-energooszczedny/budowa-slask.webp',
+      alt: 'Budowa domu jednorodzinnego na Śląsku — izolacja fundamentu płytą XPS na terenie górniczym',
+      caption: 'Izolacja płyty fundamentowej XPS-em na budowie w rejonie Śląska — eliminacja mostków termicznych od poziomu gruntu',
+    },
+
+    // ── SEKCJA 10 — Projekty ─────────────────────────────────────
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Projekty domów energooszczędnych — na co zwrócić uwagę',
+    },
+    {
+      type: 'paragraph',
+      content: 'Nie każdy projekt „katalogowy" jest energooszczędny. Przy wyborze zwróć uwagę na:',
+    },
+    {
+      type: 'list',
+      items: [
+        '<strong>Zwartą bryłę</strong> — im mniej załamań, wykuszy i loggi, tym mniejsza powierzchnia przegród tracących ciepło. Stosunek A/V (powierzchnia zewnętrzna do kubatury) powinien być jak najniższy.',
+        '<strong>Orientację budynku</strong> — salon i główne przeszklenia na południe (zyski solarne), pomieszczenia gospodarcze na północ.',
+        '<strong>Adaptację do gruntu</strong> — projekt gotowy wymaga adaptacji do warunków na działce (geologia, kategoria terenu, strefy wiatrowe). Dobry projektant adaptujący przeliczy izolację pod konkretną lokalizację.',
+      ],
+    },
+    {
+      type: 'paragraph',
+      content: 'W naszej <a href="/projekty">bazie projektów</a> znajdziesz ponad 250 domów parterowych i z poddaszem — każdy z kalkulacją kosztów budowy. Potrzebujesz projektu indywidualnego? <a href="/oferta/projektowanie">Zaprojektujemy dom</a> dopasowany do Twojej działki i budżetu.',
+    },
+    {
+      type: 'cta-wide',
+      ctaHref: '/projekty',
+      caption: 'Baza projektów',
+      ctaLabel: 'Znajdź projekt domu energooszczędnego',
+      ctaDescription: 'Ponad 250 domów parterowych i z poddaszem — każdy z kalkulacją kosztów budowy.',
+      content: 'Przeglądaj projekty',
+      src: '/images/blog/dom-energooszczedny/hero.webp',
+      alt: 'Nowoczesny dom energooszczędny — projekty domów CoreLTB',
+    },
+
+    // ── SEKCJA 11 — Od czego zacząć ─────────────────────────────
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Od czego zacząć budowę domu energooszczędnego?',
+    },
+    {
+      type: 'paragraph',
+      content: 'Budowa domu energooszczędnego to proces, który zaczyna się od dobrego planu. Oto 5 kluczowych kroków:',
+    },
+    {
+      type: 'list',
+      items: [
+        '<strong>1. Analiza działki</strong> — sprawdź MPZP, warunki gruntowe i ewentualne obciążenia (szkody górnicze, tereny zalewowe). <a href="/analiza-dzialki">Zamów bezpłatną analizę</a>.',
+        '<strong>2. Wybór projektu</strong> — gotowy lub indywidualny, z parametrami spełniającymi WT 2026. <a href="/projekty">Zobacz projekty</a>.',
+        '<strong>3. Wycena budowy</strong> — poznaj realne koszty z podziałem na etapy. <a href="/wycena">Użyj kalkulatora</a>.',
+        '<strong>4. Wybór wykonawcy</strong> — postaw na generalnego wykonawcę ze stałą ceną w umowie i doświadczeniem w Twoim regionie.',
+        '<strong>5. Realizacja</strong> — budowa z profesjonalnym <a href="/oferta/kompleksowa-budowa-domow">nadzorem i kontrolą jakości</a> na każdym etapie.',
+      ],
+    },
+    {
+      type: 'callout',
+      variant: 'tip',
+      content: '<strong>Pamiętaj o terminie.</strong> Jeśli chcesz budować według WT 2021, kompletny wniosek o pozwolenie na budowę musisz złożyć <strong>przed 20 września 2026</strong>. Po tej dacie — nowe, droższe wymagania.',
+    },
+    {
+      type: 'cta',
+      ctaHref: '/umow-konsultacje',
+      ctaIcon: 'phone',
+      ctaLabel: 'Umów konsultację',
+    },
+
+    // ── FAQ ──────────────────────────────────────────────────────
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Najczęściej zadawane pytania',
+    },
+    {
+      type: 'faq',
+      faqItems: [
+        {
+          question: 'Co to jest dom energooszczędny?',
+          answer: 'Dom energooszczędny to budynek o obniżonym zapotrzebowaniu na energię do ogrzewania, chłodzenia i wentylacji. Zgodnie z WT 2021 jego wskaźnik EP nie przekracza <strong>70 kWh/(m²·rok)</strong>. W praktyce dobrze zaprojektowany dom energooszczędny osiąga 40–55 kWh/(m²·rok) dzięki grubej izolacji, szczelnej konstrukcji, rekuperacji i efektywnemu systemowi grzewczemu (najczęściej pompa ciepła).',
+        },
+        {
+          question: 'Ile kosztuje budowa domu energooszczędnego w 2026 roku?',
+          answer: 'Budowa domu energooszczędnego o powierzchni 120 m² kosztuje orientacyjnie <strong>550 000–700 000 zł pod klucz</strong> (z pompą ciepła i rekuperacją). To o ok. 10–15% więcej niż dom standardowy, ale niższe rachunki za ogrzewanie (ok. 2 000–3 000 zł/rok zamiast 5 000–7 000 zł) zwracają różnicę w <strong>5–8 lat</strong>.',
+        },
+        {
+          question: 'Z czego najlepiej budować dom energooszczędny?',
+          answer: 'Każda technologia (silikat, ceramika, beton komórkowy, szkielet drewniany) pozwala osiągnąć standard energooszczędny. Kluczowa jest <strong>grubość i jakość izolacji</strong>, nie sam materiał ściany nośnej. W CoreLTB preferujemy bloczki silikatowe z ociepleniem styropianem grafitowym — łączą doskonałą akumulację ciepła z izolacyjnością akustyczną.',
+        },
+        {
+          question: 'Czym różni się dom energooszczędny od pasywnego?',
+          answer: 'Dom energooszczędny ma wskaźnik EP ≤ 70 kWh/(m²·rok), dom pasywny ≤ 15 kWh/(m²·rok). Dom pasywny wymaga ekstremalnej szczelności (n50 ≤ 0,6), izolacji 30–40 cm i okien o U ≤ 0,7. Kosztuje <strong>25–40% więcej</strong> niż standardowy. Dla większości inwestorów dom energooszczędny to optymalny wybór — realne oszczędności bez przesadnych kosztów.',
+        },
+        {
+          question: 'Jakie wymagania musi spełniać dom energooszczędny po WT 2026?',
+          answer: 'Nowe WT 2026 (od 20 września 2026) zaostrzają wymagania: wskaźnik EP ma spaść do ok. <strong>55 kWh/(m²·rok)</strong>, a współczynnik U ścian do ok. <strong>0,17 W/(m²·K)</strong>. W praktyce oznacza to grubszą izolację, lepszą stolarkę okienną i niemal obowiązkową pompę ciepła z fotowoltaiką. Szacowany wzrost kosztów: 25 000–50 000 zł.',
+        },
+        {
+          question: 'Ile kWh/m² zużywa dom energooszczędny rocznie?',
+          answer: 'Dom energooszczędny zużywa od <strong>40 do 70 kWh/(m²·rok)</strong> energii pierwotnej (wskaźnik EP). W przeliczeniu na realne zużycie ciepła do ogrzewania to ok. <strong>30–50 kWh/(m²·rok)</strong>. Dla porównania: standardowy dom sprzed 2021 roku zużywał nawet 120–150 kWh/(m²·rok).',
+        },
+      ],
+    },
+
+    // ── PODSUMOWANIE ─────────────────────────────────────────────
+    {
+      type: 'quote',
+      content: 'Dom energooszczędny to nie fanaberia — od września 2026 to nowy standard. Ale nawet dziś warto budować z zapasem na przyszłe regulacje. Dobrze zaizolowany dom z pompą ciepła i rekuperacją to niższe rachunki, czystsze powietrze w środku i wyższa wartość nieruchomości na lata.',
       caption: 'Michał Krawczyk, Inżynier Konstrukcji CoreLTB Builders',
     },
   ],

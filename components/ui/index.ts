@@ -21,3 +21,5 @@ export { FloatingPhoneCTA } from './FloatingPhoneCTA';
 
 export { InputField } from './InputField';
 // Note: InputFieldProps is not exported from InputField.tsx (internal interface)
+
+export { CookieConsent } from './CookieConsent';

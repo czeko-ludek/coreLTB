@@ -32,14 +32,14 @@ export async function generateMetadata({
 
   if (!post) {
     return {
-      title: 'Nie znaleziono artykułu | Blog CoreLTB Builders',
+      title: 'Nie znaleziono artykułu | Baza Wiedzy CoreLTB Builders',
     };
   }
 
-  const pageUrl = `${companyData.url}/blog/${slug}`;
+  const pageUrl = `${companyData.url}/baza-wiedzy/${slug}`;
 
   return {
-    title: `${post.title} | Blog CoreLTB Builders`,
+    title: `${post.title} | Baza Wiedzy CoreLTB Builders`,
     description: post.excerpt,
     openGraph: {
       title: post.title,
@@ -67,9 +67,9 @@ export async function generateMetadata({
 }
 
 /**
- * Strona pojedynczego wpisu blogowego
+ * Strona pojedynczego wpisu z Bazy Wiedzy
  */
-export default async function BlogPostPage({
+export default async function BazaWiedzyPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>;

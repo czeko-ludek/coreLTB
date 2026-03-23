@@ -150,10 +150,8 @@ export const companyData: CompanyData = {
   ] as const,
 
   sameAs: [
-    "https://facebook.com/coreltb",
-    "https://instagram.com/coreltb",
-    "https://linkedin.com/company/coreltb",
-    "https://youtube.com/@coreltb"
+    "https://www.facebook.com/CoreLTBBuilders",
+    "https://www.instagram.com/coreltb"
   ] as const
 };
 

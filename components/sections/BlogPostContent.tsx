@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
 import { clsx } from 'clsx';
 import { Icon } from '@/components/ui';
+import type { IconName } from '@/components/ui/Icon';
 import { LocalPageSidebar, type TOCItem } from '@/components/shared';
 import type { BlogPost, BlogAuthor } from './BentoBlogSection';
 
@@ -14,7 +15,7 @@ import type { BlogPost, BlogAuthor } from './BentoBlogSection';
 // =============================================================================
 
 export interface BlogContentBlock {
-  type: 'paragraph' | 'heading' | 'image' | 'list' | 'quote' | 'callout' | 'faq';
+  type: 'paragraph' | 'heading' | 'image' | 'list' | 'quote' | 'callout' | 'faq' | 'cta' | 'cta-wide';
   content?: string;
   items?: string[];
   src?: string;
@@ -24,6 +25,11 @@ export interface BlogContentBlock {
   variant?: 'info' | 'warning' | 'tip';
   // FAQ specific
   faqItems?: FAQItem[];
+  // CTA specific
+  ctaHref?: string;
+  ctaIcon?: string;
+  ctaLabel?: string;
+  ctaDescription?: string;
 }
 
 export interface FAQItem {
@@ -81,7 +87,7 @@ function PostMeta({ post }: { post: BlogPostData }) {
         </span>
       )}
       <Link
-        href={`/blog?category=${post.categoryId}`}
+        href={`/baza-wiedzy?category=${post.categoryId}`}
         className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary/10 text-primary rounded-full font-medium hover:bg-primary/20 transition-colors"
       >
         {post.category}
@@ -278,6 +284,64 @@ function ContentRenderer({ block, index }: { block: BlogContentBlock; index: num
         </div>
       );
 
+    case 'cta':
+      return (
+        <Link
+          key={index}
+          href={block.ctaHref || '/wycena'}
+          className="group my-8 inline-flex items-center gap-3 rounded-lg bg-primary hover:bg-primary-dark px-5 py-3 transition-all duration-300 hover:shadow-lg"
+        >
+          <Icon name={(block.ctaIcon as IconName) || 'calculator'} size="md" className="text-white" />
+          <span className="font-bold text-white text-sm">
+            {block.ctaLabel || 'Sprawdź'}
+          </span>
+          <Icon name="arrowRight" size="sm" className="text-white/70 group-hover:translate-x-0.5 group-hover:text-white transition-all" />
+        </Link>
+      );
+
+    case 'cta-wide':
+      return (
+        <div key={index} className="my-10 grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+          {/* Left: Content */}
+          <div className="bg-zinc-900 rounded-2xl overflow-hidden">
+            <div className="p-6 md:p-8 lg:p-10 flex flex-col justify-center h-full">
+              <span className="text-primary font-bold text-xs uppercase tracking-[0.2em] block mb-3">
+                {block.caption || 'Projekty domów'}
+              </span>
+              <h3 className="text-2xl md:text-4xl font-black text-white leading-[0.95] mb-4">
+                {block.ctaLabel || 'Sprawdź'}
+              </h3>
+              {block.ctaDescription && (
+                <p className="text-zinc-400 text-sm md:text-base mb-6 max-w-xl leading-relaxed">
+                  {block.ctaDescription}
+                </p>
+              )}
+              <div>
+                <Link
+                  href={block.ctaHref || '/projekty'}
+                  className="group inline-flex items-center gap-3 bg-primary hover:bg-white text-zinc-900 font-bold text-sm px-6 py-3 rounded-xl transition-all duration-300"
+                >
+                  {block.content || 'Zobacz projekty'}
+                  <div className="h-7 w-7 rounded-full bg-zinc-900 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                    <Icon name="arrowRight" className="text-white" size="sm" />
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </div>
+          {/* Right: Image */}
+          <div className="relative min-h-[250px] md:min-h-[300px] rounded-2xl overflow-hidden">
+            <Image
+              src={block.src || '/images/cta.webp'}
+              alt={block.alt || ''}
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
+        </div>
+      );
+
     case 'faq':
       if (!block.faqItems || block.faqItems.length === 0) return null;
       return <FAQSection key={index} items={block.faqItems} sectionIndex={index} />;
@@ -430,8 +494,8 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
             </li>
             <Icon name="chevronRight" size="sm" className="text-text-muted" />
             <li className="flex items-center gap-2">
-              <Link href="/blog" className="text-text-muted hover:text-primary transition-colors">
-                Blog
+              <Link href="/baza-wiedzy" className="text-text-muted hover:text-primary transition-colors">
+                Baza wiedzy
               </Link>
             </li>
             <Icon name="chevronRight" size="sm" className="text-text-muted" />
@@ -475,7 +539,7 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
               </h1>
 
               {/* Content */}
-              <div className="prose prose-lg max-w-none">
+              <div className="prose prose-lg max-w-none blog-prose">
                 {post.content.map((block, index) => (
                   <ContentRenderer key={index} block={block} index={index} />
                 ))}
@@ -489,7 +553,7 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
                     {post.tags.map((tag, index) => (
                       <Link
                         key={index}
-                        href={`/blog?tag=${tag.toLowerCase().replace(/\s+/g, '-')}`}
+                        href={`/baza-wiedzy?tag=${tag.toLowerCase().replace(/\s+/g, '-')}`}
                         className="px-3 py-1 bg-zinc-100 text-text-secondary text-sm rounded-full hover:bg-primary/10 hover:text-primary transition-colors"
                       >
                         #{tag}

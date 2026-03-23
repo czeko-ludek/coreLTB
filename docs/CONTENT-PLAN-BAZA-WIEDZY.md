@@ -6,6 +6,43 @@
 
 ---
 
+## Opublikowane artykuły
+
+### Płyta fundamentowa na terenach górniczych
+- **Slug:** `plyta-fundamentowa-tereny-gornicze`
+- **Status:** OPUBLIKOWANY
+- **URL:** `/baza-wiedzy/plyta-fundamentowa-tereny-gornicze`
+- **Dane:** `data/blog-data.ts` (BlogPost + BlogContentBlock[])
+- **Brakujące zdjęcia:**
+  - `/images/blog/plyta-fundamentowa/plyta-fundamentowa.webp` — hero (potrzebne zdjęcie z realizacji)
+  - `/images/blog/plyta-fundamentowa/schemat-niecka-siodlo.webp` — schemat niecka vs siodło
+  - `/images/blog/plyta-fundamentowa/uszkodzenia-gornicze.webp` — uszkodzenia budynku bez fundamentu
+  - `/images/blog/plyta-fundamentowa/zbrojenie-plyta.webp` — zbrojenie podwójne B500SP
+  - `/images/blog/plyta-fundamentowa/izolacja-xps.webp` — izolacja XPS pod płytą
+
+### Dom energooszczędny — kompletny przewodnik budowy 2026
+- **Slug:** `dom-energooszczedny-slask`
+- **Status:** OPUBLIKOWANY (treść gotowa, brak zdjęć)
+- **URL:** `/baza-wiedzy/dom-energooszczedny-slask`
+- **Redirect:** `/oferta/budowa/dom-energooszczedny-slask` → `/baza-wiedzy/dom-energooszczedny-slask` (301)
+- **Dane:** `data/blog-data.ts` (BlogPost + BlogContentBlock[])
+- **Pipeline:** create-content (DataForSEO keyword research + SERP analysis + blueprint)
+- **Główna oś:** WT 2026 (wchodzi 20.09.2026) — żaden konkurent w TOP10 nie pokrywa
+- **Interlinki:** /wycena (2x), /plyta-fundamentowa, /oferta/kompleksowa-budowa-domow, /oferta/projektowanie, /projekty, /analiza-dzialki, /umow-konsultacje, /obszar-dzialania (3 miasta)
+- **FAQ:** 6 pytań z wolumenami PAA
+- **Brakujące zdjęcia (4 sztuki):**
+
+| # | Plik | Co powinno przedstawiać | Alt text |
+|---|------|------------------------|----------|
+| 1 | `/images/blog/dom-energooszczedny/hero.webp` | Nowoczesny dom parterowy/piętrowy z panelami PV na dachu, czysta elewacja, zadbany ogród. Najlepiej z realizacji CoreLTB lub dobry stock. | Nowoczesny dom energooszczędny z fotowoltaiką na dachu i pompą ciepła — widok od frontu |
+| 2 | `/images/blog/dom-energooszczedny/rekuperacja.webp` | Centrala rekuperacyjna zamontowana w kotłowni/pomieszczeniu technicznym. Widoczne kanały wentylacyjne i filtr. | Centrala rekuperacyjna z filtrem — wentylacja mechaniczna z odzyskiem ciepła w domu energooszczędnym |
+| 3 | `/images/blog/dom-energooszczedny/pompa-ciepla-fotowoltaika.webp` | Jednostka zewnętrzna pompy ciepła obok domu + panele PV widoczne na dachu w tle. | Pompa ciepła powietrze-woda obok domu jednorodzinnego z instalacją fotowoltaiczną na dachu |
+| 4 | `/images/blog/dom-energooszczedny/budowa-slask.webp` | Budowa w trakcie — widoczna izolacja XPS na fundamencie/płycie. Najlepiej z realizacji CoreLTB na Śląsku. | Budowa domu jednorodzinnego na Śląsku — izolacja fundamentu płytą XPS na terenie górniczym |
+
+> **Format:** WebP, szerokość min. 1200px, proporcje 16:9 lub 2:1 (hero). Kompresja ~80%.
+
+---
+
 ## Priorytet 1 — Kluczowe artykuły konwersyjne (linkowane wielokrotnie)
 
 ### 1. Ile realnie kosztuje budowa domu — SSO / Pod Klucz? (Raport cenowy)

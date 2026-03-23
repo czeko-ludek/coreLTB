@@ -514,7 +514,7 @@ servicesAccordion: {
             content: [
               {
                 type: 'paragraph',
-                value: 'Zakup działki na Śląsku bez sprawdzenia gruntu to ryzyko. Grunty wysadzinowe (gliny) i **szkody górnicze** (kategorie I-IV) wpływają na koszty. Analizujemy grunt przed startem, bo różnica w cenie między ławą a **[płytą fundamentową](/blog/plyta-fundamentowa-tereny-gornicze)** jest znacząca.'
+                value: 'Zakup działki na Śląsku bez sprawdzenia gruntu to ryzyko. Grunty wysadzinowe (gliny) i **szkody górnicze** (kategorie I-IV) wpływają na koszty. Analizujemy grunt przed startem, bo różnica w cenie między ławą a **[płytą fundamentową](/baza-wiedzy/plyta-fundamentowa-tereny-gornicze)** jest znacząca.'
               },
               {
                 type: 'list',
@@ -746,9 +746,9 @@ servicesAccordion: {
           cities: [
             { label: 'Wodzisław Śląski', url: '/obszar-dzialania/wodzislaw-slaski' },
             { label: 'Rybnik', url: '/obszar-dzialania/rybnik' },
-            { label: 'Żory' },
-            { label: 'Racibórz' },
-            { label: 'Jastrzębie-Zdrój' },
+            { label: 'Żory', url: '/obszar-dzialania/zory' },
+            { label: 'Racibórz', url: '/obszar-dzialania/raciborz' },
+            { label: 'Jastrzębie-Zdrój', url: '/obszar-dzialania/jastrzebie-zdroj' },
           ]
         },
         {
@@ -1116,7 +1116,7 @@ servicesAccordion: {
       content: [
         {
           type: 'paragraph',
-          value: 'To nasza codzienność. Standardowy projekt nie przejdzie w starostwie bez **adaptacji konstrukcyjnej** do kategorii szkód (I-IV). Nasz konstruktor przeliczy fundamenty (najczęściej na płytę fundamentową) i zaprojektuje niezbędne dylatacje/wieńce, zgodnie z wytycznami GIG i lokalnym prawem geologicznym. Więcej: [Płyta fundamentowa na terenach górniczych](/blog/plyta-fundamentowa-tereny-gornicze).'
+          value: 'To nasza codzienność. Standardowy projekt nie przejdzie w starostwie bez **adaptacji konstrukcyjnej** do kategorii szkód (I-IV). Nasz konstruktor przeliczy fundamenty (najczęściej na płytę fundamentową) i zaprojektuje niezbędne dylatacje/wieńce, zgodnie z wytycznami GIG i lokalnym prawem geologicznym. Więcej: [Płyta fundamentowa na terenach górniczych](/baza-wiedzy/plyta-fundamentowa-tereny-gornicze).'
         }
       ]
     },
@@ -1915,7 +1915,7 @@ cooperationTimelineNoLine: {
         {
           // LINK: Baza wiedzy (Technologia/Geologia)
           type: 'paragraph',
-          value: '**Budujesz na szkodach górniczych?** Sprawdź, jak dobrać fundamenty: [Płyta fundamentowa na terenach górniczych — poradnik inżyniera](/blog/plyta-fundamentowa-tereny-gornicze)'
+          value: '**Budujesz na szkodach górniczych?** Sprawdź, jak dobrać fundamenty: [Płyta fundamentowa na terenach górniczych — poradnik inżyniera](/baza-wiedzy/plyta-fundamentowa-tereny-gornicze)'
         }
       ],
       imageSrc: '/images/uslugi/uslugi-techniczne/etapy/geologia.webp',

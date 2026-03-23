@@ -23,9 +23,10 @@ export interface HeaderProps {
 const navIconMap: Record<string, string> = {
   '/': 'home',
   '/o-nas': 'users',
+  '/partnerzy': 'handshake',
   '/oferta': 'briefcase',
   '/projekty': 'building',
-  '/blog': 'fileText',
+  '/baza-wiedzy': 'fileText',
   '/kontakt': 'mail',
 };
 
@@ -43,10 +44,21 @@ export function Header({
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Handle scroll state for header styling
+  // Handle scroll state for header styling — hysteresis to prevent jitter.
+  // The header padding change alters its height, which shifts content and
+  // can push scrollY back across a single threshold, causing an infinite loop.
+  // Solution: require crossing a HIGHER threshold to shrink, and a LOWER one to grow back.
   useEffect(() => {
+    const SCROLL_DOWN_THRESHOLD = 80;  // shrink header after 80px
+    const SCROLL_UP_THRESHOLD = 10;    // restore padding only near top
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const y = window.scrollY;
+      setIsScrolled(prev => {
+        if (!prev && y > SCROLL_DOWN_THRESHOLD) return true;
+        if (prev && y < SCROLL_UP_THRESHOLD) return false;
+        return prev;
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });

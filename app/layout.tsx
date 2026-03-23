@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header, Footer } from "@/components/sections";
 import { ErrorBoundary } from "@/components/shared";
 import { FloatingPhoneCTA } from "@/components/ui/FloatingPhoneCTA";
+import { CookieConsent } from "@/components/ui/CookieConsent";
 import { companyData } from "@/data/company-data";
 
 const manrope = Manrope({ subsets: ["latin"], display: "swap" });
@@ -49,10 +50,8 @@ const headerData = {
     phone: "+48 664 123 757",
     email: "biuro@coreltb.pl",
     socials: [
-      { platform: "facebook" as const, href: "https://facebook.com" },
-      { platform: "twitter" as const, href: "https://twitter.com" },
-      { platform: "instagram" as const, href: "https://instagram.com" },
-      { platform: "linkedin" as const, href: "https://linkedin.com" },
+      { platform: "facebook" as const, href: "https://www.facebook.com/CoreLTBBuilders" },
+      { platform: "instagram" as const, href: "https://www.instagram.com/coreltb" },
     ],
   },
   logo: { src: "/images/logo-black.webp", alt: "CoreLTB Builders" },
@@ -61,7 +60,7 @@ const headerData = {
     { label: "O nas", href: "/o-nas" },
     { label: "Oferta", href: "/oferta" },
     { label: "Projekty", href: "/projekty" },
-    { label: "Blog", href: "/blog" },
+    { label: "Baza wiedzy", href: "/baza-wiedzy" },
     { label: "Kontakt", href: "/kontakt" },
   ],
   searchEnabled: false,
@@ -120,6 +119,7 @@ const footerData = {
     { label: "O nas", href: "/o-nas" },
     { label: "Realizacje", href: "/projekty" },
     { label: "Obszar działania", href: "/obszar-dzialania" },
+    { label: "Partnerzy", href: "/partnerzy" },
     { label: "Kontakt", href: "/kontakt" },
   ],
   serviceLinks: [
@@ -178,9 +178,8 @@ const footerData = {
     },
   ],
   socials: [
-    { platform: "facebook" as const, href: "https://facebook.com" },
-    { platform: "instagram" as const, href: "https://instagram.com" },
-    { platform: "linkedin" as const, href: "https://linkedin.com" },
+    { platform: "facebook" as const, href: "https://www.facebook.com/CoreLTBBuilders" },
+    { platform: "instagram" as const, href: "https://www.instagram.com/coreltb" },
   ],
   bottomBar: {
     copyright: `© ${new Date().getFullYear()} CoreLTB Builders sp. z o.o. Wszelkie prawa zastrzeżone.`,
@@ -206,6 +205,7 @@ export default function RootLayout({
         </ErrorBoundary>
         <Footer {...footerData} />
         <FloatingPhoneCTA />
+        <CookieConsent />
       </body>
     </html>
   );

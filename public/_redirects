@@ -1,0 +1,83 @@
+# ============================================
+# Cloudflare Pages — 301 Redirects
+# Migracja coreltb.pl (Venet) → Elever v3
+# ============================================
+# Format: /stary-path /nowy-path 301
+# Dane źródłowe: GSC 12 mies. (03.2025–02.2026)
+# Uwaga: Specyficzne reguły PRZED catch-all!
+# ============================================
+
+# ── STRONY LOKALNE BUDOWY ──────────────────────────────────────
+
+/oferta/budowa/budowa-katowice /obszar-dzialania/katowice 301
+/oferta/budowa/budowa-rybnik /obszar-dzialania/rybnik 301
+/oferta/budowa/budowa-gliwice /obszar-dzialania/gliwice 301
+/oferta/budowa/budowa-wodzislaw-slaski /obszar-dzialania/wodzislaw-slaski 301
+/oferta/budowa/budowa-jaworzno /obszar-dzialania/jaworzno 301
+/oferta/budowa/budowa-tychy /obszar-dzialania/tychy 301
+/oferta/budowa/budowa-zabrze /obszar-dzialania/zabrze 301
+/oferta/budowa/budowa-zory /obszar-dzialania/zory 301
+/oferta/budowa/budowa-raciborz /oferta/kompleksowa-budowa-domow 301
+
+# ── BUDOWA OGÓLNA I STANY ─────────────────────────────────────
+
+/oferta/budowa /oferta/kompleksowa-budowa-domow 301
+/stan-surowy-otwarty /oferta/kompleksowa-budowa-domow 301
+/stan-zero /oferta/kompleksowa-budowa-domow 301
+/stan-pod-klucz /oferta/kompleksowa-budowa-domow 301
+/oferta/budowa/dom-energooszczedny-slask /baza-wiedzy/dom-energooszczedny-slask 301
+
+# ── PROJEKTY (specyficzne przed catch-all) ────────────────────
+
+/oferta/projekty/projekty-indywidualne/projekty-indywidualne-katowice /obszar-dzialania/katowice 301
+/oferta/projekty/projekty-indywidualne /oferta/projektowanie 301
+/oferta/projekty/projekty-gotowe /oferta/projektowanie 301
+/oferta/projekty/oceny-stanu-technicznego /oferta/uslugi-techniczne 301
+/oferta/projekty/swiadectwa-charakterystyki-energetycznej /oferta/uslugi-techniczne 301
+/oferta/projekty /oferta/projektowanie 301
+
+# ── NADZÓR BUDOWLANY (specyficzne per-miasto) ─────────────────
+
+/oferta/uslugi-techniczne/nadzor-budowy/nadzor-budowy-katowice /kierownik-budowy-katowice 301
+/oferta/uslugi-techniczne/nadzor-budowy/nadzor-budowy-wodzislaw-slaski /kierownik-budowy-wodzislaw-slaski 301
+/oferta/uslugi-techniczne/nadzor-budowy /oferta/nadzor-i-doradztwo 301
+
+# ── USŁUGI TECHNICZNE ─────────────────────────────────────────
+
+/oferta/uslugi-techniczne/kosztorysowanie /oferta/uslugi-techniczne 301
+/oferta/uslugi-techniczne/doradztwo-techniczne /oferta/nadzor-i-doradztwo 301
+/oferta/uslugi-techniczne/geodezja /oferta/uslugi-techniczne 301
+/oferta/uslugi-techniczne/odbiory-techniczne /oferta/uslugi-techniczne 301
+/pinb /oferta/uslugi-techniczne 301
+
+# ── WNĘTRZA ───────────────────────────────────────────────────
+
+/oferta/wnetrza/projektowanie-wnetrz /oferta/wykonczenia-i-aranzacje 301
+/oferta/wnetrza/kompleksowe-wykonawstwo-wnetrz /oferta/wykonczenia-i-aranzacje 301
+/oferta/wnetrza /oferta/wykonczenia-i-aranzacje 301
+
+# ── ZAGOSPODAROWANIE TERENU ────────────────────────────────────
+
+/oferta/zagospodarowanie-terenu/ogrodzenia /oferta/zagospodarowanie-terenu 301
+/oferta/zagospodarowanie-terenu/drogi /oferta/zagospodarowanie-terenu 301
+/oferta/zagospodarowanie-terenu/ogrody /oferta/zagospodarowanie-terenu 301
+
+# ── BLOG VENET (specyficzne przed catch-all) ───────────────────
+
+/blog/stan-surowy-zamkniety-a-deweloperski-roznice-i-znaczenie-dla-inwestora /oferta/kompleksowa-budowa-domow 301
+/blog/nowoczesne-przestrzenie-mieszkalne-budownictwo-w-jaworznie /obszar-dzialania/jaworzno 301
+/blog/wyzwania-stojace-przed-kierownikiem-budowy /oferta/nadzor-i-doradztwo 301
+/blog/projektowanie-domu-jak-uwzglednic-potrzeby-rodziny /oferta/projektowanie 301
+/blog/jakie-sa-najnowsze-rozwiazania-w-wykonczaniu-wnetrz /oferta/wykonczenia-i-aranzacje 301
+/blog/projektowanie-domow-nowoczesnosc-i-funkcjonalnosc /oferta/projektowanie 301
+
+# ── BLOG → BAZA WIEDZY (migracja wewnętrzna) ─────────────────
+
+/blog /baza-wiedzy 301
+
+# ── CATCH-ALL (MUSZĄ BYĆ NA KOŃCU!) ───────────────────────────
+
+/oferta/uslugi-techniczne-w-budownictwie/* /oferta/uslugi-techniczne 301
+/oferta/uslugi-techniczne/* /oferta/uslugi-techniczne 301
+/oferta/budowa/* /oferta/kompleksowa-budowa-domow 301
+/blog/* /baza-wiedzy 301

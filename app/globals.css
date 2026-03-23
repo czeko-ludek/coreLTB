@@ -822,6 +822,18 @@
     }
   }
 
+  /* Blog article prose — golden links (skip CTA buttons) */
+  .blog-prose a:not([class]) {
+    color: #dfbb68;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .blog-prose a:not([class]):hover {
+    color: #c9a54a;
+  }
+
   /* Accordion content - gold bullets for lists */
   .accordion-content ul {
     list-style: none;
