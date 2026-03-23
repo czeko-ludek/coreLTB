@@ -19,7 +19,7 @@ export interface ProjectIntroductionProps {
 export function ProjectIntroduction({
   id,
   surfaceArea,
-  estimatedBuildCost,
+  // estimatedBuildCost — kept in interface for future use
   title,
   technology,
   price,

@@ -105,11 +105,6 @@ export function InteractiveMapSection({ header }: InteractiveMapSectionProps) {
     setTooltip(null);
   }, []);
 
-  // Get active voivodeship name for display
-  const activeVoivName = activeVoivodeship
-    ? getVoivodeshipById(activeVoivodeship)?.name
-    : null;
-
   return (
     <section
       className="hidden lg:block bg-background-beige py-16 sm:py-20"

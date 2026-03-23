@@ -35,7 +35,7 @@ export function TimelineStepNoLine({
   imageSrc,
   imageAlt,
   isActive,
-  isLast = false,
+  // isLast — kept in interface for future use
   onInView,
 }: TimelineStepNoLineProps) {
   // useInView dla scrollspy (śledzenie aktywnego kroku)

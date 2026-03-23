@@ -15,7 +15,7 @@ export function ServiceCardSimple({
   image,
   title,
   description,
-  features,
+  // features — kept in interface for future use
   href,
 }: ServiceCardSimpleProps) {
   return (

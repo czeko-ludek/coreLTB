@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Inter, Outfit, Manrope, Montserrat, Lato, Playfair_Display } from 'next/font/google';
 import { Icon } from '@/components/ui';
 

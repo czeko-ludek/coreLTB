@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Icon, IconName } from '@/components/ui';
+import { Icon } from '@/components/ui';
 
 interface OfferVariant {
     id: string;
@@ -148,7 +148,7 @@ export const BentoOfferSection: React.FC = () => {
                             />
 
                             <div className="relative grid grid-cols-4 gap-3 md:gap-4">
-                                {offerVariants.map((variant, index) => {
+                                {offerVariants.map((variant) => {
                                     const isActive = activeVariant === variant.id;
 
                                     return (

@@ -45,7 +45,7 @@ export const ProjectListingCard = React.memo(function ProjectListingCard({
   category,
   technology,
   surfaceArea,
-  estimatedBuildCost,
+  // estimatedBuildCost — kept in interface for future use
   price,
   thumbnailSrc,
   source,

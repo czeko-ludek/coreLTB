@@ -1,13 +1,12 @@
 'use client';
 
-import { useState, useReducer, useRef, useCallback, useEffect } from 'react';
+import { useState, useReducer, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Icon } from '@/components/ui/Icon';
 import type { IconName } from '@/components/ui/Icon';
 import { OptionCard } from '@/components/ui/OptionCard';
-import { CalculatorHero } from './CalculatorHero';
 import {
   calculateEstimate,
   WALL_LABELS,
@@ -36,14 +35,9 @@ import { validateEmailStructure } from '@/lib/email-validation';
 import {
   captureUTMParams,
   getUTMParams,
-  trackEvent,
   trackLead,
   trackCalculatorStart,
   trackCalculatorStep,
-  trackEstimateView,
-  trackFormFocus,
-  trackFormError,
-  trackPhoneClick,
 } from '@/lib/analytics';
 
 // ─── State ──────────────────────────────────────────────

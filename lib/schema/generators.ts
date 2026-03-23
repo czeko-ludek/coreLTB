@@ -6,7 +6,6 @@
 import type { ResolvedLocalPageData, FAQItem } from '@/data/local';
 import { companyData, getLocalBusinessSchema, getProviderSchema } from '@/data/company-data';
 import type {
-  SchemaGraph,
   FAQPageSchema,
   ServiceSchema,
   BreadcrumbListSchema

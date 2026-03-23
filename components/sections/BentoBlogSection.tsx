@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
 import { clsx } from 'clsx';
-import { Icon, IconName } from '@/components/ui';
+import { Icon, type IconName } from '@/components/ui';
 
 // =============================================================================
 // INTERFACES

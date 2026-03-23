@@ -51,9 +51,6 @@ export function ServiceShowcaseSection({ header, services }: ServiceShowcaseSect
     }, 600); // Exit (250ms) + Enter (350ms)
   };
 
-  const safeIndex = Math.min(activeIndex, services.length - 1);
-  const activeService = services[safeIndex];
-
   return (
     <section ref={ref} className="py-24 bg-background-beige">
       <div className="container mx-auto px-4">

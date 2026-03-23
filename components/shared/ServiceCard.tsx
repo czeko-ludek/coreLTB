@@ -12,7 +12,7 @@ export interface ServiceCardProps {
 
 export function ServiceCard({
   iconName,
-  serviceNumber,
+  // serviceNumber — kept in interface for future use
   title,
   description,
   href,

@@ -140,7 +140,7 @@ function FAQAccordionItem({ question, answer, isOpen, onToggle }: {
   );
 }
 
-function FAQSection({ items, sectionIndex }: { items: FAQItem[]; sectionIndex: number }) {
+function FAQSection({ items }: { items: FAQItem[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
@@ -344,7 +344,7 @@ function ContentRenderer({ block, index }: { block: BlogContentBlock; index: num
 
     case 'faq':
       if (!block.faqItems || block.faqItems.length === 0) return null;
-      return <FAQSection key={index} items={block.faqItems} sectionIndex={index} />;
+      return <FAQSection key={index} items={block.faqItems} />;
 
     default:
       return null;

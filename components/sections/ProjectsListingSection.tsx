@@ -23,7 +23,6 @@ import {
   type ProjectListingItem,
   type ProjectFilters,
   type SortOption,
-  type GarageFilter,
 } from '@/data/projects';
 
 const PROJECTS_PER_PAGE = 24;
@@ -123,7 +122,7 @@ export function ProjectsListingSection({
   const [sortBy, setSortBy] = useState<SortOption>(urlState?.sort ?? initialSort);
   const [currentPage, setCurrentPage] = useState(urlState?.page ?? initialPage);
   const [searchQuery, setSearchQuery] = useState(searchParams?.get('q') ?? '');
-  const [isMobileFilterOpen, toggleMobileFilter, setIsMobileFilterOpen] = useToggle(false);
+  const [isMobileFilterOpen, , setIsMobileFilterOpen] = useToggle(false);
   const [isSortDropdownOpen, toggleSortDropdown, setIsSortDropdownOpen] = useToggle(false);
 
   // Debounced URL sync for search (avoid spamming router on every keystroke)

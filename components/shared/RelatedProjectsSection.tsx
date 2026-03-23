@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -30,10 +30,10 @@ export interface RelatedProjectsSectionProps {
 }
 
 export function RelatedProjectsSection({
-  currentProjectSlug,
+  // currentProjectSlug — kept in interface for future filtering
   allProjects: relatedProjects,
 }: RelatedProjectsSectionProps) {
-  const [swiperInstance, setSwiperInstance] = React.useState<SwiperType | null>(null);
+  const [, setSwiperInstance] = React.useState<SwiperType | null>(null);
   const [isMounted, setIsMounted] = React.useState(false);
 
   React.useEffect(() => {

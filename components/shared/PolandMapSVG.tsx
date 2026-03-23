@@ -218,6 +218,7 @@ export function PolandMapSVG({
         addTrackedListener(circle, 'mouseleave', leaveHandler);
       }
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addTrackedListener]);
 
   // Update voivodeship classes based on state

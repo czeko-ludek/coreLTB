@@ -7,7 +7,6 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { Icon } from '@/components/ui/Icon';
 import type { IconName } from '@/components/ui/Icon';
 import { OptionCard } from '@/components/ui/OptionCard';
-import { companyData } from '@/data/company-data';
 import { validatePolishPhone } from '@/lib/validation';
 import { useEmailSuggestion } from '@/hooks/useEmailSuggestion';
 import { validateEmailStructure } from '@/lib/email-validation';

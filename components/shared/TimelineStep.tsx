@@ -33,7 +33,7 @@ export function TimelineStep({
   imageSrc,
   imageAlt,
   isActive,
-  isLast = false,
+  // isLast — kept in interface for future use
   onInView,
 }: TimelineStepProps) {
   // useInView dla scrollspy (śledzenie aktywnego kroku)

@@ -138,10 +138,6 @@ export const AreasOfOperationSection: React.FC<AreasOfOperationSectionProps> = (
 		setTooltip(null);
 	}, []);
 
-	const activeVoivName = activeVoivodeship
-		? getVoivodeshipById(activeVoivodeship)?.name
-		: null;
-
 	return (
 		<section id={id} className="bg-background-beige py-8 md:py-16 sm:py-20">
 			<div className="mx-auto max-w-[83rem] px-4 sm:px-6 lg:px-8">

@@ -19,6 +19,7 @@ export function AboutCompanySection({
   content,
   stats,
   ctaButton,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   image,
 }: AboutCompanySectionProps) {
   const [isVisible, setIsVisible] = React.useState(false);
