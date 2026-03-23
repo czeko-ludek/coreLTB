@@ -82,8 +82,9 @@
 /blog /baza-wiedzy 301
 
 # ── CATCH-ALL (MUSZĄ BYĆ NA KOŃCU!) ───────────────────────────
+# UWAGA: Nie używać /* dla ścieżek które istnieją w apce!
+# Trailing slash (np. /oferta/uslugi-techniczne/) matchuje /* i tworzy pętlę.
 
 /oferta/uslugi-techniczne-w-budownictwie/* /oferta/uslugi-techniczne 301
-/oferta/uslugi-techniczne/* /oferta/uslugi-techniczne 301
 /oferta/budowa/* /oferta/kompleksowa-budowa-domow 301
 /blog/* /baza-wiedzy 301
