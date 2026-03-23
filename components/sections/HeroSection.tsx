@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@/components/ui';
@@ -61,40 +61,59 @@ export function HeroSection({
     return () => clearInterval(timer);
   }, [images.length]);
 
+  // Only render slides that are visible or about to be visible (current, previous, next)
+  // This prevents loading all 4 images at once — saves ~600 KiB on initial load
+  const visibleIndices = useMemo(() => {
+    const indices = new Set<number>();
+    indices.add(currentIndex);
+    // Keep previous slide rendered for smooth fade-out
+    indices.add((currentIndex - 1 + images.length) % images.length);
+    // Preload next slide for smooth fade-in
+    indices.add((currentIndex + 1) % images.length);
+    return indices;
+  }, [currentIndex, images.length]);
+
   return (
     <>
       {/* ====== MOBILE: obraz na gorze (do samej gory ekranu), tekst pod spodem ====== */}
       <div className="md:hidden -mt-[96px]">
         {/* Obraz - full-width, wjezdza pod sticky header */}
         <div className="relative h-[50vh] overflow-hidden">
-          {mobileImages.map((image, index) => (
-            <div
-              key={`m-${index}`}
-              className="absolute inset-0"
-              style={{
-                opacity: index === currentIndex ? 1 : 0,
-                transition: 'opacity 1.2s ease-in-out',
-              }}
-            >
+          {mobileImages.map((image, index) => {
+            // Only render active, previous, and next slides
+            if (!visibleIndices.has(index)) return null;
+
+            return (
               <div
+                key={`m-${index}`}
                 className="absolute inset-0"
-                key={`m-zoom-${index}-${slideKeys[index]}`}
                 style={{
-                  animation: 'kenBurnsZoom 6s linear forwards',
+                  opacity: index === currentIndex ? 1 : 0,
+                  transition: 'opacity 1.2s ease-in-out',
                 }}
               >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover"
-                  priority={index === 0}
-                  sizes="100vw"
-                  quality={60}
-                />
+                <div
+                  className="absolute inset-0"
+                  key={`m-zoom-${index}-${slideKeys[index]}`}
+                  style={{
+                    animation: 'kenBurnsZoom 6s linear forwards',
+                  }}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover"
+                    priority={index === 0}
+                    fetchPriority={index === 0 ? 'high' : undefined}
+                    sizes="100vw"
+                    quality={index === 0 ? 60 : 50}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
           {/* Cinematic Overlay - jak na desktop */}
           <div className="absolute inset-0 z-[1]">
             <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/30 via-transparent to-zinc-900/50" />
@@ -155,34 +174,41 @@ export function HeroSection({
       <div className="hidden md:block px-4 md:px-[50px] mt-3 md:mt-6 mb-3 md:mb-6">
         <section className="relative min-h-[53vh] flex flex-col justify-center overflow-hidden bg-zinc-900 rounded-2xl">
           {/* Background Images with Zoom & Fade - Ken Burns style */}
-          {images.map((image, index) => (
-            <div
-              key={`d-${index}`}
-              className="absolute inset-0"
-              style={{
-                opacity: index === currentIndex ? 1 : 0,
-                transition: 'opacity 1.2s ease-in-out',
-              }}
-            >
+          {images.map((image, index) => {
+            // Only render active, previous, and next slides
+            if (!visibleIndices.has(index)) return null;
+
+            return (
               <div
+                key={`d-${index}`}
                 className="absolute inset-0"
-                key={`zoom-${index}-${slideKeys[index]}`}
                 style={{
-                  animation: 'kenBurnsZoom 6s linear forwards',
+                  opacity: index === currentIndex ? 1 : 0,
+                  transition: 'opacity 1.2s ease-in-out',
                 }}
               >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover"
-                  priority={index === 0}
-                  sizes="100vw"
-                  quality={60}
-                />
+                <div
+                  className="absolute inset-0"
+                  key={`zoom-${index}-${slideKeys[index]}`}
+                  style={{
+                    animation: 'kenBurnsZoom 6s linear forwards',
+                  }}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover"
+                    priority={index === 0}
+                    fetchPriority={index === 0 ? 'high' : undefined}
+                    sizes="100vw"
+                    quality={index === 0 ? 60 : 50}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
 
           {/* Cinematic Overlay */}
           <div className="absolute inset-0 z-[1]">

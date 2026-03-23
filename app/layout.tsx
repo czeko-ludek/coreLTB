@@ -57,7 +57,7 @@ const headerData = {
       { platform: "instagram" as const, href: "https://www.instagram.com/coreltb" },
     ],
   },
-  logo: { src: "/images/logo-black.webp", alt: "CoreLTB Builders" },
+  logo: { src: "/images/logo-black-sm.webp", alt: "CoreLTB Builders" },
   navLinks: [
     { label: "Strona główna", href: "/" },
     { label: "O nas", href: "/o-nas" },
@@ -110,7 +110,7 @@ const headerData = {
 
 // Footer data
 const footerData = {
-  logo: { src: "/images/logo-white.webp", alt: "CoreLTB Builders" },
+  logo: { src: "/images/logo-white-sm.webp", alt: "CoreLTB Builders" },
   about: "Budowa domów jednorodzinnych pod klucz na Śląsku, w Małopolsce i na Opolszczyźnie. Od 2005 roku łączymy rzemieślniczą dokładność z profesjonalnym zarządzaniem projektami.",
   topBar: {
     phone: "+48 664 123 757",
@@ -201,6 +201,25 @@ export default function RootLayout({
   return (
     <html lang="pl" data-scroll-behavior="smooth">
       <head>
+        {/* Preload LCP hero image (mobile — most users) */}
+        <link
+          rel="preload"
+          as="image"
+          type="image/webp"
+          href="/images/hero/slide-1-mobile.webp"
+          media="(max-width: 767px)"
+        />
+        {/* Preload LCP hero image (desktop) */}
+        <link
+          rel="preload"
+          as="image"
+          type="image/webp"
+          href="/images/hero/slide-1.webp"
+          media="(min-width: 768px)"
+        />
+        {/* Preconnect to GTM to reduce connection overhead */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         {/* Google Consent Mode v2 — defaults BEFORE GTM loads (required for EOG/GDPR) */}
         <Script id="consent-defaults" strategy="beforeInteractive">{`
           window.dataLayer = window.dataLayer || [];
