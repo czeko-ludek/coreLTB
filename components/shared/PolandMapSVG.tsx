@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { clsx } from 'clsx';
 import {
   VoivodeshipId,
@@ -53,6 +53,7 @@ export function PolandMapSVG({
 }: PolandMapSVGProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
+  const [svgLoaded, setSvgLoaded] = useState(false);
 
   // Store callbacks in refs to always have current versions in event listeners
   const callbacksRef = useRef<CallbackRefs>({
@@ -102,6 +103,9 @@ export function PolandMapSVG({
             // Setup initial interactivity
             setupVoivodeshipInteractivity();
             setupCityInteractivity();
+
+            // Signal that SVG is ready so visibility effect can apply initial classes
+            setSvgLoaded(true);
           }
         }
       } catch (error) {
@@ -280,7 +284,7 @@ export function PolandMapSVG({
         label.classList.add('label-visible');
       }
     });
-  }, [view, activeVoivodeship, hoveredVoivodeship, hoveredCity]);
+  }, [view, activeVoivodeship, hoveredVoivodeship, hoveredCity, svgLoaded]);
 
   return (
     <div
