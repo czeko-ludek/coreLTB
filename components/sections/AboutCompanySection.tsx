@@ -57,7 +57,7 @@ export function AboutCompanySection({
               {/* Logo */}
               <Image
                 src="/images/logo-white.webp"
-                alt="CoreLTB Builders — Generalne Wykonawstwo"
+                alt="CoreLTB Builders — Budowa Domów"
                 fill
                 className="object-contain p-12 md:p-20"
                 sizes="(max-width: 1024px) 100vw, 50vw"

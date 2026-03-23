@@ -42,8 +42,8 @@ export default function Home() {
 	// About Company Section Data
 	const aboutData = {
 		header: {
-			label: "GENERALNE WYKONAWSTWO",
-			title: "Dlaczego inżynierowie wybierają CoreLTB?",
+			label: "BUDOWA DOMÓW",
+			title: "Dlaczego klienci wybierają CoreLTB?",
 			theme: "light" as const,
 		},
 		content: [
@@ -75,7 +75,7 @@ export default function Home() {
 	const servicesData = {
 		header: {
 			label: "ZAKRES KOMPETENCJI",
-			title: "Generalne wykonawstwo domów – od projektu po klucz",
+			title: "Budowa domów od projektu po klucz",
 			theme: "light" as const,
 		},
 		services: [
@@ -83,7 +83,7 @@ export default function Home() {
 				iconName: "home" as const,
 				title: "Kompleksowa budowa domów",
 				description:
-					"Generalne wykonawstwo (SSO / Deweloperka) w reżimie WT2026. Płyty fundamentowe, systemowe dylatacje, materiał z hurtowni w cenie.",
+					"Budowa domów (SSO / Deweloperka) w reżimie WT2026. Płyty fundamentowe, systemowe dylatacje, materiał z hurtowni w cenie.",
 				image: "/images/uslugi/kompleksowa-budowa-domow/timeline/odbior-gwarancja.webp",
 				href: "/oferta/kompleksowa-budowa-domow",
 			},

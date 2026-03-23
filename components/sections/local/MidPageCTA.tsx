@@ -37,7 +37,7 @@ export function MidPageCTA({ headline, highlightedText, phone, image, buttons }:
           >
             <div className="p-6 md:p-8 lg:p-10 flex flex-col justify-center h-full">
               <span className="text-primary font-bold text-xs uppercase tracking-[0.2em] block mb-3">
-                Bezpłatna konsultacja
+                Kalkulator budowy
               </span>
 
               <h2 className="text-3xl md:text-4xl font-black text-white leading-tight mb-4">
@@ -47,7 +47,7 @@ export function MidPageCTA({ headline, highlightedText, phone, image, buttons }:
               </h2>
 
               <p className="text-zinc-400 text-base mb-6 max-w-md">
-                Porozmawiajmy o Twoim projekcie. Sprawdzimy teren, dobierzemy technologię i przedstawimy kosztorys.
+                Skonfiguruj parametry domu i poznaj szczegółowy kosztorys z podziałem na etapy — w 60 sekund.
               </p>
 
               {/* Phone */}

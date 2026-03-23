@@ -2296,7 +2296,7 @@ servicesAccordion: {
 philosophyTimeline: {
   header: {
     label: 'SYSTEM REALIZACJI WNĘTRZ',
-    title: 'Generalne wykonawstwo zamiast "pilnowania ekip"', // Konkret
+    title: 'Budowa pod klucz zamiast "pilnowania ekip"', // Konkret
     description: 'Wykończenie to logistyka setek produktów i koordynacja 5-7 różnych branż. W CoreLTB Builders zastępujemy chaos "systemu gospodarczego" (gdzie Ty jesteś kierownikiem budowy) profesjonalnym procesem "fit-out". Przejmujemy klucze i odpowiedzialność.',
   },
   items: [

@@ -76,12 +76,12 @@ export const sharedTemplate: SharedLocalTemplate = {
 
   // ── Mid-page CTA ──
   midCTA: {
-    headline: 'Gotowy na budowę',
+    headline: 'Ile kosztuje budowa domu',
     highlightedText: 'w {cityNameLocative}?',
     phone: '+48 664 123 757',
     buttons: [
-      { text: 'Zadzwoń do nas', href: 'tel:+48664123757', variant: 'primary' },
-      { text: 'Umów konsultację', href: '/umow-konsultacje', variant: 'outline-white' },
+      { text: 'Oblicz koszt budowy', href: '/wycena', variant: 'primary' },
+      { text: 'Zadzwoń do nas', href: 'tel:+48664123757', variant: 'outline-white' },
     ],
   },
 

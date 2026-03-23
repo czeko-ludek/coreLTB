@@ -64,7 +64,7 @@ export default function AboutPage() {
 		competencies: [
 			{
 				icon: "building" as const,
-				title: "Generalne wykonawstwo",
+				title: "Budowa domów",
 				description:
 					"Zastępujemy inwestora w procesie budowlanym. Przejmujemy ryzyko kontraktowe, logistykę materiałową oraz koordynację wszystkich branż (od ziemnych po instalacyjne).",
 			},

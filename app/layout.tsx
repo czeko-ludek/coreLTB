@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pl_PL",
     siteName: "CoreLTB Builders",
-    title: "CoreLTB Builders — Generalne Wykonawstwo Domów na Śląsku",
+    title: "CoreLTB Builders — Budowa Domów na Śląsku",
     description: "Budowa domów pod klucz na Śląsku, w Małopolsce i na Opolszczyźnie. 15 lat doświadczenia, 150+ oddanych inwestycji. Stała cena w umowie.",
     images: [
       {
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "CoreLTB Builders — Generalne Wykonawstwo Domów na Śląsku",
+    title: "CoreLTB Builders — Budowa Domów na Śląsku",
     description: "Budowa domów pod klucz na Śląsku. 15 lat doświadczenia, 150+ oddanych inwestycji.",
     images: ["/images/og-image.jpg"],
   },
