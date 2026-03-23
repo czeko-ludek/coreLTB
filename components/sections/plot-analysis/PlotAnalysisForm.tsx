@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { Icon } from '@/components/ui/Icon';
 import type { IconName } from '@/components/ui/Icon';
 import { validatePolishPhone } from '@/lib/validation';
+import { captureUTMParams, getUTMParams, trackLead } from '@/lib/analytics';
 
 // ─── Types ──────────────────────────────────────────────
 
@@ -80,6 +81,9 @@ export const PlotAnalysisForm = () => {
   const honeypotRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
 
+  // Capture UTM params on mount
+  useEffect(() => { captureUTMParams(); }, []);
+
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -130,6 +134,8 @@ export const PlotAnalysisForm = () => {
             mpzp: state.mpzp || undefined,
             notes: state.notes || undefined,
             website: honeypotRef.current?.value || '',
+            // UTM attribution
+            ...(() => { const u = getUTMParams(); return { utm_source: u.utm_source || '', utm_medium: u.utm_medium || '', utm_campaign: u.utm_campaign || '', landing_page: u.landing_page || '', referrer: u.referrer || '' }; })(),
           },
         }),
       });
@@ -146,8 +152,8 @@ export const PlotAnalysisForm = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setIsSuccess(true);
 
-    // TODO: GA4 event — track lead conversion
-    // trackEvent('generate_lead', { form: 'plot_analysis', address: state.address });
+    // GA4 conversion event (via GTM dataLayer)
+    trackLead('plot_analysis', { address: state.address });
   }
 
   // ─── Form View ────────────────────────────────────────

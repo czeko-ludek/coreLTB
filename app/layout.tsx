@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Funnel_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Header, Footer } from "@/components/sections";
 import { ErrorBoundary } from "@/components/shared";
@@ -7,13 +8,15 @@ import { FloatingPhoneCTA } from "@/components/ui/FloatingPhoneCTA";
 import { CookieConsent } from "@/components/ui/CookieConsent";
 import { companyData } from "@/data/company-data";
 
+const GTM_ID = "GTM-TPFV68BN";
+
 const manrope = Manrope({ subsets: ["latin"], display: "swap" });
 const funnelSans = Funnel_Sans({ subsets: ["latin"], display: "swap", variable: "--font-heading" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(companyData.url),
-  title: "CoreLTB Builders - Zbuduj Swój Wymarzony Projekt z Nami",
-  description: "Profesjonalne usługi budowlane. Dostarczamy klientom większą przejrzystość projektów, lepszy wgląd i mniej chaosu.",
+  title: "CoreLTB Builders — Budowa Domów Pod Klucz | Śląsk i Małopolska",
+  description: "Budowa domów jednorodzinnych od projektu po klucz. 15 lat doświadczenia, 150+ oddanych inwestycji, stała cena w umowie. Śląsk, Małopolska, Opolszczyzna.",
   icons: {
     icon: [
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
@@ -64,7 +67,7 @@ const headerData = {
     { label: "Kontakt", href: "/kontakt" },
   ],
   searchEnabled: false,
-  ctaButton: { text: "Wycena", href: "/wycena" },
+  ctaButton: { text: "Wyceń budowę", href: "/wycena" },
   megaMenuItems: [
     {
       icon: "home" as const,
@@ -108,7 +111,7 @@ const headerData = {
 // Footer data
 const footerData = {
   logo: { src: "/images/logo-white.webp", alt: "CoreLTB Builders" },
-  about: "Generalny wykonawca domów jednorodzinnych na Śląsku, w Małopolsce i na Opolszczyźnie. Od 2005 roku łączymy rzemieślniczą dokładność z profesjonalnym zarządzaniem projektami.",
+  about: "Budowa domów jednorodzinnych pod klucz na Śląsku, w Małopolsce i na Opolszczyźnie. Od 2005 roku łączymy rzemieślniczą dokładność z profesjonalnym zarządzaniem projektami.",
   topBar: {
     phone: "+48 664 123 757",
     phoneHref: "tel:+48664123757",
@@ -197,8 +200,40 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl" data-scroll-behavior="smooth">
-      {/* Preconnect/dns-prefetch removed: next/font/google hosts fonts locally, no external requests needed */}
+      <head>
+        {/* Google Consent Mode v2 — defaults BEFORE GTM loads (required for EOG/GDPR) */}
+        <Script id="consent-defaults" strategy="beforeInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('consent', 'default', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'functionality_storage': 'granted',
+            'security_storage': 'granted',
+            'wait_for_update': 500
+          });
+        `}</Script>
+        {/* Google Tag Manager */}
+        <Script id="gtm" strategy="afterInteractive">{`
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','${GTM_ID}');
+        `}</Script>
+      </head>
       <body className={`${manrope.className} ${funnelSans.variable}`}>
+        {/* GTM noscript fallback */}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <Header {...headerData} />
         <ErrorBoundary>
           {children}

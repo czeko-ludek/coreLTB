@@ -118,9 +118,19 @@ function baseTemplate(title: string, rows: [string, string][]): string {
 </div></body></html>`;
 }
 
+function utmRows(d: Record<string, string>): [string, string][] {
+  const rows: [string, string][] = [];
+  if (d.utm_source) rows.push(['Źródło (UTM)', `${d.utm_source} / ${d.utm_medium || '-'}`]);
+  if (d.utm_campaign) rows.push(['Kampania', d.utm_campaign]);
+  if (d.landing_page) rows.push(['Strona wejścia', d.landing_page]);
+  if (d.referrer) rows.push(['Referrer', d.referrer]);
+  return rows;
+}
+
 function calculatorEmail(d: Record<string, string>): { subject: string; html: string } {
+  const utmTag = d.utm_source ? ` [${d.utm_source}/${d.utm_medium || '?'}]` : '';
   return {
-    subject: `[Wycena] ${d.name} — ${d.area} m² ${d.finish || ''}`.trim(),
+    subject: `[Wycena] ${d.name} — ${d.area} m² ${d.finish || ''}${utmTag}`.trim(),
     html: baseTemplate('Nowa wycena z kalkulatora', [
       ['Imię i nazwisko', d.name],
       ['Telefon', d.phone],
@@ -137,13 +147,15 @@ function calculatorEmail(d: Record<string, string>): { subject: string; html: st
       ['Ogrzewanie', d.heating],
       ['Szacunek netto', d.estimateTotal],
       ['Szacunek brutto', d.estimateTotalBrutto],
+      ...utmRows(d),
     ]),
   };
 }
 
 function consultationEmail(d: Record<string, string>): { subject: string; html: string } {
+  const utmTag = d.utm_source ? ` [${d.utm_source}/${d.utm_medium || '?'}]` : '';
   return {
-    subject: `[Konsultacja] ${d.name} — ${d.service || 'Ogólne'}`,
+    subject: `[Konsultacja] ${d.name} — ${d.service || 'Ogólne'}${utmTag}`,
     html: baseTemplate('Nowe zapytanie o konsultację', [
       ['Imię i nazwisko', d.name],
       ['Telefon', d.phone],
@@ -157,13 +169,15 @@ function consultationEmail(d: Record<string, string>): { subject: string; html: 
       ['Etap budowy', d.buildStage],
       ['Rodzaj projektu', d.projectType],
       ['Uwagi', d.notes],
+      ...utmRows(d),
     ]),
   };
 }
 
 function plotAnalysisEmail(d: Record<string, string>): { subject: string; html: string } {
+  const utmTag = d.utm_source ? ` [${d.utm_source}/${d.utm_medium || '?'}]` : '';
   return {
-    subject: `[Analiza działki] ${d.name} — ${d.address || ''}`.trim(),
+    subject: `[Analiza działki] ${d.name} — ${d.address || ''}${utmTag}`.trim(),
     html: baseTemplate('Nowe zgłoszenie analizy działki', [
       ['Imię i nazwisko', d.name],
       ['Telefon', d.phone],
@@ -173,6 +187,7 @@ function plotAnalysisEmail(d: Record<string, string>): { subject: string; html: 
       ['Księga wieczysta', d.landRegister],
       ['MPZP', d.mpzp],
       ['Uwagi', d.notes],
+      ...utmRows(d),
     ]),
   };
 }

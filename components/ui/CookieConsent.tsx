@@ -3,6 +3,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: Record<string, unknown>[];
+  }
+}
+
 const COOKIE_KEY = 'coreltb-cookies';
 
 type ConsentValue = 'all' | 'necessary' | null;
@@ -26,8 +33,23 @@ export function CookieConsent() {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
+    const stored = getStoredConsent();
+
+    // Przywróć consent z poprzedniej wizyty (GTM startuje z 'denied')
+    if (stored && typeof window !== 'undefined' && typeof window.gtag === 'function') {
+      if (stored === 'all') {
+        window.gtag('consent', 'update', {
+          analytics_storage: 'granted',
+          ad_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted',
+        });
+      }
+      // 'necessary' = defaults remain 'denied', nothing to update
+    }
+
     // Nie pokazuj jeśli user już wybrał
-    if (getStoredConsent()) return;
+    if (stored) return;
 
     // Pokaż po krótkim opóźnieniu żeby nie walczyć z FCP
     const timer = setTimeout(() => {
@@ -44,8 +66,24 @@ export function CookieConsent() {
   const handleConsent = useCallback((value: 'all' | 'necessary') => {
     localStorage.setItem(COOKIE_KEY, value);
 
-    // TODO: Kiedy GA4 będzie podpięte, tutaj odpalamy/blokujemy skrypty
-    // if (value === 'all') { window.gtag?.('consent', 'update', { analytics_storage: 'granted' }); }
+    // Google Consent Mode v2 — update consent based on user choice
+    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+      if (value === 'all') {
+        window.gtag('consent', 'update', {
+          analytics_storage: 'granted',
+          ad_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted',
+        });
+      } else {
+        window.gtag('consent', 'update', {
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+        });
+      }
+    }
 
     // Animacja wyjścia
     setAnimate(false);

@@ -31,6 +31,18 @@ import {
 } from '@/data/pricing';
 import { companyData } from '@/data/company-data';
 import { validatePolishPhone } from '@/lib/validation';
+import {
+  captureUTMParams,
+  getUTMParams,
+  trackEvent,
+  trackLead,
+  trackCalculatorStart,
+  trackCalculatorStep,
+  trackEstimateView,
+  trackFormFocus,
+  trackFormError,
+  trackPhoneClick,
+} from '@/lib/analytics';
 
 // ─── State ──────────────────────────────────────────────
 
@@ -170,13 +182,29 @@ export const CalculatorForm = () => {
     }
   }, [searchParams]);
 
+  // Capture UTM params on mount
+  useEffect(() => {
+    captureUTMParams();
+  }, []);
+
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
+  // Track calculator funnel steps
+  const hasTrackedStart = useRef(false);
   const set = (field: string, value: string | number | boolean | File | null) => {
+    // Track first interaction
+    if (!hasTrackedStart.current) {
+      hasTrackedStart.current = true;
+      trackCalculatorStart();
+    }
+    // Track each step change
+    if (typeof value === 'string' || typeof value === 'number') {
+      trackCalculatorStep(field, value);
+    }
     dispatch({ type: 'SET_FIELD', field, value });
   };
 
@@ -278,7 +306,8 @@ export const CalculatorForm = () => {
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Send lead email
+    // Send lead email (with UTM data for attribution)
+    const utm = getUTMParams();
     try {
       await fetch('/api/lead', {
         method: 'POST',
@@ -303,6 +332,13 @@ export const CalculatorForm = () => {
             estimateTotalBrutto: `${formatPrice(Math.round((result.totalBrutto.min + result.totalBrutto.max) / 2))} zl brutto`,
             projektName: state.projectName || undefined,
             website: honeypotRef.current?.value || '',
+            // UTM attribution
+            utm_source: utm.utm_source || '',
+            utm_medium: utm.utm_medium || '',
+            utm_campaign: utm.utm_campaign || '',
+            utm_content: utm.utm_content || '',
+            landing_page: utm.landing_page || '',
+            referrer: utm.referrer || '',
           },
         }),
       });
@@ -310,8 +346,12 @@ export const CalculatorForm = () => {
       console.error('[Calculator] Email send error:', err);
     }
 
-    // TODO: GA4 event — track lead conversion
-    // trackEvent('generate_lead', { form: 'calculator', area: state.area, finish: state.finish });
+    // GA4 conversion event (via GTM dataLayer)
+    trackLead('calculator', {
+      area: String(state.area),
+      finish: state.finish,
+      estimate_total: String(Math.round((result.total.min + result.total.max) / 2)),
+    });
   }
 
   function handlePrint() {

@@ -9,6 +9,7 @@ import type { IconName } from '@/components/ui/Icon';
 import { OptionCard } from '@/components/ui/OptionCard';
 import { companyData } from '@/data/company-data';
 import { validatePolishPhone } from '@/lib/validation';
+import { captureUTMParams, getUTMParams, trackLead } from '@/lib/analytics';
 
 // ─── Types ──────────────────────────────────────────────
 
@@ -133,6 +134,9 @@ export const ConsultationForm = () => {
     }
   }, [searchParams]);
 
+  // Capture UTM params on mount
+  useEffect(() => { captureUTMParams(); }, []);
+
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
@@ -196,6 +200,8 @@ export const ConsultationForm = () => {
             contactPref: state.contactPref || undefined,
             notes: state.notes || undefined,
             website: honeypotRef.current?.value || '',
+            // UTM attribution
+            ...(() => { const u = getUTMParams(); return { utm_source: u.utm_source || '', utm_medium: u.utm_medium || '', utm_campaign: u.utm_campaign || '', landing_page: u.landing_page || '', referrer: u.referrer || '' }; })(),
             hasPlot: state.hasPlot || undefined,
             hasProject: state.hasProject || undefined,
             area: state.plannedArea ? `${state.plannedArea} m²` : undefined,
@@ -218,8 +224,8 @@ export const ConsultationForm = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setIsSuccess(true);
 
-    // TODO: GA4 event — track lead conversion
-    // trackEvent('generate_lead', { form: 'consultation', service: state.service, city: state.city });
+    // GA4 conversion event (via GTM dataLayer)
+    trackLead('consultation', { service: state.service, city: state.city });
   }
 
   // ─── Form View ────────────────────────────────────────
