@@ -185,14 +185,23 @@ export function Header({
                   </button>
                 )}
                 
-                <Button
-                  variant="primary"
-                  size="md"
-                  href={ctaButton.href}
-                  leftIcon={<Icon name="calculator" size="sm" />}
-                >
-                  {ctaButton.text}
-                </Button>
+                {/* Mobile: compact button */}
+                <span className="lg:hidden">
+                  <Button variant="primary" size="sm" href={ctaButton.href}>
+                    Wycena
+                  </Button>
+                </span>
+                {/* Desktop: full button with icon */}
+                <span className="hidden lg:inline-flex">
+                  <Button
+                    variant="primary"
+                    size="md"
+                    href={ctaButton.href}
+                    leftIcon={<Icon name="calculator" size="sm" />}
+                  >
+                    {ctaButton.text}
+                  </Button>
+                </span>
 
                 {/* Hamburger Menu - Mobile Only */}
                 <button
