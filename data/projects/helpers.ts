@@ -265,6 +265,80 @@ export function sortProjects(projects: ProjectListingItem[], sortBy: SortOption)
   const sorted = [...projects];
 
   switch (sortBy) {
+    case 'mixed': {
+      // Balanced deterministic shuffle — ensures smaller sources (Z500) get fair
+      // visibility on page 1, then fills remaining slots with larger sources.
+      // Uses slug-based hash for stable, random-looking order within each source.
+      const PAGE = 24;
+      const hash = (s: string): number => {
+        let h = 0x9e3779b9;
+        for (let i = 0; i < s.length; i++) {
+          h = Math.imul(h ^ s.charCodeAt(i), 0x5bd1e995);
+          h ^= h >>> 15;
+        }
+        return h >>> 0;
+      };
+
+      // Group by source, shuffle each group deterministically
+      const groups = new Map<string, ProjectListingItem[]>();
+      for (const p of sorted) {
+        const src = p.source || 'other';
+        if (!groups.has(src)) groups.set(src, []);
+        groups.get(src)!.push(p);
+      }
+      for (const arr of groups.values()) {
+        arr.sort((a, b) => hash(a.slug) - hash(b.slug));
+      }
+
+      // Sort sources: smallest first (so they get guaranteed slots)
+      const sources = [...groups.entries()].sort((a, b) => a[1].length - b[1].length);
+      const totalSources = sources.length;
+
+      // Allocate per-page slots: each source gets at least floor(PAGE / totalSources)
+      // but at most its own length. Remainder goes to larger sources.
+      const perPage = Math.floor(PAGE / totalSources); // e.g. 24/3 = 8
+      const allocations = new Map<string, number>();
+      let remaining = PAGE;
+
+      for (const [src, arr] of sources) {
+        const take = Math.min(perPage, arr.length);
+        allocations.set(src, take);
+        remaining -= take;
+      }
+      // Distribute leftover slots to larger sources (last = largest)
+      for (let i = sources.length - 1; i >= 0 && remaining > 0; i--) {
+        const [src, arr] = sources[i];
+        const current = allocations.get(src)!;
+        const canTake = Math.min(remaining, arr.length - current);
+        allocations.set(src, current + canTake);
+        remaining -= canTake;
+      }
+
+      // Build result: for each page-worth, take allocated amounts then shuffle together
+      const result: ProjectListingItem[] = [];
+      const cursors = new Map<string, number>(sources.map(([src]) => [src, 0]));
+      const totalProjects = sorted.length;
+
+      while (result.length < totalProjects) {
+        const pageBatch: ProjectListingItem[] = [];
+
+        for (const [src, arr] of sources) {
+          const cursor = cursors.get(src)!;
+          const remaining = arr.length - cursor;
+          const take = Math.min(allocations.get(src)!, remaining);
+          for (let i = 0; i < take; i++) {
+            pageBatch.push(arr[cursor + i]);
+          }
+          cursors.set(src, cursor + take);
+        }
+
+        // Shuffle the page batch deterministically so sources don't form columns
+        pageBatch.sort((a, b) => hash(a.slug + String(result.length)) - hash(b.slug + String(result.length)));
+        result.push(...pageBatch);
+      }
+
+      return result;
+    }
     case 'newest':     return sorted.sort((a, b) => b.dateAdded - a.dateAdded);
     case 'price-asc':  return sorted.sort((a, b) => a.costNum - b.costNum);
     case 'price-desc': return sorted.sort((a, b) => b.costNum - a.costNum);

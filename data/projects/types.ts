@@ -42,7 +42,7 @@ export interface ProjectCostTable {
 
 export type ProjectCategory = 'jednorodzinny' | 'dwulokalowy' | 'z-poddaszem' | 'parterowy' | 'pietrowy';
 export type ProjectTechnology = 'MUROWANY' | 'DREWNIANY';
-export type SortOption = 'newest' | 'price-asc' | 'price-desc' | 'area-asc' | 'area-desc';
+export type SortOption = 'mixed' | 'newest' | 'price-asc' | 'price-desc' | 'area-asc' | 'area-desc';
 
 /** Źródło/wydawca projektu */
 export type ProjectSource = 'galeriadomow' | 'z500' | 'malachit' | 'own';
@@ -161,6 +161,7 @@ export const surfaceRanges: SurfaceRange[] = [
 ];
 
 export const sortOptions = [
+  { id: 'mixed',      label: 'Polecane' },
   { id: 'newest',     label: 'Najnowsze' },
   { id: 'price-asc',  label: 'Cena rosnąco' },
   { id: 'price-desc', label: 'Cena malejąco' },

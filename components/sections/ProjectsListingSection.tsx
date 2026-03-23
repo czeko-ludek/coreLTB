@@ -63,7 +63,7 @@ function buildUrl(
   if (filters.source.length)      params.set('source',     filters.source.join(','));
   if (filters.garage.length)      params.set('garage',     filters.garage.join(','));
   if (filters.surfaceRange)       params.set('surface',    filters.surfaceRange);
-  if (sortBy !== 'newest')        params.set('sort',       sortBy);   // default pominięty
+  if (sortBy !== 'mixed')         params.set('sort',       sortBy);   // default pominięty
   if (page > 1)                   params.set('page',       String(page)); // page=1 pominięta
 
   const query = params.toString();
@@ -90,7 +90,7 @@ function parseFiltersFromURL(sp: URLSearchParams): {
       garage:     parseList(sp.get('garage'))       as ProjectFilters['garage'],
       surfaceRange: sp.get('surface') || null,
     },
-    sort: (sp.get('sort') || 'newest') as SortOption,
+    sort: (sp.get('sort') || 'mixed') as SortOption,
     page: Math.max(1, parseInt(sp.get('page') || '1', 10)),
   };
 }
@@ -102,7 +102,7 @@ export function ProjectsListingSection({
   description,
   projects,
   initialFilters,
-  initialSort   = 'newest',
+  initialSort   = 'mixed',
   initialPage   = 1,
 }: ProjectsListingSectionProps) {
   const router   = useRouter();
@@ -167,7 +167,7 @@ export function ProjectsListingSection({
   const handleReset = useCallback(() => {
     const empty: ProjectFilters = { technology: [], category: [], surfaceRange: null, source: [], garage: [] };
     setFilters(empty);
-    setSortBy('newest');
+    setSortBy('mixed');
     setSearchQuery('');
     setCurrentPage(1);
     router.replace(pathname, { scroll: false }); // czyste URL bez parametrów

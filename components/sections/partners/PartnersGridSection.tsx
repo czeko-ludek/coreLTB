@@ -83,9 +83,11 @@ function PartnerRow({
           {/* Description */}
           <div className="space-y-3 mb-5">
             {partner.description.map((paragraph, i) => (
-              <p key={i} className="text-sm lg:text-base text-zinc-600 leading-relaxed">
-                {paragraph}
-              </p>
+              <p
+                key={i}
+                className="text-sm lg:text-base text-zinc-600 leading-relaxed [&_a]:text-primary [&_a]:font-semibold [&_a]:underline [&_a]:underline-offset-2 hover:[&_a]:text-primary-dark"
+                dangerouslySetInnerHTML={{ __html: paragraph }}
+              />
             ))}
           </div>
 

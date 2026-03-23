@@ -41,8 +41,8 @@ export function PartnerLogosMarquee({
         <div className="absolute left-0 top-0 bottom-0 w-16 lg:w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 lg:w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
-        {/* Scrolling track */}
-        <div className="flex items-center animate-marquee">
+        {/* Scrolling track — w-max prevents flex from being constrained to parent width */}
+        <div className="flex items-center w-max animate-marquee">
           {doubled.map((logo, i) => {
             const scale = logo.scale ?? 1;
             const h = Math.round(56 * scale);
