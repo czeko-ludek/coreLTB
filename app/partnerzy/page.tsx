@@ -6,7 +6,7 @@ import { PartnersGridSection } from '@/components/sections/partners/PartnersGrid
 import { WhyPartnerSection } from '@/components/sections/partners/WhyPartnerSection';
 
 export const metadata: Metadata = {
-  title: 'Nasi Partnerzy — Firmy, z którymi budujemy | CoreLTB Builders',
+  title: 'Nasi Partnerzy – Firmy, z którymi budujemy | CoreLTB Builders',
   description:
     'Poznaj zaufanych partnerów CoreLTB Builders: dostawców materiałów budowlanych, biura nieruchomości, biura projektowe i firmy OZE na Śląsku i w Małopolsce.',
   alternates: { canonical: 'https://coreltb.pl/partnerzy' },

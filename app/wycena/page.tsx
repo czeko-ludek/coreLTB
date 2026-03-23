@@ -10,7 +10,7 @@ import { ContactCTASection } from '@/components/sections/ContactCTASection';
 import { companyData } from '@/data/company-data';
 
 export const metadata: Metadata = {
-  title: 'Bezpłatna Wycena Budowy Domu — Kalkulator Online | CoreLTB Builders',
+  title: 'Bezpłatna Wycena Budowy Domu – Kalkulator Online | CoreLTB Builders',
   description:
     'Skonfiguruj parametry domu i otrzymaj wstępną wycenę budowy. Powierzchnia, materiał, dach, kondygnacje — wyceń w 60 sekund. Oddzwonimy z dokładną kalkulacją.',
   alternates: {

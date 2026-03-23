@@ -10,7 +10,7 @@ import { Icon } from '@/components/ui/Icon';
 import { companyData } from '@/data/company-data';
 
 export const metadata: Metadata = {
-  title: 'Analiza Działki Budowlanej — Grunt, MPZP, Uzbrojenie | CoreLTB Builders',
+  title: 'Analiza Działki Budowlanej – Grunt, MPZP, Uzbrojenie | CoreLTB Builders',
   description:
     'Zamów analizę działki budowlanej. Sprawdzimy warunki gruntowe, MPZP, uzbrojenie mediów i szkody górnicze. Bezpłatna przy umowie na budowę — Śląsk i Małopolska.',
   alternates: {

@@ -4,7 +4,7 @@ import { BentoContactSection, ContactInfo } from '@/components/sections';
 import { companyData } from '@/data/company-data';
 
 export const metadata: Metadata = {
-  title: 'Kontakt — CoreLTB Builders | Budowa Domów Śląsk',
+  title: 'Kontakt – CoreLTB Builders | Budowa Domów Śląsk',
   description:
     'Skontaktuj się z CoreLTB Builders. Zadzwoń +48 664 123 757 lub napisz biuro@coreltb.pl. Biura: Jaworzno (HQ) i Wodzisław Śląski.',
   alternates: {

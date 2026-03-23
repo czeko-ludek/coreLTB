@@ -223,7 +223,7 @@ export const allServicesV2: ServiceV2[] = [
     slug: 'kompleksowa-budowa-domow',
     id: 'kompleksowa-budowa-domow',
     category: 'Kompleksowa budowa domów',
-    title: 'Budowa Domów Pod Klucz — Śląsk', // Zmiana pod SEO!
+    title: 'Budowa Domów Pod Klucz – Śląsk', // Zmiana pod SEO!
 
     // Listing (karta na stronie /oferta)
     listing: {

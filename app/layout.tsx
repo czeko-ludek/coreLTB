@@ -15,7 +15,7 @@ const funnelSans = Funnel_Sans({ subsets: ["latin"], display: "swap", variable: 
 
 export const metadata: Metadata = {
   metadataBase: new URL(companyData.url),
-  title: "CoreLTB Builders — Budowa Domów Pod Klucz | Śląsk i Małopolska",
+  title: "CoreLTB Builders – Budowa Domów Pod Klucz | Śląsk i Małopolska",
   description: "Budowa domów jednorodzinnych od projektu po klucz. 15 lat doświadczenia, 150+ oddanych inwestycji, stała cena w umowie. Śląsk, Małopolska, Opolszczyzna.",
   icons: {
     icon: [

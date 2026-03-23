@@ -14,7 +14,7 @@ import { AnimatedServiceGrid } from "@/components/shared/AnimatedServiceGrid";
 import { getAllServicesListingData } from "@/data/servicesV2";
 
 export const metadata: Metadata = {
-	title: "Usługi Budowlane i Projektowe — Śląsk, Małopolska | CoreLTB Builders",
+	title: "Usługi Budowlane i Projektowe – Śląsk, Małopolska | CoreLTB Builders",
 	description:
 		"Budowa domów pod klucz, projektowanie, nadzór inwestorski i badania geologiczne. Kompleksowa obsługa inwestycji na Śląsku i w Małopolsce. 150+ realizacji.",
 	alternates: { canonical: "https://coreltb.pl/oferta" },

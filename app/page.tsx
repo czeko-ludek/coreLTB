@@ -17,7 +17,7 @@ import { allPartnerLogos } from "@/data/partners";
 import { blogPosts } from "@/data/blog-data";
 
 export const metadata: Metadata = {
-	title: "Budowa Domów Pod Klucz — Śląsk i Małopolska | CoreLTB Builders",
+	title: "Budowa Domów Pod Klucz – Śląsk i Małopolska | CoreLTB Builders",
 	description:
 		"Budowa domów jednorodzinnych od projektu po klucz. 15 lat doświadczenia, 150+ oddanych inwestycji, stała cena w umowie. Rybnik, Katowice, Jaworzno i cały Śląsk.",
 	alternates: {
