@@ -31,6 +31,8 @@ import {
 } from '@/data/pricing';
 import { companyData } from '@/data/company-data';
 import { validatePolishPhone } from '@/lib/validation';
+import { useEmailSuggestion } from '@/hooks/useEmailSuggestion';
+import { validateEmailStructure } from '@/lib/email-validation';
 import {
   captureUTMParams,
   getUTMParams,
@@ -193,6 +195,11 @@ export const CalculatorForm = () => {
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
+  // Email typo detection + disposable blocking
+  const emailSuggestion = useEmailSuggestion(state.email, (corrected) => {
+    dispatch({ type: 'SET_FIELD', field: 'email', value: corrected });
+  });
+
   // Track calculator funnel steps
   const hasTrackedStart = useRef(false);
   const set = (field: string, value: string | number | boolean | File | null) => {
@@ -235,8 +242,10 @@ export const CalculatorForm = () => {
     if (!state.name.trim() || state.name.trim().length < 3) errors.name = 'Podaj imię i nazwisko';
     if (!state.phone.trim() || !validatePolishPhone(state.phone))
       errors.phone = 'Podaj prawidłowy polski numer telefonu (9 cyfr)';
-    if (state.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email))
-      errors.email = 'Podaj prawidłowy adres e-mail';
+    if (state.email) {
+      const emailError = validateEmailStructure(state.email);
+      if (emailError) errors.email = emailError;
+    }
     if (!state.consentData) errors.consentData = 'Wymagana zgoda';
     if (!state.consentContact) errors.consentContact = 'Wymagana zgoda';
     return errors;
@@ -1077,8 +1086,12 @@ export const CalculatorForm = () => {
                   type="email"
                   value={state.email}
                   onChange={(v) => set('email', v)}
-                  error={state.errors.email}
+                  error={state.errors.email || emailSuggestion.disposableError || undefined}
                   placeholder="jan@example.com"
+                  onBlur={emailSuggestion.onBlur}
+                  suggestion={emailSuggestion.suggestion}
+                  onApplySuggestion={emailSuggestion.applySuggestion}
+                  onDismissSuggestion={emailSuggestion.clearSuggestion}
                 />
                 <InputField
                   label="Lokalizacja budowy"
@@ -1321,6 +1334,10 @@ function InputField({
   required,
   placeholder,
   hint,
+  onBlur,
+  suggestion,
+  onApplySuggestion,
+  onDismissSuggestion,
 }: {
   label: string;
   type?: 'text' | 'tel' | 'email';
@@ -1330,6 +1347,10 @@ function InputField({
   required?: boolean;
   placeholder?: string;
   hint?: string;
+  onBlur?: () => void;
+  suggestion?: { full: string; domain: string; original: string } | null;
+  onApplySuggestion?: () => void;
+  onDismissSuggestion?: () => void;
 }) {
   return (
     <div data-error={!!error || undefined}>
@@ -1341,6 +1362,7 @@ function InputField({
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        onBlur={onBlur}
         placeholder={placeholder}
         className={`w-full px-4 py-3 rounded-xl border-2 text-body-md transition-colors duration-200
           focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary
@@ -1348,7 +1370,30 @@ function InputField({
           ${error ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-white hover:border-gray-300'}`}
       />
       {error && <p className="mt-1 text-body-xs text-red-500">{error}</p>}
-      {hint && !error && <p className="mt-1 text-body-xs text-text-muted">{hint}</p>}
+      {suggestion && onApplySuggestion && (
+        <div className="mt-1.5 flex items-center gap-2 text-body-xs">
+          <span className="text-amber-600">
+            Czy chodziło o <strong>{suggestion.full}</strong>?
+          </span>
+          <button
+            type="button"
+            onClick={onApplySuggestion}
+            className="text-primary font-semibold hover:underline"
+          >
+            Popraw
+          </button>
+          {onDismissSuggestion && (
+            <button
+              type="button"
+              onClick={onDismissSuggestion}
+              className="text-text-muted hover:text-text-secondary"
+            >
+              Nie
+            </button>
+          )}
+        </div>
+      )}
+      {hint && !error && !suggestion && <p className="mt-1 text-body-xs text-text-muted">{hint}</p>}
     </div>
   );
 }
