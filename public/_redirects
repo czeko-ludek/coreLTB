@@ -62,6 +62,12 @@
 /oferta/zagospodarowanie-terenu/drogi /oferta/zagospodarowanie-terenu 301
 /oferta/zagospodarowanie-terenu/ogrody /oferta/zagospodarowanie-terenu 301
 
+# ── INNE STARE STRONY ────────────────────────────────────────
+
+/realizacje /projekty 301
+/o-firmie /o-nas 301
+/kontakt-z-nami /kontakt 301
+
 # ── BLOG VENET (specyficzne przed catch-all) ───────────────────
 
 /blog/stan-surowy-zamkniety-a-deweloperski-roznice-i-znaczenie-dla-inwestora /oferta/kompleksowa-budowa-domow 301
