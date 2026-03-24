@@ -261,7 +261,7 @@ export const CalculatorForm = () => {
       dispatch({ type: 'SET_ERRORS', errors });
 
       // Find first missing option group or input error and scroll to it
-      const optionFields = ['floors', 'wallType', 'roofType', 'foundation', 'basement', 'finish', 'heating'];
+      const optionFields = ['area', 'floors', 'wallType', 'roofType', 'foundation', 'basement', 'finish', 'heating'];
       const firstMissingOption = optionFields.find(f => errors[f]);
       if (firstMissingOption) {
         const el = document.querySelector(`[data-option-group="${firstMissingOption}"]`);
@@ -819,7 +819,10 @@ export const CalculatorForm = () => {
 
             {/* ─── Section 1: Powierzchnia ─── */}
             <FormSection number="1" title="Powierzchnia domu">
-              <div className="space-y-3">
+              <div
+                className={`space-y-3 rounded-xl transition-all duration-300 ${state.errors.area ? 'animate-error-pulse p-2 -m-2' : ''}`}
+                data-option-group="area"
+              >
                 <div className="flex items-center justify-between">
                   <label className="text-body-sm font-semibold text-text-primary">
                     Powierzchnia użytkowa
