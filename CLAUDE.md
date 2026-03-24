@@ -7,11 +7,10 @@
 - No Framer Motion — all animations use CSS transitions/keyframes + `useInView` from `react-intersection-observer`
 
 ## Git Workflow & Deployment
-- **`v3`** — working branch, auto-deploys to **preview** (`v3.coreltb.pages.dev`)
-- **`master`** — production branch, auto-deploys to **coreltb.pl** (Cloudflare Pages)
-- All work happens on `v3`. When ready for production: `git checkout master && git merge v3 && git push origin master && git checkout v3`
-- **Never push directly to `master`** — always merge from `v3`
-- Cloudflare Pages project: `coreltb` (repo: `czeko-ludek/coreLTB`)
+- **`v3`** — main working branch, **direct production deploys** to **coreltb.pl** (Cloudflare Pages)
+- Every push to `v3` auto-deploys to production — no merge needed
+- Cloudflare Pages project: `coreltb` (repo: `czeko-ludek/coreLTB`, production branch: `v3`)
+- `coreltb-v2` project — ignored, not used
 - Build command: `npx next build`, output: `out` (static export)
 - Cloudflare Pages Functions: `functions/api/lead.ts` (standalone, no imports from lib/)
 - Env vars (Cloudflare Dashboard): `RESEND_API_KEY`, `LEAD_NOTIFICATION_EMAIL`, `LEAD_FROM_EMAIL`
