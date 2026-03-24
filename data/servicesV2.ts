@@ -1846,7 +1846,7 @@ philosophyTimeline: {
   ],
   image: {
     src: '/images/uslugi/uslugi-techniczne/filozofia-pomiary.webp',
-    alt: 'Zespół CoreLTB podczas pomiarów geodezyjnych na działce',
+    alt: 'Badania geotechniczne gruntu na działce budowlanej',
   },
 },
 
