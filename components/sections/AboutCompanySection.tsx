@@ -62,8 +62,7 @@ export function AboutCompanySection({
                 fill
                 className="object-contain p-12 md:p-20"
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                priority
-                fetchPriority="high"
+                loading="lazy"
               />
             </div>
 

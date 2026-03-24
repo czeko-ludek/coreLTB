@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import {
 	AboutCompanySection,
 	BlogSection,
 	ContactCTASection,
 	HeroSection,
 	HowItWorksSection,
-	ProjectsSection,
 	ServiceShowcaseSection,
 	TestimonialsSection,
 	AreasOfOperationSection,
@@ -13,6 +13,22 @@ import {
 import { PartnerLogosMarquee } from "@/components/sections/local/PartnerLogosMarquee";
 import { companyData } from "@/data/company-data";
 import { allProjects } from "@/data/projects";
+
+// Lazy load ProjectsSection (includes Swiper ~205 KiB) — far below fold
+const ProjectsSection = dynamic(
+	() => import("@/components/sections/ProjectsSection").then((mod) => mod.ProjectsSection),
+	{
+		loading: () => (
+			<section className="relative py-20 overflow-hidden bg-background-beige">
+				<div className="mx-auto px-4 lg:px-8 max-w-[1400px]">
+					<div className="mt-16 min-h-[400px] flex items-center justify-center">
+						<div className="animate-pulse text-text-secondary">Ładowanie projektów...</div>
+					</div>
+				</div>
+			</section>
+		),
+	}
+);
 import { allPartnerLogos } from "@/data/partners";
 import { blogPosts } from "@/data/blog-data";
 
