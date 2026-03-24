@@ -15,6 +15,19 @@
 - Cloudflare Pages Functions: `functions/api/lead.ts` (standalone, no imports from lib/)
 - Env vars (Cloudflare Dashboard): `RESEND_API_KEY`, `LEAD_NOTIFICATION_EMAIL`, `LEAD_FROM_EMAIL`
 
+## Analytics & Tracking
+- **GTM:** `GTM-TPFV68BN` (embedded in `app/layout.tsx` via `next/script`)
+- **GA4:** `G-SMNG7006SN` (configured via GTM, NOT directly in code)
+- **Consent Mode v2:** defaults denied, updated on cookie consent (`components/ui/CookieConsent.tsx`)
+- **UTM tracking:** `lib/analytics.ts` — `captureUTMParams()` stores in sessionStorage, sent with lead data
+- **Conversion events (GA4 key events, value 500 PLN each):**
+  - `calculator_lead` — form submit on `/wycena`
+  - `consultation_lead` — form submit on `/umow-konsultacje`
+  - `plot_analysis_lead` — form submit on `/analiza-dzialki`
+- **Other events:** `calculator_start`, `calculator_step`, `phone_click`, `form_focus`, `form_error`
+- **GTM tags:** 6 tags (1 GA4 Config + 5 GA4 Event), 5 custom event triggers
+- **Google Ads:** Plan in `docs/google-ads-kampania.md` — PMax campaign, 50 PLN/day (pending account setup)
+
 ## Landing Pages & Conversion Strategy
 Full strategy doc: **`docs/LANDING-PAGES-STRATEGY.md`** — describes all conversion landing pages, CTA mapping, GA4 events, Google Ads campaigns, backend API routes.
 
