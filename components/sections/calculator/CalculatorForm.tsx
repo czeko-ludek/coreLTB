@@ -38,6 +38,7 @@ import {
   trackLead,
   trackCalculatorStart,
   trackCalculatorStep,
+  trackPhoneClick,
 } from '@/lib/analytics';
 
 // ─── State ──────────────────────────────────────────────
@@ -643,6 +644,7 @@ export const CalculatorForm = () => {
             </button>
             <a
               href="tel:+48664123757"
+              onClick={() => trackPhoneClick('calculator-estimate')}
               className="flex-1 flex items-center justify-center gap-2.5 bg-background-dark hover:bg-gray-800 text-white font-bold py-4 px-6 rounded-xl transition-colors duration-200 text-body-md"
             >
               <Icon name="phone" size="md" />
@@ -788,7 +790,7 @@ export const CalculatorForm = () => {
                 Darmowa wycena
                 <Icon name="arrowRight" size="sm" />
               </Link>
-              <a href="tel:+48664123757" className="flex items-center gap-3 py-2.5 text-base font-medium text-gray-700">
+              <a href="tel:+48664123757" onClick={() => trackPhoneClick('calculator-mobile-menu')} className="flex items-center gap-3 py-2.5 text-base font-medium text-gray-700">
                 <Icon name="phone" size="md" className="text-primary" />
                 +48 664 123 757
               </a>

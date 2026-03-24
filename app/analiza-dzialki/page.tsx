@@ -7,6 +7,7 @@ import { LPSteps } from '@/components/sections/shared/LPSteps';
 import { FAQTwoColumnsSection } from '@/components/sections/FAQTwoColumnsSection';
 import { ContactCTASection } from '@/components/sections/ContactCTASection';
 import { Icon } from '@/components/ui/Icon';
+import { TrackedPhoneLink } from '@/components/ui/TrackedPhoneLink';
 import { companyData } from '@/data/company-data';
 
 export const metadata: Metadata = {
@@ -154,13 +155,14 @@ export default function AnalizaDzialkiPage() {
 
               <div className="bg-background-dark rounded-2xl p-6 text-center">
                 <p className="text-body-sm text-gray-300 mb-3">Nie wiesz, który wariant wybrać?</p>
-                <a
+                <TrackedPhoneLink
                   href="tel:+48664123757"
+                  location="analiza-dzialki-pricing"
                   className="inline-flex items-center gap-2 text-body-md font-bold text-primary hover:text-primary/80 transition-colors"
                 >
                   <Icon name="phone" size="md" />
                   +48 664 123 757
-                </a>
+                </TrackedPhoneLink>
                 <p className="text-body-xs text-gray-500 mt-1">Doradzimy bezpłatnie</p>
               </div>
             </div>

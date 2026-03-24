@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Button, Icon } from '@/components/ui';
 import { MegaMenu, MegaMenuItem } from '@/components/shared';
+import { trackPhoneClick } from '@/lib/analytics';
 export interface HeaderProps {
   topBar: {
     phone: string;
@@ -347,7 +348,7 @@ export function Header({
               Darmowa wycena
               <Icon name="arrowRight" size="sm" />
             </Link>
-            <a href={`tel:${topBar.phone.replace(/\s/g, '')}`} className="flex items-center gap-3 py-2.5 text-base font-medium text-gray-700">
+            <a href={`tel:${topBar.phone.replace(/\s/g, '')}`} onClick={() => trackPhoneClick('header-mobile')} className="flex items-center gap-3 py-2.5 text-base font-medium text-gray-700">
               <Icon name="phone" size="md" className="text-primary" />
               {topBar.phone}
             </a>

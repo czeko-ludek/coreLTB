@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
 import { clsx } from 'clsx';
 import { Icon, type IconName } from '@/components/ui';
+import { trackPhoneClick } from '@/lib/analytics';
 
 // =============================================================================
 // INTERFACES
@@ -106,6 +107,7 @@ export const ContactCTASection: React.FC<ContactCTASectionProps> = ({
                 {/* Phone */}
                 <a
                   href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}
+                  onClick={() => trackPhoneClick('contact-cta')}
                   className="group flex items-center gap-3"
                 >
                   <div className="h-11 w-11 rounded-xl bg-primary flex items-center justify-center group-hover:scale-110 transition-transform duration-300">

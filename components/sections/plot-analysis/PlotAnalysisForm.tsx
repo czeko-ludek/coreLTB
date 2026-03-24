@@ -9,7 +9,7 @@ import type { IconName } from '@/components/ui/Icon';
 import { validatePolishPhone } from '@/lib/validation';
 import { useEmailSuggestion } from '@/hooks/useEmailSuggestion';
 import { validateEmailStructure } from '@/lib/email-validation';
-import { captureUTMParams, getUTMParams, trackLead } from '@/lib/analytics';
+import { captureUTMParams, getUTMParams, trackLead, trackPhoneClick } from '@/lib/analytics';
 
 // ─── Types ──────────────────────────────────────────────
 
@@ -280,7 +280,7 @@ export const PlotAnalysisForm = () => {
                 Darmowa wycena
                 <Icon name="arrowRight" size="sm" />
               </Link>
-              <a href="tel:+48664123757" className="flex items-center gap-3 py-2.5 text-base font-medium text-gray-700">
+              <a href="tel:+48664123757" onClick={() => trackPhoneClick('plot-analysis-mobile-menu')} className="flex items-center gap-3 py-2.5 text-base font-medium text-gray-700">
                 <Icon name="phone" size="md" className="text-primary" />
                 +48 664 123 757
               </a>
@@ -329,6 +329,7 @@ export const PlotAnalysisForm = () => {
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
                   <a
                     href="tel:+48664123757"
+                    onClick={() => trackPhoneClick('plot-analysis-success')}
                     className="flex-1 flex items-center justify-center gap-2.5 bg-background-dark hover:bg-gray-800 text-white font-bold py-4 px-6 rounded-xl transition-colors"
                   >
                     <Icon name="phone" size="md" />
@@ -550,6 +551,7 @@ export const PlotAnalysisForm = () => {
             <div className="mt-8 border-t border-border-light pt-6">
               <a
                 href="tel:+48664123757"
+                onClick={() => trackPhoneClick('plot-analysis-form')}
                 className="flex items-center gap-4 bg-white border-2 border-gray-200 hover:border-primary/30 hover:shadow-md rounded-2xl px-5 py-4 transition-all duration-200 group"
               >
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">

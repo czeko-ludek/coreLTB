@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
 import { Icon } from '@/components/ui';
+import { trackPhoneClick } from '@/lib/analytics';
 
 export interface MidPageCTAProps {
   headline: string;
@@ -53,6 +54,7 @@ export function MidPageCTA({ headline, highlightedText, phone, image, buttons }:
               {/* Phone */}
               <a
                 href={`tel:${phone.replace(/\s/g, '')}`}
+                onClick={() => trackPhoneClick('midpage-cta')}
                 className="group flex items-center gap-3 mb-6"
               >
                 <div className="h-11 w-11 rounded-xl bg-primary flex items-center justify-center group-hover:scale-110 transition-transform duration-300">

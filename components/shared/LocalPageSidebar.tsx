@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { clsx } from 'clsx';
 import { Icon } from '@/components/ui';
 import { companyData } from '@/data/company-data';
+import { trackPhoneClick } from '@/lib/analytics';
 
 // =============================================================================
 // INTERFACES
@@ -88,6 +89,7 @@ export function LocalPageSidebar({
           <div className="flex gap-2">
             <a
               href={`tel:${companyData.telephone}`}
+              onClick={() => trackPhoneClick('local-sidebar')}
               className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium text-sm bg-white text-primary hover:bg-white/90 transition-colors"
             >
               <Icon name="phone" size="sm" />

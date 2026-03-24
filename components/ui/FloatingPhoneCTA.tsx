@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Icon } from './Icon';
+import { trackPhoneClick } from '@/lib/analytics';
 
 interface FloatingPhoneCTAProps {
   phone?: string;
@@ -111,7 +112,7 @@ export const FloatingPhoneCTA: React.FC<FloatingPhoneCTAProps> = ({
       <a
         href={`tel:${phone}`}
         aria-label="Zadzwoń do nas"
-        onClick={dismissTooltip}
+        onClick={() => { dismissTooltip(); trackPhoneClick('floating-cta'); }}
         className="
           relative
           w-14 h-14

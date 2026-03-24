@@ -8,6 +8,7 @@ import { SectionHeader } from '@/components/shared';
 import { Button, Icon } from '@/components/ui';
 import type { IconName } from '@/components/ui/Icon';
 import { BentoGridItem } from '@/components/shared/BentoGridItem';
+import { trackPhoneClick } from '@/lib/analytics';
 
 export interface ContactInfo {
     phone: string;
@@ -107,7 +108,7 @@ export const BentoContactSection: React.FC<BentoContactSectionProps> = ({
                             style={{ animationDelay: '0.3s' }}
                         >
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <a href={`tel:${contactInfo.phone.replace(/\s/g, '')}`} className="flex items-center gap-3 group">
+                                <a href={`tel:${contactInfo.phone.replace(/\s/g, '')}`} onClick={() => trackPhoneClick('bento-contact')} className="flex items-center gap-3 group">
                                     <div className="h-11 w-11 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 shrink-0 group-hover:scale-110 transition-transform">
                                         <Icon name="phone" className="text-white" size="sm" />
                                     </div>
