@@ -340,6 +340,29 @@ export const partners: Partner[] = [
     featured: true,
   },
   {
+    slug: 'archetyp',
+    name: 'Pracownia Projektowa Archetyp',
+    logo: '/images/partners/archetyp.webp',
+    category: 'projektowanie',
+    shortDescription:
+      'Pracownia architektoniczna z Jaworzna — kompleksowe projekty budowlane od 1992 roku.',
+    description: [
+      'Pracownia Projektowa Archetyp to biuro architektoniczne z Jaworzna prowadzone przez mgr. inż. arch. Tomasza Göttela. Od 1992 roku firma realizuje kompleksowe projekty budowlane i wykonawcze — od domów jednorodzinnych, przez zabudowę wielorodzinną i szeregową, po obiekty usługowe i przemysłowe.',
+      'Archetyp wyróżnia się indywidualnym podejściem do każdego zlecenia i ponad 30-letnim doświadczeniem w koordynacji przedsięwzięć architektonicznych. Pracownia współpracuje z projektantami branżowymi, zapewniając kompleksową obsługę zarówno klientom indywidualnym, jak i instytucjonalnym.',
+    ],
+    services: [
+      'Projekty domów jednorodzinnych',
+      'Zabudowa wielorodzinna i szeregowa',
+      'Obiekty usługowe i przemysłowe',
+      'Kompleksowe projekty budowlane',
+      'Projekty wykonawcze',
+      'Koordynacja branżowa',
+    ],
+    location: 'Jaworzno',
+    website: 'https://pparchetyp.pl',
+    featured: true,
+  },
+  {
     slug: 'z500',
     name: 'Z500',
     logo: '/images/partners/z500.webp',
