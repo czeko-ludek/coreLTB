@@ -34,7 +34,7 @@ const offerVariants: OfferVariant[] = [
         ],
         callout: 'Dzięki temu masz absolutną pewność, że inwestujesz w grunt bez wad prawnych i ukrytych problemów technicznych.',
         ctaText: 'Sprawdź Usługi Geologiczne',
-        ctaHref: '/oferta/uslugi-techniczne-w-budownictwie',
+        ctaHref: '/oferta/uslugi-techniczne',
         imageSrc: '/images/uslugi/kompleksowa-budowa-domow/timeline/dzialka-budowlana.webp',
     },
     {

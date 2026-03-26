@@ -40,6 +40,7 @@
 
 /oferta/uslugi-techniczne/nadzor-budowy/nadzor-budowy-katowice /kierownik-budowy-katowice 301
 /oferta/uslugi-techniczne/nadzor-budowy/nadzor-budowy-wodzislaw-slaski /kierownik-budowy-wodzislaw-slaski 301
+/oferta/uslugi-techniczne/nadzor-budowy/nadzor-budowy-jaworzno /kierownik-budowy-jaworzno 301
 /oferta/uslugi-techniczne/nadzor-budowy /oferta/nadzor-i-doradztwo 301
 
 # ── USŁUGI TECHNICZNE ─────────────────────────────────────────
@@ -80,6 +81,12 @@
 # ── BLOG → BAZA WIEDZY (migracja wewnętrzna) ─────────────────
 
 /blog /baza-wiedzy 301
+
+# ── NADZÓR — STARA STRUKTURA VENET (przed catch-all!) ────────
+/oferta/uslugi-techniczne-w-budownictwie/nadzor-budowy/nadzor-budowy-katowice /kierownik-budowy-katowice 301
+/oferta/uslugi-techniczne-w-budownictwie/nadzor-budowy/nadzor-budowy-wodzislaw-slaski /kierownik-budowy-wodzislaw-slaski 301
+/oferta/uslugi-techniczne-w-budownictwie/nadzor-budowy/nadzor-budowy-jaworzno /kierownik-budowy-jaworzno 301
+/oferta/uslugi-techniczne-w-budownictwie/nadzor-budowy /oferta/nadzor-i-doradztwo 301
 
 # ── CATCH-ALL (MUSZĄ BYĆ NA KOŃCU!) ───────────────────────────
 # UWAGA: Nie używać /* dla ścieżek które istnieją w apce!
