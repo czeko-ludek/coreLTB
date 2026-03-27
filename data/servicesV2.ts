@@ -934,8 +934,8 @@ philosophyTimeline: {
               value: 'Naszym zadaniem jest zamiana "taniego projektu" w dokumentację "tanią w budowie".'
             }
           ],
-          imageSrc: '/images/uslugi/projektowanie/etapy/projekt-gotowy.webp',
-          imageAlt: 'Inżynier weryfikujący projekt katalogowy pod kątem kosztów'
+          imageSrc: '/images/uslugi/projektowanie/etapy/adaptacja-projektu.webp',
+          imageAlt: 'Adaptacja projektu gotowego do warunków działki'
         },
         {
           id: 'step-2', // Pamiętaj, żeby ID były unikalne (step-1, step-2...)

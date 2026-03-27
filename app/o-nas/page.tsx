@@ -17,7 +17,7 @@ export default function AboutPage() {
 	const pageHeaderData = {
 		title: "O nas",
 		watermarkText: "O NAS",
-		backgroundImage: "/images/o-nas-hero.webp",
+		backgroundImage: "/images/o-nas/hero.webp",
 		breadcrumbs: [
 			{ label: "Strona Główna", href: "/" },
 			{ label: "O nas", href: "/o-nas" },
