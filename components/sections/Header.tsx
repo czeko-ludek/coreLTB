@@ -66,15 +66,24 @@ export function Header({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
+  // Lock body scroll when mobile menu is open (works on iOS too)
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.inset = '0';
+      document.body.style.width = '100%';
     } else {
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.inset = '';
+      document.body.style.width = '';
     }
     return () => {
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.inset = '';
+      document.body.style.width = '';
     };
   }, [mobileMenuOpen]);
 
@@ -237,13 +246,13 @@ export function Header({
         {/* Drawer */}
         <div
           className={`fixed top-0 right-0 bottom-0 w-full bg-white z-[70] lg:hidden
-            shadow-2xl overflow-y-auto
+            shadow-2xl flex flex-col
             transition-transform duration-300 ease-out
             ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}
           `}
         >
           {/* Logo + zamknij */}
-          <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 flex-shrink-0">
             <Link href="/" onClick={closeMobileMenu} className="relative w-[56px] h-[50px]">
               <Image src={logo.src} alt={logo.alt} fill className="object-contain" sizes="56px" />
             </Link>
@@ -256,8 +265,8 @@ export function Header({
             </button>
           </div>
 
-          {/* Nawigacja */}
-          <nav className="px-4 py-6 flex flex-col gap-1">
+          {/* Nawigacja — scrollowalna */}
+          <nav className="flex-1 overflow-y-auto overscroll-contain px-4 py-4 flex flex-col gap-0.5">
             {navLinks.filter(link => link.href !== '/').map((link, index) => {
               const isActive = pathname === link.href || (link.href === '/oferta' && pathname.startsWith('/oferta'));
               const isOferta = link.href === '/oferta';
@@ -269,21 +278,17 @@ export function Header({
                     {/* Oferta — klik rozwija/zwija submenu */}
                     <button
                       onClick={() => setOfertaExpanded(!ofertaExpanded)}
-                      className={`w-full flex items-center justify-between px-4 py-4 rounded-xl text-base font-semibold transition-colors ${
+                      className={`w-full flex items-center justify-between px-3 py-3 rounded-lg text-[15px] font-semibold transition-colors ${
                         isActive ? 'text-primary bg-primary/5' : 'text-gray-700 hover:bg-gray-50'
                       }`}
                     >
-                      <div className="flex items-center gap-4">
-                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                          isActive ? 'bg-primary/10 text-primary' : 'bg-gray-100 text-gray-500'
-                        }`}>
-                          <Icon name={iconName as import('@/components/ui').IconName} size="md" />
-                        </div>
+                      <div className="flex items-center gap-3">
+                        <Icon name={iconName as import('@/components/ui').IconName} size="md" className={isActive ? 'text-primary' : 'text-gray-400'} />
                         {link.label}
                       </div>
                       <Icon
                         name="chevronDown"
-                        size="md"
+                        size="sm"
                         className={`text-gray-400 transition-transform duration-200 ${ofertaExpanded ? 'rotate-180' : ''}`}
                       />
                     </button>
@@ -292,23 +297,19 @@ export function Header({
                     <div className={`overflow-hidden transition-all duration-300 ${
                       ofertaExpanded ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
                     }`}>
-                      <div className="ml-7 pl-4 border-l-2 border-primary/20 py-2 flex flex-col gap-1">
+                      <div className="ml-5 pl-3 border-l-2 border-primary/20 py-1 flex flex-col gap-0.5">
                         {megaMenuItems.map((item, subIndex) => (
                           <Link
                             key={subIndex}
                             href={item.href}
                             onClick={closeMobileMenu}
-                            className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-colors ${
+                            className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                               pathname === item.href
                                 ? 'text-primary bg-primary/5'
                                 : 'text-gray-600 hover:text-primary hover:bg-gray-50'
                             }`}
                           >
-                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                              pathname === item.href ? 'bg-primary/10 text-primary' : 'bg-gray-50 text-gray-400'
-                            }`}>
-                              <Icon name={item.icon as import('@/components/ui').IconName} size="sm" />
-                            </div>
+                            <Icon name={item.icon as import('@/components/ui').IconName} size="sm" className={pathname === item.href ? 'text-primary' : 'text-gray-400'} />
                             {item.title}
                           </Link>
                         ))}
@@ -323,39 +324,44 @@ export function Header({
                   key={index}
                   href={link.href}
                   onClick={closeMobileMenu}
-                  className={`flex items-center gap-4 px-4 py-4 rounded-xl text-base font-semibold transition-colors ${
+                  className={`flex items-center gap-3 px-3 py-3 rounded-lg text-[15px] font-semibold transition-colors ${
                     isActive ? 'text-primary bg-primary/5' : 'text-gray-700 hover:bg-gray-50'
                   }`}
                 >
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                    isActive ? 'bg-primary/10 text-primary' : 'bg-gray-100 text-gray-500'
-                  }`}>
-                    <Icon name={iconName as import('@/components/ui').IconName} size="md" />
-                  </div>
+                  <Icon name={iconName as import('@/components/ui').IconName} size="md" className={isActive ? 'text-primary' : 'text-gray-400'} />
                   {link.label}
                 </Link>
               );
             })}
           </nav>
 
-          {/* CTA + kontakt na dole */}
-          <div className="px-6 py-5 mt-auto border-t border-gray-100">
+          {/* CTA + kontakt — zawsze na dole */}
+          <div className="flex-shrink-0 px-5 py-4 border-t border-gray-100 bg-gray-50/80">
             <Link
               href="/wycena"
               onClick={closeMobileMenu}
-              className="flex items-center justify-center gap-2 w-full bg-primary text-zinc-900 font-bold py-3.5 rounded-xl text-base mb-5"
+              className="flex items-center justify-center gap-2 w-full bg-primary text-zinc-900 font-bold py-3 rounded-xl text-[15px] mb-3"
             >
+              <Icon name="calculator" size="sm" />
               Darmowa wycena
-              <Icon name="arrowRight" size="sm" />
             </Link>
-            <a href={`tel:${topBar.phone.replace(/\s/g, '')}`} onClick={() => trackPhoneClick('header-mobile')} className="flex items-center gap-3 py-2.5 text-base font-medium text-gray-700">
-              <Icon name="phone" size="md" className="text-primary" />
-              {topBar.phone}
-            </a>
-            <a href={`mailto:${topBar.email}`} className="flex items-center gap-3 py-2.5 text-base font-medium text-gray-700">
-              <Icon name="mail" size="md" className="text-primary" />
-              {topBar.email}
-            </a>
+            <div className="flex gap-2">
+              <a
+                href={`tel:${topBar.phone.replace(/\s/g, '')}`}
+                onClick={() => trackPhoneClick('header-mobile')}
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white border border-gray-200 text-sm font-semibold text-gray-700 hover:border-primary/30 transition-colors"
+              >
+                <Icon name="phone" size="sm" className="text-primary" />
+                Zadzwoń
+              </a>
+              <a
+                href={`mailto:${topBar.email}`}
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white border border-gray-200 text-sm font-semibold text-gray-700 hover:border-primary/30 transition-colors"
+              >
+                <Icon name="mail" size="sm" className="text-primary" />
+                Napisz
+              </a>
+            </div>
           </div>
         </div>
 
