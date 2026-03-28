@@ -39,6 +39,8 @@ import {
   trackCalculatorStart,
   trackCalculatorStep,
   trackPhoneClick,
+  trackEstimateView,
+  trackFormFocus,
 } from '@/lib/analytics';
 
 // ─── State ──────────────────────────────────────────────
@@ -139,6 +141,7 @@ export const CalculatorForm = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
   const honeypotRef = useRef<HTMLInputElement>(null);
+  const formFocusTracked = useRef(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -307,6 +310,11 @@ export const CalculatorForm = () => {
     setSubmittedConfig(config);
     setLoadingStep(-1);
     setIsSubmitting(false);
+
+    // GA4: user saw the estimate document
+    trackEstimateView(
+      `${formatPrice(Math.round((result.total.min + result.total.max) / 2))} zl`
+    );
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -1069,6 +1077,12 @@ export const CalculatorForm = () => {
                   error={state.errors.name}
                   required
                   placeholder="Jan Kowalski"
+                  onFocus={() => {
+                    if (!formFocusTracked.current) {
+                      formFocusTracked.current = true;
+                      trackFormFocus('calculator');
+                    }
+                  }}
                 />
                 <InputField
                   label="Telefon"
@@ -1334,6 +1348,7 @@ function InputField({
   placeholder,
   hint,
   onBlur,
+  onFocus,
   suggestion,
   onApplySuggestion,
   onDismissSuggestion,
@@ -1347,6 +1362,7 @@ function InputField({
   placeholder?: string;
   hint?: string;
   onBlur?: () => void;
+  onFocus?: () => void;
   suggestion?: { full: string; domain: string; original: string } | null;
   onApplySuggestion?: () => void;
   onDismissSuggestion?: () => void;
@@ -1362,6 +1378,7 @@ function InputField({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onBlur={onBlur}
+        onFocus={onFocus}
         placeholder={placeholder}
         className={`w-full px-4 py-3 rounded-xl border-2 text-body-md transition-colors duration-200
           focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary

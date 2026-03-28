@@ -5,8 +5,8 @@
     "name": "CoreLTB Builders"
   },
   "ga4": {
-    "propertyId": "",
-    "comment": "Format: properties/XXXXXXXX — uzupełnij po podłączeniu GA4"
+    "propertyId": "529532413",
+    "comment": "CoreLTB — konto KLIENCI (accounts/379444843)"
   },
   "gsc": {
     "siteUrl": "sc-domain:coreltb.pl",

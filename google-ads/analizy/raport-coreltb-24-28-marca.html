@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raport CoreLTB — 24-28 marca 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #dfbb68;
+    --gold-dark: #d4a847;
+    --gold-light: #e8cc8a;
+    --gold-pale: #f5ecd7;
+    --bg-dark: #1a1a1a;
+    --bg-card: #232323;
+    --bg-light: #fafaf9;
+    --bg-cream: #f5f5f3;
+    --text-primary: #1a1a1a;
+    --text-secondary: #555;
+    --text-light: #888;
+    --green: #22c55e;
+    --red: #ef4444;
+    --blue: #3b82f6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: var(--bg-dark);
+    padding: 40px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 120%, rgba(223,187,104,0.15) 0%, transparent 70%);
+  }
+  .header-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .header img.logo {
+    height: 48px;
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .header h1 span { color: var(--gold); }
+  .header .subtitle {
+    font-size: 15px;
+    color: #aaa;
+    font-weight: 400;
+  }
+
+  /* ===== LAYOUT ===== */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  section {
+    margin: 40px 0;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--bg-dark);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .icon {
+    width: 32px;
+    height: 32px;
+    background: var(--gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    color: var(--bg-dark);
+    font-weight: 800;
+  }
+
+  /* ===== SUMMARY CARDS ===== */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .summary-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border: 1px solid #eee;
+  }
+  .summary-card .label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .summary-card .value {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--bg-dark);
+  }
+  .summary-card .note {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+  .summary-card.highlight {
+    background: var(--bg-dark);
+    border-color: var(--gold);
+  }
+  .summary-card.highlight .label { color: var(--gold-light); }
+  .summary-card.highlight .value { color: #fff; }
+  .summary-card.highlight .note { color: #aaa; }
+
+  /* ===== TABLE ===== */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border: 1px solid #eee;
+    background: #fff;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  thead th {
+    background: var(--bg-dark);
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #fafaf9; }
+  .text-right { text-align: right; }
+  .text-center { text-align: center; }
+  .font-bold { font-weight: 700; }
+  .text-green { color: var(--green); }
+  .text-red { color: var(--red); }
+  .text-gold { color: var(--gold-dark); }
+
+  /* ===== FUNNEL ===== */
+  .funnel {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 20px 0;
+  }
+  .funnel-step {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: #fff;
+    border: 1px solid #eee;
+    position: relative;
+  }
+  .funnel-step:first-child { border-radius: 12px 12px 0 0; }
+  .funnel-step:last-child { border-radius: 0 0 12px 12px; }
+  .funnel-step:not(:last-child) { border-bottom: none; }
+  .funnel-bar {
+    height: 36px;
+    border-radius: 6px;
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+    transition: width 0.3s;
+  }
+  .funnel-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    min-width: 180px;
+  }
+
+  /* ===== INSIGHT BOX ===== */
+  .insight-box {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #2a2520 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    border-left: 4px solid var(--gold);
+  }
+  .insight-box h3 {
+    color: var(--gold);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .insight-box p, .insight-box li {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #ccc;
+  }
+  .insight-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .insight-box li {
+    padding: 4px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+  .insight-box li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  /* ===== BADGE ===== */
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .badge-green { background: #dcfce7; color: #15803d; }
+  .badge-red { background: #fce4e4; color: #b91c1c; }
+  .badge-gold { background: var(--gold-pale); color: #92700a; }
+  .badge-blue { background: #dbeafe; color: #1d4ed8; }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0;
+  }
+  .progress-row .prog-label {
+    font-size: 13px;
+    min-width: 120px;
+    color: var(--text-secondary);
+  }
+  .progress-row .prog-bar-bg {
+    flex: 1;
+    height: 20px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-row .prog-bar {
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--bg-dark);
+    padding: 30px 0;
+    text-align: center;
+    margin-top: 60px;
+  }
+  .footer img.logo { height: 32px; margin-bottom: 12px; }
+  .footer p { font-size: 12px; color: #666; }
+  .footer a { color: var(--gold); text-decoration: none; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .funnel-label { min-width: 100px; font-size: 12px; }
+    .header h1 { font-size: 22px; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .header { padding: 20px 0; }
+    section { margin: 20px 0; break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <img class="logo" src="data:image/webp;base64,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" alt="CoreLTB Logo">
+    <h1>Raport <span>Google Ads</span></h1>
+    <p class="subtitle">24 - 28 marca 2026 &middot; CoreLTB Builders &middot; coreltb.pl</p>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ===== SECTION 1: PODSUMOWANIE ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">1</div>
+    Podsumowanie kampanii
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card highlight">
+      <div class="label">Wydano</div>
+      <div class="value">353 zl</div>
+      <div class="note">budzet 250 zl (5 dni x 50 zl)</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Klikniecia</div>
+      <div class="value">119</div>
+      <div class="note">z Google Ads</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Sredni koszt klikniecia</div>
+      <div class="value">2,97 zl</div>
+      <div class="note">branza: 2-5 zl</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Wyswietlenia</div>
+      <div class="value">13 868</div>
+      <div class="note">w tym 9696 Display</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <h3>Dlaczego wydano wiecej niz budzet?</h3>
+    <p>Google moze wydac do 200% dziennego budzetu (100 zl zamiast 50 zl) w dni, gdy widzi szanse na konwersje. W skali miesiaca wyrownuje to do ustalonego limitu. To normalne zachowanie algorytmu.</p>
+  </div>
+</section>
+
+<!-- ===== SECTION 2: DZIEN PO DNIU ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">2</div>
+    Wydatki dzien po dniu
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Dzien</th>
+          <th class="text-right">Wydano</th>
+          <th class="text-right">Klikniecia</th>
+          <th class="text-right">Koszt/klik</th>
+          <th class="text-right">Wyswietlenia</th>
+          <th class="text-center">Uwagi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pon 24.03</td>
+          <td class="text-right">48,16 zl</td>
+          <td class="text-right">17</td>
+          <td class="text-right">2,83 zl</td>
+          <td class="text-right">564</td>
+          <td class="text-center"><span class="badge badge-green">OK</span></td>
+        </tr>
+        <tr>
+          <td>Wt 25.03</td>
+          <td class="text-right">52,24 zl</td>
+          <td class="text-right">18</td>
+          <td class="text-right">2,90 zl</td>
+          <td class="text-right">539</td>
+          <td class="text-center"><span class="badge badge-green">OK</span></td>
+        </tr>
+        <tr>
+          <td>Sr 26.03</td>
+          <td class="text-right">58,39 zl</td>
+          <td class="text-right">19</td>
+          <td class="text-right">3,07 zl</td>
+          <td class="text-right">663</td>
+          <td class="text-center"><span class="badge badge-green">OK</span></td>
+        </tr>
+        <tr>
+          <td>Czw 27.03</td>
+          <td class="text-right">99,70 zl</td>
+          <td class="text-right">34</td>
+          <td class="text-right">2,93 zl</td>
+          <td class="text-right">10 534</td>
+          <td class="text-center"><span class="badge badge-red">Display!</span></td>
+        </tr>
+        <tr>
+          <td>Pt 28.03</td>
+          <td class="text-right">93,81 zl</td>
+          <td class="text-right">31</td>
+          <td class="text-right">3,03 zl</td>
+          <td class="text-right">1 568</td>
+          <td class="text-center"><span class="badge badge-gold">Wysoki</span></td>
+        </tr>
+        <tr style="background: #fafaf9; font-weight: 700;">
+          <td>RAZEM</td>
+          <td class="text-right">352,30 zl</td>
+          <td class="text-right">119</td>
+          <td class="text-right">2,97 zl</td>
+          <td class="text-right">13 868</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>Co sie stalo w czwartek 27.03?</h3>
+    <p>Google wyswietlil reklame na stronach Display (banery na portalach) — az 9 696 wyswietlen. To dalo duzo wyswietlen, ale malo wartosciowych klikniec. Typowe zachowanie kampanii PMax na poczatku — algorytm testuje rozne kanaly.</p>
+  </div>
+</section>
+
+<!-- ===== SECTION 3: CO ROBIA UZYTKOWNICY ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">3</div>
+    Co robia uzytkownicy po kliknieciu reklamy?
+  </div>
+
+  <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
+    Dane z Google Analytics 4 — sledzi rzeczywiste zachowanie na stronie coreltb.pl
+  </p>
+
+  <div class="funnel">
+    <div class="funnel-step">
+      <div class="funnel-bar" style="width: 100%; background: var(--bg-dark);">119</div>
+      <div class="funnel-label">Klikniecia w reklame (Google Ads)</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-bar" style="width: 28%; background: var(--gold-dark);">33</div>
+      <div class="funnel-label">Dotarlo na strone <span class="badge badge-red">28%</span></div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-bar" style="width: 9%; background: var(--gold);">11</div>
+      <div class="funnel-label">Przegladalo podstrony</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-bar" style="width: 4%; background: var(--green);">5</div>
+      <div class="funnel-label">Otworzyli kalkulator wyceny</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-bar" style="width: 2.5%; background: #15803d;">3</div>
+      <div class="funnel-label">Zobaczyli wycene <span class="badge badge-green">potencjalni klienci</span></div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <h3>Dlaczego tylko 33 z 119 klikniec dotarlo na strone?</h3>
+    <ul>
+      <li>Czesc klikniec to Display (banery) — ludzie klikaja przypadkowo</li>
+      <li>Consent Mode — uzytkownicy nie akceptuja cookies, wiec Analytics ich nie widzi</li>
+      <li>Szybkie wyjscia — strona sie laduje, uzytkownik wraca do Google</li>
+    </ul>
+    <p style="margin-top: 10px;"><strong style="color: var(--gold);">Wniosek:</strong> 5 osob doszlo do kalkulatora wyceny, 3 zobaczyli konkretna wycene. To realni, zainteresowani klienci.</p>
+  </div>
+</section>
+
+<!-- ===== SECTION 4: SKAD SA UZYTKOWNICY ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">4</div>
+    Skad sa uzytkownicy?
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Miasto</th>
+          <th class="text-right">Klikniecia</th>
+          <th class="text-right">Koszt</th>
+          <th class="text-right">Koszt/klik</th>
+          <th class="text-center">Nasz obszar?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="font-bold">Rybnik</td>
+          <td class="text-right">18</td>
+          <td class="text-right">42,30 zl</td>
+          <td class="text-right">2,35 zl</td>
+          <td class="text-center"><span class="badge badge-green">Tak</span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">Katowice</td>
+          <td class="text-right">14</td>
+          <td class="text-right">45,20 zl</td>
+          <td class="text-right">3,23 zl</td>
+          <td class="text-center"><span class="badge badge-green">Tak</span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">Gliwice</td>
+          <td class="text-right">11</td>
+          <td class="text-right">28,60 zl</td>
+          <td class="text-right">2,60 zl</td>
+          <td class="text-center"><span class="badge badge-green">Tak</span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">Tychy</td>
+          <td class="text-right">9</td>
+          <td class="text-right">23,40 zl</td>
+          <td class="text-right">2,60 zl</td>
+          <td class="text-center"><span class="badge badge-green">Tak</span></td>
+        </tr>
+        <tr>
+          <td>Wodzislaw Slaski</td>
+          <td class="text-right">7</td>
+          <td class="text-right">18,90 zl</td>
+          <td class="text-right">2,70 zl</td>
+          <td class="text-center"><span class="badge badge-green">Tak</span></td>
+        </tr>
+        <tr>
+          <td>Jastrzebie-Zdroj</td>
+          <td class="text-right">6</td>
+          <td class="text-right">15,60 zl</td>
+          <td class="text-right">2,60 zl</td>
+          <td class="text-center"><span class="badge badge-green">Tak</span></td>
+        </tr>
+        <tr>
+          <td>Zabrze</td>
+          <td class="text-right">5</td>
+          <td class="text-right">14,50 zl</td>
+          <td class="text-right">2,90 zl</td>
+          <td class="text-center"><span class="badge badge-green">Tak</span></td>
+        </tr>
+        <tr>
+          <td style="color: var(--red);">Krakow</td>
+          <td class="text-right">8</td>
+          <td class="text-right">17,60 zl</td>
+          <td class="text-right">2,20 zl</td>
+          <td class="text-center"><span class="badge badge-red">Nie</span></td>
+        </tr>
+        <tr>
+          <td style="color: var(--red);">Oswiecim</td>
+          <td class="text-right">4</td>
+          <td class="text-right">22,46 zl</td>
+          <td class="text-right">5,62 zl</td>
+          <td class="text-center"><span class="badge badge-red">Nie</span></td>
+        </tr>
+        <tr>
+          <td>Inne miasta</td>
+          <td class="text-right">37</td>
+          <td class="text-right">123,74 zl</td>
+          <td class="text-right">3,34 zl</td>
+          <td class="text-center"><span class="badge badge-gold">Rozne</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>Stracone pieniadze poza naszym obszarem</h3>
+    <p>Krakow (17,60 zl) i Oswiecim (22,46 zl) to <strong style="color: var(--gold);">~40 zl wyrzuconych</strong> na klikniecia z miast, w ktorych nie budujemy. Te miasta powinny zostac wykluczone z kampanii.</p>
+  </div>
+</section>
+
+<!-- ===== SECTION 5: SEO (ORGANIC) ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">5</div>
+    SEO — bezplatny ruch z Google
+  </div>
+
+  <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
+    Dane z Google Search Console za te same 5 dni (24-28 marca)
+  </p>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="label">Wyswietlenia w Google</div>
+      <div class="value">4 218</div>
+      <div class="note">bezplatne</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Klikniecia organiczne</div>
+      <div class="value">187</div>
+      <div class="note">koszt: 0 zl</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Srednia pozycja</div>
+      <div class="value">18,4</div>
+      <div class="note">druga strona Google</div>
+    </div>
+    <div class="summary-card highlight">
+      <div class="label">CTR (klikalnosc)</div>
+      <div class="value">4,4%</div>
+      <div class="note">dobry wynik</div>
+    </div>
+  </div>
+
+  <h3 style="font-size: 15px; font-weight: 700; margin: 20px 0 12px;">Top frazy, ktore przynosza ruch:</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Fraza w Google</th>
+          <th class="text-right">Klikniecia</th>
+          <th class="text-right">Pozycja</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>budowa domu rybnik</td>
+          <td class="text-right font-bold">24</td>
+          <td class="text-right">6,2</td>
+        </tr>
+        <tr>
+          <td>firma budowlana slask</td>
+          <td class="text-right font-bold">18</td>
+          <td class="text-right">8,1</td>
+        </tr>
+        <tr>
+          <td>budowa domu slask</td>
+          <td class="text-right font-bold">15</td>
+          <td class="text-right">7,5</td>
+        </tr>
+        <tr>
+          <td>dom pod klucz rybnik</td>
+          <td class="text-right font-bold">12</td>
+          <td class="text-right">5,8</td>
+        </tr>
+        <tr>
+          <td>kalkulator budowy domu</td>
+          <td class="text-right font-bold">11</td>
+          <td class="text-right">12,3</td>
+        </tr>
+        <tr>
+          <td>ile kosztuje budowa domu 2026</td>
+          <td class="text-right">9</td>
+          <td class="text-right">14,7</td>
+        </tr>
+        <tr>
+          <td>budowa domu katowice</td>
+          <td class="text-right">8</td>
+          <td class="text-right">11,2</td>
+        </tr>
+        <tr>
+          <td>coreltb</td>
+          <td class="text-right">7</td>
+          <td class="text-right">1,0</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>SEO vs Reklamy — porownanie</h3>
+    <ul>
+      <li>SEO: <strong style="color: var(--gold);">187 klikniec za 0 zl</strong></li>
+      <li>Reklamy: <strong style="color: var(--gold);">119 klikniec za 352 zl</strong></li>
+      <li>SEO daje wiecej ruchu i jest bezplatne, ale potrzebuje czasu na budowe pozycji</li>
+      <li>Reklamy daja natychmiastowy ruch — szczegolnie wartosciowy na poczatku</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== SECTION 6: FAZA NAUKI ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">6</div>
+    Faza nauki algorytmu
+  </div>
+
+  <div style="background: #fff; border-radius: 12px; padding: 24px; border: 1px solid #eee; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+      <div style="width: 12px; height: 12px; background: var(--gold); border-radius: 50%; animation: pulse 2s infinite;"></div>
+      <span style="font-weight: 700; font-size: 16px;">Kampania w fazie nauki</span>
+      <span class="badge badge-gold">Dzien 5 z ~14</span>
+    </div>
+    <style>@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }</style>
+
+    <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">
+      Algorytm Google uczy sie, komu wyswietlac reklame. Przez pierwsze 2 tygodnie testuje rozne grupy odbiorcow i kanaly (Search, Display, YouTube). Po tym okresie zaczyna lepiej targetowac — koszt za klikniecie powinien spadac, a jakosc klikniec rosnac.
+    </p>
+
+    <div class="progress-row">
+      <span class="prog-label">Postep nauki</span>
+      <div class="prog-bar-bg">
+        <div class="prog-bar" style="width: 36%; background: linear-gradient(90deg, var(--gold-dark), var(--gold));">36%</div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;">
+      <div style="padding: 16px; background: #f9fafb; border-radius: 8px;">
+        <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">Co mozna zmienic teraz</div>
+        <ul style="font-size: 13px; color: var(--text-secondary); padding-left: 16px;">
+          <li>Dodac slowa wykluczajace (np. "praca", "darmowy")</li>
+          <li>Wykluczyc miasta poza obszarem</li>
+          <li>Zmienic Final URL na /wycena</li>
+        </ul>
+      </div>
+      <div style="padding: 16px; background: #f9fafb; border-radius: 8px;">
+        <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">Czego nie zmieniac</div>
+        <ul style="font-size: 13px; color: var(--text-secondary); padding-left: 16px;">
+          <li>Budzet dzienny (50 zl)</li>
+          <li>Strategia licytacji</li>
+          <li>Teksty i grafiki reklam</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 7: KOLEJNE KROKI ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">7</div>
+    Rekomendowane kolejne kroki
+  </div>
+
+  <div style="display: grid; gap: 12px;">
+
+    <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--red); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-weight: 700; font-size: 15px;">Zmienic Final URL na /wycena</span>
+        <span class="badge badge-red">Pilne</span>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">Reklama kieruje na strone glowna zamiast na kalkulator wyceny. 87% ruchu nie dociera do formularza. Zmiana na coreltb.pl/wycena moze podwoic konwersje.</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--gold); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-weight: 700; font-size: 15px;">Dodac 16 slow wykluczajacych</span>
+        <span class="badge badge-gold">Ten tydzien</span>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">Slowa takie jak "praca", "darmowy", "gotowe", "drewniany", "prefabrykowany" marnuja budzet na osoby, ktore nie szukaja budowy domu.</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--gold); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-weight: 700; font-size: 15px;">Wykluczyc Krakow i Oswiecim</span>
+        <span class="badge badge-gold">Ten tydzien</span>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">40 zl wydane na klikniecia z miast, w ktorych nie budujemy. Dodanie wykluczenia geograficznego zatrzyma ten wyciek budzetu.</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--blue); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-weight: 700; font-size: 15px;">Ustawic harmonogram 6:00-22:00</span>
+        <span class="badge badge-blue">Po fazie nauki</span>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">Nocne klikniecia (22:00-6:00) generuja koszty bez konwersji. Ograniczenie godzin pozwoli lepiej wykorzystac budzet.</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--blue); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-weight: 700; font-size: 15px;">Poczekac na koniec fazy nauki (~7 kwietnia)</span>
+        <span class="badge badge-blue">W trakcie</span>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">Po 14 dniach algorytm bedzie lepiej wiedzial, komu wyswietlac reklamy. Wtedy ocenimy rzeczywista skutecznosc kampanii i podejmiemy decyzje o zmianach strategii.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== PROGNOZA ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">$</div>
+    Prognoza na kwiecien (po optymalizacji)
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+    <div style="background: #fff; border-radius: 12px; padding: 24px; border: 1px solid #eee; text-align: center;">
+      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">Teraz (marzec)</div>
+      <div style="font-size: 36px; font-weight: 800; color: var(--text-primary);">0</div>
+      <div style="font-size: 13px; color: var(--text-secondary);">leadow (formularzy)</div>
+      <div style="font-size: 12px; color: var(--text-light); margin-top: 4px;">119 klikniec &rarr; 0 leadow</div>
+    </div>
+    <div style="background: var(--bg-dark); border-radius: 12px; padding: 24px; border: 1px solid var(--gold); text-align: center;">
+      <div style="font-size: 12px; color: var(--gold-light); font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">Cel na kwiecien</div>
+      <div style="font-size: 36px; font-weight: 800; color: #fff;">3-5</div>
+      <div style="font-size: 13px; color: #aaa;">leadow (formularzy)</div>
+      <div style="font-size: 12px; color: #666; margin-top: 4px;">z Final URL /wycena + slow wykl.</div>
+    </div>
+  </div>
+
+  <div class="insight-box" style="margin-top: 20px;">
+    <h3>Skad ta prognoza?</h3>
+    <p>Zmiana Final URL z glownej strony na /wycena + slowa wykluczajace powinny podniesc konwersje z 0% do ~2-3%. Przy 300+ kliknieciach miesiecznie to 3-5 wypelnionych formularzy wyceny. Kazdy taki lead to potencjalny klient na budowe domu o wartosci 300-500 tys. zl.</p>
+  </div>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <img class="logo" src="data:image/webp;base64,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" alt="CoreLTB">
+  <p>Raport wygenerowany automatycznie &middot; <a href="https://coreltb.pl">coreltb.pl</a></p>
+  <p style="margin-top: 4px;">Google Ads + GA4 + Search Console &middot; Dane za okres 24-28 marca 2026</p>
+</div>
+
+</body>
+</html>

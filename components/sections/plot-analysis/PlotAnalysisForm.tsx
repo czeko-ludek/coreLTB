@@ -9,7 +9,7 @@ import type { IconName } from '@/components/ui/Icon';
 import { validatePolishPhone } from '@/lib/validation';
 import { useEmailSuggestion } from '@/hooks/useEmailSuggestion';
 import { validateEmailStructure } from '@/lib/email-validation';
-import { captureUTMParams, getUTMParams, trackLead, trackPhoneClick } from '@/lib/analytics';
+import { captureUTMParams, getUTMParams, trackLead, trackPhoneClick, trackFormFocus } from '@/lib/analytics';
 
 // ─── Types ──────────────────────────────────────────────
 
@@ -81,6 +81,7 @@ export const PlotAnalysisForm = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const successRef = useRef<HTMLDivElement>(null);
   const honeypotRef = useRef<HTMLInputElement>(null);
+  const formFocusTracked = useRef(false);
   const pathname = usePathname();
 
   // Capture UTM params on mount
@@ -456,6 +457,12 @@ export const PlotAnalysisForm = () => {
                   error={state.errors.name}
                   required
                   placeholder="Jan Kowalski"
+                  onFocus={() => {
+                    if (!formFocusTracked.current) {
+                      formFocusTracked.current = true;
+                      trackFormFocus('plot_analysis');
+                    }
+                  }}
                 />
                 <InputField
                   label="Telefon"
@@ -612,6 +619,7 @@ function InputField({
   required,
   placeholder,
   onBlur,
+  onFocus,
   suggestion,
   onApplySuggestion,
   onDismissSuggestion,
@@ -624,6 +632,7 @@ function InputField({
   required?: boolean;
   placeholder?: string;
   onBlur?: () => void;
+  onFocus?: () => void;
   suggestion?: { full: string; domain: string; original: string } | null;
   onApplySuggestion?: () => void;
   onDismissSuggestion?: () => void;
@@ -639,6 +648,7 @@ function InputField({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onBlur={onBlur}
+        onFocus={onFocus}
         placeholder={placeholder}
         className={`w-full px-4 py-3 rounded-xl border-2 text-body-md transition-colors duration-200
           focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary

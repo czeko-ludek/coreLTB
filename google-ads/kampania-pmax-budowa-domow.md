@@ -12,13 +12,13 @@
 
 | Parametr | Wartosc |
 |---|---|
-| Nazwa | CoreLTB — PMax — Budowa Domow |
+| Nazwa | CoreLTB — PMax |
 | Typ | Performance Max |
 | Cel | Przeslanie formularza kontaktowego (Leads) |
 | Budzet dzienny | 50,00 zl |
 | Strategia stawek | Maksymalizuj liczbe konwersji (bez docelowego CPA) |
 | Pozyskiwanie klientow | Jednakowe stawki dla nowych i obecnych |
-| Schedule | Codziennie 6:00–22:00 |
+| Schedule | **NIE USTAWIONY** — do dodania 6:00–22:00 |
 | Jezyk | polski |
 | Reklamy polityczne | Nie |
 
@@ -189,7 +189,7 @@ dzialka na sprzedaz, kupno dzialki, dzialki budowlane sprzedaz
 | Ustawienie | Wartosc |
 |---|---|
 | Dostosowywanie tekstu | Wlaczone |
-| Rozwiniecie koncowego URL | **Wylaczone** |
+| Rozwiniecie koncowego URL | Wylaczone (potwierdzone 2026-03-28) |
 | Ulepszanie grafik | Wlaczone |
 | Obrazy na stronie docelowej | Wlaczone |
 | Ulepszanie wideo | Wlaczone |
@@ -207,7 +207,9 @@ dzialka na sprzedaz, kupno dzialki, dzialki budowlane sprzedaz
 | GA4 tag calculator_start | Aktywny | Trigger: dataLayer event |
 | GA4 tag consultation_lead | Aktywny | Trigger: dataLayer event |
 | GA4 tag plot_analysis_lead | Aktywny | Trigger: dataLayer event |
-| GA4 tag phone_click | Aktywny w GTM | Nie podpiety w kodzie — TODO |
+| GA4 tag phone_click | Aktywny | Podpiety w kodzie 2026-03-25 |
+| GA4 tag estimate_view | Aktywny | Podpiety w kodzie 2026-03-28 |
+| GA4 tag form_focus | Aktywny | Podpiety w kodzie 2026-03-28 |
 | UTM capture | Aktywny | sessionStorage, wysylany z leadami |
 
 ---
@@ -237,17 +239,99 @@ dzialka na sprzedaz, kupno dzialki, dzialki budowlane sprzedaz
 - [ ] Dodac Asset Group 2: Nadzor i kierownik budowy
 - [ ] Rozwazyc osobna kampanie Search
 
+### Miesiac 3-4: Kampania Search + Remarketing
+
+- [ ] Uruchomic kampanie Search na frazy z wysoka intencja:
+  - "budowa domu rybnik", "firma budowlana jaworzno", "budowa domu wodzislaw"
+  - "kalkulator budowy domu", "ile kosztuje budowa domu"
+  - "budowa domu pod klucz slask"
+- [ ] Cel: Search lapie high-intent, PMax znajduje nowych odbiorcow
+- [ ] Budzet Search: 30-50 zl/dzien (osobny od PMax)
+- [ ] Uruchomic kampanie Remarketing:
+  - Osoby ktore byly na /wycena ale nie wyslaly formularza
+  - Osoby ktore byly na /projekty (ogladaly projekty domow)
+  - Format: Display + YouTube
+  - Budzet: 15-20 zl/dzien
+
+### Miesiac 4-6: Optymalizacja pelnego lejka + Facebook
+
+- [ ] Podpiac dane z Facebook Ads (Customer Match):
+  - Eksport listy leadow z Facebooka (emaile, telefony)
+  - Import do Google Ads jako Customer Match audience
+  - Uzyc jako sygnal dla PMax (audience signal)
+  - Stworzyc Similar Audiences na podstawie FB leadow
+- [ ] Wdrozyc Offline Conversion Tracking:
+  - Podpiac CRM — informowac Google ktore leady staly sie klientami
+  - Google optymalizuje pod jakosc leadow, nie tylko ilosc
+- [ ] Ustawic Target CPA (po zebraniu 30+ konwersji/miesiac)
+- [ ] Rozwazyc Meta Pixel + kampanie FB Ads kierujace na /wycena
+
+### Miesiac 6+: Skalowanie
+
+- [ ] Zwiekszyc budzet PMax do 100-150 zl/dzien (jesli CPA < 50 zl)
+- [ ] Dodac Asset Group 3: Projekty domow (ruch na /projekty)
+- [ ] Testowac kampanie Demand Gen (YouTube + Discover)
+- [ ] Rozwazyc Local Services Ads (jesli dostepne w PL)
+- [ ] A/B testy landing pages (/wycena wariant A vs B)
+
+---
+
+## Strategia: Facebook Ads → Google Ads (Cross-Platform)
+
+### Kontekst
+
+Klient prowadzi kampanie Facebook Ads od ~1 roku (kampanie marketingowe/brandingowe). Te dane maja wartosc dla Google Ads.
+
+### Co mozna wykorzystac:
+
+| Dane z Facebooka | Jak uzyc w Google Ads | Wartosc |
+|---|---|---|
+| Lista emaili z leadow FB | Customer Match → audience signal w PMax | WYSOKA — Google wie kogo szukac |
+| Lista emaili z leadow FB | Similar Audiences w Google | WYSOKA — Google znajduje podobnych ludzi |
+| Dane demograficzne (wiek, plec, lokalizacja) | Ustawienia demograficzne kampanii | SREDNIA — informuje targetowanie |
+| Najlepiej konwertujace kreacje | Inspiracja dla assetow Google Ads | SREDNIA — co dziala na FB czesto dziala w Display |
+| Remarketing z FB (odwiedzajacy strone) | Juz lapie Google przez GTM | JUZ MAMY |
+
+### Jak to wdrozyc:
+
+1. **Eksport emaili** z Facebook Ads Manager → Centrum odbiorow → Eksportuj liste
+2. **Haszowanie** — Google wymaga haszowanych emaili (SHA-256) lub plaintext (Google hashuje sam)
+3. **Import do Google Ads** → Narzedzia → Zarzadzanie odbiorcami → Listy klientow → "+"
+4. **Dodaj jako sygnal** w PMax Asset Group → Sygnaly dotyczace odbiorcow → Twoje dane → Lista klientow
+5. **Aktualizuj co miesiac** — nowe leady z FB dodawaj do listy
+
+### Match rate:
+
+Typowy match rate to ~50% (polowa emaili z FB dopasuje sie do kont Google). Im wieksza lista, tym lepiej — minimum 1000 emaili.
+
+### Wymogi prawne (GDPR/Consent):
+
+- Osoby na liscie muszaly wyrazic zgode na marketing
+- Google wymaga deklaracji ze dane zostaly zebrane zgodnie z GDPR
+- W EU (DMA) — wymagany consent signal przy uploadzie
+
 ---
 
 ## TODO — do zrobienia
 
-- [ ] Podpiac `trackPhoneClick()` do linkow tel: w kodzie (10+ linkow)
-- [ ] Podpiac `trackEstimateView()` w CalculatorForm
-- [ ] Podpiac `trackFormFocus()` na polach kontaktowych
+- [x] Podpiac `trackPhoneClick()` do linkow tel: w kodzie (15 linkow) — DONE 2026-03-25
+- [x] Ustawic wartosci konwersji w Google Ads — DONE 2026-03-25 (150/100/80 zl)
+- [x] Naprawic polaczenie GA4 → Google Ads (374-981-3686) — DONE 2026-03-25
+- [x] Podpiac `trackEstimateView()` w CalculatorForm — DONE 2026-03-28
+- [x] Podpiac `trackFormFocus()` na polach kontaktowych (calculator, consultation, plot_analysis) — DONE 2026-03-28
 - [ ] Podpiac `trackCTAClick()` na kluczowych CTA
-- [ ] Ustawic wartosci konwersji w Google Ads (po aktywacji)
+- [ ] Dodac phone_click jako konwersje Dodatkowa (50 zl) w Google Ads
+- [x] ~~Wylaczyc Final URL Expansion~~ — juz bylo wylaczone (potwierdzone 2026-03-28)
+- [x] **Zmienic Final URL w Asset Group z coreltb.pl na coreltb.pl/wycena** — DONE 2026-03-28 (zmienione przez klienta)
+- [ ] **Dodac harmonogram reklam** 6:00-22:00 (Ad schedule) — po fazie nauki (~7 kwietnia)
+- [ ] Dodac negative keywords do listy wykluczajacej (16 slow: praca, zatrudnienie, oferta pracy, darmowy, za darmo, gotowe domy, domy gotowe, dom modulowy, dom prefabrykowany, drewniany, dom z drewna, szkieletowy, kontener, tiny house, minidom, remont)
+- [ ] Wykluczyc lokalizacje: Krakow, Oswiecim (klikniecia poza naszym obszarem)
 - [ ] Przygotowac Asset Group 2 (nadzor) na miesiac 2
 - [ ] Skrypt analizy kampanii dzien po dniu
+- [ ] Eksport listy leadow z Facebook Ads → Customer Match w Google Ads
+- [ ] Przygotowac kampanie Search (frazy + budzet + reklamy)
+- [ ] Wdrozyc Meta Pixel na stronie (przez GTM)
+- [ ] Podpiac CRM do offline conversions
 
 ---
 
@@ -256,4 +340,15 @@ dzialka na sprzedaz, kupno dzialki, dzialki budowlane sprzedaz
 | Data | Zmiana | Kto |
 |---|---|---|
 | 2026-03-24 | Utworzenie kampanii PMax, 50 zl/dzien, 15 naglowkow, 5 opisow, 10 Search Themes, 44 negative keywords, wizytowki GBP podpiete | Dawid + Claude |
-| 2026-03-24 | Polaczenie GA4 → Google Ads, import 3 konwersji (calculator/consultation/plot_analysis_lead) | Dawid |
+| 2026-03-24 | Polaczenie GA4 → Google Ads (900-970-2482) — BLEDNE KONTO | Dawid |
+| 2026-03-25 | Naprawione polaczenie GA4 → Google Ads (374-981-3686) — wlasciwe konto kampanii | tledzki + Dawid |
+| 2026-03-25 | Utworzenie 3 konwersji GA4 → Ads: calculator_lead (150zl), consultation_lead (100zl), plot_analysis_lead (80zl) — wszystkie jako Glowne | Dawid |
+| 2026-03-25 | trackPhoneClick() podpiety do 15 linkow tel: w 10 komponentach, push na produkcje | Claude |
+| 2026-03-25 | Analiza konkurencji (3 firmy) + roadmap kampanii (6 miesiecy) | Claude |
+| 2026-03-28 | Analiza 4 dni danych: 12158 imp, 414 klik, 3 konw (calculator_lead), 221.80 zl. Wykryto: Final URL Expansion WLACZONE (87% budzetu na homepage), brak harmonogramu, brak 17 negatywnych slow. Utworzono skrypt eksportu ads-export-script.js | Claude |
+| 2026-03-28 | Nazwa kampanii w rzeczywistosci: "CoreLTB — PMax" (nie "...Budowa Domow") — poprawiono w dokumentacji i skrypcie | Claude |
+| 2026-03-28 | Podlaczono GA4 API (propertyId: 529532413) — analiza zachowania uzytkownikow z PMax (Cross-network channel) | Claude |
+| 2026-03-28 | Dodano trackEstimateView() do CalculatorForm + trackFormFocus() do 3 formularzy (calculator, consultation, plot_analysis) | Claude |
+| 2026-03-28 | Wygenerowano raport HTML dla klienta: google-ads/analizy/raport-coreltb-24-28-marca.html (brand colors, funnel GA4, SEO vs Ads) | Claude |
+| 2026-03-28 | **Final URL zmieniony z coreltb.pl na coreltb.pl/wycena** w Asset Group — kluczowa zmiana, 87% ruchu szlo na homepage zamiast kalkulator | Dawid |
+| 2026-03-28 | Analiza GA4: 119 klikniec Ads → 33 sesji (28%), 5 kalkulator, 3 wyceny. Strata: Krakow 17.60 zl, Oswiecim 22.46 zl (poza obszarem) | Claude |
