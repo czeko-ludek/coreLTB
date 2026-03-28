@@ -2,12 +2,13 @@
 # Cloudflare Pages — Security & Cache Headers
 # ============================================
 
-# Security headers dla wszystkich stron
+# Security + cache headers dla wszystkich stron (HTML)
 /*
   X-DNS-Prefetch-Control: on
   X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+  Cache-Control: public, max-age=0, must-revalidate
 
 # Cache dla obrazów (1 rok)
 /images/*

@@ -42,15 +42,15 @@ export function ProjectTabs({ specifications }: ProjectTabsProps) {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   return (
-    <section className="py-8 md:py-12 bg-background-beige">
+    <section className="py-6 md:py-8 bg-background-beige">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         {/* Tab Headers */}
-        <div className="flex flex-wrap gap-2 md:gap-3">
+        <div className="flex flex-wrap gap-1.5 md:gap-2">
           {specifications.map((tab, index) => (
             <button
               key={index}
               onClick={() => setActiveTabIndex(index)}
-              className={`px-4 py-2 md:px-6 md:py-3 font-medium text-xs md:text-sm uppercase tracking-wide transition-all duration-300 ${
+              className={`px-3 py-1.5 md:px-5 md:py-2 font-medium text-xs md:text-sm uppercase tracking-wide transition-all duration-300 ${
                 activeTabIndex === index
                   ? 'bg-primary text-white rounded-t-lg'
                   : 'bg-gray-50 text-text-secondary hover:bg-gray-100 hover:text-text-primary rounded-t-lg'
@@ -62,13 +62,13 @@ export function ProjectTabs({ specifications }: ProjectTabsProps) {
         </div>
 
         {/* Tab Content - Connected directly to tabs */}
-        <div className="bg-gray-50 rounded-b-xl rounded-tr-xl p-4 md:p-8">
-          <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-4 md:mb-6">
+        <div className="bg-gray-50 rounded-b-xl rounded-tr-xl p-3 md:p-5">
+          <h3 className="text-lg md:text-xl font-bold text-text-primary mb-3 md:mb-4">
             {specifications[activeTabIndex].title}
           </h3>
 
           {/* Grid with conditional columns: 1 for "Opis funkcjonalny", 2 for others */}
-          <div className={`grid gap-5 ${
+          <div className={`grid gap-2.5 md:gap-3 ${
             specifications[activeTabIndex].title === 'Opis funkcjonalny'
               ? 'grid-cols-1'
               : 'grid-cols-1 md:grid-cols-2'
@@ -80,13 +80,13 @@ export function ProjectTabs({ specifications }: ProjectTabsProps) {
               return (
                 <div
                   key={index}
-                  className="bg-white rounded-lg p-3 md:p-4 border border-primary/20 hover:border-primary/40 hover:shadow-md transition-all duration-300"
+                  className="bg-white rounded-md px-3 py-2 md:px-3.5 md:py-2.5 border border-primary/20 hover:border-primary/40 hover:shadow-md transition-all duration-300"
                 >
-                  <dt className="text-[0.7rem] md:text-xs font-medium text-text-secondary tracking-wide mb-2 flex items-center">
+                  <dt className="text-[0.7rem] md:text-xs font-medium text-text-secondary tracking-wide mb-1 flex items-center">
                     <span>{item.label}</span>
                     {hasInfo && definition && <InfoTooltip definition={definition} />}
                   </dt>
-                  <dd className="text-sm md:text-base font-semibold text-text-primary whitespace-pre-line leading-relaxed">
+                  <dd className="text-sm md:text-base font-semibold text-text-primary whitespace-pre-line leading-snug">
                     {specifications[activeTabIndex].title === 'Opis funkcjonalny'
                       ? formatDescription(item.value)
                       : item.value}
