@@ -9,7 +9,7 @@ import type { IconName } from '@/components/ui/Icon';
 import { validatePolishPhone } from '@/lib/validation';
 import { useEmailSuggestion } from '@/hooks/useEmailSuggestion';
 import { validateEmailStructure } from '@/lib/email-validation';
-import { captureUTMParams, getUTMParams, trackLead, trackPhoneClick, trackFormFocus } from '@/lib/analytics';
+import { captureUTMParams, getUTMParams, trackLead, trackMetaLead, trackPhoneClick, trackFormFocus } from '@/lib/analytics';
 
 // ─── Types ──────────────────────────────────────────────
 
@@ -164,6 +164,9 @@ export const PlotAnalysisForm = () => {
 
     // GA4 conversion event (via GTM dataLayer)
     trackLead('plot_analysis', { address: state.address });
+
+    // Meta Pixel conversion event
+    trackMetaLead('plot_analysis');
   }
 
   // ─── Form View ────────────────────────────────────────

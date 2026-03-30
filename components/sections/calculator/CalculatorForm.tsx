@@ -41,6 +41,8 @@ import {
   trackPhoneClick,
   trackEstimateView,
   trackFormFocus,
+  trackMetaLead,
+  trackMetaViewContent,
 } from '@/lib/analytics';
 
 // ─── State ──────────────────────────────────────────────
@@ -182,9 +184,10 @@ export const CalculatorForm = () => {
     }
   }, [searchParams]);
 
-  // Capture UTM params on mount
+  // Capture UTM params on mount + fire Meta Pixel ViewContent
   useEffect(() => {
     captureUTMParams();
+    trackMetaViewContent('kalkulator-budowy', 'wycena');
   }, []);
 
   // Lock body scroll when mobile menu is open
@@ -363,6 +366,12 @@ export const CalculatorForm = () => {
       area: String(state.area),
       finish: state.finish,
       estimate_total: String(Math.round((result.total.min + result.total.max) / 2)),
+    });
+
+    // Meta Pixel conversion event
+    trackMetaLead('calculator', {
+      value: Math.round((result.total.min + result.total.max) / 2),
+      currency: 'PLN',
     });
   }
 

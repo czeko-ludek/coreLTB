@@ -10,7 +10,7 @@ import { OptionCard } from '@/components/ui/OptionCard';
 import { validatePolishPhone } from '@/lib/validation';
 import { useEmailSuggestion } from '@/hooks/useEmailSuggestion';
 import { validateEmailStructure } from '@/lib/email-validation';
-import { captureUTMParams, getUTMParams, trackLead, trackPhoneClick, trackFormFocus } from '@/lib/analytics';
+import { captureUTMParams, getUTMParams, trackLead, trackMetaLead, trackPhoneClick, trackFormFocus } from '@/lib/analytics';
 
 // ─── Types ──────────────────────────────────────────────
 
@@ -235,6 +235,9 @@ export const ConsultationForm = () => {
 
     // GA4 conversion event (via GTM dataLayer)
     trackLead('consultation', { service: state.service, city: state.city });
+
+    // Meta Pixel conversion event
+    trackMetaLead('consultation');
   }
 
   // ─── Form View ────────────────────────────────────────

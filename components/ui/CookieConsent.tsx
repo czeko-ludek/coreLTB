@@ -7,6 +7,7 @@ declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
     dataLayer?: Record<string, unknown>[];
+    fbq?: (...args: unknown[]) => void;
   }
 }
 
@@ -37,14 +38,19 @@ export function CookieConsent() {
   useEffect(() => {
     const stored = getStoredConsent();
 
-    if (stored && typeof window !== 'undefined' && typeof window.gtag === 'function') {
+    if (stored && typeof window !== 'undefined') {
       if (stored === 'all') {
-        window.gtag('consent', 'update', {
-          analytics_storage: 'granted',
-          ad_storage: 'granted',
-          ad_user_data: 'granted',
-          ad_personalization: 'granted',
-        });
+        if (typeof window.gtag === 'function') {
+          window.gtag('consent', 'update', {
+            analytics_storage: 'granted',
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted',
+          });
+        }
+        if (typeof window.fbq === 'function') {
+          window.fbq('consent', 'grant');
+        }
       }
     }
 
@@ -63,21 +69,31 @@ export function CookieConsent() {
   const handleConsent = useCallback((value: 'all' | 'necessary') => {
     localStorage.setItem(COOKIE_KEY, value);
 
-    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-      if (value === 'all') {
-        window.gtag('consent', 'update', {
-          analytics_storage: 'granted',
-          ad_storage: 'granted',
-          ad_user_data: 'granted',
-          ad_personalization: 'granted',
-        });
-      } else {
-        window.gtag('consent', 'update', {
-          analytics_storage: 'denied',
-          ad_storage: 'denied',
-          ad_user_data: 'denied',
-          ad_personalization: 'denied',
-        });
+    if (typeof window !== 'undefined') {
+      if (typeof window.gtag === 'function') {
+        if (value === 'all') {
+          window.gtag('consent', 'update', {
+            analytics_storage: 'granted',
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted',
+          });
+        } else {
+          window.gtag('consent', 'update', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied',
+          });
+        }
+      }
+      // Meta Pixel consent
+      if (typeof window.fbq === 'function') {
+        if (value === 'all') {
+          window.fbq('consent', 'grant');
+        } else {
+          window.fbq('consent', 'revoke');
+        }
       }
     }
 

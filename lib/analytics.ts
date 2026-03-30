@@ -168,3 +168,56 @@ export function trackFormFocus(formName: string) {
 export function trackFormError(formName: string, field: string) {
   trackEvent('form_error', { form_name: formName, error_field: field });
 }
+
+// ─── Meta Pixel (Facebook) ───────────────────────────────
+
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
+/**
+ * Fire a Meta Pixel standard or custom event.
+ * Respects consent — fbq is loaded in 'revoke' mode by default,
+ * granted only after cookie consent.
+ */
+export function trackMetaEvent(
+  eventName: string,
+  params?: Record<string, string | number | boolean | undefined>
+) {
+  if (typeof window === 'undefined' || typeof window.fbq !== 'function') return;
+  if (params) {
+    window.fbq('track', eventName, params);
+  } else {
+    window.fbq('track', eventName);
+  }
+}
+
+/**
+ * Track a lead conversion on Meta Pixel.
+ * Uses the standard 'Lead' event that Meta Ads optimizes for.
+ */
+export function trackMetaLead(
+  source: LeadSource,
+  data?: Record<string, string | number | undefined>
+) {
+  trackMetaEvent('Lead', {
+    content_name: source,
+    content_category: 'lead_form',
+    ...data,
+  });
+}
+
+/**
+ * Track ViewContent on Meta Pixel (e.g. viewing /wycena page).
+ */
+export function trackMetaViewContent(
+  contentName: string,
+  contentCategory?: string
+) {
+  trackMetaEvent('ViewContent', {
+    content_name: contentName,
+    content_category: contentCategory || 'landing_page',
+  });
+}
