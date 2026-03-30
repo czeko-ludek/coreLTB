@@ -4,153 +4,279 @@
 
 | Platform | Status | Account | Notes |
 |----------|--------|---------|-------|
-| Google Ads | ❌ TODO | — | Konto do utworzenia |
-| Google Tag Manager | ❌ TODO | — | Container do osadzenia |
-| GA4 | ⏳ Do podlaczenia | — | Property ID do wpisania w `SEO/seo-agent/config.json` |
-| Meta Ads (Facebook/Instagram) | ❌ TODO | — | Pixel do osadzenia |
+| Google Ads | ✅ Active | dawidFC@gmail.com | Kampania PMax aktywna |
+| Google Tag Manager | ✅ Done | GTM-TPFV68BN | Osadzony w `app/layout.tsx` |
+| GA4 | ✅ Done | G-SMNG7006SN | Skonfigurowany via GTM |
 | Google Search Console | ✅ Done | dawidFC@gmail.com | Domena: coreltb.pl |
+| Meta Pixel | ✅ Done | ID: 2115781769222343 | Osadzony w `app/layout.tsx`, consent mode |
+| Meta Ads | ✅ Active | Konto: CoreLTB Reklama (515195598339409) | Kampania na `/wycena` aktywna |
 
 ---
 
-## Google Ads
+## Conversion Tracking — Architektura
 
-### Kampanie (planowane)
+### Problem: GA4 Import vs Native Google Ads Tag
 
-| Kampania | Typ | Landing Page | Budget | Frazy |
-|----------|-----|-------------|--------|-------|
-| Wycena — Search | Search | `/wycena` | — | budowa domu wycena, kalkulator budowy domu, ile kosztuje budowa domu |
-| Wycena — Local | Search (local) | `/wycena` | — | budowa domu katowice, budowa domu rybnik, firma budowlana slask |
-| Brand | Search | `/` | — | coreltb, core ltb, coreltb builders |
-| Remarketing | Display | `/wycena` | — | Osoby ktore odwiedzialy /wycena ale nie wyslaly formularza |
+Obecnie konwersje sa importowane z GA4 do Google Ads. To powoduje:
 
-### Conversion tracking
+| | GA4 Import (obecny) | Native Google Ads Tag (docelowy) |
+|---|---|---|
+| **Opoznienie** | **24-72h** | **~1-3h** (zwykle minuty) |
+| **Smart Bidding** | Uczy sie z opoznieniem | Near real-time |
+| **Cross-device** | Brak | Sledzi cross-device |
+| **View-through** | Brak | Widzi konwersje po wyswietleniu reklamy |
+| **Enhanced Conversions** | Ograniczone | Pelne wsparcie |
+| **Consent Mode modeling** | Dziala, ale czesciowe dane (0.5 konwersji) | Lepsze modelowanie, pelniejsze dane |
 
-| Event | Trigger | Value |
-|-------|---------|-------|
-| `calculator_submit` | Wyslanie formularza na `/wycena` | Lead |
-| `calculator_pdf_download` | Klik "Pobierz wycene (PDF)" | Micro-conversion |
-| `phone_click` | Klik na numer telefonu | Micro-conversion |
-| `contact_form_submit` | Wyslanie formularza na `/kontakt` | Lead |
+### Consent Mode a ułamkowe konwersje
 
-### Konfiguracja GTM
+Gdy user NIE akceptuje cookies → `ad_storage: denied` → Google Ads nie moze bezposrednio zmierzyc konwersji → stosuje **Consent Mode Modeling** → konwersja liczona jako ulamek (np. 0.5 zamiast 1.0).
 
-```
-TODO: Wpisac GTM Container ID
-<!-- Google Tag Manager -->
-<script>
-  // GTM snippet — do osadzenia w app/layout.tsx
-</script>
-```
+Gdy user AKCEPTUJE cookies → `ad_storage: granted` → pelna konwersja 1.0.
 
-**Plik do edycji:** `app/layout.tsx` — dodac GTM snippet w `<head>` i noscript w `<body>`.
+Native Google Ads Tag lepiej radzi sobie z modelowaniem consent niz GA4 import.
 
----
+### Docelowa architektura (TODO)
 
-## GA4 (Google Analytics 4)
+**Dual tracking — tak robia profesjonalisci:**
 
-```
-TODO: Wpisac GA4 Measurement ID (G-XXXXXXXXXX)
-```
+1. **Native Google Ads Conversion Tag** (PRIMARY) — do optymalizacji kampanii, Smart Bidding
+2. **GA4 Key Events** (SECONDARY/OBSERVE) — do analityki, raportow, audience
 
-### Zdarzenia do skonfigurowania
+#### Implementacja Native Tag w GTM:
 
-| Event name | Parametry | Kiedy |
-|------------|-----------|-------|
-| `generate_lead` | `lead_type: "calculator"`, `area`, `finish_type` | Po wyslaniu formularza /wycena |
-| `generate_lead` | `lead_type: "contact"` | Po wyslaniu formularza /kontakt |
-| `page_view` | auto | Kazda strona |
-| `scroll` | auto | 90% scroll |
-| `file_download` | `file_name: "wycena-pdf"` | Klik PDF |
+1. W Google Ads → Cele → Konwersje → Nowa akcja konwersji → Strona internetowa → Skonfiguruj recznie
+2. Skopiowac **Conversion ID** (np. `AW-123456789`) i **Conversion Label** (np. `AbCdEfG`)
+3. W GTM dodac:
+   - **Tag:** Google Ads Conversion Tracking
+   - **Conversion ID:** z kroku 2
+   - **Conversion Label:** z kroku 2
+   - **Value:** 500 (PLN)
+   - **Trigger:** Custom Event = `calculator_lead` / `consultation_lead` / `plot_analysis_lead`
+4. Conversion Linker tag (jesli nie istnieje) — All Pages trigger
+5. W Google Ads oznaczyc GA4 import jako "Secondary" (observe only)
 
-### Grupy odbiorcow (Audiences)
-
-| Audience | Definicja |
-|----------|-----------|
-| Kalkulator — nie wyslali | Odwiedzili `/wycena`, nie wyslali formularza |
-| Kalkulator — wyslali | Event `generate_lead` z `lead_type: "calculator"` |
-| Lokalne strony | Odwiedzili `/obszar-dzialania/*` |
-| Powracajacy | Sesje >= 2 |
+#### Potrzebne dane (od Dawida):
+- [ ] **Conversion ID** (AW-XXXXXXXXX)
+- [ ] **Conversion Label** per akcja (calculator, consultation, plot_analysis)
 
 ---
 
-## Meta Ads (Facebook / Instagram)
+## Aktywne eventy (dataLayer → GTM → GA4)
 
+### Conversion events (key events, value 500 PLN each)
+
+| Event | Trigger | Formularz |
+|-------|---------|-----------|
+| `calculator_lead` | Submit na `/wycena` | CalculatorForm.tsx |
+| `consultation_lead` | Submit na `/umow-konsultacje` | ConsultationForm.tsx |
+| `plot_analysis_lead` | Submit na `/analiza-dzialki` | PlotAnalysisForm.tsx |
+
+### Micro-conversion events
+
+| Event | Trigger | Plik |
+|-------|---------|------|
+| `calculator_start` | Pierwsza zmiana parametru | CalculatorForm.tsx |
+| `calculator_step` | Wybor opcji w kalkulatorze | CalculatorForm.tsx |
+| `calculator_estimate_view` | Wyswietlenie wyceny | CalculatorForm.tsx |
+| `form_focus` | Focus na polu kontaktowym | CalculatorForm.tsx |
+| `form_error` | Blad walidacji | CalculatorForm.tsx |
+| `phone_click` | Klik na numer tel | Wszystkie tel: linki |
+| `cta_click` | Klik CTA | Rozne komponenty |
+
+### Implementacja w kodzie
+
+Wszystkie eventy ida przez `lib/analytics.ts`:
+- `trackEvent(name, params)` → `window.dataLayer.push({ event, ...params })`
+- `trackLead(source, data)` → odpala odpowiedni event + dolacza UTM params z sessionStorage
+- `trackPhoneClick(location)` → `phone_click`
+- `trackCalculatorStart()` → `calculator_start`
+- `trackCalculatorStep(step, value)` → `calculator_step`
+
+---
+
+## GTM Configuration
+
+**Container:** GTM-TPFV68BN
+
+### Tags (6)
+
+| Tag | Type | Trigger |
+|-----|------|---------|
+| GA4 Config | GA4 Configuration (G-SMNG7006SN) | All Pages |
+| calculator_lead | GA4 Event | Custom Event: calculator_lead |
+| consultation_lead | GA4 Event | Custom Event: consultation_lead |
+| plot_analysis_lead | GA4 Event | Custom Event: plot_analysis_lead |
+| phone_click | GA4 Event | Custom Event: phone_click |
+| calculator_start | GA4 Event | Custom Event: calculator_start |
+
+### TODO: Dodac w GTM
+
+- [ ] Google Ads Conversion Tracking tag (po otrzymaniu Conversion ID + Label)
+- [ ] Google Ads Conversion Linker tag (All Pages)
+- [ ] Oznaczyc GA4 import w Google Ads jako Secondary
+
+---
+
+## Consent Mode v2
+
+Zaimplementowany w `app/layout.tsx` + `components/ui/CookieConsent.tsx`.
+
+### Google (GTM/GA4)
+
+**Default (przed akceptacja):**
+```js
+gtag('consent', 'default', {
+  analytics_storage: 'denied',
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+});
 ```
-TODO: Wpisac Meta Pixel ID
+
+**Po akceptacji ("Akceptuje"):**
+```js
+gtag('consent', 'update', {
+  analytics_storage: 'granted',
+  ad_storage: 'granted',
+  ad_user_data: 'granted',
+  ad_personalization: 'granted',
+});
 ```
 
-### Kampanie (planowane)
+### Meta Pixel
 
-| Kampania | Cel | Audience | LP |
-|----------|-----|----------|----|
-| Lead Gen — Lookalike | Leads | Lookalike z konwersji kalkulatora | `/wycena` |
-| Remarketing | Conversions | Custom Audience: odwiedziny /wycena | `/wycena` |
-| Awareness — Realizacje | Reach | Zainteresowania: budowa domu, nieruchomosci | `/projekty` |
+**Default:** `fbq('consent', 'revoke')` — Pixel laduje sie ale nie trackuje.
+**Po akceptacji:** `fbq('consent', 'grant')` — pelne sledzenie wlaczone.
+**Po odrzuceniu:** `fbq('consent', 'revoke')` — pozostaje zablokowany.
 
-### Zdarzenia Pixel
+### Cookie Consent UX & Tracking
+
+**Design:** Duzy bar na dole z ciemnym overlay (backdrop). Trudny do ignorowania.
+**Wariant:** Opcja B (bar + przyciemnienie). Jesli % ignorowania wysoki → przejscie na Opcje A (pelny modal).
+
+**Eventy decyzji uzytkownika (dataLayer → GTM → GA4):**
 
 | Event | Kiedy |
 |-------|-------|
-| `Lead` | Wyslanie formularza /wycena |
-| `Contact` | Wyslanie formularza /kontakt |
-| `ViewContent` | Odwiedziny /wycena |
-| `PageView` | Kazda strona |
+| `cookie_accepted` | Kliknal "Akceptuje wszystkie" |
+| `cookie_rejected` | Kliknal "Tylko niezbedne" |
+| `cookie_ignored` | Nie podjal decyzji przez 30 sekund |
+
+**Konsekwencje:** Bez akceptacji cookies → konwersje liczone jako ulamki (Consent Mode Modeling). Z native Google Ads tagiem modelowanie jest dokladniejsze. Meta Pixel nie trackuje w ogole bez consent.
 
 ---
 
-## Implementacja w kodzie
-
-### Pliki do modyfikacji
-
-| Plik | Co dodac |
-|------|----------|
-| `app/layout.tsx` | GTM snippet, Meta Pixel base code |
-| `components/sections/calculator/CalculatorForm.tsx` | `gtag('event', 'generate_lead', {...})` po submit |
-| `app/kontakt/page.tsx` lub komponent kontaktowy | Event kontakt |
-| `lib/analytics.ts` | Helper functions: `trackEvent()`, `trackLead()` (do utworzenia) |
-
-### Helper (do implementacji)
-
-```typescript
-// lib/analytics.ts
-export function trackEvent(name: string, params?: Record<string, string | number>) {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', name, params);
-  }
-  if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq('track', name, params);
-  }
-}
-
-export function trackLead(type: 'calculator' | 'contact', extra?: Record<string, string | number>) {
-  trackEvent('generate_lead', { lead_type: type, ...extra });
-}
-```
-
----
-
-## UTM conventions
+## UTM Conventions
 
 | Parametr | Format | Przyklad |
 |----------|--------|----------|
-| `utm_source` | `google` / `facebook` / `instagram` | `google` |
+| `utm_source` | `google` / `facebook` | `google` |
 | `utm_medium` | `cpc` / `social` / `email` | `cpc` |
 | `utm_campaign` | `{typ}-{miasto}-{data}` | `wycena-katowice-2026q2` |
-| `utm_content` | `{wariant-reklamy}` | `headline-v2` |
+| `utm_content` | `{wariant}` | `headline-v2` |
+
+UTM tracking: `lib/analytics.ts` → `captureUTMParams()` → sessionStorage → wysylane z leadem do `/api/lead`.
+
+---
+
+## Kampanie Google Ads
+
+### Aktywne
+
+| Kampania | Typ | LP | Budget |
+|----------|-----|-----|--------|
+| PMax — budowa domow | Performance Max | `/wycena` | 50 PLN/dzien |
+
+### Planowane
+
+| Kampania | Typ | LP | Frazy |
+|----------|-----|-----|-------|
+| Search — wycena | Search | `/wycena` | budowa domu wycena, kalkulator budowy |
+| Search — local | Search | `/wycena` | budowa domu [miasto] |
+| Brand | Search | `/` | coreltb, core ltb |
+| Remarketing | Display | `/wycena` | Odwiedziny /wycena bez submit |
+
+---
+
+## Meta Pixel & Ads
+
+### Pixel Setup
+
+- **Pixel ID:** `2115781769222343`
+- **Nazwa:** CoreLTB Pixel
+- **Konto reklamowe:** CoreLTB Reklama (515195598339409)
+- **Tworca:** Julia Kubala (asystentka marketingu)
+- **Wlasciciel:** Tomasz (587512275861870)
+- **Osadzenie:** `app/layout.tsx` via `next/script` strategy `afterInteractive`
+- **Consent:** Startuje w `fbq('consent', 'revoke')`, aktywowany po akceptacji cookies
+
+### Ustawienia w Events Manager
+
+- **Automatyczne zaawansowane dopasowywanie:** Wl. (hashuje email/phone z formularzy)
+- **Wlasne pliki cookie:** Wl.
+- **Monitoruj zdarzenia automatycznie bez kodu:** Wyl. (eventy wysylamy recznie)
+- **Lista zatwierdzonych domen:** `coreltb.pl`
+- **API Konwersji (CAPI):** TODO — server-side tracking z `functions/api/lead.ts`
+
+### Eventy Meta Pixel
+
+| Event | Typ | Kiedy | Plik |
+|-------|-----|-------|------|
+| `PageView` | Standard | Kazda strona (automatyczny) | layout.tsx |
+| `ViewContent` | Standard | Wejscie na `/wycena` | CalculatorForm.tsx |
+| `Lead` | Standard | Submit formularza `/wycena` | CalculatorForm.tsx |
+| `Lead` | Standard | Submit formularza `/umow-konsultacje` | ConsultationForm.tsx |
+| `Lead` | Standard | Submit formularza `/analiza-dzialki` | PlotAnalysisForm.tsx |
+
+### Implementacja w kodzie
+
+Helpery w `lib/analytics.ts`:
+- `trackMetaEvent(name, params)` → `window.fbq('track', name, params)`
+- `trackMetaLead(source, data)` → `fbq('track', 'Lead', { content_name: source, ... })`
+- `trackMetaViewContent(name, category)` → `fbq('track', 'ViewContent', ...)`
+
+### Remarketing — plan (zbieranie danych w toku)
+
+| Grupa | Definicja | Min. wielkosci | Status |
+|-------|-----------|---------------|--------|
+| Odwiedzili /wycena | ViewContent, 30 dni | 500-1000 osob | Zbieranie danych |
+| Lead (konwersja) | Lead event, 180 dni | 100+ leadow | Zbieranie danych |
+| Odwiedzili bez Lead | ViewContent MINUS Lead, 30 dni | 500+ osob | Zbieranie danych |
+| Lookalike z leadow | Lookalike z grupy Lead | 500+ leadow zrodlowych | Za 2-3 miesiace |
+
+**Minimalne wielkosci grup:** Remarketing = 100 (wymog Meta, realne min. 500-1000). Lookalike = 100 zrodlowych (realne min. 500+).
+**Szacowany czas zbierania:** Remarketing ~2-4 tygodnie, Lookalike ~2-3 miesiace.
+
+### Aktywne kampanie Meta
+
+| Kampania | LP | Budget | Status |
+|----------|-----|--------|--------|
+| Kampania na kalkulator | `/wycena` | TBD | Aktywna (prowadzi Julia) |
+
+### TODO Meta
+
+- [ ] Conversions API (CAPI) — server-side tracking z `functions/api/lead.ts` (potrzebny Access Token)
+- [ ] Stworzyc grupy remarketingowe (po zebraniu min. 500 ViewContent)
+- [ ] Stworzyc Lookalike audience (po zebraniu min. 100 leadow)
+- [ ] Analiza wynikow kampanii na `/wycena` — targetowanie, kreacje, koszty
 
 ---
 
 ## TODO Checklist
 
-- [ ] Utworzyc konto Google Ads
-- [ ] Utworzyc kontener GTM i osadzic w `app/layout.tsx`
-- [ ] Skonfigurowac GA4 property, wpisac Measurement ID
-- [ ] Utworzyc `lib/analytics.ts` z helper functions
-- [ ] Dodac event tracking do `CalculatorForm.tsx` (submit + PDF download)
-- [ ] Dodac event tracking do formularza kontaktowego
-- [ ] Skonfigurowac conversion goals w Google Ads
-- [ ] Utworzyc Meta Pixel i osadzic w `app/layout.tsx`
-- [ ] Skonfigurowac Custom Audiences i Lookalike w Meta
-- [ ] Przygotowac kampanie Search + Local w Google Ads
-- [ ] Ustawic remarketing (Google + Meta)
-- [ ] Test: sprawdzic eventy w GA4 DebugView i Meta Events Manager
+- [x] GTM container osadzony
+- [x] GA4 skonfigurowany via GTM
+- [x] Event tracking w formularzach (calculator, consultation, plot_analysis)
+- [x] Phone click tracking na wszystkich tel: linkach
+- [x] UTM capture + sessionStorage
+- [x] Consent Mode v2 (Google + Meta)
+- [x] Meta Pixel osadzony (ID: 2115781769222343)
+- [x] Meta Pixel eventy: PageView, ViewContent, Lead
+- [x] Meta consent mode (revoke/grant)
+- [x] Cookie consent tracking (accepted/rejected/ignored)
+- [ ] **Native Google Ads Conversion Tag w GTM** ← PRIORYTET
+- [ ] Enhanced Conversions setup
+- [ ] Meta Conversions API (CAPI) — server-side
+- [ ] Remarketing audiences (Meta — po zebraniu danych)
+- [ ] Analiza kampanii Meta na `/wycena`
