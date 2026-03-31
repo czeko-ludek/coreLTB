@@ -6,7 +6,8 @@ import { Header, Footer } from "@/components/sections";
 import { ErrorBoundary } from "@/components/shared";
 import { FloatingPhoneCTA } from "@/components/ui/FloatingPhoneCTA";
 import { CookieConsent } from "@/components/ui/CookieConsent";
-import { companyData } from "@/data/company-data";
+import { companyData, getLocalBusinessSchema } from "@/data/company-data";
+import { googleReviewsData } from "@/data/google-reviews";
 
 const GTM_ID = "GTM-TPFV68BN";
 const META_PIXEL_ID = "2115781769222343";
@@ -266,7 +267,7 @@ export default function RootLayout({
             width="1"
             style={{ display: 'none' }}
             src={`https://www.facebook.net/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
-            alt=""
+            alt="Meta Pixel"
           />
         </noscript>
       </head>
@@ -287,6 +288,38 @@ export default function RootLayout({
         <Footer {...footerData} />
         <FloatingPhoneCTA />
         <CookieConsent />
+
+        {/* Schema.org — LocalBusiness + WebSite (global, every page) */}
+        <script
+          id="schema-global"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  ...getLocalBusinessSchema(),
+                  aggregateRating: {
+                    '@type': 'AggregateRating',
+                    ratingValue: googleReviewsData.aggregateRating.toString(),
+                    reviewCount: googleReviewsData.totalReviews.toString(),
+                    bestRating: '5',
+                    worstRating: '1',
+                  },
+                },
+                {
+                  '@type': 'WebSite',
+                  '@id': `${companyData.url}/#website`,
+                  url: companyData.url,
+                  name: companyData.name,
+                  description: companyData.description,
+                  publisher: { '@id': `${companyData.url}/#organization` },
+                  inLanguage: 'pl-PL',
+                },
+              ],
+            }).replace(/</g, '\\u003c'),
+          }}
+        />
       </body>
     </html>
   );

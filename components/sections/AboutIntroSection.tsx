@@ -52,7 +52,7 @@ export function AboutIntroSection({
               {label}
             </span>
 
-            <h1
+            <h2
               className={clsx(
                 'text-h3 md:text-h2 lg:text-display font-bold font-heading text-zinc-900 leading-[1.1] mb-6',
                 inView ? 'animate-fade-in-up' : 'opacity-0'
@@ -63,7 +63,7 @@ export function AboutIntroSection({
               {titleHighlight && (
                 <span className="block text-primary mt-1">{titleHighlight}</span>
               )}
-            </h1>
+            </h2>
 
             <div
               className={clsx(

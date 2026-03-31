@@ -29,6 +29,12 @@ export default function ContactPage() {
         className="container mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2"
       />
 
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2 text-center">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary">
+          Kontakt
+        </h1>
+      </div>
+
       <BentoContactSection contactInfo={contactInfo} />
     </main>
   );

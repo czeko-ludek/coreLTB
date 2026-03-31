@@ -234,13 +234,14 @@ export function HeroSection({
                 </span>
               </div>
 
-              <h1
+              <p
                 className="text-4xl lg:text-5xl font-black text-white leading-[0.95] mb-4 opacity-0"
                 style={{ animation: 'heroTextIn 1s ease-out 0.5s forwards' }}
+                role="presentation"
               >
                 {title.split(' ').slice(0, -1).join(' ')}{' '}
                 <span className="text-primary">{title.split(' ').slice(-1)}</span>
-              </h1>
+              </p>
 
               <p
                 className="text-base text-white/60 max-w-lg mb-6 leading-relaxed opacity-0"
