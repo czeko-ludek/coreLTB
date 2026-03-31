@@ -40,6 +40,9 @@ export type { TeamSectionProps } from './TeamSection';
 export { TestimonialsSection } from './TestimonialsSection';
 export type { TestimonialsSectionProps } from './TestimonialsSection';
 
+export { GoogleReviewsSection } from './GoogleReviewsSection';
+export type { GoogleReviewsSectionProps } from './GoogleReviewsSection';
+
 export { BlogSection } from './BlogSection';
 export type { BlogSectionProps } from './BlogSection';
 

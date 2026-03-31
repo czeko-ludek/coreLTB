@@ -7,7 +7,7 @@ import {
 	HeroSection,
 	HowItWorksSection,
 	ServiceShowcaseSection,
-	TestimonialsSection,
+	GoogleReviewsSection,
 	AreasOfOperationSection,
 } from "@/components/sections";
 import { PartnerLogosMarquee } from "@/components/sections/local/PartnerLogosMarquee";
@@ -30,6 +30,7 @@ const ProjectsSection = dynamic(
 	}
 );
 import { allPartnerLogos } from "@/data/partners";
+import { googleReviewsData } from "@/data/google-reviews";
 import { blogPosts } from "@/data/blog-data";
 
 export const metadata: Metadata = {
@@ -258,55 +259,11 @@ export default function Home() {
 		})),
 	};
 
-	// Testimonials Section Data
-	const testimonialsData = {
-		header: {
-			label: "REFERENCJE",
-			title: "Co mówią Inwestorzy z regionu?",
-			theme: "light" as const,
-		},
-		testimonials: [
-			{
-				quote:
-					"Baliśmy się budowy na grząskim gruncie. CoreLTB sprawdziło działkę, zaprojektowało zbrojoną płytę fundamentową i zagwarantowało cenę w umowie. Zero stresu, czysta inżynieria i terminowość.",
-				author: {
-					image: { src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100", alt: "Katarzyna W." },
-					name: "Katarzyna W.",
-					role: "Inwestycja: Rybnik-Boguszowice",
-				},
-				rating: 5.0,
-			},
-			{
-				quote:
-					"Szukaliśmy Generalnego Wykonawcy, a nie 'zbieraniny' ekip z ogłoszenia. Rewelacyjna logistyka, dostawy betonu na czas i kierownik budowy zawsze pod telefonem. Dom oddany do stanu deweloperskiego w 8 miesięcy.",
-				author: {
-					image: { src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100", alt: "Michał L." },
-					name: "Michał Lewandowski",
-					role: "Inwestycja: Katowice-Podlesie",
-				},
-				rating: 5.0,
-			},
-			{
-				quote:
-					"Budowa na terenie szkód górniczych III kategorii. Inne firmy proponowały astronomiczne kwoty. CoreLTB zoptymalizowało stal w projekcie, dając 5 lat rękojmi. Mamy bezpieczny dom i zaoszczędzone pieniądze.",
-				author: {
-					image: { src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100", alt: "Tomasz K." },
-					name: "Tomasz Kowalczyk",
-					role: "Inwestycja: Jastrzębie-Zdrój",
-				},
-				rating: 5.0,
-			},
-			{
-				quote:
-					"Polecam z czystym sumieniem umowę ryczałtową. Zapłaciliśmy dokładnie tyle, ile było w kosztorysie na początku roku, mimo że ceny styropianu na rynku wzrosły. Profesjonalne, uczciwe podejście.",
-				author: {
-					image: { src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100", alt: "Anna N." },
-					name: "Anna Nowak",
-					role: "Inwestycja: Gliwice",
-				},
-				rating: 5.0,
-			},
-		],
+	// Google Reviews Section Data
+	const reviewsHeader = {
+		label: "OPINIE Z GOOGLE",
+		title: "Co mówią Inwestorzy z regionu?",
+		theme: "light" as const,
 	};
 
 	// CTA Section Data
@@ -344,7 +301,7 @@ export default function Home() {
 			<AreasOfOperationSection {...areasData} />
 			<HowItWorksSection {...howItWorksData} />
 			<ProjectsSection {...projectsData} />
-			<TestimonialsSection {...testimonialsData} />
+			<GoogleReviewsSection header={reviewsHeader} data={googleReviewsData} />
 			<PartnerLogosMarquee
 				label="Wspolpracujemy z najlepszymi"
 				logos={allPartnerLogos}
