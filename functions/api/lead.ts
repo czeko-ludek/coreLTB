@@ -122,6 +122,8 @@ function utmRows(d: Record<string, string>): [string, string][] {
   const rows: [string, string][] = [];
   if (d.utm_source) rows.push(['Źródło (UTM)', `${d.utm_source} / ${d.utm_medium || '-'}`]);
   if (d.utm_campaign) rows.push(['Kampania', d.utm_campaign]);
+  if (d.utm_term) rows.push(['Hasło wyszukiwania', d.utm_term]);
+  if (d.utm_content) rows.push(['Wariant reklamy', d.utm_content]);
   if (d.landing_page) rows.push(['Strona wejścia', d.landing_page]);
   if (d.referrer) rows.push(['Referrer', d.referrer]);
   return rows;

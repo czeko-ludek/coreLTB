@@ -300,40 +300,86 @@ Scalable system for city-specific landing pages at `/obszar-dzialania/[slug]`.
 - `docs/ads.md` — ads & analytics config
 - `docs/LANDING-PAGES-STRATEGY.md` — full funnel strategy
 
-## SEO Agent (SEO/seo-agent/)
-Node.js agent pulling real data from Google Search Console + GA4, generating Markdown reports.
-Domena: **coreltb.pl** | GSC: Done | GA4: TODO
+## SEO System (SEO/seo-agent/)
+Node.js system with orchestrator + 3 specialized agents. Real data from GSC + GA4.
+Domena: **coreltb.pl** | GSC: Done | GA4: Done (property 529532413)
 
 **Architecture:**
 ```
 SEO/
 ├── seo-agent/
-│   ├── agent.js              <- CLI orchestrator
-│   ├── config.json           <- config (coreltb.pl, thresholds, keyword groups)
-│   ├── seo-actions.json      <- SEO change log (correlates with effects)
+│   ├── orchestrator.js        <- MAIN: orchestrator with 3 agents + executive summary
+│   ├── agent.js               <- Legacy: simple GSC+GA4 report
+│   ├── config.json            <- config (coreltb.pl, thresholds, keyword groups)
+│   ├── seo-actions.json       <- SEO change log (correlates with effects)
 │   ├── lib/
-│   │   ├── auth.js, gsc.js, ga4.js, analyzer.js, formatter.js
-│   ├── credentials/          <- (gitignored)
-│   └── reports/              <- (gitignored)
-└── analizy/                  <- Saved SEO analyses
-    └── YYYY-MM-DD-opis.md
+│   │   ├── auth.js            <- OAuth2 ADC authentication
+│   │   ├── gsc.js             <- Google Search Console API
+│   │   ├── ga4.js             <- Google Analytics 4 Data API
+│   │   ├── analyzer.js        <- GSC analysis (movers, groups, alerts, opportunities)
+│   │   ├── ads-analyzer.js    <- Ads analysis (channels, conversions, LP performance)
+│   │   ├── link-analyzer.js   <- Link building (evaluate, add, budget, report)
+│   │   └── formatter.js       <- Markdown report generator
+│   ├── data/
+│   │   └── links-db.json      <- Link building database (purchased links, budget)
+│   ├── credentials/           <- (gitignored)
+│   └── reports/               <- (gitignored)
+├── analizy/                   <- Saved SEO analyses & strategies
+│   ├── YYYY-MM-DD-opis.md
+│   └── link-building-strategy.md  <- Link building strategy & proposal templates
+└── scripts/
+    └── submit-indexing.mjs    <- Batch Google Indexing API submission (200/day)
 ```
 
 **Auth:** OAuth2 ADC from `%APPDATA%/gcloud/application_default_credentials.json` (dawidFC@gmail.com).
 Token refresh: `py "D:\NEXUS V2\credentials\setup_analytics_adc.py"`
 
-**Commands:**
+### Orchestrator Commands (user can say: "odpal agentow", "pelny raport", "raport SEO")
 ```bash
-node SEO/seo-agent/agent.js                  # 28-day report (default)
+# Full report — all 3 agents (GSC+GA4, Ads, Links)
+node SEO/seo-agent/orchestrator.js                    # 28 days (default)
+node SEO/seo-agent/orchestrator.js --days 7           # 7 days
+
+# Single agent only
+node SEO/seo-agent/orchestrator.js --agent gsc        # only GSC+GA4
+node SEO/seo-agent/orchestrator.js --agent ads        # only Ads analysis
+node SEO/seo-agent/orchestrator.js --agent links      # only Link Building
+```
+
+### Link Building Commands (user can say: "ocen link", "dodaj link", "raport linkow")
+```bash
+# Evaluate a link proposal (WhitePress etc.)
+node SEO/seo-agent/orchestrator.js --evaluate-link '{"portal":"Name","dr":25,"traffic":5000,"price":200,"topic":"budownictwo region","targetPage":"/obszar-dzialania/rybnik"}'
+
+# Add purchased link to database
+node SEO/seo-agent/orchestrator.js --add-link '{"portal":"Name","dr":25,"price":200,"targetPage":"/obszar-dzialania/rybnik","anchor":"firma budowlana Rybnik"}'
+
+# Link building report (purchased links, budget, ROI)
+node SEO/seo-agent/orchestrator.js --link-report
+```
+
+### Indexing Commands (user can say: "wyslij URLe do indeksacji")
+```bash
+node scripts/submit-indexing.mjs                      # submit project URLs (200/day)
+node scripts/submit-indexing.mjs --dry-run             # list URLs without submitting
+node scripts/submit-indexing.mjs --limit 50            # submit first 50
+node scripts/submit-indexing.mjs --filter /obszar      # custom URL filter
+```
+
+### Legacy Agent (simple GSC+GA4 report)
+```bash
+node SEO/seo-agent/agent.js                  # 28-day report
 node SEO/seo-agent/agent.js --days 7         # 7-day report
-node SEO/seo-agent/agent.js --gsc-only       # GSC only (no GA4)
 node SEO/seo-agent/agent.js --test-auth      # test connection
-node SEO/seo-agent/agent.js --actions        # show SEO change log
 ```
 
 **SEO change log (`seo-actions.json`):** After EVERY SEO change, add entry with date, type, description. Agent correlates changes with effects.
 
-**TODO po deploy:**
-- [ ] Connect GA4 -> add `propertyId` to `config.json`
+**Link building strategy:** `SEO/analizy/link-building-strategy.md` — targets, budget variants, anchor mix, proposal template, purchased links log.
+
+**IMPORTANT:** GA4 conversion events (calculator_lead etc.) currently include test submissions. Real lead count should be verified against Resend email logs. User will provide real lead numbers separately.
+
+**TODO:**
 - [ ] Request historical GSC data from Venet
 - [ ] Set up redirects from old URL structure
+- [ ] Submit remaining ~320 project URLs to Indexing API (200/day batches)

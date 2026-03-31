@@ -1,0 +1,41 @@
+{
+  "links": [],
+  "budget": {
+    "monthly": 0,
+    "spent": {}
+  },
+  "targets": {
+    "/": {
+      "priority": 2,
+      "anchorsMix": []
+    },
+    "/obszar-dzialania/wodzislaw-slaski": {
+      "priority": 1,
+      "anchorsMix": []
+    },
+    "/obszar-dzialania/rybnik": {
+      "priority": 1,
+      "anchorsMix": []
+    },
+    "/obszar-dzialania/zory": {
+      "priority": 1,
+      "anchorsMix": []
+    },
+    "/obszar-dzialania/katowice": {
+      "priority": 1,
+      "anchorsMix": []
+    },
+    "/obszar-dzialania/gliwice": {
+      "priority": 1,
+      "anchorsMix": []
+    },
+    "/wycena": {
+      "priority": 3,
+      "anchorsMix": []
+    },
+    "/projekty": {
+      "priority": 3,
+      "anchorsMix": []
+    }
+  }
+}

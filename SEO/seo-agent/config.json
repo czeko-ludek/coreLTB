@@ -50,5 +50,11 @@
   "output": {
     "dir": "./reports",
     "latestFile": "./reports/latest-report.md"
+  },
+  "realLeads": {
+    "_comment": "Prawdziwe leady z Resend (GA4 zawiera tez testy). Aktualizuj recznie.",
+    "log": [
+      { "period": "2026-03-12 to 2026-03-31", "count": 10, "source": "resend", "note": "Pierwsze 3 tygodnie strony v3" }
+    ]
   }
 }

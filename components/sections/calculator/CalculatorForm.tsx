@@ -352,6 +352,7 @@ export const CalculatorForm = () => {
             utm_medium: utm.utm_medium || '',
             utm_campaign: utm.utm_campaign || '',
             utm_content: utm.utm_content || '',
+            utm_term: utm.utm_term || '',
             landing_page: utm.landing_page || '',
             referrer: utm.referrer || '',
           },

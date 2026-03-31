@@ -85,14 +85,51 @@ function generateReport(data) {
     add('');
     const curr = ga4.overview.current.rows[0]?.metricValues || [];
     const prev = ga4.overview.previous?.rows?.[0]?.metricValues || [];
-    const metricNames = ['Sesje', 'Użytkownicy', 'Odsłony', 'Bounce Rate', 'Śr. czas sesji', 'Engagement Rate', 'Nowi użytkownicy'];
 
-    add('| Metryka | Obecny okres | Poprzedni okres |');
-    add('|---------|-------------|-----------------|');
-    metricNames.forEach((name, i) => {
-      const c = curr[i]?.value || '-';
-      const p = prev[i]?.value || '-';
-      add(`| ${name} | ${c} | ${p} |`);
+    // Metric order matches ga4.js getOverview(): sessions, totalUsers, screenPageViews, bounceRate, averageSessionDuration, engagementRate, newUsers
+    const metricDefs = [
+      { name: 'Sesje', format: 'number' },
+      { name: 'Użytkownicy', format: 'number' },
+      { name: 'Odsłony', format: 'number' },
+      { name: 'Bounce Rate', format: 'percent' },
+      { name: 'Śr. czas sesji', format: 'duration' },
+      { name: 'Engagement Rate', format: 'percent' },
+      { name: 'Nowi użytkownicy', format: 'number' },
+    ];
+
+    function formatGA4Value(raw, format) {
+      if (!raw || raw === '-') return '-';
+      const v = parseFloat(raw);
+      if (isNaN(v)) return raw;
+      switch (format) {
+        case 'percent': return (v * 100).toFixed(1) + '%';
+        case 'duration': {
+          const mins = Math.floor(v / 60);
+          const secs = Math.round(v % 60);
+          return mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
+        }
+        case 'number':
+        default: return formatNumber(Math.round(v));
+      }
+    }
+
+    add('| Metryka | Obecny okres | Poprzedni okres | Zmiana |');
+    add('|---------|-------------|-----------------|--------|');
+    metricDefs.forEach((def, i) => {
+      const cRaw = curr[i]?.value;
+      const pRaw = prev[i]?.value;
+      const c = formatGA4Value(cRaw, def.format);
+      const p = formatGA4Value(pRaw, def.format);
+
+      let delta = '-';
+      if (cRaw && pRaw && !isNaN(parseFloat(cRaw)) && !isNaN(parseFloat(pRaw)) && parseFloat(pRaw) > 0) {
+        const cv = parseFloat(cRaw);
+        const pv = parseFloat(pRaw);
+        const changePct = ((cv - pv) / pv * 100).toFixed(1);
+        delta = `${changePct > 0 ? '+' : ''}${changePct}%`;
+      }
+
+      add(`| ${def.name} | ${c} | ${p} | ${delta} |`);
     });
     add('');
   }

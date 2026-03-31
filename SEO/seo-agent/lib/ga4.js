@@ -33,8 +33,9 @@ async function runGA4Report(propertyId, params) {
   }
 
   const analytics = await getAnalyticsData();
+  const property = propertyId.startsWith('properties/') ? propertyId : `properties/${propertyId}`;
   const res = await analytics.properties.runReport({
-    property: propertyId,
+    property,
     requestBody: params,
   });
 

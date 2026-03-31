@@ -210,7 +210,7 @@ export const ConsultationForm = () => {
             notes: state.notes || undefined,
             website: honeypotRef.current?.value || '',
             // UTM attribution
-            ...(() => { const u = getUTMParams(); return { utm_source: u.utm_source || '', utm_medium: u.utm_medium || '', utm_campaign: u.utm_campaign || '', landing_page: u.landing_page || '', referrer: u.referrer || '' }; })(),
+            ...(() => { const u = getUTMParams(); return { utm_source: u.utm_source || '', utm_medium: u.utm_medium || '', utm_campaign: u.utm_campaign || '', utm_content: u.utm_content || '', utm_term: u.utm_term || '', landing_page: u.landing_page || '', referrer: u.referrer || '' }; })(),
             hasPlot: state.hasPlot || undefined,
             hasProject: state.hasProject || undefined,
             area: state.plannedArea ? `${state.plannedArea} m²` : undefined,
