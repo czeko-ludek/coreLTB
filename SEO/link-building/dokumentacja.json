@@ -1,0 +1,234 @@
+{
+  "meta": {
+    "projekt": "CoreLTB Builders — coreltb.pl",
+    "utworzono": "2026-03-31",
+    "aktualizacja": "2026-03-31",
+    "budzet_miesieczny": null,
+    "wydano_lacznie": 0,
+    "linki_lacznie": 0,
+    "zaindeksowane": 0
+  },
+  "linki": [
+    {
+      "id": 1,
+      "portal": "nowiny.pl",
+      "portal_url": "https://www.nowiny.pl",
+      "whitepress_id": 600,
+      "oferta": {
+        "linki": "1x Dofollow",
+        "anchory": "Dowolny",
+        "czas": "Bezterminowo",
+        "podlinkowanie": "Archiwum + Homepage 1 dzien",
+        "oznaczenie": "material zewnetrzny",
+        "tresc": "standard 2500 znaków",
+        "promocja": "1x image",
+        "cena_netto": 281.50,
+        "cena_brutto": 346.25
+      },
+      "portal_stats": {
+        "dr_ahrefs": 63,
+        "da_moz": 50,
+        "spam_score": 1,
+        "ruch_ahrefs": 22263,
+        "ruch_semrush": 79401,
+        "ref_domains": 1693,
+        "gestosc_linkow_wych": 0,
+        "trust_flow": 18,
+        "citation_flow": 34
+      },
+      "weryfikacja_html": {
+        "data": "2026-03-31",
+        "artykul_testowy": "https://www.nowiny.pl/wiadomosci/247732-jak-dobrac-kolor-sofy-do-reszty-wnetrza.html",
+        "linki_wychodzace": 2,
+        "rel_atrybut": "brak (dofollow)",
+        "noindex": false,
+        "sidebar_czyste": true,
+        "sasiedztwo": "Eko-Okna, JSW, Jelcz/PGZ, meble — czyste"
+      },
+      "nasz_link": {
+        "strona_docelowa": "/obszar-dzialania/rybnik",
+        "pelny_url": "https://coreltb.pl/obszar-dzialania/rybnik",
+        "anchor_text": "budowa domow Rybnik",
+        "anchor_typ": "exact match",
+        "artykul_plik": "artykuly/01-nowiny-rybnik.md"
+      },
+      "scoring": {
+        "wynik": 8.2,
+        "werdykt": "KUP",
+        "data_oceny": "2026-03-31",
+        "metoda": "12-czynnikowy framework"
+      },
+      "status": "przygotowany",
+      "historia": [
+        { "data": "2026-03-31", "akcja": "Ocena portalu + przygotowanie artykulu" }
+      ],
+      "publikacja": {
+        "url_artykulu": null,
+        "data_wyslania": null,
+        "data_publikacji": null,
+        "data_indexacji": null,
+        "zaindeksowany": false
+      },
+      "efekt_seo": {
+        "fraza_docelowa": "budowa domow rybnik",
+        "pozycja_przed": 14.3,
+        "pozycja_po": null,
+        "impresje_przed": 149,
+        "impresje_po": null,
+        "data_pomiaru": null
+      }
+    },
+    {
+      "id": 2,
+      "portal": "tuwodzislaw.pl",
+      "portal_url": "https://www.tuwodzislaw.pl",
+      "whitepress_id": 99313,
+      "oferta": {
+        "linki": "2x Dofollow",
+        "anchory": "URL, Brand",
+        "czas": "Bezterminowo",
+        "podlinkowanie": "Kategoria + Homepage 1 dzien",
+        "oznaczenie": "Material Partnera",
+        "tresc": "standard 2500 znaków",
+        "promocja": "6x image + video",
+        "cena_netto": 474.70,
+        "cena_brutto": 583.88
+      },
+      "portal_stats": {
+        "dr_ahrefs": 35,
+        "da_moz": 34,
+        "spam_score": 3,
+        "ruch_ahrefs": 7256,
+        "ruch_semrush": 23019,
+        "ref_domains": 421,
+        "gestosc_linkow_wych": 0.01,
+        "trust_flow": 18,
+        "citation_flow": 34
+      },
+      "weryfikacja_html": {
+        "data": "2026-03-31",
+        "artykul_testowy": "https://www.tuwodzislaw.pl/wiadomosci,do-jakich-zadan-potrzebna-jest-akumulatorowa-mlotowiertarka,wia5-3266-32318.html",
+        "linki_wychodzace": 1,
+        "rel_atrybut": "brak (dofollow)",
+        "noindex": false,
+        "sidebar_czyste": true,
+        "sasiedztwo": "Dnipro-M (narzedzia budowlane) — czyste"
+      },
+      "nasz_link": {
+        "strona_docelowa": "/obszar-dzialania/wodzislaw-slaski",
+        "pelny_url": "https://coreltb.pl/obszar-dzialania/wodzislaw-slaski",
+        "anchor_text": "CoreLTB Builders",
+        "anchor_typ": "brand",
+        "artykul_plik": "artykuly/02-tuwodzislaw-wodzislaw.md"
+      },
+      "scoring": {
+        "wynik": 7.5,
+        "werdykt": "KUP",
+        "data_oceny": "2026-03-31",
+        "metoda": "12-czynnikowy framework"
+      },
+      "status": "przygotowany",
+      "historia": [
+        { "data": "2026-03-31", "akcja": "Ocena portalu + przygotowanie artykulu" }
+      ],
+      "publikacja": {
+        "url_artykulu": null,
+        "data_wyslania": null,
+        "data_publikacji": null,
+        "data_indexacji": null,
+        "zaindeksowany": false
+      },
+      "efekt_seo": {
+        "fraza_docelowa": "budowa domow wodzislaw slaski",
+        "pozycja_przed": 11.7,
+        "pozycja_po": null,
+        "impresje_przed": 125,
+        "impresje_po": null,
+        "data_pomiaru": null
+      }
+    },
+    {
+      "id": 3,
+      "portal": "naszwodzislaw.com",
+      "portal_url": "https://naszwodzislaw.com",
+      "whitepress_id": 22400,
+      "oferta": {
+        "linki": "2x Dofollow",
+        "anchory": "URL, Brand",
+        "czas": "Bezterminowo",
+        "podlinkowanie": "Kategoria",
+        "oznaczenie": "artykul partnerski, material partnera",
+        "tresc": "standard 2500 znaków",
+        "promocja": "1x image",
+        "cena_netto": 95.80,
+        "cena_brutto": 117.83
+      },
+      "portal_stats": {
+        "dr_ahrefs": 35,
+        "da_moz": null,
+        "spam_score": null,
+        "ruch_ahrefs": null,
+        "ruch_semrush": null,
+        "ref_domains": null,
+        "gestosc_linkow_wych": null,
+        "trust_flow": null,
+        "citation_flow": null
+      },
+      "weryfikacja_html": {
+        "data": null,
+        "artykul_testowy": null,
+        "linki_wychodzace": null,
+        "rel_atrybut": null,
+        "noindex": null,
+        "sidebar_czyste": null,
+        "sasiedztwo": null
+      },
+      "nasz_link": {
+        "strona_docelowa": "/obszar-dzialania/wodzislaw-slaski",
+        "pelny_url": "https://coreltb.pl/obszar-dzialania/wodzislaw-slaski",
+        "anchor_text": "coreltb.pl",
+        "anchor_typ": "URL",
+        "artykul_plik": "artykuly/03-naszwodzislaw-wodzislaw.md"
+      },
+      "scoring": {
+        "wynik": 7.1,
+        "werdykt": "KUP",
+        "data_oceny": "2026-03-31",
+        "metoda": "12-czynnikowy framework (czesciowe dane)"
+      },
+      "status": "przygotowany",
+      "historia": [
+        { "data": "2026-03-31", "akcja": "Ocena portalu + przygotowanie artykulu" }
+      ],
+      "publikacja": {
+        "url_artykulu": null,
+        "data_wyslania": null,
+        "data_publikacji": null,
+        "data_indexacji": null,
+        "zaindeksowany": false
+      },
+      "efekt_seo": {
+        "fraza_docelowa": "budowa domow wodzislaw slaski",
+        "pozycja_przed": 11.7,
+        "pozycja_po": null,
+        "impresje_przed": 125,
+        "impresje_po": null,
+        "data_pomiaru": null
+      }
+    }
+  ],
+  "podsumowanie_kosztow": {
+    "nowiny_pl": 281.50,
+    "tuwodzislaw_pl": 474.70,
+    "naszwodzislaw_com": 95.80,
+    "razem_netto": 852.00,
+    "razem_brutto": 1047.96
+  },
+  "anchor_mix": {
+    "exact_match": ["budowa domow Rybnik"],
+    "brand": ["CoreLTB Builders"],
+    "url": ["coreltb.pl"],
+    "naturalny": [],
+    "rozklad": "33% exact, 33% brand, 33% URL — naturalny profil"
+  }
+}
