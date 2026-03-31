@@ -412,8 +412,9 @@ function ShareButtons() {
 
 export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
   const { ref, inView } = useInView({
-    threshold: 0.05,
+    threshold: 0,
     triggerOnce: true,
+    rootMargin: '200px 0px',
   });
 
   // Build TOC items from H2 headings only (not H3)
@@ -426,6 +427,15 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
         level: 2,
       }));
   }, [post.content]);
+
+  // Fallback: ensure content is visible after 1s even if IntersectionObserver fails
+  const [forceVisible, setForceVisible] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setForceVisible(true), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const isVisible = inView || forceVisible;
 
   // Active section tracking
   const [activeSection, setActiveSection] = useState<string>(tocItems[0]?.id || '');
@@ -482,7 +492,7 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
           aria-label="Breadcrumb"
           className={clsx(
             'mb-6',
-            inView ? 'animate-fade-in-up' : 'opacity-0'
+            isVisible ? 'animate-fade-in-up' : 'opacity-0'
           )}
           style={{ animationDelay: '0.1s' }}
         >
@@ -512,7 +522,7 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
           <div
             className={clsx(
               'bg-white rounded-3xl border border-zinc-200/60 overflow-hidden',
-              inView ? 'animate-fade-in-up' : 'opacity-0'
+              isVisible ? 'animate-fade-in-up' : 'opacity-0'
             )}
             style={{ animationDelay: '0.2s' }}
           >
@@ -576,7 +586,7 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
             <LocalPageSidebar
               sections={tocItems}
               activeSection={activeSection}
-              inView={inView}
+              inView={isVisible}
               showCTA={false}
             />
           )}
@@ -587,7 +597,7 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
           <section
             className={clsx(
               'mt-12',
-              inView ? 'animate-fade-in-up' : 'opacity-0'
+              isVisible ? 'animate-fade-in-up' : 'opacity-0'
             )}
             style={{ animationDelay: '0.5s' }}
           >
