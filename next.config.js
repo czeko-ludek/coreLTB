@@ -15,7 +15,9 @@ const nextConfig = {
   // ✅ Optymalizacje dla Next.js 15
   experimental: {
     // Optymalizuje importy pakietów (zmniejsza bundle size)
-    optimizePackageImports: ['lucide-react', 'swiper'],
+    // NOTE: swiper usunięty — z optimizePackageImports/transpilePackages
+    // webpack hoistował go do shared chunks (~164 KB eager na homepage mimo dynamic())
+    optimizePackageImports: ['lucide-react'],
   },
 
   // ✅ Trailing slash - foldery z index.html (niezawodne na Cloudflare Pages)
@@ -23,9 +25,6 @@ const nextConfig = {
 
   // ✅ Powered by header - wyłączony dla bezpieczeństwa
   poweredByHeader: false,
-
-  // ✅ Swiper CSS inlining (dla lepszego LCP)
-  transpilePackages: ['swiper'],
 
   // ⚠️ Headers i redirects → plik public/_headers i public/_redirects
   // (async headers() / async redirects() nie działają z output: 'export')

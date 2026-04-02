@@ -8,7 +8,7 @@ import { ServiceShowcaseSection } from "@/components/sections/ServiceShowcaseSec
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
 
 import { companyData } from "@/data/company-data";
-import { allProjects } from "@/data/projects";
+import { homepageProjects } from "@/data/homepage-projects";
 import { allPartnerLogos } from "@/data/partners";
 import { googleReviewsData } from "@/data/google-reviews";
 import { blogPosts } from "@/data/blog-data";
@@ -267,21 +267,21 @@ export default function Home() {
 		],
 	};
 
-	// Projects Section Data
+	// Projects Section Data (lightweight — avoids importing full 1.8 MB allProjects)
 	const projectsData = {
 		header: {
 			label: "REALIZACJE",
 			title: "Nasze budowy na Śląsku i w Małopolsce",
 			theme: "light" as const,
 		},
-		projects: allProjects.slice(0, 8).map((project) => ({
-			slug: project.slug,
-			alt: project.alt,
-			title: project.title,
-			price: project.price,
-			surfaceArea: project.surfaceArea,
-			technology: project.technology,
-			source: project.source,
+		projects: homepageProjects.map((p) => ({
+			slug: p.slug,
+			alt: p.alt,
+			title: p.title,
+			price: p.price,
+			surfaceArea: p.surfaceArea,
+			technology: p.technology,
+			source: p.source,
 		})),
 	};
 
