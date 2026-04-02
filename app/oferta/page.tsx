@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import React from "react";
-import { ContactCTASection, BlogSection } from "@/components/sections";
+import { ContactCTASection } from "@/components/sections/ContactCTASection";
+import { BlogSection } from "@/components/sections/BlogSection";
 import { companyData } from "@/data/company-data";
 import { blogPosts } from "@/data/blog-data";
 import { PhilosophyTimelineSection } from "@/components/sections/PhilosophyTimelineSection";

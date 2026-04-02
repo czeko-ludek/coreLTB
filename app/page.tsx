@@ -1,37 +1,63 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import {
-	AboutCompanySection,
-	BlogSection,
-	ContactCTASection,
-	HeroSection,
-	HowItWorksSection,
-	ServiceShowcaseSection,
-	GoogleReviewsSection,
-	AreasOfOperationSection,
-} from "@/components/sections";
-import { PartnerLogosMarquee } from "@/components/sections/local/PartnerLogosMarquee";
+
+// Direct imports — above-fold sections only (no barrel to avoid pulling Swiper)
+import { HeroSection } from "@/components/sections/HeroSection";
+import { AboutCompanySection } from "@/components/sections/AboutCompanySection";
+import { ServiceShowcaseSection } from "@/components/sections/ServiceShowcaseSection";
+import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
+
 import { companyData } from "@/data/company-data";
 import { allProjects } from "@/data/projects";
+import { allPartnerLogos } from "@/data/partners";
+import { googleReviewsData } from "@/data/google-reviews";
+import { blogPosts } from "@/data/blog-data";
 
-// Lazy load ProjectsSection (includes Swiper ~205 KiB) — far below fold
+// ── Lazy-loaded below-fold sections (reduces initial JS by ~200 KB) ──
+
+function SectionPlaceholder({ label, className = "" }: { label: string; className?: string }) {
+	return (
+		<section className={`py-20 ${className}`}>
+			<div className="mx-auto px-4 max-w-[1400px] min-h-[300px] flex items-center justify-center">
+				<div className="animate-pulse text-text-secondary">{label}</div>
+			</div>
+		</section>
+	);
+}
+
+const AreasOfOperationSection = dynamic(
+	() => import("@/components/sections/AreasOfOperationSection").then((mod) => mod.AreasOfOperationSection),
+	{ loading: () => <SectionPlaceholder label="Mapa obszaru działania" /> }
+);
+
 const ProjectsSection = dynamic(
 	() => import("@/components/sections/ProjectsSection").then((mod) => mod.ProjectsSection),
 	{
 		loading: () => (
-			<section className="relative py-20 overflow-hidden bg-background-beige">
-				<div className="mx-auto px-4 lg:px-8 max-w-[1400px]">
-					<div className="mt-16 min-h-[400px] flex items-center justify-center">
-						<div className="animate-pulse text-text-secondary">Ładowanie projektów...</div>
-					</div>
-				</div>
-			</section>
+			<SectionPlaceholder label="Ładowanie projektów..." className="bg-background-beige" />
 		),
 	}
 );
-import { allPartnerLogos } from "@/data/partners";
-import { googleReviewsData } from "@/data/google-reviews";
-import { blogPosts } from "@/data/blog-data";
+
+const GoogleReviewsSection = dynamic(
+	() => import("@/components/sections/GoogleReviewsSection").then((mod) => mod.GoogleReviewsSection),
+	{ loading: () => <SectionPlaceholder label="Opinie" /> }
+);
+
+const PartnerLogosMarquee = dynamic(
+	() => import("@/components/sections/local/PartnerLogosMarquee").then((mod) => mod.PartnerLogosMarquee),
+	{ loading: () => <div className="py-12" /> }
+);
+
+const ContactCTASection = dynamic(
+	() => import("@/components/sections/ContactCTASection").then((mod) => mod.ContactCTASection),
+	{ loading: () => <div className="py-16" /> }
+);
+
+const BlogSection = dynamic(
+	() => import("@/components/sections/BlogSection").then((mod) => mod.BlogSection),
+	{ loading: () => <SectionPlaceholder label="Blog" /> }
+);
 
 export const metadata: Metadata = {
 	title: "Budowa Domów Pod Klucz – Śląsk i Małopolska | CoreLTB Builders",

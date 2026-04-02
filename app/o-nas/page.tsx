@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import {
-	AboutIntroSection,
-	BusinessResponsibilitySection,
-	CompetenciesSection,
-} from "@/components/sections";
+import { AboutIntroSection } from "@/components/sections/AboutIntroSection";
+import { BusinessResponsibilitySection } from "@/components/sections/BusinessResponsibilitySection";
+import { CompetenciesSection } from "@/components/sections/CompetenciesSection";
 import { PageHeader, Breadcrumbs } from "@/components/shared";
 
 export const metadata: Metadata = {

@@ -8,6 +8,7 @@ import { SectionHeader } from '@/components/shared';
 import { Icon } from '@/components/ui';
 import { MapTooltip } from '@/components/ui/MapTooltip';
 import { PolandMapSVG } from '@/components/shared/PolandMapSVG';
+import './AreasOfOperation.css';
 import {
 	VoivodeshipId,
 	MapCity,

@@ -6,6 +6,9 @@ import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import { Icon } from '@/components/ui';
 import type { ProjectSource } from '@/data/projects';
 

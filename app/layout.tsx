@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Manrope, Funnel_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import { Header, Footer } from "@/components/sections";
+import { Header } from "@/components/sections/Header";
+import { Footer } from "@/components/sections/Footer";
 import { ErrorBoundary } from "@/components/shared";
 import { FloatingPhoneCTA } from "@/components/ui/FloatingPhoneCTA";
 import { CookieConsent } from "@/components/ui/CookieConsent";
@@ -204,6 +205,8 @@ export default function RootLayout({
   return (
     <html lang="pl" data-scroll-behavior="smooth">
       <head>
+        {/* Print styles — loaded with low priority, does NOT block rendering */}
+        <link rel="stylesheet" href="/print.css" media="print" />
         {/* Preload LCP hero image (mobile — most users) */}
         <link
           rel="preload"
