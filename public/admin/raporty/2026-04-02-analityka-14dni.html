@@ -236,16 +236,21 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    margin: 8px 0;
+    margin: 10px 0;
+    padding: 10px 16px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #eee;
   }
   .progress-row .prog-label {
-    font-size: 13px;
-    min-width: 140px;
-    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 190px;
+    color: var(--text-primary);
   }
   .progress-row .prog-bar-bg {
     flex: 1;
-    height: 24px;
+    height: 10px;
     background: #f0f0f0;
     border-radius: 10px;
     overflow: hidden;
@@ -253,13 +258,13 @@
   .progress-row .prog-bar {
     height: 100%;
     border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 8px;
-    font-size: 11px;
-    font-weight: 700;
-    color: #fff;
+  }
+  .progress-row .prog-value {
+    min-width: 70px;
+    text-align: right;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--text-primary);
   }
 
   .two-col {
@@ -365,14 +370,14 @@
       <div class="note">wizyt na stronie</div>
     </div>
     <div class="summary-card">
-      <div class="label">Uzytkownicy</div>
+      <div class="label">Użytkownicy</div>
       <div class="value">198</div>
       <div class="note">182 nowych (92%)</div>
     </div>
     <div class="summary-card">
-      <div class="label">Odslony</div>
+      <div class="label">Odsłony</div>
       <div class="value">1 377</div>
-      <div class="note">~7 stron / uzytkownik</div>
+      <div class="note">~7 stron / użytkownik</div>
     </div>
     <div class="summary-card">
       <div class="label">Bounce Rate</div>
@@ -383,34 +388,34 @@
 
   <div class="summary-grid">
     <div class="summary-card highlight">
-      <div class="label">Sr. czas sesji</div>
+      <div class="label">Śr. czas sesji</div>
       <div class="value">5m 43s</div>
-      <div class="note">ludzie czytaja i porownuja</div>
+      <div class="note">ludzie czytają i porównują</div>
     </div>
     <div class="summary-card">
       <div class="label">Engagement Rate</div>
       <div class="value" style="color: var(--green);">75,8%</div>
-      <div class="note">3 na 4 osoby klikaja dalej</div>
+      <div class="note">3 na 4 osoby klikają dalej</div>
     </div>
     <div class="summary-card">
-      <div class="label">Nowi uzytkownicy</div>
+      <div class="label">Nowi użytkownicy</div>
       <div class="value">182</div>
       <div class="note">92% to nowe osoby</div>
     </div>
     <div class="summary-card">
-      <div class="label">Powracajacy</div>
+      <div class="label">Powracający</div>
       <div class="value">16</div>
-      <div class="note">wracaja i porownuja</div>
+      <div class="note">wracają i porównują</div>
     </div>
   </div>
 
   <div class="insight-box">
     <h3>Co to znaczy?</h3>
     <ul>
-      <li><strong style="color: var(--gold);">198 osob</strong> odwiedzilo strone w ciagu 2 tygodni — wiekszosc to nowi potencjalni klienci</li>
-      <li>Kazdy spedza srednio <strong style="color: var(--gold);">prawie 6 minut</strong> na stronie — to bardzo duzo jak na branze budowlana</li>
-      <li><strong style="color: var(--gold);">7 stron na uzytkownika</strong> — ludzie przegladaja projekty, oferte i kalkulator wyceny</li>
-      <li>Bounce rate <strong style="color: var(--gold);">24%</strong> oznacza, ze 3 na 4 osoby interakcjonuja ze strona (klikaja, scrolluja, czytaja)</li>
+      <li><strong style="color: var(--gold);">198 osób</strong> odwiedziło stronę w ciągu 2 tygodni — większość to nowi potencjalni klienci</li>
+      <li>Każdy spędza średnio <strong style="color: var(--gold);">prawie 6 minut</strong> na stronie — to bardzo dużo jak na branżę budowlaną</li>
+      <li><strong style="color: var(--gold);">7 stron na użytkownika</strong> — ludzie przeglądają projekty, ofertę i kalkulator wyceny</li>
+      <li>Bounce rate <strong style="color: var(--gold);">24%</strong> oznacza, ze 3 na 4 osoby interakcjonują ze strona (klikają, scrollują, czytają)</li>
     </ul>
   </div>
 </section>
@@ -419,11 +424,11 @@
 <section>
   <div class="section-title">
     <div class="icon">2</div>
-    Skad przychodza uzytkownicy
+    Skąd przychodzą użytkownicy
   </div>
 
   <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
-    Rozklad zrodel ruchu — skad ludzie trafiaja na coreltb.pl
+    Rozkład źródeł ruchu — skąd ludzie trafiają na coreltb.pl
   </p>
 
   <!-- PROGRESS BARS -->
@@ -431,38 +436,44 @@
     <div class="progress-row">
       <span class="prog-label">Google (organiczny)</span>
       <div class="prog-bar-bg">
-        <div class="prog-bar" style="width: 33.2%; background: var(--green);">118 sesji</div>
+        <div class="prog-bar" style="width: 100%; background: var(--gold);"></div>
       </div>
+      <span class="prog-value">118</span>
     </div>
     <div class="progress-row">
-      <span class="prog-label">Wejscia bezposrednie</span>
+      <span class="prog-label">Wej&#347;cia bezpo&#347;rednie</span>
       <div class="prog-bar-bg">
-        <div class="prog-bar" style="width: 28.2%; background: var(--bg-dark);">100 sesji</div>
+        <div class="prog-bar" style="width: 85%; background: var(--gold-dark);"></div>
       </div>
+      <span class="prog-value">100</span>
     </div>
     <div class="progress-row">
       <span class="prog-label">Google Ads (PMax)</span>
       <div class="prog-bar-bg">
-        <div class="prog-bar" style="width: 23.4%; background: var(--blue);">83 sesje</div>
+        <div class="prog-bar" style="width: 70%; background: var(--gold);"></div>
       </div>
+      <span class="prog-value">83</span>
     </div>
     <div class="progress-row">
       <span class="prog-label">Social (organiczny)</span>
       <div class="prog-bar-bg">
-        <div class="prog-bar" style="width: 8.5%; background: var(--purple);">30 sesji</div>
+        <div class="prog-bar" style="width: 25%; background: var(--gold-dark);"></div>
       </div>
+      <span class="prog-value">30</span>
     </div>
     <div class="progress-row">
-      <span class="prog-label">Social (platny / Meta)</span>
+      <span class="prog-label">Social (p&#322;atny / Meta)</span>
       <div class="prog-bar-bg">
-        <div class="prog-bar" style="width: 6.5%; background: #ec4899;">23 sesje</div>
+        <div class="prog-bar" style="width: 19.5%; background: var(--gold);"></div>
       </div>
+      <span class="prog-value">23</span>
     </div>
     <div class="progress-row">
       <span class="prog-label">Referral / Inne</span>
       <div class="prog-bar-bg">
-        <div class="prog-bar" style="width: 1%; background: var(--text-light);">2</div>
+        <div class="prog-bar" style="width: 2%; background: #ccc;"></div>
       </div>
+      <span class="prog-value">2</span>
     </div>
   </div>
 
@@ -471,11 +482,11 @@
     <table>
       <thead>
         <tr>
-          <th>Zrodlo ruchu</th>
+          <th>Źródło ruchu</th>
           <th class="text-right">Sesje</th>
-          <th class="text-right">Uzytkownicy</th>
+          <th class="text-right">Użytkownicy</th>
           <th class="text-right">Engagement</th>
-          <th class="text-right">Sr. czas</th>
+          <th class="text-right">Śr. czas</th>
           <th class="text-right">Koszt</th>
         </tr>
       </thead>
@@ -486,15 +497,15 @@
           <td class="text-right">44</td>
           <td class="text-right">72%</td>
           <td class="text-right font-bold text-green">7m 43s</td>
-          <td class="text-right font-bold text-green">0 zl</td>
+          <td class="text-right font-bold text-green">0 zł</td>
         </tr>
         <tr>
-          <td class="font-bold">Wejscia bezposrednie</td>
+          <td class="font-bold">Wejścia bezpośrednie</td>
           <td class="text-right font-bold">100</td>
           <td class="text-right">48</td>
           <td class="text-right">72%</td>
           <td class="text-right font-bold text-green">8m 04s</td>
-          <td class="text-right font-bold text-green">0 zl</td>
+          <td class="text-right font-bold text-green">0 zł</td>
         </tr>
         <tr>
           <td class="font-bold">Google Ads (PMax)</td>
@@ -502,7 +513,7 @@
           <td class="text-right">78</td>
           <td class="text-right font-bold text-green">88%</td>
           <td class="text-right">1m 24s</td>
-          <td class="text-right">~451 zl</td>
+          <td class="text-right">~451 zł</td>
         </tr>
         <tr>
           <td>Social organiczny</td>
@@ -510,15 +521,15 @@
           <td class="text-right">18</td>
           <td class="text-right">70%</td>
           <td class="text-right">2m 58s</td>
-          <td class="text-right text-green">0 zl</td>
+          <td class="text-right text-green">0 zł</td>
         </tr>
         <tr>
-          <td>Social platny (Meta Ads)</td>
+          <td>Social płatny (Meta Ads)</td>
           <td class="text-right">23</td>
           <td class="text-right">23</td>
           <td class="text-right">78%</td>
           <td class="text-right">2m 41s</td>
-          <td class="text-right">platne</td>
+          <td class="text-right">płatne</td>
         </tr>
         <tr>
           <td>Referral / Inne</td>
@@ -526,19 +537,19 @@
           <td class="text-right">2</td>
           <td class="text-right">50%</td>
           <td class="text-right">—</td>
-          <td class="text-right text-green">0 zl</td>
+          <td class="text-right text-green">0 zł</td>
         </tr>
       </tbody>
     </table>
   </div>
 
   <div class="insight-box">
-    <h3>Najwazniejsze wnioski</h3>
+    <h3>Najważniejsze wnioski</h3>
     <ul>
-      <li><strong style="color: var(--gold);">Google organiczny = najlepszy kanal.</strong> 118 sesji za 0 zl, ludzie spedzaja prawie <strong>8 minut</strong> na stronie. To efekt SEO i pozycjonowania lokalnego</li>
-      <li><strong style="color: var(--gold);">Wejscia bezposrednie (100 sesji)</strong> — ludzie wpisuja "coreltb.pl" z glowy, z wizytowki lub z polecenia. Znaja firme. Najdluzszy czas: <strong>8 min 4 sek</strong></li>
-      <li><strong style="color: var(--gold);">Google Ads ma najwyzszy engagement (88%)</strong> — ludzie z reklam klikaja w kalkulator i wypelniaja formularz. Krotszy czas, bo trafiaja prosto na /wycena</li>
-      <li><strong>Social (53 sesje lacznie)</strong> — Facebook/Instagram daje dodatkowy ruch. Engagement 70-78%</li>
+      <li><strong style="color: var(--gold);">Google organiczny = najlepszy kanał.</strong> 118 sesji za 0 zł, ludzie spędzają prawie <strong>8 minut</strong> na stronie. To efekt SEO i pozycjonowania lokalnego</li>
+      <li><strong style="color: var(--gold);">Wejścia bezpośrednie (100 sesji)</strong> — ludzie wpisują "coreltb.pl" z głowy, z wizytówki lub z polecenia. Znają firmę. Najdłuższy czas: <strong>8 min 4 sek</strong></li>
+      <li><strong style="color: var(--gold);">Google Ads ma najwyższy engagement (88%)</strong> — ludzie z reklam klikają w kalkulator i wypełniają formularz. Krótszy czas, bo trafiają prosto na /wycena</li>
+      <li><strong>Social (53 sesje łącznie)</strong> — Facebook/Instagram daje dodatkowy ruch. Engagement 70-78%</li>
     </ul>
   </div>
 </section>
@@ -547,21 +558,21 @@
 <section>
   <div class="section-title">
     <div class="icon">3</div>
-    Ile czasu spedzaja na stronie
+    Ile czasu spędzają na stronie
   </div>
 
   <div class="two-col">
     <div style="background: var(--bg-dark); border-radius: 12px; padding: 28px; border: 1px solid var(--gold); text-align: center;">
-      <div style="font-size: 12px; color: var(--gold-light); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Rekord: wejscia bezposrednie</div>
+      <div style="font-size: 12px; color: var(--gold-light); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Rekord: wejścia bezpośrednie</div>
       <div style="font-size: 48px; font-weight: 800; color: #fff;">8:04</div>
-      <div style="font-size: 13px; color: #aaa; margin-top: 4px;">minut srednio na sesje</div>
-      <div style="font-size: 12px; color: #666; margin-top: 8px;">Ludzie, ktorzy znaja CoreLTB, przegladaja najdluzej</div>
+      <div style="font-size: 13px; color: #aaa; margin-top: 4px;">minut średnio na sesję</div>
+      <div style="font-size: 12px; color: #666; margin-top: 8px;">Ludzie, którzy znają CoreLTB, przeglądają najdłużej</div>
     </div>
     <div style="background: #fff; border-radius: 12px; padding: 28px; border: 1px solid #eee; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
-      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 12px;">Czas sesji wg zrodla</div>
+      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 12px;">Czas sesji wg źródła</div>
       <div style="display: grid; gap: 10px;">
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f0f0f0;">
-          <span style="font-size: 14px;">Wejscia bezposrednie</span>
+          <span style="font-size: 14px;">Wejścia bezpośrednie</span>
           <span style="font-size: 16px; font-weight: 800;">8m 04s</span>
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f0f0f0;">
@@ -573,7 +584,7 @@
           <span style="font-size: 16px; font-weight: 800;">2m 58s</span>
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f0f0f0;">
-          <span style="font-size: 14px;">Social platny (Meta)</span>
+          <span style="font-size: 14px;">Social płatny (Meta)</span>
           <span style="font-size: 16px; font-weight: 800;">2m 41s</span>
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0;">
@@ -585,11 +596,11 @@
   </div>
 
   <div class="insight-box">
-    <h3>Dlaczego rozne kanaly = rozny czas?</h3>
+    <h3>Dlaczego różne kanały = różny czas?</h3>
     <ul>
-      <li><strong style="color: var(--gold);">Bezposrednie + organiczne (7-8 min)</strong> — to ludzie, ktorzy szukaja firmy budowlanej. Przegladaja projekty domow, porownuja oferte, czytaja blog. Dluga interakcja = powaznie rozpatruja budowe</li>
-      <li><strong style="color: var(--gold);">Social (2-3 min)</strong> — przyszli z Facebooka/Instagrama. Krotsze sesje, ale nadal przegladaja kilka stron</li>
-      <li><strong style="color: var(--gold);">Google Ads (1m 24s)</strong> — krotki czas, ale to OK! Reklama kieruje prosto na kalkulator /wycena. Ludzie wypelniaja formularz i wychodza — cel osiagniety</li>
+      <li><strong style="color: var(--gold);">Bezpośrednie + organiczne (7-8 min)</strong> — to ludzie, którzy szukają firmy budowlanej. Przeglądają projekty domów, porównują ofertę, czytają blog. Długa interakcja = poważnie rozpatrują budowę</li>
+      <li><strong style="color: var(--gold);">Social (2-3 min)</strong> — przyszli z Facebooka/Instagrama. Krótsze sesje, ale nadal przeglądają kilka stron</li>
+      <li><strong style="color: var(--gold);">Google Ads (1m 24s)</strong> — krótki czas, ale to OK! Reklama kieruje prosto na kalkulator /wycena. Ludzie wypełniają formularz i wychodzą — cel osiągnięty</li>
     </ul>
   </div>
 </section>
@@ -598,7 +609,7 @@
 <section>
   <div class="section-title">
     <div class="icon">4</div>
-    Urzadzenia — telefon vs komputer
+    Urządzenia — telefon vs komputer
   </div>
 
   <div class="two-col">
@@ -607,20 +618,23 @@
       <div class="progress-row">
         <span class="prog-label">Desktop</span>
         <div class="prog-bar-bg">
-          <div class="prog-bar" style="width: 53%; background: var(--bg-dark);">67 klik. (53%)</div>
+          <div class="prog-bar" style="width: 100%; background: var(--gold-dark);"></div>
         </div>
+        <span class="prog-value">67 (53%)</span>
       </div>
       <div class="progress-row">
         <span class="prog-label">Mobile</span>
         <div class="prog-bar-bg">
-          <div class="prog-bar" style="width: 47%; background: var(--gold);">60 klik. (47%)</div>
+          <div class="prog-bar" style="width: 90%; background: var(--gold);"></div>
         </div>
+        <span class="prog-value">60 (47%)</span>
       </div>
       <div class="progress-row">
         <span class="prog-label">Tablet</span>
         <div class="prog-bar-bg">
-          <div class="prog-bar" style="width: 1%; background: var(--text-light);"></div>
+          <div class="prog-bar" style="width: 2%; background: #ccc;"></div>
         </div>
+        <span class="prog-value">0</span>
       </div>
     </div>
     <div>
@@ -629,9 +643,9 @@
         <table>
           <thead>
             <tr>
-              <th>Urzadzenie</th>
-              <th class="text-right">Klikniecia</th>
-              <th class="text-right">Wyswietlenia</th>
+              <th>Urządzenie</th>
+              <th class="text-right">Kliknięcia</th>
+              <th class="text-right">Wyświetlenia</th>
               <th class="text-right">CTR</th>
               <th class="text-right">Pozycja</th>
             </tr>
@@ -654,7 +668,7 @@
           </tbody>
         </table>
       </div>
-      <p style="font-size: 12px; color: var(--text-light); margin-top: 8px;">Na telefonie coreltb.pl jest wyzej (poz. 7,7) i ma lepszy CTR (5,5%)</p>
+      <p style="font-size: 12px; color: var(--text-light); margin-top: 8px;">Na telefonie coreltb.pl jest wyżej (poz. 7,7) i ma lepszy CTR (5,5%)</p>
     </div>
   </div>
 </section>
@@ -663,40 +677,40 @@
 <section>
   <div class="section-title">
     <div class="icon">5</div>
-    Widocznosc w Google (SEO)
+    Widoczność w Google (SEO)
   </div>
 
   <div class="summary-grid">
     <div class="summary-card">
-      <div class="label">Klikniecia z Google</div>
+      <div class="label">Kliknięcia z Google</div>
       <div class="value">87</div>
       <div class="note text-green font-bold">+70 vs poprz. okres</div>
     </div>
     <div class="summary-card">
-      <div class="label">Wyswietlenia</div>
+      <div class="label">Wyświetlenia</div>
       <div class="value">1 117</div>
       <div class="note text-green font-bold">+408 vs poprz. okres</div>
     </div>
     <div class="summary-card">
-      <div class="label">Sr. CTR</div>
+      <div class="label">Śr. CTR</div>
       <div class="value">7,8%</div>
-      <div class="note">branza: 3-5%</div>
+      <div class="note">branża: 3-5%</div>
     </div>
     <div class="summary-card highlight">
-      <div class="label">Sr. pozycja</div>
+      <div class="label">Śr. pozycja</div>
       <div class="value">16,6</div>
       <div class="note">druga strona Google</div>
     </div>
   </div>
 
-  <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Rosnace frazy — co ludzie szukaja w Google i znajduja CoreLTB</h3>
+  <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Rosnące frazy — co ludzie szukają w Google i znajdują CoreLTB</h3>
   <div class="table-wrap">
     <table>
       <thead>
         <tr>
           <th>Fraza w Google</th>
-          <th class="text-right">Klikniecia</th>
-          <th class="text-right">Wyswietlenia</th>
+          <th class="text-right">Kliknięcia</th>
+          <th class="text-right">Wyświetlenia</th>
           <th class="text-right">Pozycja</th>
           <th class="text-right">CTR</th>
           <th class="text-right">Zmiana klik.</th>
@@ -776,45 +790,45 @@
     <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid var(--green); text-align: center;">
       <div style="font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase;">budowa domow</div>
       <div style="font-size: 20px; font-weight: 800; margin: 4px 0;">11 klik.</div>
-      <div style="font-size: 12px; color: var(--text-secondary);">522 wyswietlen</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">522 wyświetlen</div>
     </div>
     <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid var(--gold); text-align: center;">
       <div style="font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase;">wodzislaw</div>
       <div style="font-size: 20px; font-weight: 800; margin: 4px 0;">5 klik.</div>
-      <div style="font-size: 12px; color: var(--text-secondary);">131 wyswietlen</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">131 wyświetlen</div>
     </div>
     <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid var(--blue); text-align: center;">
       <div style="font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase;">slask / region</div>
       <div style="font-size: 20px; font-weight: 800; margin: 4px 0;">5 klik.</div>
-      <div style="font-size: 12px; color: var(--text-secondary);">145 wyswietlen</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">145 wyświetlen</div>
     </div>
   </div>
   <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
     <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid var(--purple); text-align: center;">
       <div style="font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase;">rybnik</div>
       <div style="font-size: 20px; font-weight: 800; margin: 4px 0;">3 klik.</div>
-      <div style="font-size: 12px; color: var(--text-secondary);">126 wyswietlen</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">126 wyświetlen</div>
     </div>
     <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid #ec4899; text-align: center;">
       <div style="font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase;">katowice</div>
       <div style="font-size: 20px; font-weight: 800; margin: 4px 0;">0 klik.</div>
-      <div style="font-size: 12px; color: var(--text-secondary);">44 wyswietlenia</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">44 wyświetlenia</div>
     </div>
     <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid #f97316; text-align: center;">
       <div style="font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase;">gliwice</div>
       <div style="font-size: 20px; font-weight: 800; margin: 4px 0;">0 klik.</div>
-      <div style="font-size: 12px; color: var(--text-secondary);">39 wyswietlen</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">39 wyświetlen</div>
     </div>
   </div>
 
   <div class="insight-box" style="margin-top: 20px;">
-    <h3>Trend SEO — rosniemy</h3>
+    <h3>Trend SEO — rośniemy</h3>
     <ul>
-      <li><strong style="color: var(--gold);">+70 klikniec vs poprzedni okres</strong> — widocznosc coreltb.pl w Google znaczaco rosnie</li>
-      <li><strong style="color: var(--gold);">+408 wyswietlen</strong> — coraz wiecej ludzi widzi CoreLTB w wynikach wyszukiwania</li>
+      <li><strong style="color: var(--gold);">+70 kliknięć vs poprzedni okres</strong> — widoczność coreltb.pl w Google znaczaco rośnie</li>
+      <li><strong style="color: var(--gold);">+408 wyświetlen</strong> — coraz więcej ludzi widzi CoreLTB w wynikach wyszukiwania</li>
       <li>Frazy brandowe (coreltb, coreltb builders) na <strong style="color: var(--gold);">pozycji #1</strong> — firma jest rozpoznawalna</li>
-      <li>Frazy lokalne (wodzislaw, rybnik, zory) rosna — strony lokalne zaczynaja dzialac</li>
-      <li>Katowice i Gliwice — sa wyswietlenia (44 i 39) ale brak klikniec. Potencjal do poprawy pozycji</li>
+      <li>Frazy lokalne (wodzislaw, rybnik, zory) rosna — strony lokalne zaczynają dzialac</li>
+      <li>Katowice i Gliwice — są wyświetlenia (44 i 39) ale brak kliknięć. Potencjał do poprawy pozycji</li>
     </ul>
   </div>
 </section>
@@ -827,14 +841,14 @@
   </div>
 
   <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">
-    Sprawdzone 02.04.2026 przez niezalezny tracker (SERPlab). To rzeczywiste pozycje w wynikach Google — nie srednia, a dokladna pozycja dzisiaj.
+    Sprawdzone 02.04.2026 przez niezależny tracker (SERPlab). To rzeczywiste pozycje w wynikach Google — nie średnia, a dokładna pozycja dzisiaj.
   </p>
   <p style="font-size: 12px; color: var(--text-light); margin-bottom: 20px;">
-    Uwaga: GSC pokazuje srednia z 14 dni. Jesli GSC mowi "11,8" a live jest "#2" — to znaczy, ze fraza dynamicznie rosla w ciagu ostatnich 2 tygodni.
+    Uwaga: GSC pokazuje średnia z 14 dni. Jesli GSC mowi "11,8" a live jest "#2" — to znaczy, ze fraza dynamicznie rosla w ciągu ostatnich 2 tygodni.
   </p>
 
   <!-- TOP 10 -->
-  <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">TOP 10 — jestesmy na pierwszej stronie Google</h3>
+  <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">TOP 10 — jesteśmy na pierwszej stronie Google</h3>
   <div style="display: grid; gap: 12px; margin-bottom: 24px;">
     <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); border-radius: 12px; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--gold);">
       <div>
@@ -931,11 +945,11 @@
   <div class="insight-box">
     <h3>Co to znaczy dla biznesu?</h3>
     <ul>
-      <li><strong style="color: var(--gold);">Wodzislaw #2 — to ogromny sukces.</strong> Na 70 wyszukiwan miesiecznie, jestesmy tuz za najlepsza pozycja. Klienci z Wodzislawia widza CoreLTB od razu</li>
-      <li><strong style="color: var(--gold);">Rybnik #5 przy 110 wyszukiwan/msc</strong> — to najbardziej wartosciowa fraza. Kazda pozycja wyzej = wiecej klientow</li>
-      <li><strong style="color: var(--gold);">Zory #8</strong> — jestesmy na pierwszej stronie. Strona lokalna dziala</li>
-      <li><strong>Katowice (#33) i Gliwice (#38)</strong> — Google indeksuje starsza strone /oferta/budowa/ zamiast dedykowanej lokalnej. Bedziemy to poprawiac</li>
-      <li><strong>Frazy ogolne (slask, pod klucz, kalkulator)</strong> — wymagaja wiecej contentu i linkow. Przyjda z czasem</li>
+      <li><strong style="color: var(--gold);">Wodzislaw #2 — to ogromny sukces.</strong> Na 70 wyszukiwań miesięcznie, jesteśmy tuz za najlepsza pozycja. Klienci z Wodzislawia widzą CoreLTB od razu</li>
+      <li><strong style="color: var(--gold);">Rybnik #5 przy 110 wyszukiwań/msc</strong> — to najbardziej wartościowa fraza. Każda pozycja wyżej = więcej klientów</li>
+      <li><strong style="color: var(--gold);">Zory #8</strong> — jesteśmy na pierwszej stronie. Strona lokalna dziala</li>
+      <li><strong>Katowice (#33) i Gliwice (#38)</strong> — Google indeksuje starszą stronę /oferta/budowa/ zamiast dedykowanej lokalnej. Będziemy to poprawiać</li>
+      <li><strong>Frazy ogolne (slask, pod klucz, kalkulator)</strong> — wymagają więcej contentu i linków. Przyjdą z czasem</li>
     </ul>
   </div>
 </section>
@@ -944,30 +958,30 @@
 <section>
   <div class="section-title">
     <div class="icon">7</div>
-    Nowi vs powracajacy uzytkownicy
+    Nowi vs powracający użytkownicy
   </div>
 
   <div class="two-col">
     <div style="background: #fff; border-radius: 12px; padding: 28px; border: 1px solid #eee; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
-      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Nowi uzytkownicy</div>
+      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Nowi użytkownicy</div>
       <div style="font-size: 48px; font-weight: 800; color: var(--blue);">182</div>
-      <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">92% wszystkich odwiedzajacych</div>
+      <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">92% wszystkich odwiedzających</div>
       <div style="font-size: 12px; color: var(--text-light); margin-top: 8px;">Pierwszy raz na stronie — potencjalni klienci</div>
     </div>
     <div style="background: #fff; border-radius: 12px; padding: 28px; border: 1px solid #eee; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
-      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Powracajacy</div>
+      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Powracający</div>
       <div style="font-size: 48px; font-weight: 800; color: var(--gold);">16</div>
-      <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">8% — wracaja i porownuja</div>
-      <div style="font-size: 12px; color: var(--text-light); margin-top: 8px;">Rozpatruja oferte, beda kontaktowac</div>
+      <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">8% — wracają i porównują</div>
+      <div style="font-size: 12px; color: var(--text-light); margin-top: 8px;">Rozpatrują ofertę, będą kontaktować</div>
     </div>
   </div>
 
   <div class="insight-box" style="margin-top: 20px;">
-    <h3>Dlaczego to wazne?</h3>
+    <h3>Dlaczego to ważne?</h3>
     <ul>
-      <li><strong style="color: var(--gold);">182 nowe osoby w 2 tygodnie</strong> — to ludzie, ktorzy po raz pierwszy zobaczyli oferte CoreLTB</li>
-      <li><strong style="color: var(--gold);">16 powracajacych</strong> — to osoby, ktore wracaja by porownac projekty, sprawdzic ceny. Czesc z nich stanie sie leadami</li>
-      <li>W branzy budowlanej decyzja trwa tygodnie/miesiace — powracajacy sa najcenniejszi</li>
+      <li><strong style="color: var(--gold);">182 nowe osoby w 2 tygodnie</strong> — to ludzie, którzy po raz pierwszy zobaczyli ofertę CoreLTB</li>
+      <li><strong style="color: var(--gold);">16 powracających</strong> — to osoby, które wracają by porownac projekty, sprawdzic ceny. Część z nich stanie się leadami</li>
+      <li>W branży budowlanej decyzja trwa tygodnie/miesiące — powracający są najcenniejsi</li>
     </ul>
   </div>
 </section>
@@ -981,23 +995,23 @@
 
   <div style="display: grid; gap: 12px;">
     <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--green); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
-      <span style="font-weight: 700; font-size: 15px;">Strona zyje i rosnie</span>
-      <p style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;">355 sesji, 198 uzytkownikow, 75% engagement w ciagu 2 tygodni. Ludzie spedzaja srednio prawie 6 minut — to swietny wynik dla strony budowlanej.</p>
+      <span style="font-weight: 700; font-size: 15px;">Strona żyje i rośnie</span>
+      <p style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;">355 sesji, 198 użytkowników, 75% engagement w ciągu 2 tygodni. Ludzie spędzają średnio prawie 6 minut — to świetny wynik dla strony budowlanej.</p>
     </div>
 
     <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--gold); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
-      <span style="font-weight: 700; font-size: 15px;">SEO daje darmowy ruch, ktory rosnie — TOP pozycje potwierdzone</span>
-      <p style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;">118 sesji z Google za 0 zl, +70 klikniec vs poprzedni okres. <strong>Wodzislaw #2, Rybnik #5, Zory #8</strong> — potwierdzone live. Brand "coreltb" na pozycji #1.</p>
+      <span style="font-weight: 700; font-size: 15px;">SEO daje darmowy ruch, który rośnie — TOP pozycje potwierdzone</span>
+      <p style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;">118 sesji z Google za 0 zł, +70 kliknięć vs poprzedni okres. <strong>Wodzisław #2, Rybnik #5, Żory #8</strong> — potwierdzone live. Brand "coreltb" na pozycji #1.</p>
     </div>
 
     <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--blue); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
-      <span style="font-weight: 700; font-size: 15px;">Reklamy + SEO + social = razem dzialaja</span>
-      <p style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;">Kazdy kanal gra inna role: SEO buduje autorytet i dlugie sesje, reklamy generuja szybkie leady, social buduje swiadomosc. Razem tworza pelny lejek.</p>
+      <span style="font-weight: 700; font-size: 15px;">Reklamy + SEO + social = razem działają</span>
+      <p style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;">Każdy kanał gra inną rolę: SEO buduje autorytet i długie sesje, reklamy generują szybkie leady, social buduje świadomość. Razem tworzą pełny lejek.</p>
     </div>
 
     <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--purple); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
-      <span style="font-weight: 700; font-size: 15px;">Potencjal: Katowice (#33) i Gliwice (#38)</span>
-      <p style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;">Juz widac wyswietlenia, ale Google indeksuje starsza strone /oferta/ zamiast dedykowanej lokalnej. Poprawimy to — potencjal to 140+ wyszukiwan/msc dla samych Katowic.</p>
+      <span style="font-weight: 700; font-size: 15px;">Potencjał: Katowice (#33) i Gliwice (#38)</span>
+      <p style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;">Już widać wyświetlenia, ale Google indeksuje starszą stronę /oferta/ zamiast dedykowanej lokalnej. Poprawimy to — potencjał to 140+ wyszukiwań/msc dla samych Katowic.</p>
     </div>
   </div>
 </section>
