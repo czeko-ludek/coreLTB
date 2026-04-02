@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raport Google Ads — CoreLTB Builders — 24.03-02.04.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #dfbb68;
+    --gold-dark: #d4a847;
+    --gold-light: #e8cc8a;
+    --gold-pale: #f5ecd7;
+    --bg-dark: #1a1a1a;
+    --bg-card: #232323;
+    --bg-light: #fafaf9;
+    --bg-cream: #f5f5f3;
+    --text-primary: #1a1a1a;
+    --text-secondary: #555;
+    --text-light: #888;
+    --green: #22c55e;
+    --red: #ef4444;
+    --blue: #3b82f6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .header {
+    background: var(--bg-dark);
+    padding: 48px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 120%, rgba(223,187,104,0.15) 0%, transparent 70%);
+  }
+  .header-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .header img.logo {
+    height: 48px;
+    margin-bottom: 24px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .header h1 span { color: var(--gold); }
+  .header .subtitle {
+    font-size: 15px;
+    color: #aaa;
+    font-weight: 400;
+  }
+  .header .period-badge {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 6px 20px;
+    background: rgba(223,187,104,0.15);
+    border: 1px solid var(--gold);
+    border-radius: 24px;
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  section {
+    margin: 40px 0;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--bg-dark);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .icon {
+    width: 32px;
+    height: 32px;
+    background: var(--gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    color: var(--bg-dark);
+    font-weight: 800;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .summary-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border: 1px solid #eee;
+  }
+  .summary-card .label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .summary-card .value {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--bg-dark);
+  }
+  .summary-card .note {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+  .summary-card.highlight {
+    background: var(--bg-dark);
+    border-color: var(--gold);
+  }
+  .summary-card.highlight .label { color: var(--gold-light); }
+  .summary-card.highlight .value { color: #fff; }
+  .summary-card.highlight .note { color: #aaa; }
+
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border: 1px solid #eee;
+    background: #fff;
+    margin-bottom: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  thead th {
+    background: var(--bg-dark);
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #fafaf9; }
+  .text-right { text-align: right; }
+  .text-center { text-align: center; }
+  .font-bold { font-weight: 700; }
+  .text-green { color: var(--green); }
+  .text-red { color: var(--red); }
+  .text-gold { color: var(--gold-dark); }
+
+  .funnel {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 20px 0;
+  }
+  .funnel-step {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: #fff;
+    border: 1px solid #eee;
+    position: relative;
+  }
+  .funnel-step:first-child { border-radius: 12px 12px 0 0; }
+  .funnel-step:last-child { border-radius: 0 0 12px 12px; }
+  .funnel-step:not(:last-child) { border-bottom: none; }
+  .funnel-bar {
+    height: 36px;
+    border-radius: 6px;
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+  }
+  .funnel-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    min-width: 180px;
+  }
+
+  .insight-box {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #2a2520 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    border-left: 4px solid var(--gold);
+  }
+  .insight-box h3 {
+    color: var(--gold);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .insight-box p, .insight-box li {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #ccc;
+  }
+  .insight-box ul { list-style: none; padding: 0; }
+  .insight-box li {
+    padding: 4px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+  .insight-box li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .badge-green { background: #dcfce7; color: #15803d; }
+  .badge-red { background: #fce4e4; color: #b91c1c; }
+  .badge-gold { background: var(--gold-pale); color: #92700a; }
+  .badge-blue { background: #dbeafe; color: #1d4ed8; }
+
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0;
+  }
+  .progress-row .prog-label {
+    font-size: 13px;
+    min-width: 120px;
+    color: var(--text-secondary);
+  }
+  .progress-row .prog-bar-bg {
+    flex: 1;
+    height: 20px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-row .prog-bar {
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .stat-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid #eee;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .note-box {
+    background: #fffbeb;
+    border: 1px solid #fbbf24;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+  .note-box h4 {
+    color: #92400e;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .note-box p {
+    color: #78350f;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .footer {
+    background: var(--bg-dark);
+    padding: 30px 0;
+    text-align: center;
+    margin-top: 60px;
+  }
+  .footer img.logo { height: 32px; margin-bottom: 12px; }
+  .footer p { font-size: 12px; color: #666; }
+  .footer a { color: var(--gold); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .funnel-label { min-width: 100px; font-size: 12px; }
+    .header h1 { font-size: 22px; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .header { padding: 20px 0; }
+    section { margin: 20px 0; break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <img class="logo" src="data:image/webp;base64,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" alt="CoreLTB Logo">
+    <h1>Raport kampanii <span>Google Ads</span></h1>
+    <p class="subtitle">CoreLTB Builders &middot; coreltb.pl</p>
+    <div class="period-badge">24 marca - 2 kwietnia 2026 &middot; 10 dni &middot; Performance Max</div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ===== 1: PODSUMOWANIE KPI ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">1</div>
+    Podsumowanie kampanii
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card highlight">
+      <div class="label">Wydano</div>
+      <div class="value">451 zl</div>
+      <div class="note">budzet: 500 zl (10 dni x 50 zl)</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Wyswietlenia</div>
+      <div class="value">14 175</div>
+      <div class="note">Search + Display + YouTube</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Klikniecia</div>
+      <div class="value">524</div>
+      <div class="note">3,70% CTR</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Koszt klikniecia</div>
+      <div class="value">0,86 zl</div>
+      <div class="note">branza: 2-5 zl</div>
+    </div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card highlight">
+      <div class="label">Leady (formularze)</div>
+      <div class="value">5</div>
+      <div class="note">calculator_lead (Google Ads)</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Koszt za lead</div>
+      <div class="value">90 zl</div>
+      <div class="note">cel operacyjny: 50 zl</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Conversion Rate</div>
+      <div class="value">0,95%</div>
+      <div class="note">klikniecie &rarr; lead</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Faza kampanii</div>
+      <div class="value" style="font-size: 18px;">NAUKA</div>
+      <div class="note">dzien 10 z ~14</div>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <h4>Uwaga dotyczaca liczby leadow</h4>
+    <p>Google Ads raportuje <strong>5 leadow</strong> (calculator_lead) — to dane modelowane przez Consent Mode v2 (nie wszyscy uzytkownicy akceptuja cookies). GA4 Analytics raportuje <strong>36 leadow</strong> w tym samym okresie, ale ta liczba zawiera rowniez testy konfiguracyjne i wewnetrzne. <strong>Faktyczna liczba leadow dostarczonych przez kampanie to leady widoczne na mailu (Resend) z referrerem "google".</strong> Od 2 kwietnia leady z kampanii sa identyfikowalne przez UTM: google / cpc, kampania: pmax-wycena.</p>
+  </div>
+</section>
+
+<!-- ===== 2: DZIEN PO DNIU ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">2</div>
+    Wydatki i wyniki dzien po dniu
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th class="text-right">Wydano</th>
+          <th class="text-right">Klikniecia</th>
+          <th class="text-right">CPC</th>
+          <th class="text-right">Wyswietlenia</th>
+          <th class="text-center">Konwersje</th>
+          <th class="text-center">Uwagi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Wt 25.03</td>
+          <td class="text-right">19,44 zl</td>
+          <td class="text-right">11</td>
+          <td class="text-right">1,77 zl</td>
+          <td class="text-right">245</td>
+          <td class="text-center font-bold text-green">1</td>
+          <td class="text-center"><span class="badge badge-green">Start</span></td>
+        </tr>
+        <tr>
+          <td>Sr 26.03</td>
+          <td class="text-right">31,84 zl</td>
+          <td class="text-right">58</td>
+          <td class="text-right">0,55 zl</td>
+          <td class="text-right">1 824</td>
+          <td class="text-center font-bold text-green">2</td>
+          <td class="text-center"><span class="badge badge-green">Najlepszy CPA</span></td>
+        </tr>
+        <tr>
+          <td>Czw 27.03</td>
+          <td class="text-right">97,75 zl</td>
+          <td class="text-right">318</td>
+          <td class="text-right">0,31 zl</td>
+          <td class="text-right">9 639</td>
+          <td class="text-center">0</td>
+          <td class="text-center"><span class="badge badge-red">Display burst</span></td>
+        </tr>
+        <tr>
+          <td>Pt 28.03</td>
+          <td class="text-right">94,92 zl</td>
+          <td class="text-right">27</td>
+          <td class="text-right">3,52 zl</td>
+          <td class="text-right">433</td>
+          <td class="text-center">0</td>
+          <td class="text-center"><span class="badge badge-gold">Wysoki CPC</span></td>
+        </tr>
+        <tr>
+          <td>Sb 29.03</td>
+          <td class="text-right">49,14 zl</td>
+          <td class="text-right">31</td>
+          <td class="text-right">1,59 zl</td>
+          <td class="text-right">434</td>
+          <td class="text-center font-bold text-green">1</td>
+          <td class="text-center"><span class="badge badge-green">OK</span></td>
+        </tr>
+        <tr>
+          <td>Nd 30.03</td>
+          <td class="text-right">60,64 zl</td>
+          <td class="text-right">31</td>
+          <td class="text-right">1,96 zl</td>
+          <td class="text-right">547</td>
+          <td class="text-center">0</td>
+          <td class="text-center"><span class="badge badge-gold">Weekend</span></td>
+        </tr>
+        <tr>
+          <td>Pn 31.03</td>
+          <td class="text-right">27,46 zl</td>
+          <td class="text-right">14</td>
+          <td class="text-right">1,96 zl</td>
+          <td class="text-right">341</td>
+          <td class="text-center font-bold text-green">1</td>
+          <td class="text-center"><span class="badge badge-green">OK</span></td>
+        </tr>
+        <tr>
+          <td>Wt 01.04</td>
+          <td class="text-right">34,57 zl</td>
+          <td class="text-right">20</td>
+          <td class="text-right">1,73 zl</td>
+          <td class="text-right">480</td>
+          <td class="text-center">0</td>
+          <td class="text-center"><span class="badge badge-blue">Stabilne</span></td>
+        </tr>
+        <tr>
+          <td>Sr 02.04</td>
+          <td class="text-right">35,72 zl</td>
+          <td class="text-right">14</td>
+          <td class="text-right">2,55 zl</td>
+          <td class="text-right">232</td>
+          <td class="text-center">0</td>
+          <td class="text-center"><span class="badge badge-blue">Stabilne</span></td>
+        </tr>
+        <tr style="background: #fafaf9; font-weight: 700;">
+          <td>RAZEM</td>
+          <td class="text-right">451,47 zl</td>
+          <td class="text-right">524</td>
+          <td class="text-right">0,86 zl</td>
+          <td class="text-right">14 175</td>
+          <td class="text-center">5</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>Co sie stalo w czwartek 27.03?</h3>
+    <p>Algorytm Google wyswietlil reklame masowo w sieci Display (banery na portalach i YouTube) — az <strong style="color: var(--gold);">9 639 wyswietlen</strong> za jedyne 97 zl. To typowe zachowanie kampanii Performance Max w fazie nauki — AI testuje rozne kanaly, zeby znalezc te najskuteczniejsze. Po tym tescie kampania stabilizowala sie na Search (wyszukiwarce), ktory daje najlepsze wyniki.</p>
+  </div>
+</section>
+
+<!-- ===== 3: KANALY — SEARCH vs DISPLAY ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">3</div>
+    Kanaly reklamowe — Search vs Display
+  </div>
+
+  <div class="two-col">
+    <div class="stat-box" style="border-left: 4px solid var(--green);">
+      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Search (Wyszukiwarka Google)</div>
+      <div style="font-size: 32px; font-weight: 800; margin-bottom: 4px;">1 033</div>
+      <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">wyswietlen &middot; 76 klikniec &middot; 7,36% CTR</div>
+      <div style="font-size: 14px; color: var(--text-secondary);">
+        <strong style="color: var(--green);">5 konwersji</strong> &middot; CPA 34,76 zl<br>
+        <span style="font-size: 12px; color: var(--text-light);">Tutaj trafiaja ludzie aktywnie szukajacy budowy domu</span>
+      </div>
+    </div>
+    <div class="stat-box" style="border-left: 4px solid var(--text-light);">
+      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Display / YouTube / Inne</div>
+      <div style="font-size: 32px; font-weight: 800; margin-bottom: 4px;">~13 142</div>
+      <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">wyswietlen &middot; ~448 klikniec &middot; 3,41% CTR</div>
+      <div style="font-size: 14px; color: var(--text-secondary);">
+        <strong style="color: var(--red);">0 konwersji</strong> &middot; CPA &mdash;<br>
+        <span style="font-size: 12px; color: var(--text-light);">Banery i filmy — budowanie swiadomosci marki, ale niska jakosc klikniec</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <h3>Wnioski z kanalu</h3>
+    <ul>
+      <li><strong style="color: var(--gold);">Search przynosi 100% konwersji</strong> — mimo ze stanowi tylko 7% wyswietlen</li>
+      <li>Display/YouTube to glownie faza nauki — algorytm testowal rozne kanaly i po 27.03 przesunol sie na Search</li>
+      <li>Aktualnie (od 30.03) kampania dziala glownie w wyszukiwarce — to pozytywna zmiana</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 4: LANDING PAGES ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">4</div>
+    Strony docelowe — gdzie trafiaja klienci
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Strona</th>
+          <th class="text-right">Wyswietlenia</th>
+          <th class="text-right">Klikniecia</th>
+          <th class="text-right">Konwersje</th>
+          <th class="text-right">Conv Rate</th>
+          <th class="text-right">Koszt</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="font-bold">coreltb.pl (strona glowna)</td>
+          <td class="text-right">12 141</td>
+          <td class="text-right">390</td>
+          <td class="text-right">2,5</td>
+          <td class="text-right">0,64%</td>
+          <td class="text-right">215,77 zl</td>
+        </tr>
+        <tr style="background: #f0fdf4;">
+          <td class="font-bold text-green">coreltb.pl/wycena (kalkulator)</td>
+          <td class="text-right">2 995</td>
+          <td class="text-right">116</td>
+          <td class="text-right">2,5</td>
+          <td class="text-right font-bold text-green">2,16%</td>
+          <td class="text-right">229,35 zl</td>
+        </tr>
+        <tr>
+          <td>coreltb.pl/projekty</td>
+          <td class="text-right">781</td>
+          <td class="text-right">3</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0%</td>
+          <td class="text-right">1,54 zl</td>
+        </tr>
+        <tr>
+          <td>coreltb.pl/oferta</td>
+          <td class="text-right">688</td>
+          <td class="text-right">2</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0%</td>
+          <td class="text-right">1,28 zl</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>Kalkulator /wycena konwertuje 3,4x lepiej</h3>
+    <ul>
+      <li>Strona /wycena ma <strong style="color: var(--gold);">2,16% conversion rate</strong> vs 0,64% na stronie glownej</li>
+      <li>Google automatycznie kieruje coraz wiecej ruchu na /wycena — bo widzi, ze tam ludzie wypelniaja formularz</li>
+      <li>To potwierdza, ze kalkulator jest najskuteczniejszym narzedziem do generowania leadow</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 5: SLOWA KLUCZOWE ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">5</div>
+    Czego szukaja klienci w Google
+  </div>
+
+  <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">
+    Pelne dane z Search za 10 dni kampanii: <strong>85 klikniec</strong> z <strong>1 212 wyswietlen</strong> (7,01% CTR), sr. CPC <strong>2,23 zl</strong>, <strong>5 konwersji</strong>
+  </p>
+
+  <!-- KATEGORIE FRAZ -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;">
+    <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid var(--green);">
+      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Frazy brandowe</div>
+      <div style="font-size: 22px; font-weight: 800; color: var(--green);">14 klik. / 2 konw.</div>
+      <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">coreltb, coreltb builders sp z o o</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">CR: <strong>14,3%</strong> &middot; CPC: 1,72 zl</div>
+    </div>
+    <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid var(--gold);">
+      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Frazy lokalne (z miastem)</div>
+      <div style="font-size: 22px; font-weight: 800; color: var(--gold);">10 klik. / 2 konw.</div>
+      <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">gliwice, wodzislaw, jaworzno, bytom, slask</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">CR: <strong>20,0%</strong> &middot; CPC: 3,14 zl</div>
+    </div>
+    <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid var(--blue);">
+      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Frazy kosztowe (ile kosztuje, cena)</div>
+      <div style="font-size: 22px; font-weight: 800; color: var(--blue);">25 klik. / 0 konw.</div>
+      <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">koszt budowy, cena za m2, kalkulator</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">CR: <strong>0%</strong> &middot; CPC: 1,33 zl (tani ruch)</div>
+    </div>
+    <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid var(--red);">
+      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Frazy nietrafione (do wykluczenia)</div>
+      <div style="font-size: 22px; font-weight: 800; color: var(--red);">~20 klik. / 0 konw.</div>
+      <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">modulowy, prefabrykowany, szkieletowy, z bali</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">Marnuja budzet na uslugi, ktorych CoreLTB nie oferuje</div>
+    </div>
+  </div>
+
+  <!-- TABELA FRAZ Z KONWERSJAMI -->
+  <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Frazy z konwersjami</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Fraza w Google</th>
+          <th class="text-right">Wyswietl.</th>
+          <th class="text-right">Klik.</th>
+          <th class="text-right">CTR</th>
+          <th class="text-right">CPC</th>
+          <th class="text-center">Konw.</th>
+          <th class="text-right">CPA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background: #f0fdf4;">
+          <td class="font-bold text-green">coreltb builders sp z o o</td>
+          <td class="text-right">29</td>
+          <td class="text-right">9</td>
+          <td class="text-right">31,03%</td>
+          <td class="text-right">1,83 zl</td>
+          <td class="text-center font-bold text-green">2</td>
+          <td class="text-right font-bold text-green">8,23 zl</td>
+        </tr>
+        <tr style="background: #f0fdf4;">
+          <td class="font-bold text-green">budowa domow gliwice</td>
+          <td class="text-right">5</td>
+          <td class="text-right">2</td>
+          <td class="text-right">40,00%</td>
+          <td class="text-right">8,99 zl</td>
+          <td class="text-center font-bold text-green">1</td>
+          <td class="text-right font-bold text-green">17,99 zl</td>
+        </tr>
+        <tr style="background: #f0fdf4;">
+          <td class="font-bold text-green">dom wodzislaw slaski</td>
+          <td class="text-right">1</td>
+          <td class="text-right">1</td>
+          <td class="text-right">100%</td>
+          <td class="text-right">2,52 zl</td>
+          <td class="text-center font-bold text-green">1</td>
+          <td class="text-right font-bold text-green">2,52 zl</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TABELA WSZYSTKICH FRAZ -->
+  <h3 style="font-size: 15px; font-weight: 700; margin: 20px 0 12px;">Pelna lista fraz (top 30)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Fraza w Google</th>
+          <th class="text-right">Wyswietl.</th>
+          <th class="text-right">Klik.</th>
+          <th class="text-right">CTR</th>
+          <th class="text-right">Koszt</th>
+          <th class="text-center">Konw.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background: #f0fdf4;">
+          <td class="font-bold text-green">coreltb builders sp z o o</td>
+          <td class="text-right">29</td>
+          <td class="text-right">9</td>
+          <td class="text-right">31,03%</td>
+          <td class="text-right">16,46 zl</td>
+          <td class="text-center font-bold text-green">2</td>
+        </tr>
+        <tr>
+          <td>coreltb</td>
+          <td class="text-right">24</td>
+          <td class="text-right">4</td>
+          <td class="text-right">16,67%</td>
+          <td class="text-right">7,48 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr>
+          <td>kalkulator budowy domu</td>
+          <td class="text-right">11</td>
+          <td class="text-right">4</td>
+          <td class="text-right">36,36%</td>
+          <td class="text-right">5,45 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr style="background: #fef2f2;">
+          <td class="text-red">dom modulowy 120m2 cena pod klucz</td>
+          <td class="text-right">8</td>
+          <td class="text-right">4</td>
+          <td class="text-right">50,00%</td>
+          <td class="text-right">3,76 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr>
+          <td>budowa domu 90m2 koszt</td>
+          <td class="text-right">2</td>
+          <td class="text-right">2</td>
+          <td class="text-right">100%</td>
+          <td class="text-right">2,97 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr>
+          <td>koszt budowy domu 120m2</td>
+          <td class="text-right">7</td>
+          <td class="text-right">2</td>
+          <td class="text-right">28,57%</td>
+          <td class="text-right">3,56 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr style="background: #f0fdf4;">
+          <td class="font-bold text-green">budowa domow gliwice</td>
+          <td class="text-right">5</td>
+          <td class="text-right">2</td>
+          <td class="text-right">40,00%</td>
+          <td class="text-right">17,99 zl</td>
+          <td class="text-center font-bold text-green">1</td>
+        </tr>
+        <tr style="background: #fef2f2;">
+          <td class="text-red">dom prefabrykowany cena</td>
+          <td class="text-right">3</td>
+          <td class="text-right">2</td>
+          <td class="text-right">66,67%</td>
+          <td class="text-right">1,40 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr>
+          <td>ile kosztuje projekt domu z pozwoleniem</td>
+          <td class="text-right">5</td>
+          <td class="text-right">2</td>
+          <td class="text-right">40,00%</td>
+          <td class="text-right">1,78 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr style="background: #fef2f2;">
+          <td class="text-red">ile kosztuje dom modulowy 100m2</td>
+          <td class="text-right">5</td>
+          <td class="text-right">3</td>
+          <td class="text-right">60,00%</td>
+          <td class="text-right">1,80 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr>
+          <td>budowa domow</td>
+          <td class="text-right">8</td>
+          <td class="text-right">1</td>
+          <td class="text-right">12,50%</td>
+          <td class="text-right">0,88 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr>
+          <td>budowa domu cena za m2</td>
+          <td class="text-right">1</td>
+          <td class="text-right">1</td>
+          <td class="text-right">100%</td>
+          <td class="text-right">2,27 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr>
+          <td>cena budowy domu 100m2</td>
+          <td class="text-right">2</td>
+          <td class="text-right">1</td>
+          <td class="text-right">50,00%</td>
+          <td class="text-right">1,05 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr style="background: #fef2f2;">
+          <td class="text-red">cena domu prefabrykowanego</td>
+          <td class="text-right">1</td>
+          <td class="text-right">1</td>
+          <td class="text-right">100%</td>
+          <td class="text-right">8,05 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr>
+          <td>coreltb builders</td>
+          <td class="text-right">6</td>
+          <td class="text-right">1</td>
+          <td class="text-right">16,67%</td>
+          <td class="text-right">0,23 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr>
+          <td>dom 100m koszt</td>
+          <td class="text-right">1</td>
+          <td class="text-right">1</td>
+          <td class="text-right">100%</td>
+          <td class="text-right">2,56 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr style="background: #fef2f2;">
+          <td class="text-red">dom modulowy 80m2 cena pod klucz</td>
+          <td class="text-right">2</td>
+          <td class="text-right">1</td>
+          <td class="text-right">50,00%</td>
+          <td class="text-right">1,17 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr>
+          <td>dom murowany 70m2 cena</td>
+          <td class="text-right">1</td>
+          <td class="text-right">1</td>
+          <td class="text-right">100%</td>
+          <td class="text-right">1,63 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr>
+          <td>dom pod klucz slaskie</td>
+          <td class="text-right">3</td>
+          <td class="text-right">1</td>
+          <td class="text-right">33,33%</td>
+          <td class="text-right">1,34 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr style="background: #fef2f2;">
+          <td class="text-red">dom prefabrykowany ceny</td>
+          <td class="text-right">6</td>
+          <td class="text-right">1</td>
+          <td class="text-right">16,67%</td>
+          <td class="text-right">0,80 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr style="background: #f0fdf4;">
+          <td class="font-bold text-green">dom wodzislaw slaski</td>
+          <td class="text-right">1</td>
+          <td class="text-right">1</td>
+          <td class="text-right">100%</td>
+          <td class="text-right">2,52 zl</td>
+          <td class="text-center font-bold text-green">1</td>
+        </tr>
+        <tr style="background: #fef2f2;">
+          <td class="text-red">dom z bali cena pod klucz 100m2</td>
+          <td class="text-right">3</td>
+          <td class="text-right">1</td>
+          <td class="text-right">33,33%</td>
+          <td class="text-right">0,54 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr style="background: #fef2f2;">
+          <td class="text-red">dom z betonu prefabrykowany</td>
+          <td class="text-right">1</td>
+          <td class="text-right">1</td>
+          <td class="text-right">100%</td>
+          <td class="text-right">2,52 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr>
+          <td>domy bytom</td>
+          <td class="text-right">1</td>
+          <td class="text-right">1</td>
+          <td class="text-right">100%</td>
+          <td class="text-right">4,30 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr style="background: #fef2f2;">
+          <td class="text-red">domy modulowe jaworzno</td>
+          <td class="text-right">2</td>
+          <td class="text-right">1</td>
+          <td class="text-right">50,00%</td>
+          <td class="text-right">1,98 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr style="background: #fef2f2;">
+          <td class="text-red">domy modulowe slask</td>
+          <td class="text-right">8</td>
+          <td class="text-right">1</td>
+          <td class="text-right">12,50%</td>
+          <td class="text-right">3,18 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr>
+          <td>domy na sprzedaz jaworzno</td>
+          <td class="text-right">2</td>
+          <td class="text-right">1</td>
+          <td class="text-right">50,00%</td>
+          <td class="text-right">1,40 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr style="background: #fef2f2;">
+          <td class="text-red">domy szkieletowe slask cennik</td>
+          <td class="text-right">3</td>
+          <td class="text-right">1</td>
+          <td class="text-right">33,33%</td>
+          <td class="text-right">2,14 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr style="background: #fef2f2;">
+          <td class="text-red">domy z bali cena</td>
+          <td class="text-right">2</td>
+          <td class="text-right">1</td>
+          <td class="text-right">50,00%</td>
+          <td class="text-right">0,49 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+        <tr>
+          <td>building construction companies near me</td>
+          <td class="text-right">2</td>
+          <td class="text-right">1</td>
+          <td class="text-right">50,00%</td>
+          <td class="text-right">1,99 zl</td>
+          <td class="text-center">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>Kto szuka i co konwertuje?</h3>
+    <ul>
+      <li><strong style="color: var(--green);">Frazy brandowe (14 klik., 2 konw.)</strong> — ludzie, ktorzy juz znaja CoreLTB, konwertuja najlepiej. CPA zaledwie <strong>8,23 zl</strong>. To efekt SEO i polecen</li>
+      <li><strong style="color: var(--gold);">Frazy lokalne z miastem (10 klik., 2 konw.)</strong> — "budowa domow gliwice", "dom wodzislaw slaski" daja <strong>20% CR</strong>. To fundament przyszlej kampanii Search</li>
+      <li><strong style="color: var(--blue);">Frazy kosztowe (25 klik., 0 konw.)</strong> — "koszt budowy", "kalkulator", "cena za m2" generuja duzo klikniec ale brak konwersji. Ludzie porownuja ceny — warto ich remarketingowac</li>
+      <li><strong style="color: var(--red);">Frazy do wykluczenia (~20 klik., 0 konw.)</strong> — "modulowy", "prefabrykowany", "szkieletowy", "z bali" to uslugi, ktorych CoreLTB nie oferuje (budowa murowana). Marnuja budzet — nalezy dodac jako <strong>slowa wykluczajace</strong></li>
+    </ul>
+  </div>
+
+  <div class="note-box" style="margin-top: 16px;">
+    <h4>Rekomendacja: slowa wykluczajace do dodania</h4>
+    <p>Nastepujace frazy nalezy wykluczyc z kampanii, aby nie marnowac budzetu na nietrafiony ruch:</p>
+    <p style="margin-top: 8px; font-family: monospace; font-size: 13px; background: #f5f5f3; padding: 8px 12px; border-radius: 6px;">
+      modulowy, modulowe, prefabrykowany, prefabrykowane, szkieletowy, szkieletowe, z bali, abakon, sklepy budowlane, na sprzedaz
+    </p>
+  </div>
+</section>
+
+<!-- ===== 6: URZADZENIA I GODZINY ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">6</div>
+    Urzadzenia, godziny i dni tygodnia
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Urzadzenia</h3>
+      <div class="progress-row">
+        <span class="prog-label">Mobile</span>
+        <div class="prog-bar-bg">
+          <div class="prog-bar" style="width: 70%; background: var(--gold);">~70%</div>
+        </div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Desktop</span>
+        <div class="prog-bar-bg">
+          <div class="prog-bar" style="width: 25%; background: var(--bg-dark);">~25%</div>
+        </div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Tablet</span>
+        <div class="prog-bar-bg">
+          <div class="prog-bar" style="width: 5%; background: var(--text-light);">~5%</div>
+        </div>
+      </div>
+      <p style="font-size: 12px; color: var(--text-light); margin-top: 8px;">3 z 5 konwersji pochodzi z telefonu</p>
+    </div>
+    <div>
+      <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Najlepsze godziny</h3>
+      <div class="table-wrap" style="margin-bottom: 0;">
+        <table>
+          <thead>
+            <tr>
+              <th>Godzina</th>
+              <th class="text-right">Konwersje</th>
+              <th class="text-right">Klikniecia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>17:00</td><td class="text-right font-bold text-green">2</td><td class="text-right">32</td></tr>
+            <tr><td>18:00</td><td class="text-right font-bold text-green">1</td><td class="text-right">72</td></tr>
+            <tr><td>8:00</td><td class="text-right font-bold text-green">1</td><td class="text-right">25</td></tr>
+            <tr><td>21:00</td><td class="text-right font-bold text-green">1</td><td class="text-right">20</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px;">
+    <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Dni tygodnia</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Dzien</th>
+            <th class="text-right">Klikniecia</th>
+            <th class="text-right">Konwersje</th>
+            <th class="text-right">Koszt</th>
+            <th class="text-right">CPA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background: #f0fdf4;">
+            <td class="font-bold">Czwartek</td>
+            <td class="text-right">72</td>
+            <td class="text-right font-bold text-green">2</td>
+            <td class="text-right">67,56 zl</td>
+            <td class="text-right font-bold text-green">33,78 zl</td>
+          </tr>
+          <tr>
+            <td>Wtorek</td>
+            <td class="text-right">14</td>
+            <td class="text-right font-bold text-green">1</td>
+            <td class="text-right">27,46 zl</td>
+            <td class="text-right">27,46 zl</td>
+          </tr>
+          <tr>
+            <td>Sroda</td>
+            <td class="text-right">31</td>
+            <td class="text-right font-bold text-green">1</td>
+            <td class="text-right">54,01 zl</td>
+            <td class="text-right">54,01 zl</td>
+          </tr>
+          <tr>
+            <td>Niedziela</td>
+            <td class="text-right">31</td>
+            <td class="text-right font-bold text-green">1</td>
+            <td class="text-right">49,14 zl</td>
+            <td class="text-right">49,14 zl</td>
+          </tr>
+          <tr>
+            <td class="text-red">Piatek</td>
+            <td class="text-right">318</td>
+            <td class="text-right">0</td>
+            <td class="text-right text-red">97,75 zl</td>
+            <td class="text-right">—</td>
+          </tr>
+          <tr>
+            <td class="text-red">Sobota</td>
+            <td class="text-right">27</td>
+            <td class="text-right">0</td>
+            <td class="text-right text-red">94,92 zl</td>
+            <td class="text-right">—</td>
+          </tr>
+          <tr>
+            <td>Poniedzialek</td>
+            <td class="text-right">31</td>
+            <td class="text-right">0</td>
+            <td class="text-right">60,64 zl</td>
+            <td class="text-right">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <h3>Wnioski z urzadzen i czasu</h3>
+    <ul>
+      <li>Wiekszosc ruchu i konwersji z <strong style="color: var(--gold);">telefonu</strong> — strona musi byc szybka na mobile</li>
+      <li>Konwersje pojawiaja sie glownie <strong style="color: var(--gold);">rano (8:00) i wieczorem (17:00-21:00)</strong> — ludzie szukaja po pracy</li>
+      <li>Piatek i sobota: duze wydatki, zero konwersji — czesc to burst Display z 27.03</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 7: FUNNEL ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">7</div>
+    Sciezka klienta — od reklamy do formularza
+  </div>
+
+  <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
+    Dane z Google Analytics 4 — rzeczywiste zachowanie na stronie coreltb.pl (10 dni)
+  </p>
+
+  <div class="funnel">
+    <div class="funnel-step">
+      <div class="funnel-bar" style="width: 100%; background: var(--bg-dark);">524</div>
+      <div class="funnel-label">Klikniecia w reklame (Google Ads)</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-bar" style="width: 20%; background: var(--gold-dark);">106</div>
+      <div class="funnel-label">Sesje na stronie (GA4) <span class="badge badge-gold">20%</span></div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-bar" style="width: 17%; background: var(--gold);">88%</div>
+      <div class="funnel-label">Zaangazowanych (engagement rate)</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-bar" style="width: 8%; background: var(--green);">36</div>
+      <div class="funnel-label">Wypelnionych formularzy (GA4) <span class="badge badge-green">leady</span></div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <h3>Dlaczego 524 klikniecia, ale tylko 106 sesji?</h3>
+    <ul>
+      <li><strong>Display/YouTube</strong> — wiekszosc klikniec to sieci banerowe i wideo. Uzytkownicy klikaja przypadkowo i nie docieraja na strone</li>
+      <li><strong>Consent Mode v2</strong> — uzytkownicy, ktorzy nie akceptuja cookies, nie sa widoczni w Analytics</li>
+      <li><strong>Szybkie wyjscia</strong> — strona sie laduje, uzytkownik wraca do Google przed zaladowaniem Analytics</li>
+      <li>To normalne dla kampanii PMax — skutecznosc oceniamy po konwersjach, nie po kliknieciach</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 8: SEO (ORGANIC) ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">8</div>
+    SEO — bezplatny ruch z Google
+  </div>
+
+  <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
+    Dane z Google Search Console i Analytics za okres 10 dni
+  </p>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="label">Sesje organiczne</div>
+      <div class="value">118</div>
+      <div class="note">koszt: 0 zl</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Klikniecia GSC</div>
+      <div class="value">102</div>
+      <div class="note">z wyszukiwarki Google</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Srednia pozycja</div>
+      <div class="value">17,5</div>
+      <div class="note">druga strona Google</div>
+    </div>
+    <div class="summary-card highlight">
+      <div class="label">Engagement Rate</div>
+      <div class="value">72%</div>
+      <div class="note">sr. czas: 7m 43s</div>
+    </div>
+  </div>
+
+  <h3 style="font-size: 15px; font-weight: 700; margin: 20px 0 12px;">Top frazy organiczne:</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Fraza w Google</th>
+          <th class="text-right">Klikniecia</th>
+          <th class="text-right">Pozycja</th>
+          <th class="text-right">CTR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="font-bold">coreltb</td><td class="text-right">32</td><td class="text-right">1,1</td><td class="text-right">72,4%</td></tr>
+        <tr><td>coreltb builders sp. z o.o</td><td class="text-right">4</td><td class="text-right">1,5</td><td class="text-right">63,6%</td></tr>
+        <tr><td>budowa domow wodzislaw slaski</td><td class="text-right">3</td><td class="text-right">12,0</td><td class="text-right">3,6%</td></tr>
+        <tr><td>budowa domow rybnik</td><td class="text-right">2</td><td class="text-right">8,2</td><td class="text-right">5,1%</td></tr>
+        <tr><td>budowa domow zory</td><td class="text-right">2</td><td class="text-right">9,1</td><td class="text-right">4,0%</td></tr>
+        <tr><td>budowa domow jaworzno</td><td class="text-right">1</td><td class="text-right">4,4</td><td class="text-right">5,6%</td></tr>
+        <tr><td>kierownik budowy jaworzno</td><td class="text-right">1</td><td class="text-right">5,4</td><td class="text-right">1,3%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>Reklamy vs SEO — porownanie</h3>
+    <ul>
+      <li><strong style="color: var(--gold);">SEO:</strong> 118 sesji za 0 zl, sr. czas 7m 43s, engagement 72%</li>
+      <li><strong style="color: var(--gold);">Reklamy:</strong> 106 sesji za 451 zl, sr. czas 1m 24s, engagement 88%</li>
+      <li>SEO daje dluzsza interakcje — ludzie przegladaja wiele podstron i spedzaja wiecej czasu</li>
+      <li>Reklamy daja natychmiastowy ruch i kieruja prosto na kalkulator wyceny</li>
+      <li>Obie strategie sie uzupelniaja — SEO buduje autorytet, reklamy generuja szybkie leady</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 9: GBP ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">9</div>
+    Google Business Profile — wizytowki
+  </div>
+
+  <div class="two-col">
+    <div class="stat-box">
+      <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Jaworzno <span class="badge badge-green">91/100</span></div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px;">
+        <div><span style="color: var(--text-light);">Wyswietlenia</span><br><strong>273</strong></div>
+        <div><span style="color: var(--text-light);">Klik www</span><br><strong>23</strong></div>
+        <div><span style="color: var(--text-light);">Telefon</span><br><strong>3</strong></div>
+        <div><span style="color: var(--text-light);">Nawigacje</span><br><strong>30</strong></div>
+      </div>
+      <div style="margin-top: 8px; font-size: 12px; color: var(--text-light);">63% mobile &middot; 20,5% engagement</div>
+    </div>
+    <div class="stat-box">
+      <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Wodzislaw Slaski <span class="badge badge-green">88/100</span></div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px;">
+        <div><span style="color: var(--text-light);">Wyswietlenia</span><br><strong>129</strong></div>
+        <div><span style="color: var(--text-light);">Klik www</span><br><strong>10</strong></div>
+        <div><span style="color: var(--text-light);">Telefon</span><br><strong>4</strong></div>
+        <div><span style="color: var(--text-light);">Nawigacje</span><br><strong>27</strong></div>
+      </div>
+      <div style="margin-top: 8px; font-size: 12px; color: var(--text-light);">59% mobile &middot; 31,8% engagement</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 10: FAZA NAUKI ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">10</div>
+    Faza nauki algorytmu
+  </div>
+
+  <div style="background: #fff; border-radius: 12px; padding: 24px; border: 1px solid #eee; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+      <div style="width: 12px; height: 12px; background: var(--gold); border-radius: 50%; animation: pulse 2s infinite;"></div>
+      <span style="font-weight: 700; font-size: 16px;">Kampania w fazie nauki</span>
+      <span class="badge badge-gold">Dzien 10 z ~14</span>
+    </div>
+    <style>@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }</style>
+
+    <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">
+      Algorytm Google uczy sie, komu wyswietlac reklame. Przez pierwsze 2 tygodnie testuje rozne grupy odbiorcow i kanaly. Widac wyrazna poprawe — po poczatkowym Display burst (27.03) kampania stabilizuje sie na Search, gdzie sa konwersje.
+    </p>
+
+    <div class="progress-row">
+      <span class="prog-label">Postep nauki</span>
+      <div class="prog-bar-bg">
+        <div class="prog-bar" style="width: 71%; background: linear-gradient(90deg, var(--gold-dark), var(--gold));">71%</div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;">
+      <div style="padding: 16px; background: #f9fafb; border-radius: 8px;">
+        <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">Pozytywne sygnaly</div>
+        <ul style="font-size: 13px; color: var(--text-secondary); padding-left: 16px;">
+          <li>CPC spada (od 2,97 do 0,86 zl)</li>
+          <li>Display burst sie zakonczyl</li>
+          <li>Konwersje pojawiaja sie regularnie</li>
+          <li>Google preferuje /wycena jako LP</li>
+        </ul>
+      </div>
+      <div style="padding: 16px; background: #f9fafb; border-radius: 8px;">
+        <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">Czego nie zmieniac</div>
+        <ul style="font-size: 13px; color: var(--text-secondary); padding-left: 16px;">
+          <li>Budzet dzienny (50 zl)</li>
+          <li>Strategia licytacji (Max Conversions)</li>
+          <li>Teksty i grafiki reklam</li>
+          <li>URL-e docelowe</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 11: STRATEGIA TESTOWA ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">11</div>
+    Strategia kampanii — plan testowy
+  </div>
+
+  <div style="background: linear-gradient(135deg, var(--bg-dark) 0%, #2a2a2a 100%); border-radius: 12px; padding: 28px; border: 1px solid var(--gold); color: #fff;">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+      <div style="width: 36px; height: 36px; background: rgba(223,187,104,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">&#9881;</div>
+      <div>
+        <div style="font-weight: 700; font-size: 16px;">Kampania PMax — tryb testowy</div>
+        <div style="font-size: 13px; color: #aaa;">Okres testowy: ~4 tygodnie (24.03 — ~21.04.2026)</div>
+      </div>
+    </div>
+
+    <p style="font-size: 14px; color: #ccc; margin-bottom: 20px; line-height: 1.7;">
+      Obecna kampania Performance Max zostala uruchomiona jako <strong style="color: var(--gold);">kampania testowa</strong> na okres okolo 4 tygodni. Jej glownym celem jest zebranie danych o zachowaniach uzytkownikow, skutecznosci kanalow i fraz, a takze nauczenie algorytmu Google, kto jest idealnym klientem CoreLTB Builders.
+    </p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+      <div style="background: rgba(255,255,255,0.06); border-radius: 10px; padding: 16px; text-align: center;">
+        <div style="font-size: 12px; color: var(--gold-light); font-weight: 600; text-transform: uppercase; margin-bottom: 6px;">Faza 1 — teraz</div>
+        <div style="font-size: 22px; font-weight: 800; color: #fff;">PMax</div>
+        <div style="font-size: 12px; color: #aaa; margin-top: 4px;">Test ~4 tyg.</div>
+        <div style="font-size: 12px; color: #aaa;">50 zl/dzien</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.06); border-radius: 10px; padding: 16px; text-align: center;">
+        <div style="font-size: 12px; color: var(--gold-light); font-weight: 600; text-transform: uppercase; margin-bottom: 6px;">Faza 2 — analiza</div>
+        <div style="font-size: 22px; font-weight: 800; color: #fff;">Raport</div>
+        <div style="font-size: 12px; color: #aaa; margin-top: 4px;">~21 kwietnia</div>
+        <div style="font-size: 12px; color: #aaa;">Decyzja o dalszej strategii</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.06); border-radius: 10px; padding: 16px; text-align: center;">
+        <div style="font-size: 12px; color: var(--gold-light); font-weight: 600; text-transform: uppercase; margin-bottom: 6px;">Faza 3 — skalowanie</div>
+        <div style="font-size: 22px; font-weight: 800; color: #fff;">Search</div>
+        <div style="font-size: 12px; color: #aaa; margin-top: 4px;">Kampanie na slowa kluczowe</div>
+        <div style="font-size: 12px; color: #aaa;">~1 200 zl budzetu</div>
+      </div>
+    </div>
+
+    <div style="background: rgba(223,187,104,0.1); border-radius: 10px; padding: 20px; border: 1px solid rgba(223,187,104,0.3);">
+      <div style="font-weight: 700; font-size: 14px; color: var(--gold); margin-bottom: 10px;">Co dalej po tescie PMax?</div>
+      <ul style="font-size: 13px; color: #ccc; padding-left: 18px; line-height: 1.8;">
+        <li>Po zakonczeniu okresu testowego (~4 tygodnie) przeanalizujemy pelne wyniki kampanii PMax</li>
+        <li>Na podstawie zebranych danych podejmiemy decyzje o dalszej strategii reklamowej</li>
+        <li>Rozwazymy uruchomienie <strong style="color: var(--gold);">kampanii Search na slowa kluczowe</strong> — precyzyjne targetowanie fraz takich jak "budowa domu [miasto]", "kalkulator budowy domu", "firma budowlana slask"</li>
+        <li>Dysponujemy budzetem <strong style="color: var(--gold);">~1 200 zl</strong> do wykorzystania w nowych kampaniach po analizie wynikow PMax</li>
+        <li>Kampanie Search daja wieksza kontrole nad frazami i licytacjami — moga byc bardziej efektywne kosztowo niz PMax</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="insight-box" style="margin-top: 20px;">
+    <h3>Dlaczego testujemy PMax przed Search?</h3>
+    <ul>
+      <li><strong style="color: var(--gold);">Zbieranie danych</strong> — PMax testuje wszystkie kanaly jednoczesnie (Search, Display, YouTube, Maps) i pokazuje, gdzie sa klienci</li>
+      <li><strong style="color: var(--gold);">Nauka algorytmu</strong> — Google uczy sie, jaki profil uzytkownika konwertuje dla CoreLTB. Te dane beda wykorzystane w przyszlych kampaniach</li>
+      <li><strong style="color: var(--gold);">Frazy wejsciowe</strong> — widzimy juz, jakie frazy kluczowe generuja klikniecia i konwersje. To bedzie fundament kampanii Search</li>
+      <li><strong style="color: var(--gold);">Optymalizacja budzetu</strong> — zamiast od razu wydawac caly budzet, testujemy mala kwota i skalujemy to, co dziala</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 12: WARTOSC BIZNESOWA ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">$</div>
+    Wartosc biznesowa kampanii
+  </div>
+
+  <div class="two-col">
+    <div class="stat-box" style="text-align: center;">
+      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">Wydano na reklamy</div>
+      <div style="font-size: 40px; font-weight: 800; color: var(--text-primary);">451 zl</div>
+      <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">10 dni kampanii</div>
+    </div>
+    <div style="background: var(--bg-dark); border-radius: 12px; padding: 24px; border: 1px solid var(--gold); text-align: center;">
+      <div style="font-size: 12px; color: var(--gold-light); font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">Potencjalna wartosc leada</div>
+      <div style="font-size: 40px; font-weight: 800; color: #fff;">25 000 zl</div>
+      <div style="font-size: 13px; color: #aaa; margin-top: 4px;">kontrakt 500k zl x 5% konwersji</div>
+    </div>
+  </div>
+
+  <div style="background: #fff; border-radius: 12px; padding: 24px; border: 1px solid #eee; margin-top: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+    <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 16px;">Prognoza miesieczna (przy budzecie 50 zl/dzien)</h3>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; text-align: center;">
+      <div>
+        <div style="font-size: 12px; color: var(--text-light); text-transform: uppercase;">Budzet</div>
+        <div style="font-size: 20px; font-weight: 800;">1 500 zl</div>
+      </div>
+      <div>
+        <div style="font-size: 12px; color: var(--text-light); text-transform: uppercase;">Prognoza leadow</div>
+        <div style="font-size: 20px; font-weight: 800;">~15</div>
+      </div>
+      <div>
+        <div style="font-size: 12px; color: var(--text-light); text-transform: uppercase;">Prognoza klientow</div>
+        <div style="font-size: 20px; font-weight: 800;">~0,75</div>
+      </div>
+      <div>
+        <div style="font-size: 12px; color: var(--text-light); text-transform: uppercase;">ROAS</div>
+        <div style="font-size: 20px; font-weight: 800; color: var(--green);">277:1</div>
+      </div>
+    </div>
+    <p style="font-size: 12px; color: var(--text-light); margin-top: 12px; text-align: center;">Przy konwersji lead-klient 5% i sredniego kontraktu 500 000 zl. Jeden klient z kampanii = zwrot inwestycji x277.</p>
+  </div>
+</section>
+
+<!-- ===== 13: REKOMENDACJE ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">!</div>
+    Rekomendacje na kolejny okres
+  </div>
+
+  <div style="display: grid; gap: 12px;">
+
+    <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--green); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-weight: 700; font-size: 15px;">Nie zmieniac ustawien kampanii</span>
+        <span class="badge badge-green">Teraz</span>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">Kampania jest w fazie nauki i wykazuje pozytywne trendy. Algorytm przenosi sie z Display na Search. Jakiekolwiek zmiany budzetu, strategii lub assetow zresetuja proces nauki.</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--gold); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-weight: 700; font-size: 15px;">Monitorowac slowa wykluczajace</span>
+        <span class="badge badge-gold">Ten tydzien</span>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">Frazy takie jak "dom modulowy", "dom szkieletowy", "abakon", "sklepy budowlane" marnuja budzet na osoby, ktore nie szukaja budowy domu murowanego. Dodanie slow wykluczajacych poprawi jakosc ruchu.</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--gold); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-weight: 700; font-size: 15px;">Wdrożony natywny tag konwersji Google Ads</span>
+        <span class="badge badge-green">Zrobione</span>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">Dzis (2 kwietnia) wdrozono natywny tag sledzenia konwersji Google Ads w GTM. Od teraz konwersje beda raportowane w czasie rzeczywistym (bez 24-72h opoznienia importu GA4). To poprawi optymalizacje algorytmu.</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--blue); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-weight: 700; font-size: 15px;">Poczekac na koniec fazy nauki (~7 kwietnia)</span>
+        <span class="badge badge-blue">Za 5 dni</span>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">Po 14 dniach algorytm bedzie lepiej wiedzial, komu wyswietlac reklamy. Wtedy ocenimy rzeczywista skutecznosc kampanii i podejmiemy decyzje o ewentualnych zmianach strategii.</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--blue); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-weight: 700; font-size: 15px;">Rozwijac SEO rownoczesnie</span>
+        <span class="badge badge-blue">Ciagly</span>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">SEO juz daje 118 sesji za 0 zl z engagementem 72%. Lokalne frazy (rybnik, wodzislaw, jaworzno) rosna. Inwestycja w link building i content moze podwoic ruch organiczny w ciagu 3-6 miesiecy.</p>
+    </div>
+
+  </div>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <img class="logo" src="data:image/webp;base64,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" alt="CoreLTB">
+  <p>Raport wygenerowany automatycznie &middot; <a href="https://coreltb.pl">coreltb.pl</a></p>
+  <p style="margin-top: 4px;">Google Ads + GA4 + Search Console + GBP &middot; Dane za okres 24.03-02.04.2026</p>
+  <p style="margin-top: 8px; color: #555;">CoreLTB Builders Sp. z o.o. &middot; +48 664 123 757 &middot; biuro@coreltb.pl</p>
+</div>
+
+</body>
+</html>
