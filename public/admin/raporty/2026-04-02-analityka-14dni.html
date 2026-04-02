@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Analityka coreltb.pl — 14 dni — CoreLTB Builders</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #dfbb68;
+    --gold-dark: #d4a847;
+    --gold-light: #e8cc8a;
+    --gold-pale: #f5ecd7;
+    --bg-dark: #1a1a1a;
+    --bg-card: #232323;
+    --bg-light: #fafaf9;
+    --bg-cream: #f5f5f3;
+    --text-primary: #1a1a1a;
+    --text-secondary: #555;
+    --text-light: #888;
+    --green: #22c55e;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --purple: #8b5cf6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .header {
+    background: var(--bg-dark);
+    padding: 48px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 120%, rgba(223,187,104,0.15) 0%, transparent 70%);
+  }
+  .header-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .header img.logo {
+    height: 48px;
+    margin-bottom: 24px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .header h1 span { color: var(--gold); }
+  .header .subtitle {
+    font-size: 15px;
+    color: #aaa;
+    font-weight: 400;
+  }
+  .header .period-badge {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 6px 20px;
+    background: rgba(223,187,104,0.15);
+    border: 1px solid var(--gold);
+    border-radius: 24px;
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+  section { margin: 40px 0; }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--bg-dark);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .icon {
+    width: 32px;
+    height: 32px;
+    background: var(--gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    color: var(--bg-dark);
+    font-weight: 800;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .summary-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border: 1px solid #eee;
+  }
+  .summary-card .label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .summary-card .value {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--bg-dark);
+  }
+  .summary-card .note {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+  .summary-card.highlight {
+    background: var(--bg-dark);
+    border-color: var(--gold);
+  }
+  .summary-card.highlight .label { color: var(--gold-light); }
+  .summary-card.highlight .value { color: #fff; }
+  .summary-card.highlight .note { color: #aaa; }
+
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border: 1px solid #eee;
+    background: #fff;
+    margin-bottom: 20px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead th {
+    background: var(--bg-dark);
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #fafaf9; }
+  .text-right { text-align: right; }
+  .text-center { text-align: center; }
+  .font-bold { font-weight: 700; }
+  .text-green { color: var(--green); }
+  .text-red { color: var(--red); }
+  .text-gold { color: var(--gold-dark); }
+
+  .insight-box {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #2a2520 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    border-left: 4px solid var(--gold);
+  }
+  .insight-box h3 {
+    color: var(--gold);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .insight-box p, .insight-box li {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #ccc;
+  }
+  .insight-box ul { list-style: none; padding: 0; }
+  .insight-box li {
+    padding: 4px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+  .insight-box li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .badge-green { background: #dcfce7; color: #15803d; }
+  .badge-gold { background: var(--gold-pale); color: #92700a; }
+  .badge-blue { background: #dbeafe; color: #1d4ed8; }
+  .badge-purple { background: #ede9fe; color: #6d28d9; }
+
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0;
+  }
+  .progress-row .prog-label {
+    font-size: 13px;
+    min-width: 140px;
+    color: var(--text-secondary);
+  }
+  .progress-row .prog-bar-bg {
+    flex: 1;
+    height: 24px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-row .prog-bar {
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .stat-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid #eee;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .channel-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #eee;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    margin-bottom: 12px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
+  }
+  .channel-card .ch-name {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 2px;
+  }
+  .channel-card .ch-meta {
+    font-size: 12px;
+    color: var(--text-light);
+  }
+  .channel-card .ch-stats {
+    display: flex;
+    gap: 20px;
+    text-align: center;
+  }
+  .channel-card .ch-stat-item .ch-val {
+    font-size: 18px;
+    font-weight: 800;
+  }
+  .channel-card .ch-stat-item .ch-label {
+    font-size: 11px;
+    color: var(--text-light);
+    text-transform: uppercase;
+  }
+
+  .footer {
+    background: var(--bg-dark);
+    padding: 30px 0;
+    text-align: center;
+    margin-top: 60px;
+  }
+  .footer img.logo { height: 32px; margin-bottom: 12px; }
+  .footer p { font-size: 12px; color: #666; }
+  .footer a { color: var(--gold); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .header h1 { font-size: 22px; }
+    .channel-card { grid-template-columns: 1fr; }
+    .channel-card .ch-stats { justify-content: flex-start; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .header { padding: 20px 0; }
+    section { margin: 20px 0; break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <img class="logo" src="data:image/webp;base64,UklGRs4TAABXRUJQVlA4WAoAAAAQAAAAdwAAcQAAQUxQSLgPAAAB8Mf//yol/v89zpkZZhhEYIYSUF5rUHZ3LesiHSomKOHa3a7djcSu7bYt2AWulN2xui9s10AxSIWZ4dz/mDPnDGd4xZ8RMQEkfZlrt9EpJ+69rdAbdGWvbx1eF9dBy1Ktr2gcs+1akQ7CK9+cT+5XX1aracJ/fqKHeSvvp/nXqbVcR+V+Bq/h06MLx3bt2Lpzz4krT0uqwVtyYpB9rWQ/4pIOALiivKTYTp72KjnLsHJrTcPuIzddKeYA4POZCHWtI+txtBIASrNndrBjSCyr7bHkyhcAKP21JVO7aOcXAsC7X/rakZkZp/4ZJQDwaLRNbdLiiB5A8S9dlVSTNoGHPwP4vMOz1mCD7gIwZIeoqKZtY25yAJfboZaQxb4C8H6JC0mx4aZyAA8CmNpAPvoDgLthcjInI45UCc8BPItgLE828iPAnWlB5lQG9jYDMb2uA3gRYnkDi4DqfQ3IjEzzLcXTzUHUPBvAo56W1vMpwO1yJTPWm/UYmGYe8joL4JqfZTW6BCDDjcTbDLygBzDVTOR7AUCG1pJsdgLIa0Si5V32lsN4pcJM1OEBYFgks6DEz8DjziS64ao34P+wo73MPBT1HigKsBzfB0B5HIl1GHWHg0kOr9b6MGaRLTAA51wsRZEGYJu1CFmfU5UQyAHcw7n1zUGOJwHDDEvpWQQ88CWRTtdgXFhoCjDcHO1oBupVCPzb2zJUfwD6CSTW9S8ArzeFHRQCVOUMtBUnWwdgOWMRPT4Aec7i7uFVWuiY3EphQMWRAJUY8ikAHnpZguxHoCqOxJ1OCx13vgr8PPoz96uBT7+0E0OLAG6mJXg/AS67iHAOtFN2m3RRB9N8KYEL71cDR6zF+D0DLjpawNhqYBYJdkm8cM/D7pABQPnxy0JQfX9h0Lx7OKsWI9sMlAdLz/oI8KqFELexl6pQ4O7yF1B2ZNiAfEFA9d+Lg+aniKK+ZUAKIzm/l0C6ygTjMfGaHuCpODQkes8nCNJzAFewrAMryukKcN1ZcjF6cOOJl/GcdksP4wJ3zaqhg/YXwyRP1bqt7wBgv0oUrQdKekiNSQXet+dxmnXPAP4CD3l4egkAvU5IdW5ixNZCIEstLqoSmCI123PAVS1P6BeYLnDXXgegvz49QwhQee67sM1FZ83g/QL4WSaxhk+A32Q8kVWCnO9Cf3VK8JqXwoDK3NERcSpxdXOAC/YS61oMzCPeCBE3r04KWf+Mg5Dq5+UAqs4PstKwYtidwNOGEovWwzDULDaRYUkvYJqn6vvYUxUAzrhsn+/JCKN5wKdOEhsPVHxjDg/V0lcA8M8rISj6JSr2eDkyXXJxZ4q7sAQOlcESWwB8aGsOd+d7AF4khWYIAj783m/YiQzXHEB/bYyLkIgqVA+T2Brgta957uLZ+pDJl3UigI+7BnZyyAUA3YU4rSn/CmC0xDYCL5qYxeno+pCp1/Tg59EfvWUAULJawwNUZg+w4utRCky0gMbm8FB0nXlDD9N8P/addcsAZLnm8AEFnpazBnjtaw53u+McgJID+ULAPVweOOMGslwEPG3I518BjJbYAuB9W7M43wOK90UPuigI4B6vDJq5zhzhVageJrHxQLm/mUp2DxiSUQpBOg7gnqztaJcrLoFDZbDEovXQDzGLw8LooUfKYJKnanXaGwA46JQjbh7wqZPEupUA88zhIe93vBwCebhL48LTXgGZLuLYHcCzRhJr+BT4VWYGd+11COYBqi5MCEt5k+kqzjYbuGAvMdts4KrWHE53zALoLk2KGOaUK8rrOfCLTGJMKvC+vYQA/bUYe3GRlcBUknqsAdw4SQFnXHJErQNKekqu6UvgoFJameIcLwM3XCRnfQR42dzC+pYBqYzkaFw1MNOyZJuAihCSvs8T4JIz694uptISGhGR31PgkpMFyDYBX9K23b8z/YsFPB66ekSbFQA3iywxoBTGjy3i4fc6Q1EZ8MTHApguGTqjqjXDKi3g0YQSGBcu8mUl1+kReLerIqos4GmzVB5wj8erpBZfzVMVRZEWwGU7jeV4gLL+UnM/wRlht0f7y5+lxX3ImugX9QCmt9hIq07XHTqe6pvzQwYnXy3mJJGLL48zpnVvOeRgCQR+TrWVUL24kx8BfHn2GQBXeHhaaOSM328UVdfQGcd5C8PbdYn/uUAH4aW9JMNGXtYBQPn8xhFJ+W/1APc+P+W70NC4MXU1f1bozWAo++fqgbXRnt0TUvLeGiC6wFcyHV6Cd7OSiLFvNWz96YelHLhPdzPWjg6JHjFu7rqfMs5evf/0VdH7lw/yMzYvGjc0OmZy0tEHn6phzr/DSLJfF/NNIn5G3aDLsEW/Zv/9tvxL2Zv7eQe3rpk7aXT88JjYmMHDEqeu2HHy1quKapi5cHMzkq5qUQnP3RA1D5GtZ7MOPYOGTFy27diNN3oAqK4q/1j44smrkioONVh2a3UHK5KyMiKzAgCKj33nZWWkcmsVGD8n+ffj5+88Liyr1BuqOQ4AxxkMhmohHCeguuT+gVlfu7IkdfuIX57oAOif7R3T1oElIoZlFWoHtyatugb0Hz5m2vyVKdt3H82+VvD2CyeAX1/8MCttVHd3K7JMReNByflvdAD3/uLmUb269Ok/cvqiNalbdv62N+NYZu7Ve49eFpVWGjgI5CqL/7l9Zse8IV08bRiyaMau+cDlGXeK9EDFswsHflw+f+6ClUnb9hzNzL9250HB4ydPnjx++PfdGxfOHt2zZdXMhNDOXs5qlmpLpUur8MnJ6ZcfF5WVf3r97yun9+3YuHTOtAmjE4cPGzQgMjTwmx6dWnl72DJUKzMK+/rNe0bEz1ie+tPeIyczs7LOnDi8//ftKavmTUmMDujo46qupQQzMoVKbVPH1raOjVplJWfp/7AMy9QqrCiWMY/Ca8jCjWlJ86ObKCzKpVtgQGDvxiwRMYkrEvpHRUVFhoVHRUVFDZq63IW+6h0UGBwa2MldZoJpvfnavhkDQgd9f/T29i5yC7Lvlad7FlOPMdp284ekpKT16V9uJSUlJW08fK8hOff/d2XuT7vP3Ujx41GMeHLOX0XGtv1uvf5akNxaxUqFZYmIRuEPBRnLJviQcbBhB0NEpB7fkIhJwUhSuo5/d7sDEbGji9PdyXSzK1NNuUSu2PHrL5tndFHzMN6RcXEJiYmJQ7o4mHD0j42LT0xMTPxu1qaORpFcGvHK21mJIB9nIlqMeCJiZuGoLZH/u+uNSGjIAj670RcyZ/Xt0GVgyvUDPWVERPZBT7/sXLZyw/77eYOseFRNfsP55cuXL1+x4Vq4UZQpkpEYGSuAmr7+0JYcjutjSLDtUGujBrsK5zqSMdv60OuJSiIi5ZGSdkSk7JxfOoYxIurPrSbenr3EmBTAa8L1r6oA6l9+1VkY1bMiIuf04gQZmXTaVTaBJSJFeml7Mu72/mFjvnCDCTtXKTV4WNKJfsYGMqNsqWGNggQ2vPG2h7C6uYZwUfxS8S8/70gPuBHmaP3qsRcJHsXtVQmyPomBluR2pDCCqPxLgDnmYbtMWKOn71oLcr1d3EkMy0glwa55TM69CJaouqyHGVRHMZaEW5/CcEFDqg7bmlrF01IrGbfe43dd3d1HTvry3mZwuGKIEMH+jO95OqjsHerHPrnVlkzt7tmrV6/ADfWlEk9E8rbHi8bI3usixLD1ZQ5X9CEimG1YzNOxU+qVB9dT/MiU7vbWbdu27cn2kBLRVzfeBp3HVDGqPnJ1JgaLUOzDZJ725JVu2GxHAgxrZXKFXBntLi2agaPLsVshwn0oQ2lYKEJ7pSrIBNXP1s2RCVlNxlqVxL79/LHjy3+aiQiaQNRPl2krrEfJbTdT1OPVh3BxJgWxTI30KOXk67FWLkj50xgi7Z8VYYKsNmMWCWAm6/5qZQ6tXERLTY3005WQZ/7HfoIGX25GRH2LLnwlZGDJaWchVHcXTnuI04YrhLnGKnn0280i/xGHiNpefR4lNyHvfz6KiEg28v3RxiZkUS8uNCe+dkbkcxk/O4hRjutDRP1M2SyOJB7DTlbIEsQZyQd/LOhGRN67nm9sZ8uSzL7zxsxQ1ohk4VeuxLkriFG3XPv01yZk7JSv68dDrf+s2upmNBXbmnh5efl9uzPTiUi+HH94eXl5NQ/be9XdiJ2LfFcBddOxqnO3HtFb313tQ8Y24b9lH/xh/ab9GXO+ItPuEw4f37Ehbf+5X0PURESM3/TzN376xtaIXMfvWxdYxzEy/caf6enp6Yezb40nqh97+sa59PT09GN5t79nich9yPEbl+a3lvEwPlPyr+edPXs284/vPMikokG3yOig1g4MCa7j4x/Vr/dXVsRf10mrddLKeYisNI5ypZOjRutorNUoidROjhqto7FWa01EZO3kqNE62TE8ZOus1WodHbW2cvqfXPsf+1z2f+re/7Hpf3wbjZ2DVqM0Umjs7B3kxNg6aOoQqTR29vYsMXYOdho1j9zB3k6jtZPzMHYOdhqtVmOnIFJp7Oy1WlvWhMKtsYdKydZU1wXnlsdNTotREXmMzPgjRkuyPsuX9GbJd9LpLVFqUoalZk1vz+MYuzt9VPzoacFqIlKFpWZNjYtfmuVP5DPx1Jb4UeuWNeZpvHJR/JQNyzQ1RX1LYxjl8HfDiRjNpQwVQ0RDI4mIGr/YwBIRs+BdS+Jl1EcuOshV3ls32hMRs+htC1butDuWiBo93yhTNMk+V4+I7I9ssiF55BnnGvumZDCR5/OtDFHdiwflREQDw4z+9WwtGc8t9OMjxaHztkTk8/ccIqJ5hX5EFBhNRA2erieiCZXhRNTu/TgiUn/vIoFBRF1ejyFJHOaR777nxuNLRPb1BUz6HERE3s9zmzLEuFvVXOmSrtFZP9SVEi0v62JU9LV7A0eGTDXKO6YlItnkT4/m+8qo5r8pXekfmXbIn5HS/MpvjcoWjxobwPI8OTt2Xc6qBmSs6LP77Yv1nhIoGURkc6DAu6ZYRsiqko5GhU2JZYjn6Va3BZ8iyVguJ2WHnZ+POkpgMBFN0kURqc+dVBrFBpijl4sAq/TrTjx+ROTgybOOXM5fdDPqEEBEqnWfgyWypKQ7EaX+5UZEslnNzGC9wpNIcYinTcEoEhAykGc90YDSxSwRBa1hiSisOLTG+pbGsMqO19Osiajj/ZlqkvecoiQipsnzDTIiYhe8bSlTBJytR4zNkYsahbrlzu+tiYhd9Lal3MplbwwR0/jZRjmpdxX2ZIgC7/eVk13qaZcaYvok3980Ze7WaRoiIiYwY/OMGRPciIhaLbl5cKg1WQ/bfWfZ1Nknj2nIdUJW/uxps+f3tSIi62G7by+bOu2H20FErRbfTB9Rh7rd3hvCUuelPyydtWWzH4kHVlA4IPADAACwFwCdASp4AHIAPm0ukkWkIqGXizXEQAbEsgMUAIWGntsv0/LCd0QZeKvMwfb/0vqb8wDnQ+YbzZv+H6v/8z6gH936ln0D/2762L+5f9vKZejv4QdukMcxIU/DrVy9sLZ2NFBjzBbUlJOEJqCYIFzgqCZBdJxoWUHmyL6lXN93d4nrfR8jBl0ncqo0GMD0eLc2nrsPgL+Y7i9P76gfEKpQfaevpTwguZEEMAT6ia6pt3NKy12q+dmsxjQN5ZB/tnR4mrkFVsAA/v02hX+vLz+9skLzDJUL8Ijs/znirOzbiz6oB6i+IHGIGV/YIeZZXUHIyB2DW9ZU5NuSf/Y7YrdL5cX3tCPif9jfLn74aC/f/2jIqv/wS0EevXPyQ3SBzXbk1ICXBGolYEACCfTSHKM2P9DkR9JUMSdPHn+CyLyHXcNVjsX/bYRgkldU4kv4PCSnN/gh3eiT5Ye8dQZD07BV7NnU16X+T0oLPIdJbtl+XpwVCsdh+3K1UczP+sWC2XaeT9r8MjvqN7JJwihgr4t/ITFgM6Ks5GvrUybHe40TyiDoZptna11IMkMqfg7C97Nfr8KpUJ4mk2NmDAJhOmzvdAR747rbBiXQVUt95F0X+aARFdEPjVEuZTdgWymqNQALJIylAOjmVohjPe0pTJVuHM6rsjRZRIzRXj2VzwMN7cH/GZzaXAmFJGN7g2ZZts/tNT4Sqg30h+SNLT4cpzn8NBY3tSOigyZZAauUDgxnqobTkJ/c3c5g8gEercvJfMI5qKZsKfuGQ3l+XG3rUPheW82+klijx4LqMURw4rY2eKo9sdQtu/tSWDaZ2KH/vMGH23qL97cI8llyY+IoqoPfh3azK0Sj4pV2+GzhAsSc/N//iXicu3lG4Ca9/j/tst+BWj3GZ8fdNN8zBOIU2iD1CD3Sfz1uQ3dPybLjcqS///t/QA+F0qxNs7HFoe+CGAC4U2TUTTwaYJS9oybZz643HMKr6faa88pODisoi62CLvPEbxAG/WCf//+39Auf/UhLoAAEqodT3uLP/CHTNRtj33Ml+OJi/Ge5mL+Nfx5rtT9xhSr8S8ZnWqrGKpk9zejNbtsZuHp4nKtRmVwrFiVf0deBmSqxgJX3LeulXuR1GU8Vsr5LtHDyCgxyUgPSdZsQ88Wz51TYPzektMnCDZPQJdzH3MPqwkMYMd9INZkfvxKzudSbcvX6Z3tptokldU8saAgu+A8A4H7dDya6ouem8lcT6YVhmQZhP//AMnsLyRf9AZPYTn5CIG2tTiAAiWRCoU1W/4ecHZImEi0aHqcL5VEZu6aRojei/Et+vdEfdgNO3qAaTLb9jDScXvQAAAA=" alt="CoreLTB Logo">
+    <h1>Analityka <span>coreltb.pl</span></h1>
+    <p class="subtitle">Google Analytics 4 + Search Console</p>
+    <div class="period-badge">19 marca - 2 kwietnia 2026 &middot; 14 dni</div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ===== 1: PODSUMOWANIE ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">1</div>
+    Podsumowanie ruchu na stronie
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card highlight">
+      <div class="label">Sesje</div>
+      <div class="value">355</div>
+      <div class="note">wizyt na stronie</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Uzytkownicy</div>
+      <div class="value">198</div>
+      <div class="note">182 nowych (92%)</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Odslony</div>
+      <div class="value">1 377</div>
+      <div class="note">~7 stron / uzytkownik</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Bounce Rate</div>
+      <div class="value" style="color: var(--green);">24,2%</div>
+      <div class="note">niski = dobrze</div>
+    </div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card highlight">
+      <div class="label">Sr. czas sesji</div>
+      <div class="value">5m 43s</div>
+      <div class="note">ludzie czytaja i porownuja</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Engagement Rate</div>
+      <div class="value" style="color: var(--green);">75,8%</div>
+      <div class="note">3 na 4 osoby klikaja dalej</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Nowi uzytkownicy</div>
+      <div class="value">182</div>
+      <div class="note">92% to nowe osoby</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Powracajacy</div>
+      <div class="value">16</div>
+      <div class="note">wracaja i porownuja</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <h3>Co to znaczy?</h3>
+    <ul>
+      <li><strong style="color: var(--gold);">198 osob</strong> odwiedzilo strone w ciagu 2 tygodni — wiekszosc to nowi potencjalni klienci</li>
+      <li>Kazdy spedza srednio <strong style="color: var(--gold);">prawie 6 minut</strong> na stronie — to bardzo duzo jak na branze budowlana</li>
+      <li><strong style="color: var(--gold);">7 stron na uzytkownika</strong> — ludzie przegladaja projekty, oferte i kalkulator wyceny</li>
+      <li>Bounce rate <strong style="color: var(--gold);">24%</strong> oznacza, ze 3 na 4 osoby interakcjonuja ze strona (klikaja, scrolluja, czytaja)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 2: SKAD PRZYCHODZA ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">2</div>
+    Skad przychodza uzytkownicy
+  </div>
+
+  <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
+    Rozklad zrodel ruchu — skad ludzie trafiaja na coreltb.pl
+  </p>
+
+  <!-- PROGRESS BARS -->
+  <div style="margin-bottom: 24px;">
+    <div class="progress-row">
+      <span class="prog-label">Google (organiczny)</span>
+      <div class="prog-bar-bg">
+        <div class="prog-bar" style="width: 33.2%; background: var(--green);">118 sesji</div>
+      </div>
+    </div>
+    <div class="progress-row">
+      <span class="prog-label">Wejscia bezposrednie</span>
+      <div class="prog-bar-bg">
+        <div class="prog-bar" style="width: 28.2%; background: var(--bg-dark);">100 sesji</div>
+      </div>
+    </div>
+    <div class="progress-row">
+      <span class="prog-label">Google Ads (PMax)</span>
+      <div class="prog-bar-bg">
+        <div class="prog-bar" style="width: 23.4%; background: var(--blue);">83 sesje</div>
+      </div>
+    </div>
+    <div class="progress-row">
+      <span class="prog-label">Social (organiczny)</span>
+      <div class="prog-bar-bg">
+        <div class="prog-bar" style="width: 8.5%; background: var(--purple);">30 sesji</div>
+      </div>
+    </div>
+    <div class="progress-row">
+      <span class="prog-label">Social (platny / Meta)</span>
+      <div class="prog-bar-bg">
+        <div class="prog-bar" style="width: 6.5%; background: #ec4899;">23 sesje</div>
+      </div>
+    </div>
+    <div class="progress-row">
+      <span class="prog-label">Referral / Inne</span>
+      <div class="prog-bar-bg">
+        <div class="prog-bar" style="width: 1%; background: var(--text-light);">2</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHANNEL DETAILS TABLE -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Zrodlo ruchu</th>
+          <th class="text-right">Sesje</th>
+          <th class="text-right">Uzytkownicy</th>
+          <th class="text-right">Engagement</th>
+          <th class="text-right">Sr. czas</th>
+          <th class="text-right">Koszt</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background: #f0fdf4;">
+          <td class="font-bold">Google (organiczny)</td>
+          <td class="text-right font-bold">118</td>
+          <td class="text-right">44</td>
+          <td class="text-right">72%</td>
+          <td class="text-right font-bold text-green">7m 43s</td>
+          <td class="text-right font-bold text-green">0 zl</td>
+        </tr>
+        <tr>
+          <td class="font-bold">Wejscia bezposrednie</td>
+          <td class="text-right font-bold">100</td>
+          <td class="text-right">48</td>
+          <td class="text-right">72%</td>
+          <td class="text-right font-bold text-green">8m 04s</td>
+          <td class="text-right font-bold text-green">0 zl</td>
+        </tr>
+        <tr>
+          <td class="font-bold">Google Ads (PMax)</td>
+          <td class="text-right">83</td>
+          <td class="text-right">78</td>
+          <td class="text-right font-bold text-green">88%</td>
+          <td class="text-right">1m 24s</td>
+          <td class="text-right">~451 zl</td>
+        </tr>
+        <tr>
+          <td>Social organiczny</td>
+          <td class="text-right">30</td>
+          <td class="text-right">18</td>
+          <td class="text-right">70%</td>
+          <td class="text-right">2m 58s</td>
+          <td class="text-right text-green">0 zl</td>
+        </tr>
+        <tr>
+          <td>Social platny (Meta Ads)</td>
+          <td class="text-right">23</td>
+          <td class="text-right">23</td>
+          <td class="text-right">78%</td>
+          <td class="text-right">2m 41s</td>
+          <td class="text-right">platne</td>
+        </tr>
+        <tr>
+          <td>Referral / Inne</td>
+          <td class="text-right">2</td>
+          <td class="text-right">2</td>
+          <td class="text-right">50%</td>
+          <td class="text-right">—</td>
+          <td class="text-right text-green">0 zl</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>Najwazniejsze wnioski</h3>
+    <ul>
+      <li><strong style="color: var(--gold);">Google organiczny = najlepszy kanal.</strong> 118 sesji za 0 zl, ludzie spedzaja prawie <strong>8 minut</strong> na stronie. To efekt SEO i pozycjonowania lokalnego</li>
+      <li><strong style="color: var(--gold);">Wejscia bezposrednie (100 sesji)</strong> — ludzie wpisuja "coreltb.pl" z glowy, z wizytowki lub z polecenia. Znaja firme. Najdluzszy czas: <strong>8 min 4 sek</strong></li>
+      <li><strong style="color: var(--gold);">Google Ads ma najwyzszy engagement (88%)</strong> — ludzie z reklam klikaja w kalkulator i wypelniaja formularz. Krotszy czas, bo trafiaja prosto na /wycena</li>
+      <li><strong>Social (53 sesje lacznie)</strong> — Facebook/Instagram daje dodatkowy ruch. Engagement 70-78%</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 3: CZAS NA STRONIE ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">3</div>
+    Ile czasu spedzaja na stronie
+  </div>
+
+  <div class="two-col">
+    <div style="background: var(--bg-dark); border-radius: 12px; padding: 28px; border: 1px solid var(--gold); text-align: center;">
+      <div style="font-size: 12px; color: var(--gold-light); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Rekord: wejscia bezposrednie</div>
+      <div style="font-size: 48px; font-weight: 800; color: #fff;">8:04</div>
+      <div style="font-size: 13px; color: #aaa; margin-top: 4px;">minut srednio na sesje</div>
+      <div style="font-size: 12px; color: #666; margin-top: 8px;">Ludzie, ktorzy znaja CoreLTB, przegladaja najdluzej</div>
+    </div>
+    <div style="background: #fff; border-radius: 12px; padding: 28px; border: 1px solid #eee; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 12px;">Czas sesji wg zrodla</div>
+      <div style="display: grid; gap: 10px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f0f0f0;">
+          <span style="font-size: 14px;">Wejscia bezposrednie</span>
+          <span style="font-size: 16px; font-weight: 800;">8m 04s</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f0f0f0;">
+          <span style="font-size: 14px;">Google organiczny</span>
+          <span style="font-size: 16px; font-weight: 800;">7m 43s</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f0f0f0;">
+          <span style="font-size: 14px;">Social organiczny</span>
+          <span style="font-size: 16px; font-weight: 800;">2m 58s</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f0f0f0;">
+          <span style="font-size: 14px;">Social platny (Meta)</span>
+          <span style="font-size: 16px; font-weight: 800;">2m 41s</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0;">
+          <span style="font-size: 14px;">Google Ads (PMax)</span>
+          <span style="font-size: 16px; font-weight: 800;">1m 24s</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <h3>Dlaczego rozne kanaly = rozny czas?</h3>
+    <ul>
+      <li><strong style="color: var(--gold);">Bezposrednie + organiczne (7-8 min)</strong> — to ludzie, ktorzy szukaja firmy budowlanej. Przegladaja projekty domow, porownuja oferte, czytaja blog. Dluga interakcja = powaznie rozpatruja budowe</li>
+      <li><strong style="color: var(--gold);">Social (2-3 min)</strong> — przyszli z Facebooka/Instagrama. Krotsze sesje, ale nadal przegladaja kilka stron</li>
+      <li><strong style="color: var(--gold);">Google Ads (1m 24s)</strong> — krotki czas, ale to OK! Reklama kieruje prosto na kalkulator /wycena. Ludzie wypelniaja formularz i wychodza — cel osiagniety</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 4: URZADZENIA ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">4</div>
+    Urzadzenia — telefon vs komputer
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Google Search Console</h3>
+      <div class="progress-row">
+        <span class="prog-label">Desktop</span>
+        <div class="prog-bar-bg">
+          <div class="prog-bar" style="width: 53%; background: var(--bg-dark);">67 klik. (53%)</div>
+        </div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Mobile</span>
+        <div class="prog-bar-bg">
+          <div class="prog-bar" style="width: 47%; background: var(--gold);">60 klik. (47%)</div>
+        </div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Tablet</span>
+        <div class="prog-bar-bg">
+          <div class="prog-bar" style="width: 1%; background: var(--text-light);"></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Ciekawostka: pozycja wg urzadzenia</h3>
+      <div class="table-wrap" style="margin: 0;">
+        <table>
+          <thead>
+            <tr>
+              <th>Urzadzenie</th>
+              <th class="text-right">Klikniecia</th>
+              <th class="text-right">Wyswietlenia</th>
+              <th class="text-right">CTR</th>
+              <th class="text-right">Pozycja</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-bold">Desktop</td>
+              <td class="text-right">67</td>
+              <td class="text-right">2 012</td>
+              <td class="text-right">3,3%</td>
+              <td class="text-right">14,8</td>
+            </tr>
+            <tr style="background: #f0fdf4;">
+              <td class="font-bold">Mobile</td>
+              <td class="text-right">60</td>
+              <td class="text-right">1 097</td>
+              <td class="text-right font-bold text-green">5,5%</td>
+              <td class="text-right font-bold text-green">7,7</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size: 12px; color: var(--text-light); margin-top: 8px;">Na telefonie coreltb.pl jest wyzej (poz. 7,7) i ma lepszy CTR (5,5%)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5: SEO — WIDOCZNOSC ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">5</div>
+    Widocznosc w Google (SEO)
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="label">Klikniecia z Google</div>
+      <div class="value">87</div>
+      <div class="note text-green font-bold">+70 vs poprz. okres</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Wyswietlenia</div>
+      <div class="value">1 117</div>
+      <div class="note text-green font-bold">+408 vs poprz. okres</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Sr. CTR</div>
+      <div class="value">7,8%</div>
+      <div class="note">branza: 3-5%</div>
+    </div>
+    <div class="summary-card highlight">
+      <div class="label">Sr. pozycja</div>
+      <div class="value">16,6</div>
+      <div class="note">druga strona Google</div>
+    </div>
+  </div>
+
+  <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Rosnace frazy — co ludzie szukaja w Google i znajduja CoreLTB</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Fraza w Google</th>
+          <th class="text-right">Klikniecia</th>
+          <th class="text-right">Wyswietlenia</th>
+          <th class="text-right">Pozycja</th>
+          <th class="text-right">CTR</th>
+          <th class="text-right">Zmiana klik.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background: #f0fdf4;">
+          <td class="font-bold text-green">coreltb</td>
+          <td class="text-right font-bold">40+</td>
+          <td class="text-right">52+</td>
+          <td class="text-right font-bold text-green">1,1</td>
+          <td class="text-right font-bold">67,1%</td>
+          <td class="text-right font-bold text-green">+40</td>
+        </tr>
+        <tr style="background: #f0fdf4;">
+          <td class="font-bold text-green">coreltb builders sp. z o.o</td>
+          <td class="text-right">6+</td>
+          <td class="text-right">14+</td>
+          <td class="text-right font-bold text-green">1,3</td>
+          <td class="text-right">44,4%</td>
+          <td class="text-right font-bold text-green">+6</td>
+        </tr>
+        <tr>
+          <td>budowa domow wodzislaw slaski</td>
+          <td class="text-right">3</td>
+          <td class="text-right">105</td>
+          <td class="text-right">11,8</td>
+          <td class="text-right">2,9%</td>
+          <td class="text-right text-green">+3</td>
+        </tr>
+        <tr>
+          <td>budowa domow rybnik</td>
+          <td class="text-right">2</td>
+          <td class="text-right">25+</td>
+          <td class="text-right">7,7</td>
+          <td class="text-right">3,8%</td>
+          <td class="text-right text-green">+2</td>
+        </tr>
+        <tr>
+          <td>budowa domow zory</td>
+          <td class="text-right">2</td>
+          <td class="text-right">45+</td>
+          <td class="text-right">9,8</td>
+          <td class="text-right">3,6%</td>
+          <td class="text-right text-green">+2</td>
+        </tr>
+        <tr>
+          <td>budowa domu wodzislaw slaski</td>
+          <td class="text-right">2</td>
+          <td class="text-right">13+</td>
+          <td class="text-right">11,3</td>
+          <td class="text-right">10,0%</td>
+          <td class="text-right text-green">+2</td>
+        </tr>
+        <tr>
+          <td>coreltb builders sp. z o.o. opinie</td>
+          <td class="text-right">2</td>
+          <td class="text-right">25+</td>
+          <td class="text-right">3,1</td>
+          <td class="text-right">5,3%</td>
+          <td class="text-right text-green">+2</td>
+        </tr>
+        <tr>
+          <td>firmy jaworzno</td>
+          <td class="text-right">1</td>
+          <td class="text-right">3</td>
+          <td class="text-right">9,0</td>
+          <td class="text-right">28,6%</td>
+          <td class="text-right text-green">+1</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size: 15px; font-weight: 700; margin: 20px 0 12px;">Grupy fraz kluczowych</h3>
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+    <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid var(--green); text-align: center;">
+      <div style="font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase;">budowa domow</div>
+      <div style="font-size: 20px; font-weight: 800; margin: 4px 0;">11 klik.</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">522 wyswietlen</div>
+    </div>
+    <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid var(--gold); text-align: center;">
+      <div style="font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase;">wodzislaw</div>
+      <div style="font-size: 20px; font-weight: 800; margin: 4px 0;">5 klik.</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">131 wyswietlen</div>
+    </div>
+    <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid var(--blue); text-align: center;">
+      <div style="font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase;">slask / region</div>
+      <div style="font-size: 20px; font-weight: 800; margin: 4px 0;">5 klik.</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">145 wyswietlen</div>
+    </div>
+  </div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+    <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid var(--purple); text-align: center;">
+      <div style="font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase;">rybnik</div>
+      <div style="font-size: 20px; font-weight: 800; margin: 4px 0;">3 klik.</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">126 wyswietlen</div>
+    </div>
+    <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid #ec4899; text-align: center;">
+      <div style="font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase;">katowice</div>
+      <div style="font-size: 20px; font-weight: 800; margin: 4px 0;">0 klik.</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">44 wyswietlenia</div>
+    </div>
+    <div style="background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; border-left: 4px solid #f97316; text-align: center;">
+      <div style="font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase;">gliwice</div>
+      <div style="font-size: 20px; font-weight: 800; margin: 4px 0;">0 klik.</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">39 wyswietlen</div>
+    </div>
+  </div>
+
+  <div class="insight-box" style="margin-top: 20px;">
+    <h3>Trend SEO — rosniemy</h3>
+    <ul>
+      <li><strong style="color: var(--gold);">+70 klikniec vs poprzedni okres</strong> — widocznosc coreltb.pl w Google znaczaco rosnie</li>
+      <li><strong style="color: var(--gold);">+408 wyswietlen</strong> — coraz wiecej ludzi widzi CoreLTB w wynikach wyszukiwania</li>
+      <li>Frazy brandowe (coreltb, coreltb builders) na <strong style="color: var(--gold);">pozycji #1</strong> — firma jest rozpoznawalna</li>
+      <li>Frazy lokalne (wodzislaw, rybnik, zory) rosna — strony lokalne zaczynaja dzialac</li>
+      <li>Katowice i Gliwice — sa wyswietlenia (44 i 39) ale brak klikniec. Potencjal do poprawy pozycji</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 6: NOWI vs POWRACAJACY ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">6</div>
+    Nowi vs powracajacy uzytkownicy
+  </div>
+
+  <div class="two-col">
+    <div style="background: #fff; border-radius: 12px; padding: 28px; border: 1px solid #eee; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Nowi uzytkownicy</div>
+      <div style="font-size: 48px; font-weight: 800; color: var(--blue);">182</div>
+      <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">92% wszystkich odwiedzajacych</div>
+      <div style="font-size: 12px; color: var(--text-light); margin-top: 8px;">Pierwszy raz na stronie — potencjalni klienci</div>
+    </div>
+    <div style="background: #fff; border-radius: 12px; padding: 28px; border: 1px solid #eee; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <div style="font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Powracajacy</div>
+      <div style="font-size: 48px; font-weight: 800; color: var(--gold);">16</div>
+      <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">8% — wracaja i porownuja</div>
+      <div style="font-size: 12px; color: var(--text-light); margin-top: 8px;">Rozpatruja oferte, beda kontaktowac</div>
+    </div>
+  </div>
+
+  <div class="insight-box" style="margin-top: 20px;">
+    <h3>Dlaczego to wazne?</h3>
+    <ul>
+      <li><strong style="color: var(--gold);">182 nowe osoby w 2 tygodnie</strong> — to ludzie, ktorzy po raz pierwszy zobaczyli oferte CoreLTB</li>
+      <li><strong style="color: var(--gold);">16 powracajacych</strong> — to osoby, ktore wracaja by porownac projekty, sprawdzic ceny. Czesc z nich stanie sie leadami</li>
+      <li>W branzy budowlanej decyzja trwa tygodnie/miesiace — powracajacy sa najcenniejszi</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 7: PODSUMOWANIE ===== -->
+<section>
+  <div class="section-title">
+    <div class="icon">!</div>
+    Kluczowe wnioski
+  </div>
+
+  <div style="display: grid; gap: 12px;">
+    <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--green); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <span style="font-weight: 700; font-size: 15px;">Strona zyje i rosnie</span>
+      <p style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;">355 sesji, 198 uzytkownikow, 75% engagement w ciagu 2 tygodni. Ludzie spedzaja srednio prawie 6 minut — to swietny wynik dla strony budowlanej.</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--gold); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <span style="font-weight: 700; font-size: 15px;">SEO daje darmowy ruch, ktory rosnie</span>
+      <p style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;">118 sesji z Google za 0 zl, +70 klikniec vs poprzedni okres. Frazy lokalne (wodzislaw, rybnik, zory) zaczynaja dawac efekty. Brand "coreltb" na pozycji #1.</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--blue); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <span style="font-weight: 700; font-size: 15px;">Reklamy + SEO + social = razem dzialaja</span>
+      <p style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;">Kazdy kanal gra inna role: SEO buduje autorytet i dlugie sesje, reklamy generuja szybkie leady, social buduje swiadomosc. Razem tworza pelny lejek.</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid var(--purple); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <span style="font-weight: 700; font-size: 15px;">Potencjal: Katowice i Gliwice</span>
+      <p style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;">Juz widac wyswietlenia (44 i 39) ale brak klikniec. Poprawa pozycji dla tych miast moze otworzyc nowy rynek klientow.</p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <img class="logo" src="data:image/webp;base64,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" alt="CoreLTB">
+  <p>Raport wygenerowany automatycznie &middot; <a href="https://coreltb.pl">coreltb.pl</a></p>
+  <p style="margin-top: 4px;">Google Analytics 4 + Search Console &middot; Dane za okres 19.03-02.04.2026 (14 dni)</p>
+  <p style="margin-top: 8px; color: #555;">CoreLTB Builders Sp. z o.o. &middot; +48 664 123 757 &middot; biuro@coreltb.pl</p>
+</div>
+
+</body>
+</html>
