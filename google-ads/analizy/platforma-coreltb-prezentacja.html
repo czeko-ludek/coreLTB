@@ -1228,7 +1228,7 @@
   <div class="insight-box">
     <h3>Dlaczego Cloudflare, a nie tradycyjny hosting (AWS / VPS)?</h3>
     <ul>
-      <li><strong style="color: var(--gold);">Koszt infrastruktury ~80 PLN/mies.</strong> zamiast 2 000-20 000 PLN/mies. na AWS (EC2 + RDS + S3 + ALB)</li>
+      <li><strong style="color: var(--gold);">Koszt infrastruktury + AI ~310 PLN/mies.</strong> zamiast 2 000-20 000 PLN/mies. na AWS (EC2 + RDS + S3 + ALB)</li>
       <li><strong style="color: var(--gold);">Automatyczne skalowanie</strong> — zero konfiguracji serwerów, zero DevOps</li>
       <li><strong style="color: var(--gold);">DDoS protection + WAF gratis</strong> — u AWS to dodatkowy koszt (Shield + WAF)</li>
       <li><strong style="color: var(--gold);">CDN globalnie</strong> — dane serwowane z najblizszego edge (~50ms, nie ~200ms)</li>
@@ -1453,7 +1453,7 @@
   </div>
 
   <p style="font-size: 12px; color: var(--text-light); margin-bottom: 16px;">
-    * Koszt samej infrastruktury Cloudflare (~80 PLN/mies.) — bez kosztów utrzymania i rozwoju. Porównanie dotyczy opłat platformowych.
+    * Koszt infrastruktury Cloudflare + AI (~310 PLN/mies.) — bez kosztów utrzymania i rozwoju. Porównanie dotyczy opłat platformowych.
   </p>
 
   <div class="insight-box">
@@ -1469,7 +1469,7 @@
 
   <div class="note-box">
     <h4>Kluczowa różnica: SaaS vs Custom</h4>
-    <p>Rozwiązania SaaS (Buildertrend, PlanRadar) to <strong>wynajem</strong> — płacisz co miesiąc, a po zakończeniu tracisz dostęp. Nasza platforma to <strong>własność</strong> — po zakończeniu współpracy system dalej działa, kod jest Wasz. Koszt infrastruktury: ~80 PLN/mies.</p>
+    <p>Rozwiązania SaaS (Buildertrend, PlanRadar) to <strong>wynajem</strong> — płacisz co miesiąc, a po zakończeniu tracisz dostęp. Nasza platforma to <strong>własność</strong> — po zakończeniu współpracy system dalej działa, kod jest Wasz. Koszt infrastruktury + AI: ~310 PLN/mies.</p>
   </div>
 </section>
 
@@ -1678,20 +1678,20 @@
 
     <div style="display: grid; grid-template-columns: 80px 1fr 120px; gap: 8px 16px; font-size: 13px; color: #ccc;">
       <div style="color: var(--gold); font-weight: 700;">15-50</div>
-      <div>Obecna architektura, zero zmian. Zużycie: &lt;2% limitów.</div>
-      <div style="color: var(--green); font-weight: 600; text-align: right;">~80 PLN/mies.</div>
+      <div>Obecna architektura, zero zmian. Zużycie: &lt;2% limitów. AI: lekkie obciążenie.</div>
+      <div style="color: var(--green); font-weight: 600; text-align: right;">~200 PLN/mies.</div>
 
       <div style="color: var(--gold); font-weight: 700;">50-100</div>
       <div>Obecna architektura, zero zmian. Zużycie: &lt;6% limitów. Więcej AI requestów.</div>
-      <div style="color: var(--green); font-weight: 600; text-align: right;">~150 PLN/mies.</div>
+      <div style="color: var(--green); font-weight: 600; text-align: right;">~310 PLN/mies.</div>
 
       <div style="color: var(--gold); font-weight: 700;">100-300</div>
-      <div>Obecna architektura wystarcza. Opcjonalnie: indeksy, cache KV dla częstych zapytań.</div>
-      <div style="color: var(--blue); font-weight: 600; text-align: right;">~250 PLN/mies.</div>
+      <div>Obecna architektura wystarcza. Opcjonalnie: indeksy, cache KV dla częstych zapytań AI.</div>
+      <div style="color: var(--blue); font-weight: 600; text-align: right;">~500 PLN/mies.</div>
 
       <div style="color: var(--gold); font-weight: 700;">300-500</div>
       <div>Rozważyć migracje D1 -> PostgreSQL (Neon via Hyperdrive). Drizzle ORM = 1 plik do zmiany.</div>
-      <div style="color: var(--blue); font-weight: 600; text-align: right;">~400 PLN/mies.</div>
+      <div style="color: var(--blue); font-weight: 600; text-align: right;">~800 PLN/mies.</div>
 
       <div style="color: var(--gold); font-weight: 700;">500-1000</div>
       <div>PostgreSQL (Neon/Supabase) + dedykowane buckety R2. Opcjonalnie: read replicas.</div>
@@ -1738,10 +1738,6 @@
         <div class="cost-value">~10 PLN</div>
       </div>
       <div class="cost-item">
-        <div class="cost-label">Workers AI (generowanie)</div>
-        <div class="cost-value">~15 PLN</div>
-      </div>
-      <div class="cost-item">
         <div class="cost-label">Access (Zero Trust auth)</div>
         <div class="cost-value">0 PLN</div>
       </div>
@@ -1756,7 +1752,36 @@
 
       <div class="cost-total">
         <div class="cost-label">Razem infrastruktura</div>
-        <div class="cost-value">~80 PLN/mies.</div>
+        <div class="cost-value">~60 PLN/mies.</div>
+      </div>
+
+      <h4 style="font-size: 14px; font-weight: 700; margin: 20px 0 16px; color: var(--bg-dark); border-top: 2px solid var(--gold); padding-top: 16px;">Asystent AI</h4>
+
+      <div class="cost-item">
+        <div class="cost-label">Workers AI (inference on-edge)</div>
+        <div class="cost-value">~150 PLN</div>
+      </div>
+      <div class="cost-item">
+        <div class="cost-label">Vectorize (wektorowa baza)</div>
+        <div class="cost-value">~12 PLN</div>
+      </div>
+      <div class="cost-item">
+        <div class="cost-label">OpenAI API (złożone zapytania)</div>
+        <div class="cost-value">~80 PLN</div>
+      </div>
+      <div class="cost-item">
+        <div class="cost-label">Embeddingi (indeksowanie)</div>
+        <div class="cost-value">~8 PLN</div>
+      </div>
+
+      <div class="cost-total">
+        <div class="cost-label">Razem AI</div>
+        <div class="cost-value">~250 PLN/mies.</div>
+      </div>
+
+      <div class="cost-total" style="margin-top: 12px; background: rgba(223,187,104,0.12); border-radius: 8px; padding: 10px 12px;">
+        <div class="cost-label" style="font-weight: 800; color: var(--gold-dark);">RAZEM (infra + AI)</div>
+        <div class="cost-value" style="color: var(--gold-dark); font-size: 16px;">~310 PLN/mies.</div>
       </div>
     </div>
 
@@ -1827,14 +1852,14 @@
       </div>
     </div>
     <div class="progress-row">
-      <div class="prog-label" style="font-weight: 700; color: var(--gold-dark);">Nasza infra.</div>
+      <div class="prog-label" style="font-weight: 700; color: var(--gold-dark);">Nasza platforma<br><span style="font-weight: 400; font-size: 11px;">(infra + AI)</span></div>
       <div class="prog-bar-bg">
-        <div class="prog-bar" style="width: 3%; background: linear-gradient(90deg, var(--green), #16a34a); min-width: 90px;">~960 PLN/rok</div>
+        <div class="prog-bar" style="width: 5%; background: linear-gradient(90deg, var(--green), #16a34a); min-width: 110px;">~3 720 PLN/rok</div>
       </div>
     </div>
 
     <p style="font-size: 12px; color: var(--text-light); margin-top: 8px;">
-      Porównanie samych kosztów platformowych. SaaS = czynsz (utracone po zakończeniu). Nasza platforma = własność (zostaje po zakończeniu współpracy).
+      Porównanie kosztów rocznych (infrastruktura + AI). SaaS = czynsz (utracone po zakończeniu). Nasza platforma = własność (zostaje po zakończeniu współpracy).
     </p>
   </div>
 </section>
@@ -2080,7 +2105,7 @@
       </div>
     </div>
     <!-- Chat messages -->
-    <div style="padding: 20px; display: flex; flex-direction: column; gap: 16px; max-height: 480px;">
+    <div style="padding: 20px; display: flex; flex-direction: column; gap: 16px; max-height: 480px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #555 #222;">
       <!-- User message -->
       <div style="display: flex; justify-content: flex-end;">
         <div style="background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); border-radius: 12px 12px 0 12px; padding: 10px 14px; max-width: 75%; font-size: 13px; color: #93c5fd;">
@@ -2563,7 +2588,7 @@
       <li><strong style="color: var(--gold);">Szyte na miarę</strong> — dokładnie pod procesy firmy budowlanej, zero kompromisów</li>
       <li><strong style="color: var(--gold);">5 unikalnych funkcji</strong> — kamery, auto-aneksy AI, auto-wycena zmian, integracja ze stroną, AI dziennik</li>
       <li><strong style="color: var(--gold);">Własność, nie wynajem</strong> — po zakończeniu współpracy platforma jest Wasza</li>
-      <li><strong style="color: var(--gold);">Infrastruktura 100x tańsza</strong> — 80 PLN/mies. vs 2 000-10 000 PLN/mies. u konkurencji</li>
+      <li><strong style="color: var(--gold);">Infrastruktura 30x tańsza</strong> — 310 PLN/mies. (infra + AI) vs 2 000-10 000 PLN/mies. u konkurencji</li>
       <li><strong style="color: var(--gold);">5 warstw bezpieczeństwa</strong> — WAF, Zero Trust, RBAC, AES-256, Audit Log</li>
       <li><strong style="color: var(--gold);">Natychmiastowa wartość</strong> — CRM gotowy w 4-6 tygodni, nie za pół roku</li>
       <li><strong style="color: var(--gold);">Asystent AI wyszkolony na Waszych danych</strong> — pytasz, AI szuka w systemie i daje odpowiedź z linkiem do źródła</li>
