@@ -494,7 +494,7 @@
   .note-box-green h4 { color: #15803d; }
   .note-box-green p { color: #166534; font-size: 14px; }
 
-  /* ===== PROGRESS BARS ===== */
+  /* ===== PROGRESS BARS (legacy) ===== */
   .progress-row {
     display: flex;
     align-items: center;
@@ -525,6 +525,62 @@
     font-weight: 700;
     color: #fff;
     transition: width 0.6s ease;
+  }
+
+  /* ===== USAGE BARS (new — labels outside) ===== */
+  .usage-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .usage-row:last-of-type { border-bottom: none; }
+  .usage-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+  .usage-bar-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .usage-bar-bg {
+    flex: 1;
+    height: 18px;
+    background: #f0f0f0;
+    border-radius: 9px;
+    overflow: hidden;
+    min-width: 80px;
+  }
+  .usage-bar {
+    height: 100%;
+    border-radius: 9px;
+    min-width: 4px;
+    transition: width 0.6s ease;
+  }
+  .usage-value {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .usage-limit {
+    color: var(--text-light);
+    font-weight: 400;
+  }
+  .usage-pct {
+    font-size: 13px;
+    font-weight: 800;
+    min-width: 56px;
+    text-align: right;
+    flex-shrink: 0;
   }
 
   /* ===== TIMELINE ===== */
@@ -894,6 +950,14 @@
     .progress-row { flex-direction: column; align-items: flex-start; gap: 4px; }
     .progress-row .prog-label { min-width: unset; font-size: 12px; }
     .progress-row .prog-bar-bg { width: 100%; }
+
+    /* Usage bars */
+    .usage-row { flex-wrap: wrap; gap: 4px 8px; padding: 8px 0; }
+    .usage-label { min-width: unset; width: 100%; font-size: 12px; }
+    .usage-bar-wrap { flex: 1; min-width: 0; }
+    .usage-bar-bg { min-width: 60px; }
+    .usage-value { font-size: 11px; }
+    .usage-pct { min-width: 44px; font-size: 12px; }
 
     /* Security layers */
     .security-layer { flex-direction: column; }
@@ -1504,35 +1568,65 @@
     <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 4px;">Zużycie zasobów przy 100 budowach (po 12 miesiącach)</h4>
     <p style="font-size: 12px; color: var(--text-light); margin-bottom: 16px;">Procent wykorzystania limitów Cloudflare D1</p>
 
-    <div class="progress-row">
-      <div class="prog-label">Wiersze w bazie</div>
-      <div class="prog-bar-bg">
-        <div class="prog-bar" style="width: 6%; background: linear-gradient(90deg, var(--green), #16a34a); min-width: 80px;">~350K / 10M</div>
+    <div class="usage-row">
+      <div class="usage-label">Wiersze w bazie</div>
+      <div class="usage-bar-wrap">
+        <div class="usage-bar-bg">
+          <div class="usage-bar" style="width: 3.5%; background: linear-gradient(90deg, var(--green), #16a34a);"></div>
+        </div>
+        <div class="usage-value">~350K <span class="usage-limit">/ 10M</span></div>
       </div>
+      <div class="usage-pct" style="color: var(--green);">3,5%</div>
     </div>
-    <div class="progress-row">
-      <div class="prog-label">Rozmiar bazy</div>
-      <div class="prog-bar-bg">
-        <div class="prog-bar" style="width: 4%; background: linear-gradient(90deg, var(--green), #16a34a); min-width: 75px;">~200 MB / 10 GB</div>
+    <div class="usage-row">
+      <div class="usage-label">Rozmiar bazy</div>
+      <div class="usage-bar-wrap">
+        <div class="usage-bar-bg">
+          <div class="usage-bar" style="width: 2%; background: linear-gradient(90deg, var(--green), #16a34a);"></div>
+        </div>
+        <div class="usage-value">~200 MB <span class="usage-limit">/ 10 GB</span></div>
       </div>
+      <div class="usage-pct" style="color: var(--green);">2%</div>
     </div>
-    <div class="progress-row">
-      <div class="prog-label">Odczyty /dzien</div>
-      <div class="prog-bar-bg">
-        <div class="prog-bar" style="width: 3%; background: linear-gradient(90deg, var(--green), #16a34a); min-width: 60px;">~50K / 25B</div>
+    <div class="usage-row">
+      <div class="usage-label">Odczyty /dzień</div>
+      <div class="usage-bar-wrap">
+        <div class="usage-bar-bg">
+          <div class="usage-bar" style="width: 1%; background: linear-gradient(90deg, var(--green), #16a34a);"></div>
+        </div>
+        <div class="usage-value">~50K <span class="usage-limit">/ 25 mld</span></div>
       </div>
+      <div class="usage-pct" style="color: var(--green);">&lt;0,001%</div>
     </div>
-    <div class="progress-row">
-      <div class="prog-label">Zapisy /dzien</div>
-      <div class="prog-bar-bg">
-        <div class="prog-bar" style="width: 3%; background: linear-gradient(90deg, var(--green), #16a34a); min-width: 55px;">~5K / 50M</div>
+    <div class="usage-row">
+      <div class="usage-label">Zapisy /dzień</div>
+      <div class="usage-bar-wrap">
+        <div class="usage-bar-bg">
+          <div class="usage-bar" style="width: 1%; background: linear-gradient(90deg, var(--green), #16a34a);"></div>
+        </div>
+        <div class="usage-value">~5K <span class="usage-limit">/ 50M</span></div>
       </div>
+      <div class="usage-pct" style="color: var(--green);">0,01%</div>
     </div>
-    <div class="progress-row">
-      <div class="prog-label">Workers AI</div>
-      <div class="prog-bar-bg">
-        <div class="prog-bar" style="width: 25%; background: linear-gradient(90deg, var(--blue), #2563eb);">~100 wpisów/dzien</div>
+    <div class="usage-row">
+      <div class="usage-label">Storage R2</div>
+      <div class="usage-bar-wrap">
+        <div class="usage-bar-bg">
+          <div class="usage-bar" style="width: 0%; background: linear-gradient(90deg, var(--green), #16a34a);"></div>
+        </div>
+        <div class="usage-value">~75 GB <span class="usage-limit">/ bez limitu</span></div>
       </div>
+      <div class="usage-pct" style="color: var(--green);">&#8734;</div>
+    </div>
+    <div class="usage-row">
+      <div class="usage-label">Workers AI</div>
+      <div class="usage-bar-wrap">
+        <div class="usage-bar-bg">
+          <div class="usage-bar" style="width: 25%; background: linear-gradient(90deg, var(--blue), #2563eb);"></div>
+        </div>
+        <div class="usage-value">~100 wpisów <span class="usage-limit">/ dzień</span></div>
+      </div>
+      <div class="usage-pct" style="color: var(--blue);">~$3/d</div>
     </div>
 
     <p style="font-size: 13px; color: var(--text-secondary); margin-top: 16px; font-weight: 600;">
@@ -1963,11 +2057,145 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- 8: JAK TO DZIALA — FLOW -->
+<!-- 8: ASYSTENT AI — INTELIGENTNY POMOCNIK -->
 <!-- ============================================================ -->
 <section>
   <div class="section-title">
     <div class="icon">8</div>
+    Asystent AI — inteligentny pomocnik w platformie
+  </div>
+
+  <p style="font-size: 15px; color: var(--text-secondary); margin-bottom: 24px; line-height: 1.7;">
+    W każdym widoku platformy dostępne jest <strong>okienko czatu z AI</strong> — wyszkolonym na danych Waszej firmy. Asystent zna wszystkie projekty, umowy, harmonogramy, finanse. Szef lub kierownik budowy po prostu pisze pytanie — AI odpowiada i podaje link do odpowiedniego miejsca w systemie.
+  </p>
+
+  <!-- CHAT MOCKUP -->
+  <div style="background: var(--bg-dark); border-radius: 16px; padding: 0; overflow: hidden; margin-bottom: 24px; border: 1px solid #333;">
+    <!-- Chat header -->
+    <div style="background: rgba(223,187,104,0.12); padding: 14px 20px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #333;">
+      <div style="width: 32px; height: 32px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: var(--bg-dark);">AI</div>
+      <div>
+        <div style="font-size: 13px; font-weight: 700; color: #fff;">Asystent CoreLTB</div>
+        <div style="font-size: 11px; color: var(--gold);">Online &middot; wyszkolony na Waszych danych</div>
+      </div>
+    </div>
+    <!-- Chat messages -->
+    <div style="padding: 20px; display: flex; flex-direction: column; gap: 16px; max-height: 480px;">
+      <!-- User message -->
+      <div style="display: flex; justify-content: flex-end;">
+        <div style="background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); border-radius: 12px 12px 0 12px; padding: 10px 14px; max-width: 75%; font-size: 13px; color: #93c5fd;">
+          Pokaż mi dane z projektu Kowalski — jaki jest budżet i ile wydaliśmy do tej pory?
+        </div>
+      </div>
+      <!-- AI response -->
+      <div style="display: flex; justify-content: flex-start;">
+        <div style="background: rgba(223,187,104,0.08); border: 1px solid rgba(223,187,104,0.2); border-radius: 12px 12px 12px 0; padding: 12px 16px; max-width: 85%; font-size: 13px; color: #ddd; line-height: 1.7;">
+          <strong style="color: var(--gold);">Projekt: Dom Kowalski (ul. Dębowa 12, Rybnik)</strong><br><br>
+          <span style="color: #aaa;">Budżet całkowity:</span> <strong>487 000 PLN</strong><br>
+          <span style="color: #aaa;">Wydano do dziś:</span> <strong>312 400 PLN</strong> (64%)<br>
+          <span style="color: #aaa;">Pozostało:</span> <strong style="color: var(--green);">174 600 PLN</strong><br>
+          <span style="color: #aaa;">Etap:</span> Instalacje (78% ukończenia)<br>
+          <span style="color: #aaa;">Ostatnia faktura:</span> 14 800 PLN — Elektro-Bud (3 dni temu)<br><br>
+          <span style="font-size: 12px; color: var(--gold);">📍 <a href="#" style="color: var(--gold); text-decoration: underline;">Przejdź do finansów projektu</a> &middot; <a href="#" style="color: var(--gold); text-decoration: underline;">Harmonogram</a> &middot; <a href="#" style="color: var(--gold); text-decoration: underline;">Umowy</a></span>
+        </div>
+      </div>
+      <!-- User message 2 -->
+      <div style="display: flex; justify-content: flex-end;">
+        <div style="background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); border-radius: 12px 12px 0 12px; padding: 10px 14px; max-width: 75%; font-size: 13px; color: #93c5fd;">
+          Które budowy przekroczyły budżet w tym miesiącu?
+        </div>
+      </div>
+      <!-- AI response 2 -->
+      <div style="display: flex; justify-content: flex-start;">
+        <div style="background: rgba(223,187,104,0.08); border: 1px solid rgba(223,187,104,0.2); border-radius: 12px 12px 12px 0; padding: 12px 16px; max-width: 85%; font-size: 13px; color: #ddd; line-height: 1.7;">
+          <strong style="color: var(--gold);">Przekroczenia budżetu (kwiecień 2026):</strong><br><br>
+          <span style="color: var(--red);">&#9679;</span> <strong>Dom Nowak</strong> — przekroczenie <strong style="color: var(--red);">+12 300 PLN</strong> (etap: dach, przyczyna: zmiana dachówki)<br>
+          <span style="color: var(--orange);">&#9679;</span> <strong>Dom Wiśniewski</strong> — przekroczenie <strong style="color: var(--orange);">+4 200 PLN</strong> (etap: fundamenty, przyczyna: dodatkowe wzmocnienie gruntu)<br><br>
+          <span style="color: var(--green);">Pozostałe 8 budów mieści się w budżecie.</span><br><br>
+          <span style="font-size: 12px; color: var(--gold);">📍 <a href="#" style="color: var(--gold); text-decoration: underline;">Dom Nowak — finanse</a> &middot; <a href="#" style="color: var(--gold); text-decoration: underline;">Dom Nowak — zmiana materiałowa</a> &middot; <a href="#" style="color: var(--gold); text-decoration: underline;">Raport budżetowy</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARCHITEKTURA AI -->
+  <div class="two-col" style="margin-bottom: 20px;">
+    <div style="background: #fff; border-radius: 12px; padding: 24px; border: 1px solid #eee; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <h4 style="font-size: 14px; font-weight: 700; color: var(--bg-dark); margin-bottom: 14px;">Jak AI jest wyszkolone?</h4>
+      <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">
+        <div style="display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px;">
+          <div style="width: 28px; height: 28px; background: var(--gold); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--bg-dark); flex-shrink: 0;">1</div>
+          <div><strong>Indeksowanie danych</strong> — AI ma stały dostęp do bazy: projekty, umowy, faktury, dziennik, zmiany materiałowe. Przy każdej aktualizacji dane są automatycznie reindeksowane.</div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px;">
+          <div style="width: 28px; height: 28px; background: var(--gold); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--bg-dark); flex-shrink: 0;">2</div>
+          <div><strong>Embeddingi wektorowe</strong> — dane zamieniane na wektory numeryczne (Vectorize). AI rozumie kontekst, nie szuka po słowach kluczowych.</div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px;">
+          <div style="width: 28px; height: 28px; background: var(--gold); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--bg-dark); flex-shrink: 0;">3</div>
+          <div><strong>RAG (Retrieval-Augmented Generation)</strong> — na pytanie AI najpierw wyszukuje odpowiednie dane z bazy, potem generuje odpowiedź z faktami, nie z wyobraźni.</div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: flex-start;">
+          <div style="width: 28px; height: 28px; background: var(--gold); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--bg-dark); flex-shrink: 0;">4</div>
+          <div><strong>Kontekst ról</strong> — szef widzi dane finansowe, kierownik budowy — dziennik i harmonogram, klient — tylko swój projekt. AI odpowiada w ramach uprawnień.</div>
+        </div>
+      </div>
+    </div>
+    <div style="background: #fff; border-radius: 12px; padding: 24px; border: 1px solid #eee; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+      <h4 style="font-size: 14px; font-weight: 700; color: var(--bg-dark); margin-bottom: 14px;">Co AI potrafi?</h4>
+      <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">
+        <div style="margin-bottom: 8px;"><span style="color: var(--gold); font-weight: 700;">&#10003;</span> &nbsp;Pokaż dane z dowolnego projektu — budżet, etapy, dokumenty</div>
+        <div style="margin-bottom: 8px;"><span style="color: var(--gold); font-weight: 700;">&#10003;</span> &nbsp;Porównaj budżet planowany vs rzeczywisty</div>
+        <div style="margin-bottom: 8px;"><span style="color: var(--gold); font-weight: 700;">&#10003;</span> &nbsp;Znajdź umowę, aneks lub fakturę — podaj link</div>
+        <div style="margin-bottom: 8px;"><span style="color: var(--gold); font-weight: 700;">&#10003;</span> &nbsp;Podsumuj wpisy z dziennika budowy za ostatni tydzień</div>
+        <div style="margin-bottom: 8px;"><span style="color: var(--gold); font-weight: 700;">&#10003;</span> &nbsp;Alerty: które budowy mają opóźnienia lub przekroczenia</div>
+        <div style="margin-bottom: 8px;"><span style="color: var(--gold); font-weight: 700;">&#10003;</span> &nbsp;Wygeneruj raport dla inwestora jednym zdaniem</div>
+        <div style="margin-bottom: 8px;"><span style="color: var(--gold); font-weight: 700;">&#10003;</span> &nbsp;Przekieruj do odpowiedniego modułu (finanse, umowy, dziennik)</div>
+        <div><span style="color: var(--gold); font-weight: 700;">&#10003;</span> &nbsp;Przetłumacz notatkę kierownika na formalny wpis dziennika</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEMAT TECHNICZNY AI -->
+  <div class="arch-diagram">
+    <div style="text-align: center; font-size: 12px; color: var(--gold); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Architektura AI Asystenta</div>
+    <div class="arch-row">
+      <div class="arch-box primary">Pytanie użytkownika<br><span style="font-size: 10px; font-weight: 400;">"pokaż budżet Kowalski"</span></div>
+    </div>
+    <div class="arch-arrow">&darr;</div>
+    <div class="arch-row">
+      <div class="arch-box secondary">Embedding<br><span style="font-size: 10px; font-weight: 400;">tekst &rarr; wektor</span></div>
+      <div class="arch-box storage">Vectorize<br><span style="font-size: 10px; font-weight: 400;">wyszukanie danych</span></div>
+      <div class="arch-box secondary">D1 / R2<br><span style="font-size: 10px; font-weight: 400;">pobranie szczegółów</span></div>
+    </div>
+    <div class="arch-arrow">&darr;</div>
+    <div class="arch-row">
+      <div class="arch-box primary">Workers AI / OpenAI<br><span style="font-size: 10px; font-weight: 400;">generowanie odpowiedzi z kontekstem</span></div>
+    </div>
+    <div class="arch-arrow">&darr;</div>
+    <div class="arch-row">
+      <div class="arch-box" style="background: rgba(34,197,94,0.15); border: 1px solid var(--green); color: #86efac;">Odpowiedź + linki do modułów<br><span style="font-size: 10px; font-weight: 400;">finanse &middot; umowy &middot; dziennik &middot; harmonogram</span></div>
+    </div>
+  </div>
+
+  <div class="insight-box" style="margin-top: 20px;">
+    <h3>AI wyszkolone na Waszych danych — nie ogólne ChatGPT</h3>
+    <ul>
+      <li>AI nie zmyśla — odpowiada <strong>wyłącznie na bazie danych z systemu</strong> (RAG). Jeśli nie ma danych, powie "nie znalazłem".</li>
+      <li>Dane <strong>nigdy nie opuszczają infrastruktury</strong> — przetwarzanie na Cloudflare Workers AI (edge), nie na zewnętrznych serwerach.</li>
+      <li>Każda odpowiedź zawiera <strong>link do źródła</strong> — szef może kliknąć i sprawdzić dane samodzielnie.</li>
+      <li>AI uczy się <strong>kontekstu firmy</strong> — zna nazwy projektów, podwykonawców, materiały. Im dłużej używane, tym trafniejsze odpowiedzi.</li>
+      <li><strong>Koszt: ~$3-5/dzień</strong> przy 100 budowach i ~100 zapytań dziennie. Zlecenie tych samych wyszukiwań ręcznie = godziny pracy biura.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 9: JAK TO DZIALA — FLOW -->
+<!-- ============================================================ -->
+<section>
+  <div class="section-title">
+    <div class="icon">9</div>
     Jak to działa w praktyce — przykładowy flow
   </div>
 
@@ -2009,7 +2237,7 @@
 <!-- ============================================================ -->
 <section>
   <div class="section-title">
-    <div class="icon">9</div>
+    <div class="icon">10</div>
     Model danych — co przechowuje system
   </div>
 
@@ -2092,7 +2320,7 @@
 <!-- ============================================================ -->
 <section>
   <div class="section-title">
-    <div class="icon">10</div>
+    <div class="icon">11</div>
     Podsumowanie
   </div>
 
@@ -2128,6 +2356,7 @@
       <li><strong style="color: var(--gold);">Infrastruktura 100x tańsza</strong> — 80 PLN/mies. vs 2 000-10 000 PLN/mies. u konkurencji</li>
       <li><strong style="color: var(--gold);">5 warstw bezpieczeństwa</strong> — WAF, Zero Trust, RBAC, AES-256, Audit Log</li>
       <li><strong style="color: var(--gold);">Natychmiastowa wartość</strong> — CRM gotowy w 4-6 tygodni, nie za pół roku</li>
+      <li><strong style="color: var(--gold);">Asystent AI wyszkolony na Waszych danych</strong> — pytasz, AI szuka w systemie i daje odpowiedź z linkiem do źródła</li>
       <li><strong style="color: var(--gold);">Skalowalność na 100+ budów</strong> — zużycie &lt;6% limitów bazy przy 100 budowach, architektura gotowa na 500+ bez zmian</li>
     </ul>
   </div>
