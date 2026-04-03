@@ -1004,6 +1004,37 @@
     .note-popup { width: calc(100vw - 48px); right: -14px; }
     .note-btn { width: 26px; height: 26px; font-size: 16px; }
 
+    /* Chat mockup */
+    [style*="border-radius: 16px"][style*="border: 1px solid #333"] {
+      border-radius: 12px !important;
+    }
+    [style*="border-radius: 16px"][style*="border: 1px solid #333"] > div:last-child {
+      padding: 14px !important;
+      gap: 12px !important;
+      max-height: 500px !important;
+    }
+    [style*="border-radius: 12px 12px 0 12px"],
+    [style*="border-radius: 12px 12px 12px 0"] {
+      max-width: 92% !important;
+      font-size: 12px !important;
+      padding: 8px 12px !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+    }
+
+    /* Context window visualization bars */
+    [style*="max-width: 170px"][style*="height: 18px"],
+    [style*="max-width: 140px"][style*="height: 18px"],
+    [style*="max-width: 60px"][style*="height: 18px"],
+    [style*="max-width: 30px"][style*="height: 18px"],
+    [style*="max-width: 15px"][style*="height: 18px"] {
+      height: 14px !important;
+    }
+    [style*="Co AI"] [style*="justify-content: space-between"] {
+      flex-direction: column !important;
+      gap: 4px !important;
+    }
+
     /* Footer */
     .footer { padding: 24px 14px; }
     .footer img.logo { height: 28px; }
@@ -1031,6 +1062,24 @@
     .header h1 { font-size: 18px; }
     .section-title { font-size: 15px; flex-wrap: wrap; }
     table { min-width: 420px; }
+
+    /* Chat: even tighter on very small screens */
+    [style*="border-radius: 12px 12px 0 12px"],
+    [style*="border-radius: 12px 12px 12px 0"] {
+      max-width: 96% !important;
+      font-size: 11px !important;
+      line-height: 1.6 !important;
+    }
+    /* Chat header */
+    [style*="background: rgba(223,187,104,0.12)"][style*="padding: 14px 20px"] {
+      padding: 10px 14px !important;
+    }
+
+    /* Cost total RAZEM box */
+    [style*="background: rgba(223,187,104,0.12)"][style*="border-radius: 8px"][style*="padding: 10px 12px"] .cost-label,
+    [style*="background: rgba(223,187,104,0.12)"][style*="border-radius: 8px"][style*="padding: 10px 12px"] .cost-value {
+      font-size: 13px !important;
+    }
 
     /* Extra small: note popup position */
     .note-popup { right: -7px; width: calc(100vw - 28px); }
