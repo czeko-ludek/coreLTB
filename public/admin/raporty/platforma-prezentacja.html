@@ -1104,7 +1104,7 @@
     <div class="pre-title">Prezentacja produktu</div>
     <h1>Platforma do <span>zarządzania budowami</span></h1>
     <p class="subtitle">Od leada po oddanie budynku. Jeden system dla całej firmy — kierowników, inżynierów, handlowców i inwestorów.</p>
-    <div class="period-badge">Custom-built &middot; Cloudflare Edge &middot; app.coreltb.pl</div>
+    <div class="period-badge">Custom-built &middot; React + Cloudflare Edge &middot; app.coreltb.pl</div>
   </div>
 </div>
 
@@ -1202,15 +1202,15 @@
   </div>
 
   <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
-    Platforma zbudowana na infrastrukturze <strong>Cloudflare</strong> — globalnej sieci edge serwerów. Dane przetwarzane blisko użytkownika (~50ms latency). Zero zarządzania serwerami — skalowanie automatyczne.
+    Platforma zbudowana na infrastrukturze <strong>Cloudflare</strong> — globalnej sieci edge serwerów. Frontend to szybka aplikacja React (SPA) za loginem — nie potrzebuje SEO, więc nie stosujemy ciężkiego SSR. Dane przetwarzane blisko użytkownika (~50ms latency). Zero zarządzania serwerami — skalowanie automatyczne.
   </p>
 
   <div class="tech-grid">
     <div class="tech-card">
-      <div class="tech-icon" style="background: linear-gradient(135deg, #000, #333);">N</div>
+      <div class="tech-icon" style="background: linear-gradient(135deg, #61dafb, #087ea4);">R</div>
       <div>
-        <h4>Next.js 15 (Frontend)</h4>
-        <p>Nowoczesny framework React. Server-side rendering, szybkie ladowanie stron, SEO-friendly. Ten sam stack co Vercel, Netflix, TikTok.</p>
+        <h4>React + Vite (Frontend SPA)</h4>
+        <p>Szybka aplikacja SPA z React 18 i Vite. TanStack Query (cache, fetching), TanStack Table (tabele), TanStack Virtual (wydajnosc). Brak SSR — aplikacja za loginem, SEO niepotrzebne.</p>
       </div>
     </div>
     <div class="tech-card">
@@ -1248,6 +1248,20 @@
         <p>Przetwarzanie notatek dziennika, generowanie umów, OCR faktur. AI zintegrowane bezpośrednio w Workers.</p>
       </div>
     </div>
+    <div class="tech-card">
+      <div class="tech-icon" style="background: linear-gradient(135deg, var(--orange), #c2410c);">Q</div>
+      <div>
+        <h4>Cloudflare Queues (Async Jobs)</h4>
+        <p>Asynchroniczne zadania: generowanie PDF, ZIP, ingest RAG, OCR faktur. Workers mają limit 30s — Queues przetwarzają ciężkie operacje w tle.</p>
+      </div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon" style="background: linear-gradient(135deg, #ec4899, #be185d);">V</div>
+      <div>
+        <h4>Vectorize (Wyszukiwanie AI)</h4>
+        <p>Wektorowa baza danych do semantycznego wyszukiwania. Asystent AI przeszukuje historię projektów, dzienniki budowy i umowy — odpowiada na pytania w kontekście Waszych danych.</p>
+      </div>
+    </div>
   </div>
 
   <!-- ARCHITECTURE DIAGRAM -->
@@ -1263,7 +1277,7 @@
     </div>
     <div class="arch-arrow">|</div>
     <div class="arch-row">
-      <div class="arch-box primary">Next.js SSR (Frontend)</div>
+      <div class="arch-box primary">React SPA + Vite (Frontend)</div>
       <div class="arch-box primary">Hono.js API (Backend)</div>
     </div>
     <div class="arch-arrow">|</div>
@@ -1273,15 +1287,21 @@
       <div class="arch-box secondary">KV — Sesje / Cache</div>
       <div class="arch-box secondary">DO — Real-time</div>
     </div>
+    <div class="arch-arrow">|</div>
+    <div class="arch-row">
+      <div class="arch-box" style="background: rgba(249,115,22,0.15); border: 1px solid var(--orange); color: #fdba74;">Queues — Async Jobs</div>
+      <div class="arch-box" style="background: rgba(236,72,153,0.15); border: 1px solid #ec4899; color: #f9a8d4;">Vectorize — RAG AI</div>
+    </div>
   </div>
 
   <div class="insight-box">
     <h3>Dlaczego Cloudflare, a nie tradycyjny hosting (AWS / VPS)?</h3>
     <ul>
-      <li><strong style="color: var(--gold);">Koszt infrastruktury + AI ~310 PLN/mies.</strong> zamiast 2 000-20 000 PLN/mies. na AWS (EC2 + RDS + S3 + ALB)</li>
+      <li><strong style="color: var(--gold);">Koszt infrastruktury + AI ~315 PLN/mies.</strong> zamiast 2 000-20 000 PLN/mies. na AWS (EC2 + RDS + S3 + ALB + SQS)</li>
       <li><strong style="color: var(--gold);">Automatyczne skalowanie</strong> — zero konfiguracji serwerów, zero DevOps</li>
       <li><strong style="color: var(--gold);">DDoS protection + WAF gratis</strong> — u AWS to dodatkowy koszt (Shield + WAF)</li>
       <li><strong style="color: var(--gold);">CDN globalnie</strong> — dane serwowane z najblizszego edge (~50ms, nie ~200ms)</li>
+      <li><strong style="color: var(--gold);">Queues + Vectorize wbudowane</strong> — asynchroniczne zadania (PDF, OCR) i wyszukiwanie AI bez zewnętrznych usług</li>
       <li><strong style="color: var(--gold);">SSL automatycznie</strong> — certyfikaty odnawiane bez ingerencji</li>
     </ul>
   </div>
@@ -1503,7 +1523,7 @@
   </div>
 
   <p style="font-size: 12px; color: var(--text-light); margin-bottom: 16px;">
-    * Koszt infrastruktury Cloudflare + AI (~310 PLN/mies.) — bez kosztów utrzymania i rozwoju. Porównanie dotyczy opłat platformowych.
+    * Koszt infrastruktury Cloudflare + AI (~315 PLN/mies.) — bez kosztów utrzymania i rozwoju. Porównanie dotyczy opłat platformowych.
   </p>
 
   <div class="insight-box">
@@ -1519,7 +1539,7 @@
 
   <div class="note-box">
     <h4>Kluczowa różnica: SaaS vs Custom</h4>
-    <p>Rozwiązania SaaS (Buildertrend, PlanRadar) to <strong>wynajem</strong> — płacisz co miesiąc, a po zakończeniu tracisz dostęp. Nasza platforma to <strong>własność</strong> — po zakończeniu współpracy system dalej działa, kod jest Wasz. Koszt infrastruktury + AI: ~310 PLN/mies.</p>
+    <p>Rozwiązania SaaS (Buildertrend, PlanRadar) to <strong>wynajem</strong> — płacisz co miesiąc, a po zakończeniu tracisz dostęp. Nasza platforma to <strong>własność</strong> — po zakończeniu współpracy system dalej działa, kod jest Wasz. Koszt infrastruktury + AI: ~315 PLN/mies.</p>
   </div>
 </section>
 
@@ -1594,6 +1614,12 @@
           <td class="font-bold">WebSocket połączenia</td>
           <td class="text-right">bez limitu (DO)</td>
           <td class="text-right">~50 jednoczesnych</td>
+          <td class="text-center"><span class="badge badge-green">brak limitu</span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">Queues (async jobs) /dzien</td>
+          <td class="text-right">bez limitu (paid)</td>
+          <td class="text-right">~200 jobów /dzien</td>
           <td class="text-center"><span class="badge badge-green">brak limitu</span></td>
         </tr>
         <tr>
@@ -1718,6 +1744,7 @@
       <li><strong style="color: var(--gold);">D1 = SQLite na edge</strong> — limit 10 GB / 10M wierszy. Przy 100 budowach zużywamy 3,5% wierszy i 2% storage. Można prowadzić 2 000+ budów zanim limit stanie się problemem.</li>
       <li><strong style="color: var(--gold);">R2 = object storage bez limitu</strong> — zdjęcia, dokumenty, skany faktur. Brak limitu pojemności, opłata tylko za przechowywanie (~0.015 $/GB/mies.).</li>
       <li><strong style="color: var(--gold);">Durable Objects = real-time bez limitu połączeń</strong> — notyfikacje WebSocket dla 200 użytkowników jednocześnie bez problemu.</li>
+      <li><strong style="color: var(--gold);">Queues = ciężkie operacje w tle</strong> — generowanie PDF, OCR faktur, ingest RAG — bez blokowania interfejsu. Workers mają limit 30s, Queues przetwarzają bez limitu czasu.</li>
       <li><strong style="color: var(--gold);">Workers AI = na żądanie</strong> — AI przetwarza wpisy dziennika i generuje dokumenty. Płatność za zużycie, nie za licencje. 100 wpisów AI/dzien = ~$2-5/dzien.</li>
     </ul>
   </div>
@@ -1733,7 +1760,7 @@
 
       <div style="color: var(--gold); font-weight: 700;">50-100</div>
       <div>Obecna architektura, zero zmian. Zużycie: &lt;6% limitów. Więcej AI requestów.</div>
-      <div style="color: var(--green); font-weight: 600; text-align: right;">~310 PLN/mies.</div>
+      <div style="color: var(--green); font-weight: 600; text-align: right;">~315 PLN/mies.</div>
 
       <div style="color: var(--gold); font-weight: 700;">100-300</div>
       <div>Obecna architektura wystarcza. Opcjonalnie: indeksy, cache KV dla częstych zapytań AI.</div>
@@ -1788,6 +1815,10 @@
         <div class="cost-value">~10 PLN</div>
       </div>
       <div class="cost-item">
+        <div class="cost-label">Queues (async jobs)</div>
+        <div class="cost-value">~5 PLN</div>
+      </div>
+      <div class="cost-item">
         <div class="cost-label">Access (Zero Trust auth)</div>
         <div class="cost-value">0 PLN</div>
       </div>
@@ -1802,7 +1833,7 @@
 
       <div class="cost-total">
         <div class="cost-label">Razem infrastruktura</div>
-        <div class="cost-value">~60 PLN/mies.</div>
+        <div class="cost-value">~65 PLN/mies.</div>
       </div>
 
       <h4 style="font-size: 14px; font-weight: 700; margin: 20px 0 16px; color: var(--bg-dark); border-top: 2px solid var(--gold); padding-top: 16px;">Asystent AI</h4>
@@ -1831,7 +1862,7 @@
 
       <div class="cost-total" style="margin-top: 12px; background: rgba(223,187,104,0.12); border-radius: 8px; padding: 10px 12px;">
         <div class="cost-label" style="font-weight: 800; color: var(--gold-dark);">RAZEM (infra + AI)</div>
-        <div class="cost-value" style="color: var(--gold-dark); font-size: 16px;">~310 PLN/mies.</div>
+        <div class="cost-value" style="color: var(--gold-dark); font-size: 16px;">~315 PLN/mies.</div>
       </div>
     </div>
 
@@ -1904,7 +1935,7 @@
     <div class="progress-row">
       <div class="prog-label" style="font-weight: 700; color: var(--gold-dark);">Nasza platforma<br><span style="font-weight: 400; font-size: 11px;">(infra + AI)</span></div>
       <div class="prog-bar-bg">
-        <div class="prog-bar" style="width: 5%; background: linear-gradient(90deg, var(--green), #16a34a); min-width: 110px;">~3 720 PLN/rok</div>
+        <div class="prog-bar" style="width: 5%; background: linear-gradient(90deg, var(--green), #16a34a); min-width: 110px;">~3 780 PLN/rok</div>
       </div>
     </div>
 
