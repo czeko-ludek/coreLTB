@@ -192,8 +192,8 @@ export function calculateEstimate(config: CalculatorConfig): EstimateBreakdown {
     });
   }
 
-  // ─── 3. STAN SUROWY ZAMKNIĘTY (garaż / overhead) ───
-  {
+  // ─── 3. STAN SUROWY ZAMKNIĘTY (garaż / overhead) — tylko deweloperski i pod klucz ───
+  if (finish === 'deweloperski' || finish === 'pod_klucz') {
     const rate = GARAGE_RATES[garage];
     const total = Math.round(area * rate);
 
