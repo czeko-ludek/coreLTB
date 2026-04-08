@@ -18,7 +18,7 @@ export type WallType = 'beton_komorkowy' | 'ceramika' | 'silikat';
 export type RoofType = 'plaski' | 'dwuspadowy' | 'wielospadowy';
 export type FloorType = 'parterowy' | 'poddasze' | 'pietrowy';
 export type GarageType = 'brak' | 'jednostanowiskowy' | 'dwustanowiskowy';
-export type FinishType = 'sso' | 'deweloperski' | 'pod_klucz';
+export type FinishType = 'sso' | 'ssz' | 'deweloperski' | 'pod_klucz';
 export type HeatingType = 'gazowe' | 'pompa_ciepla' | 'pelet';
 export type FoundationType = 'plyta' | 'lawy';
 export type BasementType = 'brak' | 'czesciowa' | 'cala';
@@ -192,8 +192,8 @@ export function calculateEstimate(config: CalculatorConfig): EstimateBreakdown {
     });
   }
 
-  // ─── 3. STAN SUROWY ZAMKNIĘTY (garaż / overhead) — tylko deweloperski i pod klucz ───
-  if (finish === 'deweloperski' || finish === 'pod_klucz') {
+  // ─── 3. STAN SUROWY ZAMKNIĘTY (garaż / overhead) — SSZ, deweloperski i pod klucz ───
+  if (finish === 'ssz' || finish === 'deweloperski' || finish === 'pod_klucz') {
     const rate = GARAGE_RATES[garage];
     const total = Math.round(area * rate);
 
@@ -333,6 +333,7 @@ export const GARAGE_LABELS: Record<GarageType, string> = {
 
 export const FINISH_LABELS: Record<FinishType, string> = {
   sso: 'Stan surowy otwarty',
+  ssz: 'Stan surowy zamknięty',
   deweloperski: 'Stan deweloperski',
   pod_klucz: 'Pod klucz',
 };

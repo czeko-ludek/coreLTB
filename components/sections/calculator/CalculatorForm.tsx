@@ -164,7 +164,7 @@ export const CalculatorForm = () => {
       wallType: ['beton_komorkowy', 'ceramika', 'silikat'],
       roofType: ['plaski', 'dwuspadowy', 'wielospadowy'],
       garage: ['brak', 'jednostanowiskowy', 'dwustanowiskowy'],
-      finish: ['sso', 'deweloperski', 'pod_klucz'],
+      finish: ['sso', 'ssz', 'deweloperski', 'pod_klucz'],
       heating: ['gazowe', 'pompa_ciepla', 'pelet'],
       foundation: ['plyta', 'lawy'],
       basement: ['brak', 'czesciowa', 'cala'],
@@ -1007,9 +1007,9 @@ export const CalculatorForm = () => {
 
             {/* ─── Section 3: Wykończenie i dodatkowe ─── */}
             <FormSection number="3" title="Standard i wyposażenie">
-              <OptionGroup label="Standard budowy" field="finish" hasError={!!state.errors.finish}>
+              <OptionGroup label="Standard budowy" field="finish" hasError={!!state.errors.finish} columns={4}>
                 {(Object.keys(FINISH_LABELS) as FinishType[]).map((f) => {
-                  const iconMap: Record<string, IconName> = { sso: 'hammer', deweloperski: 'house', pod_klucz: 'keyRound' };
+                  const iconMap: Record<string, IconName> = { sso: 'hammer', ssz: 'doorClosed', deweloperski: 'house', pod_klucz: 'keyRound' };
                   return (
                     <OptionCard
                       key={f}
@@ -1026,10 +1026,13 @@ export const CalculatorForm = () => {
               <div className="mt-3 bg-primary/5 border border-primary/20 rounded-xl p-4">
                 <p className="text-body-xs text-text-secondary leading-relaxed">
                   {state.finish === 'sso' && (
-                    <><strong>Stan surowy otwarty</strong> — fundamenty, ściany, strop, dach z pokryciem, okna i drzwi zewnętrzne. Bez instalacji wewnętrznych.</>
+                    <><strong>Stan surowy otwarty</strong> — fundamenty, ściany, strop, dach z pokryciem. Bez okien, drzwi i instalacji wewnętrznych.</>
+                  )}
+                  {state.finish === 'ssz' && (
+                    <><strong>Stan surowy zamknięty</strong> — SSO + okna, drzwi zewnętrzne, instalacja elektryczna i wod-kan. Dom zamknięty, zabezpieczony.</>
                   )}
                   {state.finish === 'deweloperski' && (
-                    <><strong>Stan deweloperski</strong> — SSO + kompletne instalacje (elektryka, wod-kan, ogrzewanie, tynki, wylewki). Gotowy do wykończenia wnętrz.</>
+                    <><strong>Stan deweloperski</strong> — SSZ + ogrzewanie, tynki, wylewki, elewacja z ociepleniem. Gotowy do wykończenia wnętrz.</>
                   )}
                   {state.finish === 'pod_klucz' && (
                     <><strong>Pod klucz</strong> — deweloperski + pełne wykończenie wnętrz: podłogi, łazienki, kuchnia (bez mebli), malowanie.</>
@@ -1321,13 +1324,16 @@ function OptionGroup({
   className = '',
   field,
   hasError,
+  columns = 3,
 }: {
   label: string;
   children: React.ReactNode;
   className?: string;
   field?: string;
   hasError?: boolean;
+  columns?: 2 | 3 | 4;
 }) {
+  const colsClass = columns === 4 ? 'grid-cols-2 md:grid-cols-4' : columns === 2 ? 'grid-cols-2' : 'grid-cols-3';
   return (
     <div
       className={`${className} rounded-xl transition-all duration-300 ${hasError ? 'animate-error-pulse p-2 -m-2' : ''}`}
@@ -1337,7 +1343,7 @@ function OptionGroup({
         {label}
         {hasError && <span className="ml-2 text-body-xs font-normal text-red-400">— wybierz opcję</span>}
       </label>
-      <div className="grid grid-cols-3 gap-2.5">
+      <div className={`grid ${colsClass} gap-2.5`}>
         {children}
       </div>
     </div>

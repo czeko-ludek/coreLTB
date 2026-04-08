@@ -9,6 +9,26 @@
       "keywords": [],
       "status": "active",
       "notes": "Inicjalna konfiguracja — baseline"
+    },
+    {
+      "id": "002",
+      "date": "2026-04-01",
+      "type": "content",
+      "description": "GBP: pelna optymalizacja obu wizytowek (URL, kategorie, opisy, uslugi, obszary, godziny) + pierwszy post",
+      "pages": ["gbp-jaworzno", "gbp-wodzislaw"],
+      "keywords": ["budowa domow jaworzno", "budowa domow wodzislaw slaski", "firma budowlana slask"],
+      "status": "active",
+      "notes": "Jaworzno 81->91/100, Wodzislaw 88/100 utrzymana. Posty o realizacji w Mikolowie."
+    },
+    {
+      "id": "003",
+      "date": "2026-04-07",
+      "type": "content",
+      "description": "GBP: drugi post na obu wizytowkach (realizacja Mikolow — plyta fundamentowa) + zdjecia z budowy",
+      "pages": ["gbp-jaworzno", "gbp-wodzislaw"],
+      "keywords": ["budowa domu mikolow", "plyta fundamentowa", "firma budowlana slask"],
+      "status": "active",
+      "notes": "Tydzien 2 wg planu. Rozne tresci na kazdej wizytowce (unikanie duplikatu). Fix audytora GBP (falszywe uslugi + miasta)."
     }
   ],
   "_schema": {
