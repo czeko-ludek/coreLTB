@@ -8,6 +8,7 @@ import {
 } from '@/data/blog-data';
 import { BlogPostContent } from '@/components/sections';
 import { companyData } from '@/data/company-data';
+import type { FAQItem } from '@/components/sections/BlogPostContent';
 
 /**
  * Generate static params for SSG
@@ -84,8 +85,65 @@ export default async function BazaWiedzyPostPage({
   // Pobierz powiązane posty
   const relatedPosts = getRelatedPosts(slug, 3).map(toRelatedPost);
 
+  // Wyciągnij FAQ items z content blocks (dla FAQ Schema)
+  const faqItems: FAQItem[] = post.content
+    .filter((block) => block.type === 'faq' && block.faqItems)
+    .flatMap((block) => block.faqItems!);
+
+  // Article Schema JSON-LD
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    image: `${companyData.url}${post.image.src}`,
+    datePublished: new Date(post.dateTimestamp).toISOString(),
+    author: {
+      '@type': 'Organization',
+      name: 'CoreLTB Builders',
+      url: companyData.url,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'CoreLTB Builders',
+      url: companyData.url,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${companyData.url}/logo.svg`,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${companyData.url}/baza-wiedzy/${slug}`,
+    },
+  };
+
+  // FAQ Schema JSON-LD (tylko jeśli artykuł ma FAQ)
+  const faqSchema = faqItems.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer.replace(/<[^>]*>/g, ''), // strip HTML tags
+      },
+    })),
+  } : null;
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <BlogPostContent post={post} relatedPosts={relatedPosts} />
     </main>
   );

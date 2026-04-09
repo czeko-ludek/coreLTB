@@ -1,0 +1,167 @@
+{
+  "date": "2026-04-09",
+  "source": "DataForSEO SERP live/advanced",
+  "location": "Poland",
+  "device": "desktop",
+  "note": "Pozycje live vs GSC srednia 28d. Uzyc w raporcie klienckim.",
+  "positions": [
+    {
+      "keyword": "budowa domów wodzisław śląski",
+      "volume": 40,
+      "position_live": 1,
+      "position_gsc_avg28d": 13.2,
+      "gsc_impressions_28d": 205,
+      "gsc_clicks_28d": 3,
+      "url": "/obszar-dzialania/wodzislaw-slaski/",
+      "trend": "rising"
+    },
+    {
+      "keyword": "budowa domu wodzisław śląski",
+      "volume": 40,
+      "position_live": 1,
+      "position_gsc_avg28d": 10.7,
+      "gsc_impressions_28d": 42,
+      "gsc_clicks_28d": 2,
+      "url": "/obszar-dzialania/wodzislaw-slaski/",
+      "trend": "rising"
+    },
+    {
+      "keyword": "kierownik budowy wodzisław śląski",
+      "volume": 30,
+      "position_live": 2,
+      "position_gsc_avg28d": 6.7,
+      "gsc_impressions_28d": 58,
+      "gsc_clicks_28d": 3,
+      "url": "/kierownik-budowy-wodzislaw-slaski/",
+      "trend": "rising"
+    },
+    {
+      "keyword": "budowa domu rybnik",
+      "volume": 70,
+      "position_live": 4,
+      "position_gsc_avg28d": 12.3,
+      "gsc_impressions_28d": 89,
+      "gsc_clicks_28d": 1,
+      "url": "/obszar-dzialania/rybnik/",
+      "trend": "rising"
+    },
+    {
+      "keyword": "budowa domów rybnik",
+      "volume": 110,
+      "position_live": 5,
+      "position_gsc_avg28d": 8.4,
+      "gsc_impressions_28d": 106,
+      "gsc_clicks_28d": 2,
+      "url": "/obszar-dzialania/rybnik/",
+      "trend": "rising"
+    },
+    {
+      "keyword": "budowa domów jaworzno",
+      "volume": 40,
+      "position_live": 5,
+      "position_gsc_avg28d": 3.7,
+      "gsc_impressions_28d": 24,
+      "gsc_clicks_28d": 1,
+      "url": "/obszar-dzialania/jaworzno/",
+      "trend": "stable"
+    },
+    {
+      "keyword": "budowa domów żory",
+      "volume": 30,
+      "position_live": 5,
+      "position_gsc_avg28d": 11.0,
+      "gsc_impressions_28d": 95,
+      "gsc_clicks_28d": 2,
+      "url": "/obszar-dzialania/zory/",
+      "trend": "rising"
+    },
+    {
+      "keyword": "kierownik budowy katowice",
+      "volume": 110,
+      "position_live": 6,
+      "position_gsc_avg28d": 8.7,
+      "gsc_impressions_28d": 79,
+      "gsc_clicks_28d": 1,
+      "url": "/kierownik-budowy-katowice/",
+      "trend": "rising"
+    },
+    {
+      "keyword": "kierownik budowy jaworzno",
+      "volume": 30,
+      "position_live": 16,
+      "position_gsc_avg28d": 6.8,
+      "gsc_impressions_28d": 129,
+      "gsc_clicks_28d": 1,
+      "url": "/oferta/nadzor-i-doradztwo/",
+      "url_correct": "/kierownik-budowy-jaworzno/",
+      "issue": "Nowy URL /kierownik-budowy-jaworzno/ NIE JEST ZAINDEKSOWANY. Google rankuje ogolna strone /oferta/nadzor-i-doradztwo/. Redirect 301 dziala poprawnie. URL wyslany do Indexing API 2026-04-09.",
+      "trend": "blocked"
+    },
+    {
+      "keyword": "coreltb",
+      "volume": 10,
+      "position_live": 1,
+      "position_gsc_avg28d": 1.1,
+      "gsc_impressions_28d": 95,
+      "gsc_clicks_28d": 52,
+      "url": "/",
+      "trend": "stable"
+    },
+    {
+      "keyword": "stan surowy otwarty",
+      "volume": 2400,
+      "position_live": 33,
+      "position_gsc_avg28d": null,
+      "gsc_impressions_28d": 11,
+      "gsc_clicks_28d": 0,
+      "url": "/baza-wiedzy/stan-surowy-otwarty-poradnik/",
+      "note": "Nowy artykul opublikowany 2026-04-08, juz widoczny w SERP po 1 dniu",
+      "trend": "new"
+    },
+    {
+      "keyword": "firma budowlana jaworzno",
+      "volume": 90,
+      "position_live": null,
+      "position_gsc_avg28d": null,
+      "gsc_impressions_28d": 56,
+      "gsc_clicks_28d": 1,
+      "url": null,
+      "issue": "Nie rankujemy w TOP 100. GBP widoczny na te fraze (24 wyswietlenia Maps), strona organicznie nie.",
+      "trend": "missing"
+    },
+    {
+      "keyword": "dom przy bukowej 49",
+      "volume": 590,
+      "position_live": null,
+      "position_gsc_avg28d": 8.1,
+      "gsc_impressions_28d": 217,
+      "gsc_clicks_28d": 1,
+      "url": "/projekty/dom-przy-bukowej-49/",
+      "issue": "GSC srednia poz 8 ale live >100. Prawdopodobnie wypadl z indeksu lub konkurencja go przesunela.",
+      "trend": "dropping"
+    }
+  ],
+  "indexation_issues": {
+    "kierownik-budowy-jaworzno": {
+      "old_url": "/oferta/uslugi-techniczne-w-budownictwie/nadzor-budowy/nadzor-budowy-jaworzno",
+      "new_url": "/kierownik-budowy-jaworzno/",
+      "redirect_301": true,
+      "redirect_works": true,
+      "new_url_indexed": false,
+      "indexed_instead": "/oferta/nadzor-i-doradztwo/",
+      "indexing_api_submitted": "2026-04-09",
+      "katowice_indexed": true,
+      "wodzislaw_indexed": true,
+      "root_cause": "Google nie zaindexowal nowego URL mimo poprawnego 301. Katowice i Wodzislaw sa zaindeksowane. Mozliwe przyczyny: 1) Jaworzno mialo wiecej linkow/sygnałow na stary URL i Google wybral ogolna strone nadzoru zamiast nowej, 2) Crawl budget - Google jeszcze nie przetrawil redirecta, 3) Canonicalization - Google uznal ogolna strone za lepszy wynik."
+    }
+  },
+  "summary": {
+    "total_keywords_tracked": 13,
+    "in_top3": 3,
+    "in_top5": 7,
+    "in_top10": 8,
+    "in_top20": 9,
+    "not_ranking": 2,
+    "indexation_issues": 1
+  }
+}

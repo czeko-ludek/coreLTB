@@ -369,7 +369,7 @@ servicesAccordion: {
         {
            type: 'list',
            items: [
-             '**3-4 miesiące** – Stan Surowy Otwarty (SSO).',
+             '**3-4 miesiące** – [Stan Surowy Otwarty (SSO)](/baza-wiedzy/stan-surowy-otwarty-poradnik).',
              '**7-9 miesięcy** – Stan Deweloperski (pełne instalacje, tynki, elewacja).',
              '**12 miesięcy** – Opcja "Pod Klucz" z wykończeniem wnętrz.'
            ]
@@ -995,7 +995,7 @@ philosophyTimeline: {
             {
                // STRATEGICZNY LINK DO ARTYKUŁU
                type: 'paragraph',
-               value: '**Technologia:** Zobacz, jakie rozwiązania obniżą Twoje rachunki: Domy energooszczędne i zwrot z inwestycji'
+               value: '**Technologia:** Zobacz, jakie rozwiązania obniżą Twoje rachunki: [Domy energooszczędne - przewodnik 2026](/baza-wiedzy/dom-energooszczedny-slask)'
             }
           ],
           imageSrc: '/images/uslugi/projektowanie/etapy/adaptacja.webp',
@@ -1971,7 +1971,7 @@ cooperationTimelineNoLine: {
     {
        // LINK
        type: 'paragraph',
-       value: '**Ważne dla inwestora:** certyfikat to test jakości izolacji. Zobacz, jak budujemy, żeby wyniki były doskonałe: Technologia domów energooszczędnych WT2021'
+       value: '**Ważne dla inwestora:** certyfikat to test jakości izolacji. Zobacz, jak budujemy, żeby wyniki były doskonałe: [Dom energooszczędny - przewodnik 2026](/baza-wiedzy/dom-energooszczedny-slask)'
     }
   ],
   // Zdjęcie zostaje Twoje stare

@@ -22,7 +22,7 @@
 # ── BUDOWA OGÓLNA I STANY ─────────────────────────────────────
 
 /oferta/budowa /oferta/kompleksowa-budowa-domow 301
-/stan-surowy-otwarty /oferta/kompleksowa-budowa-domow 301
+/stan-surowy-otwarty /baza-wiedzy/stan-surowy-otwarty-poradnik 301
 /stan-zero /oferta/kompleksowa-budowa-domow 301
 /stan-pod-klucz /oferta/kompleksowa-budowa-domow 301
 /oferta/budowa/dom-energooszczedny-slask /baza-wiedzy/dom-energooszczedny-slask 301

@@ -289,7 +289,7 @@ function ContentRenderer({ block, index }: { block: BlogContentBlock; index: num
         <Link
           key={index}
           href={block.ctaHref || '/wycena'}
-          className="group my-8 inline-flex items-center gap-3 rounded-lg bg-primary hover:bg-primary-dark px-5 py-3 transition-all duration-300 hover:shadow-lg"
+          className="group my-3 flex w-fit items-center gap-3 rounded-lg bg-primary hover:bg-primary-dark px-5 py-3 transition-all duration-300 hover:shadow-lg"
         >
           <Icon name={(block.ctaIcon as IconName) || 'calculator'} size="md" className="text-white" />
           <span className="font-bold text-white text-sm">

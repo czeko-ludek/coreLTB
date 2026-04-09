@@ -114,6 +114,8 @@ export interface BlogPost {
   excerpt: string;
   author?: BlogAuthor;
   href: string;
+  /** Ukrywa post z listingu (draft/scheduled) - treść nadal dostępna po slug */
+  hidden?: boolean;
 }
 
 export interface BentoBlogSectionProps {
