@@ -236,6 +236,7 @@ export const CalculatorForm = () => {
     if (!state.floors) errors.floors = 'Wybierz kondygnację';
     if (!state.wallType) errors.wallType = 'Wybierz typ ścian';
     if (!state.roofType) errors.roofType = 'Wybierz typ dachu';
+    if (!state.garage) errors.garage = 'Wybierz opcję garażu';
     if (!state.finish) errors.finish = 'Wybierz standard wykończenia';
     if (!state.heating) errors.heating = 'Wybierz typ ogrzewania';
     if (!state.foundation) errors.foundation = 'Wybierz typ fundamentu';
