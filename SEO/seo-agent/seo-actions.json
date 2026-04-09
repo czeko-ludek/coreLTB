@@ -29,6 +29,36 @@
       "keywords": ["budowa domu mikolow", "plyta fundamentowa", "firma budowlana slask"],
       "status": "active",
       "notes": "Tydzien 2 wg planu. Rozne tresci na kazdej wizytowce (unikanie duplikatu). Fix audytora GBP (falszywe uslugi + miasta)."
+    },
+    {
+      "id": "004",
+      "date": "2026-04-09",
+      "type": "content",
+      "description": "Blog: publikacja artykulu 'Stan surowy otwarty - co zawiera i ile kosztuje w 2026?' + Article/FAQ Schema JSON-LD na wszystkich postach + redirect /stan-surowy-otwarty -> artykul",
+      "pages": ["/baza-wiedzy/stan-surowy-otwarty-poradnik", "/baza-wiedzy/*"],
+      "keywords": ["stan surowy otwarty", "stan surowy otwarty co zawiera", "stan surowy otwarty cena za m2", "SSO koszt", "SSO a SSZ"],
+      "status": "active",
+      "notes": "Pipeline: DataForSEO keyword research + SERP analysis 7 konkurentow + competitor WebFetch. Primary KW: 2400 vol/msc. Redirect z /stan-surowy-otwarty (stary Venet URL, poz.33 w Google). Internal links z servicesV2 (budowa timeline). 2 kolejne artykuly hidden (kosztorys ~15.04, kierownik ~28.04). Dane pozycji: SEO/seo-agent/data/serp-positions-2026-04-09.json"
+    },
+    {
+      "id": "005",
+      "date": "2026-04-09",
+      "type": "redirect",
+      "description": "Redirect /stan-surowy-otwarty -> /baza-wiedzy/stan-surowy-otwarty-poradnik (byl -> /oferta/kompleksowa-budowa-domow)",
+      "pages": ["/stan-surowy-otwarty", "/baza-wiedzy/stan-surowy-otwarty-poradnik"],
+      "keywords": ["stan surowy otwarty"],
+      "status": "active",
+      "notes": "Stary URL rankowal na poz.33 dla 'stan surowy otwarty' (2400 vol). Redirect przeniose link juice na dedykowany artykul zamiast ogolnej strony budowy."
+    },
+    {
+      "id": "006",
+      "date": "2026-04-09",
+      "type": "technical",
+      "description": "Indexing API: wyslano /kierownik-budowy-jaworzno/ (nie byl zaindeksowany mimo poprawnego 301 i obecnosci w sitemap)",
+      "pages": ["/kierownik-budowy-jaworzno"],
+      "keywords": ["kierownik budowy jaworzno"],
+      "status": "active",
+      "notes": "Katowice i Wodzislaw zaindeksowane poprawnie. Jaworzno rankuje na /oferta/nadzor-i-doradztwo/ (poz.16) zamiast dedykowanej strony. Wyslano URL_UPDATED do Indexing API. Sprawdzic za 48h."
     }
   ],
   "_schema": {
