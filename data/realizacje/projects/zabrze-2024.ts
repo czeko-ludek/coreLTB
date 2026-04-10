@@ -247,19 +247,19 @@ export const zabrze2024: RealizationData = {
       ],
       images: [
         {
+          src: `${IMG}/dach-rabek-dron.webp`,
+          alt: 'Gotowy dach z blachy na rąbek stojący — widok z drona na dom parterowy w Zabrzu',
+          caption: 'Gotowe pokrycie z blachy na rąbek stojący — widok z drona, okna dachowe VELUX',
+        },
+        {
+          src: `${IMG}/dach-rabek-naroznik.webp`,
+          alt: 'Detal narożnika dachu z blachy na rąbek stojący — obróbka blacharska',
+          caption: 'Narożnik dachu wielospadowego — precyzyjna obróbka blacharska na rąbek',
+        },
+        {
           src: `${IMG}/dach-deskowanie-pelne.webp`,
-          alt: 'Pełne deskowanie dachu z zamontowanymi oknami — dom w Zabrzu z drona',
-          caption: 'Deskowanie kompletne — widoczne zamontowane okna i rusztowania',
-        },
-        {
-          src: `${IMG}/dach-deskowanie-detal.webp`,
-          alt: 'Detal pełnego deskowania dachu wielospadowego',
-          caption: 'Detal deskowania — połączenie połaci z widoczną więźbą garażu',
-        },
-        {
-          src: `${IMG}/dach-blacha-rabek-dron.webp`,
-          alt: 'Gotowy dach z blachy na rąbek stojący — ujęcie z drona nad domem w Zabrzu',
-          caption: 'Gotowe pokrycie z blachy na rąbek stojący — widok z drona',
+          alt: 'Pełne deskowanie dachu przed montażem blachy na rąbek — dom w Zabrzu',
+          caption: 'Deskowanie pełne — podkład pod blachę na rąbek (etap pośredni)',
         },
       ],
       expertInsight: {
