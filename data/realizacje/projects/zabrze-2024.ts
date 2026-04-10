@@ -277,40 +277,47 @@ export const zabrze2024: RealizationData = {
       ],
     },
 
-    // ── ETAP 6: Kanalizacja zewnętrzna ──────────────────────────
+    // ── ETAP 6: Kanalizacja deszczowa ──────────────────────────
     {
-      id: 'kanalizacja-zewnetrzna',
+      id: 'kanalizacja-deszczowa',
       order: 6,
-      title: 'Kanalizacja zewnętrzna',
-      icon: 'plug',
+      title: 'Kanalizacja zewnętrzna deszczowa',
+      icon: 'droplets',
       dateLabel: 'Maj 2025',
       duration: '1 tydzień',
       narrative: [
-        'Kanalizacja zewnętrzna to jeden z tych etapów, które nie wyglądają efektownie, ale mają kluczowe znaczenie dla funkcjonowania domu. Rury PVC o średnicy 160 mm ułożono w wykopach wzdłuż fundamentów z odpowiednim spadkiem (min. 2%) w kierunku przyłącza miejskiego.',
-        'Na zdjęciach widać charakterystyczne pomarańczowe rury kanalizacyjne PVC-U przeznaczone do instalacji zewnętrznych (podziemnych). Trójniki i kolanka pozwalają na podłączenie odpływów z łazienek, kuchni i wpustów podłogowych garażu.',
-        'Wszystkie połączenia wykonano na uszczelki gumowe i przetestowano szczelność przed zasypaniem — to standard, który eliminuje ryzyko kosztownych napraw w przyszłości.',
+        'Po zamontowaniu pokrycia dachowego i rynien stalowych przyszedł czas na wykonanie systemu odprowadzenia wód opadowych. Kanalizacja deszczowa to osobna instalacja — niezależna od kanalizacji sanitarnej — której zadaniem jest bezpieczne odprowadzenie deszczówki z dachu i terenu wokół budynku.',
+        'Wody opadowe z rynien sprowadzane są rurami spustowymi do podziemnej instalacji z rur PVC-U o średnicy 160 mm. Na zdjęciach widać charakterystyczne pomarańczowe rury ułożone w wykopach wzdłuż fundamentów, prowadzące do studzienek rewizyjnych. Trasa kanalizacji deszczowej zaprojektowana została ze spadkiem min. 2%, aby zapewnić grawitacyjny spływ wody bez ryzyka cofki.',
+        'Studzienki rewizyjne (widoczne na zdjęciach jako betonowe kręgi) umożliwiają kontrolę i czyszczenie instalacji w przyszłości. To ważne szczególnie jesienią, gdy liście mogą zatykać system. Całość odprowadza wodę do miejskiej sieci kanalizacji deszczowej.',
       ],
       images: [
         {
           src: `${IMG}/kanalizacja-rury-wykop.webp`,
-          alt: 'Rury kanalizacyjne PVC w wykopie wzdłuż fundamentów domu w Zabrzu',
-          caption: 'Rury kanalizacyjne PVC 160 mm w wykopie przy fundamentach',
+          alt: 'Rury kanalizacji deszczowej PVC w wykopie przy fundamentach domu w Zabrzu',
+          caption: 'Rury kanalizacji deszczowej PVC 160 mm w wykopie wzdłuż fundamentów',
         },
         {
           src: `${IMG}/kanalizacja-trasa.webp`,
-          alt: 'Trasa kanalizacji zewnętrznej z kręgami studziennymi',
-          caption: 'Trasa kanalizacji z widocznymi kręgami studziennymi',
+          alt: 'Trasa kanalizacji deszczowej ze studzienkami rewizyjnymi — dom w Zabrzu',
+          caption: 'Trasa odprowadzenia wód opadowych ze studzienkami rewizyjnymi',
         },
         {
           src: `${IMG}/kanalizacja-przy-budynku.webp`,
-          alt: 'Kanalizacja zewnętrzna poprowadzona wzdłuż ściany budynku',
-          caption: 'Rury ułożone ze spadkiem min. 2% w kierunku przyłącza',
+          alt: 'Kanalizacja deszczowa poprowadzona wzdłuż ściany budynku — odprowadzenie wód z dachu',
+          caption: 'Rury deszczowe ułożone ze spadkiem min. 2% od rur spustowych do sieci miejskiej',
         },
       ],
+      expertInsight: {
+        title: 'Kanalizacja deszczowa vs retencja — co wybrać?',
+        content: [
+          'W tej realizacji wody opadowe odprowadzamy do sieci miejskiej, ale coraz popularniejszą alternatywą jest zagospodarowanie deszczówki na działce. Zbiornik retencyjny (2 000–5 000 l) pozwala gromadzić wodę deszczową do podlewania ogrodu, co obniża rachunki za wodę o 20–40%.',
+          'Przy domu 200 m² z dachem wielospadowym roczny spływ deszczówki to ok. 120 000–150 000 litrów. Coraz więcej gmin na Śląsku wprowadza opłaty za odprowadzanie wód opadowych do kanalizacji — retencja pozwala ich uniknąć. Warto zaplanować to już na etapie kanalizacji zewnętrznej, bo późniejsze dokładanie zbiornika wymaga ponownych wykopów.',
+        ],
+      },
       technicalFacts: [
-        { label: 'Rury', value: 'PVC-U DN 160 mm', icon: 'plug' },
+        { label: 'Rury', value: 'PVC-U DN 160 mm', icon: 'droplets' },
         { label: 'Spadek', value: 'Min. 2%', icon: 'layers' },
-        { label: 'Połączenia', value: 'Na uszczelki gumowe', icon: 'shieldCheck' },
+        { label: 'Studzienki', value: 'Rewizyjne betonowe', icon: 'circleDot' },
         { label: 'Czas trwania', value: '5 dni roboczych', icon: 'clock' },
       ],
     },

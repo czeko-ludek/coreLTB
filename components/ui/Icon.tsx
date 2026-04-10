@@ -110,6 +110,8 @@ import {
   ExternalLink,
   DoorClosed,
   ImageIcon,
+  Droplets,
+  CircleDot,
 } from 'lucide-react';
 
 const iconMap = {
@@ -228,6 +230,8 @@ const iconMap = {
   externalLink: ExternalLink,
   doorClosed: DoorClosed,
   image: ImageIcon,
+  droplets: Droplets,
+  circleDot: CircleDot,
 };
 
 export type IconName = keyof typeof iconMap;
