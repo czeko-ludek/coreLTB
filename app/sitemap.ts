@@ -3,6 +3,7 @@ import { allServicesV2 } from '@/data/servicesV2';
 import { allProjects } from '@/data/projects';
 import { getAllLocalPageSlugs } from '@/data/local';
 import { getAllNadzorSlugs } from '@/data/nadzor';
+import { getAllRealizationSlugs } from '@/data/realizacje';
 import { companyData } from '@/data/company-data';
 
 // Wymagane dla output: 'export' (static HTML)
@@ -129,5 +130,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...servicePages, ...projectPages, ...localPages, ...nadzorPages];
+  // Strony realizacji (/realizacje/[slug])
+  const realizationPages: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/realizacje`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    ...getAllRealizationSlugs().map((slug) => ({
+      url: `${BASE_URL}/realizacje/${slug}`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    })),
+  ];
+
+  return [...staticPages, ...servicePages, ...projectPages, ...localPages, ...nadzorPages, ...realizationPages];
 }

@@ -290,7 +290,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'Ściany działowe (wewnętrzne, nienośne) murujemy z bloczków betonu komórkowego 12 cm - ich zadaniem jest podział przestrzeni, nie przenoszenie obciążeń.',
+      content: 'Ściany działowe (wewnętrzne, nienośne) murujemy z bloczków betonu komórkowego 12 cm - ich zadaniem jest podział przestrzeni, nie przenoszenie obciążeń. Jak wygląda murowanie ceramiką szlifowaną w praktyce? Zobacz naszą <a href="/realizacje/dom-jednorodzinny-zabrze-gwiazdy-polarnej">budowę domu 200 m² w Zabrzu krok po kroku</a> - dokumentujemy każdy etap ze zdjęciami.',
     },
     {
       type: 'heading',
@@ -705,7 +705,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'Ceny obejmują materiały, robociznę, kierownika budowy i nadzór inżynierski. <strong>Nie obejmują:</strong> projektu budowlanego, przyłączy mediów, ogrodzenia, zagospodarowania terenu.',
+      content: 'Ceny obejmują materiały, robociznę, kierownika budowy i nadzór inżynierski. <strong>Nie obejmują:</strong> projektu budowlanego, przyłączy mediów, ogrodzenia, zagospodarowania terenu. Chcesz zobaczyć, jak wygląda realizacja takiego budżetu w praktyce? Zobacz naszą <a href="/realizacje/dom-jednorodzinny-zabrze-gwiazdy-polarnej">budowę domu 200 m² w Zabrzu</a> - dokumentujemy koszty i technologie na każdym etapie.',
     },
     {
       type: 'cta',
@@ -1537,7 +1537,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'Rekuperacja ma jeszcze jedną, często pomijaną zaletę: <strong>filtracja powietrza</strong>. W regionach o złej jakości powietrza (południe Polski, aglomeracje) filtry F7 lub HEPA w centrali skutecznie zatrzymują pyły PM2.5 i PM10. To nie gadżet - to ochrona zdrowia domowników.',
+      content: 'Rekuperacja ma jeszcze jedną, często pomijaną zaletę: <strong>filtracja powietrza</strong>. W regionach o złej jakości powietrza (południe Polski, aglomeracje) filtry F7 lub HEPA w centrali skutecznie zatrzymują pyły PM2.5 i PM10. To nie gadżet - to ochrona zdrowia domowników. Jak wygląda instalacja rekuperacji i pompy ciepła w praktyce? Zobacz naszą <a href="/realizacje/dom-jednorodzinny-zabrze-gwiazdy-polarnej">realizację domu z pompą ciepła i LOXONE w Zabrzu</a> - zdjęcia z każdego etapu.',
     },
     // TODO: OBRAZ - rekuperator
     {

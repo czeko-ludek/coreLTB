@@ -90,7 +90,7 @@ export const zabrzeData: CityData = {
       {
         icon: 'shield',
         title: 'Doświadczenie w szkodach górniczych',
-        description: 'Mamy udokumentowane realizacje na terenach III i IV kategorii szkód górniczych w Zabrzu i miastach ościennych (Gliwice, Ruda Śląska, Bytom). Nie uczymy się na Twoim domu.',
+        description: 'Mamy udokumentowane realizacje na terenach III i IV kategorii szkód górniczych w Zabrzu i miastach ościennych (Gliwice, Ruda Śląska, Bytom). Nie uczymy się na Twoim domu. Zobacz naszą <a href="/realizacje/dom-jednorodzinny-zabrze-gwiazdy-polarnej">realizację domu 200 m² w Zabrzu</a> — dokumentujemy każdy etap budowy ze zdjęciami.',
       },
       {
         icon: 'trendingUp',

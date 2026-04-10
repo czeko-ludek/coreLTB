@@ -109,6 +109,7 @@ import {
   Handshake,
   ExternalLink,
   DoorClosed,
+  ImageIcon,
 } from 'lucide-react';
 
 const iconMap = {
@@ -226,6 +227,7 @@ const iconMap = {
   handshake: Handshake,
   externalLink: ExternalLink,
   doorClosed: DoorClosed,
+  image: ImageIcon,
 };
 
 export type IconName = keyof typeof iconMap;

@@ -6,6 +6,12 @@
 - Polish language content, SEO-focused
 - No Framer Motion — all animations use CSS transitions/keyframes + `useInView` from `react-intersection-observer`
 
+## Performance Optimization (PLANNED)
+- Mobile PSI: 63/100, Desktop: 83/100 (mediana, kwiecien 2026)
+- Root cause: `output: 'export'` laduje WSZYSTKIE chunki JS (~2.2 MB niepotrzebnego) na kazdej stronie
+- Plan: migracja na SSR via `@opennextjs/cloudflare` (OpenNext) — per-page code splitting, prognoza +15-25 pkt mobile
+- **Full docs: `docs/OPTYMALIZACJA-PERFORMANCE.md`** — root cause analysis, zrealizowane optymalizacje, plan migracji, SEO impact
+
 ## Git Workflow & Deployment
 - **`v3`** — main working branch, **direct production deploys** to **coreltb.pl** (Cloudflare Pages)
 - Every push to `v3` auto-deploys to production — no merge needed
@@ -182,6 +188,66 @@ Scalable system for city-specific landing pages at `/obszar-dzialania/[slug]`.
 
 **Old file:** `data/local-pages.ts` is deprecated (still exists but no imports reference it)
 
+## Realizacje System (data/realizacje/)
+Scalable system for construction case studies (build diaries) at `/realizacje` and `/realizacje/[slug]`.
+
+**Architecture:**
+- `data/realizacje/types.ts` — all interfaces: `RealizationData`, `BuildStage`, `StageImage`, `ProjectCard`, `ExpertInsight`, `StageChallenge`, `TechnicalFact`, `MidBuildCTA`, `RealizationFAQItem`, `RealizationSummary`, `RealizationListingItem`
+- `data/realizacje/shared-content.ts` — `STAGE_LIBRARY` with default expert insights and technical facts per stage type
+- `data/realizacje/index.ts` — public API: `allRealizations`, `allRealizationListings`, `getRealizationBySlug()`, `getAllRealizationSlugs()`. Derives listing items from full data with progress calculation.
+- `data/realizacje/projects/*.ts` — one file per realization
+
+**Active realizations:**
+- `zabrze-2024.ts` — Dom 200 m2, Zabrze, ul. Gwiazdy Polarnej. Status: in-progress (85%). 8 stages documented. Ceramika szlifowana 24.5cm, strop monolityczny, blacha na rabek, pompa ciepla Buderus, LOXONE. 33 photos.
+
+**Removed:** `mikolow-2025.ts` — placeholder, removed from listing (will add when real data available)
+
+**Adding a new realization:** Create `data/realizacje/projects/{slug}.ts` exporting `RealizationData`, add import to `index.ts` `allRealizationsRaw[]`, add photos to `public/images/realizacje/{slug}/`.
+
+**Progress system:** Each `ProjectCard` has optional `progress?: number` (0-100) that overrides the heuristic (which counts stages with narrative+images). Important for in-progress builds where all stages are documented but build isn't complete.
+
+**Listing page (`/realizacje`):**
+- Layout: baza-wiedzy style — no hero image, breadcrumbs + H1 + description inline
+- H1: "Budowa domu **krok po kroku**" (golden highlight)
+- Status filters: Wszystkie / W trakcie (golden) / Zakonczone (green) — with counts
+- Grid: `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`
+- SEO title: `Budowa domu krok po kroku - Realizacje ze zdjeciami | CoreLTB`
+- Component: `RealizacjeListingSection` (client, with filters)
+
+**Detail page (`/realizacje/[slug]`):**
+- TOC: mobile — collapsible accordion at top (collapsed by default), desktop — sticky sidebar
+- Article: hero image with lightbox, stage timeline with interleaved midCTAs
+- Each stage: gallery (1/2/3+ image layouts), narrative, challenge box (amber), expert insight box (green), technical facts bar
+- Summary: dark stats card (bg-zinc-900) with icons, headline, description, CTA buttons
+- FAQ + ContactCTA at bottom
+- Schema.org: Article + ImageGallery + FAQPage
+
+**Realizacje components** in `components/sections/realizacje/`:
+- `RealizacjeListingSection` — listing page with status filters (client component)
+- `RealizationCard` — listing card with status badge (golden for in-progress), spec pills, progress bar
+- `RealizationArticle` — full article body with shared lightbox
+- `RealizationContent` — TOC with mobile collapsible + desktop sticky sidebar
+- `BuildTimeline` — interleaves stages with midCTAs
+- `BuildStageEntry` — single stage: gallery, narrative, challenge/insight boxes, technical facts
+- `RealizationSummary` — dark stats card + testimonial + CTA
+- `ProjectInfoCard` — project specs card in article header
+- `MidBuildCTABlock` — calculator/consultation CTA between stages
+- `RealizationLightbox` — shared lightbox for all images (hero + stages)
+
+**Gallery layout (3+ images in BuildStageEntry):**
+- Grid: `grid-cols-[2fr_1fr]` with explicit height `h-[224px] md:h-[310px]`
+- Left: large image with caption below (flex-1 + flex-shrink-0)
+- Right: 2 stacked images with captions, "+N zdjec" badge on last if hidden images
+- Captions under images (not overlays), bottom edges aligned via shared container height
+
+**Status badge colors:**
+- "W trakcie" — golden (`bg-primary/90 text-zinc-900`) with pulsing dot
+- "Zakonczona" — green (`bg-green-500/90 text-white`)
+
+**Redirect removed:** Old `/realizacje -> /projekty` 301 redirect removed from `public/_redirects` (was from Venet migration).
+
+**Photos:** `public/images/realizacje/zabrze-2024/` — 33 SEO-named photos, ~37MB total (needs optimization). Named by stage: `fundamenty-*.jpg`, `sciany-*.jpg`, `strop-*.jpg`, `wiezba-*.jpg`, `dach-*.jpg`, `kanalizacja-*.jpg`, `ssz-*.jpg`, `instalacje-*.jpg`.
+
 ## Ads & Analytics (`docs/ads.md`)
 
 ### Platforms Status
@@ -276,6 +342,24 @@ Scalable system for city-specific landing pages at `/obszar-dzialania/[slug]`.
 - Calculator: all 8 OptionGroups support error pulse
 - Consultation: service type selection grid supports error pulse
 
+## Google Ads Reports (Skills)
+- **Skill:** `~/.claude/skills/google-ads-report.md` — schema for generating professional HTML campaign reports
+- **Template:** `google-ads/analizy/raport-coreltb-pelny-24mar-01apr.html` — reference report (dark theme, Manrope, gold accents, 13 sections)
+- **Data sources:** `google-ads/analizy/*.html` (exported from Google Sheets), `SEO/seo-agent/reports/full-report-*.md` (orchestrator)
+- **Logo:** `google-ads/analizy/logo-b64.txt` (base64 webp for embedding)
+- **Trigger phrases:** "raport kampanii", "raport google ads", "raport dla klienta"
+- **Sections:** KPI summary, daily breakdown, channels, landing pages, search terms (with category cards), devices/hours/days, funnel, SEO comparison, GBP, learning phase, campaign strategy, business value, recommendations
+
+## Business & Pricing
+- **`docs/BIBLIA-CEN-PROJEKTU.md`** — cennik, zakres uslug, model pracy, plan rozwoju, etapowanie systemu dzialek, abonament 3k/msc, timeline
+- **`docs/SYSTEM-DZIALEK.md`** — specyfikacja techniczna systemu dzialek (`/dzialki`), typy danych, architektura, etapowanie MVP/Rozszerzenie/Premium
+
+## Claude Code Workflow
+- **`docs/CLAUDE-CODE-IMPROVEMENTS.md`** — plan ulepszen workflow: rules folder, code review skill z 4 sub-agentami, pipeline (brainstorm->plan->execute->review->compound), compound learning, czyszczenie permissions
+- TODO: stworzyc `.claude/rules/` i przeniesc sekcje z CLAUDE.md (coding-standards, seo-system, ads-reports, local-pages, calculator-system, cloudflare-patterns)
+- TODO: stworzyc skille workflow (code-review, dev-brainstorm, dev-plan, compound)
+- TODO: stworzyc `.claude/insights.md` — compound learning z sesji
+
 ## Key Files
 - `app/wycena/page.tsx` — calculator LP (with `<Suspense>`)
 - `app/umow-konsultacje/page.tsx` — consultation LP (with `<Suspense>`)
@@ -285,6 +369,11 @@ Scalable system for city-specific landing pages at `/obszar-dzialania/[slug]`.
 - `lib/validation.ts` — shared phone validation (`validatePolishPhone`, `formatPolishPhone`)
 - `app/projekty/[slug]/page.tsx` — project detail page
 - `app/projekty/page.tsx` — projects listing (RSC)
+- `app/realizacje/page.tsx` — realizacje listing (baza-wiedzy style, status filters)
+- `app/realizacje/[slug]/page.tsx` — realizacja detail page (TOC + article + FAQ)
+- `data/realizacje/index.ts` — realizacje public API (listings, slugs, getBySlug)
+- `data/realizacje/types.ts` — all realizacje types
+- `data/realizacje/projects/zabrze-2024.ts` — first real realization (200m2, Zabrze)
 - `app/obszar-dzialania/[slug]/page.tsx` — local page route
 - `components/sections/shared/` — LPTrustBar, LPTestimonials, LPSteps
 - `components/sections/consultation/ConsultationForm.tsx` — consultation form
@@ -299,6 +388,13 @@ Scalable system for city-specific landing pages at `/obszar-dzialania/[slug]`.
 - `data/servicesV2.ts` — service definitions
 - `docs/ads.md` — ads & analytics config
 - `docs/LANDING-PAGES-STRATEGY.md` — full funnel strategy
+- `docs/INTERLINKING-MAP.md` — mapa interlinkingu: wszystkie linki wewnetrzne, status, plan
+
+## Internal Linking Strategy
+- **`docs/INTERLINKING-MAP.md`** — centralna mapa wszystkich linkow wewnetrznych na stronie
+- Tracks: existing links, newly added links, planned links with priorities
+- Content rendering: blog-data.ts uses HTML (dangerouslySetInnerHTML in BlogPostContent), realizacje expertInsight uses dangerouslySetInnerHTML, local page WhyUsSection uses dangerouslySetInnerHTML
+- **Update this doc after EVERY content change** that adds/removes internal links
 
 ## SEO System (SEO/seo-agent/)
 Node.js system with orchestrator + 3 specialized agents. Real data from GSC + GA4.

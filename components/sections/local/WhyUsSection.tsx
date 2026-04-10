@@ -38,9 +38,10 @@ function CompetencyCard({ comp, index }: { comp: WhyUsCard; index: number }) {
       <h3 className="text-lg font-bold text-text-primary mt-4 group-hover:text-primary transition-colors">
         {comp.title}
       </h3>
-      <p className="text-sm text-text-secondary mt-2 leading-relaxed">
-        {comp.description}
-      </p>
+      <p
+        className="text-sm text-text-secondary mt-2 leading-relaxed [&_a]:text-primary [&_a]:underline [&_a]:font-medium hover:[&_a]:text-primary-dark"
+        dangerouslySetInnerHTML={{ __html: comp.description }}
+      />
     </div>
   );
 }

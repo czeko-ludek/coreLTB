@@ -69,7 +69,7 @@
 
 # ── INNE STARE STRONY ────────────────────────────────────────
 
-/realizacje /projekty 301
+# /realizacje — usunięty redirect, mamy nową stronę /realizacje (dzienniki budowy)
 /o-firmie /o-nas 301
 /kontakt-z-nami /kontakt 301
 
