@@ -34,7 +34,7 @@ export const zabrze2024: RealizationData = {
     startDate: 'Październik 2024',
     endDate: undefined,
     status: 'in-progress',
-    heroImage: `${IMG}/hero.jpg`,
+    heroImage: `${IMG}/hero.webp`,
     progress: 85,
   },
 
@@ -54,27 +54,27 @@ export const zabrze2024: RealizationData = {
       ],
       images: [
         {
-          src: `${IMG}/fundamenty-lawy-zbrojenie.jpg`,
+          src: `${IMG}/fundamenty-lawy-zbrojenie.webp`,
           alt: 'Ławy fundamentowe ze zbrojeniem — budowa domu w Zabrzu',
           caption: 'Ławy fundamentowe z widocznym zbrojeniem i kanalizacją podposadzkową',
         },
         {
-          src: `${IMG}/fundamenty-bloczki-zalewowe.jpg`,
+          src: `${IMG}/fundamenty-bloczki-zalewowe.webp`,
           alt: 'Bloczki zalewowe na ścianach fundamentowych domu w Zabrzu',
           caption: 'Ściany fundamentowe z bloczków zalewowych ze zbrojeniem pionowym',
         },
         {
-          src: `${IMG}/fundamenty-izolacja-detal.jpg`,
+          src: `${IMG}/fundamenty-izolacja-detal.webp`,
           alt: 'Zbrojenie ław fundamentowych z izolacją — detal',
           caption: 'Zbrojenie ław z izolacją XPS i folią kubełkową',
         },
         {
-          src: `${IMG}/fundamenty-hydroizolacja-panorama.jpg`,
+          src: `${IMG}/fundamenty-hydroizolacja-panorama.webp`,
           alt: 'Panorama fundamentów z hydroizolacją — dom 200 m2 w Zabrzu',
           caption: 'Panorama fundamentów z kompletną hydroizolacją',
         },
         {
-          src: `${IMG}/fundamenty-zalane.jpg`,
+          src: `${IMG}/fundamenty-zalane.webp`,
           alt: 'Zalane ławy fundamentowe — chudziak betonowy na podbudowie',
           caption: 'Ławy po zalaniu betonem — widoczna podsypka i zbrojenie',
         },
@@ -109,22 +109,22 @@ export const zabrze2024: RealizationData = {
       ],
       images: [
         {
-          src: `${IMG}/sciany-widok-ogolny.jpg`,
+          src: `${IMG}/sciany-widok-ogolny.webp`,
           alt: 'Ściany z pustaków ceramicznych szlifowanych — widok na budowę domu w Zabrzu',
           caption: 'Ściany nośne w trakcie murowania — pustaki ceramiczne szlifowane 24,5 cm',
         },
         {
-          src: `${IMG}/sciany-ceramika-wnetrze.jpg`,
+          src: `${IMG}/sciany-ceramika-wnetrze.webp`,
           alt: 'Wnętrze pokoju z murowanymi ścianami ceramicznymi — budowa w Zabrzu',
           caption: 'Ściany nośne od wewnątrz — widoczna precyzja murowania na cienką spoinę',
         },
         {
-          src: `${IMG}/sciany-dzialowe-strop.jpg`,
+          src: `${IMG}/sciany-dzialowe-strop.webp`,
           alt: 'Ściany działowe ceramiczne pod stropem monolitycznym',
           caption: 'Ściany działowe 11,5 cm pod stropem — widoczne nadproża',
         },
         {
-          src: `${IMG}/sciany-otwor-drzwiowy.jpg`,
+          src: `${IMG}/sciany-otwor-drzwiowy.webp`,
           alt: 'Otwór drzwiowy w ścianach ceramicznych z nadprożem',
           caption: 'Precyzyjnie wymurowany otwór drzwiowy z nadprożem prefabrykowanym',
         },
@@ -159,17 +159,17 @@ export const zabrze2024: RealizationData = {
       ],
       images: [
         {
-          src: `${IMG}/strop-stemple.jpg`,
+          src: `${IMG}/strop-stemple.webp`,
           alt: 'Stemple stropowe podtrzymujące strop monolityczny — dom w Zabrzu',
           caption: 'Stemple podtrzymujące strop — widoczna ściana działowa ceramiczna',
         },
         {
-          src: `${IMG}/strop-widok-garaz.jpg`,
+          src: `${IMG}/strop-widok-garaz.webp`,
           alt: 'Widok z garażu na strop monolityczny i przygotowane drewno na więźbę',
           caption: 'Widok z garażu — strop gotowy, drewno na więźbę dostarczone',
         },
         {
-          src: `${IMG}/strop-korytarz.jpg`,
+          src: `${IMG}/strop-korytarz.webp`,
           alt: 'Korytarz z widocznym stropem monolitycznym i ścianami działowymi',
           caption: 'Korytarz — strop monolityczny nad ścianami działowymi ceramicznymi',
         },
@@ -197,22 +197,22 @@ export const zabrze2024: RealizationData = {
       ],
       images: [
         {
-          src: `${IMG}/wiezba-dron-panorama.jpg`,
+          src: `${IMG}/wiezba-dron-panorama.webp`,
           alt: 'Więźba dachowa z drona — widok na konstrukcję wielospadową domu w Zabrzu',
           caption: 'Więźba wielospadowa z lotu ptaka — drewno C24 certyfikowane',
         },
         {
-          src: `${IMG}/wiezba-konstrukcja-bliska.jpg`,
+          src: `${IMG}/wiezba-konstrukcja-bliska.webp`,
           alt: 'Konstrukcja więźby dachowej z bliska — krokwie i płatwie drewniane',
           caption: 'Detal konstrukcji — krokwie narożne i koszowe z drewna C24',
         },
         {
-          src: `${IMG}/wiezba-wielospadowa-detal.jpg`,
+          src: `${IMG}/wiezba-wielospadowa-detal.webp`,
           alt: 'Złożona konstrukcja więźby wielospadowej — połączenia krokwi',
           caption: 'Złożoność połączeń krokwi w dachu wielospadowym',
         },
         {
-          src: `${IMG}/wiezba-deskowanie-montaz.jpg`,
+          src: `${IMG}/wiezba-deskowanie-montaz.webp`,
           alt: 'Montaż pełnego deskowania na więźbie — ekipa ciesielska na dachu',
           caption: 'Montaż pełnego deskowania — podkład pod blachę na rąbek',
         },
@@ -247,17 +247,17 @@ export const zabrze2024: RealizationData = {
       ],
       images: [
         {
-          src: `${IMG}/dach-deskowanie-pelne.jpg`,
+          src: `${IMG}/dach-deskowanie-pelne.webp`,
           alt: 'Pełne deskowanie dachu z zamontowanymi oknami — dom w Zabrzu z drona',
           caption: 'Deskowanie kompletne — widoczne zamontowane okna i rusztowania',
         },
         {
-          src: `${IMG}/dach-deskowanie-detal.jpg`,
+          src: `${IMG}/dach-deskowanie-detal.webp`,
           alt: 'Detal pełnego deskowania dachu wielospadowego',
           caption: 'Detal deskowania — połączenie połaci z widoczną więźbą garażu',
         },
         {
-          src: `${IMG}/dach-blacha-rabek-dron.jpg`,
+          src: `${IMG}/dach-blacha-rabek-dron.webp`,
           alt: 'Gotowy dach z blachy na rąbek stojący — ujęcie z drona nad domem w Zabrzu',
           caption: 'Gotowe pokrycie z blachy na rąbek stojący — widok z drona',
         },
@@ -292,17 +292,17 @@ export const zabrze2024: RealizationData = {
       ],
       images: [
         {
-          src: `${IMG}/kanalizacja-rury-wykop.jpg`,
+          src: `${IMG}/kanalizacja-rury-wykop.webp`,
           alt: 'Rury kanalizacyjne PVC w wykopie wzdłuż fundamentów domu w Zabrzu',
           caption: 'Rury kanalizacyjne PVC 160 mm w wykopie przy fundamentach',
         },
         {
-          src: `${IMG}/kanalizacja-trasa.jpg`,
+          src: `${IMG}/kanalizacja-trasa.webp`,
           alt: 'Trasa kanalizacji zewnętrznej z kręgami studziennymi',
           caption: 'Trasa kanalizacji z widocznymi kręgami studziennymi',
         },
         {
-          src: `${IMG}/kanalizacja-przy-budynku.jpg`,
+          src: `${IMG}/kanalizacja-przy-budynku.webp`,
           alt: 'Kanalizacja zewnętrzna poprowadzona wzdłuż ściany budynku',
           caption: 'Rury ułożone ze spadkiem min. 2% w kierunku przyłącza',
         },
@@ -330,22 +330,22 @@ export const zabrze2024: RealizationData = {
       ],
       images: [
         {
-          src: `${IMG}/ssz-front-panorama.jpg`,
+          src: `${IMG}/ssz-front-panorama.webp`,
           alt: 'Dom w stanie surowym zamkniętym — front z oknami i dachem z blachy na rąbek',
           caption: 'Stan surowy zamknięty — front budynku z dużymi przeszkleniami',
         },
         {
-          src: `${IMG}/ssz-garaz-brama.jpg`,
+          src: `${IMG}/ssz-garaz-brama.webp`,
           alt: 'Garaż z bramą segmentową i dachem z blachy — dom w Zabrzu',
           caption: 'Garaż dwustanowiskowy z bramą segmentową',
         },
         {
-          src: `${IMG}/ssz-okna-bok.jpg`,
+          src: `${IMG}/ssz-okna-bok.webp`,
           alt: 'Boczna elewacja z oknami PCV Oknoplast — stan surowy zamknięty',
           caption: 'Okna Oknoplast w montażu Illbruck — widok z boku',
         },
         {
-          src: `${IMG}/ssz-wejscie-garaz.jpg`,
+          src: `${IMG}/ssz-wejscie-garaz.webp`,
           alt: 'Widok na wejście i garaż — dom w Zabrzu w stanie surowym zamkniętym',
           caption: 'Elewacja frontowa z wejściem i garażem — okna dachowe VELUX',
         },
@@ -381,32 +381,32 @@ export const zabrze2024: RealizationData = {
       ],
       images: [
         {
-          src: `${IMG}/instalacje-salon-podlogowka.jpg`,
+          src: `${IMG}/instalacje-salon-podlogowka.webp`,
           alt: 'Ogrzewanie podłogowe w salonie z rekuperacją — dom inteligentny w Zabrzu',
           caption: 'Salon — ogrzewanie podłogowe i rury rekuperacji pod stropem',
         },
         {
-          src: `${IMG}/instalacje-salon-okna.jpg`,
+          src: `${IMG}/instalacje-salon-okna.webp`,
           alt: 'Salon z ogrzewaniem podłogowym i dużymi oknami tarasowymi',
           caption: 'Salon z widokiem na taras — podłogówka przed wylewką',
         },
         {
-          src: `${IMG}/instalacje-sypialnia.jpg`,
+          src: `${IMG}/instalacje-sypialnia.webp`,
           alt: 'Ogrzewanie podłogowe w sypialni — rury PEX na macie systemowej',
           caption: 'Sypialnia — pętle ogrzewania podłogowego na folii odbijającej',
         },
         {
-          src: `${IMG}/instalacje-lazienka-laser.jpg`,
+          src: `${IMG}/instalacje-lazienka-laser.webp`,
           alt: 'Łazienka z ogrzewaniem podłogowym i tynkiem cementowym — laser niwelacyjny',
           caption: 'Łazienka — tynk cementowy, podłogówka, kontrola laserowa poziomu',
         },
         {
-          src: `${IMG}/instalacje-korytarz.jpg`,
+          src: `${IMG}/instalacje-korytarz.webp`,
           alt: 'Korytarz z ogrzewaniem podłogowym i tynkami gipsowymi',
           caption: 'Korytarz — ogrzewanie podłogowe z rozdziałem stref grzewczych',
         },
         {
-          src: `${IMG}/instalacje-rekuperacja-sypialnia.jpg`,
+          src: `${IMG}/instalacje-rekuperacja-sypialnia.webp`,
           alt: 'Sypialnia z rekuperacją i ogrzewaniem podłogowym — widok na instalacje',
           caption: 'Sypialnia — rury rekuperacji pod sufitem i ogrzewanie podłogowe',
         },
