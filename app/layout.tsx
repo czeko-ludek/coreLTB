@@ -300,16 +300,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@graph': [
-                {
-                  ...getLocalBusinessSchema(),
-                  aggregateRating: {
-                    '@type': 'AggregateRating',
-                    ratingValue: googleReviewsData.aggregateRating.toString(),
-                    reviewCount: googleReviewsData.totalReviews.toString(),
-                    bestRating: '5',
-                    worstRating: '1',
-                  },
-                },
+                getLocalBusinessSchema(),
                 {
                   '@type': 'WebSite',
                   '@id': `${companyData.url}/#website`,

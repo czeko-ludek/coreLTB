@@ -319,8 +319,30 @@ export default function Home() {
 		posts: latestPosts,
 	};
 
+	// AggregateRating schema — only on homepage (not global, GSC error fix)
+	const aggregateRatingSchema = {
+		'@context': 'https://schema.org',
+		'@type': 'LocalBusiness',
+		'@id': `${companyData.url}/#organization`,
+		name: companyData.name,
+		aggregateRating: {
+			'@type': 'AggregateRating',
+			ratingValue: googleReviewsData.aggregateRating.toString(),
+			reviewCount: googleReviewsData.totalReviews.toString(),
+			bestRating: '5',
+			worstRating: '1',
+		},
+	};
+
 	return (
 		<main>
+			<script
+				id="schema-aggregate-rating"
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify(aggregateRatingSchema).replace(/</g, '\\u003c'),
+				}}
+			/>
 			<HeroSection {...heroData} />
 			<AboutCompanySection {...aboutData} />
 			<ServiceShowcaseSection {...servicesData} />
