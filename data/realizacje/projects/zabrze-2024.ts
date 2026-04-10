@@ -214,7 +214,12 @@ export const zabrze2024: RealizationData = {
         {
           src: `${IMG}/wiezba-deskowanie-montaz.webp`,
           alt: 'Montaż pełnego deskowania na więźbie — ekipa ciesielska na dachu',
-          caption: 'Montaż pełnego deskowania — podkład pod blachę na rąbek',
+          caption: 'Montaż pełnego deskowania — ekipa ciesielska w trakcie pracy',
+        },
+        {
+          src: `${IMG}/dach-deskowanie-pelne.webp`,
+          alt: 'Gotowe pełne deskowanie dachu wielospadowego — widok z drona na dom w Zabrzu',
+          caption: 'Kompletne deskowanie pełne — gotowe pod montaż blachy na rąbek',
         },
       ],
       expertInsight: {
@@ -255,11 +260,6 @@ export const zabrze2024: RealizationData = {
           src: `${IMG}/dach-rabek-naroznik.webp`,
           alt: 'Detal narożnika dachu z blachy na rąbek stojący — obróbka blacharska',
           caption: 'Narożnik dachu wielospadowego — precyzyjna obróbka blacharska na rąbek',
-        },
-        {
-          src: `${IMG}/dach-deskowanie-pelne.webp`,
-          alt: 'Pełne deskowanie dachu przed montażem blachy na rąbek — dom w Zabrzu',
-          caption: 'Deskowanie pełne — podkład pod blachę na rąbek (etap pośredni)',
         },
       ],
       expertInsight: {
