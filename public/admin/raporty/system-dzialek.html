@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>System Dzialek Budowlanych — CoreLTB Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #dfbb68;
+    --gold-dark: #d4a847;
+    --gold-light: #e8cc8a;
+    --gold-pale: #f5ecd7;
+    --bg-dark: #1a1a1a;
+    --bg-card: #232323;
+    --bg-light: #fafaf9;
+    --bg-cream: #f5f5f3;
+    --text-primary: #1a1a1a;
+    --text-secondary: #555;
+    --text-light: #888;
+    --green: #22c55e;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --purple: #8b5cf6;
+    --amber: #f59e0b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-primary);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: var(--bg-dark);
+    padding: 56px 0 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 130%, rgba(223,187,104,0.18) 0%, transparent 70%);
+  }
+  .header-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .header .pre-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .header h1 span { color: var(--gold); }
+  .header .subtitle {
+    font-size: 15px;
+    color: #aaa;
+    font-weight: 400;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .header .period-badge {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 6px 20px;
+    background: rgba(223,187,104,0.15);
+    border: 1px solid var(--gold);
+    border-radius: 24px;
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  /* ===== LAYOUT ===== */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+  section { margin: 48px 0; }
+
+  /* ===== SECTION TITLE ===== */
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--bg-dark);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .icon {
+    width: 32px;
+    height: 32px;
+    background: var(--gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    color: var(--bg-dark);
+    font-weight: 800;
+  }
+
+  /* ===== SUMMARY GRID ===== */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .summary-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border: 1px solid #eee;
+  }
+  .summary-card .label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .summary-card .value {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--bg-dark);
+  }
+  .summary-card .note {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+  .summary-card.highlight {
+    background: var(--bg-dark);
+    border-color: var(--gold);
+  }
+  .summary-card.highlight .label { color: var(--gold-light); }
+  .summary-card.highlight .value { color: #fff; }
+  .summary-card.highlight .note { color: #aaa; }
+
+  /* ===== STAT BOX ===== */
+  .stat-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid #eee;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  /* ===== TABLES ===== */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border: 1px solid #eee;
+    background: #fff;
+    margin-bottom: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  thead th {
+    background: var(--bg-dark);
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #fafaf9; }
+  .text-center { text-align: center; }
+  .text-green { color: var(--green); font-weight: 700; }
+  .text-gold { color: var(--gold-dark); font-weight: 700; }
+  .text-muted { color: var(--text-light); }
+  .highlight-col { background: rgba(223,187,104,0.04); border-left: 2px solid var(--gold); }
+
+  /* ===== INSIGHT BOX ===== */
+  .insight-box {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #2a2520 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    border-left: 4px solid var(--gold);
+  }
+  .insight-box h3 {
+    color: var(--gold);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .insight-box p, .insight-box li {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #ccc;
+  }
+  .insight-box ul { list-style: none; padding: 0; }
+  .insight-box li { padding: 4px 0 4px 20px; position: relative; }
+  .insight-box li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 12px;
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  /* ===== BADGES ===== */
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  .badge-green { background: #dcfce7; color: #15803d; }
+  .badge-gold { background: var(--gold-pale); color: #92700a; }
+  .badge-blue { background: #dbeafe; color: #1d4ed8; }
+
+  /* ===== FEATURE CARDS ===== */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .feature-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    transition: border-color 0.2s;
+  }
+  .feature-card:hover { border-color: var(--gold); }
+  .feature-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .feature-card p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .feature-card .icon-box {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .icon-gold { background: var(--gold-pale); color: #92700a; }
+  .icon-green { background: #dcfce7; color: #15803d; }
+  .icon-blue { background: #dbeafe; color: #1d4ed8; }
+  .icon-amber { background: #fef3c7; color: #92400e; }
+
+  /* ===== CHECK LIST ===== */
+  .check-list { list-style: none; padding: 0; }
+  .check-list li {
+    padding: 6px 0 6px 24px;
+    position: relative;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .check-list li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0; top: 6px;
+    color: var(--green);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  /* ===== NOTE BOX ===== */
+  .note-box {
+    background: #fffbeb;
+    border: 1px solid #fbbf24;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+  .note-box h4 { color: #92400e; font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .note-box p { color: #78350f; font-size: 14px; line-height: 1.6; }
+  .note-box-green { background: #f0fdf4; border-color: var(--green); }
+  .note-box-green h4 { color: #15803d; }
+  .note-box-green p { color: #166534; }
+
+  /* ===== FLOW DIAGRAM ===== */
+  .flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 28px 0;
+  }
+  .flow-step {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 16px 20px;
+    text-align: center;
+    min-width: 150px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .flow-step .f-icon { font-size: 22px; margin-bottom: 6px; }
+  .flow-step .f-label { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+  .flow-step .f-sub { font-size: 11px; color: var(--text-light); }
+  .flow-step.gold { border-color: var(--gold); background: var(--gold-pale); }
+  .flow-step.green-border { border-color: var(--green); }
+  .flow-arrow { font-size: 18px; color: var(--gold); padding: 0 10px; flex-shrink: 0; }
+
+  /* ===== TWO COL ===== */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* ===== MOCKUP SCREENS ===== */
+  .mockup-browser {
+    background: var(--bg-dark);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .mockup-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.3);
+    border-bottom: 1px solid #333;
+  }
+  .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .mockup-dot.r { background: #ef4444; }
+  .mockup-dot.y { background: #f59e0b; }
+  .mockup-dot.g { background: #22c55e; }
+  .mockup-url {
+    flex: 1;
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 11px;
+    color: #888;
+    margin-left: 8px;
+  }
+  .mockup-body {
+    padding: 20px;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mock-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .mock-chip {
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    background: #333;
+    color: #999;
+  }
+  .mock-chip.active { background: var(--gold); color: #000; }
+
+  .mock-card-row { display: flex; gap: 10px; }
+  .mock-card {
+    flex: 1;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .mock-card-img { height: 50px; background: linear-gradient(135deg, rgba(223,187,104,0.15), rgba(223,187,104,0.05)); }
+  .mock-card-body { padding: 8px; }
+  .mock-card-price { font-size: 13px; font-weight: 800; color: var(--gold); }
+  .mock-card-loc { font-size: 9px; color: #666; margin-top: 1px; }
+  .mock-card-specs { display: flex; gap: 6px; margin-top: 4px; }
+  .mock-card-spec { font-size: 9px; color: #666; background: rgba(255,255,255,0.04); padding: 1px 5px; border-radius: 3px; }
+
+  .mock-split { display: flex; gap: 0; height: 200px; }
+  .mock-sidebar-area { width: 35%; border-right: 1px solid #333; overflow: hidden; display: flex; flex-direction: column; }
+  .mock-sidebar-card { padding: 8px; border-bottom: 1px solid #333; }
+  .mock-sidebar-price { font-size: 11px; font-weight: 700; color: var(--gold); }
+  .mock-sidebar-loc { font-size: 9px; color: #666; }
+  .mock-map-area {
+    flex: 1;
+    background: radial-gradient(circle at 30% 40%, rgba(223,187,104,0.12) 0%, transparent 30%),
+                radial-gradient(circle at 70% 60%, rgba(34,197,94,0.08) 0%, transparent 25%),
+                linear-gradient(135deg, #1a2332, #0f1922);
+    position: relative;
+  }
+  .mock-pin {
+    position: absolute;
+    background: var(--green);
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .mock-pin.gold { background: var(--gold); color: #000; }
+  .mock-cluster {
+    position: absolute;
+    width: 30px; height: 30px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    color: #000;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 9px; top: 8px; bottom: 8px;
+    width: 2px;
+    background: #ddd;
+  }
+  .timeline-item { position: relative; margin-bottom: 24px; }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -22px; top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    z-index: 1;
+  }
+  .timeline-item.done::before { background: var(--green); }
+  .timeline-item.future::before { background: #ddd; }
+  .timeline-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .timeline-item p { font-size: 13px; color: var(--text-secondary); }
+  .tag-done { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: #dcfce7; color: #15803d; margin-left: 6px; }
+  .tag-next { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: var(--gold-pale); color: #92700a; margin-left: 6px; }
+  .tag-planned { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: #f3f4f6; color: #6b7280; margin-left: 6px; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid #eee;
+    color: var(--text-light);
+    font-size: 13px;
+  }
+
+  @media (max-width: 768px) {
+    .feature-grid, .two-col { grid-template-columns: 1fr; }
+    .three-col { grid-template-columns: 1fr; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .flow { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <div class="header-inner">
+    <div class="pre-title">Nowy komponent coreltb.pl</div>
+    <h1>System <span>Dzialek Budowlanych</span></h1>
+    <div class="subtitle">
+      Kompletna platforma do prezentacji i sprzedazy dzialek budowlanych
+      z interaktywna mapa, filtrami i integracja z kalkulatorem wyceny.
+    </div>
+    <div class="period-badge">Kwiecien 2026 &middot; Aktywny na coreltb.pl/dzialki</div>
+  </div>
+</div>
+
+<!-- ===== KPI ===== -->
+<section>
+  <div class="container">
+    <div class="summary-grid">
+      <div class="summary-card highlight">
+        <div class="label">Dzialki</div>
+        <div class="value" style="color:var(--gold)">41</div>
+        <div class="note">w bazie danych</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Miasta</div>
+        <div class="value">16</div>
+        <div class="note">lokalizacji</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Strony SEO</div>
+        <div class="value" style="color:var(--gold-dark)">35+</div>
+        <div class="note">wygenerowanych</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Kod</div>
+        <div class="value">~4 400</div>
+        <div class="note">linii w 12 plikach</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CO DOSTAJESZ ===== -->
+<section>
+  <div class="container">
+    <h2 class="section-title">
+      <span class="icon">&#128205;</span>
+      Co dostajesz w tym module?
+    </h2>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h4><span class="icon-box icon-gold">&#128203;</span> Listing dzialek</h4>
+        <p>Strona <strong>/dzialki</strong> z kafelkami w stylu OtoDom. Cena, powierzchnia, media, MPZP, zdjecie i badge dostepnosci. Responsywny grid 1-3 kolumny z filtrami cenowymi.</p>
+      </div>
+      <div class="feature-card">
+        <h4><span class="icon-box icon-green">&#128205;</span> Mapa interaktywna</h4>
+        <p>Leaflet z pinami cen, klasteringiem, popupami ze zdjeciami i synchronizacja z lista. Fullscreen overlay, boundary overlay granic gmin, Ctrl+scroll zoom.</p>
+      </div>
+      <div class="feature-card">
+        <h4><span class="icon-box icon-blue">&#128269;</span> Wyszukiwarka lokalizacji</h4>
+        <p>Autocomplete z hierarchia: wojewodztwo &rarr; powiat &rarr; gmina &rarr; miejscowosc. 35+ lokalizacji z nawigacja klawiatura, debounce i breadcrumbami.</p>
+      </div>
+      <div class="feature-card">
+        <h4><span class="icon-box icon-amber">&#128200;</span> SEO per miasto</h4>
+        <p>Kazde miasto/gmina ma wlasna podstrone z unikatowym H1, meta description, dynamicznym FAQ i Schema.org FAQPage + RealEstateListing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LISTING MOCKUP ===== -->
+<section>
+  <div class="container">
+    <h2 class="section-title">
+      <span class="icon">&#128203;</span>
+      Widok listy dzialek
+    </h2>
+
+    <div class="two-col" style="gap:28px;align-items:start">
+      <div>
+        <p style="margin-bottom:16px;color:var(--text-secondary)">
+          Strona glowna dzialek wyswietla kafelki z pelnym zestawem informacji.
+          Kazda karta zaprojektowana, aby klient natychmiast widzial najwazniejsze parametry.
+        </p>
+        <ul class="check-list">
+          <li>Cena + cena za m2 — widoczne od razu</li>
+          <li>Badge dostepnosci — Dostepna / Rezerwacja / Sprzedana</li>
+          <li>Informacja o MPZP</li>
+          <li>Pills mediow — Woda, Prad, Gaz, Kanalizacja</li>
+          <li>Przycisk "Sprawdz koszt budowy" &rarr; kalkulator</li>
+          <li>Animacje wejscia ze stagger delay</li>
+        </ul>
+      </div>
+      <div class="mockup-browser">
+        <div class="mockup-toolbar">
+          <span class="mockup-dot r"></span>
+          <span class="mockup-dot y"></span>
+          <span class="mockup-dot g"></span>
+          <span class="mockup-url">coreltb.pl/dzialki</span>
+        </div>
+        <div class="mockup-body">
+          <div class="mock-chips">
+            <span class="mock-chip active">Wszystkie (41)</span>
+            <span class="mock-chip">Wodzislawski (22)</span>
+            <span class="mock-chip">Rybnik (10)</span>
+          </div>
+          <div class="mock-card-row">
+            <div class="mock-card">
+              <div class="mock-card-img"></div>
+              <div class="mock-card-body">
+                <div class="mock-card-price">225 000 zl</div>
+                <div class="mock-card-loc">Godow, Skrzyszow</div>
+                <div class="mock-card-specs">
+                  <span class="mock-card-spec">2 780 m2</span>
+                  <span class="mock-card-spec">81 zl/m2</span>
+                </div>
+              </div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card-img"></div>
+              <div class="mock-card-body">
+                <div class="mock-card-price">77 000 zl</div>
+                <div class="mock-card-loc">Wodzislaw Sl.</div>
+                <div class="mock-card-specs">
+                  <span class="mock-card-spec">545 m2</span>
+                  <span class="mock-card-spec">141 zl/m2</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAPA MOCKUP ===== -->
+<section>
+  <div class="container">
+    <h2 class="section-title">
+      <span class="icon">&#128205;</span>
+      Mapa interaktywna — split view
+    </h2>
+
+    <div class="two-col" style="gap:28px;align-items:start">
+      <div class="mockup-browser">
+        <div class="mockup-toolbar">
+          <span class="mockup-dot r"></span>
+          <span class="mockup-dot y"></span>
+          <span class="mockup-dot g"></span>
+          <span class="mockup-url">coreltb.pl/dzialki — tryb mapy</span>
+        </div>
+        <div style="padding:0">
+          <div class="mock-split">
+            <div class="mock-sidebar-area">
+              <div class="mock-sidebar-card">
+                <div class="mock-sidebar-price">225 000 zl</div>
+                <div class="mock-sidebar-loc">Godow, Skrzyszow</div>
+              </div>
+              <div class="mock-sidebar-card" style="border-left:3px solid var(--gold);background:rgba(223,187,104,0.05)">
+                <div class="mock-sidebar-price">77 000 zl</div>
+                <div class="mock-sidebar-loc">Wodzislaw Slaski</div>
+              </div>
+              <div class="mock-sidebar-card">
+                <div class="mock-sidebar-price">180 000 zl</div>
+                <div class="mock-sidebar-loc">Gorzyce</div>
+              </div>
+              <div class="mock-sidebar-card">
+                <div class="mock-sidebar-price">145 000 zl</div>
+                <div class="mock-sidebar-loc">Lyski, Sumina</div>
+              </div>
+            </div>
+            <div class="mock-map-area">
+              <div class="mock-pin" style="top:25%;left:35%">225k</div>
+              <div class="mock-pin gold" style="top:55%;left:20%">77k</div>
+              <div class="mock-pin" style="top:40%;left:60%">180k</div>
+              <div class="mock-cluster" style="top:15%;left:70%">5</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="margin-bottom:16px;color:var(--text-secondary)">
+          Po kliknieciu "Pokaz na mapie" otwiera sie fullscreen overlay z mapa i lista kart.
+          Kazda dzialka ma pin z cena — zielone dla dostepnych, zlote dla rezerwacji.
+        </p>
+        <ul class="check-list">
+          <li><strong>Split view</strong> — sidebar z kartami + mapa obok</li>
+          <li><strong>Piny cen</strong> — cena bezposrednio na mapie</li>
+          <li><strong>Clustering</strong> — grupowanie w zlote kolka</li>
+          <li><strong>Popup z galeria</strong> — zdjecia, cena, parametry</li>
+          <li><strong>Synchronizacja</strong> — hover na karcie podswietla pin</li>
+          <li><strong>Boundary overlay</strong> — granice gminy/miasta</li>
+          <li><strong>Ctrl+scroll zoom</strong> — zapobiega przypadkowemu zoomowi</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MONETYZACJA ===== -->
+<section>
+  <div class="container">
+    <h2 class="section-title">
+      <span class="icon">&#128176;</span>
+      Jak system generuje leady na budowe?
+    </h2>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="f-icon">&#128269;</div>
+        <div class="f-label">Klient szuka dzialki</div>
+        <div class="f-sub">Google / reklama</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="f-icon">&#128205;</div>
+        <div class="f-label">Przegladanie dzialek</div>
+        <div class="f-sub">Mapa, filtry, karty</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step gold">
+        <div class="f-icon">&#128200;</div>
+        <div class="f-label" style="color:#92700a">Sprawdz koszt budowy</div>
+        <div class="f-sub" style="color:#92700a">Kalkulator wyceny</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step green-border">
+        <div class="f-icon">&#128222;</div>
+        <div class="f-label" style="color:var(--green)">LEAD &rarr; Budowa</div>
+        <div class="f-sub">Kontakt, spotkanie</div>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <h3>Kluczowa konwersja: Dzialka &rarr; Kalkulator budowy</h3>
+      <p>
+        Kazda karta dzialki ma przycisk <strong>"Sprawdz koszt budowy"</strong>, ktory prowadzi do kalkulatora
+        <code>/wycena</code> z automatycznym pre-fillem powierzchni. Klient klika jeden przycisk
+        i od razu widzi szacunkowy koszt budowy domu na TEJ dzialce.
+      </p>
+    </div>
+
+    <div class="two-col" style="margin-top:20px">
+      <div class="note-box-green note-box">
+        <h4>SEO — ruch organiczny</h4>
+        <p>35+ podstron z unikatowym contentem per miasto/gmina. Frazy typu "dzialki budowlane Wodzislaw Slaski" — dlugie ogony, na ktorych latwiej sie pozycjonowac. Kazda strona ma dynamiczne FAQ.</p>
+      </div>
+      <div class="note-box">
+        <h4>Cross-selling z projektami</h4>
+        <p>Dzialka &harr; najlepszy projekt domu. Klient przegladajacy projekty widzi "Szukasz dzialki?" i odwrotnie. Podwaja szanse na lead.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== POROWNANIE ===== -->
+<section>
+  <div class="container">
+    <h2 class="section-title">
+      <span class="icon">&#128200;</span>
+      Porownanie z liderami rynku
+    </h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:280px">Funkcjonalnosc</th>
+            <th class="text-center">OtoDom</th>
+            <th class="text-center">OLX</th>
+            <th class="highlight-col text-center" style="color:var(--gold)">CoreLTB</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Mapa interaktywna z pinami</td><td class="text-center text-green">&#10003;</td><td class="text-center text-green">&#10003;</td><td class="highlight-col text-center text-green">&#10003;</td></tr>
+          <tr><td>Split view (lista + mapa)</td><td class="text-center text-green">&#10003;</td><td class="text-center text-muted">&#10007;</td><td class="highlight-col text-center text-green">&#10003;</td></tr>
+          <tr><td>Piny cen na mapie</td><td class="text-center text-green">&#10003;</td><td class="text-center text-muted">&#10007;</td><td class="highlight-col text-center text-green">&#10003;</td></tr>
+          <tr><td>Clustering pinow</td><td class="text-center text-green">&#10003;</td><td class="text-center text-muted">&#10007;</td><td class="highlight-col text-center text-green">&#10003;</td></tr>
+          <tr><td>Popup ze zdjeciem + galeria</td><td class="text-center text-green">&#10003;</td><td class="text-center" style="color:var(--amber)">czesciowo</td><td class="highlight-col text-center text-green">&#10003;</td></tr>
+          <tr><td>Hover synchronizacja</td><td class="text-center text-green">&#10003;</td><td class="text-center text-muted">&#10007;</td><td class="highlight-col text-center text-green">&#10003;</td></tr>
+          <tr><td>Wyszukiwarka z hierarchia</td><td class="text-center text-green">&#10003;</td><td class="text-center" style="color:var(--amber)">czesciowo</td><td class="highlight-col text-center text-green">&#10003;</td></tr>
+          <tr><td>Boundary overlay (granice)</td><td class="text-center text-green">&#10003;</td><td class="text-center text-muted">&#10007;</td><td class="highlight-col text-center text-green">&#10003;</td></tr>
+          <tr><td>Mobile bottom drawer</td><td class="text-center text-green">&#10003;</td><td class="text-center text-muted">&#10007;</td><td class="highlight-col text-center text-green">&#10003;</td></tr>
+          <tr><td>SEO — podstrona per miasto</td><td class="text-center text-green">&#10003;</td><td class="text-center" style="color:var(--amber)">czesciowo</td><td class="highlight-col text-center text-green">&#10003;</td></tr>
+          <tr><td>Schema.org RealEstateListing</td><td class="text-center text-green">&#10003;</td><td class="text-center" style="color:var(--amber)">czesciowo</td><td class="highlight-col text-center text-green">&#10003;</td></tr>
+          <tr style="background:var(--gold-pale)"><td style="font-weight:700;color:var(--gold-dark)">Integracja z kalkulatorem budowy</td><td class="text-center text-muted">&#10007;</td><td class="text-center text-muted">&#10007;</td><td class="highlight-col text-center text-gold">&#10003; UNIKALNE</td></tr>
+          <tr style="background:var(--gold-pale)"><td style="font-weight:700;color:var(--gold-dark)">Klikniecie &rarr; wycena budowy</td><td class="text-center text-muted">&#10007;</td><td class="text-center text-muted">&#10007;</td><td class="highlight-col text-center text-gold">&#10003; UNIKALNE</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="insight-box">
+      <h3>Kluczowa przewaga CoreLTB</h3>
+      <p>
+        OtoDom i OLX to portale ogloszen — koniec ich roli to "zobaczylem dzialke, dzwonie do sprzedawcy".
+        CoreLTB idzie dalej: <strong>dzialka &rarr; kalkulator budowy &rarr; lead na budowe domu</strong>.
+        To zamyka pelny funnel od "szukam dzialki" do "chce budowac z CoreLTB".
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TECHNOLOGIE ===== -->
+<section>
+  <div class="container">
+    <h2 class="section-title">
+      <span class="icon">&#9881;</span>
+      Uzyte technologie
+    </h2>
+
+    <div class="three-col">
+      <div class="stat-box">
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">Leaflet + CartoDB</div>
+        <div style="font-size:12px;color:var(--text-secondary)">Mapa interaktywna, darmowa</div>
+      </div>
+      <div class="stat-box">
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">MarkerCluster</div>
+        <div style="font-size:12px;color:var(--text-secondary)">Grupowanie pinow</div>
+      </div>
+      <div class="stat-box">
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">Next.js App Router</div>
+        <div style="font-size:12px;color:var(--text-secondary)">SSG, dynamiczny routing</div>
+      </div>
+      <div class="stat-box">
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">Schema.org</div>
+        <div style="font-size:12px;color:var(--text-secondary)">FAQPage + RealEstateListing</div>
+      </div>
+      <div class="stat-box">
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">Nominatim API</div>
+        <div style="font-size:12px;color:var(--text-secondary)">Granice gmin na mapie</div>
+      </div>
+      <div class="stat-box">
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">Responsive Design</div>
+        <div style="font-size:12px;color:var(--text-secondary)">Desktop, tablet, telefon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATUS / TIMELINE ===== -->
+<section>
+  <div class="container">
+    <h2 class="section-title">
+      <span class="icon">&#128203;</span>
+      Co jest gotowe i co dalej
+    </h2>
+
+    <div class="two-col" style="gap:40px">
+      <div>
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:20px;color:var(--green)">&#10003; Zrealizowane</h3>
+        <div class="timeline">
+          <div class="timeline-item done">
+            <h4>Listing dzialek <span class="tag-done">gotowe</span></h4>
+            <p>Strona /dzialki z kafelkami, filtrami, sortowaniem i chipami regionow</p>
+          </div>
+          <div class="timeline-item done">
+            <h4>Karty dzialek — 2 tryby <span class="tag-done">gotowe</span></h4>
+            <p>Pelna karta (grid) + kompaktowa karta (sidebar mapy)</p>
+          </div>
+          <div class="timeline-item done">
+            <h4>Mapa interaktywna <span class="tag-done">gotowe</span></h4>
+            <p>Fullscreen, split view, piny cen, clustering, popupy, boundary overlay</p>
+          </div>
+          <div class="timeline-item done">
+            <h4>Wyszukiwarka lokalizacji <span class="tag-done">gotowe</span></h4>
+            <p>Autocomplete, 35+ lokalizacji, hierarchia, keyboard nav</p>
+          </div>
+          <div class="timeline-item done">
+            <h4>Mobile UX <span class="tag-done">gotowe</span></h4>
+            <p>Mapa pelnoekranowa, bottom drawer (styl Uber)</p>
+          </div>
+          <div class="timeline-item done">
+            <h4>SEO per miasto <span class="tag-done">gotowe</span></h4>
+            <p>35+ podstron, dynamiczne FAQ, Schema.org</p>
+          </div>
+          <div class="timeline-item done">
+            <h4>Scraper danych <span class="tag-done">gotowe</span></h4>
+            <p>Import 41 dzialek z geocodingiem i zdjeciami</p>
+          </div>
+          <div class="timeline-item done">
+            <h4>Integracja z kalkulatorem <span class="tag-done">gotowe</span></h4>
+            <p>"Sprawdz koszt budowy" z pre-fillem do /wycena</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:20px;color:var(--gold-dark)">&#9679; Dalszy rozwoj</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h4>Detail page /dzialki/[slug] <span class="tag-next">nastepne</span></h4>
+            <p>Strona szczegolowa z galeria, pelnym opisem, mini mapa i CTA</p>
+          </div>
+          <div class="timeline-item future">
+            <h4>CTA "Zamow audyt dzialki" <span class="tag-planned">planowane</span></h4>
+            <p>Link do formularza analizy z pre-fillem adresu</p>
+          </div>
+          <div class="timeline-item future">
+            <h4>Cross-linking z projektami <span class="tag-planned">planowane</span></h4>
+            <p>"Szukasz dzialki pod ten projekt?" i odwrotnie</p>
+          </div>
+          <div class="timeline-item future">
+            <h4>Eventy GA4 <span class="tag-planned">planowane</span></h4>
+            <p>Sledzenie plot_view, plot_calculator_click</p>
+          </div>
+          <div class="timeline-item future">
+            <h4>Nowe dzialki <span class="tag-planned">biezace</span></h4>
+            <p>Regularne dodawanie ofert, aktualizacja statusow</p>
+          </div>
+          <div class="timeline-item future">
+            <h4>Kampania PMax <span class="tag-planned">planowane</span></h4>
+            <p>Nowa grupa assetow dla fraz o dzialkach</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PODSUMOWANIE ===== -->
+<section>
+  <div class="container">
+    <h2 class="section-title">
+      <span class="icon">&#11088;</span>
+      Dlaczego ten system jest wart uwagi?
+    </h2>
+
+    <div class="three-col">
+      <div class="feature-card" style="border-color:#dcfce7">
+        <h4><span class="icon-box icon-green">&#10003;</span> Nowy kanal sprzedazy</h4>
+        <p>Kazda osoba szukajaca dzialki to potencjalny klient na budowe domu. System konwertuje ruch "szukam dzialki" na leady budowlane.</p>
+      </div>
+      <div class="feature-card" style="border-color:var(--gold-pale)">
+        <h4><span class="icon-box icon-gold">&#128200;</span> Poziom OtoDom</h4>
+        <p>Mapa z pinami, split view, clustering, synchronizacja, boundary overlay, autocomplete — profesjonalna platforma nieruchomosci.</p>
+      </div>
+      <div class="feature-card" style="border-color:#dbeafe">
+        <h4><span class="icon-box icon-blue">&#128203;</span> 35+ stron SEO</h4>
+        <p>Kazde miasto ma wlasna podstrone z unikatowym contentem, FAQ i Schema.org. Dziesiecki fraz dlugooglowych za darmo.</p>
+      </div>
+    </div>
+
+    <div class="insight-box" style="margin-top:28px;text-align:center">
+      <p style="font-size:15px;max-width:700px;margin:0 auto">
+        System dzialek to nie koszt — to <strong style="color:var(--gold)">inwestycja w nowy kanal sprzedazy</strong>.
+        Kazdy lead na budowe domu to kontrakt o wartosci setek tysiecy zlotych.
+        Wystarczy <strong style="color:#fff">1 klient pozyskany przez system dzialek</strong>,
+        aby zwrocil sie wielokrotnie.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>System Dzialek Budowlanych &mdash; CoreLTB Builders</p>
+  <p style="margin-top:4px;font-size:12px">Przygotowane przez Dawida &middot; Kwiecien 2026</p>
+</footer>
+
+</body>
+</html>

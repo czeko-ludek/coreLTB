@@ -4,16 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Raporty — CoreLTB Admin</title>
+<title>Admin Panel — CoreLTB</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --gold: #dfbb68;
     --gold-dark: #d4a847;
     --bg-dark: #1a1a1a;
+    --bg-sidebar: #111;
     --bg-card: #232323;
+    --border: #2a2a2a;
     --green: #22c55e;
     --blue: #3b82f6;
+    --purple: #a78bfa;
+    --amber: #f59e0b;
+    --text: #e5e5e5;
+    --text-muted: #888;
+    --text-dim: #555;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,140 +28,209 @@
   body {
     font-family: 'Manrope', sans-serif;
     background: var(--bg-dark);
-    color: #fff;
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 260px;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    overflow-y: auto;
+  }
+
+  .sidebar-logo {
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sidebar-logo img { height: 32px; }
+  .sidebar-logo .badge {
+    background: rgba(223,187,104,0.12);
+    color: var(--gold);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+
+  .sidebar-section {
+    padding: 20px 12px 8px;
+  }
+  .sidebar-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    padding: 0 8px;
+    margin-bottom: 8px;
+  }
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s;
+    margin-bottom: 2px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+  }
+  .sidebar-link:hover {
+    background: rgba(255,255,255,0.04);
+    color: var(--text);
+  }
+  .sidebar-link.active {
+    background: rgba(223,187,104,0.1);
+    color: var(--gold);
+  }
+  .sidebar-link .icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.04);
+  }
+  .sidebar-link.active .icon {
+    background: rgba(223,187,104,0.15);
+  }
+  .sidebar-link .label { flex: 1; }
+  .sidebar-link .count {
+    font-size: 11px;
+    font-weight: 700;
+    background: rgba(255,255,255,0.06);
+    padding: 2px 7px;
+    border-radius: 10px;
+    color: var(--text-dim);
+  }
+  .sidebar-link.active .count {
+    background: rgba(223,187,104,0.15);
+    color: var(--gold);
+  }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding: 16px 20px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  .sidebar-footer a { color: var(--gold); text-decoration: none; }
+
+  /* ── MAIN ── */
+  .main {
+    flex: 1;
+    margin-left: 260px;
     min-height: 100vh;
   }
 
   .topbar {
-    background: var(--bg-card);
-    border-bottom: 1px solid #333;
-    padding: 16px 24px;
+    background: var(--bg-sidebar);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 50;
   }
-  .topbar-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .topbar img { height: 32px; }
-  .topbar .badge {
-    background: rgba(223,187,104,0.15);
-    color: var(--gold);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  .topbar .logout {
-    color: #666;
-    text-decoration: none;
-    font-size: 13px;
-    transition: color 0.2s;
-  }
-  .topbar .logout:hover { color: #fff; }
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px 24px;
-  }
-
-  h1 {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  h1 span { color: var(--gold); }
-  .subtitle {
-    color: #888;
-    font-size: 14px;
-    margin-bottom: 32px;
-  }
-
-  .section-label {
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--gold);
-    margin-bottom: 16px;
-  }
-
-  .report-list {
-    display: grid;
-    gap: 12px;
-  }
-
-  .report-card {
-    background: var(--bg-card);
-    border: 1px solid #333;
-    border-radius: 12px;
-    padding: 20px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: border-color 0.2s, transform 0.2s;
-    text-decoration: none;
-    color: #fff;
-  }
-  .report-card:hover {
-    border-color: var(--gold);
-    transform: translateY(-1px);
-  }
-
-  .report-info {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .report-icon {
-    width: 44px;
-    height: 44px;
-    background: rgba(223,187,104,0.1);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-  .report-title {
+  .topbar-title {
     font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 2px;
-  }
-  .report-meta {
-    font-size: 12px;
-    color: #888;
+    font-weight: 700;
     display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .topbar-title .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .topbar-breadcrumb {
+    font-size: 13px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .topbar-breadcrumb .sep { color: var(--text-dim); }
+  .topbar-breadcrumb .current { color: var(--text); font-weight: 600; }
+  .topbar-breadcrumb .back-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+  .topbar-breadcrumb .back-link:hover { color: var(--gold); }
+
+  .topbar-actions {
+    display: flex;
+    align-items: center;
     gap: 12px;
   }
-  .report-meta .tag {
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 600;
+  .topbar-actions a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    transition: color 0.15s;
   }
-  .tag-pmax { background: rgba(59,130,246,0.15); color: var(--blue); }
-  .tag-search { background: rgba(34,197,94,0.15); color: var(--green); }
-  .tag-seo { background: rgba(223,187,104,0.15); color: var(--gold); }
-  .tag-platform { background: rgba(139,92,246,0.15); color: #a78bfa; }
+  .topbar-actions a:hover { color: var(--text); }
 
-  .report-arrow {
-    color: #555;
-    font-size: 20px;
-    transition: color 0.2s;
-  }
-  .report-card:hover .report-arrow { color: var(--gold); }
+  /* ── PAGE CONTENT ── */
+  .page { display: none; }
+  .page.active { display: block; }
 
-  .empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    color: #666;
+  .page-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px 28px;
   }
 
+  .page-header {
+    margin-bottom: 28px;
+  }
+  .page-header h1 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .page-header h1 span { color: var(--gold); }
+  .page-header p {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  /* ── QUICK STATS ── */
   .stats-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -163,16 +239,17 @@
   }
   .stat-card {
     background: var(--bg-card);
-    border: 1px solid #333;
+    border: 1px solid var(--border);
     border-radius: 10px;
     padding: 16px;
     text-align: center;
   }
   .stat-label {
-    font-size: 11px;
-    color: #888;
+    font-size: 10px;
+    color: var(--text-dim);
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.5px;
     margin-bottom: 4px;
   }
   .stat-value {
@@ -181,116 +258,605 @@
   }
   .stat-note {
     font-size: 11px;
-    color: #555;
+    color: var(--text-dim);
     margin-top: 2px;
   }
 
-  @media (max-width: 640px) {
+  /* ── SECTION ── */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  /* ── REPORT CARDS ── */
+  .report-list { display: grid; gap: 10px; margin-bottom: 32px; }
+
+  .report-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: border-color 0.2s, transform 0.15s;
+    text-decoration: none;
+    color: var(--text);
+    cursor: pointer;
+  }
+  .report-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-1px);
+  }
+  .report-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .report-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(223,187,104,0.08);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .report-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .report-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .tag-pmax { background: rgba(59,130,246,0.12); color: var(--blue); }
+  .tag-seo { background: rgba(223,187,104,0.12); color: var(--gold); }
+  .tag-platform { background: rgba(139,92,246,0.12); color: var(--purple); }
+  .tag-component { background: rgba(34,197,94,0.12); color: var(--green); }
+
+  .report-arrow {
+    color: var(--text-dim);
+    font-size: 18px;
+    transition: color 0.2s;
+  }
+  .report-card:hover .report-arrow { color: var(--gold); }
+
+  /* ── DATE BADGE ── */
+  .date-badge {
+    font-size: 11px;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.04);
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--text-dim);
+  }
+  .empty-state .empty-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+    opacity: 0.4;
+  }
+  .empty-state p {
+    font-size: 13px;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  /* ── IFRAME PAGE ── */
+  .iframe-page {
+    width: 100%;
+    height: calc(100vh - 53px);
+    border: none;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
     .stats-row { grid-template-columns: 1fr 1fr; }
-    .report-meta { flex-direction: column; gap: 4px; }
   }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="topbar-left">
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
     <img src="data:image/webp;base64,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" alt="CoreLTB">
-    <span class="badge">Admin Panel</span>
+    <span class="badge">Admin</span>
   </div>
-  <a href="/admin/logout" class="logout">Wyloguj</a>
+
+  <!-- Raporty -->
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Raporty</div>
+    <button class="sidebar-link active" data-page="dashboard">
+      <span class="icon">&#128202;</span>
+      <span class="label">Dashboard</span>
+    </button>
+    <button class="sidebar-link" data-page="google-ads">
+      <span class="icon">&#128200;</span>
+      <span class="label">Google Ads PMax</span>
+      <span class="count">1</span>
+    </button>
+    <button class="sidebar-link" data-page="seo">
+      <span class="icon">&#128203;</span>
+      <span class="label">SEO & Analityka</span>
+      <span class="count">1</span>
+    </button>
+  </div>
+
+  <!-- CRM -->
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">CRM</div>
+    <button class="sidebar-link" data-page="platforma">
+      <span class="icon">&#9881;</span>
+      <span class="label">Plan platformy</span>
+      <span class="tag tag-platform" style="font-size:9px">PRO</span>
+    </button>
+  </div>
+
+  <!-- Komponenty -->
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Komponenty strony</div>
+    <button class="sidebar-link" data-page="dzialki">
+      <span class="icon">&#128205;</span>
+      <span class="label">System dzialek</span>
+      <span class="tag tag-component" style="font-size:9px">NOWE</span>
+    </button>
+    <button class="sidebar-link" data-page="realizacje">
+      <span class="icon">&#127959;</span>
+      <span class="label">Realizacje</span>
+    </button>
+  </div>
+
+  <div class="sidebar-footer">
+    CoreLTB Builders &middot; <a href="https://coreltb.pl">coreltb.pl</a>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title">
+      <span class="dot"></span>
+      <span id="topbar-text">Dashboard</span>
+    </div>
+    <div class="topbar-actions">
+      <a href="https://coreltb.pl" target="_blank">coreltb.pl &#8599;</a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- PAGE: DASHBOARD                         -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="page active" id="page-dashboard">
+    <div class="page-container">
+      <div class="page-header">
+        <h1>Panel <span>administracyjny</span></h1>
+        <p>Raporty, komponenty i dokumentacja projektu CoreLTB Builders</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Kampania</div>
+          <div class="stat-value" style="color:var(--gold)">PMax</div>
+          <div class="stat-note">Performance Max</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Status</div>
+          <div class="stat-value" style="color:var(--green)">Aktywna</div>
+          <div class="stat-note">od 24.03.2026</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Budzet</div>
+          <div class="stat-value">50 zl</div>
+          <div class="stat-note">dziennie</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Komponenty</div>
+          <div class="stat-value" style="color:var(--green)">2</div>
+          <div class="stat-note">nowe systemy</div>
+        </div>
+      </div>
+
+      <!-- Quick access cards -->
+      <div class="section-label">Szybki dostep</div>
+      <div class="report-list">
+        <div class="report-card" onclick="switchPage('google-ads')">
+          <div class="report-info">
+            <div class="report-icon" style="background:rgba(59,130,246,0.1)">&#128200;</div>
+            <div>
+              <div class="report-title">Google Ads PMax</div>
+              <div class="report-meta">
+                <span>1 raport</span>
+                <span>kampania aktywna</span>
+                <span class="tag tag-pmax">ADS</span>
+              </div>
+            </div>
+          </div>
+          <div class="report-arrow">&#8594;</div>
+        </div>
+
+        <div class="report-card" onclick="switchPage('seo')">
+          <div class="report-info">
+            <div class="report-icon">&#128203;</div>
+            <div>
+              <div class="report-title">SEO & Analityka</div>
+              <div class="report-meta">
+                <span>1 raport</span>
+                <span>GA4 + GSC</span>
+                <span class="tag tag-seo">SEO</span>
+              </div>
+            </div>
+          </div>
+          <div class="report-arrow">&#8594;</div>
+        </div>
+
+        <div class="report-card" onclick="switchPage('platforma')" style="border-color:rgba(139,92,246,0.2)">
+          <div class="report-info">
+            <div class="report-icon" style="background:rgba(139,92,246,0.1)">&#9881;</div>
+            <div>
+              <div class="report-title">Plan platformy</div>
+              <div class="report-meta">
+                <span>prezentacja produktu</span>
+                <span>11 sekcji</span>
+                <span class="tag tag-platform">PRO</span>
+              </div>
+            </div>
+          </div>
+          <div class="report-arrow">&#8594;</div>
+        </div>
+
+        <div class="report-card" onclick="switchPage('dzialki')" style="border-color:rgba(34,197,94,0.2)">
+          <div class="report-info">
+            <div class="report-icon" style="background:rgba(34,197,94,0.1)">&#128205;</div>
+            <div>
+              <div class="report-title">System dzialek budowlanych</div>
+              <div class="report-meta">
+                <span>41 dzialek</span>
+                <span>mapa + SEO</span>
+                <span class="tag tag-component">NOWE</span>
+              </div>
+            </div>
+          </div>
+          <div class="report-arrow">&#8594;</div>
+        </div>
+
+        <div class="report-card" onclick="switchPage('realizacje')">
+          <div class="report-info">
+            <div class="report-icon">&#127959;</div>
+            <div>
+              <div class="report-title">System realizacji budow</div>
+              <div class="report-meta">
+                <span>Zabrze 200m2</span>
+                <span>8 etapow, 33 zdjecia</span>
+                <span class="tag tag-component">NOWE</span>
+              </div>
+            </div>
+          </div>
+          <div class="report-arrow">&#8594;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- PAGE: GOOGLE ADS PMAX                   -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="page" id="page-google-ads">
+    <div class="page-container">
+      <div class="page-header">
+        <h1>Google Ads <span>PMax</span></h1>
+        <p>Raporty kampanii Performance Max — sortowane od najnowszych</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Typ kampanii</div>
+          <div class="stat-value" style="color:var(--blue)">PMax</div>
+          <div class="stat-note">Performance Max</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Status</div>
+          <div class="stat-value" style="color:var(--green)">Aktywna</div>
+          <div class="stat-note">od 24.03.2026</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Budzet</div>
+          <div class="stat-value">50 zl</div>
+          <div class="stat-note">dziennie</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Raporty</div>
+          <div class="stat-value">1</div>
+          <div class="stat-note">dostepnych</div>
+        </div>
+      </div>
+
+      <div class="section-label">Raporty kampanii</div>
+      <div class="report-list">
+        <a href="/admin/raporty/2026-04-02-pmax-10dni.html" class="report-card">
+          <div class="report-info">
+            <div class="report-icon" style="background:rgba(59,130,246,0.1)">&#128202;</div>
+            <div>
+              <div class="report-title">Raport PMax — 24.03-02.04.2026</div>
+              <div class="report-meta">
+                <span>10 dni kampanii</span>
+                <span>451 zl wydane</span>
+                <span>5 leadow</span>
+                <span class="tag tag-pmax">PMax</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="date-badge">02.04.2026</span>
+            <span class="report-arrow">&#8594;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- PAGE: SEO & ANALITYKA                   -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="page" id="page-seo">
+    <div class="page-container">
+      <div class="page-header">
+        <h1>SEO & <span>Analityka</span></h1>
+        <p>Raporty Google Analytics 4 i Google Search Console — sortowane od najnowszych</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Zrodla</div>
+          <div class="stat-value" style="color:var(--gold)">GA4</div>
+          <div class="stat-note">+ Search Console</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Domena</div>
+          <div class="stat-value" style="font-size:16px">coreltb.pl</div>
+          <div class="stat-note">zweryfikowana</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">GTM</div>
+          <div class="stat-value" style="color:var(--green)">OK</div>
+          <div class="stat-note">6 tagow</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Raporty</div>
+          <div class="stat-value">1</div>
+          <div class="stat-note">dostepnych</div>
+        </div>
+      </div>
+
+      <div class="section-label">Raporty analityczne</div>
+      <div class="report-list">
+        <a href="/admin/raporty/2026-04-02-analityka-14dni.html" class="report-card">
+          <div class="report-info">
+            <div class="report-icon">&#128200;</div>
+            <div>
+              <div class="report-title">Analityka strony — 19.03-02.04.2026</div>
+              <div class="report-meta">
+                <span>14 dni</span>
+                <span>355 sesji</span>
+                <span>198 uzytkownikow</span>
+                <span class="tag tag-seo">GA4 + GSC</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="date-badge">02.04.2026</span>
+            <span class="report-arrow">&#8594;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- PAGE: PLAN PLATFORMY                    -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="page" id="page-platforma">
+    <div class="page-container">
+      <div class="page-header">
+        <h1>Plan <span>platformy</span></h1>
+        <p>Prezentacja produktu, implementacja i dokumentacja techniczna</p>
+      </div>
+
+      <div class="section-label">Dokumenty</div>
+      <div class="report-list">
+        <a href="/admin/raporty/platforma-prezentacja.html" class="report-card" style="border-color:rgba(139,92,246,0.2)">
+          <div class="report-info">
+            <div class="report-icon" style="background:rgba(139,92,246,0.1)">&#9881;</div>
+            <div>
+              <div class="report-title">Prezentacja produktu — implementacja platformy</div>
+              <div class="report-meta">
+                <span>11 sekcji</span>
+                <span>tech stack, AI, koszty</span>
+                <span class="tag tag-platform">Platform</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="date-badge">marzec 2026</span>
+            <span class="report-arrow">&#8594;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- PAGE: SYSTEM DZIALEK                    -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="page" id="page-dzialki">
+    <div class="page-container">
+      <div class="page-header">
+        <h1>System <span>dzialek budowlanych</span></h1>
+        <p>Dokumentacja komponentu, prezentacja funkcjonalnosci i mozliwosci</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Dzialki</div>
+          <div class="stat-value" style="color:var(--green)">41</div>
+          <div class="stat-note">w bazie</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Miasta</div>
+          <div class="stat-value">16</div>
+          <div class="stat-note">lokalizacji</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Strony SEO</div>
+          <div class="stat-value" style="color:var(--gold)">35+</div>
+          <div class="stat-note">wygenerowanych</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Status</div>
+          <div class="stat-value" style="color:var(--green);font-size:16px">Aktywny</div>
+          <div class="stat-note">na coreltb.pl</div>
+        </div>
+      </div>
+
+      <div class="section-label">Dokumenty</div>
+      <div class="report-list">
+        <a href="/admin/raporty/system-dzialek.html" class="report-card" style="border-color:rgba(34,197,94,0.2)">
+          <div class="report-info">
+            <div class="report-icon" style="background:rgba(34,197,94,0.1)">&#128205;</div>
+            <div>
+              <div class="report-title">Prezentacja systemu dzialek</div>
+              <div class="report-meta">
+                <span>mapa interaktywna</span>
+                <span>filtry, SEO, monetyzacja</span>
+                <span class="tag tag-component">NOWE</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="date-badge">kwiecien 2026</span>
+            <span class="report-arrow">&#8594;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- PAGE: REALIZACJE                        -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="page" id="page-realizacje">
+    <div class="page-container">
+      <div class="page-header">
+        <h1>System <span>realizacji budow</span></h1>
+        <p>Dokumentacja komponentu dziennikow budowy i prezentacji etapow</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Realizacje</div>
+          <div class="stat-value" style="color:var(--gold)">1</div>
+          <div class="stat-note">aktywna</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Etapy</div>
+          <div class="stat-value">8</div>
+          <div class="stat-note">udokumentowanych</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Zdjecia</div>
+          <div class="stat-value" style="color:var(--green)">33</div>
+          <div class="stat-note">profesjonalne</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Powierzchnia</div>
+          <div class="stat-value">200m2</div>
+          <div class="stat-note">Zabrze</div>
+        </div>
+      </div>
+
+      <div class="section-label">Dokumenty</div>
+      <div class="report-list">
+        <a href="/admin/raporty/system-realizacji.html" class="report-card">
+          <div class="report-info">
+            <div class="report-icon">&#127959;</div>
+            <div>
+              <div class="report-title">Prezentacja systemu realizacji</div>
+              <div class="report-meta">
+                <span>Zabrze 200m2</span>
+                <span>timeline, galerie, SEO</span>
+                <span class="tag tag-component">NOWE</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="date-badge">kwiecien 2026</span>
+            <span class="report-arrow">&#8594;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<div class="container">
-  <h1>Raporty <span>kampanii</span></h1>
-  <p class="subtitle">Raporty Google Ads, SEO i analityki dla CoreLTB Builders</p>
+<script>
+function switchPage(id) {
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  // Show target page
+  const target = document.getElementById('page-' + id);
+  if (target) target.classList.add('active');
 
-  <!-- QUICK STATS -->
-  <div class="stats-row">
-    <div class="stat-card">
-      <div class="stat-label">Kampania</div>
-      <div class="stat-value" style="color: var(--gold);">PMax</div>
-      <div class="stat-note">Performance Max</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Status</div>
-      <div class="stat-value" style="color: var(--green);">Aktywna</div>
-      <div class="stat-note">od 24.03.2026</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Budzet</div>
-      <div class="stat-value">50 zl</div>
-      <div class="stat-note">dziennie</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Raporty</div>
-      <div class="stat-value">3</div>
-      <div class="stat-note">dostepnych</div>
-    </div>
-  </div>
+  // Update sidebar active state
+  document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+  const btn = document.querySelector('[data-page="' + id + '"]');
+  if (btn) btn.classList.add('active');
 
-  <!-- GOOGLE ADS REPORTS -->
-  <div class="section-label">Google Ads</div>
-  <div class="report-list">
-    <a href="/admin/raporty/2026-04-02-pmax-10dni.html" class="report-card">
-      <div class="report-info">
-        <div class="report-icon">&#128202;</div>
-        <div>
-          <div class="report-title">Raport PMax — 24.03-02.04.2026</div>
-          <div class="report-meta">
-            <span>10 dni kampanii</span>
-            <span>451 zl wydane</span>
-            <span>5 leadow</span>
-            <span class="tag tag-pmax">PMax</span>
-          </div>
-        </div>
-      </div>
-      <div class="report-arrow">&#8594;</div>
-    </a>
-  </div>
+  // Update topbar text
+  const names = {
+    'dashboard': 'Dashboard',
+    'google-ads': 'Google Ads PMax',
+    'seo': 'SEO & Analityka',
+    'platforma': 'Plan platformy',
+    'dzialki': 'System dzialek budowlanych',
+    'realizacje': 'System realizacji budow'
+  };
+  document.getElementById('topbar-text').textContent = names[id] || 'Dashboard';
 
-  <div class="section-label" style="margin-top: 32px;">Analityka</div>
-  <div class="report-list">
-    <a href="/admin/raporty/2026-04-02-analityka-14dni.html" class="report-card">
-      <div class="report-info">
-        <div class="report-icon">&#128200;</div>
-        <div>
-          <div class="report-title">Analityka strony — 19.03-02.04.2026</div>
-          <div class="report-meta">
-            <span>14 dni</span>
-            <span>355 sesji</span>
-            <span>198 uzytkownikow</span>
-            <span class="tag tag-seo">GA4 + GSC</span>
-          </div>
-        </div>
-      </div>
-      <div class="report-arrow">&#8594;</div>
-    </a>
-  </div>
+  // Scroll to top
+  window.scrollTo(0, 0);
+}
 
-  <!-- PLATFORM PLAN -->
-  <div class="section-label" style="margin-top: 32px;">Platforma do zarządzania budowami</div>
-  <div class="report-list">
-    <a href="/admin/raporty/platforma-prezentacja.html" class="report-card" style="border-color: rgba(139,92,246,0.3);">
-      <div class="report-info">
-        <div class="report-icon" style="background: rgba(139,92,246,0.1); font-size: 22px;">&#9881;</div>
-        <div>
-          <div class="report-title">Plan platformy — prezentacja produktu</div>
-          <div class="report-meta">
-            <span>11 sekcji</span>
-            <span>tech stack, AI, bezpieczenstwo, koszty</span>
-            <span class="tag tag-platform">Platform</span>
-          </div>
-        </div>
-      </div>
-      <div class="report-arrow">&#8594;</div>
-    </a>
-  </div>
-
-  <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #333; text-align: center;">
-    <p style="font-size: 12px; color: #555;">CoreLTB Builders Sp. z o.o. &middot; Panel raportow &middot; <a href="https://coreltb.pl" style="color: var(--gold); text-decoration: none;">coreltb.pl</a></p>
-  </div>
-</div>
+// Sidebar button clicks
+document.querySelectorAll('.sidebar-link[data-page]').forEach(btn => {
+  btn.addEventListener('click', () => switchPage(btn.dataset.page));
+});
+</script>
 
 </body>
 </html>
