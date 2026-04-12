@@ -124,7 +124,7 @@ export const blogPosts: BlogPost[] = [
     categoryId: 'porady',
     date: '28 Kwietnia, 2026',
     dateTimestamp: Date.parse('2026-04-28'),
-    readTime: '11 min czytania',
+    readTime: '13 min czytania',
     title: 'Ile kosztuje kierownik budowy w 2026? Obowiązki, stawki, na co uważać',
     excerpt: 'Kierownik budowy to obowiązkowa funkcja przy każdej budowie domu. Ile kosztuje, za co odpowiada i czym różni się od inspektora nadzoru? Aktualne stawki na Śląsku i konkretne wskazówki od generalnego wykonawcy.',
     author: {
@@ -133,7 +133,6 @@ export const blogPosts: BlogPost[] = [
       avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
     href: '/baza-wiedzy/ile-kosztuje-kierownik-budowy',
-    hidden: true,
   },
 
   // ============= MARZEC 2026 =============
@@ -867,7 +866,11 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     // ── INTRO ──────────────────────────────────────────────────
     {
       type: 'paragraph',
-      content: '<strong>Kierownik budowy</strong> to jedyna funkcja na budowie, która jest <strong>obowiązkowa z mocy prawa</strong> - bez niego nie możesz rozpocząć budowy domu, prowadzić robót ani odebrać budynku do użytkowania. W tym artykule podajemy aktualne stawki na Śląsku, wyjaśniamy obowiązki kierownika i pokazujemy, czym różni się od inspektora nadzoru inwestorskiego.',
+      content: '<strong>Kierownik budowy</strong> to jedyna funkcja na budowie, która jest <strong>obowiązkowa z mocy prawa</strong> - bez niego nie możesz rozpocząć budowy domu, prowadzić robót ani odebrać budynku do użytkowania. W tym artykule podajemy aktualne stawki na Śląsku (2026), wyjaśniamy zakres obowiązków kierownika i pokazujemy, czym różni się od inspektora nadzoru inwestorskiego.',
+    },
+    {
+      type: 'paragraph',
+      content: 'Jeśli planujesz budowę domu jednorodzinnego, ten przewodnik pomoże Ci zrozumieć, ile realnie zapłacisz za kierownika, na co zwrócić uwagę przy wyborze i kiedy warto rozważyć dodatkowy <a href="/oferta/nadzor-i-doradztwo">nadzór inwestorski</a>.',
     },
 
     // ── SEKCJA 1 - Kim jest kierownik budowy ────────────────────
@@ -882,12 +885,20 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'To on podpisuje się pod każdym wpisem w dzienniku budowy i ponosi odpowiedzialność prawną za zgodność robót z projektem, sztuką budowlaną i przepisami BHP. W praktyce - to „strażnik" całego procesu.',
+      content: 'To on podpisuje się pod każdym wpisem w dzienniku budowy i ponosi <strong>osobistą odpowiedzialność prawną</strong> za zgodność robót z projektem, sztuką budowlaną i przepisami BHP. W praktyce - to „strażnik" całego procesu budowlanego.',
     },
     {
       type: 'callout',
       variant: 'warning',
       content: '<strong>Bez kierownika budowy nie możesz:</strong> rozpocząć budowy (zgłoszenie w PINB wymaga jego oświadczenia), prowadzić prac na placu (brak nadzoru = wykroczenie), odebrać budynku do użytkowania. To wymóg prawny, nie opcja.',
+    },
+
+    // ── ZDJĘCIE 1 - Kierownik na budowie ──────────────────────
+    {
+      type: 'image',
+      src: '/images/blog/kierownik-budowy/kierownik-na-budowie.webp',
+      alt: 'Kierownik budowy odbierający zbrojenie płyty fundamentowej na budowie domu jednorodzinnego',
+      caption: 'Kierownik budowy podczas odbioru zbrojenia - jeden z kluczowych momentów, którego nie da się zweryfikować po zalaniu betonem',
     },
 
     // ── SEKCJA 2 - Obowiązki (kw: co robi, za co odpowiada) ────
@@ -898,26 +909,37 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'Obowiązki reguluje art. 22 Prawa budowlanego. W praktyce oznacza to:',
+      content: 'Obowiązki kierownika budowy reguluje <strong>art. 22 Prawa budowlanego</strong>. Nie jest to tylko formalność - w praktyce oznacza realną odpowiedzialność za bezpieczeństwo i jakość Twojego domu:',
     },
     {
       type: 'list',
       items: [
-        '<strong>Protokolarne przejęcie placu budowy</strong> i zabezpieczenie terenu',
-        '<strong>Prowadzenie dziennika budowy</strong> - dokumentacja przebiegu robót, wpisy o odbiorach',
+        '<strong>Protokolarne przejęcie placu budowy</strong> i zabezpieczenie terenu (ogrodzenie, tablica informacyjna)',
+        '<strong>Prowadzenie dziennika budowy</strong> - od 2026 roku obowiązuje <strong>elektroniczny e-dziennik budowy</strong>, co przyspiesza obieg dokumentów',
         '<strong>Geodezyjne wytyczenie obiektu</strong> i organizacja inwentaryzacji powykonawczej',
         '<strong>Nadzór nad zgodnością robót z projektem</strong> i przepisami techniczno-budowlanymi',
-        '<strong>Kontrola jakości materiałów</strong> - weryfikacja certyfikatów, atestów, deklaracji',
-        '<strong>Odbiory robót zanikających</strong> - zbrojenie przed betonowaniem, hydroizolacja przed zasypaniem',
+        '<strong>Kontrola jakości materiałów</strong> - weryfikacja certyfikatów, atestów, deklaracji zgodności',
+        '<strong>Odbiory robót zanikających</strong> - zbrojenie przed betonowaniem, hydroizolacja przed zasypaniem, kanalizacja podposadzkowa',
         '<strong>Plan BIOZ</strong> - bezpieczeństwo i ochrona zdrowia na budowie',
         '<strong>Wstrzymanie robót</strong> w przypadku zagrożenia lub rażących odchyleń od projektu',
-        '<strong>Zgłoszenie obiektu do odbioru</strong> i uczestnictwo w czynnościach odbiorowych',
+        '<strong>Zgłoszenie obiektu do odbioru</strong> i uczestnictwo w czynnościach odbiorowych PINB',
       ],
     },
     {
       type: 'callout',
       variant: 'info',
-      content: '<strong>Odbiory robót zanikających - kluczowy moment.</strong> Zbrojenie fundamentów, kanalizacja podposadzkowa, hydroizolacja - to prace, których nie zweryfikujesz po zalaniu betonem. Dobry kierownik jest obecny przy każdym takim momencie i dokumentuje go w dzienniku budowy.',
+      content: '<strong>Odbiory robót zanikających - kluczowy moment.</strong> Zbrojenie fundamentów, kanalizacja podposadzkowa, hydroizolacja - to prace, których nie zweryfikujesz po zalaniu betonem. Dobry kierownik jest obecny przy każdym takim momencie i dokumentuje go w dzienniku budowy. Na <a href="/baza-wiedzy/plyta-fundamentowa-tereny-gornicze">terenach górniczych</a> to podwójnie istotne.',
+    },
+
+    // ── CTA 1 - po obowiązkach, naturalny moment decyzyjny ────
+    {
+      type: 'cta-inline',
+      caption: 'Planujesz budowe?',
+      ctaLabel: 'Sprawdz, ile kosztuje budowa z nadzorem',
+      ctaDescription: 'Kalkulator uwzglednia kierownika budowy i inzyniera budowy w cenie - bez ukrytych kosztow.',
+      ctaHref: '/wycena',
+      ctaIcon: 'calculator',
+      content: 'Kalkulator wyceny',
     },
 
     // ── SEKCJA 3 - Stawki (kw: ile kosztuje, ile bierze) ────────
@@ -927,11 +949,16 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
       content: 'Ile kosztuje kierownik budowy w 2026 roku - stawki na Śląsku',
     },
     {
+      type: 'paragraph',
+      content: 'Poniżej aktualne stawki rynkowe za usługi kierownika budowy domu jednorodzinnego na Śląsku. Dane zebrane na podstawie realnych ofert i naszego doświadczenia jako <a href="/oferta/kompleksowa-budowa-domow">generalnego wykonawcy</a>:',
+    },
+    {
       type: 'list',
       items: [
-        '<strong>Ryczałt za całą budowę</strong> (dom jednorodzinny, SSO → pod klucz): <strong>8 000–20 000 zł</strong>',
-        '<strong>Stawka miesięczna:</strong> <strong>1 000–2 000 zł/miesiąc</strong>',
-        '<strong>Stawka za wizytę:</strong> <strong>300–600 zł/wizyta</strong> (1–2x w tygodniu)',
+        '<strong>Ryczałt za całą budowę</strong> (dom jednorodzinny, SSO - pod klucz): <strong>5 000-20 000 zł</strong>',
+        '<strong>Stawka miesięczna:</strong> <strong>1 000-2 500 zł/miesiąc</strong> (przy budowie trwającej 8-14 miesięcy)',
+        '<strong>Stawka za wizytę:</strong> <strong>300-600 zł/wizyta</strong> (przy 1-2 wizytach tygodniowo)',
+        '<strong>Konsultacja jednorazowa:</strong> <strong>od 250 zł</strong> (np. opinia techniczna, weryfikacja projektu)',
       ],
     },
     {
@@ -942,11 +969,12 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'list',
       items: [
-        '<strong>Zakres budowy</strong> - nadzór nad samym SSO kosztuje mniej niż nadzór nad budową pod klucz',
-        '<strong>Częstotliwość wizyt</strong> - 1x/tydzień vs 3x/tydzień to znaczna różnica',
+        '<strong>Zakres budowy</strong> - nadzór nad samym <a href="/baza-wiedzy/stan-surowy-otwarty-poradnik">stanem surowym otwartym (SSO)</a> kosztuje mniej niż nadzór nad budową pod klucz',
+        '<strong>Częstotliwość wizyt</strong> - 1x/tydzień vs 3x/tydzień to znaczna różnica w koszcie końcowym',
         '<strong>Stopień zaangażowania</strong> - sam formalny nadzór (minimum prawne) vs aktywne zarządzanie budową (koordynacja ekip, zamawianie materiałów)',
-        '<strong>Lokalizacja</strong> - Katowice, Gliwice: stawki o 20–30% wyższe niż w mniejszych miejscowościach',
-        '<strong>Doświadczenie</strong> - kierownik z 20-letnim stażem i specjalizacją w szkodach górniczych kosztuje więcej niż świeżo uprawiony inżynier',
+        '<strong>Lokalizacja</strong> - <a href="/kierownik-budowy-katowice">Katowice</a>, Gliwice: stawki o 20-30% wyższe niż w mniejszych miejscowościach',
+        '<strong>Tereny górnicze</strong> - budowa na <a href="/baza-wiedzy/plyta-fundamentowa-tereny-gornicze">szkodach górniczych</a> wymaga kierownika ze specjalizacją - koszt wyższy o 30-50%',
+        '<strong>Doświadczenie</strong> - kierownik z 20-letnim stażem kosztuje więcej niż świeżo uprawniony inżynier, ale oszczędzi Ci kosztownych błędów',
       ],
     },
     {
@@ -955,7 +983,38 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
       content: '<strong>W CoreLTB kierownik budowy i inżynier budowy są wliczeni w cenę.</strong> Nie płacisz za nadzór osobno - to integralny element naszej usługi <a href="/oferta/kompleksowa-budowa-domow">kompleksowej budowy domu</a>. Kierownik jest na budowie od wytyczenia fundamentów do odbioru końcowego.',
     },
 
-    // ── SEKCJA 4 - Kierownik vs inspektor nadzoru ────────────────
+    // ── SEKCJA 4 - Stawki w miastach na Śląsku ──────────────────
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Cennik kierownika budowy w miastach Śląska',
+    },
+    {
+      type: 'paragraph',
+      content: 'Stawki za kierownika budowy różnią się w zależności od miasta. Poniżej orientacyjne ceny ryczałtowe za pełny nadzór nad budową domu jednorodzinnego:',
+    },
+    {
+      type: 'list',
+      items: [
+        '<strong><a href="/kierownik-budowy-katowice">Katowice</a></strong> - od 5 000 zł brutto (ryczałt za inwestycję). Tereny górnicze w dzielnicach Podlesie, Murcki, Kostuchna wymagają dodatkowej specjalizacji.',
+        '<strong><a href="/kierownik-budowy-jaworzno">Jaworzno</a></strong> - od 5 000 zł brutto. Bliskość KWK Sobieski - IV kategoria uszkodzeń na wielu działkach.',
+        '<strong><a href="/kierownik-budowy-wodzislaw-slaski">Wodzisław Śląski</a></strong> - od 5 000 zł brutto. Powiat wodzisławski: wpływ KWK ROW na warunki gruntowe.',
+      ],
+    },
+    {
+      type: 'paragraph',
+      content: 'Stawka za pojedynczą wizytę kontrolną na budowie wynosi <strong>500-800 zł</strong> (ok. 2 godziny na placu). Rozliczenie ryczałtowe jest korzystniejsze przy budowie domu od podstaw - stała cena chroni przed inflacją i opóźnieniami.',
+    },
+
+    // ── ZDJĘCIE 2 - Dziennik budowy / dokumentacja ──────────────
+    {
+      type: 'image',
+      src: '/images/blog/kierownik-budowy/dziennik-budowy.webp',
+      alt: 'Elektroniczny dziennik budowy i dokumentacja techniczna na placu budowy',
+      caption: 'Od 2026 roku obowiązuje elektroniczny e-dziennik budowy - kierownik dokumentuje każdy etap cyfrowo',
+    },
+
+    // ── SEKCJA 5 - Kierownik vs inspektor nadzoru ────────────────
     {
       type: 'heading',
       level: 2,
@@ -963,40 +1022,60 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'To dwie różne funkcje, często mylone przez inwestorów. Kluczowa różnica: kierownik reprezentuje <strong>wykonawcę</strong>, inspektor - <strong>inwestora</strong>.',
+      content: 'To dwie różne funkcje, często mylone przez inwestorów budujących pierwszy dom. Kluczowa różnica: kierownik reprezentuje <strong>wykonawcę</strong>, inspektor - <strong>inwestora</strong>.',
     },
     {
       type: 'list',
       items: [
-        '<strong>Kierownik budowy</strong> - obowiązkowy. Zatrudniany przez wykonawcę (lub inwestora przy systemie gospodarczym). Odpowiada za prawidłowe prowadzenie robót, BHP, dziennik budowy.',
-        '<strong>Inspektor nadzoru inwestorskiego</strong> - nieobowiązkowy przy domach jednorodzinnych. Zatrudniany przez inwestora. Kontroluje jakość prac wykonawcy, weryfikuje faktury, reprezentuje inwestora. Koszt: <strong>5 000–15 000 zł</strong> za budowę lub <strong>200–500 zł/wizyta</strong>.',
+        '<strong>Kierownik budowy</strong> - obowiązkowy z mocy prawa. Zatrudniany przez wykonawcę (lub inwestora przy systemie gospodarczym). Odpowiada za prawidłowe prowadzenie robót, BHP, dziennik budowy. Koszt: <strong>5 000-20 000 zł</strong>.',
+        '<strong>Inspektor nadzoru inwestorskiego</strong> - nieobowiązkowy przy domach jednorodzinnych (chyba że nałoży to PINB). Zatrudniany przez inwestora. Kontroluje jakość prac wykonawcy, weryfikuje faktury, reprezentuje inwestora wobec kierownika. Koszt: <strong>5 000-15 000 zł</strong> za budowę lub <strong>500-800 zł/wizytę</strong>.',
       ],
     },
     {
       type: 'callout',
       variant: 'info',
-      content: '<strong>Kiedy inspektor jest obowiązkowy?</strong> PINB może nałożyć obowiązek ustanowienia inspektora w decyzji o pozwoleniu na budowę - szczególnie na <strong>terenach górniczych</strong>, przy budynkach wielorodzinnych lub skomplikowanych konstrukcjach.',
+      content: '<strong>Kiedy inspektor jest obowiązkowy?</strong> PINB może nałożyć obowiązek ustanowienia inspektora w decyzji o pozwoleniu na budowę - szczególnie na <strong>terenach górniczych</strong> (III i IV kategoria uszkodzeń), przy budynkach wielorodzinnych lub skomplikowanych konstrukcjach. Więcej o specyfice budowy na takich terenach: <a href="/baza-wiedzy/plyta-fundamentowa-tereny-gornicze">płyta fundamentowa na szkodach górniczych</a>.',
+    },
+    {
+      type: 'callout',
+      variant: 'warning',
+      content: '<strong>Konflikt interesów.</strong> Kierownik budowy zatrudniony przez wykonawcę chroni interesy... wykonawcy. Jeśli budujesz systemem gospodarczym (sam koordynujesz ekipy), rozważ zatrudnienie <strong>inspektora nadzoru</strong> jako niezależnej kontroli jakości. To inwestycja, która może uchronić Cię przed kosztownymi błędami.',
     },
 
-    // ── SEKCJA 5 - Jak wybrać ──────────────────────────────────
+    // ── CTA 2 - po sekcji porównawczej ──────────────────────────
+    {
+      type: 'cta-inline',
+      caption: 'Potrzebujesz nadzoru?',
+      ctaLabel: 'Kierownik budowy i inspektor nadzoru na Śląsku',
+      ctaDescription: 'Uprawnienia bez ograniczeń, polisa OC 500 000 zł, dojazd wliczony. Cennik od 5 000 zł brutto.',
+      ctaHref: '/oferta/nadzor-i-doradztwo',
+      ctaIcon: 'shieldCheck',
+      content: 'Sprawdz oferte nadzoru',
+    },
+
+    // ── SEKCJA 6 - Jak wybrać ──────────────────────────────────
     {
       type: 'heading',
       level: 2,
       content: 'Jak wybrać kierownika budowy - 6 zasad',
     },
     {
+      type: 'paragraph',
+      content: 'Wybór kierownika budowy to jedna z najważniejszych decyzji w procesie inwestycyjnym. Oto na co zwrócić uwagę:',
+    },
+    {
       type: 'list',
       items: [
-        '<strong>Sprawdź uprawnienia</strong> - aktualne uprawnienia budowlane + wpis do PIIB. Numer uprawnień zweryfikujesz na stronie izby.',
-        '<strong>Pytaj o doświadczenie w Twojej technologii</strong> - kierownik od domów drewnianych może nie znać specyfiki silikatów na terenach górniczych.',
-        '<strong>Ustal częstotliwość wizyt</strong> - minimum 1x/tydzień, optymalnie 2–3x. Przy betonowaniu fundamentów i stropu - obowiązkowo na miejscu.',
-        '<strong>Podpisz umowę</strong> - jasny zakres, częstotliwość wizyt, stawka, odpowiedzialność. Ustna umowa to proszenie się o problemy.',
-        '<strong>Sprawdź referencje</strong> - poproś o kontakt do 2–3 poprzednich inwestorów.',
-        '<strong>Unikaj „kierowników na papierze"</strong> - tani kierownik podpisujący dziennik raz w miesiącu bez wizytowania placu to formalność. Nie ochroni Cię przed błędami ekipy.',
+        '<strong>Sprawdź uprawnienia</strong> - aktualne uprawnienia budowlane + wpis do PIIB (Polska Izba Inżynierów Budownictwa). Numer uprawnień zweryfikujesz na stronie izby.',
+        '<strong>Pytaj o doświadczenie w Twojej technologii</strong> - kierownik od domów drewnianych może nie znać specyfiki murowania z silikatów na terenach górniczych.',
+        '<strong>Ustal częstotliwość wizyt</strong> - minimum 1x/tydzień, optymalnie 2-3x. Przy betonowaniu fundamentów i stropu - obowiązkowo na miejscu.',
+        '<strong>Podpisz umowę</strong> - jasny zakres obowiązków, częstotliwość wizyt, stawka, zakres odpowiedzialności. Ustna umowa to proszenie się o problemy.',
+        '<strong>Sprawdź referencje</strong> - poproś o kontakt do 2-3 poprzednich inwestorów. Dobry kierownik nie ma problemu z pokazaniem ukończonych realizacji.',
+        '<strong>Unikaj „kierowników na papierze"</strong> - tani kierownik podpisujący dziennik raz w miesiącu bez wizytowania placu to formalność. Nie ochroni Cię przed błędami ekipy budowlanej.',
       ],
     },
 
-    // ── SEKCJA 6 - Model CoreLTB ──────────────────────────────
+    // ── SEKCJA 7 - Model CoreLTB ──────────────────────────────
     {
       type: 'heading',
       level: 2,
@@ -1004,30 +1083,31 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'W modelu generalnego wykonawstwa kierownik budowy jest <strong>wliczony w cenę</strong> i obecny od pierwszego do ostatniego dnia. Nasz model:',
+      content: 'W modelu <a href="/oferta/kompleksowa-budowa-domow">generalnego wykonawstwa</a> kierownik budowy jest <strong>wliczony w cenę</strong> i obecny od pierwszego do ostatniego dnia budowy. To nie jest „podbijanie pieczątki" raz w miesiącu - to aktywny nadzór inżynierski:',
     },
     {
       type: 'list',
       items: [
-        '<strong>Kierownik Budowy</strong> - uprawnienia budowlane, odpowiedzialność formalno-prawna, dziennik budowy, odbiory robót zanikających',
-        '<strong>Inżynier Budowy</strong> - codzienny nadzór techniczny na placu, kontrola jakości materiałów, fotodokumentacja',
-        '<strong>Cotygodniowe raporty</strong> - inwestor otrzymuje aktualizacje ze zdjęciami z placu budowy',
-        '<strong>Stała cena w umowie</strong> - kierownik pilnuje harmonogramu i budżetu. Przekroczenia to nasz problem, nie inwestora.',
+        '<strong>Kierownik Budowy</strong> - uprawnienia budowlane bez ograniczeń, odpowiedzialność formalno-prawna, e-dziennik budowy, odbiory robót zanikających',
+        '<strong>Inżynier Budowy</strong> - codzienny nadzór techniczny na placu, kontrola jakości materiałów, fotodokumentacja każdego etapu',
+        '<strong>Cotygodniowe raporty</strong> - inwestor otrzymuje aktualizacje ze zdjęciami z placu budowy i statusem prac',
+        '<strong>Stała cena w umowie</strong> - kierownik pilnuje harmonogramu i budżetu. Ewentualne przekroczenia to nasz problem, nie inwestora',
       ],
     },
-
-    // ── CTA ──────────────────────────────────────────────────────
     {
-      type: 'cta',
-      ctaHref: '/wycena',
-      ctaIcon: 'calculator',
-      ctaLabel: 'Oblicz koszt budowy z nadzorem',
+      type: 'paragraph',
+      content: 'Możesz zobaczyć, jak ten model wygląda w praktyce - na naszej <a href="/realizacje/zabrze-2024">budowie domu 200 m2 w Zabrzu</a> dokumentujemy każdy etap ze zdjęciami i opisami technicznymi.',
     },
+
+    // ── CTA 3 - po sekcji o CoreLTB ──────────────────────────────
     {
-      type: 'cta',
-      ctaHref: '/oferta/nadzor-i-doradztwo',
-      ctaIcon: 'shieldCheck',
-      ctaLabel: 'Nadzór i doradztwo budowlane',
+      type: 'cta-inline',
+      caption: 'Zainteresowany?',
+      ctaLabel: 'Planujesz budowe domu na Śląsku?',
+      ctaDescription: 'Umow bezplatna konsultacje z naszym inzynierem. Omowimy Twoj projekt, dzialke i optymalna technologie.',
+      ctaHref: '/umow-konsultacje',
+      ctaIcon: 'messageCircle',
+      content: 'Umow konsultacje',
     },
 
     // ── FAQ (z DataForSEO PAA) ──────────────────────────────────
@@ -1041,27 +1121,31 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
       faqItems: [
         {
           question: 'Ile kosztuje kierownik budowy domu jednorodzinnego?',
-          answer: 'Na Śląsku w 2026 roku: <strong>8 000–20 000 zł za całą budowę</strong> (ryczałt) lub <strong>1 000–2 000 zł miesięcznie</strong>. Cena zależy od zakresu budowy, częstotliwości wizyt i doświadczenia. W CoreLTB kierownik jest <strong>wliczony w cenę</strong> usługi generalnego wykonawstwa.',
+          answer: 'Na Śląsku w 2026 roku: <strong>5 000-20 000 zł za całą budowę</strong> (ryczałt) lub <strong>1 000-2 500 zł miesięcznie</strong>. Cena zależy od zakresu budowy, częstotliwości wizyt i doświadczenia kierownika. W CoreLTB kierownik jest <strong>wliczony w cenę</strong> usługi generalnego wykonawstwa - nie płacisz za nadzór osobno.',
         },
         {
           question: 'Czy kierownik budowy jest obowiązkowy?',
-          answer: 'Tak. Art. 42 ust. 1 <strong>Prawa budowlanego</strong> wymaga zapewnienia kierownictwa budowy przez osobę z uprawnieniami. Bez kierownika nie rozpoczniesz budowy, nie będziesz prowadzić robót i nie odbierzesz budynku do użytkowania. Brak kierownika to wykroczenie.',
+          answer: 'Tak. Art. 42 ust. 1 <strong>Prawa budowlanego</strong> wymaga zapewnienia kierownictwa budowy przez osobę z uprawnieniami. Bez kierownika nie rozpoczniesz budowy (PINB wymaga jego oświadczenia), nie będziesz prowadzić robót i nie odbierzesz budynku do użytkowania. Brak kierownika na budowie to wykroczenie.',
         },
         {
           question: 'Ile bierze kierownik budowy za wizytę?',
-          answer: 'Stawka za pojedynczą wizytę na Śląsku wynosi <strong>300–600 zł</strong>. Przy umówionych 1–2 wizytach tygodniowo daje to 1 200–4 800 zł/miesiąc. Ryczałt miesięczny (1 000–2 000 zł) jest zazwyczaj korzystniejszy.',
+          answer: 'Stawka za pojedynczą wizytę kontrolną na Śląsku wynosi <strong>500-800 zł</strong> (ok. 2 godziny na placu). Przy umówionych 1-2 wizytach tygodniowo daje to 2 000-6 400 zł/miesiąc. Ryczałt miesięczny (1 000-2 500 zł) jest zazwyczaj korzystniejszy finansowo.',
         },
         {
           question: 'Co robi kierownik budowy?',
-          answer: 'Prowadzi dziennik budowy, nadzoruje zgodność robót z projektem, kontroluje materiały, odbiera roboty zanikające (zbrojenie, hydroizolacja), zapewnia BHP na budowie i zgłasza obiekt do odbioru. Pełny zakres obowiązków reguluje <strong>art. 22 Prawa budowlanego</strong>.',
+          answer: 'Prowadzi dziennik budowy (od 2026 - e-dziennik), nadzoruje zgodność robót z projektem, kontroluje materiały i certyfikaty, odbiera roboty zanikające (zbrojenie, hydroizolacja), zapewnia BHP na budowie, organizuje wytyczenie geodezyjne i zgłasza obiekt do odbioru. Pełny zakres obowiązków reguluje <strong>art. 22 Prawa budowlanego</strong>.',
         },
         {
           question: 'Czym różni się kierownik budowy od inspektora nadzoru?',
-          answer: 'Kierownik reprezentuje <strong>wykonawcę</strong> - odpowiada za prowadzenie robót. Inspektor nadzoru reprezentuje <strong>inwestora</strong> - kontroluje jakość prac. Kierownik jest obowiązkowy przy każdej budowie. Inspektor - tylko gdy nałoży to PINB lub gdy inwestor chce dodatkowej kontroli.',
+          answer: 'Kierownik reprezentuje <strong>wykonawcę</strong> - odpowiada za prowadzenie robót i prowadzi dziennik budowy. Inspektor nadzoru reprezentuje <strong>inwestora</strong> - kontroluje jakość prac i weryfikuje faktury. Kierownik jest obowiązkowy przy każdej budowie. Inspektor - tylko gdy nałoży to PINB (np. na terenach górniczych) lub gdy inwestor chce niezależnej kontroli.',
         },
         {
           question: 'Jak często kierownik powinien być na budowie?',
-          answer: 'Minimum <strong>1 raz w tygodniu</strong>, optymalnie 2–3 razy. Obowiązkowo: przy betonowaniu fundamentów i stropu, odbiorach robót zanikających, montażu konstrukcji dachu. W CoreLTB nasz inżynier budowy jest na placu <strong>codziennie</strong>.',
+          answer: 'Minimum <strong>1 raz w tygodniu</strong>, optymalnie 2-3 razy. Obowiązkowo: przy betonowaniu fundamentów i stropu, odbiorach robót zanikających (zbrojenie, hydroizolacja), montażu konstrukcji dachu. W CoreLTB nasz inżynier budowy jest na placu <strong>codziennie</strong>, a kierownik przy każdym kluczowym etapie.',
+        },
+        {
+          question: 'Ile zarabia kierownik budowy?',
+          answer: 'Wynagrodzenie kierownika budowy zależy od formy zatrudnienia. Na etacie (w firmie budowlanej): <strong>8 000-15 000 zł brutto/miesiąc</strong>. Jako wolny strzelec obsługujący 3-5 budów jednocześnie: <strong>15 000-30 000 zł/miesiąc</strong>. Stawki na Śląsku są o 10-20% wyższe niż średnia krajowa ze względu na wymagania terenów górniczych.',
         },
       ],
     },

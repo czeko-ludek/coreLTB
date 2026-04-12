@@ -15,7 +15,7 @@ import type { BlogPost, BlogAuthor } from './BentoBlogSection';
 // =============================================================================
 
 export interface BlogContentBlock {
-  type: 'paragraph' | 'heading' | 'image' | 'list' | 'quote' | 'callout' | 'faq' | 'cta' | 'cta-wide';
+  type: 'paragraph' | 'heading' | 'image' | 'list' | 'quote' | 'callout' | 'faq' | 'cta' | 'cta-wide' | 'cta-inline';
   content?: string;
   items?: string[];
   src?: string;
@@ -339,6 +339,36 @@ function ContentRenderer({ block, index }: { block: BlogContentBlock; index: num
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
+        </div>
+      );
+
+    case 'cta-inline':
+      return (
+        <div
+          key={index}
+          className="my-10 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 bg-zinc-900 rounded-2xl p-6 md:p-8 items-center"
+        >
+          <div>
+            <span className="text-primary font-bold text-xs uppercase tracking-[0.2em] block mb-2">
+              {block.caption || 'Zainteresowany?'}
+            </span>
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
+              {block.ctaLabel || 'Sprawdz'}
+            </h3>
+            {block.ctaDescription && (
+              <p className="text-sm text-zinc-400">{block.ctaDescription}</p>
+            )}
+          </div>
+          <Link
+            href={block.ctaHref || '/wycena'}
+            className="group inline-flex items-center gap-3 bg-primary hover:bg-white text-zinc-900 font-bold text-sm px-6 py-3 rounded-xl transition-all duration-300 self-center"
+          >
+            <Icon name={(block.ctaIcon as IconName) || 'calculator'} size="sm" />
+            {block.content || 'Sprawdz'}
+            <div className="h-7 w-7 rounded-full bg-zinc-900 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+              <Icon name="arrowRight" className="text-white" size="sm" />
+            </div>
+          </Link>
         </div>
       );
 
