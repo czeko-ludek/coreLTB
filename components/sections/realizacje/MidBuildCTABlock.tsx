@@ -9,8 +9,8 @@ import type { MidBuildCTA } from '@/data/realizacje/types';
 
 const CTA_CONFIG: Record<MidBuildCTA['variant'], { href: string; buttonText: string; icon: IconName }> = {
   calculator: { href: '/wycena', buttonText: 'Kalkulator wyceny', icon: 'calculator' },
-  consultation: { href: '/umow-konsultacje', buttonText: 'Umow konsultacje', icon: 'messageCircle' },
-  plot: { href: '/analiza-dzialki', buttonText: 'Analiza dzialki', icon: 'map' },
+  consultation: { href: '/umow-konsultacje', buttonText: 'Umów konsultację', icon: 'messageCircle' },
+  plot: { href: '/analiza-dzialki', buttonText: 'Analiza działki', icon: 'map' },
 };
 
 interface MidBuildCTABlockProps {

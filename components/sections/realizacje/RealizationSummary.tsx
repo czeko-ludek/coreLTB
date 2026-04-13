@@ -107,14 +107,14 @@ export function RealizationSummary({ summary }: RealizationSummaryProps) {
             className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-zinc-900 font-bold text-sm px-6 py-3.5 rounded-xl transition-colors"
           >
             <Icon name="calculator" size="sm" />
-            Sprawdz wycene swojego domu
+            Sprawdź wycenę swojego domu
           </Link>
           <Link
             href="/umow-konsultacje"
             className="inline-flex items-center justify-center gap-2 border-2 border-zinc-900 hover:border-primary text-zinc-900 hover:text-primary font-bold text-sm px-6 py-3.5 rounded-xl transition-colors"
           >
             <Icon name="messageCircle" size="sm" />
-            Umow konsultacje
+            Umów konsultację
           </Link>
         </div>
       </div>

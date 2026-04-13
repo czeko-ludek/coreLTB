@@ -353,7 +353,7 @@ function ContentRenderer({ block, index }: { block: BlogContentBlock; index: num
               {block.caption || 'Zainteresowany?'}
             </span>
             <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-              {block.ctaLabel || 'Sprawdz'}
+              {block.ctaLabel || 'Sprawdź'}
             </h3>
             {block.ctaDescription && (
               <p className="text-sm text-zinc-400">{block.ctaDescription}</p>
@@ -364,7 +364,7 @@ function ContentRenderer({ block, index }: { block: BlogContentBlock; index: num
             className="group inline-flex items-center gap-3 bg-primary hover:bg-white text-zinc-900 font-bold text-sm px-6 py-3 rounded-xl transition-all duration-300 self-center"
           >
             <Icon name={(block.ctaIcon as IconName) || 'calculator'} size="sm" />
-            {block.content || 'Sprawdz'}
+            {block.content || 'Sprawdź'}
             <div className="h-7 w-7 rounded-full bg-zinc-900 flex items-center justify-center group-hover:translate-x-1 transition-transform">
               <Icon name="arrowRight" className="text-white" size="sm" />
             </div>

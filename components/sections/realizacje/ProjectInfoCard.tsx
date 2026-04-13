@@ -104,7 +104,7 @@ export function ProjectInfoCard({ project, stagesTotal, stagesCompleted }: Proje
             className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-zinc-900 font-bold text-sm px-5 py-3 rounded-xl transition-colors"
           >
             <Icon name="calculator" size="sm" />
-            Sprawdz wycene podobnego domu
+            Sprawdź wycenę podobnego domu
           </Link>
           {project.city && (
             <Link

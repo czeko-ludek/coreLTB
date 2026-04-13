@@ -934,9 +934,9 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     // ── CTA 1 - po obowiązkach, naturalny moment decyzyjny ────
     {
       type: 'cta-inline',
-      caption: 'Planujesz budowe?',
-      ctaLabel: 'Sprawdz, ile kosztuje budowa z nadzorem',
-      ctaDescription: 'Kalkulator uwzglednia kierownika budowy i inzyniera budowy w cenie - bez ukrytych kosztow.',
+      caption: 'Planujesz budowę?',
+      ctaLabel: 'Sprawdź, ile kosztuje budowa z nadzorem',
+      ctaDescription: 'Kalkulator uwzględnia kierownika budowy i inżyniera budowy w cenie - bez ukrytych kosztów.',
       ctaHref: '/wycena',
       ctaIcon: 'calculator',
       content: 'Kalkulator wyceny',
@@ -1050,7 +1050,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
       ctaDescription: 'Uprawnienia bez ograniczeń, polisa OC 500 000 zł, dojazd wliczony. Cennik od 5 000 zł brutto.',
       ctaHref: '/oferta/nadzor-i-doradztwo',
       ctaIcon: 'shieldCheck',
-      content: 'Sprawdz oferte nadzoru',
+      content: 'Sprawdź ofertę nadzoru',
     },
 
     // ── SEKCJA 6 - Jak wybrać ──────────────────────────────────
@@ -1103,11 +1103,11 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'cta-inline',
       caption: 'Zainteresowany?',
-      ctaLabel: 'Planujesz budowe domu na Śląsku?',
-      ctaDescription: 'Umow bezplatna konsultacje z naszym inzynierem. Omowimy Twoj projekt, dzialke i optymalna technologie.',
+      ctaLabel: 'Planujesz budowę domu na Śląsku?',
+      ctaDescription: 'Umów bezpłatną konsultację z naszym inżynierem. Omówimy Twój projekt, działkę i optymalną technologię.',
       ctaHref: '/umow-konsultacje',
       ctaIcon: 'messageCircle',
-      content: 'Umow konsultacje',
+      content: 'Umów konsultację',
     },
 
     // ── FAQ (z DataForSEO PAA) ──────────────────────────────────
