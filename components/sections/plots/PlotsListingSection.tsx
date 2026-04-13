@@ -13,6 +13,7 @@ import type { PlotFAQItem } from '@/data/plots/seo';
 import { PlotCard } from './PlotCard';
 import { LocationSearch, type LocationSelection } from './LocationSearch';
 import type { PlotMapHandle } from './PlotMap';
+import { LOCATIONS, getLocationCities, getLocationDistricts } from '@/data/plots/locations';
 
 // Dynamic import — Leaflet doesn't support SSR
 const PlotMap = dynamic(() => import('./PlotMap').then((m) => m.PlotMap), {
@@ -85,8 +86,22 @@ export function PlotsListingSection({
   seoContent,
 }: PlotsListingSectionProps) {
   const router = useRouter();
-  // Location search selection (hierarchical)
-  const [locationSelection, setLocationSelection] = useState<LocationSelection | null>(null);
+
+  // Initialize location selection from activeCity prop (URL-driven)
+  const initialSelection = useMemo<LocationSelection | null>(() => {
+    if (!activeCity) return null;
+    const entry = LOCATIONS[activeCity];
+    if (!entry) return null;
+    return {
+      slug: entry.slug,
+      entry,
+      cities: getLocationCities(entry.slug),
+      districts: getLocationDistricts(entry.slug) || undefined,
+      nominatimQuery: entry.nominatimQuery,
+    };
+  }, [activeCity]);
+
+  const [locationSelection, setLocationSelection] = useState<LocationSelection | null>(initialSelection);
 
   const [filters, setFilters] = useState<PlotFilters>({
     sortBy: 'newest',
@@ -258,14 +273,14 @@ export function PlotsListingSection({
                 Mapa
               </button>
 
-              {/* "Wszystkie" link when on city subpage */}
+              {/* "Usuń filtry" link when on city subpage */}
               {activeCity && (
                 <button
                   onClick={() => router.push('/dzialki')}
                   className="flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-semibold bg-zinc-100 text-text-primary hover:bg-zinc-200 transition-all shrink-0"
                 >
                   <Icon name="x" size="sm" />
-                  Pokaż wszystkie
+                  Usuń filtry
                 </button>
               )}
             </div>
