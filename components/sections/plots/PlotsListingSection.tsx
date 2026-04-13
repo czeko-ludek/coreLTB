@@ -213,28 +213,6 @@ export function PlotsListingSection({
       <section ref={ref} className="pt-6 pb-16 md:pt-8 md:pb-24 bg-background-beige min-h-screen">
         <div className="container mx-auto px-4 md:px-6">
 
-          {/* ── Breadcrumbs (above search bar) ── */}
-          <nav
-            aria-label="Breadcrumb"
-            className={clsx('mb-4', inView ? 'animate-fade-in-up' : 'opacity-0')}
-            style={{ animationDelay: '0.05s' }}
-          >
-            <ol className="flex items-center gap-2 text-sm">
-              {(customBreadcrumbs ?? breadcrumbs).map((crumb, index) => (
-                <li key={index} className="flex items-center gap-2">
-                  {index > 0 && <Icon name="chevronRight" size="sm" className="text-text-muted" />}
-                  {crumb.href ? (
-                    <Link href={crumb.href} className="text-text-muted hover:text-primary transition-colors">
-                      {crumb.label}
-                    </Link>
-                  ) : (
-                    <span className="text-text-primary font-medium">{crumb.label}</span>
-                  )}
-                </li>
-              ))}
-            </ol>
-          </nav>
-
           {/* ── Header ── */}
           <div
             className={clsx('max-w-3xl mb-6', inView ? 'animate-fade-in-up' : 'opacity-0')}
@@ -483,6 +461,28 @@ export function PlotsListingSection({
               </div>
             </div>
           </div>
+
+          {/* ── Breadcrumbs (below search bar) ── */}
+          <nav
+            aria-label="Breadcrumb"
+            className={clsx('mb-4', inView ? 'animate-fade-in-up' : 'opacity-0')}
+            style={{ animationDelay: '0.25s' }}
+          >
+            <ol className="flex items-center gap-2 text-sm">
+              {(customBreadcrumbs ?? breadcrumbs).map((crumb, index) => (
+                <li key={index} className="flex items-center gap-2">
+                  {index > 0 && <Icon name="chevronRight" size="sm" className="text-text-muted" />}
+                  {crumb.href ? (
+                    <Link href={crumb.href} className="text-text-muted hover:text-primary transition-colors">
+                      {crumb.label}
+                    </Link>
+                  ) : (
+                    <span className="text-text-primary font-medium">{crumb.label}</span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </nav>
 
           {/* ── Content ── */}
           <div

@@ -118,12 +118,6 @@ export const LocationSearch = React.memo(function LocationSearch({
   // Flat list for keyboard nav
   const flatResults = useMemo(() => results, [results]);
 
-  // ── Breadcrumb for selected value ──
-  const breadcrumb = useMemo(() => {
-    if (!value) return [];
-    return getLocationBreadcrumb(value.slug);
-  }, [value]);
-
   // ── Select a location ──
   const handleSelect = useCallback(
     (entry: LocationEntry) => {
@@ -351,33 +345,6 @@ export const LocationSearch = React.memo(function LocationSearch({
           </button>
         )}
       </div>
-
-      {/* ── Breadcrumb below input (when selected) ── */}
-      {value && breadcrumb.length > 1 && !compact && (
-        <div className="flex items-center gap-1 mt-1.5 px-1">
-          {breadcrumb.map((loc, i) => (
-            <React.Fragment key={loc.slug}>
-              {i > 0 && (
-                <Icon name="chevronRight" size="sm" className="text-text-muted shrink-0" />
-              )}
-              <button
-                onClick={() => {
-                  const entry = LOCATIONS[loc.slug];
-                  if (entry) handleSelect(entry);
-                }}
-                className={clsx(
-                  'text-[11px] transition-colors',
-                  loc.slug === value.slug
-                    ? 'font-semibold text-primary'
-                    : 'text-text-muted hover:text-primary'
-                )}
-              >
-                {loc.name}
-              </button>
-            </React.Fragment>
-          ))}
-        </div>
-      )}
 
       {/* ── Dropdown ── */}
       {(showDropdown || showPopular) && (
