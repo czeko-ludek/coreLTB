@@ -139,6 +139,82 @@ export function PlotDetails({ plot }: PlotDetailsProps) {
 
   const detailRows = useMemo(() => buildDetailRows(plot, locationDisplay), [plot, locationDisplay]);
 
+  // ── Reusable CTA card ──
+  const ctaCard = (
+    <div className="bg-white border border-zinc-200/60 rounded-2xl shadow-lg overflow-hidden">
+      {/* Price header */}
+      <div className="bg-zinc-900 px-6 py-6">
+        <p className="text-primary font-bold text-xs uppercase tracking-[0.15em] mb-1">Cena</p>
+        <p className="text-3xl md:text-4xl font-black text-white">
+          {formatPrice(plot.price)} zł
+        </p>
+        <p className="text-zinc-400 text-sm md:text-base mt-1">
+          {plot.pricePerM2} zł/m<sup className="text-xs">2</sup> &middot; {plot.area.toLocaleString('pl-PL')} m<sup className="text-xs">2</sup>
+        </p>
+      </div>
+
+      {/* Quick specs in sidebar */}
+      <div className="border-b border-zinc-100 px-6 py-4 space-y-2">
+        {(() => {
+          const items: { icon: IconName; text: string }[] = [];
+          if (plot.dimensions) items.push({ icon: 'ruler', text: `Wymiary: ${plot.dimensions}` });
+          if (plot.plotShape) items.push({ icon: 'layers', text: `Kształt: ${plot.plotShape}` });
+          if (plot.legalStatus) items.push({ icon: 'fileBadge', text: `Stan prawny: ${plot.legalStatus}` });
+          if (plot.purpose) items.push({ icon: 'landmark', text: `Przeznaczenie: ${plot.purpose}` });
+          return items.map((item, i) => (
+            <div key={i} className="flex items-center gap-2 text-sm text-text-secondary">
+              <Icon name={item.icon} size="sm" className="text-text-muted/60 shrink-0" />
+              <span className="truncate">{item.text}</span>
+            </div>
+          ));
+        })()}
+      </div>
+
+      {/* CTA buttons */}
+      <div className="p-6 space-y-3">
+        <Link
+          href={calculatorUrl}
+          className="group w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-zinc-900 font-bold text-sm md:text-base px-6 py-3.5 rounded-lg transition-all duration-300 uppercase tracking-wider"
+        >
+          <Icon name="calculator" size="md" />
+          Sprawdź koszt budowy
+        </Link>
+
+        <Link
+          href={analysisUrl}
+          className="group w-full flex items-center justify-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-sm md:text-base px-6 py-3.5 rounded-lg transition-all duration-300 uppercase tracking-wider"
+        >
+          <Icon name="search" size="md" />
+          Zamów analizę działki
+        </Link>
+
+        <Link
+          href="/umow-konsultacje?usluga=budowa"
+          className="group w-full flex items-center justify-center gap-2 bg-white hover:bg-zinc-50 text-text-primary font-semibold text-sm md:text-base px-6 py-3.5 rounded-lg border border-zinc-200 transition-all duration-300"
+        >
+          <Icon name="phone" size="md" />
+          Zapytaj o działkę
+        </Link>
+      </div>
+
+      {/* Trust points */}
+      <div className="border-t border-zinc-100 px-6 py-5 space-y-3">
+        {[
+          'Bezpłatna analiza przy podpisaniu umowy',
+          'Stała cena w umowie ryczałtowej',
+          'Pomoc z formalnościami budowlanymi',
+        ].map((point, i) => (
+          <div key={i} className="flex items-start gap-2.5">
+            <div className="w-5 h-5 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5">
+              <Icon name="check" size="sm" className="text-green-600" />
+            </div>
+            <span className="text-sm text-text-secondary leading-relaxed">{point}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     <section className="bg-background-beige py-6 md:py-8">
       <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
@@ -268,6 +344,11 @@ export function PlotDetails({ plot }: PlotDetailsProps) {
                 </div>
               </div>
 
+              {/* ── Mobile CTA card — after media, before description ── */}
+              <div className="lg:hidden">
+                {ctaCard}
+              </div>
+
               {/* Description — 4 sections with golden left border + icons */}
               {descSections.length > 0 && (
                 <div>
@@ -299,81 +380,10 @@ export function PlotDetails({ plot }: PlotDetailsProps) {
               )}
             </div>
 
-            {/* Right: sticky CTA card */}
-            <div className="lg:col-span-1">
+            {/* Right: sticky CTA card — desktop only */}
+            <div className="hidden lg:block lg:col-span-1">
               <div className="sticky top-24">
-                <div className="bg-white border border-zinc-200/60 rounded-2xl shadow-lg overflow-hidden">
-                  {/* Price header */}
-                  <div className="bg-zinc-900 px-6 py-6">
-                    <p className="text-primary font-bold text-xs uppercase tracking-[0.15em] mb-1">Cena</p>
-                    <p className="text-3xl md:text-4xl font-black text-white">
-                      {formatPrice(plot.price)} zł
-                    </p>
-                    <p className="text-zinc-400 text-sm md:text-base mt-1">
-                      {plot.pricePerM2} zł/m<sup className="text-xs">2</sup> &middot; {plot.area.toLocaleString('pl-PL')} m<sup className="text-xs">2</sup>
-                    </p>
-                  </div>
-
-                  {/* Quick specs in sidebar */}
-                  <div className="border-b border-zinc-100 px-6 py-4 space-y-2">
-                    {(() => {
-                      const items: { icon: IconName; text: string }[] = [];
-                      if (plot.dimensions) items.push({ icon: 'ruler', text: `Wymiary: ${plot.dimensions}` });
-                      if (plot.plotShape) items.push({ icon: 'layers', text: `Kształt: ${plot.plotShape}` });
-                      if (plot.legalStatus) items.push({ icon: 'fileBadge', text: `Stan prawny: ${plot.legalStatus}` });
-                      if (plot.purpose) items.push({ icon: 'landmark', text: `Przeznaczenie: ${plot.purpose}` });
-                      return items.map((item, i) => (
-                        <div key={i} className="flex items-center gap-2 text-sm text-text-secondary">
-                          <Icon name={item.icon} size="sm" className="text-text-muted/60 shrink-0" />
-                          <span className="truncate">{item.text}</span>
-                        </div>
-                      ));
-                    })()}
-                  </div>
-
-                  {/* CTA buttons */}
-                  <div className="p-6 space-y-3">
-                    <Link
-                      href={calculatorUrl}
-                      className="group w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-zinc-900 font-bold text-sm md:text-base px-6 py-3.5 rounded-lg transition-all duration-300 uppercase tracking-wider"
-                    >
-                      <Icon name="calculator" size="md" />
-                      Sprawdź koszt budowy
-                    </Link>
-
-                    <Link
-                      href={analysisUrl}
-                      className="group w-full flex items-center justify-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-sm md:text-base px-6 py-3.5 rounded-lg transition-all duration-300 uppercase tracking-wider"
-                    >
-                      <Icon name="search" size="md" />
-                      Zamów analizę działki
-                    </Link>
-
-                    <Link
-                      href="/umow-konsultacje?usluga=budowa"
-                      className="group w-full flex items-center justify-center gap-2 bg-white hover:bg-zinc-50 text-text-primary font-semibold text-sm md:text-base px-6 py-3.5 rounded-lg border border-zinc-200 transition-all duration-300"
-                    >
-                      <Icon name="phone" size="md" />
-                      Zapytaj o działkę
-                    </Link>
-                  </div>
-
-                  {/* Trust points */}
-                  <div className="border-t border-zinc-100 px-6 py-5 space-y-3">
-                    {[
-                      'Bezpłatna analiza przy podpisaniu umowy',
-                      'Stała cena w umowie ryczałtowej',
-                      'Pomoc z formalnościami budowlanymi',
-                    ].map((point, i) => (
-                      <div key={i} className="flex items-start gap-2.5">
-                        <div className="w-5 h-5 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5">
-                          <Icon name="check" size="sm" className="text-green-600" />
-                        </div>
-                        <span className="text-sm text-text-secondary leading-relaxed">{point}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                {ctaCard}
               </div>
             </div>
           </div>
