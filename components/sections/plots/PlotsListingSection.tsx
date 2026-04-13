@@ -636,8 +636,8 @@ export function PlotsListingSection({
 
           {/* Fullscreen content — sidebar + map */}
           <div className="flex-1 flex overflow-hidden">
-            {/* Sidebar */}
-            <div className="w-[480px] shrink-0 overflow-y-auto border-r border-zinc-200 bg-white hidden md:block">
+            {/* Sidebar — only on large screens (1024px+), tablets get mobile drawer */}
+            <div className="w-[480px] shrink-0 overflow-y-auto border-r border-zinc-200 bg-white hidden lg:block">
               <div className="sticky top-0 bg-white z-10 px-4 py-3 border-b border-zinc-100">
                 <p className="text-sm font-semibold text-text-primary">
                   {sidebarPlots.length} {sidebarPlots.length === 1 ? 'działka' : 'działek'}
@@ -679,7 +679,7 @@ export function PlotsListingSection({
               {/* Mobile: bottom drawer trigger in fullscreen */}
               <button
                 onClick={() => setMobileDrawerOpen(true)}
-                className="absolute bottom-4 left-4 right-4 bg-white rounded-2xl shadow-lg border border-zinc-200/60 px-5 py-3.5 flex items-center justify-between z-[1100] md:hidden"
+                className="absolute bottom-4 left-4 right-4 bg-white rounded-2xl shadow-lg border border-zinc-200/60 px-5 py-3.5 flex items-center justify-between z-[1100] lg:hidden"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
