@@ -169,6 +169,33 @@ export function trackFormError(formName: string, field: string) {
   trackEvent('form_error', { form_name: formName, error_field: field });
 }
 
+// ─── Plot Events ─────────────────────────────────────────
+
+/** User viewed a plot detail page */
+export function trackPlotView(plotSlug: string, city: string, price: number, area: number) {
+  trackEvent('plot_view', { plot_slug: plotSlug, city, price, area });
+}
+
+/** User clicked "Sprawdź koszt budowy" on a plot */
+export function trackPlotCalculatorClick(plotSlug: string, city: string) {
+  trackEvent('plot_calculator_click', { plot_slug: plotSlug, city });
+}
+
+/** User clicked "Zamów analizę działki" on a plot */
+export function trackPlotAnalysisClick(plotSlug: string, city: string) {
+  trackEvent('plot_analysis_click', { plot_slug: plotSlug, city });
+}
+
+/** User clicked "Zapytaj o działkę" on a plot */
+export function trackPlotContactClick(plotSlug: string, city: string) {
+  trackEvent('plot_contact_click', { plot_slug: plotSlug, city });
+}
+
+/** User clicked a cross-link (plots ↔ projects) */
+export function trackCrossLinkClick(from: string, to: string, linkType: string) {
+  trackEvent('cross_link_click', { from_page: from, to_page: to, link_type: linkType });
+}
+
 // ─── Meta Pixel (Facebook) ───────────────────────────────
 
 declare global {

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Icon } from '@/components/ui';
 import type { IconName } from '@/components/ui/Icon';
@@ -13,6 +13,12 @@ import {
   formatPrice,
   getMediaLabels,
 } from '@/data/plots/helpers';
+import {
+  trackPlotView,
+  trackPlotCalculatorClick,
+  trackPlotAnalysisClick,
+  trackPlotContactClick,
+} from '@/lib/analytics';
 
 interface PlotDetailsProps {
   plot: Plot;
@@ -139,6 +145,23 @@ export function PlotDetails({ plot }: PlotDetailsProps) {
 
   const detailRows = useMemo(() => buildDetailRows(plot, locationDisplay), [plot, locationDisplay]);
 
+  // ── GA4 tracking ──
+  useEffect(() => {
+    trackPlotView(plot.slug, plot.city, plot.price, plot.area);
+  }, [plot.slug, plot.city, plot.price, plot.area]);
+
+  const onCalculatorClick = useCallback(() => {
+    trackPlotCalculatorClick(plot.slug, plot.city);
+  }, [plot.slug, plot.city]);
+
+  const onAnalysisClick = useCallback(() => {
+    trackPlotAnalysisClick(plot.slug, plot.city);
+  }, [plot.slug, plot.city]);
+
+  const onContactClick = useCallback(() => {
+    trackPlotContactClick(plot.slug, plot.city);
+  }, [plot.slug, plot.city]);
+
   // ── Reusable CTA card ──
   const ctaCard = (
     <div className="bg-white border border-zinc-200/60 rounded-2xl shadow-lg overflow-hidden">
@@ -174,6 +197,7 @@ export function PlotDetails({ plot }: PlotDetailsProps) {
       <div className="p-6 space-y-3">
         <Link
           href={calculatorUrl}
+          onClick={onCalculatorClick}
           className="group w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-zinc-900 font-bold text-sm md:text-base px-6 py-3.5 rounded-lg transition-all duration-300 uppercase tracking-wider"
         >
           <Icon name="calculator" size="md" />
@@ -182,6 +206,7 @@ export function PlotDetails({ plot }: PlotDetailsProps) {
 
         <Link
           href={analysisUrl}
+          onClick={onAnalysisClick}
           className="group w-full flex items-center justify-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-sm md:text-base px-6 py-3.5 rounded-lg transition-all duration-300 uppercase tracking-wider"
         >
           <Icon name="search" size="md" />
@@ -190,6 +215,7 @@ export function PlotDetails({ plot }: PlotDetailsProps) {
 
         <Link
           href="/umow-konsultacje?usluga=budowa"
+          onClick={onContactClick}
           className="group w-full flex items-center justify-center gap-2 bg-white hover:bg-zinc-50 text-text-primary font-semibold text-sm md:text-base px-6 py-3.5 rounded-lg border border-zinc-200 transition-all duration-300"
         >
           <Icon name="phone" size="md" />

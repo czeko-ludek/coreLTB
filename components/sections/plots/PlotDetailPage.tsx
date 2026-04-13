@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import type { Plot } from '@/data/plots/types';
 import { PlotGalleryHero } from './PlotGalleryHero';
 import { PlotDetails } from './PlotDetails';
+import { PlotProjectsCrossLink } from './PlotProjectsCrossLink';
 
 // Dynamic import for map (Leaflet can't SSR)
 const PlotDetailMap = dynamic(
@@ -36,6 +37,7 @@ export function PlotDetailPage({ plot }: PlotDetailPageProps) {
     <>
       <PlotGalleryHero plot={plot} />
       <PlotDetails plot={plot} />
+      <PlotProjectsCrossLink plot={plot} />
       <PlotDetailMap plot={plot} />
     </>
   );

@@ -20,6 +20,7 @@ import {
 } from '@/components/shared';
 import { ProjectElevations } from '@/components/shared/ProjectElevations';
 import { MirrorModeProvider } from '@/contexts/MirrorModeContext';
+import { ProjectPlotsCrossLink } from '@/components/sections/plots/ProjectPlotsCrossLink';
 
 // Generate static params for all projects
 export async function generateStaticParams() {
@@ -234,6 +235,12 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       {/* CTA for Project Modifications */}
       <ProjectModificationCTA />
+
+      {/* Cross-link: find a plot for this project */}
+      <ProjectPlotsCrossLink
+        projectSlug={project.slug}
+        surfaceArea={project.surfaceArea}
+      />
 
       {/* Related Projects Section */}
       <RelatedProjectsSection
