@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raport SEO & Analityka — CoreLTB Builders — 24.03-13.04.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #dfbb68;
+    --gold-dark: #d4a847;
+    --gold-light: #e8cc8a;
+    --gold-pale: #f5ecd7;
+    --bg-dark: #1a1a1a;
+    --bg-card: #232323;
+    --bg-light: #fafaf9;
+    --bg-cream: #f5f5f3;
+    --text-primary: #1a1a1a;
+    --text-secondary: #555;
+    --text-light: #888;
+    --green: #22c55e;
+    --red: #ef4444;
+    --blue: #3b82f6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .header {
+    background: var(--bg-dark);
+    padding: 48px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 120%, rgba(223,187,104,0.15) 0%, transparent 70%);
+  }
+  .header-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .header img.logo {
+    height: 48px;
+    margin-bottom: 24px;
+    filter: brightness(0) invert(1);
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .header h1 span { color: var(--gold); }
+  .header .subtitle {
+    font-size: 15px;
+    color: #aaa;
+    font-weight: 400;
+  }
+  .header .period-badge {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 6px 20px;
+    background: rgba(223,187,104,0.15);
+    border: 1px solid var(--gold);
+    border-radius: 24px;
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  section {
+    padding: 36px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--bg-cream);
+  }
+  .section-title .icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--bg-dark);
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  /* Summary cards */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .summary-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .summary-card.highlight {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, #fffdf5, #fff);
+  }
+  .summary-card .label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-light);
+    margin-bottom: 6px;
+  }
+  .summary-card .value {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+  .summary-card .note {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  /* Tables */
+  .table-wrap {
+    overflow-x: auto;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    background: var(--bg-cream);
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--text-secondary);
+    border-bottom: 2px solid #e5e5e5;
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: #fafafa; }
+
+  .text-right { text-align: right; }
+  .text-center { text-align: center; }
+  .text-green { color: var(--green); }
+  .text-red { color: var(--red); }
+  .font-bold { font-weight: 700; }
+
+  /* Badges */
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .badge-green { background: rgba(34,197,94,0.1); color: var(--green); }
+  .badge-gold { background: rgba(223,187,104,0.15); color: var(--gold-dark); }
+  .badge-red { background: rgba(239,68,68,0.1); color: var(--red); }
+  .badge-blue { background: rgba(59,130,246,0.1); color: var(--blue); }
+
+  /* Insight box */
+  .insight-box {
+    background: linear-gradient(135deg, #f0fdf4, #f8fff8);
+    border: 1px solid rgba(34,197,94,0.2);
+    border-left: 4px solid var(--green);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-top: 20px;
+  }
+  .insight-box h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #166534;
+  }
+  .insight-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .insight-box li {
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 4px 0 4px 20px;
+    position: relative;
+    color: var(--text-secondary);
+  }
+  .insight-box li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  /* Rank badges */
+  .rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 28px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .rank-1 { background: linear-gradient(135deg, #ffd700, #ffaa00); color: #000; }
+  .rank-2 { background: linear-gradient(135deg, #c0c0c0, #a0a0a0); color: #000; }
+  .rank-3 { background: linear-gradient(135deg, #cd7f32, #b8691a); color: #fff; }
+  .rank-top5 { background: rgba(34,197,94,0.15); color: var(--green); }
+  .rank-top10 { background: rgba(59,130,246,0.1); color: var(--blue); }
+  .rank-top20 { background: rgba(223,187,104,0.15); color: var(--gold-dark); }
+
+  /* Funnel */
+  .funnel { margin-bottom: 24px; }
+  .funnel-step { margin-bottom: 12px; }
+  .funnel-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
+  .funnel-bar {
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    min-width: 60px;
+    transition: width 0.5s;
+  }
+
+  /* Two-col */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .stat-box {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .stat-box h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Progress bars */
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .prog-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    width: 90px;
+    flex-shrink: 0;
+  }
+  .prog-bar-bg {
+    flex: 1;
+    height: 24px;
+    background: #f0f0f0;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .prog-bar {
+    height: 100%;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 30px;
+  }
+
+  /* Change indicators */
+  .change-up { color: var(--green); font-weight: 700; }
+  .change-down { color: var(--red); font-weight: 700; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--text-light);
+    font-size: 13px;
+    border-top: 1px solid #e5e5e5;
+    margin-top: 24px;
+  }
+
+  @media (max-width: 700px) {
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <img class="logo" src="/images/logo.webp" alt="CoreLTB Builders" onerror="this.style.display='none'">
+    <h1>Raport <span>SEO & Analityka</span></h1>
+    <p class="subtitle">CoreLTB Builders &mdash; coreltb.pl</p>
+    <div class="period-badge">24 marca &mdash; 13 kwietnia 2026 (21 dni)</div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 1. PODSUMOWANIE RUCHU -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">1</div> Podsumowanie ruchu na stronie (GA4)</div>
+
+  <div class="summary-grid">
+    <div class="summary-card highlight">
+      <div class="label">Sesje</div>
+      <div class="value">984</div>
+      <div class="note">21 dni</div>
+    </div>
+    <div class="summary-card highlight">
+      <div class="label">Uzytkownicy</div>
+      <div class="value">607</div>
+      <div class="note">582 nowych</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Odslony</div>
+      <div class="value">3 384</div>
+      <div class="note">3,4 str/sesje</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Engagement</div>
+      <div class="value">66,1%</div>
+      <div class="note">bounce: 33,9%</div>
+    </div>
+  </div>
+
+  <div class="summary-grid" style="grid-template-columns: repeat(3, 1fr)">
+    <div class="summary-card">
+      <div class="label">Sr. czas sesji</div>
+      <div class="value" style="font-size:22px">4m 52s</div>
+      <div class="note">wysoki zaangazowanie</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Nowi uzytkownicy</div>
+      <div class="value">582</div>
+      <div class="note">95,9% calego ruchu</div>
+    </div>
+    <div class="summary-card highlight">
+      <div class="label">Leady lacznie</div>
+      <div class="value text-green">77</div>
+      <div class="note">calculator: 76, konsultacja: 1</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 2. LEJEK KONWERSJI -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">2</div> Lejek konwersji (GA4, 21 dni)</div>
+
+  <div class="funnel">
+    <div class="funnel-step">
+      <div class="funnel-label">Sesje na stronie</div>
+      <div class="funnel-bar" style="width:100%; background:var(--bg-dark)">984</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-label">Uzytkownicy</div>
+      <div class="funnel-bar" style="width:62%; background:#555">607</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-label">Otworzyli kalkulator (calculator_start)</div>
+      <div class="funnel-bar" style="width:44%; background:var(--blue)">437</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-label font-bold">Wyslali formularz (lead)</div>
+      <div class="funnel-bar" style="width:8%; background:var(--green)">77</div>
+    </div>
+  </div>
+
+  <div class="summary-grid" style="grid-template-columns: repeat(4, 1fr)">
+    <div class="summary-card highlight">
+      <div class="label">Leady</div>
+      <div class="value text-green">77</div>
+      <div class="note">calculator: 76, kons.: 1</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Calculator starts</div>
+      <div class="value">437</div>
+      <div class="note">372 unikalnych</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Start &rarr; Lead</div>
+      <div class="value">17,6%</div>
+      <div class="note">konwersja kalkulatora</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Sesja &rarr; Lead</div>
+      <div class="value">7,8%</div>
+      <div class="note">ogolna konwersja</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 3. ZRODLA RUCHU -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">3</div> Zrodla ruchu (GA4, 21 dni)</div>
+
+  <div class="summary-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom: 20px;">
+    <div class="summary-card">
+      <div class="label">Ruch platny (Ads)</div>
+      <div class="value">455</div>
+      <div class="note">44,9% calego ruchu | engagement 65,5%</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Ruch organiczny</div>
+      <div class="value">559</div>
+      <div class="note">55,1% calego ruchu | engagement 62,8%</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Kanal</th>
+          <th>Typ</th>
+          <th class="text-right">Sesje</th>
+          <th class="text-right">Uzytkownicy</th>
+          <th class="text-right">Engagement</th>
+          <th class="text-right">Sr. czas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="font-bold">Cross-network (PMax)</td>
+          <td><span class="badge badge-blue">paid</span></td>
+          <td class="text-right font-bold">338</td>
+          <td class="text-right">306</td>
+          <td class="text-right">68,9%</td>
+          <td class="text-right">2m 15s</td>
+        </tr>
+        <tr>
+          <td class="font-bold text-green">Organic Search</td>
+          <td><span class="badge badge-green">organic</span></td>
+          <td class="text-right font-bold">251</td>
+          <td class="text-right">87</td>
+          <td class="text-right">66,5%</td>
+          <td class="text-right font-bold text-green">7m 15s</td>
+        </tr>
+        <tr>
+          <td class="font-bold">Direct</td>
+          <td><span class="badge badge-green">organic</span></td>
+          <td class="text-right font-bold">212</td>
+          <td class="text-right">87</td>
+          <td class="text-right">67,5%</td>
+          <td class="text-right font-bold text-green">8m 48s</td>
+        </tr>
+        <tr>
+          <td>Paid Social (Meta)</td>
+          <td><span class="badge badge-blue">paid</span></td>
+          <td class="text-right">117</td>
+          <td class="text-right">104</td>
+          <td class="text-right">55,6%</td>
+          <td class="text-right">50s</td>
+        </tr>
+        <tr>
+          <td>Organic Social</td>
+          <td><span class="badge badge-green">organic</span></td>
+          <td class="text-right">51</td>
+          <td class="text-right">36</td>
+          <td class="text-right text-green font-bold">72,5%</td>
+          <td class="text-right">2m 16s</td>
+        </tr>
+        <tr>
+          <td>Referral</td>
+          <td><span class="badge badge-green">organic</span></td>
+          <td class="text-right">4</td>
+          <td class="text-right">3</td>
+          <td class="text-right text-green font-bold">100%</td>
+          <td class="text-right">8m 16s</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>Kluczowe obserwacje</h3>
+    <ul>
+      <li><strong>Organic Search rosnie</strong> &mdash; 251 sesji, uzytkownicy spedzaja srednie 7m 15s na stronie (3x wiecej niz paid)</li>
+      <li><strong>Direct traffic = 212 sesji</strong> &mdash; ludzie wracaja na strone bezposrednio, buduje sie rozpoznawalnosc marki</li>
+      <li><strong>Organic Social = 51 sesji z engagement 72,5%</strong> &mdash; najwyzszy engagement ze wszystkich kanalow</li>
+      <li><strong>Paid Social (Meta) ma niski czas sesji (50s)</strong> &mdash; ruch z Facebooka jest mniej zaangazowany, warto monitorowac</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 4. GOOGLE SEARCH CONSOLE -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">4</div> Google Search Console (21 dni)</div>
+
+  <div class="summary-grid">
+    <div class="summary-card highlight">
+      <div class="label">Klikniecia org.</div>
+      <div class="value">104</div>
+      <div class="note change-up">+73 vs poprzedni okres</div>
+    </div>
+    <div class="summary-card highlight">
+      <div class="label">Wyswietlenia</div>
+      <div class="value">1 359</div>
+      <div class="note change-up">+362 vs poprzedni</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Sr. CTR</div>
+      <div class="value">7,7%</div>
+      <div class="note">powyzej sredniej</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Sr. pozycja</div>
+      <div class="value">11,5</div>
+      <div class="note">50 fraz w Google</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="stat-box">
+      <h4>Urzadzenia</h4>
+      <div class="progress-row">
+        <span class="prog-label">Desktop</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:51%; background:var(--blue)">84 klik</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Mobile</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:48%; background:var(--green)">79 klik</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Tablet</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:1%; background:var(--gold)">1</div></div>
+      </div>
+    </div>
+    <div class="stat-box">
+      <h4>Grupy fraz kluczowych</h4>
+      <div class="progress-row">
+        <span class="prog-label">budowa-domow</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:50%; background:var(--bg-dark)">11 klik | poz. 8,8</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">wodzislaw</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:32%; background:var(--blue)">7 klik | poz. 20,5</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">rybnik</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:14%; background:var(--green)">3 klik | poz. 11,1</div></div>
+      </div>
+    </div>
+  </div>
+
+  <h4 style="margin:20px 0 12px; font-size:15px; font-weight:700">Top rosnace frazy kluczowe</h4>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Fraza</th><th class="text-right">Klik &Delta;</th><th class="text-right">Impr &Delta;</th><th class="text-right">Pozycja</th><th class="text-right">CTR</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="font-bold text-green">coreltb</td><td class="text-right change-up">+36</td><td class="text-right change-up">+56</td><td class="text-right text-green font-bold">1,1</td><td class="text-right">57,3%</td></tr>
+        <tr><td class="font-bold text-green">coreltb builders sp. z o.o</td><td class="text-right change-up">+11</td><td class="text-right change-up">+26</td><td class="text-right text-green font-bold">1,2</td><td class="text-right">37,8%</td></tr>
+        <tr><td class="font-bold">kierownik budowy jaworzno</td><td class="text-right change-up">+4</td><td class="text-right change-up">+94</td><td class="text-right">7,2</td><td class="text-right">3,2%</td></tr>
+        <tr><td class="font-bold">coreltb builders</td><td class="text-right change-up">+3</td><td class="text-right change-up">+11</td><td class="text-right text-green font-bold">1,0</td><td class="text-right">30,4%</td></tr>
+        <tr><td>budowa domow wodzislaw slaski</td><td class="text-right change-up">+3</td><td class="text-right change-up">+123</td><td class="text-right">14,3</td><td class="text-right">1,6%</td></tr>
+        <tr><td>kierownik budowy wodzislaw slaski</td><td class="text-right change-up">+2</td><td class="text-right change-up">+30</td><td class="text-right">6,6</td><td class="text-right">6,1%</td></tr>
+        <tr><td>budowa domow rybnik</td><td class="text-right change-up">+2</td><td class="text-right change-up">+42</td><td class="text-right">8,8</td><td class="text-right">2,4%</td></tr>
+        <tr><td>budowa domow zory</td><td class="text-right change-up">+2</td><td class="text-right change-up">+77</td><td class="text-right">9,6</td><td class="text-right">2,1%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4 style="margin:20px 0 12px; font-size:15px; font-weight:700">Nowe frazy (pojawialy sie pierwsze razy)</h4>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Fraza</th><th class="text-right">Klik</th><th class="text-right">Impr.</th><th class="text-right">Pozycja</th><th class="text-right">CTR</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="font-bold text-green">dom przy rubinowej 10</td><td class="text-right">2</td><td class="text-right">94</td><td class="text-right">6,8</td><td class="text-right">2,1%</td></tr>
+        <tr><td class="font-bold text-green">kierownik budowy cennik</td><td class="text-right">2</td><td class="text-right">6</td><td class="text-right">11,5</td><td class="text-right text-green">33,3%</td></tr>
+        <tr><td>budowa domow jaworzno</td><td class="text-right">1</td><td class="text-right">2</td><td class="text-right text-green">6,5</td><td class="text-right text-green">50,0%</td></tr>
+        <tr><td>koszt kierownika budowy 2026</td><td class="text-right">1</td><td class="text-right">3</td><td class="text-right text-green">4,7</td><td class="text-right text-green">33,3%</td></tr>
+        <tr><td>pekniecia fundamentow szkody gornicze</td><td class="text-right">1</td><td class="text-right">8</td><td class="text-right">10,1</td><td class="text-right">12,5%</td></tr>
+        <tr><td>sso budowa</td><td class="text-right">1</td><td class="text-right">2</td><td class="text-right">12,0</td><td class="text-right text-green">50,0%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4 style="margin:20px 0 12px; font-size:15px; font-weight:700">Rosnace strony</h4>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Strona</th><th class="text-right">Klik &Delta;</th><th class="text-right">Impr &Delta;</th><th class="text-right">Pozycja</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="font-bold text-green">/ (strona glowna)</td><td class="text-right change-up">+24</td><td class="text-right change-up">+146</td><td class="text-right">13,2</td></tr>
+        <tr><td class="font-bold text-green">/oferta/budowa/budowa-wodzislaw-slaski</td><td class="text-right change-up">+5</td><td class="text-right change-up">+65</td><td class="text-right text-green">6,1</td></tr>
+        <tr><td>/oferta/uslugi-techniczne/nadzor-budowy</td><td class="text-right change-up">+2</td><td class="text-right change-up">+112</td><td class="text-right">7,1</td></tr>
+        <tr><td>/oferta/budowa/budowa-rybnik</td><td class="text-right change-up">+2</td><td class="text-right">-48</td><td class="text-right">16,6</td></tr>
+        <tr><td>/kontakt</td><td class="text-right change-up">+1</td><td class="text-right change-up">+118</td><td class="text-right text-green">4,3</td></tr>
+        <tr><td>/o-nas</td><td class="text-right change-up">+1</td><td class="text-right change-up">+79</td><td class="text-right text-green">2,1</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 5. POZYCJE W GOOGLE (SERPLab) -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">5</div> Pozycje w Google (SERPLab, 12-13.04)</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Poz.</th>
+          <th>Fraza kluczowa</th>
+          <th>Najlepsza</th>
+          <th>Wolumen</th>
+          <th>Strona</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-1">1</div></td>
+          <td class="font-bold">budowa domu wodzislaw slaski</td>
+          <td class="text-center text-green font-bold">1</td>
+          <td class="text-right">30-40</td>
+          <td>/obszar-dzialania/wodzislaw-slaski/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-2">2</div></td>
+          <td class="font-bold">budowa domow wodzislaw slaski</td>
+          <td class="text-center text-green font-bold">1</td>
+          <td class="text-right">50-70</td>
+          <td>/obszar-dzialania/wodzislaw-slaski/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-3">3</div></td>
+          <td class="font-bold">kierownik budowy wodzislaw slaski</td>
+          <td class="text-center text-green font-bold">3</td>
+          <td class="text-right">30-40</td>
+          <td>/kierownik-budowy-wodzislaw-slaski/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-top5">5</div></td>
+          <td class="font-bold">budowa domow zory</td>
+          <td class="text-center text-green">3</td>
+          <td class="text-right">40-50</td>
+          <td>/obszar-dzialania/zory/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-top5">5</div></td>
+          <td class="font-bold">budowa domow rybnik</td>
+          <td class="text-center text-green">3</td>
+          <td class="text-right">90-110</td>
+          <td>/obszar-dzialania/rybnik/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-top10">7</div></td>
+          <td>kierownik budowy cena</td>
+          <td class="text-center">7</td>
+          <td class="text-right">&mdash;</td>
+          <td>/baza-wiedzy/ile-kosztuje-kierownik-budowy/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-top10">7</div></td>
+          <td>kalkulator budowy domu 2026</td>
+          <td class="text-center">7</td>
+          <td class="text-right">&mdash;</td>
+          <td>/baza-wiedzy/kosztorys-budowy-domu-2026/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-top10">9</div></td>
+          <td>budowa domow gliwice</td>
+          <td class="text-center text-green">7</td>
+          <td class="text-right">140-170</td>
+          <td>/obszar-dzialania/gliwice/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-top10">10</div></td>
+          <td>budowa domow katowice</td>
+          <td class="text-center">10</td>
+          <td class="text-right">140</td>
+          <td>/obszar-dzialania/katowice/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-top20">13</div></td>
+          <td>stan surowy otwarty</td>
+          <td class="text-center">13</td>
+          <td class="text-right">&mdash;</td>
+          <td>/baza-wiedzy/stan-surowy-otwarty-poradnik/</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="summary-grid" style="grid-template-columns: repeat(3, 1fr)">
+    <div class="summary-card highlight">
+      <div class="label">Fraz w TOP 5</div>
+      <div class="value text-green">5</div>
+      <div class="note">z 10 sledzonych</div>
+    </div>
+    <div class="summary-card highlight">
+      <div class="label">Fraz w TOP 10</div>
+      <div class="value text-green">9</div>
+      <div class="note">z 10 sledzonych</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Pozycja #1</div>
+      <div class="value" style="font-size:18px">budowa domu wodzislaw</div>
+      <div class="note">flagowa fraza lokalna</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <h3>SEO &mdash; kluczowe osiagniecia</h3>
+    <ul>
+      <li><strong>#1 za "budowa domu wodzislaw slaski"</strong> &mdash; flagowa fraza lokalna, TOP 1 w Google</li>
+      <li><strong>5 fraz w TOP 5</strong> &mdash; dominacja na Slasku (Wodzislaw, Rybnik, Zory)</li>
+      <li><strong>9 z 10 fraz w TOP 10</strong> &mdash; jedyna poza TOP 10 to "stan surowy otwarty" (ogolnopolska fraza, poz. 13 &mdash; swietny wynik)</li>
+      <li><strong>Artykul o kierowniku budowy</strong> juz na pozycji #7 za "kierownik budowy cena" &mdash; nowy content rankuje w ciagu dni</li>
+      <li><strong>Gliwice (#9) i Katowice (#10)</strong> &mdash; wchodzenie na duze rynki (140-170 wyszukiwan/mies.)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 6. GOOGLE BUSINESS PROFILE -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">6</div> Google Business Profile (21 dni)</div>
+
+  <div class="two-col">
+    <div class="stat-box">
+      <h4>Jaworzno <span class="badge badge-green" style="margin-left:8px">94/100</span></h4>
+      <div class="progress-row">
+        <span class="prog-label">Wyswietlenia</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:80%; background:var(--blue)">221</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Klik www</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:26%; background:var(--green)">14</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Telefon</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:6%; background:var(--gold)">3</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Nawigacje</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:46%; background:#8b5cf6">25</div></div>
+      </div>
+      <p style="font-size:12px; color:var(--text-light); margin-top:12px">Mobile: 60% | Akcje: 42 | Engagement: 19,0%</p>
+    </div>
+    <div class="stat-box">
+      <h4>Wodzislaw <span class="badge badge-green" style="margin-left:8px">93/100</span></h4>
+      <div class="progress-row">
+        <span class="prog-label">Wyswietlenia</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:41%; background:var(--blue)">114</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Klik www</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:15%; background:var(--green)">8</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Telefon</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:2%; background:var(--gold)">1</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Nawigacje</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:55%; background:#8b5cf6">30</div></div>
+      </div>
+      <p style="font-size:12px; color:var(--text-light); margin-top:12px">Mobile: 52% | Akcje: 39 | Engagement: 34,2%</p>
+    </div>
+  </div>
+
+  <h4 style="margin:20px 0 12px; font-size:15px; font-weight:700">Wzrost vs poprzedni okres</h4>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Metryka</th><th class="text-right">Jaworzno</th><th class="text-right">Zmiana</th><th class="text-right">Wodzislaw</th><th class="text-right">Zmiana</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="font-bold">Wyswietlenia</td><td class="text-right">221</td><td class="text-right change-up">+136 (+160%)</td><td class="text-right">114</td><td class="text-right change-up">+70 (+159%)</td></tr>
+        <tr><td class="font-bold">Klik www</td><td class="text-right">14</td><td class="text-right change-up">+9 (+180%)</td><td class="text-right">8</td><td class="text-right change-up">+7 (+700%)</td></tr>
+        <tr><td class="font-bold">Telefon</td><td class="text-right">3</td><td class="text-right change-up">+1 (+50%)</td><td class="text-right">1</td><td class="text-right change-up">+1 (+100%)</td></tr>
+        <tr><td class="font-bold">Nawigacje</td><td class="text-right">25</td><td class="text-right change-up">+13 (+108%)</td><td class="text-right">30</td><td class="text-right change-up">+15 (+100%)</td></tr>
+        <tr><td class="font-bold">Akcje lacznie</td><td class="text-right font-bold">42</td><td class="text-right change-up">+23 (+121%)</td><td class="text-right font-bold">39</td><td class="text-right change-up">+23 (+144%)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4 style="margin:20px 0 12px; font-size:15px; font-weight:700">Czym ludzie szukaja w Maps</h4>
+  <div class="two-col">
+    <div class="stat-box">
+      <h4>Jaworzno &mdash; top hasla</h4>
+      <div class="table-wrap" style="border:none; margin:0">
+        <table>
+          <tbody>
+            <tr><td class="font-bold">firma budowlana jaworzno</td><td class="text-right">24</td></tr>
+            <tr><td>coreltb</td><td class="text-right">23</td></tr>
+            <tr><td>coreltb builders sp. z o.o. opinie</td><td class="text-right">23</td></tr>
+            <tr><td>coreltb builders</td><td class="text-right">21</td></tr>
+            <tr><td>budowa domow jaworzno</td><td class="text-right">&mdash;</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="stat-box">
+      <h4>Wodzislaw &mdash; top hasla</h4>
+      <div class="table-wrap" style="border:none; margin:0">
+        <table>
+          <tbody>
+            <tr><td class="font-bold">coreltb builders</td><td class="text-right">20</td></tr>
+            <tr><td>coreltb</td><td class="text-right">&mdash;</td></tr>
+            <tr><td>coreltb builders sp. z o.o</td><td class="text-right">&mdash;</td></tr>
+            <tr><td>marklowice grunwaldzka firma budowlana</td><td class="text-right">&mdash;</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 7. CONTENT & SEO ACTIONS -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">7</div> Opublikowany content &amp; SEO Actions</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Data</th><th>Akcja</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="font-bold">01.04</td>
+          <td>GBP: pelna optymalizacja wizytowek (Jaworzno + Wodzislaw) &mdash; URL, kategorie, opisy, uslugi, obszary</td>
+          <td><span class="badge badge-green">EFEKT</span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">07.04</td>
+          <td>GBP: drugi post na obu wizytowkach &mdash; realizacja Mikolow (plyta fundamentowa) + zdjecia</td>
+          <td><span class="badge badge-gold">PRAWDOP.</span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">08.04</td>
+          <td>Blog: "Ile kosztuje kierownik budowy?" &mdash; artykul + CTA inline</td>
+          <td><span class="badge badge-green">EFEKT</span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">09.04</td>
+          <td>Blog: "Stan surowy otwarty &mdash; co zawiera i ile kosztuje w 2026?" + Schema Article/FAQ</td>
+          <td><span class="badge badge-gold">PRAWDOP.</span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">09.04</td>
+          <td>Redirect /stan-surowy-otwarty &rarr; /baza-wiedzy/stan-surowy-otwarty-poradnik</td>
+          <td><span class="badge badge-gold">PRAWDOP.</span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">09.04</td>
+          <td>Indexing API: wyslano /kierownik-budowy-jaworzno/ (nie byl zaindeksowany)</td>
+          <td><span class="badge badge-gold">PRAWDOP.</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>Content juz rankuje</h3>
+    <ul>
+      <li><strong>"kierownik budowy wodzislaw slaski"</strong> &mdash; nowa fraza w GSC, pozycja 6,6 z kliknieciami. Artykul opublikowany kilka dni temu juz generuje ruch</li>
+      <li><strong>"kierownik budowy cennik"</strong> &mdash; nowa fraza, CTR 33,3%. Content przechwytuje ruch informacyjny</li>
+      <li><strong>"stan surowy otwarty"</strong> &mdash; pozycja 13 w SERPLab (ogolnopolska fraza z duza konkurencja)</li>
+      <li><strong>"kierownik budowy cena"</strong> &mdash; pozycja 7 w SERPLab &mdash; artykul blogowy generuje ruch informacyjny</li>
+      <li>Strategia content marketing dziala: <strong>kazdy artykul generuje nowe frazy kluczowe i ruch organiczny w ciagu dni</strong></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 8. PODSUMOWANIE SEO -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">8</div> Podsumowanie SEO &amp; analityki</div>
+
+  <div class="summary-grid" style="grid-template-columns: repeat(3, 1fr)">
+    <div class="summary-card highlight">
+      <div class="label">Klikniecia organiczne</div>
+      <div class="value text-green">104</div>
+      <div class="note change-up">+235% vs poprzedni okres</div>
+    </div>
+    <div class="summary-card highlight">
+      <div class="label">Fraz w TOP 10</div>
+      <div class="value text-green">9/10</div>
+      <div class="note">w tym 5 w TOP 5</div>
+    </div>
+    <div class="summary-card highlight">
+      <div class="label">GBP wzrost</div>
+      <div class="value text-green">+160%</div>
+      <div class="note">wyswietlenia obu wizytowek</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <h3>Ocena SEO &mdash; 21 dni</h3>
+    <ul>
+      <li><strong>Widocznosc organiczna rosnie dynamicznie</strong> &mdash; 104 klikniecia GSC (+235%), 1 359 wyswietlen (+36%), 50 fraz w Google</li>
+      <li><strong>Pozycje w SERPLab sa bardzo mocne</strong> &mdash; 9 z 10 sledzonych fraz w TOP 10, #1 za flagowa fraze "budowa domu wodzislaw slaski"</li>
+      <li><strong>Ruch organiczny to 251 sesji (25,5%)</strong> &mdash; uzytkownicy z Google spedzaja sredni 7m 15s na stronie, engagement 66,5%</li>
+      <li><strong>Direct traffic = 212 sesji</strong> &mdash; marka CoreLTB buduje rozpoznawalnosc, ludzie wracaja na strone</li>
+      <li><strong>GBP obie wizytowki rosna 3-cyfrowo</strong> &mdash; Jaworzno +160% wyswietlen, Wodzislaw +159%. Lacznie 335 wyswietlen i 81 akcji</li>
+      <li><strong>Content marketing dziala</strong> &mdash; nowe artykuly (kierownik budowy, SSO) rankuja w ciagu dni, generujac nowe frazy i ruch</li>
+      <li><strong>Lejek konwersji:</strong> 984 sesji &rarr; 437 calculator starts &rarr; 77 leadow (konwersja 7,8%)</li>
+      <li><strong>Do poprawy:</strong> CTR dla "budowa domow wodzislaw slaski" (poz. 14,3, CTR 1,6%) &mdash; potrzebuje linkow i lepszego meta description</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p><strong>CoreLTB Builders</strong> &mdash; Raport wygenerowany 13 kwietnia 2026</p>
+  <p style="margin-top:6px">Dane: GA4, Google Search Console, SERPLab, Google Business Profile | Okres: 24.03-13.04.2026 (21 dni)</p>
+</div>
+
+</body>
+</html>
