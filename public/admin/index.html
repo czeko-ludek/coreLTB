@@ -837,6 +837,21 @@ function switchPage(id) {
 document.querySelectorAll('.sidebar-link[data-page]').forEach(btn => {
   btn.addEventListener('click', () => switchPage(btn.dataset.page));
 });
+
+// Auto-unlock disabled sections after a specific date/time
+(function() {
+  var UNLOCK_AT = new Date('2026-04-14T09:30:00'); // 14 kwietnia 2026, 9:30
+  function tryUnlock() {
+    if (new Date() >= UNLOCK_AT) {
+      document.querySelectorAll('.disabled').forEach(function(el) {
+        el.classList.remove('disabled');
+      });
+    }
+  }
+  tryUnlock();
+  // Re-check every minute in case user has the page open before 9:30
+  setInterval(tryUnlock, 60000);
+})();
 </script>
 
 </body>
