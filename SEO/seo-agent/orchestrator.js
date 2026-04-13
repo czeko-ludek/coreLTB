@@ -21,6 +21,7 @@
  *   node orchestrator.js --agent gsc        — tylko GSC+GA4
  *   node orchestrator.js --agent ads        — tylko Ads
  *   node orchestrator.js --agent links      — tylko Link Building
+ *   node orchestrator.js --agent gbp        — tylko Google Business Profile
  *   node orchestrator.js --evaluate-link    — interaktywna ocena linku
  *   node orchestrator.js --add-link         — dodaj zakupiony link
  *   node orchestrator.js --link-report      — raport linkowy
@@ -52,6 +53,7 @@ const ga4 = require('./lib/ga4');
 const analyzer = require('./lib/analyzer');
 const adsAnalyzer = require('./lib/ads-analyzer');
 const linkAnalyzer = require('./lib/link-analyzer');
+const gbp = require('./lib/gbp');
 
 // ─── Evaluate Link (standalone) ──────────────────
 if (hasFlag('--evaluate-link')) {
@@ -344,6 +346,70 @@ async function main() {
   }
 
   // ═══════════════════════════════════════════════
+  // AGENT 4: Google Business Profile
+  // ═══════════════════════════════════════════════
+  let gbpReport = '';
+
+  if (!agentFilter || agentFilter === 'gbp' || agentFilter === 'all') {
+    console.log('┌─ Agent 4: Google Business Profile ───────────');
+
+    try {
+      const gbpResults = await gbp.generateGBPReport(days);
+
+      // Delta — porownaj z poprzednim snapshotem
+      const gbpDelta = gbp.compareWithPrevious(gbpResults);
+
+      // Zapisz biezacy snapshot
+      gbp.saveSnapshot(gbpResults);
+
+      // Formatuj raport (z delta jesli dostepna)
+      gbpReport = gbp.formatGBPReport(gbpResults);
+      if (gbpDelta) {
+        gbpReport += '\n' + gbp.formatDeltaReport(gbpDelta);
+      }
+
+      for (const result of gbpResults) {
+        // Performance totals
+        if (result.performance?.multiDailyMetricTimeSeries) {
+          const totals = gbp.calculateTotals(result.performance);
+          const totalActions = totals.websiteClicks + totals.callClicks + totals.directions;
+
+          insights.push(`GBP ${result.location.shortName}: ${totals.totalImpressions} wyswietlen, ${totals.websiteClicks} klik www, ${totals.callClicks} tel, ${totals.directions} nawigacji`);
+          console.log(`│  ✅ ${result.location.shortName}: ${totals.totalImpressions} wyswietlen, ${totals.callClicks} tel, ${totals.directions} nawigacji`);
+        } else if (result.performance?.error) {
+          console.log(`│  ⚠️  ${result.location.shortName}: ${result.performance.error}`);
+        }
+
+        // Audit score + action items
+        if (result.audit) {
+          console.log(`│  ✅ ${result.location.shortName}: audyt ${result.audit.score}/100 (${result.audit.grade}), ${result.audit.issues.length} problemow, ${result.audit.warnings.length} ostrzezen`);
+
+          // Dodaj krytyczne problemy jako action items
+          for (const issue of result.audit.issues) {
+            actionItems.push({
+              priority: issue.startsWith('BRAK') || issue.startsWith('ZERO') || issue.includes('NIEADEKWATNE') ? 'high' : 'medium',
+              source: 'GBP',
+              action: `${result.location.shortName}: ${issue}`,
+            });
+          }
+        }
+
+        if (result.keywords?.keywords?.length > 0) {
+          console.log(`│  ✅ ${result.location.shortName}: ${result.keywords.keywords.length} hasel wyszukiwania`);
+        }
+      }
+    } catch (err) {
+      console.error(`│  ❌ GBP Error: ${err.message}`);
+      if (err.message.includes('insufficient') || err.message.includes('scope') || err.message.includes('403')) {
+        console.error('│  → Odswież token: py "D:\\NEXUS V2\\credentials\\setup_analytics_adc.py"');
+      }
+    }
+
+    console.log('└───────────────────────────────────────────────');
+    console.log('');
+  }
+
+  // ═══════════════════════════════════════════════
   // GLOWNY ANALITYK — zbiorczy raport
   // ═══════════════════════════════════════════════
   console.log('┌─ Glowny Analityk — generuje raport ───────────');
@@ -365,7 +431,7 @@ async function main() {
   // Executive Summary
   fullReportLines.push('# Raport SEO & Marketing — CoreLTB Builders');
   fullReportLines.push(`> Wygenerowano: ${timestamp}`);
-  fullReportLines.push(`> Okres: ${days} dni | Agenty: GSC+GA4, Ads, Links`);
+  fullReportLines.push(`> Okres: ${days} dni | Agenty: GSC+GA4, Ads, Links, GBP`);
   fullReportLines.push('');
 
   // Executive summary
@@ -421,6 +487,14 @@ async function main() {
     fullReportLines.push('---');
     fullReportLines.push('');
     fullReportLines.push(linksReport);
+  }
+
+  // GBP Report
+  if (gbpReport) {
+    fullReportLines.push('');
+    fullReportLines.push('---');
+    fullReportLines.push('');
+    fullReportLines.push(gbpReport);
   }
 
   // Footer

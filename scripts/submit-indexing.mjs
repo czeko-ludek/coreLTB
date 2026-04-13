@@ -3,12 +3,16 @@
  *
  * Submits project URLs from sitemap.xml to Google for faster indexing.
  * Uses OAuth2 ADC credentials (same as SEO agent).
+ * Tracks submitted URLs in scripts/indexing-history.json to avoid duplicates.
  *
  * Usage:
- *   node scripts/submit-indexing.mjs                  # submit all project URLs
- *   node scripts/submit-indexing.mjs --limit 50       # submit first 50
- *   node scripts/submit-indexing.mjs --dry-run        # just list URLs, don't submit
- *   node scripts/submit-indexing.mjs --filter /obszar  # custom URL filter
+ *   node scripts/submit-indexing.mjs                  # submit next batch (auto-skips already sent)
+ *   node scripts/submit-indexing.mjs --limit 50       # submit next 50 unsent URLs
+ *   node scripts/submit-indexing.mjs --dry-run        # list what would be sent, don't submit
+ *   node scripts/submit-indexing.mjs --filter /obszar  # custom URL filter (default: /projekty/)
+ *   node scripts/submit-indexing.mjs --all            # include already submitted (re-submit)
+ *   node scripts/submit-indexing.mjs --status         # show submission history summary
+ *   node scripts/submit-indexing.mjs --reset          # clear history and start fresh
  *
  * Rate limits: Google allows 200 requests/day for Indexing API.
  * Script auto-batches and respects this limit.
@@ -20,8 +24,11 @@
  *     https://console.cloud.google.com/apis/library/indexing.googleapis.com
  */
 
-import { readFileSync, existsSync } from 'fs';
-import { resolve } from 'path';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // ─── Config ──────────────────────────────────────────────
 
@@ -29,9 +36,65 @@ const SITEMAP_URL = 'https://coreltb.pl/sitemap.xml';
 const DAILY_LIMIT = 200;
 const DELAY_MS = 500;
 const DEFAULT_FILTER = '/projekty/';
+const HISTORY_FILE = resolve(__dirname, 'indexing-history.json');
 
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
 const INDEXING_URL = 'https://indexing.googleapis.com/v3/urlNotifications:publish';
+
+// ─── History tracking ───────────────────────────────────
+
+function loadHistory() {
+  if (!existsSync(HISTORY_FILE)) {
+    return { submissions: [], batches: [] };
+  }
+  try {
+    return JSON.parse(readFileSync(HISTORY_FILE, 'utf-8'));
+  } catch {
+    return { submissions: [], batches: [] };
+  }
+}
+
+function saveHistory(history) {
+  writeFileSync(HISTORY_FILE, JSON.stringify(history, null, 2), 'utf-8');
+}
+
+function getSubmittedUrls(history) {
+  return new Set(history.submissions.map(s => s.url));
+}
+
+function showStatus(history) {
+  const submitted = history.submissions.length;
+  const batches = history.batches.length;
+  const successCount = history.submissions.filter(s => s.status === 'ok').length;
+  const errorCount = history.submissions.filter(s => s.status === 'error').length;
+
+  console.log('=== Indexing History ===\n');
+  console.log(`Total submitted:  ${submitted} URLs`);
+  console.log(`  Successful:     ${successCount}`);
+  console.log(`  Errors:         ${errorCount}`);
+  console.log(`Batches run:      ${batches}`);
+
+  if (batches > 0) {
+    console.log('\n--- Batches ---');
+    history.batches.forEach((b, i) => {
+      console.log(`  ${i + 1}. ${b.date} — ${b.success} ok, ${b.errors} err, filter: "${b.filter}"`);
+    });
+  }
+
+  // Group by date
+  const byDate = {};
+  history.submissions.forEach(s => {
+    const date = s.date.split('T')[0];
+    byDate[date] = (byDate[date] || 0) + 1;
+  });
+
+  if (Object.keys(byDate).length > 0) {
+    console.log('\n--- Submissions by date ---');
+    Object.entries(byDate).sort().forEach(([date, count]) => {
+      console.log(`  ${date}: ${count} URLs`);
+    });
+  }
+}
 
 // ─── Auth ────────────────────────────────────────────────
 
@@ -132,22 +195,61 @@ function sleep(ms) {
 async function main() {
   const args = process.argv.slice(2);
   const dryRun = args.includes('--dry-run');
+  const includeAll = args.includes('--all');
+  const showStatusFlag = args.includes('--status');
+  const resetFlag = args.includes('--reset');
   const limitIdx = args.indexOf('--limit');
   const limit = limitIdx !== -1 ? parseInt(args[limitIdx + 1]) : DAILY_LIMIT;
   const filterIdx = args.indexOf('--filter');
   const filter = filterIdx !== -1 ? args[filterIdx + 1] : DEFAULT_FILTER;
 
+  const history = loadHistory();
+
+  // --status: show history and exit
+  if (showStatusFlag) {
+    showStatus(history);
+    return;
+  }
+
+  // --reset: clear history
+  if (resetFlag) {
+    saveHistory({ submissions: [], batches: [] });
+    console.log('History cleared.');
+    return;
+  }
+
   console.log('=== Google Indexing API — Batch URL Submission ===\n');
 
   const allUrls = await fetchSitemapUrls(filter);
-  const urls = allUrls.slice(0, Math.min(limit, DAILY_LIMIT));
 
-  console.log(`Will submit ${urls.length} of ${allUrls.length} URLs\n`);
+  // Filter out already submitted URLs (unless --all)
+  const submittedSet = getSubmittedUrls(history);
+  let candidateUrls;
+  if (includeAll) {
+    candidateUrls = allUrls;
+    console.log(`Mode: --all (re-submitting including already sent)\n`);
+  } else {
+    candidateUrls = allUrls.filter(u => !submittedSet.has(u));
+    const skipped = allUrls.length - candidateUrls.length;
+    if (skipped > 0) {
+      console.log(`Skipping ${skipped} already submitted URLs`);
+    }
+  }
+
+  const urls = candidateUrls.slice(0, Math.min(limit, DAILY_LIMIT));
+
+  console.log(`Will submit ${urls.length} of ${candidateUrls.length} pending URLs (${allUrls.length} total in sitemap)\n`);
+
+  if (urls.length === 0) {
+    console.log('Nothing to submit! All URLs already sent.');
+    console.log('Use --all to re-submit, or --filter to change URL filter.');
+    return;
+  }
 
   if (dryRun) {
     urls.forEach((url, i) => console.log(`  ${i + 1}. ${url}`));
     console.log(`\nDRY RUN — nothing submitted.`);
-    console.log(`Remaining: ${allUrls.length - urls.length}`);
+    console.log(`Pending after this batch: ${candidateUrls.length - urls.length}`);
     return;
   }
 
@@ -159,15 +261,19 @@ async function main() {
   // Submit
   let success = 0;
   let errors = 0;
+  const batchSubmissions = [];
 
   for (let i = 0; i < urls.length; i++) {
     const result = await submitUrl(token, urls[i]);
+    const now = new Date().toISOString();
 
     if (result.status === 'ok') {
       success++;
+      batchSubmissions.push({ url: result.url, status: 'ok', date: now });
       process.stdout.write(`\r  [${i + 1}/${urls.length}] Submitted: ${success} | Errors: ${errors}`);
     } else {
       errors++;
+      batchSubmissions.push({ url: result.url, status: 'error', code: result.code, message: result.message, date: now });
       console.log(`\n  ERR ${result.url} — ${result.code}: ${result.message}`);
 
       if (result.code === 403 || result.code === 401) {
@@ -184,14 +290,30 @@ async function main() {
     if (i < urls.length - 1) await sleep(DELAY_MS);
   }
 
+  // Save history
+  history.submissions.push(...batchSubmissions);
+  history.batches.push({
+    date: new Date().toISOString(),
+    filter,
+    total: urls.length,
+    success,
+    errors,
+  });
+  saveHistory(history);
+
+  const remaining = candidateUrls.length - urls.length;
+
   console.log('\n\n=== Summary ===');
   console.log(`Submitted: ${success}`);
   console.log(`Errors:    ${errors}`);
-  console.log(`Remaining: ${allUrls.length - urls.length}`);
+  console.log(`Remaining: ${remaining}`);
+  console.log(`History:   ${HISTORY_FILE}`);
 
-  if (allUrls.length > urls.length) {
-    const days = Math.ceil((allUrls.length - urls.length) / DAILY_LIMIT);
+  if (remaining > 0) {
+    const days = Math.ceil(remaining / DAILY_LIMIT);
     console.log(`\nRun again tomorrow — ${days} more day(s) to finish all URLs.`);
+  } else {
+    console.log('\nAll URLs submitted!');
   }
 }
 

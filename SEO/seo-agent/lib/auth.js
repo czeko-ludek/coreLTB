@@ -148,4 +148,12 @@ function _formatDate(date) {
   return date.toISOString().split('T')[0];
 }
 
-module.exports = { getAuthClient, getSearchConsole, getAnalyticsData, testAuth };
+/**
+ * Get authenticated Business Profile Performance client
+ */
+async function getBusinessProfile() {
+  const auth = await getAuthClient();
+  return google.businessprofileperformance({ version: 'v1', auth });
+}
+
+module.exports = { getAuthClient, getSearchConsole, getAnalyticsData, getBusinessProfile, testAuth };

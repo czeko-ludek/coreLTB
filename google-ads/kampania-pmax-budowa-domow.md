@@ -16,7 +16,7 @@
 | Typ | Performance Max |
 | Cel | Przeslanie formularza kontaktowego (Leads) |
 | Budzet dzienny | 50,00 zl |
-| Strategia stawek | Maksymalizuj liczbe konwersji (bez docelowego CPA) |
+| Strategia stawek | Maksymalizuj liczbe konwersji, **docelowy CPA: 63 zl** (ustawione 2026-04-07) |
 | Pozyskiwanie klientow | Jednakowe stawki dla nowych i obecnych |
 | Schedule | **NIE USTAWIONY** — do dodania 6:00–22:00 |
 | Jezyk | polski |
@@ -352,3 +352,4 @@ Typowy match rate to ~50% (polowa emaili z FB dopasuje sie do kont Google). Im w
 | 2026-03-28 | Wygenerowano raport HTML dla klienta: google-ads/analizy/raport-coreltb-24-28-marca.html (brand colors, funnel GA4, SEO vs Ads) | Claude |
 | 2026-03-28 | **Final URL zmieniony z coreltb.pl na coreltb.pl/wycena** w Asset Group — kluczowa zmiana, 87% ruchu szlo na homepage zamiast kalkulator | Dawid |
 | 2026-03-28 | Analiza GA4: 119 klikniec Ads → 33 sesji (28%), 5 kalkulator, 3 wyceny. Strata: Krakow 17.60 zl, Oswiecim 22.46 zl (poza obszarem) | Claude |
+| 2026-04-07 | **Ustawiono docelowy CPA: 63 zl.** Dane last 7 days: 213 klik, 5k imp, 7 konw, 316 zl (CPA ~45 zl). tCPA 63 zl jako sufit zabezpieczajacy — realne CPA ponizej celu (<50 zl). Rekomendacje Google odrzucone: rozszerzenie URL (juz raz namieszalo), wideo (smieciowy ruch YT), zwiekszenie budzetu (nie teraz). Kampania trwa jeszcze ~1 msc, potem Search | Dawid |

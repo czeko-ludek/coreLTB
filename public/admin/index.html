@@ -132,6 +132,20 @@
     background: rgba(223,187,104,0.15);
     color: var(--gold);
   }
+  .sidebar-link.disabled {
+    opacity: 0.35;
+    pointer-events: none;
+    cursor: default;
+  }
+  .report-card.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: default;
+  }
+  .report-card.disabled:hover {
+    border-color: var(--border);
+    transform: none;
+  }
 
   .sidebar-footer {
     margin-top: auto;
@@ -421,12 +435,12 @@
   <!-- Komponenty -->
   <div class="sidebar-section">
     <div class="sidebar-section-label">Komponenty strony</div>
-    <button class="sidebar-link" data-page="dzialki">
+    <button class="sidebar-link disabled" data-page="dzialki">
       <span class="icon">&#128205;</span>
       <span class="label">System dzialek</span>
       <span class="tag tag-component" style="font-size:9px">NOWE</span>
     </button>
-    <button class="sidebar-link" data-page="realizacje">
+    <button class="sidebar-link disabled" data-page="realizacje">
       <span class="icon">&#127959;</span>
       <span class="label">Realizacje</span>
     </button>
@@ -530,7 +544,7 @@
           <div class="report-arrow">&#8594;</div>
         </div>
 
-        <div class="report-card" onclick="switchPage('dzialki')" style="border-color:rgba(34,197,94,0.2)">
+        <div class="report-card disabled" onclick="switchPage('dzialki')" style="border-color:rgba(34,197,94,0.2)">
           <div class="report-info">
             <div class="report-icon" style="background:rgba(34,197,94,0.1)">&#128205;</div>
             <div>
@@ -545,7 +559,7 @@
           <div class="report-arrow">&#8594;</div>
         </div>
 
-        <div class="report-card" onclick="switchPage('realizacje')">
+        <div class="report-card disabled" onclick="switchPage('realizacje')">
           <div class="report-info">
             <div class="report-icon">&#127959;</div>
             <div>

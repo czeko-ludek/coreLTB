@@ -51,6 +51,12 @@
     "dir": "./reports",
     "latestFile": "./reports/latest-report.md"
   },
+  "gbp": {
+    "locations": [
+      { "id": "4925552177843437582", "name": "Jaworzno (glowna)" },
+      { "id": "1555819064523769539", "name": "Wodzislaw Slaski" }
+    ]
+  },
   "realLeads": {
     "_comment": "Prawdziwe leady z Resend (GA4 zawiera tez testy). Aktualizuj recznie.",
     "log": [

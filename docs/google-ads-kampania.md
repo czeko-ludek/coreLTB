@@ -603,3 +603,256 @@ ROAS:                         333:1 - 667:1
 | 2026-03-23 | **Kalkulator /wycena = główna konwersja.** Wartość 150 zł (najcieplejszy lead). 4/15 nagłówków to CTA kalkulatorowe. Unikalny wyróżnik — konkurencja nie ma kalkulatora online. |
 | 2026-03-23 | **Nadzór/kierownik budowy:** Wyodrębniony do osobnego Asset Group na miesiąc 2. Inna persona (ktoś kto JUŻ buduje), inny CPA. GSC: ~180 imp/mies. łącznie. |
 | 2026-03-23 | **Negative keywords:** Rozszerzona lista: praca, edukacja, poza zasięgiem, nie nasza technologia (szkieletowy/modułowy), remont, false positives kalkulatora (excel/arkusz), sprzedaż działek. |
+| 2026-04-05 | **Native Conversion Tag** wdrożony w GTM — eliminuje opóźnienie 24-72h w raportowaniu konwersji do Google AI. |
+| 2026-04-05 | **Analiza 12 dni kampanii (25 mar - 5 apr):** 616 zł wydane, 646 kliknięć, CPC 0.95 zł, 10 konwersji (primary), CPA 61.63 zł. Trend: CPA spadł z 74 zł (T1) do 47 zł (T2). /wycena konwertuje 5x lepiej niż homepage (3.16% vs 0.64%). Czwartki najlepsze (4 konw., CPA 22 zł). Godziny 16-21 = 60% konwersji. |
+| 2026-04-05 | **PROBLEM: Gate'owany kalkulator generuje fejki.** Cena widoczna DOPIERO po zostawieniu danych kontaktowych. Szacunkowo 40-55% leadów to fejkowe numery (ludzie wpisują byle co żeby zobaczyć cenę). Google Ads AI optymalizuje na tych fejkach = zatruwa algorytm. Decyzja: wdrożyć hybrydę (Opcja C) — patrz sekcja 12. |
+| 2026-04-05 | **Decyzja PMax vs Search:** Zostajemy na PMax do końca kwietnia (faza nauki). W maju testujemy hybrydę: Search 30 zł/dzień na top frazy kosztowe + PMax 20 zł/dzień na awareness/remarketing. |
+
+---
+
+## 12. Hybryda kalkulatora — "Opcja C" (ZAPLANOWANE)
+
+> **Status:** Do wdrożenia po potwierdzeniu jakości leadów z klientem
+> **Priorytet:** WYSOKI — wpływa na jakość danych dla Google Ads AI
+> **Szacowany czas wdrożenia:** ~1h, 2 pliki, 0 zmian w backendzie
+
+### Problem
+
+Kalkulator na `/wycena` jest **gate'owany** — użytkownik musi zostawić telefon i email ZANIM zobaczy cenę. To powoduje:
+
+- ~40-55% leadów to fejkowe dane (ludzie wpisują byle co żeby zobaczyć cenę)
+- Google Ads AI uczy się na fejkach = optymalizuje pod niewłaściwy profil
+- Klient marnuje czas na dzwonienie do nieistniejących numerów
+- Realny CPA jest ~2x wyższy niż raportowany (125 zł zamiast 62 zł)
+
+### Rozwiązanie: Hybryda (zakres ceny + szczegóły za dane)
+
+**Obecny flow:**
+```
+Konfiguracja (9 kroków) -> Dane kontaktowe -> Cena
+```
+
+**Nowy flow:**
+```
+Konfiguracja (9 kroków) -> ZAKRES CENY (widoczny dla wszystkich)
+                                |
+                    "Chcę szczegółową wycenę z rozpisem na etapy"
+                                |
+                        Dane kontaktowe -> Pełna wycena PDF
+```
+
+### Co widzi użytkownik po konfiguracji (PRZED podaniem danych):
+
+```
++-------------------------------------------+
+|  Szacunkowy koszt budowy                   |
+|                                            |
+|  350 000 - 420 000 zl netto               |
+|  ~2 900 zl/m2  ·  10-13 miesiecy          |
+|                                            |
+|  Parterowy 120 m2, silikat, dwuspadowy    |
+|  Stan deweloperski, pompa ciepla           |
+|                                            |
+|  Cena orientacyjna +/-6%.                  |
+|                                            |
+|  [Chce szczegolowa wycene z rozpisem]      |
+|                                            |
+|  Bezplatnie · Oddzwonimy w 24h             |
++-------------------------------------------+
+```
+
+### Czego NIE widzi (dostępne dopiero po podaniu danych):
+
+- Rozbicie na etapy (Stan Zero, SSO, SSZ, Deweloperski, Pod klucz)
+- Lista prac per etap (bullet points)
+- Dokument PDF z nagłówkiem firmy i numerem referencyjnym
+- Cena brutto z VAT
+- Gwarancja i czas realizacji szczegółowy
+
+### Prognozowany wpływ na metryki
+
+| Metryka | Teraz | Po zmianie |
+|---------|-------|------------|
+| Leadów/mies. | 10 | 5-7 (spadek!) |
+| Fejki | ~40-55% | ~10-15% |
+| **Prawdziwych leadów** | **4-6** | **4-6** (to samo) |
+| Lead -> Spotkanie | ~10% | ~25-35% |
+| CPA (prawdziwy) | ~125 zł | ~80-100 zł |
+| Jakość danych Ads AI | Zatruta | Czysta |
+
+### Nowy 3-stopniowy funnel analytics
+
+| Event | Moment | Typ w Google Ads |
+|-------|--------|------------------|
+| `price_preview_shown` | User zobaczył zakres ceny | Observe (micro) |
+| `price_preview_cta` | User kliknął "chcę szczegóły" | Observe (micro) |
+| `calculator_lead` | User zostawił dane i dostał pełną wycenę | Primary (konwersja) |
+
+Micro-conversions (`price_preview_shown/cta`) dają Google AI dodatkowe sygnały nawet przy mniejszej liczbie primary conversions.
+
+### Zmiany techniczne
+
+| Co | Gdzie | Opis |
+|----|-------|------|
+| State `pricePreview` + `showContactSection` | `CalculatorForm.tsx` | Nowe stany do sterowania widocznością |
+| `useEffect` auto-preview | `CalculatorForm.tsx` | Po wypełnieniu 8 OptionGroups automatycznie liczy cenę z `calculateEstimate()` |
+| Komponent `PricePreviewCard` | `CalculatorForm.tsx` (inline) | Karta z zakresem ceny, summary konfiguracji, CTA button |
+| Sekcja 4 ukryta domyślnie | `CalculatorForm.tsx` | `showContactSection && <FormSection>` |
+| 2 nowe eventy | `lib/analytics.ts` | `trackPricePreviewShown()`, `trackPricePreviewCTA()` |
+
+**Zero zmian w:** `data/pricing.ts`, `functions/api/lead.ts`, `app/wycena/page.tsx`
+
+### Kiedy wdrożyć
+
+| Warunek | Termin |
+|---------|--------|
+| Potwierdzenie od klienta ile leadów to fejki | ASAP |
+| Jeśli fejki > 30% | Wdrożenie natychmiast |
+| Jeśli fejki < 20% | Odłożyć, obecny model działa |
+| Idealne okno | Początek nowego tygodnia (poniedziałek rano) |
+
+### Czy kampania PMax zacznie się uczyć od nowa?
+
+**NIE.** Zmiana landing page'a nie resetuje fazy nauki PMax. Co się stanie:
+
+1. **Przez 3-5 dni** — Google zauważy niższy conversion rate (mniej fejków = mniej "konwersji")
+2. **Po 5-7 dniach** — AI dostosuje bidding do nowego, niższego wolumenu konwersji
+3. **Po 2-3 tygodniach** — AI zacznie lepiej targetować bo uczy się na prawdziwych leadach
+
+**Nie jest to "reset" — to "rekalibracja".** Algorytm nie traci dotychczasowej wiedzy o frazach i audience. Zmienia się tylko sygnał konwersji (lepszy jakościowo).
+
+**Tip:** Wdrożenie w poniedziałek rano daje AI cały tydzień na dostosowanie się przed weekendem (kiedy jest więcej ruchu).
+
+### Design PricePreviewCard — szczegółowy plan UI
+
+Karta pojawia się automatycznie po wypełnieniu wszystkich 8 OptionGroups (area + 7 opcji). Animowane wjechanie (CSS transition, opacity + translateY). Umiejscowienie: między sekcją 3 (Standard i wyposażenie) a ukrytą sekcją 4 (Dane).
+
+**Struktura karty (5 bloków, od góry do dołu):**
+
+#### Blok 1: Cena glowna (hero)
+
+Jedna srednia kwota (nie zakres!) z dopiskiem +/-6%. Anchoring — konkretna liczba buduje pewnosc.
+
+```
+Szacunkowy koszt Twojego domu
+
+      382 000 zl  netto (+/-6%)
+      brutto: ~412 500 zl (8% VAT)
+      ~3 180 zl/m2  ·  10-13 miesiecy
+```
+
+Stylowanie: `text-h3 md:text-h1 font-bold`, cena w `text-text-primary`, reszta `text-gray-500`.
+
+#### Blok 2: Summary konfiguracji
+
+Jedna kompaktowa linia z Icon komponentami potwierdzajaca wybory usera:
+
+```
+[house] Parterowy 120 m2 · Silikat · Dwuspadowy · Deweloperski · Pompa ciepla
+```
+
+Uzywa istniejacych LABELS z `data/pricing.ts`. Stylowanie: `text-body-sm text-gray-600`, ikony `text-primary`.
+
+#### Blok 3: TEASER etapow (klucz do konwersji)
+
+5 etapow budowy z ZAMAZANYMI cenami (CSS `filter: blur(8px)` na kwotach). User widzi STRUKTURE ale nie DETALE. Mechanizm curiosity gap — "ile kosztuje sam dach?"
+
+```
+Twoja wycena zawiera rozpiske na 5 etapow:
+
+[check] Stan Zero                    ░░░░░░░ zl
+        Fundamenty, kanalizacja...
+
+[check] Stan Surowy Otwarty          ░░░░░░░ zl
+        Sciany, dach, kominy...
+
+[check] Stan Surowy Zamkniety        ░░░░░░░ zl
+        Okna, instalacje, garaz...
+
+[check] Stan Deweloperski            ░░░░░░░ zl
+        Ogrzewanie, tynki, elewacja...
+
+[check] Wykonczenie pod klucz        ░░░░░░░ zl
+        Podlogi, lazienki, malowanie...
+
++ lista 30+ pozycji prac w kazdym etapie
++ dokument PDF z naglowkiem firmy
++ gwarancja i harmonogram
+```
+
+Etapy wyswietlane dynamicznie z `estimate.stages` (te same co w pelnym dokumencie). Ilosc etapow zalezy od wybranego `finish` (SSO = 3 etapy, deweloperski = 4, pod klucz = 5).
+
+Blur implementacja: `<span className="blur-sm select-none">{formatPrice(stageTotal)} zl</span>`.
+
+#### Blok 4: CTA button
+
+Duzy, zielony (`bg-primary`), dwie linie tekstu. Konkretna obietnica, nie generyk.
+
+```
+[fileText] Odbierz wycene z rozpisem na 5 etapow budowy
+
+           Oddzwonimy w 24h z dokladna kalkulacja
+           dopasowana do Twojego projektu
+```
+
+Pierwsza linia: `font-bold text-body-md`. Druga: `text-body-sm font-normal opacity-80`.
+Przycisk: `py-5 px-8 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5` (identyczny styl jak obecny submit).
+
+onClick: `handleRevealContact()` — odsłania sekcję 4, smooth scroll, trackuje event.
+
+#### Blok 5: Trust line
+
+```
+Wystarczy imie i telefon · Bezplatnie · Bez zobowiazan
+
+Ponad 200 rodzin skorzystalo z naszego kalkulatora
+```
+
+`text-body-xs text-gray-400`, centered.
+
+**Calość karty:** `bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden` — identyczny styl jak estimate document.
+
+#### Psychologia designu
+
+| Element | Mechanizm | Efekt |
+|---------|-----------|-------|
+| Jedna kwota (nie zakres) | Anchoring | "Moj dom kosztuje 382 tys." |
+| Blurred ceny etapow | Curiosity gap | "Ile kosztuje sam dach? Musze zobaczyc" |
+| "5 etapow" + nazwy | Perceived value | "To profesjonalny kosztorys, nie byle formularz" |
+| "30+ pozycji prac" | Specificity | Konkretna liczba > "szczegolowa wycena" |
+| "Oddzwonimy w 24h" | Expectation setting | Wie co sie stanie = mniejszy opor |
+| "Wystarczy imie i telefon" | Effort reduction | "Tylko 2 pola? OK" |
+| Summary konfiguracji | Sunk cost | "Juz to wybralem, szkoda nie dokonczyc" |
+
+### Jak wyjaśnić klientowi
+
+**Krótka wersja (SMS/telefon):**
+
+> "Kalkulator teraz pokazuje cenę dopiero po zostawieniu telefonu — przez to połowa ludzi wpisuje byle jaki numer żeby zobaczyć ile kosztuje. Chcemy to zmienić: klient zobaczy zakres ceny od razu (np. 350-420 tys.), a jak chce szczegółowy kosztorys z etapami — dopiero wtedy zostawi numer. Mniej zgłoszeń, ale same prawdziwe."
+
+**Dłuższa wersja (mail/spotkanie):**
+
+> Temat: Poprawa jakości leadów z kalkulatora
+>
+> Cześć,
+>
+> Z analizy kampanii Google Ads wynika, że kalkulator generuje ok. 10 zgłoszeń miesięcznie,
+> ale spora część to mogą być nieprawdziwe numery — ludzie wpisują byle co żeby zobaczyć cenę.
+>
+> Chcemy to naprawić prostą zmianą:
+> 1. Klient konfiguruje dom (jak teraz)
+> 2. OD RAZU widzi zakres ceny (np. "350 000 - 420 000 zł")
+> 3. Jak chce szczegółowy kosztorys z rozpisem na etapy — dopiero wtedy zostawia telefon
+>
+> Co to da:
+> - Mniej zgłoszeń (7 zamiast 10), ale SAME PRAWDZIWE
+> - Nie tracisz czasu na dzwonienie do fejkowych numerów
+> - Google Ads lepiej się uczy i z czasem będzie kierować reklamy do poważniejszych klientów
+>
+> Zanim to wdrożymy — pytanie: z tych ~10 zgłoszeń które przyszły,
+> ile numerów było prawdziwych? Ile razy udało się dodzwonić?
+> To pomoże nam ocenić skalę problemu.
+>
+> Zmiana jest odwracalna w 5 minut gdyby coś nie grało.
+
+---
