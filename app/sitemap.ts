@@ -5,6 +5,8 @@ import { getAllLocalPageSlugs } from '@/data/local';
 import { getAllNadzorSlugs } from '@/data/nadzor';
 import { getAllRealizationSlugs } from '@/data/realizacje';
 import { companyData } from '@/data/company-data';
+import { getAllIndexableLocationSlugs, getLocationBreadcrumb } from '@/data/plots/locations';
+import { getAllPlotSlugs } from '@/data/plots';
 
 // Wymagane dla output: 'export' (static HTML)
 export const dynamic = 'force-static';
@@ -146,5 +148,47 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
-  return [...staticPages, ...servicePages, ...projectPages, ...localPages, ...nadzorPages, ...realizationPages];
+  // Strona główna działek
+  const plotMainPage: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/dzialki`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+  ];
+
+  // Strony lokalizacji działek (/dzialki/powiat-wodzislawski/wodzislaw-slaski etc.)
+  const plotLocationPages: MetadataRoute.Sitemap = getAllIndexableLocationSlugs().map((locSlug) => {
+    const breadcrumb = getLocationBreadcrumb(locSlug);
+    const parts = breadcrumb
+      .filter((b) => b.level !== 'wojewodztwo')
+      .map((b) => b.slug);
+    return {
+      url: `${BASE_URL}/dzialki/${parts.join('/')}`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    };
+  });
+
+  // Indywidualne strony działek (/dzialki/godow-1022329 etc.)
+  const plotDetailPages: MetadataRoute.Sitemap = getAllPlotSlugs().map((plotSlug) => ({
+    url: `${BASE_URL}/dzialki/${plotSlug}`,
+    lastModified: currentDate,
+    changeFrequency: 'weekly' as const,
+    priority: 0.6,
+  }));
+
+  return [
+    ...staticPages,
+    ...servicePages,
+    ...projectPages,
+    ...localPages,
+    ...nadzorPages,
+    ...realizationPages,
+    ...plotMainPage,
+    ...plotLocationPages,
+    ...plotDetailPages,
+  ];
 }

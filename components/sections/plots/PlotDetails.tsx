@@ -354,7 +354,7 @@ export function PlotDetails({ plot }: PlotDetailsProps) {
                       className="group w-full flex items-center justify-center gap-2 bg-white hover:bg-zinc-50 text-text-primary font-semibold text-sm md:text-base px-6 py-3.5 rounded-lg border border-zinc-200 transition-all duration-300"
                     >
                       <Icon name="phone" size="md" />
-                      Porozmawiaj z inżynierem
+                      Zapytaj o działkę
                     </Link>
                   </div>
 

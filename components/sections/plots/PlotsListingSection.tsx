@@ -13,7 +13,7 @@ import type { PlotFAQItem } from '@/data/plots/seo';
 import { PlotCard } from './PlotCard';
 import { LocationSearch, type LocationSelection } from './LocationSearch';
 import type { PlotMapHandle } from './PlotMap';
-import { LOCATIONS, getLocationCities, getLocationDistricts } from '@/data/plots/locations';
+import { LOCATIONS, getLocationCities, getLocationDistricts, getLocationBreadcrumb } from '@/data/plots/locations';
 
 // Dynamic import — Leaflet doesn't support SSR
 const PlotMap = dynamic(() => import('./PlotMap').then((m) => m.PlotMap), {
@@ -555,6 +555,93 @@ export function PlotsListingSection({
               dangerouslySetInnerHTML={{ __html: seoContent }}
             />
           )}
+
+          {/* ── Interlinking — related locations ── */}
+          {activeCity && (() => {
+            const loc = LOCATIONS[activeCity];
+            if (!loc) return null;
+
+            // Build link URL for a location slug
+            const buildLocUrl = (slug: string) => {
+              const bc = getLocationBreadcrumb(slug);
+              const parts = bc.filter((b) => b.level !== 'wojewodztwo').map((b) => b.slug);
+              return `/dzialki/${parts.join('/')}`;
+            };
+
+            // Parent location
+            const parent = loc.parentSlug ? LOCATIONS[loc.parentSlug] : null;
+            const showParent = parent && parent.level !== 'wojewodztwo';
+
+            // Sibling locations (same parent, excluding self)
+            const siblings = parent?.children
+              ?.map((s) => LOCATIONS[s])
+              .filter((s) => s && s.slug !== loc.slug) || [];
+
+            // Children locations
+            const children = loc.children?.map((c) => LOCATIONS[c]).filter(Boolean) || [];
+
+            // All plots main page link (always show)
+            const hasLinks = showParent || siblings.length > 0 || children.length > 0;
+            if (!hasLinks) return null;
+
+            return (
+              <div className="mt-12 md:mt-16">
+                <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-6">
+                  Działki w okolicy
+                </h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {/* Parent */}
+                  {showParent && (
+                    <Link
+                      href={buildLocUrl(parent.slug)}
+                      className="group flex items-center gap-2 bg-white rounded-xl border border-zinc-200/60 px-4 py-3.5 hover:border-primary/40 hover:shadow-sm transition-all"
+                    >
+                      <Icon name="chevronLeft" size="sm" className="text-text-muted group-hover:text-primary shrink-0" />
+                      <span className="text-sm font-medium text-text-primary group-hover:text-primary truncate">
+                        {parent.name}
+                      </span>
+                    </Link>
+                  )}
+                  {/* Children */}
+                  {children.map((child) => (
+                    <Link
+                      key={child.slug}
+                      href={buildLocUrl(child.slug)}
+                      className="group flex items-center gap-2 bg-white rounded-xl border border-zinc-200/60 px-4 py-3.5 hover:border-primary/40 hover:shadow-sm transition-all"
+                    >
+                      <Icon name="mapPin" size="sm" className="text-primary/60 group-hover:text-primary shrink-0" />
+                      <span className="text-sm font-medium text-text-primary group-hover:text-primary truncate">
+                        {child.name}
+                      </span>
+                    </Link>
+                  ))}
+                  {/* Siblings */}
+                  {siblings.map((sib) => (
+                    <Link
+                      key={sib.slug}
+                      href={buildLocUrl(sib.slug)}
+                      className="group flex items-center gap-2 bg-white rounded-xl border border-zinc-200/60 px-4 py-3.5 hover:border-primary/40 hover:shadow-sm transition-all"
+                    >
+                      <Icon name="mapPin" size="sm" className="text-text-muted group-hover:text-primary shrink-0" />
+                      <span className="text-sm font-medium text-text-primary group-hover:text-primary truncate">
+                        {sib.name}
+                      </span>
+                    </Link>
+                  ))}
+                  {/* All plots link */}
+                  <Link
+                    href="/dzialki"
+                    className="group flex items-center gap-2 bg-zinc-50 rounded-xl border border-zinc-200/60 px-4 py-3.5 hover:border-primary/40 hover:shadow-sm transition-all"
+                  >
+                    <Icon name="list" size="sm" className="text-text-muted group-hover:text-primary shrink-0" />
+                    <span className="text-sm font-medium text-text-secondary group-hover:text-primary truncate">
+                      Wszystkie działki
+                    </span>
+                  </Link>
+                </div>
+              </div>
+            );
+          })()}
 
         </div>
       </section>
