@@ -880,8 +880,8 @@
   width: 100%;
   margin-top: 10px;
   padding: 9px 16px;
-  background: #18181b;
-  color: #fff;
+  background: #dfbb68;
+  color: #18181b;
   font-size: 13px;
   font-weight: 700;
   text-decoration: none;
@@ -891,7 +891,7 @@
   letter-spacing: 0.04em;
 }
 .plot-popup-cta:hover {
-  background: #c9a96e;
+  background: #d4a847;
   color: #18181b;
 }
 
