@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raport kampanii — CoreLTB Builders — 03-13.04.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #dfbb68;
+    --gold-dark: #d4a847;
+    --gold-light: #e8cc8a;
+    --gold-pale: #f5ecd7;
+    --bg-dark: #1a1a1a;
+    --bg-card: #232323;
+    --bg-light: #fafaf9;
+    --bg-cream: #f5f5f3;
+    --text-primary: #1a1a1a;
+    --text-secondary: #555;
+    --text-light: #888;
+    --green: #22c55e;
+    --red: #ef4444;
+    --blue: #3b82f6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .header {
+    background: var(--bg-dark);
+    padding: 48px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 120%, rgba(223,187,104,0.15) 0%, transparent 70%);
+  }
+  .header-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .header img.logo {
+    height: 48px;
+    margin-bottom: 24px;
+    filter: brightness(0) invert(1);
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .header h1 span { color: var(--gold); }
+  .header .subtitle {
+    font-size: 15px;
+    color: #aaa;
+    font-weight: 400;
+  }
+  .header .period-badge {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 6px 20px;
+    background: rgba(223,187,104,0.15);
+    border: 1px solid var(--gold);
+    border-radius: 24px;
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  section {
+    margin: 40px 0;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--bg-dark);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .icon {
+    width: 32px;
+    height: 32px;
+    background: var(--gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    color: var(--bg-dark);
+    font-weight: 800;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .summary-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border: 1px solid #eee;
+  }
+  .summary-card .label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .summary-card .value {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--bg-dark);
+  }
+  .summary-card .note {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+  .summary-card.highlight {
+    background: var(--bg-dark);
+    border-color: var(--gold);
+  }
+  .summary-card.highlight .label { color: var(--gold-light); }
+  .summary-card.highlight .value { color: #fff; }
+  .summary-card.highlight .note { color: #aaa; }
+
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border: 1px solid #eee;
+    background: #fff;
+    margin-bottom: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  thead th {
+    background: var(--bg-dark);
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #fafaf9; }
+  .text-right { text-align: right; }
+  .text-center { text-align: center; }
+  .font-bold { font-weight: 700; }
+  .text-green { color: var(--green); }
+  .text-red { color: var(--red); }
+  .text-gold { color: var(--gold-dark); }
+
+  .funnel {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 20px 0;
+  }
+  .funnel-step {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: #fff;
+    border: 1px solid #eee;
+    position: relative;
+  }
+  .funnel-step:first-child { border-radius: 12px 12px 0 0; }
+  .funnel-step:last-child { border-radius: 0 0 12px 12px; }
+  .funnel-step:not(:last-child) { border-bottom: none; }
+  .funnel-bar {
+    height: 36px;
+    border-radius: 6px;
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+  }
+  .funnel-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    min-width: 180px;
+  }
+
+  .insight-box {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #2a2520 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    border-left: 4px solid var(--gold);
+  }
+  .insight-box h3 {
+    color: var(--gold);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .insight-box p, .insight-box li {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #ccc;
+  }
+  .insight-box ul { list-style: none; padding: 0; }
+  .insight-box li {
+    padding: 4px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+  .insight-box li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .badge-green { background: #dcfce7; color: #15803d; }
+  .badge-red { background: #fce4e4; color: #b91c1c; }
+  .badge-gold { background: var(--gold-pale); color: #92700a; }
+  .badge-blue { background: #dbeafe; color: #1d4ed8; }
+
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0;
+  }
+  .progress-row .prog-label {
+    font-size: 13px;
+    min-width: 120px;
+    color: var(--text-secondary);
+  }
+  .progress-row .prog-bar-bg {
+    flex: 1;
+    height: 20px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-row .prog-bar {
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .stat-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border: 1px solid #eee;
+  }
+  .stat-box h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .rank-1 { background: #fef3c7; color: #92400e; }
+  .rank-2 { background: #fef3c7; color: #92400e; }
+  .rank-3 { background: #fef3c7; color: #92400e; }
+  .rank-top5 { background: #dcfce7; color: #15803d; }
+  .rank-top10 { background: #dbeafe; color: #1d4ed8; }
+  .rank-top20 { background: #f3f4f6; color: #6b7280; }
+
+  .footer {
+    background: var(--bg-dark);
+    padding: 32px 0;
+    text-align: center;
+    color: #888;
+    font-size: 13px;
+    margin-top: 60px;
+  }
+  .footer strong { color: var(--gold); }
+
+  @media (max-width: 640px) {
+    .two-col { grid-template-columns: 1fr; }
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <img class="logo" src="data:image/webp;base64,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" alt="CoreLTB">
+    <h1>Raport kampanii <span>Google Ads + SEO</span></h1>
+    <p class="subtitle">CoreLTB Builders Sp. z o.o. &mdash; Budowa domow na Slasku</p>
+    <div class="period-badge">03 &mdash; 13 kwietnia 2026 &nbsp;|&nbsp; Dzien kampanii: 14&ndash;20</div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 1. KPI SUMMARY -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">1</div> Podsumowanie kampanii (20 dni)</div>
+
+  <div class="summary-grid">
+    <div class="summary-card highlight">
+      <div class="label">Leady (primary)</div>
+      <div class="value">22</div>
+      <div class="note">CPA: 47,75 zl</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Wydano</div>
+      <div class="value">1 051 zl</div>
+      <div class="note">Budzet: 50 zl/dzien</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Klikniecia</div>
+      <div class="value">963</div>
+      <div class="note">CTR: 3,98%</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Wyswietlenia</div>
+      <div class="value">24 223</div>
+      <div class="note">CPC: 1,09 zl</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Conversion Rate</div>
+      <div class="value">2,28%</div>
+      <div class="note">Typowe dla branzy</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">ROAS</div>
+      <div class="value">881%</div>
+      <div class="note">Wartosc konw: 9 250 zl</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <h3>Faza kampanii: PIERWSZA OPTYMALIZACJA (Tydzien 3-4)</h3>
+    <ul>
+      <li>22 konwersje primary w 20 dni &mdash; bliskie minimum Smart Bidding (30/mies.)</li>
+      <li>CPA 47,75 zl &mdash; pod celem operacyjnym (&lt; 50 zl). Przy wartosci leada 25 000 zl to fantastyczny koszt pozyskania</li>
+      <li>Klient potwierdza: leady sa realne i jakosciowe, wpadaja kontakty od osob planujacych budowe</li>
+      <li>Strategia: Maximize Conversions &mdash; algorytm uczy sie i stabilizuje CPA</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 2. DAILY BREAKDOWN (last 10 days) -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">2</div> Wyniki dzienne (ostatnie 10 dni)</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th class="text-right">Wyswietlenia</th>
+          <th class="text-right">Klikniecia</th>
+          <th class="text-right">Koszt</th>
+          <th class="text-right">CPC</th>
+          <th class="text-right">Konwersje</th>
+          <th class="text-right">CPA</th>
+          <th class="text-right">CTR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="font-bold">13.04 (nd)</td>
+          <td class="text-right">639</td>
+          <td class="text-right">37</td>
+          <td class="text-right">36,10 zl</td>
+          <td class="text-right text-green">0,98 zl</td>
+          <td class="text-right font-bold text-green">2</td>
+          <td class="text-right text-green">18,05 zl</td>
+          <td class="text-right">5,79%</td>
+        </tr>
+        <tr>
+          <td class="font-bold">12.04 (sb)</td>
+          <td class="text-right">1 081</td>
+          <td class="text-right">46</td>
+          <td class="text-right">63,61 zl</td>
+          <td class="text-right">1,38 zl</td>
+          <td class="text-right font-bold">1</td>
+          <td class="text-right">63,61 zl</td>
+          <td class="text-right">4,26%</td>
+        </tr>
+        <tr>
+          <td class="font-bold">11.04 (pt)</td>
+          <td class="text-right">737</td>
+          <td class="text-right">48</td>
+          <td class="text-right">70,18 zl</td>
+          <td class="text-right">1,46 zl</td>
+          <td class="text-right font-bold text-green">2</td>
+          <td class="text-right text-green">35,09 zl</td>
+          <td class="text-right">6,51%</td>
+        </tr>
+        <tr>
+          <td class="font-bold">10.04 (czw)</td>
+          <td class="text-right">1 040</td>
+          <td class="text-right">34</td>
+          <td class="text-right">46,17 zl</td>
+          <td class="text-right">1,36 zl</td>
+          <td class="text-right font-bold text-green">2</td>
+          <td class="text-right text-green">23,09 zl</td>
+          <td class="text-right">3,27%</td>
+        </tr>
+        <tr>
+          <td class="font-bold">09.04 (sr)</td>
+          <td class="text-right">758</td>
+          <td class="text-right">24</td>
+          <td class="text-right">26,11 zl</td>
+          <td class="text-right text-green">1,09 zl</td>
+          <td class="text-right font-bold">1</td>
+          <td class="text-right">26,11 zl</td>
+          <td class="text-right">3,17%</td>
+        </tr>
+        <tr>
+          <td class="font-bold">08.04 (wt)</td>
+          <td class="text-right">1 372</td>
+          <td class="text-right">51</td>
+          <td class="text-right">74,21 zl</td>
+          <td class="text-right">1,46 zl</td>
+          <td class="text-right font-bold">1</td>
+          <td class="text-right">74,21 zl</td>
+          <td class="text-right">3,72%</td>
+        </tr>
+        <tr>
+          <td class="font-bold">07.04 (pn)</td>
+          <td class="text-right">536</td>
+          <td class="text-right">37</td>
+          <td class="text-right">64,68 zl</td>
+          <td class="text-right">1,75 zl</td>
+          <td class="text-right font-bold">1</td>
+          <td class="text-right">64,68 zl</td>
+          <td class="text-right">6,90%</td>
+        </tr>
+        <tr>
+          <td class="font-bold">06.04 (nd)</td>
+          <td class="text-right">838</td>
+          <td class="text-right">36</td>
+          <td class="text-right">40,42 zl</td>
+          <td class="text-right">1,12 zl</td>
+          <td class="text-right font-bold">1</td>
+          <td class="text-right">40,42 zl</td>
+          <td class="text-right">4,30%</td>
+        </tr>
+        <tr>
+          <td class="font-bold">05.04 (sb)</td>
+          <td class="text-right">1 203</td>
+          <td class="text-right">52</td>
+          <td class="text-right">63,29 zl</td>
+          <td class="text-right">1,22 zl</td>
+          <td class="text-right font-bold">1</td>
+          <td class="text-right">63,29 zl</td>
+          <td class="text-right">4,32%</td>
+        </tr>
+        <tr>
+          <td class="font-bold">04.04 (pt)</td>
+          <td class="text-right">1 356</td>
+          <td class="text-right">44</td>
+          <td class="text-right">65,77 zl</td>
+          <td class="text-right">1,49 zl</td>
+          <td class="text-right font-bold text-green">2</td>
+          <td class="text-right text-green">32,88 zl</td>
+          <td class="text-right">3,24%</td>
+        </tr>
+        <tr style="background:#f5f5f3; font-weight:700">
+          <td>SUMA (10 dni)</td>
+          <td class="text-right">9 560</td>
+          <td class="text-right">409</td>
+          <td class="text-right">550,54 zl</td>
+          <td class="text-right">1,35 zl</td>
+          <td class="text-right text-green">14</td>
+          <td class="text-right text-green">39,32 zl</td>
+          <td class="text-right">4,28%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 3. LANDING PAGES -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">3</div> Landing Pages &mdash; skutecznosc stron</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Strona</th>
+          <th class="text-right">Klikniecia</th>
+          <th class="text-right">Wyswietlenia</th>
+          <th class="text-right">Konwersje</th>
+          <th class="text-right">Conv Rate</th>
+          <th class="text-right">CPA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="font-bold">/wycena <span class="badge badge-green">LP1</span></td>
+          <td class="text-right">553</td>
+          <td class="text-right">14 547</td>
+          <td class="text-right font-bold text-green">18,5</td>
+          <td class="text-right text-green font-bold">3,35%</td>
+          <td class="text-right text-green">44,70 zl</td>
+        </tr>
+        <tr>
+          <td class="font-bold">/ (strona glowna)</td>
+          <td class="text-right">390</td>
+          <td class="text-right">12 141</td>
+          <td class="text-right">3,5</td>
+          <td class="text-right">0,90%</td>
+          <td class="text-right">61,65 zl</td>
+        </tr>
+        <tr>
+          <td>/projekty</td>
+          <td class="text-right">4</td>
+          <td class="text-right">2 023</td>
+          <td class="text-right">0</td>
+          <td class="text-right text-light">0%</td>
+          <td class="text-right">&mdash;</td>
+        </tr>
+        <tr>
+          <td>/oferta/kompleksowa-budowa-domow</td>
+          <td class="text-right">2</td>
+          <td class="text-right">2 018</td>
+          <td class="text-right">0</td>
+          <td class="text-right text-light">0%</td>
+          <td class="text-right">&mdash;</td>
+        </tr>
+        <tr>
+          <td>/analiza-dzialki <span class="badge badge-blue">LP3</span></td>
+          <td class="text-right">1</td>
+          <td class="text-right">1 228</td>
+          <td class="text-right">0</td>
+          <td class="text-right text-light">0%</td>
+          <td class="text-right">&mdash;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>Wniosek: /wycena to maszyna do leadow</h3>
+    <ul>
+      <li><strong>/wycena</strong> generuje 84% wszystkich konwersji (18,5 z 22) przy Conv Rate 3,35% &mdash; wybitny wynik</li>
+      <li>Strona glowna tez konwertuje (3,5 leadow) ale przy duzej liczbie klkniec &mdash; CR tylko 0,90%</li>
+      <li>PMax kieruje ruch glownie na /wycena i / &mdash; algorytm sam dobral optymalne landing pages</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 4. SEARCH TERM CATEGORIES (PMax Insight Terms) -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">4</div> PMax Insight Terms &mdash; co szukaja ludzie</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Kategoria wyszukiwania</th>
+          <th class="text-right">Wyswietlenia</th>
+          <th class="text-right">Klikniecia</th>
+          <th class="text-right">Konwersje</th>
+          <th class="text-right">Wartosc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="font-bold">kalkulator budowy domu</td>
+          <td class="text-right">155</td>
+          <td class="text-right font-bold">26</td>
+          <td class="text-right font-bold text-green">2</td>
+          <td class="text-right">1 000 zl</td>
+        </tr>
+        <tr>
+          <td class="font-bold">ile kosztuje budowa domu</td>
+          <td class="text-right">162</td>
+          <td class="text-right">18</td>
+          <td class="text-right font-bold text-green">1</td>
+          <td class="text-right">500 zl</td>
+        </tr>
+        <tr>
+          <td>ile kosztuje stan deweloperski domu 100m2</td>
+          <td class="text-right">220</td>
+          <td class="text-right">12</td>
+          <td class="text-right">0</td>
+          <td class="text-right">&mdash;</td>
+        </tr>
+        <tr>
+          <td>koszt budowy domu 120m2</td>
+          <td class="text-right">157</td>
+          <td class="text-right">14</td>
+          <td class="text-right">0</td>
+          <td class="text-right">&mdash;</td>
+        </tr>
+        <tr>
+          <td>koszt budowy domu 90m2 pod klucz</td>
+          <td class="text-right">143</td>
+          <td class="text-right">14</td>
+          <td class="text-right">0</td>
+          <td class="text-right">&mdash;</td>
+        </tr>
+        <tr>
+          <td>koszt budowy domu 70m2</td>
+          <td class="text-right">94</td>
+          <td class="text-right">7</td>
+          <td class="text-right">0</td>
+          <td class="text-right">&mdash;</td>
+        </tr>
+        <tr>
+          <td class="text-gold font-bold">coreltb builders sp z o o</td>
+          <td class="text-right">62</td>
+          <td class="text-right">13</td>
+          <td class="text-right font-bold text-green">3</td>
+          <td class="text-right">800 zl</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>Analiza intencji wyszukiwania</h3>
+    <ul>
+      <li><strong>Kalkulator / kosztorys</strong> &mdash; najsilniejsze frazy konwertujace. Ludzie chca wiedziec ile kosztuje budowa i trafiaja na /wycena</li>
+      <li><strong>Brand (coreltb)</strong> &mdash; 3 konwersje z 13 klikniec (23% CR!) &mdash; osoby ktore juz znaja firme wracaja i konwertuja</li>
+      <li><strong>Konkretne metraze</strong> (70m2, 90m2, 100m2, 120m2) &mdash; duzo wyswietlen, ludzie szukaja cen dla konkretnych rozmiarow domu</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 5. DAYS & HOURS -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">5</div> Dni tygodnia i godziny</div>
+
+  <div class="two-col">
+    <div class="stat-box">
+      <h4>Dni tygodnia</h4>
+      <div class="table-wrap" style="box-shadow:none;border:none;margin:0">
+        <table>
+          <thead><tr><th>Dzien</th><th class="text-right">Klik</th><th class="text-right">Konw</th><th class="text-right">CPA</th></tr></thead>
+          <tbody>
+            <tr><td class="font-bold text-green">Czwartek</td><td class="text-right">106</td><td class="text-right font-bold text-green">5</td><td class="text-right text-green">22,82 zl</td></tr>
+            <tr><td>Sobota</td><td class="text-right">119</td><td class="text-right font-bold">4</td><td class="text-right">57,72 zl</td></tr>
+            <tr><td>Niedziela</td><td class="text-right">129</td><td class="text-right">3</td><td class="text-right">58,68 zl</td></tr>
+            <tr><td>Poniedzialek</td><td class="text-right">104</td><td class="text-right">3</td><td class="text-right">45,72 zl</td></tr>
+            <tr><td>Piatek</td><td class="text-right">372</td><td class="text-right">3</td><td class="text-right">57,35 zl</td></tr>
+            <tr><td>Wtorek</td><td class="text-right">51</td><td class="text-right">2</td><td class="text-right">46,07 zl</td></tr>
+            <tr><td>Sroda</td><td class="text-right">82</td><td class="text-right">2</td><td class="text-right">64,11 zl</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="stat-box">
+      <h4>Top godziny konwersji</h4>
+      <div class="table-wrap" style="box-shadow:none;border:none;margin:0">
+        <table>
+          <thead><tr><th>Godzina</th><th class="text-right">Klik</th><th class="text-right">Konw</th><th class="text-right">CPC</th></tr></thead>
+          <tbody>
+            <tr><td class="font-bold text-green">8:00</td><td class="text-right">44</td><td class="text-right font-bold text-green">3</td><td class="text-right">2,42 zl</td></tr>
+            <tr><td class="font-bold text-green">16:00</td><td class="text-right">62</td><td class="text-right font-bold text-green">3</td><td class="text-right">1,02 zl</td></tr>
+            <tr><td class="font-bold text-green">17:00</td><td class="text-right">57</td><td class="text-right font-bold text-green">3</td><td class="text-right">0,95 zl</td></tr>
+            <tr><td class="font-bold text-green">19:00</td><td class="text-right">122</td><td class="text-right font-bold text-green">3</td><td class="text-right">0,65 zl</td></tr>
+            <tr><td>14:00</td><td class="text-right">53</td><td class="text-right">2</td><td class="text-right">1,11 zl</td></tr>
+            <tr><td>18:00</td><td class="text-right">119</td><td class="text-right">2</td><td class="text-right">0,94 zl</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <h3>Wzorce czasowe</h3>
+    <ul>
+      <li><strong>Czwartek</strong> to najlepszy dzien &mdash; 5 konwersji przy CPA 22,82 zl (pol celu!)</li>
+      <li>Weekendy (sobota+niedziela) lacznie 7 konwersji &mdash; ludzie planuja budowe w wolnym czasie</li>
+      <li><strong>Wieczory 16-19</strong> to peak konwersji &mdash; po pracy ludzie siadaja do kalkulatora</li>
+      <li><strong>Rano 8:00</strong> tez silna konwersja &mdash; przed praca sprawdzaja koszty budowy</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 6. FUNNEL -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">6</div> Lejek konwersji (GA4, 10 dni)</div>
+
+  <div class="funnel">
+    <div class="funnel-step">
+      <div class="funnel-label">Sesje na stronie</div>
+      <div class="funnel-bar" style="width:100%; background:var(--bg-dark)">626</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-label">Uzytkownicy</div>
+      <div class="funnel-bar" style="width:70%; background:#555">436</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-label">Otworzyli kalkulator</div>
+      <div class="funnel-bar" style="width:48%; background:var(--blue)">303</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-label font-bold">Wyslali formularz</div>
+      <div class="funnel-bar" style="width:7%; background:var(--green)">41</div>
+    </div>
+  </div>
+
+  <div class="summary-grid" style="grid-template-columns: repeat(3, 1fr)">
+    <div class="summary-card highlight">
+      <div class="label">Leady lacznie</div>
+      <div class="value">41</div>
+      <div class="note">calculator: 40, konsultacja: 1</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Calculator starts</div>
+      <div class="value">303</div>
+      <div class="note">269 unikalnych uzytkownikow</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Start &rarr; Lead</div>
+      <div class="value">13,5%</div>
+      <div class="note">Konwersja kalkulatora</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 7. TRAFFIC CHANNELS -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">7</div> Zrodla ruchu (GA4, 10 dni)</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Kanal</th>
+          <th>Typ</th>
+          <th class="text-right">Sesje</th>
+          <th class="text-right">Udzial</th>
+          <th class="text-right">Engagement</th>
+          <th class="text-right">Sr. czas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="font-bold">Cross-network (PMax)</td>
+          <td><span class="badge badge-gold">PAID</span></td>
+          <td class="text-right font-bold">255</td>
+          <td class="text-right">40,7%</td>
+          <td class="text-right text-green">62,7%</td>
+          <td class="text-right">2m 32s</td>
+        </tr>
+        <tr>
+          <td class="font-bold">Organic Search</td>
+          <td><span class="badge badge-green">SEO</span></td>
+          <td class="text-right">133</td>
+          <td class="text-right">21,2%</td>
+          <td class="text-right text-green">61,7%</td>
+          <td class="text-right font-bold text-green">6m 51s</td>
+        </tr>
+        <tr>
+          <td>Direct</td>
+          <td><span class="badge badge-blue">DIRECT</span></td>
+          <td class="text-right">112</td>
+          <td class="text-right">17,9%</td>
+          <td class="text-right text-green">63,4%</td>
+          <td class="text-right font-bold text-green">9m 28s</td>
+        </tr>
+        <tr>
+          <td>Paid Social (Facebook)</td>
+          <td><span class="badge badge-gold">PAID</span></td>
+          <td class="text-right">94</td>
+          <td class="text-right">15,0%</td>
+          <td class="text-right text-red">50,0%</td>
+          <td class="text-right text-red">23s</td>
+        </tr>
+        <tr>
+          <td>Organic Social</td>
+          <td><span class="badge badge-green">ORG</span></td>
+          <td class="text-right">21</td>
+          <td class="text-right">3,4%</td>
+          <td class="text-right text-green font-bold">76,2%</td>
+          <td class="text-right">1m 16s</td>
+        </tr>
+        <tr>
+          <td>Referral</td>
+          <td><span class="badge badge-blue">REF</span></td>
+          <td class="text-right">3</td>
+          <td class="text-right">0,5%</td>
+          <td class="text-right text-green font-bold">100%</td>
+          <td class="text-right font-bold text-green">10m 30s</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>Paid vs Organic</h3>
+    <ul>
+      <li><strong>Paid (Google + FB): 349 sesji (56%)</strong> &mdash; reklamy napedzaja ponad polowe ruchu</li>
+      <li><strong>Organic + Direct: 245 sesji (39%)</strong> &mdash; ruch SEO rosnie dzieki nowym artykulom na blogu</li>
+      <li>Paid Social (Facebook): niski engagement (50%, 23s) &mdash; zimny ruch, ale buduje swiadomosc marki</li>
+      <li>Direct ma najdluzszy czas sesji (9m 28s) &mdash; to osoby ktore juz znaja firme i wracaja celowo</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 8. SEO RANKINGS (SERPLab) -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">8</div> Pozycje w Google (SERPLab, 12-13.04)</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Poz.</th>
+          <th>Fraza kluczowa</th>
+          <th>Najlepsza</th>
+          <th>Wolumen</th>
+          <th>Strona</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-1">1</div></td>
+          <td class="font-bold">budowa domu wodzislaw slaski</td>
+          <td class="text-center text-green font-bold">1</td>
+          <td class="text-right">30-40</td>
+          <td>/obszar-dzialania/wodzislaw-slaski/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-2">2</div></td>
+          <td class="font-bold">budowa domow wodzislaw slaski</td>
+          <td class="text-center text-green font-bold">1</td>
+          <td class="text-right">50-70</td>
+          <td>/obszar-dzialania/wodzislaw-slaski/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-3">3</div></td>
+          <td class="font-bold">kierownik budowy wodzislaw slaski</td>
+          <td class="text-center text-green font-bold">3</td>
+          <td class="text-right">30-40</td>
+          <td>/kierownik-budowy-wodzislaw-slaski/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-top5">5</div></td>
+          <td class="font-bold">budowa domow zory</td>
+          <td class="text-center text-green">3</td>
+          <td class="text-right">40-50</td>
+          <td>/obszar-dzialania/zory/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-top5">5</div></td>
+          <td class="font-bold">budowa domow rybnik</td>
+          <td class="text-center text-green">3</td>
+          <td class="text-right">90-110</td>
+          <td>/obszar-dzialania/rybnik/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-top10">7</div></td>
+          <td>kierownik budowy cena</td>
+          <td class="text-center">7</td>
+          <td class="text-right">&mdash;</td>
+          <td>/baza-wiedzy/ile-kosztuje-kierownik-budowy/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-top10">7</div></td>
+          <td>kalkulator budowy domu 2026</td>
+          <td class="text-center">7</td>
+          <td class="text-right">&mdash;</td>
+          <td>/baza-wiedzy/kosztorys-budowy-domu-2026/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-top10">9</div></td>
+          <td>budowa domow gliwice</td>
+          <td class="text-center text-green">7</td>
+          <td class="text-right">140-170</td>
+          <td>/obszar-dzialania/gliwice/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-top10">10</div></td>
+          <td>budowa domow katowice</td>
+          <td class="text-center">10</td>
+          <td class="text-right">140</td>
+          <td>/obszar-dzialania/katowice/</td>
+        </tr>
+        <tr>
+          <td class="text-center"><div class="rank-badge rank-top20">13</div></td>
+          <td>stan surowy otwarty</td>
+          <td class="text-center">13</td>
+          <td class="text-right">&mdash;</td>
+          <td>/baza-wiedzy/stan-surowy-otwarty-poradnik/</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>SEO &mdash; kluczowe osiagniecia</h3>
+    <ul>
+      <li><strong>#1 za "budowa domu wodzislaw slaski"</strong> &mdash; flagowa fraza lokalna, TOP 1 w Google</li>
+      <li><strong>5 fraz w TOP 5</strong> &mdash; dominacja na Slasku (Wodzislaw, Rybnik, Zory)</li>
+      <li><strong>9 fraz w TOP 10</strong> &mdash; z 10 sledzonych. Jedyna poza TOP 10 to "stan surowy otwarty" (ogolnopolska fraza, poz. 13 to swietny wynik)</li>
+      <li><strong>Artykul o kierowniku budowy</strong> juz na pozycji #7 za "kierownik budowy cena" &mdash; nowy content rankuje w ciagu dni</li>
+      <li><strong>Gliwice (#9) i Katowice (#10)</strong> &mdash; wchodzenie na duze rynki slaskie (konkurencja 140-170 wyszukiwan/mies.)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 9. SEO - GSC -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">9</div> Google Search Console (10 dni)</div>
+
+  <div class="summary-grid" style="grid-template-columns: repeat(4, 1fr)">
+    <div class="summary-card">
+      <div class="label">Klikniecia org.</div>
+      <div class="value">32</div>
+      <div class="note">z wyszukiwarki Google</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Wyswietlenia</div>
+      <div class="value">359</div>
+      <div class="note">w wynikach wyszukiwania</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Sr. CTR</div>
+      <div class="value">8,9%</div>
+      <div class="note">powyzej srednio</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Sr. pozycja</div>
+      <div class="value">13,1</div>
+      <div class="note">stala poprawa</div>
+    </div>
+  </div>
+
+  <h4 style="margin:20px 0 12px; font-size:15px; font-weight:700">Nowe frazy pojawiajace sie w Google</h4>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Fraza</th><th class="text-right">Klik</th><th class="text-right">Impr.</th><th class="text-right">Pozycja</th><th class="text-right">CTR</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="font-bold text-green">kierownik budowy wodzislaw slaski</td><td class="text-right font-bold">3</td><td class="text-right">25</td><td class="text-right text-green">6,8</td><td class="text-right">12,0%</td></tr>
+        <tr><td class="font-bold text-green">kierownik budowy cennik</td><td class="text-right font-bold">2</td><td class="text-right">6</td><td class="text-right">11,5</td><td class="text-right text-green">33,3%</td></tr>
+        <tr><td>koszt kierownika budowy 2026</td><td class="text-right">1</td><td class="text-right">3</td><td class="text-right">4,7</td><td class="text-right text-green">33,3%</td></tr>
+        <tr><td>pekniecia fundamentow szkody gornicze 2026</td><td class="text-right">1</td><td class="text-right">8</td><td class="text-right">10,1</td><td class="text-right">12,5%</td></tr>
+        <tr><td>sso budowa</td><td class="text-right">1</td><td class="text-right">2</td><td class="text-right">12,0</td><td class="text-right text-green">50,0%</td></tr>
+        <tr><td>budowa domow jaworzno</td><td class="text-right">1</td><td class="text-right">1</td><td class="text-right text-green">7,0</td><td class="text-right text-green">100%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4 style="margin:20px 0 12px; font-size:15px; font-weight:700">Rosnace strony</h4>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Strona</th><th class="text-right">Klik &Delta;</th><th class="text-right">Impr &Delta;</th><th class="text-right">Pozycja</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="font-bold text-green">/oferta/</td><td class="text-right text-green">+4</td><td class="text-right text-green">+70</td><td class="text-right">3,0</td></tr>
+        <tr><td class="font-bold text-green">/kierownik-budowy-wodzislaw-slaski/</td><td class="text-right text-green">+3</td><td class="text-right text-green">+68</td><td class="text-right">7,0</td></tr>
+        <tr><td>/oferta/nadzor-i-doradztwo/</td><td class="text-right text-green">+3</td><td class="text-right text-green">+75</td><td class="text-right">10,2</td></tr>
+        <tr><td>/obszar-dzialania/oswiecim/</td><td class="text-right text-green">+1</td><td class="text-right text-green">+33</td><td class="text-right">20,0</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 10. CONTENT PUBLISHED -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">10</div> Opublikowany content &amp; SEO Actions</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Data</th><th>Akcja</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="font-bold">01.04</td>
+          <td>GBP: pelna optymalizacja wizytowek (Jaworzno + Wodzislaw) &mdash; URL, kategorie, opisy, uslugi, obszary</td>
+          <td><span class="badge badge-green">EFEKT</span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">07.04</td>
+          <td>GBP: drugi post na obu wizytowkach &mdash; realizacja Mikolow (plyta fundamentowa) + zdjecia</td>
+          <td><span class="badge badge-gold">PRAWDOP.</span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">09.04</td>
+          <td>Blog: "Stan surowy otwarty &mdash; co zawiera i ile kosztuje w 2026?" + Schema Article/FAQ</td>
+          <td><span class="badge badge-gold">PRAWDOP.</span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">09.04</td>
+          <td>Redirect /stan-surowy-otwarty &rarr; /baza-wiedzy/stan-surowy-otwarty-poradnik</td>
+          <td><span class="badge badge-gold">PRAWDOP.</span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">09.04</td>
+          <td>Indexing API: wyslano /kierownik-budowy-jaworzno/ (nie byl zaindeksowany)</td>
+          <td><span class="badge badge-gold">PRAWDOP.</span></td>
+        </tr>
+        <tr>
+          <td class="font-bold">08.04</td>
+          <td>Blog: "Ile kosztuje kierownik budowy?" &mdash; artykul + CTA inline</td>
+          <td><span class="badge badge-green">EFEKT</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>Content juz rankuje</h3>
+    <ul>
+      <li><strong>"kierownik budowy wodzislaw slaski"</strong> &mdash; nowa fraza w GSC, pozycja 6,8 z 3 kliknieciami. Artykul opublikowany 5 dni temu juz generuje ruch</li>
+      <li><strong>"stan surowy otwarty"</strong> &mdash; pozycja 13 w SERPLab (ogolnopolska fraza z duza konkurencja)</li>
+      <li><strong>"kierownik budowy cena"</strong> &mdash; pozycja 7 &mdash; artykul blogowy przechwytuje ruch informacyjny</li>
+      <li>Strategia content marketing dziala: kazdy artykul generuje nowe frazy kluczowe i ruch organiczny</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 11. GBP -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">11</div> Google Business Profile</div>
+
+  <div class="two-col">
+    <div class="stat-box">
+      <h4>Jaworzno <span class="badge badge-green" style="margin-left:8px">92/100</span></h4>
+      <div class="progress-row">
+        <span class="prog-label">Wyswietlenia</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:65%; background:var(--blue)">85</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Klik www</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:26%; background:var(--green)">5</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Telefon</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:10%; background:var(--gold)">2</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Nawigacje</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:63%; background:#8b5cf6">12</div></div>
+      </div>
+      <p style="font-size:12px; color:var(--text-light); margin-top:12px">Mobile: 65% | Engagement: 22,4%</p>
+    </div>
+    <div class="stat-box">
+      <h4>Wodzislaw <span class="badge badge-green" style="margin-left:8px">91/100</span></h4>
+      <div class="progress-row">
+        <span class="prog-label">Wyswietlenia</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:34%; background:var(--blue)">44</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Klik www</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:5%; background:var(--green)">1</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Telefon</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:0%; background:var(--gold)">0</div></div>
+      </div>
+      <div class="progress-row">
+        <span class="prog-label">Nawigacje</span>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:79%; background:#8b5cf6">15</div></div>
+      </div>
+      <p style="font-size:12px; color:var(--text-light); margin-top:12px">Mobile: 55% | Engagement: 36,4%</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 12. BUSINESS VALUE -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">12</div> Wartosc biznesowa kampanii</div>
+
+  <div class="summary-grid" style="grid-template-columns: repeat(3, 1fr)">
+    <div class="summary-card highlight">
+      <div class="label">Wartosc leada</div>
+      <div class="value">25 000 zl</div>
+      <div class="note">500k kontrakt &times; 5% konwersja</div>
+    </div>
+    <div class="summary-card highlight">
+      <div class="label">Prognoza leadow/mies.</div>
+      <div class="value">~33</div>
+      <div class="note">22 z Ads + 11 organic</div>
+    </div>
+    <div class="summary-card highlight">
+      <div class="label">Prognoza klientow</div>
+      <div class="value">1,7/mies.</div>
+      <div class="note">33 leadow &times; 5%</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metryka</th><th class="text-right">Wartosc</th><th>Komentarz</th></tr></thead>
+      <tbody>
+        <tr><td>Sredni kontrakt</td><td class="text-right font-bold">500 000 zl</td><td>Budowa domu jednorodzinnego</td></tr>
+        <tr><td>Konwersja lead &rarr; klient</td><td class="text-right">5%</td><td>Branzowy standard</td></tr>
+        <tr><td>Wydatek na reklamy (20 dni)</td><td class="text-right">1 051 zl</td><td>50 zl/dzien</td></tr>
+        <tr><td>CPA operacyjny</td><td class="text-right text-green font-bold">47,75 zl</td><td>Pod celem (&lt; 50 zl)</td></tr>
+        <tr><td>Dopuszczalny CPA</td><td class="text-right">do 500 zl</td><td>Przy wartosci leada 25k zl</td></tr>
+        <tr><td>ROAS (prognoza realna)</td><td class="text-right text-green font-bold">524:1</td><td>Prognoza przychodu vs wydatki</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <h3>Podsumowanie ROI</h3>
+    <ul>
+      <li><strong>Za 1 051 zl wydane na reklamy pozyskano 22 leady</strong> &mdash; kazdy lead kosztuje mniej niz kolacja w restauracji</li>
+      <li>Przy 5% konwersji lead&rarr;klient i srednim kontrakcie 500k zl, <strong>prognozowany przychod to ~550 000 zl miesiecznie</strong></li>
+      <li>Leady sa realne i jakosciowe &mdash; klient potwierdza kontakty od osob planujacych budowe</li>
+      <li>Kampania jest na etapie optymalizacji &mdash; algorytm Smart Bidding potrzebuje 30 konwersji/miesiac dla pelnej efektywnosci</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 13. RECOMMENDATIONS -->
+<!-- ═══════════════════════════════════════════ -->
+<section>
+  <div class="section-title"><div class="icon">13</div> Rekomendacje na nastepny okres</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Obszar</th><th>Akcja</th><th>Priorytet</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="text-center font-bold">1</td>
+          <td>Google Ads</td>
+          <td>Sprawdzic raport assetow PMax &mdash; usunac assety z ocena LOW</td>
+          <td><span class="badge badge-red">WYSOKI</span></td>
+        </tr>
+        <tr>
+          <td class="text-center font-bold">2</td>
+          <td>Google Ads</td>
+          <td>Sprawdzic Placement Report &mdash; wykluczyc gry mobilne i aplikacje</td>
+          <td><span class="badge badge-red">WYSOKI</span></td>
+        </tr>
+        <tr>
+          <td class="text-center font-bold">3</td>
+          <td>SEO</td>
+          <td>Rozpoczac link building &mdash; Wodzislaw (poz. 11,7 w GSC) potrzebuje 2-3 linkow do stabilnego TOP 10</td>
+          <td><span class="badge badge-red">WYSOKI</span></td>
+        </tr>
+        <tr>
+          <td class="text-center font-bold">4</td>
+          <td>Content</td>
+          <td>Publikacja kolejnych artykulow blogowych (kosztorys, etapy budowy) &mdash; kazdy artykul generuje nowe frazy</td>
+          <td><span class="badge badge-gold">SREDNI</span></td>
+        </tr>
+        <tr>
+          <td class="text-center font-bold">5</td>
+          <td>GBP</td>
+          <td>Regularny posting na wizytowkach (1x/tydzien) &mdash; zdjecia z budowy, realizacje</td>
+          <td><span class="badge badge-gold">SREDNI</span></td>
+        </tr>
+        <tr>
+          <td class="text-center font-bold">6</td>
+          <td>Technicznie</td>
+          <td>Wdrozyc Native Google Ads Conversion Tag w GTM &mdash; eliminuje opoznienie 24-72h</td>
+          <td><span class="badge badge-gold">SREDNI</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p><strong>CoreLTB Builders</strong> &mdash; Raport wygenerowany 13 kwietnia 2026</p>
+  <p style="margin-top:6px">Dane: Google Ads, GA4, GSC, SERPLab, GBP | Okres: 03-13.04.2026</p>
+</div>
+
+</body>
+</html>
