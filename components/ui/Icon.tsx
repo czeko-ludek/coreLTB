@@ -112,6 +112,9 @@ import {
   ImageIcon,
   Droplets,
   CircleDot,
+  Maximize2,
+  Minimize2,
+  Pipette,
 } from 'lucide-react';
 
 const iconMap = {
@@ -232,6 +235,9 @@ const iconMap = {
   image: ImageIcon,
   droplets: Droplets,
   circleDot: CircleDot,
+  maximize2: Maximize2,
+  minimize2: Minimize2,
+  pipette: Pipette,
 };
 
 export type IconName = keyof typeof iconMap;
