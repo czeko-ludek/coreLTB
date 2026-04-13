@@ -6,11 +6,6 @@ import { clsx } from 'clsx';
 import { Icon } from '@/components/ui';
 import type { Plot } from '@/data/plots/types';
 
-/** Build /wycena URL pre-filled with plot area */
-function buildPlotCalculatorUrl(plot: Plot): string {
-  return `/wycena?area=${Math.round(plot.area)}&utm_content=dzialka-${plot.slug}`;
-}
-
 interface PlotCardProps {
   plot: Plot;
   isHighlighted?: boolean;
@@ -95,11 +90,6 @@ export const PlotCard = React.memo(function PlotCard({
             >
               {badge.label}
             </span>
-            {plot.mpzp === 'tak' && (
-              <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-md bg-zinc-800/80 text-white shadow-sm">
-                MPZP
-              </span>
-            )}
           </div>
 
           {/* Image count */}
@@ -141,35 +131,18 @@ export const PlotCard = React.memo(function PlotCard({
             </div>
           </div>
 
-          {/* Media pills */}
-          {mediaCount > 0 && (
-            <div className="flex flex-wrap gap-1.5 mb-3">
-              {mediaLabels.map((m) => (
-                <span key={m} className="text-[10px] font-medium bg-green-50 text-green-700 px-2 py-0.5 rounded-full">
-                  {m}
-                </span>
-              ))}
-            </div>
-          )}
-
-          {/* CTA — link to detail + calculator */}
-          <div className="flex items-center justify-between pt-2.5 border-t border-zinc-100 gap-2">
-            <Link
-              href={buildPlotCalculatorUrl(plot)}
-              className="text-xs font-semibold text-primary hover:underline transition-colors flex items-center gap-1.5"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Icon name="calculator" size="sm" />
-              Koszt budowy
-            </Link>
-            <Link
-              href={detailUrl}
-              className="text-xs font-semibold text-text-muted hover:text-primary transition-colors flex items-center gap-1"
-              onClick={(e) => e.stopPropagation()}
-            >
-              Szczegoly
-              <Icon name="arrowRight" size="sm" />
-            </Link>
+          {/* Media + MPZP pills */}
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            {plot.mpzp === 'tak' && (
+              <span className="text-[10px] font-semibold bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">
+                MPZP
+              </span>
+            )}
+            {mediaLabels.map((m) => (
+              <span key={m} className="text-[10px] font-medium bg-green-50 text-green-700 px-2 py-0.5 rounded-full">
+                {m}
+              </span>
+            ))}
           </div>
         </div>
       </div>
@@ -213,13 +186,6 @@ export const PlotCard = React.memo(function PlotCard({
             style={{ backgroundColor: badge.color, color: '#fff' }}
           >
             {badge.label}
-          </span>
-        </div>
-
-        {/* MPZP badge — bottom right */}
-        <div className="absolute bottom-4 right-4 z-10">
-          <span className="bg-zinc-800/90 text-white text-xs font-medium px-3 py-1.5 rounded-full">
-            MPZP: {plot.mpzp === 'tak' ? 'Tak' : plot.mpzp === 'nie' ? 'Nie' : '?'}
           </span>
         </div>
 
@@ -271,8 +237,13 @@ export const PlotCard = React.memo(function PlotCard({
           </div>
         </div>
 
-        {/* Media pills */}
+        {/* Media + MPZP pills */}
         <div className="flex flex-wrap gap-1.5 mt-3">
+          {plot.mpzp === 'tak' && (
+            <span className="inline-flex items-center gap-1 text-xs bg-blue-50 text-blue-700 font-semibold px-2.5 py-1 rounded-full">
+              MPZP
+            </span>
+          )}
           {mediaLabels.length > 0 ? (
             mediaLabels.map((m) => (
               <span key={m} className="inline-flex items-center gap-1 text-xs bg-green-50 text-green-700 px-2.5 py-1 rounded-full">
@@ -289,19 +260,8 @@ export const PlotCard = React.memo(function PlotCard({
           </span>
         </div>
 
-        {/* CTA row */}
-        <div className="flex items-center justify-between mt-4 pt-4 border-t border-zinc-100 gap-2">
-          <span
-            className="text-xs font-semibold text-primary hover:text-primary-dark transition-colors flex items-center gap-1.5"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              window.location.href = buildPlotCalculatorUrl(plot);
-            }}
-          >
-            <Icon name="calculator" size="sm" />
-            Sprawdz koszt budowy
-          </span>
+        {/* Arrow indicator */}
+        <div className="flex items-center justify-end mt-4 pt-4 border-t border-zinc-100">
           <span className="w-8 h-8 rounded-full border border-zinc-200 flex items-center justify-center text-text-muted group-hover:bg-primary group-hover:border-primary group-hover:text-white transition-all duration-300">
             <Icon name="arrowRight" size="sm" />
           </span>

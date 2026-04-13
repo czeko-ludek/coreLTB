@@ -84,12 +84,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const loc = resolveLocation(slug);
   if (!loc) return {};
 
+  // Use city SEO config if available (for meta title/description)
+  const metaCitySeo = getPlotCitySEO(loc.slug);
   const plots = getPlotsByLocation(loc.slug);
-  const count = plots.filter((p) => p.availability === 'dostepna').length;
+  const avail = plots.filter((p) => p.availability === 'dostepna');
+  const count = avail.length;
   const canonicalPath = `/dzialki/${slug.join('/')}`;
+  const mpzp = avail.filter((p) => p.mpzp === 'tak').length;
+  const minPriceStr = avail.length > 0 ? Math.min(...avail.map((p) => p.price)).toLocaleString('pl-PL') : null;
+  const areas = avail.map((p) => p.area);
+  const areaRange = areas.length > 0 ? `${Math.min(...areas)}-${Math.max(...areas)} m2` : '';
 
-  const title = `Działki budowlane ${loc.name} - ${count} ofert | CoreLTB`;
-  const description = `${count} działek budowlanych na sprzedaż ${loc.nameLocative}. Sprawdzone pod budowę domu - MPZP, media, warunki gruntowe. Ceny od ${plots.length > 0 ? Math.min(...plots.map((p) => p.price)).toLocaleString('pl-PL') : '?'} zł.`;
+  const title = metaCitySeo?.metaTitle
+    || `Działki budowlane ${loc.name} - ${count} ofert${minPriceStr ? ` od ${minPriceStr} zł` : ''} | CoreLTB`;
+  const description = metaCitySeo?.metaDescription
+    || `${count} działek budowlanych na sprzedaż ${loc.nameLocative}. ${minPriceStr ? `Ceny od ${minPriceStr} zł. ` : ''}${areaRange ? `Powierzchnie ${areaRange}. ` : ''}${mpzp > 0 ? `${mpzp} z MPZP. ` : ''}Sprawdzone pod budowę domu — media, warunki gruntowe.`;
 
   return {
     title,
@@ -412,10 +421,30 @@ export default async function DzialkiSlugPage({ params }: PageProps) {
   // SEO data from city-specific config (if exists)
   const citySeo = getPlotCitySEO(loc.slug);
 
-  // H1 and description — prefer city SEO config, fallback to location data
+  // H1 and description — prefer city SEO config, fallback to dynamic description
   const h1 = citySeo?.h1 || 'Działki budowlane';
   const h1Highlight = citySeo?.h1Highlight || loc.nameLocative;
-  const description = citySeo?.description || `Sprawdzone działki pod budowę domu jednorodzinnego ${loc.nameLocative}. Każda z informacją o mediach, MPZP i warunkach gruntowych.`;
+
+  // Build rich dynamic description with real stats
+  const available = plots.filter((p) => p.availability === 'dostepna');
+  const mpzpCount = available.filter((p) => p.mpzp === 'tak').length;
+  const fullMediaCount = available.filter(
+    (p) => p.media.water && p.media.electricity && p.media.gas && p.media.sewer
+  ).length;
+  const prices = available.map((p) => p.price);
+  const minPrice = prices.length > 0 ? Math.min(...prices) : 0;
+
+  const descParts: string[] = [];
+  if (available.length > 0) {
+    descParts.push(`${available.length} ${available.length === 1 ? 'działka budowlana' : 'działek budowlanych'} ${loc.nameLocative} od ${minPrice.toLocaleString('pl-PL')} zł.`);
+  } else {
+    descParts.push(`Działki budowlane ${loc.nameLocative}.`);
+  }
+  if (mpzpCount > 0) descParts.push(`${mpzpCount} z MPZP.`);
+  if (fullMediaCount > 0) descParts.push(`${fullMediaCount} z pełnym uzbrojeniem.`);
+  descParts.push('Sprawdzone pod budowę domu — media, warunki gruntowe, kształt terenu.');
+
+  const description = citySeo?.description || descParts.join(' ');
 
   return (
     <>

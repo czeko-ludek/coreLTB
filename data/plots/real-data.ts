@@ -659,9 +659,9 @@ export const realPlots: Plot[] = [
   },
   {
     slug: "lubomia-1116305",
-    title: "Działka 1260 m² — Lubomia, Lubomi",
+    title: "Działka 1260 m² — Lubomia",
     city: "Lubomia",
-    district: "Lubomi",
+    district: "",
     address: "Lubomia",
     area: 1260,
     price: 160000,

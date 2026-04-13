@@ -172,7 +172,7 @@ export const PlotMap = forwardRef<PlotMapHandle, PlotMapProps>(
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
       }).addTo(map);
 
-      L.control.zoom({ position: 'bottomright' }).addTo(map);
+      L.control.zoom({ position: 'topright' }).addTo(map);
 
       leafletMapRef.current = map;
 

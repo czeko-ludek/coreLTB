@@ -613,6 +613,11 @@
    PLOT MAP — Leaflet custom styles
    ====================================================================== */
 
+/* Leaflet zoom controls — keep below our UI overlays */
+.leaflet-control-zoom {
+  z-index: 800 !important;
+}
+
 /* Pin wrapper — remove Leaflet default icon styles */
 .plot-pin-wrapper {
   background: transparent !important;

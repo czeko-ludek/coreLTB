@@ -3,7 +3,6 @@
 import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import Image from 'next/image';
 import { clsx } from 'clsx';
 import { useInView } from 'react-intersection-observer';
 import { Icon } from '@/components/ui';
@@ -95,6 +94,8 @@ export function PlotsListingSection({
   const [highlightedSlug, setHighlightedSlug] = useState<string | null>(null);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
+  const [priceDropdownOpen, setPriceDropdownOpen] = useState(false);
+  const [areaDropdownOpen, setAreaDropdownOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   /** Slugs visible in map viewport — null means show all (no map-based filter) */
   const [mapVisibleSlugs, setMapVisibleSlugs] = useState<string[] | null>(null);
@@ -269,11 +270,120 @@ export function PlotsListingSection({
               )}
             </div>
 
-            {/* Row 2: Secondary filters (price, area, sort) — hidden on mobile in map view */}
-            <div className={clsx(
-              'flex flex-wrap items-center gap-2'
-            )}>
-              {/* Price range */}
+            {/* Row 2: Filters — dropdowns on mobile, chip row on desktop */}
+
+            {/* ── Mobile: 3 dropdown boxes ── */}
+            <div className="flex items-center gap-2 md:hidden">
+              {/* Price dropdown */}
+              <div className="relative flex-1">
+                <button
+                  onClick={() => { setPriceDropdownOpen(!priceDropdownOpen); setAreaDropdownOpen(false); setSortDropdownOpen(false); }}
+                  className={clsx(
+                    'w-full flex items-center justify-between gap-1 px-3 py-2.5 bg-white rounded-lg text-xs font-medium border transition-all',
+                    filters.priceMin || filters.priceMax
+                      ? 'border-zinc-900 text-zinc-900'
+                      : 'border-zinc-200 text-text-secondary'
+                  )}
+                >
+                  <span>{PRICE_RANGES.find(r => r.min === filters.priceMin && r.max === filters.priceMax)?.label || 'Cena'}</span>
+                  <Icon name={priceDropdownOpen ? 'chevronUp' : 'chevronDown'} size="sm" />
+                </button>
+                {priceDropdownOpen && (
+                  <>
+                    <div className="fixed inset-0 z-20" onClick={() => setPriceDropdownOpen(false)} />
+                    <div className="absolute left-0 top-full mt-1 w-48 bg-white rounded-xl shadow-xl border border-zinc-200 py-1 z-30">
+                      {PRICE_RANGES.map((range, i) => (
+                        <button
+                          key={i}
+                          onClick={() => { handlePriceRange(range.min, range.max); setPriceDropdownOpen(false); }}
+                          className={clsx(
+                            'w-full text-left px-4 py-2.5 text-sm transition-colors',
+                            filters.priceMin === range.min && filters.priceMax === range.max
+                              ? 'bg-primary/10 text-primary font-medium'
+                              : 'text-text-secondary hover:bg-zinc-50'
+                          )}
+                        >
+                          {range.label}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+
+              {/* Area dropdown */}
+              <div className="relative flex-1">
+                <button
+                  onClick={() => { setAreaDropdownOpen(!areaDropdownOpen); setPriceDropdownOpen(false); setSortDropdownOpen(false); }}
+                  className={clsx(
+                    'w-full flex items-center justify-between gap-1 px-3 py-2.5 bg-white rounded-lg text-xs font-medium border transition-all',
+                    filters.areaMin || filters.areaMax
+                      ? 'border-zinc-900 text-zinc-900'
+                      : 'border-zinc-200 text-text-secondary'
+                  )}
+                >
+                  <span>{AREA_RANGES.find(r => r.min === filters.areaMin && r.max === filters.areaMax)?.label || 'Powierzchnia'}</span>
+                  <Icon name={areaDropdownOpen ? 'chevronUp' : 'chevronDown'} size="sm" />
+                </button>
+                {areaDropdownOpen && (
+                  <>
+                    <div className="fixed inset-0 z-20" onClick={() => setAreaDropdownOpen(false)} />
+                    <div className="absolute left-0 top-full mt-1 w-48 bg-white rounded-xl shadow-xl border border-zinc-200 py-1 z-30">
+                      {AREA_RANGES.map((range, i) => (
+                        <button
+                          key={i}
+                          onClick={() => { handleAreaRange(range.min, range.max); setAreaDropdownOpen(false); }}
+                          className={clsx(
+                            'w-full text-left px-4 py-2.5 text-sm transition-colors',
+                            filters.areaMin === range.min && filters.areaMax === range.max
+                              ? 'bg-primary/10 text-primary font-medium'
+                              : 'text-text-secondary hover:bg-zinc-50'
+                          )}
+                        >
+                          {range.label}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+
+              {/* Sort dropdown */}
+              <div className="relative flex-1">
+                <button
+                  onClick={() => { setSortDropdownOpen(!sortDropdownOpen); setPriceDropdownOpen(false); setAreaDropdownOpen(false); }}
+                  className="w-full flex items-center justify-between gap-1 px-3 py-2.5 bg-white rounded-lg text-xs font-medium text-text-secondary border border-zinc-200 transition-all"
+                >
+                  <span>{currentSort.label}</span>
+                  <Icon name={sortDropdownOpen ? 'chevronUp' : 'chevronDown'} size="sm" />
+                </button>
+                {sortDropdownOpen && (
+                  <>
+                    <div className="fixed inset-0 z-20" onClick={() => setSortDropdownOpen(false)} />
+                    <div className="absolute right-0 top-full mt-1 w-48 bg-white rounded-xl shadow-xl border border-zinc-200 py-1 z-30">
+                      {SORT_OPTIONS.map((option) => (
+                        <button
+                          key={option.id}
+                          onClick={() => handleSortChange(option.id)}
+                          className={clsx(
+                            'w-full text-left px-4 py-2.5 text-sm transition-colors',
+                            filters.sortBy === option.id
+                              ? 'bg-primary/10 text-primary font-medium'
+                              : 'text-text-secondary hover:bg-zinc-50'
+                          )}
+                        >
+                          {option.label}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* ── Desktop: chip row (unchanged) ── */}
+            <div className="hidden md:flex flex-wrap items-center gap-2">
+              {/* Price range chips */}
               <div className="flex items-center gap-1">
                 {PRICE_RANGES.map((range, i) => {
                   const isActive = filters.priceMin === range.min && filters.priceMax === range.max;
@@ -294,9 +404,9 @@ export function PlotsListingSection({
                 })}
               </div>
 
-              <div className="w-px h-6 bg-zinc-200 mx-1 hidden sm:block" />
+              <div className="w-px h-6 bg-zinc-200 mx-1" />
 
-              {/* Area range */}
+              {/* Area range chips */}
               <div className="flex items-center gap-1">
                 {AREA_RANGES.map((range, i) => {
                   const isActive = filters.areaMin === range.min && filters.areaMax === range.max;
@@ -317,7 +427,7 @@ export function PlotsListingSection({
                 })}
               </div>
 
-              <div className="w-px h-6 bg-zinc-200 mx-1 hidden sm:block" />
+              <div className="w-px h-6 bg-zinc-200 mx-1" />
 
               {/* Sort dropdown */}
               <div className="relative ml-auto">
@@ -426,74 +536,6 @@ export function PlotsListingSection({
             />
           )}
 
-          {/* ── CTA — Kalkulator wyceny (same as ProjectsListingSection) ── */}
-          <div className="mt-12 md:mt-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
-              <div
-                className={clsx(
-                  'bg-zinc-900 rounded-2xl overflow-hidden',
-                  inView ? 'animate-fade-in-up' : 'opacity-0'
-                )}
-                style={{ animationDelay: '0.5s' }}
-              >
-                <div className="p-6 md:p-8 lg:p-10 flex flex-col justify-center h-full">
-                  <span className="text-primary font-bold text-xs uppercase tracking-[0.2em] block mb-3">
-                    Masz działkę?
-                  </span>
-                  <h3 className="text-2xl md:text-4xl lg:text-5xl font-black text-white leading-[0.95] mb-4">
-                    SPRAWDŹ KOSZT
-                    <br />
-                    <span className="text-primary">BUDOWY</span>
-                  </h3>
-                  <p className="text-zinc-400 text-sm md:text-base lg:text-lg mb-4 md:mb-6 max-w-xl leading-relaxed">
-                    Skonfiguruj parametry domu i otrzymaj{' '}
-                    <strong className="text-white">szczegółowy kosztorys budowy</strong> w 60 sekund.
-                  </p>
-                  <div className="flex flex-col gap-2.5 mb-6">
-                    {[
-                      'Wycena w 60 sekund',
-                      'Rozbicie na etapy: SSO, deweloperski, pod klucz',
-                      'Stała cena w umowie ryczałtowej',
-                    ].map((feature, i) => (
-                      <div key={i} className="flex items-center gap-3">
-                        <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                          <Icon name="check" className="text-primary" size="sm" />
-                        </div>
-                        <span className="text-zinc-300 text-sm md:text-base">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div>
-                    <Link
-                      href="/wycena"
-                      className="group inline-flex items-center gap-3 bg-primary hover:bg-white text-zinc-900 font-bold text-sm px-6 py-3 rounded-sm transition-all duration-300 uppercase tracking-wider"
-                    >
-                      Oblicz koszt budowy
-                      <div className="h-7 w-7 rounded-full bg-zinc-900 flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                        <Icon name="arrowRight" className="text-white" size="sm" />
-                      </div>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className={clsx(
-                  'relative min-h-[250px] md:min-h-[300px] rounded-2xl overflow-hidden',
-                  inView ? 'animate-fade-in-up' : 'opacity-0'
-                )}
-                style={{ animationDelay: '0.65s' }}
-              >
-                <Image
-                  src="/images/cta.webp"
-                  alt="Kalkulator kosztów budowy domu — CoreLTB Builders"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -501,7 +543,7 @@ export function PlotsListingSection({
       {isFullscreen && (
         <div className="fixed inset-0 z-[1000] bg-white flex flex-col">
           {/* Fullscreen toolbar */}
-          <div className="shrink-0 border-b border-zinc-200 bg-white px-4 py-3">
+          <div className="shrink-0 border-b border-zinc-200 bg-white px-4 py-3 relative z-[1200]">
             <div className="flex items-center gap-3">
               {/* Close button */}
               <button
@@ -622,7 +664,7 @@ export function PlotsListingSection({
               {/* Mobile: bottom drawer trigger in fullscreen */}
               <button
                 onClick={() => setMobileDrawerOpen(true)}
-                className="absolute bottom-4 left-4 right-4 bg-white rounded-2xl shadow-lg border border-zinc-200/60 px-5 py-3.5 flex items-center justify-between z-[500] md:hidden"
+                className="absolute bottom-4 left-4 right-4 bg-white rounded-2xl shadow-lg border border-zinc-200/60 px-5 py-3.5 flex items-center justify-between z-[1100] md:hidden"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
