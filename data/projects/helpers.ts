@@ -5,6 +5,17 @@ import type { Project, ProjectListingItem, ProjectFilters, SortOption, ProjectSo
 import { surfaceRanges } from './types';
 
 // ---------------------------------------------------------------------------
+// Image helpers
+// ---------------------------------------------------------------------------
+
+/** Resolve project thumbnail — explicit thumbnailSrc or convention-based gallery-1.webp */
+export function getProjectThumbnail(project: Pick<Project, 'slug' | 'thumbnailSrc' | 'galleryImageCount'>): string | undefined {
+  if (project.thumbnailSrc) return project.thumbnailSrc;
+  if (project.galleryImageCount > 0) return `/images/projekty/${project.slug}/gallery-1.webp`;
+  return undefined;
+}
+
+// ---------------------------------------------------------------------------
 // SEO helpers — title, description, category labels
 // ---------------------------------------------------------------------------
 
@@ -201,7 +212,7 @@ export function toListingItem(project: Project): ProjectListingItem {
     surfaceArea: project.surfaceArea,
     estimatedBuildCost: project.estimatedBuildCost,
     price: project.price,
-    thumbnailSrc: project.thumbnailSrc,
+    thumbnailSrc: getProjectThumbnail(project),
     source: project.source,
     dateAdded: project.dateAdded,
     costNum: parseEstimatedCost(project.estimatedBuildCost || ''),

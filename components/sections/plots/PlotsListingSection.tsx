@@ -131,7 +131,9 @@ export function PlotsListingSection({
     };
   }, [isFullscreen]);
 
-  const { ref, inView } = useInView({ threshold: 0.05, triggerOnce: true, rootMargin: '50px 0px' });
+  // initialInView: true prevents mobile bug where content stays opacity-0
+  // if IntersectionObserver fires late during hydration
+  const { ref, inView } = useInView({ threshold: 0.05, triggerOnce: true, rootMargin: '50px 0px', initialInView: true });
 
   // Top city slugs by plot count — fed to LocationSearch as popular suggestions
   const topCitySlugs = useMemo(() => {
