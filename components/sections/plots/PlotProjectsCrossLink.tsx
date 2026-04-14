@@ -8,6 +8,7 @@ import { allProjects } from '@/data/projects';
 import { getProjectThumbnail } from '@/data/projects/helpers';
 import { trackCrossLinkClick } from '@/lib/analytics';
 import type { Plot } from '@/data/plots/types';
+import type { Project } from '@/data/projects/types';
 
 interface PlotProjectsCrossLinkProps {
   plot: Plot;
@@ -15,44 +16,129 @@ interface PlotProjectsCrossLinkProps {
 
 const CATEGORY_LABELS: Record<string, string> = {
   parterowy: 'Parterowy',
-  pietrowy: 'Pietrowy',
+  pietrowy: 'Piętrowy',
   'z-poddaszem': 'Z poddaszem',
   dwulokalowy: 'Dwulokalowy',
   jednorodzinny: 'Jednorodzinny',
 };
 
+// ─── Helpers: parse dimensions ──────────────────────────
+
+/** Parse plot dimensions string → [width, length] in meters (shorter side = width) */
+function parsePlotDimensions(dims?: string): { width: number; length: number } | null {
+  if (!dims) return null;
+  // Formats: "29/42 m", "22X62 m", "30 x 31,5 m", "19/22 m"
+  // For irregular plots like "43/191/48/163 m" — take min and max
+  const numbers = dims.match(/[\d]+[,.]?[\d]*/g);
+  if (!numbers || numbers.length < 2) return null;
+
+  const parsed = numbers.map((n) => parseFloat(n.replace(',', '.')));
+  const width = Math.min(...parsed);
+  const length = Math.max(...parsed);
+
+  if (width < 5 || length < 5 || isNaN(width) || isNaN(length)) return null;
+  return { width, length };
+}
+
+/** Get minimum plot dimensions required by a project → [width, length] */
+function getProjectMinPlotDims(project: Project): { width: number; length: number } | null {
+  // Z500: dedicated fields
+  if (project.lotWidth && project.lotLength) {
+    const w = parseFloat(project.lotWidth.replace(',', '.'));
+    const l = parseFloat(project.lotLength.replace(',', '.'));
+    if (w > 0 && l > 0) return { width: Math.min(w, l), length: Math.max(w, l) };
+  }
+
+  // GaleriaDomów: spec "Minimalne wymiary działki" → "19.05 x 22.15 m"
+  for (const tab of project.specifications) {
+    for (const item of tab.items) {
+      if (item.label === 'Minimalne wymiary działki') {
+        const numbers = item.value.match(/[\d]+[,.]?[\d]*/g);
+        if (numbers && numbers.length >= 2) {
+          const parsed = numbers.map((n) => parseFloat(n.replace(',', '.')));
+          const w = Math.min(...parsed);
+          const l = Math.max(...parsed);
+          if (w > 0 && l > 0) return { width: w, length: l };
+        }
+      }
+    }
+  }
+
+  return null;
+}
+
+/** Check if a project fits on a plot by dimensions (with 1m tolerance) */
+function projectFitsOnPlot(
+  projectDims: { width: number; length: number },
+  plotDims: { width: number; length: number },
+): boolean {
+  const TOLERANCE = 1; // 1m margin
+  return (
+    projectDims.width <= plotDims.width + TOLERANCE &&
+    projectDims.length <= plotDims.length + TOLERANCE
+  );
+}
+
 /**
  * Cross-link section on plot detail pages.
- * Shows 3 matching projects based on plot area (suitable house size).
- * Styled like RealizationCard — big image, spec pills, hover effects.
+ * Shows 3 matching projects that actually fit on this plot by dimensions.
+ * Falls back to area-based matching if plot has no dimensions.
  */
 export function PlotProjectsCrossLink({ plot }: PlotProjectsCrossLinkProps) {
   const matchedProjects = useMemo(() => {
-    // Estimate buildable house area from plot size (rule of thumb: 10-35% of plot)
-    const maxHouseArea = Math.round(plot.area * 0.35);
-    const minHouseArea = Math.round(plot.area * 0.1);
+    const plotDims = parsePlotDimensions(plot.dimensions);
 
     const parseSurface = (s: string) => {
       const match = s.match(/[\d,.]+/);
       return match ? parseFloat(match[0].replace(',', '.')) : 0;
     };
 
-    // Filter projects that could fit on this plot — prefer ones with images
-    const candidates = allProjects
-      .filter((p) => {
-        const area = parseSurface(p.surfaceArea);
-        return area >= minHouseArea && area <= maxHouseArea && p.availability !== 'niedostepny';
-      })
-      .sort((a, b) => {
-        // Prefer projects with gallery images
-        const aHasImg = a.galleryImageCount > 0 ? 1 : 0;
-        const bHasImg = b.galleryImageCount > 0 ? 1 : 0;
-        if (aHasImg !== bHasImg) return bHasImg - aHasImg;
-        return Math.random() - 0.5;
-      })
-      .slice(0, 3);
+    // Area-based pre-filter (rule of thumb: house = 10-35% of plot)
+    const maxHouseArea = Math.round(plot.area * 0.35);
+    const minHouseArea = Math.round(plot.area * 0.1);
 
-    // Fallback: if no good matches, show popular projects with images
+    type ScoredProject = { project: Project; score: number };
+    const scored: ScoredProject[] = [];
+
+    for (const p of allProjects) {
+      if (p.availability === 'niedostepny') continue;
+
+      const houseArea = parseSurface(p.surfaceArea);
+      if (houseArea < minHouseArea || houseArea > maxHouseArea) continue;
+
+      let score = 0;
+
+      // +10 for having gallery images
+      if (p.galleryImageCount > 0) score += 10;
+
+      // Dimension matching — the key improvement
+      const projDims = getProjectMinPlotDims(p);
+      if (plotDims && projDims) {
+        if (projectFitsOnPlot(projDims, plotDims)) {
+          score += 50; // strong signal: project actually fits
+          // Bonus for tighter fit (less wasted space)
+          const fitRatio = (projDims.width * projDims.length) / (plotDims.width * plotDims.length);
+          score += Math.round(fitRatio * 20); // 0-20 bonus
+        } else {
+          score -= 100; // project doesn't fit — exclude
+        }
+      }
+
+      // Prefer projects closer to ideal house size (~20% of plot)
+      const idealArea = plot.area * 0.2;
+      const areaDistance = Math.abs(houseArea - idealArea) / idealArea;
+      score += Math.round((1 - Math.min(areaDistance, 1)) * 15);
+
+      if (score >= 0) {
+        scored.push({ project: p, score });
+      }
+    }
+
+    // Sort by score descending, take top 3
+    scored.sort((a, b) => b.score - a.score);
+    const candidates = scored.slice(0, 3).map((s) => s.project);
+
+    // Fallback: if < 3 matches, fill with popular projects
     if (candidates.length < 3) {
       const fallbacks = allProjects
         .filter((p) =>
@@ -65,7 +151,7 @@ export function PlotProjectsCrossLink({ plot }: PlotProjectsCrossLinkProps) {
     }
 
     return candidates;
-  }, [plot.area]);
+  }, [plot.area, plot.dimensions]);
 
   if (matchedProjects.length === 0) return null;
 
@@ -77,11 +163,11 @@ export function PlotProjectsCrossLink({ plot }: PlotProjectsCrossLinkProps) {
             <Icon name="home" size="md" className="text-primary" />
           </div>
           <h2 className="text-xl md:text-2xl font-bold text-text-primary">
-            Projekty domow na te dzialke
+            Projekty domów na tę działkę
           </h2>
         </div>
         <p className="text-text-secondary mb-6 ml-[52px]">
-          Dzialka {plot.area} m2 — sprawdz projekty, ktore mozesz na niej postawic
+          Działka {plot.area} m² — sprawdź projekty, które możesz na niej postawić
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
