@@ -212,7 +212,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     // ── INTRO ──────────────────────────────────────────────────
     {
       type: 'paragraph',
-      content: '<strong>Stan surowy otwarty (SSO)</strong> to etap, na którym dom nabiera realnych kształtów - stoi na fundamentach, ma ściany nośne i dach, ale wciąż nie posiada okien ani drzwi. Pochłania największą część budżetu budowy i jednocześnie decyduje o trwałości domu na dekady. W tym przewodniku podajemy <strong>konkretne stawki za m²</strong> w podziale na fundamenty, ściany i dach - aktualne na kwiecień 2026, dla rejonu Śląska.',
+      content: '<strong>Stan surowy otwarty (SSO)</strong> to etap, na którym dom nabiera realnych kształtów - stoi na fundamentach, ma ściany nośne i dach, ale wciąż nie posiada okien ani drzwi. Razem z fundamentami pochłania ponad połowę budżetu budowy i jednocześnie decyduje o trwałości domu na dekady. W tym przewodniku podajemy <strong>konkretne stawki za m²</strong> w podziale na fundamenty, ściany i dach - aktualne na kwiecień 2026, dla rejonu Śląska.',
     },
 
     // ── SEKCJA 1 - Definicja SSO (kw: co to jest SSO, co zawiera) ───
@@ -375,7 +375,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'callout',
       variant: 'info',
-      content: '<strong>Stan zero:</strong> (1 000 + 500) × 120 m² = <strong>169 000–191 000 zł</strong> (±6%)<br><strong>SSO:</strong> (1 300 + 900 + 800) × 120 m² = <strong>338 000–382 000 zł</strong> (±6%)<br><br><strong>Razem SSO netto: ~510 000–570 000 zł</strong><br><strong>Razem SSO brutto (8% VAT): ~551 000–616 000 zł</strong><br><strong>Stawka za m²: ~4 250–4 750 zł netto</strong><br><br><em>Stawki obejmują materiały, robociznę, kierownika budowy i nadzór inżynierski.</em>',
+      content: '<strong>Stan zero (fundamenty):</strong> (1 000 + 500) × 120 m² = <strong>169 000–191 000 zł</strong> (±6%)<br><strong>SSO (ściany + dach + kondygnacja):</strong> (1 300 + 900 + 800) × 120 m² = <strong>338 000–382 000 zł</strong> (±6%)<br><br><strong>Sam SSO netto: ~338 000–382 000 zł (~44% budżetu pod klucz)</strong><br><strong>Stan zero + SSO razem netto: ~510 000–570 000 zł (~63%)</strong><br><strong>Stan zero + SSO brutto (8% VAT): ~551 000–616 000 zł</strong><br><strong>Stawka za m² (stan zero + SSO): ~4 250–4 750 zł netto</strong><br><br><em>Stawki obejmują materiały, robociznę, kierownika budowy i nadzór inżynierski.</em>',
     },
     {
       type: 'cta',
@@ -443,16 +443,16 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'SSO pochłania <strong>65–70% samego budżetu budowy pod klucz</strong> (bez kosztu działki i projektu architektonicznego). To zdecydowanie najdroższa faza - fundamenty, ściany i dach stanowią trzon konstrukcyjny domu. Pozostałe etapy (SSZ, deweloperski, wykończenie) to łącznie 30–35%.',
+      content: 'Sam stan surowy otwarty (ściany, strop, dach — bez fundamentów) pochłania ok. <strong>40–50% budżetu budowy pod klucz</strong>. Jeśli doliczymy stan zero (fundamenty), otrzymujemy razem <strong>55–65%</strong> — to łącznie najdroższa faza budowy, stanowiąca trzon konstrukcyjny domu. Pozostałe etapy (SSZ, deweloperski, wykończenie) to 35–45%.',
     },
     {
       type: 'paragraph',
-      content: 'Dla przykładowego domu 120 m² pod klucz (ok. 800 000–900 000 zł brutto), sam SSO kosztuje 551 000–616 000 zł brutto, czyli ok. <strong>68–69%</strong>.',
+      content: 'Dla przykładowego domu 120 m² pod klucz (ok. 800 000–900 000 zł brutto): <strong>sam SSO</strong> (ściany, dach, strop — bez fundamentów) to ok. 338 000–382 000 zł netto, czyli <strong>~44%</strong> budżetu. Razem z fundamentami (stan zero + SSO) — ok. 510 000–570 000 zł netto, czyli <strong>~63%</strong>.',
     },
     {
       type: 'callout',
       variant: 'warning',
-      content: '<strong>Uwaga na porównania z innymi źródłami.</strong> Niektóre portale podają, że SSO to „30–35% inwestycji" - ale liczą procent od <strong>całkowitego kosztu inwestycji, łącznie z działką, projektem i zagospodarowaniem terenu</strong>. My podajemy procent od samego kosztu budowy - to bardziej przydatna informacja przy planowaniu etapowego finansowania.',
+      content: '<strong>Uwaga na porównania z innymi źródłami.</strong> Niektóre portale podają, że SSO to „30–35% inwestycji" — liczą procent od <strong>całkowitego kosztu inwestycji, łącznie z działką i projektem</strong>. Inne podają „65–70%" — ale mylnie wliczają fundamenty (stan zero) do SSO. My rozdzielamy: <strong>stan zero (fundamenty) to 15–22%</strong>, a <strong>sam SSO (ściany, strop, dach) to 40–50%</strong> budżetu budowy pod klucz.',
     },
 
     // ── SEKCJA 6 - Czas realizacji ──────────────────────────────
@@ -555,7 +555,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
         },
         {
           question: 'Stan surowy otwarty - ile to procent budowy?',
-          answer: 'SSO pochłania ok. <strong>65–70% budżetu samej budowy pod klucz</strong> (bez kosztu działki i projektu). To najdroższa faza - fundamenty, ściany i dach stanowią trzon konstrukcyjny domu. Jeśli doliczysz koszt działki, udział SSO w całej inwestycji spada do ok. 30–40%.',
+          answer: 'Sam SSO (ściany, strop, dach — bez fundamentów) pochłania ok. <strong>40–50% budżetu budowy pod klucz</strong>. Razem z fundamentami (stan zero) to ok. 55–65%. Jeśli doliczysz koszt działki i projektu, udział SSO w całej inwestycji spada do ok. 25–35%. Dokładny procent zależy od technologii ściennej, typu dachu i garażu.',
         },
       ],
     },
@@ -615,7 +615,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'heading',
       level: 3,
-      content: '2. Stan surowy otwarty (SSO) - ściany i dach (35–45%)',
+      content: '2. Stan surowy otwarty (SSO) - ściany i dach (40–50%)',
     },
     {
       type: 'list',
