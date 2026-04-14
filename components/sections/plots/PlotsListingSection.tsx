@@ -654,11 +654,10 @@ export function PlotsListingSection({
                 <Icon name="x" size="sm" className="text-zinc-600" />
               </button>
 
-              {/* Location search */}
+              {/* Location search — no navigateToSubpage in map mode, filter in place */}
               <LocationSearch
                 value={locationSelection}
                 onChange={handleLocationChange}
-                navigateToSubpage
                 popularSlugs={topCitySlugs}
                 placeholder="Wpisz miasto..."
                 className="w-72 md:w-96 shrink-0"
