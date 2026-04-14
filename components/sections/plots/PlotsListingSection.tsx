@@ -233,7 +233,7 @@ export function PlotsListingSection({
             className="relative z-[50] flex flex-col gap-3 mb-6"
           >
             {/* Row 1: Location search + map button */}
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
               {/* Location search — prominent bar */}
               <LocationSearch
                 value={locationSelection}
@@ -244,25 +244,28 @@ export function PlotsListingSection({
                 className="flex-1 max-w-xl"
               />
 
-              {/* Map button — opens fullscreen */}
-              <button
-                onClick={() => setIsFullscreen(true)}
-                className="flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-semibold bg-white text-text-primary border border-zinc-200 hover:border-primary hover:text-primary transition-all shrink-0"
-              >
-                <Icon name="map" size="sm" />
-                Mapa
-              </button>
-
-              {/* "Usuń filtry" link when on city subpage */}
-              {activeCity && (
+              {/* Map + Usuń filtry — stacked on mobile, inline on sm+ */}
+              <div className="flex items-center gap-2">
+                {/* Map button — opens fullscreen */}
                 <button
-                  onClick={() => router.push('/dzialki')}
-                  className="flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-semibold bg-zinc-100 text-text-primary hover:bg-zinc-200 transition-all shrink-0"
+                  onClick={() => setIsFullscreen(true)}
+                  className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-semibold bg-white text-text-primary border border-zinc-200 hover:border-primary hover:text-primary transition-all shrink-0"
                 >
-                  <Icon name="x" size="sm" />
-                  Usuń filtry
+                  <Icon name="map" size="sm" />
+                  Mapa
                 </button>
-              )}
+
+                {/* "Usuń filtry" link when on city subpage */}
+                {activeCity && (
+                  <button
+                    onClick={() => router.push('/dzialki')}
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-semibold bg-zinc-100 text-text-primary hover:bg-zinc-200 transition-all shrink-0"
+                  >
+                    <Icon name="x" size="sm" />
+                    Usuń filtry
+                  </button>
+                )}
+              </div>
             </div>
 
             {/* Row 2: Filters — dropdowns on mobile, chip row on desktop */}
@@ -462,11 +465,11 @@ export function PlotsListingSection({
           {/* ── Breadcrumbs (below search bar) ── */}
           <nav
             aria-label="Breadcrumb"
-            className="mb-4"
+            className="mb-4 overflow-x-auto scrollbar-hide"
           >
-            <ol className="flex items-center gap-2 text-sm">
+            <ol className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm whitespace-nowrap">
               {(customBreadcrumbs ?? breadcrumbs).map((crumb, index) => (
-                <li key={index} className="flex items-center gap-2">
+                <li key={index} className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                   {index > 0 && <Icon name="chevronRight" size="sm" className="text-text-muted" />}
                   {crumb.href ? (
                     <Link href={crumb.href} className="text-text-muted hover:text-primary transition-colors">
@@ -796,7 +799,7 @@ export function PlotsListingSection({
 
       {/* ── Mobile Bottom Drawer (Uber-style) ── */}
       {mobileDrawerOpen && (
-        <div className="fixed inset-0 z-[900] lg:hidden">
+        <div className="fixed inset-0 z-[1200] lg:hidden">
           {/* Backdrop */}
           <div
             className="absolute inset-0 bg-black/40 backdrop-blur-sm"
