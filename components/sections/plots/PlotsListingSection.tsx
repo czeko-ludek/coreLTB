@@ -4,7 +4,7 @@ import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react'
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { clsx } from 'clsx';
-import { useInView } from 'react-intersection-observer';
+// useInView removed — content must always be visible on mobile (no animation gating)
 import { Icon } from '@/components/ui';
 import { useRouter } from 'next/navigation';
 import type { Plot, PlotFilters, PlotSortBy } from '@/data/plots/types';
@@ -131,9 +131,9 @@ export function PlotsListingSection({
     };
   }, [isFullscreen]);
 
-  // initialInView: true prevents mobile bug where content stays opacity-0
-  // if IntersectionObserver fires late during hydration
-  const { ref, inView } = useInView({ threshold: 0.05, triggerOnce: true, rootMargin: '50px 0px', initialInView: true });
+  // NOTE: removed useInView gating — content must always be visible.
+  // animation-fill-mode:both + animationDelay caused mobile content to stay
+  // at opacity:0 (the "from" keyframe) during hydration/re-render cycles.
 
   // Top city slugs by plot count — fed to LocationSearch as popular suggestions
   const topCitySlugs = useMemo(() => {
@@ -212,13 +212,12 @@ export function PlotsListingSection({
 
   return (
     <>
-      <section ref={ref} className="pt-6 pb-16 md:pt-8 md:pb-24 bg-background-beige min-h-screen">
+      <section className="pt-6 pb-16 md:pt-8 md:pb-24 bg-background-beige min-h-screen">
         <div className="container mx-auto px-4 md:px-6">
 
           {/* ── Header ── */}
           <div
-            className={clsx('max-w-3xl mb-6', inView ? 'animate-fade-in-up' : 'opacity-0')}
-            style={{ animationDelay: '0.1s' }}
+            className="max-w-3xl mb-6"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-text-primary mb-4">
               {h1}{' '}
@@ -231,11 +230,7 @@ export function PlotsListingSection({
 
           {/* ── Toolbar ── */}
           <div
-            className={clsx(
-              'relative z-[50] flex flex-col gap-3 mb-6',
-              inView ? 'animate-fade-in-up' : 'opacity-0'
-            )}
-            style={{ animationDelay: '0.2s' }}
+            className="relative z-[50] flex flex-col gap-3 mb-6"
           >
             {/* Row 1: Location search + map button */}
             <div className="flex items-center gap-3">
@@ -467,8 +462,7 @@ export function PlotsListingSection({
           {/* ── Breadcrumbs (below search bar) ── */}
           <nav
             aria-label="Breadcrumb"
-            className={clsx('mb-4', inView ? 'animate-fade-in-up' : 'opacity-0')}
-            style={{ animationDelay: '0.25s' }}
+            className="mb-4"
           >
             <ol className="flex items-center gap-2 text-sm">
               {(customBreadcrumbs ?? breadcrumbs).map((crumb, index) => (
@@ -487,10 +481,7 @@ export function PlotsListingSection({
           </nav>
 
           {/* ── Content ── */}
-          <div
-            className={clsx(inView ? 'animate-fade-in-up' : 'opacity-0')}
-            style={{ animationDelay: '0.3s' }}
-          >
+          <div>
             {/* === LIST VIEW (only view on page — map is always fullscreen) === */}
             <>
               {/* Result count */}
@@ -505,7 +496,7 @@ export function PlotsListingSection({
                       plot={plot}
                       isHighlighted={plot.slug === highlightedSlug}
                       onHover={handlePlotHover}
-                      inView={inView}
+                      inView={true}
                       delay={index < 6 ? 0.3 + index * 0.08 : 0}
                     />
                   ))}
