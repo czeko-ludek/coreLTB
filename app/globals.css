@@ -872,7 +872,9 @@
   border-radius: 999px;
 }
 
-.plot-popup-cta {
+.plot-popup-cta,
+.leaflet-container .plot-popup-cta,
+.leaflet-container a.plot-popup-cta {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -881,7 +883,7 @@
   margin-top: 10px;
   padding: 9px 16px;
   background: #dfbb68;
-  color: #18181b;
+  color: #18181b !important;
   font-size: 13px;
   font-weight: 700;
   text-decoration: none;
@@ -890,9 +892,11 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-.plot-popup-cta:hover {
+.plot-popup-cta:hover,
+.leaflet-container .plot-popup-cta:hover,
+.leaflet-container a.plot-popup-cta:hover {
   background: #d4a847;
-  color: #18181b;
+  color: #18181b !important;
 }
 
 /* ---- Gesture overlay ---- */
