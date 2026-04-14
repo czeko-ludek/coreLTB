@@ -2,14 +2,17 @@
  * PRICING CONFIG — Kalkulator wyceny budowy domu
  *
  * Stawki per m² (netto) — addytywne komponenty.
- * Total = (fundamenty + ściany + więźba + poziomy + piwnica + ogrzewanie + garaż) × m²
+ * Total = (fundamenty + piwnica + ściany + więźba + poziomy + SSZ_base + garaż + ogrzewanie) × m²
  *
  * Etapy budowy wg nomenklatury CoreLTB — grupują stawki do prezentacji:
- * 1. Stan Zero — fundamenty + piwnica
+ * 1. Stan Zero — fundamenty (z infrastrukturą) + piwnica (opcja)
  * 2. Stan Surowy Otwarty — ściany + więźba + poziomy
- * 3. Stan Surowy Zamknięty — garaż (base overhead: okna, drzwi, instalacje)
+ * 3. Stan Surowy Zamknięty — okna, drzwi, instalacje (base) + garaż (opcja)
  * 4. Stan Deweloperski — ogrzewanie + tynki, wylewki, elewacja
  * 5. Pod klucz — wykończenie wnętrz
+ *
+ * Zasada: "brak" piwnicy/garażu = 0 zł. Koszty bazowe (kanalizacja,
+ * hydroizolacja, okna, instalacje) są jawnie w stawkach fundamentów i SSZ.
  */
 
 // ─── Types ──────────────────────────────────────────────
@@ -40,70 +43,89 @@ export interface StageBreakdown {
   description: string;
   /** Lista prac uwzględnionych w etapie (wyświetlana jako bullet points) */
   includedItems: string[];
-  total: { min: number; max: number };
+  total: number;
 }
 
 export interface EstimateBreakdown {
   stages: StageBreakdown[];
-  total: { min: number; max: number };
-  totalBrutto: { min: number; max: number };
+  total: number;
+  totalBrutto: number;
   czasRealizacji: { min: number; max: number };
   gwarancja: { konstrukcja: number; pozostale: number }; // miesiące
 }
 
 // ─── Stawki per m² (netto) ──────────────────────────────
 
-const SPREAD = 0.06; // ±6% zakres
 const VAT = 0.08; // 8% VAT na budowę domów mieszkalnych
 
 const TIME_BASE = { min: 10, max: 14 }; // miesiące dla ~140m²
 
-/** Fundamenty — zł/m² */
+/**
+ * Fundamenty — zł/m²
+ * Zawiera: fundament + kanalizacja podposadzkowa + hydroizolacja + podsypka + nadzór
+ */
+/**
+ * Fundamenty — zł/m²
+ * Zawiera: fundament + kanalizacja podposadzkowa + hydroizolacja + podsypka + nadzór
+ */
 const FOUNDATION_RATES: Record<FoundationType, number> = {
-  plyta: 1000,
-  lawy: 750,
+  plyta: 1200,
+  lawy: 1000,
 };
 
 /** Ściany — zł/m² */
 const WALL_RATES: Record<WallType, number> = {
-  beton_komorkowy: 900,
-  ceramika: 1100,
-  silikat: 1300,
+  beton_komorkowy: 720,
+  ceramika: 880,
+  silikat: 1040,
 };
 
 /** Więźba dachowa — zł/m² */
 const ROOF_RATES: Record<RoofType, number> = {
-  plaski: 900,
-  dwuspadowy: 800,
-  wielospadowy: 1000,
+  plaski: 720,
+  dwuspadowy: 640,
+  wielospadowy: 800,
 };
 
 /** Poziomy domu — zł/m² */
 const FLOOR_RATES: Record<FloorType, number> = {
-  parterowy: 800,
-  poddasze: 950,
-  pietrowy: 1200,
+  parterowy: 640,
+  poddasze: 760,
+  pietrowy: 960,
 };
 
-/** Piwnica — zł/m² */
+/**
+ * Piwnica — zł/m² (dopłata)
+ * Brak = 0 zł — nie wybierasz, nie płacisz.
+ */
 const BASEMENT_RATES: Record<BasementType, number> = {
-  brak: 500,
-  czesciowa: 750,
-  cala: 1000,
+  brak: 0,
+  czesciowa: 200,
+  cala: 400,
 };
 
 /** Ogrzewanie — zł/m² */
 const HEATING_RATES: Record<HeatingType, number> = {
-  pompa_ciepla: 900,
-  gazowe: 700,
-  pelet: 800,
+  pompa_ciepla: 720,
+  gazowe: 560,
+  pelet: 640,
 };
 
-/** Garaż — zł/m² */
+/**
+ * SSZ base — zł/m²
+ * Okna, drzwi zewnętrzne, instalacje elektryczne i wod-kan, parapety.
+ * Zawsze wchodzi w SSZ niezależnie od garażu.
+ */
+const SSZ_BASE_RATE = 400;
+
+/**
+ * Garaż — zł/m² (dopłata)
+ * Brak = 0 zł — nie wybierasz, nie płacisz.
+ */
 const GARAGE_RATES: Record<GarageType, number> = {
-  brak: 500,
-  jednostanowiskowy: 750,
-  dwustanowiskowy: 1000,
+  brak: 0,
+  jednostanowiskowy: 200,
+  dwustanowiskowy: 400,
 };
 
 // ─── Calculator ─────────────────────────────────────────
@@ -144,7 +166,7 @@ export function calculateEstimate(config: CalculatorConfig): EstimateBreakdown {
       label: 'Stan Zero',
       description: 'Fundamenty, kanalizacja podposadzkowa oraz nadzór budowlany.',
       includedItems: items,
-      total: spreadRange(total),
+      total,
     });
   }
 
@@ -188,13 +210,13 @@ export function calculateEstimate(config: CalculatorConfig): EstimateBreakdown {
       label: 'Stan Surowy Otwarty',
       description: 'Ściany konstrukcyjne i działowe, strop, więźba dachowa, pokrycie dachu, kominy i ocieplenie dachu.',
       includedItems: items,
-      total: spreadRange(total),
+      total,
     });
   }
 
-  // ─── 3. STAN SUROWY ZAMKNIĘTY (garaż / overhead) — SSZ, deweloperski i pod klucz ───
+  // ─── 3. STAN SUROWY ZAMKNIĘTY (okna/drzwi/instalacje + garaż) ───
   if (finish === 'ssz' || finish === 'deweloperski' || finish === 'pod_klucz') {
-    const rate = GARAGE_RATES[garage];
+    const rate = SSZ_BASE_RATE + GARAGE_RATES[garage];
     const total = Math.round(area * rate);
 
     const items: string[] = [
@@ -217,7 +239,7 @@ export function calculateEstimate(config: CalculatorConfig): EstimateBreakdown {
       label: 'Stan Surowy Zamknięty',
       description: 'Montaż stolarki okiennej i drzwiowej, instalacje wewnętrzne oraz garaż.',
       includedItems: items,
-      total: spreadRange(total),
+      total,
     });
   }
 
@@ -245,14 +267,13 @@ export function calculateEstimate(config: CalculatorConfig): EstimateBreakdown {
         'Styropian EPS fasadowy λ=0,031 — ocieplenie ścian',
         'Tynk silikatowy zewnętrzny z obróbką cokołu (Baumit / KABE)',
       ],
-      total: spreadRange(total),
+      total,
     });
   }
 
   // ─── 5. POD KLUCZ — jeśli wybrany ───
   if (finish === 'pod_klucz') {
-    // Pod klucz dodaje stałą stawkę 850 zł/m² na wykończenie
-    const rate = 850;
+    const rate = 680;
     const total = Math.round(area * rate);
 
     stages.push({
@@ -265,15 +286,13 @@ export function calculateEstimate(config: CalculatorConfig): EstimateBreakdown {
         'Biały montaż łazienkowy (umywalka, WC, prysznic/wanna, baterie)',
         'Drzwi wewnętrzne z ościeżnicą regulowaną',
       ],
-      total: spreadRange(total),
+      total,
     });
   }
 
   // ─── Totals ───
-  const stagesSum = stages.reduce((s, st) => s + (st.total.min + st.total.max) / 2, 0);
-
-  const totalNetto = { min: round5k(stagesSum * (1 - SPREAD)), max: round5k(stagesSum * (1 + SPREAD)) };
-  const totalBrutto = { min: Math.round(totalNetto.min * (1 + VAT)), max: Math.round(totalNetto.max * (1 + VAT)) };
+  const totalNetto = stages.reduce((s, st) => s + st.total, 0);
+  const totalBrutto = Math.round(totalNetto * (1 + VAT));
 
   const timeScale = area / 140;
   const finishTimeAdd = finish === 'pod_klucz' ? 3 : finish === 'deweloperski' ? 1 : 0;
@@ -288,21 +307,6 @@ export function calculateEstimate(config: CalculatorConfig): EstimateBreakdown {
     czasRealizacji: { min: timeMin, max: timeMax },
     gwarancja: { konstrukcja: 120, pozostale: 60 },
   };
-}
-
-function spreadRange(value: number): { min: number; max: number } {
-  return {
-    min: round1k(value * (1 - SPREAD)),
-    max: round1k(value * (1 + SPREAD)),
-  };
-}
-
-function round1k(n: number): number {
-  return Math.round(n / 1000) * 1000;
-}
-
-function round5k(n: number): number {
-  return Math.round(n / 5000) * 5000;
 }
 
 // ─── Labels ─────────────────────────────────────────────

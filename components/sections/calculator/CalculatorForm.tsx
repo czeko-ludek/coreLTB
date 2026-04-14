@@ -317,7 +317,7 @@ export const CalculatorForm = () => {
 
     // GA4: user saw the estimate document
     trackEstimateView(
-      `${formatPrice(Math.round((result.total.min + result.total.max) / 2))} zl`
+      `${formatPrice(result.total)} zl`
     );
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -344,8 +344,8 @@ export const CalculatorForm = () => {
             garage: GARAGE_LABELS[config.garage],
             finish: FINISH_LABELS[config.finish],
             heating: HEATING_LABELS[config.heating],
-            estimateTotal: `${formatPrice(Math.round((result.total.min + result.total.max) / 2))} zl netto`,
-            estimateTotalBrutto: `${formatPrice(Math.round((result.totalBrutto.min + result.totalBrutto.max) / 2))} zl brutto`,
+            estimateTotal: `${formatPrice(result.total)} zl netto`,
+            estimateTotalBrutto: `${formatPrice(result.totalBrutto)} zl brutto`,
             projektName: state.projectName || undefined,
             website: honeypotRef.current?.value || '',
             // UTM attribution
@@ -367,12 +367,12 @@ export const CalculatorForm = () => {
     trackLead('calculator', {
       area: String(state.area),
       finish: state.finish,
-      estimate_total: String(Math.round((result.total.min + result.total.max) / 2)),
+      estimate_total: String(result.total),
     });
 
     // Meta Pixel conversion event
     trackMetaLead('calculator', {
-      value: Math.round((result.total.min + result.total.max) / 2),
+      value: result.total,
       currency: 'PLN',
     });
   }
@@ -484,13 +484,13 @@ export const CalculatorForm = () => {
                     Szacunkowy koszt budowy
                   </p>
                   <p className="print-total-price text-h3 md:text-h1 font-bold text-text-primary font-heading leading-tight">
-                    {formatPrice(Math.round((estimate.total.min + estimate.total.max) / 2))}
+                    {formatPrice(estimate.total)}
                   </p>
                   <p className="print-total-unit text-body-sm text-gray-500 font-normal mt-0.5">
                     złotych netto
                   </p>
                   <p className="text-body-xs text-gray-400 mt-1">
-                    brutto: {formatPrice(Math.round((estimate.totalBrutto.min + estimate.totalBrutto.max) / 2))} zł (8% VAT)
+                    brutto: {formatPrice(estimate.totalBrutto)} zł (8% VAT)
                   </p>
                 </div>
                 {/* Right: meta stats */}
@@ -498,7 +498,7 @@ export const CalculatorForm = () => {
                   {[
                     { icon: 'calendar' as const, text: `${estimate.czasRealizacji.min}–${estimate.czasRealizacji.max} miesięcy` },
                     { icon: 'ruler' as const, text: `${submittedConfig.area} m²` },
-                    { icon: 'coins' as const, text: `~${formatPrice(Math.round((estimate.total.min + estimate.total.max) / 2 / submittedConfig.area))} zł/m²` },
+                    { icon: 'coins' as const, text: `~${formatPrice(Math.round(estimate.total / submittedConfig.area))} zł/m²` },
                     { icon: 'shieldCheck' as const, text: `Gwarancja do ${estimate.gwarancja.konstrukcja / 12} lat` },
                   ].map((item) => (
                     <span key={item.icon} className="flex items-center gap-1.5 text-body-xs md:text-body-sm text-gray-700 font-medium">
@@ -585,13 +585,13 @@ export const CalculatorForm = () => {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-green-50 border border-green-200 -mx-4 md:-mx-5 px-4 md:px-5 py-3 rounded-lg">
                   <span className="text-body-md sm:text-h5 font-bold text-text-primary">Kwota netto</span>
                   <span className="text-h5 font-bold text-text-primary tabular-nums">
-                    {formatPrice(Math.round((estimate.total.min + estimate.total.max) / 2))} zł
+                    {formatPrice(estimate.total)} zł
                   </span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-green-50 border border-green-200 -mx-4 md:-mx-5 px-4 md:px-5 py-2 rounded-lg">
                   <span className="text-body-sm font-bold text-text-primary">Kwota brutto (8% VAT)</span>
                   <span className="text-body-md font-bold text-text-primary tabular-nums">
-                    {formatPrice(Math.round((estimate.totalBrutto.min + estimate.totalBrutto.max) / 2))} zł
+                    {formatPrice(estimate.totalBrutto)} zł
                   </span>
                 </div>
               </div>
