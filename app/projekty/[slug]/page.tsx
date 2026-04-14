@@ -221,6 +221,12 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         {/* Floor Plans with Modal */}
         <ProjectFloorPlans slug={project.slug} floorPlans={project.floorPlans} />
 
+        {/* Cross-link: find a plot for this project (above elevations for variety) */}
+        <ProjectPlotsCrossLink
+          projectSlug={project.slug}
+          surfaceArea={project.surfaceArea}
+        />
+
         {/* Elevations, Cross Section & Site Plan */}
         <ProjectElevations
           slug={project.slug}
@@ -235,12 +241,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       {/* CTA for Project Modifications */}
       <ProjectModificationCTA />
-
-      {/* Cross-link: find a plot for this project */}
-      <ProjectPlotsCrossLink
-        projectSlug={project.slug}
-        surfaceArea={project.surfaceArea}
-      />
 
       {/* Related Projects Section */}
       <RelatedProjectsSection

@@ -1,5 +1,10 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useInView } from 'react-intersection-observer';
+import { clsx } from 'clsx';
 import { Icon } from '@/components/ui';
 
 interface ProjectPlotsCrossLinkProps {
@@ -8,88 +13,154 @@ interface ProjectPlotsCrossLinkProps {
 }
 
 /**
- * Cross-link section on project detail pages.
- * "Szukasz działki pod ten projekt? Zobacz sprawdzone działki budowlane."
- * Server component — rendered in RSC project page.
+ * Cross-link CTA on project detail pages — "Znajdź działkę pod ten projekt".
+ * Styled identically to ProjectModificationCTA (two-column dark CTA pattern).
+ * Compact variant (py-6 instead of py-8) since it sits above elevations.
  */
 export function ProjectPlotsCrossLink({ projectSlug, surfaceArea }: ProjectPlotsCrossLinkProps) {
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+    rootMargin: '-100px 0px',
+  });
+
   return (
-    <section className="py-12 md:py-16">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="bg-zinc-900 rounded-2xl overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-            {/* Left: content */}
-            <div className="p-8 md:p-12 flex flex-col justify-center">
-              <span className="text-primary text-xs font-bold uppercase tracking-[0.15em] mb-3">
+    <section ref={ref} className="bg-background-beige py-6 sm:py-8">
+      <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+          {/* Left: Content */}
+          <div
+            className={clsx(
+              'bg-zinc-900 rounded-2xl overflow-hidden',
+              'transition-all duration-700',
+              inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            )}
+          >
+            <div className="p-6 md:p-8 lg:p-10 flex flex-col justify-center h-full">
+              {/* Label */}
+              <span
+                className={clsx(
+                  'text-primary font-bold text-xs uppercase tracking-[0.2em] block mb-3',
+                  'transition-all duration-500 delay-200',
+                  inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-5'
+                )}
+              >
                 Szukasz działki?
               </span>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">
-                Znajdź działkę pod ten projekt
+
+              {/* H2 — two-line, matching ProjectModificationCTA */}
+              <h2
+                className={clsx(
+                  'text-2xl md:text-4xl lg:text-5xl font-black text-white leading-[0.95] mb-4',
+                  'transition-all duration-700 delay-300',
+                  inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                )}
+              >
+                ZNAJDŹ
+                <br />
+                <span className="text-primary">DZIAŁKĘ</span>
               </h2>
-              <p className="text-zinc-400 mb-6 leading-relaxed">
-                Projekt {surfaceArea} m² wymaga odpowiedniej działki. Sprawdź nasze
-                zweryfikowane działki budowlane na Śląsku — z informacją o mediach, MPZP
-                i warunkach gruntowych.
+
+              {/* Subtitle */}
+              <p
+                className={clsx(
+                  'text-zinc-400 text-sm md:text-base lg:text-lg mb-4 md:mb-6 max-w-xl leading-relaxed',
+                  'transition-all duration-500 delay-[400ms]',
+                  inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                )}
+              >
+                Projekt o powierzchni{' '}
+                <strong className="text-white">{surfaceArea}</strong> wymaga
+                odpowiedniej działki. Sprawdź nasze zweryfikowane działki budowlane
+                na Śląsku — z informacją o mediach, MPZP i warunkach zabudowy.
               </p>
-              <ul className="space-y-3 mb-8">
+
+              {/* Features */}
+              <div
+                className={clsx(
+                  'flex flex-col gap-2.5 mb-6',
+                  'transition-all duration-500 delay-500',
+                  inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                )}
+              >
                 {[
                   'Sprawdzone pod budowę domu',
                   'Informacja o mediach i MPZP',
                   'Bezpłatna analiza przy umowie',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm text-zinc-300">
-                    <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                      <Icon name="check" size="sm" className="text-primary" />
+                ].map((feature, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                      <Icon name="check" className="text-primary" size="sm" />
                     </div>
-                    {item}
-                  </li>
+                    <span className="text-zinc-300 text-sm md:text-base">
+                      {feature}
+                    </span>
+                  </div>
                 ))}
-              </ul>
-              <div className="flex flex-wrap gap-3">
+              </div>
+
+              {/* CTA Buttons */}
+              <div
+                className={clsx(
+                  'flex flex-wrap gap-3',
+                  'transition-all duration-500 delay-[600ms]',
+                  inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                )}
+              >
                 <Link
                   href="/dzialki"
-                  className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-zinc-900 font-bold text-sm px-6 py-3 rounded-lg transition-all uppercase tracking-wider"
+                  className="group inline-flex items-center gap-3 bg-primary hover:bg-white text-zinc-900 font-bold text-sm px-6 py-3 rounded-sm transition-all duration-300 uppercase tracking-wider"
                   data-cross-link-from={`/projekty/${projectSlug}`}
                   data-cross-link-to="/dzialki"
                 >
-                  <Icon name="mapPin" size="sm" />
                   Zobacz działki
+                  <div className="h-7 w-7 rounded-full bg-zinc-900 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                    <Icon name="arrowRight" className="text-white" size="sm" />
+                  </div>
                 </Link>
                 <Link
                   href="/analiza-dzialki"
-                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white font-semibold text-sm px-6 py-3 rounded-lg transition-all"
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white font-semibold text-sm px-6 py-3 rounded-sm transition-all"
                 >
-                  <Icon name="search" size="sm" />
                   Analiza działki
                 </Link>
               </div>
             </div>
+          </div>
 
-            {/* Right: visual */}
-            <div className="hidden lg:flex items-center justify-center p-12 bg-gradient-to-br from-primary/10 to-primary/5">
-              <div className="text-center space-y-6">
-                <div className="w-20 h-20 rounded-2xl bg-primary/20 flex items-center justify-center mx-auto">
-                  <Icon name="mapPin" size="xl" className="text-primary" />
-                </div>
+          {/* Right: Visual with stats */}
+          <div
+            className={clsx(
+              'relative min-h-[250px] md:min-h-[300px] rounded-2xl overflow-hidden',
+              'transition-all duration-700 delay-300',
+              inView ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+            )}
+          >
+            <Image
+              src="/images/cta.webp"
+              alt="Działki budowlane na Śląsku — znajdź działkę pod swój projekt"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+
+            {/* Stats overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+              <div className="flex items-center gap-6 text-sm">
                 <div>
-                  <p className="text-4xl font-black text-white mb-1">38+</p>
-                  <p className="text-zinc-400 text-sm">działek budowlanych</p>
+                  <p className="text-2xl md:text-3xl font-black text-white">38+</p>
+                  <p className="text-zinc-300 text-xs md:text-sm">działek</p>
                 </div>
-                <div className="flex items-center justify-center gap-6 text-sm">
-                  <div>
-                    <p className="text-xl font-bold text-white">4</p>
-                    <p className="text-zinc-500">powiaty</p>
-                  </div>
-                  <div className="w-px h-8 bg-zinc-700" />
-                  <div>
-                    <p className="text-xl font-bold text-white">13</p>
-                    <p className="text-zinc-500">gmin</p>
-                  </div>
-                  <div className="w-px h-8 bg-zinc-700" />
-                  <div>
-                    <p className="text-xl font-bold text-white">73</p>
-                    <p className="text-zinc-500">stron SEO</p>
-                  </div>
+                <div className="w-px h-10 bg-white/20" />
+                <div>
+                  <p className="text-2xl md:text-3xl font-black text-white">4</p>
+                  <p className="text-zinc-300 text-xs md:text-sm">powiaty</p>
+                </div>
+                <div className="w-px h-10 bg-white/20" />
+                <div>
+                  <p className="text-2xl md:text-3xl font-black text-white">13</p>
+                  <p className="text-zinc-300 text-xs md:text-sm">gmin</p>
                 </div>
               </div>
             </div>
