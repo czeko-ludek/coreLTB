@@ -325,6 +325,15 @@
     font-weight: 700;
     min-width: 30px;
   }
+  .prog-value {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 100px;
+    text-align: right;
+  }
 
   /* Change indicators */
   .change-up { color: var(--green); font-weight: 700; }
@@ -587,30 +596,36 @@
       <h4>Urzadzenia</h4>
       <div class="progress-row">
         <span class="prog-label">Desktop</span>
-        <div class="prog-bar-bg"><div class="prog-bar" style="width:51%; background:var(--blue)">84 klik</div></div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:51%; background:var(--blue)"></div></div>
+        <span class="prog-value">84 klik (51%)</span>
       </div>
       <div class="progress-row">
         <span class="prog-label">Mobile</span>
-        <div class="prog-bar-bg"><div class="prog-bar" style="width:48%; background:var(--green)">79 klik</div></div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:48%; background:var(--green)"></div></div>
+        <span class="prog-value">79 klik (48%)</span>
       </div>
       <div class="progress-row">
         <span class="prog-label">Tablet</span>
-        <div class="prog-bar-bg"><div class="prog-bar" style="width:1%; background:var(--gold)">1</div></div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:1%; background:var(--gold)"></div></div>
+        <span class="prog-value">1 klik (1%)</span>
       </div>
     </div>
     <div class="stat-box">
       <h4>Grupy fraz kluczowych</h4>
       <div class="progress-row">
         <span class="prog-label">budowa-domow</span>
-        <div class="prog-bar-bg"><div class="prog-bar" style="width:50%; background:var(--bg-dark)">11 klik | poz. 8,8</div></div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:50%; background:var(--bg-dark)"></div></div>
+        <span class="prog-value">11 klik | poz. 8,8</span>
       </div>
       <div class="progress-row">
         <span class="prog-label">wodzislaw</span>
-        <div class="prog-bar-bg"><div class="prog-bar" style="width:32%; background:var(--blue)">7 klik | poz. 20,5</div></div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:32%; background:var(--blue)"></div></div>
+        <span class="prog-value">7 klik | poz. 20,5</span>
       </div>
       <div class="progress-row">
         <span class="prog-label">rybnik</span>
-        <div class="prog-bar-bg"><div class="prog-bar" style="width:14%; background:var(--green)">3 klik | poz. 11,1</div></div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:14%; background:var(--green)"></div></div>
+        <span class="prog-value">3 klik | poz. 11,1</span>
       </div>
     </div>
   </div>
@@ -802,19 +817,23 @@
       <h4>Jaworzno <span class="badge badge-green" style="margin-left:8px">93/100</span></h4>
       <div class="progress-row">
         <span class="prog-label">Wyswietlenia</span>
-        <div class="prog-bar-bg"><div class="prog-bar" style="width:80%; background:var(--blue)">89</div></div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:80%; background:var(--blue)"></div></div>
+        <span class="prog-value">89</span>
       </div>
       <div class="progress-row">
         <span class="prog-label">Klik www</span>
-        <div class="prog-bar-bg"><div class="prog-bar" style="width:20%; background:var(--green)">5</div></div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:20%; background:var(--green)"></div></div>
+        <span class="prog-value">5</span>
       </div>
       <div class="progress-row">
         <span class="prog-label">Telefon</span>
-        <div class="prog-bar-bg"><div class="prog-bar" style="width:8%; background:var(--gold)">2</div></div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:8%; background:var(--gold)"></div></div>
+        <span class="prog-value">2</span>
       </div>
       <div class="progress-row">
         <span class="prog-label">Nawigacje</span>
-        <div class="prog-bar-bg"><div class="prog-bar" style="width:60%; background:#8b5cf6">15</div></div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:60%; background:#8b5cf6"></div></div>
+        <span class="prog-value">15</span>
       </div>
       <p style="font-size:12px; color:var(--text-light); margin-top:12px">Akcje: 22 | Engagement aktywny</p>
     </div>
@@ -822,19 +841,23 @@
       <h4>Wodzislaw <span class="badge badge-green" style="margin-left:8px">92/100</span></h4>
       <div class="progress-row">
         <span class="prog-label">Wyswietlenia</span>
-        <div class="prog-bar-bg"><div class="prog-bar" style="width:48%; background:var(--blue)">53</div></div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:48%; background:var(--blue)"></div></div>
+        <span class="prog-value">53</span>
       </div>
       <div class="progress-row">
         <span class="prog-label">Klik www</span>
-        <div class="prog-bar-bg"><div class="prog-bar" style="width:4%; background:var(--green)">1</div></div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:4%; background:var(--green)"></div></div>
+        <span class="prog-value">1</span>
       </div>
       <div class="progress-row">
         <span class="prog-label">Telefon</span>
-        <div class="prog-bar-bg"><div class="prog-bar" style="width:0%; background:var(--gold)">0</div></div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:0%; background:var(--gold)"></div></div>
+        <span class="prog-value">0</span>
       </div>
       <div class="progress-row">
         <span class="prog-label">Nawigacje</span>
-        <div class="prog-bar-bg"><div class="prog-bar" style="width:70%; background:#8b5cf6">17</div></div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:70%; background:#8b5cf6"></div></div>
+        <span class="prog-value">17</span>
       </div>
       <p style="font-size:12px; color:var(--text-light); margin-top:12px">Akcje: 18 | Engagement aktywny</p>
     </div>
