@@ -505,7 +505,12 @@
       Kompletna platforma do prezentacji i sprzedazy dzialek budowlanych
       z interaktywna mapa, filtrami i integracja z kalkulatorem wyceny.
     </div>
-    <div class="period-badge">Kwiecien 2026 &middot; Aktywny na coreltb.pl/dzialki</div>
+    <a href="https://coreltb.pl/dzialki" target="_blank" rel="noopener"
+       style="display:inline-block;margin-top:20px;padding:10px 32px;background:var(--gold);color:#000;font-weight:700;font-size:14px;border-radius:28px;text-decoration:none;letter-spacing:0.3px;transition:background 0.2s"
+       onmouseover="this.style.background='#e8cc8a'" onmouseout="this.style.background='#dfbb68'">
+      Zobacz na zywo &rarr; coreltb.pl/dzialki
+    </a>
+    <div class="period-badge" style="margin-top:12px">Kwiecien 2026 &middot; Aktywny na coreltb.pl/dzialki</div>
   </div>
 </div>
 
@@ -529,9 +534,9 @@
         <div class="note">4 powiaty + 13 gmin + 17 miejscowosci</div>
       </div>
       <div class="summary-card">
-        <div class="label">Interlinking</div>
+        <div class="label">SEO per miasto</div>
         <div class="value" style="color:var(--green)">&#10003;</div>
-        <div class="note">parent / sibling / child</div>
+        <div class="note">FAQ + Schema.org + meta</div>
       </div>
       <div class="summary-card">
         <div class="label">Detail page</div>
@@ -587,60 +592,94 @@
       Widok listy dzialek
     </h2>
 
-    <div class="two-col" style="gap:28px;align-items:start">
-      <div>
-        <p style="margin-bottom:16px;color:var(--text-secondary)">
-          Strona glowna dzialek wyswietla kafelki z pelnym zestawem informacji.
-          Kazda karta zaprojektowana, aby klient natychmiast widzial najwazniejsze parametry.
-        </p>
-        <ul class="check-list">
-          <li>Cena + cena za m2 — widoczne od razu</li>
-          <li>Badge dostepnosci — Dostepna / Rezerwacja / Sprzedana</li>
-          <li>MPZP jako pill obok mediow</li>
-          <li>Pills mediow — Woda, Prad, Gaz, Kanalizacja</li>
-          <li>Cala karta klikalny link do detail page</li>
-          <li>Animacje wejscia ze stagger delay</li>
-        </ul>
+    <p style="margin-bottom:20px;color:var(--text-secondary);max-width:700px">
+      Strona glowna dzialek wyswietla kafelki z pelnym zestawem informacji.
+      Kazda karta zaprojektowana, aby klient natychmiast widzial najwazniejsze parametry.
+    </p>
+
+    <!-- Full-width mockup -->
+    <div class="mockup-browser" style="margin-bottom:24px">
+      <div class="mockup-toolbar">
+        <span class="mockup-dot r"></span>
+        <span class="mockup-dot y"></span>
+        <span class="mockup-dot g"></span>
+        <span class="mockup-url">coreltb.pl/dzialki</span>
       </div>
-      <div class="mockup-browser">
-        <div class="mockup-toolbar">
-          <span class="mockup-dot r"></span>
-          <span class="mockup-dot y"></span>
-          <span class="mockup-dot g"></span>
-          <span class="mockup-url">coreltb.pl/dzialki</span>
+      <div class="mockup-body" style="min-height:320px;padding:24px">
+        <!-- Search bar -->
+        <div style="display:flex;gap:10px;margin-bottom:16px;align-items:center">
+          <div style="flex:1;background:#333;border-radius:10px;padding:10px 16px;font-size:12px;color:#666;border:1px solid #444">Szukaj lokalizacji...</div>
+          <div style="background:var(--gold);border-radius:10px;padding:10px 18px;font-size:12px;font-weight:700;color:#000;white-space:nowrap">Pokaz na mapie</div>
         </div>
-        <div class="mockup-body">
-          <div class="mock-chips">
-            <span class="mock-chip active">Wszystkie (41)</span>
-            <span class="mock-chip">Wodzislawski (22)</span>
-            <span class="mock-chip">Rybnik (10)</span>
-          </div>
-          <div class="mock-card-row">
-            <div class="mock-card">
-              <div class="mock-card-img"></div>
-              <div class="mock-card-body">
-                <div class="mock-card-price">225 000 zl</div>
-                <div class="mock-card-loc">Godow, Skrzyszow</div>
-                <div class="mock-card-specs">
-                  <span class="mock-card-spec">2 780 m2</span>
-                  <span class="mock-card-spec">81 zl/m2</span>
-                </div>
+        <!-- Filter chips -->
+        <div class="mock-chips" style="margin-bottom:16px">
+          <span class="mock-chip active">Wszystkie (38)</span>
+          <span class="mock-chip">Wodzislawski (22)</span>
+          <span class="mock-chip">Rybnicki (10)</span>
+          <span class="mock-chip">Raciborski (4)</span>
+        </div>
+        <!-- 3-card row -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+          <div class="mock-card">
+            <div class="mock-card-img" style="height:80px"></div>
+            <div class="mock-card-body" style="padding:12px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                <div class="mock-card-price" style="font-size:15px">225 000 zl</div>
+                <span style="font-size:9px;padding:2px 8px;border-radius:10px;background:#dcfce7;color:#15803d;font-weight:700">Dostepna</span>
               </div>
-            </div>
-            <div class="mock-card">
-              <div class="mock-card-img"></div>
-              <div class="mock-card-body">
-                <div class="mock-card-price">77 000 zl</div>
-                <div class="mock-card-loc">Wodzislaw Sl.</div>
-                <div class="mock-card-specs">
-                  <span class="mock-card-spec">545 m2</span>
-                  <span class="mock-card-spec">141 zl/m2</span>
-                </div>
+              <div class="mock-card-loc" style="font-size:11px;margin-bottom:6px">Godow, Skrzyszow</div>
+              <div class="mock-card-specs" style="gap:8px">
+                <span class="mock-card-spec" style="font-size:10px">2 780 m2</span>
+                <span class="mock-card-spec" style="font-size:10px">81 zl/m2</span>
+                <span class="mock-card-spec" style="font-size:10px;color:var(--green)">MPZP</span>
               </div>
             </div>
           </div>
+          <div class="mock-card">
+            <div class="mock-card-img" style="height:80px"></div>
+            <div class="mock-card-body" style="padding:12px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                <div class="mock-card-price" style="font-size:15px">77 000 zl</div>
+                <span style="font-size:9px;padding:2px 8px;border-radius:10px;background:#dcfce7;color:#15803d;font-weight:700">Dostepna</span>
+              </div>
+              <div class="mock-card-loc" style="font-size:11px;margin-bottom:6px">Wodzislaw Slaski</div>
+              <div class="mock-card-specs" style="gap:8px">
+                <span class="mock-card-spec" style="font-size:10px">545 m2</span>
+                <span class="mock-card-spec" style="font-size:10px">141 zl/m2</span>
+              </div>
+            </div>
+          </div>
+          <div class="mock-card">
+            <div class="mock-card-img" style="height:80px"></div>
+            <div class="mock-card-body" style="padding:12px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                <div class="mock-card-price" style="font-size:15px">180 000 zl</div>
+                <span style="font-size:9px;padding:2px 8px;border-radius:10px;background:var(--gold-pale);color:#92700a;font-weight:700">Rezerwacja</span>
+              </div>
+              <div class="mock-card-loc" style="font-size:11px;margin-bottom:6px">Gorzyce, Turza Sl.</div>
+              <div class="mock-card-specs" style="gap:8px">
+                <span class="mock-card-spec" style="font-size:10px">1 200 m2</span>
+                <span class="mock-card-spec" style="font-size:10px">150 zl/m2</span>
+                <span class="mock-card-spec" style="font-size:10px;color:var(--green)">MPZP</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+
+    <!-- Checkmarks below -->
+    <div class="two-col">
+      <ul class="check-list">
+        <li>Cena + cena za m2 — widoczne od razu</li>
+        <li>Badge dostepnosci — Dostepna / Rezerwacja / Sprzedana</li>
+        <li>MPZP jako pill obok mediow</li>
+      </ul>
+      <ul class="check-list">
+        <li>Pills mediow — Woda, Prad, Gaz, Kanalizacja</li>
+        <li>Cala karta klikalny link do strony szczegolowej</li>
+        <li>Wyszukiwarka lokalizacji z autouzupelnianiem</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -653,189 +692,97 @@
       Mapa interaktywna — split view
     </h2>
 
-    <div class="two-col" style="gap:28px;align-items:start">
-      <div class="mockup-browser">
-        <div class="mockup-toolbar">
-          <span class="mockup-dot r"></span>
-          <span class="mockup-dot y"></span>
-          <span class="mockup-dot g"></span>
-          <span class="mockup-url">coreltb.pl/dzialki — tryb mapy</span>
-        </div>
-        <div style="padding:0">
-          <div class="mock-split">
-            <div class="mock-sidebar-area">
-              <div class="mock-sidebar-card">
-                <div class="mock-sidebar-price">225 000 zl</div>
-                <div class="mock-sidebar-loc">Godow, Skrzyszow</div>
-              </div>
-              <div class="mock-sidebar-card" style="border-left:3px solid var(--gold);background:rgba(223,187,104,0.05)">
-                <div class="mock-sidebar-price">77 000 zl</div>
-                <div class="mock-sidebar-loc">Wodzislaw Slaski</div>
-              </div>
-              <div class="mock-sidebar-card">
-                <div class="mock-sidebar-price">180 000 zl</div>
-                <div class="mock-sidebar-loc">Gorzyce</div>
-              </div>
-              <div class="mock-sidebar-card">
-                <div class="mock-sidebar-price">145 000 zl</div>
-                <div class="mock-sidebar-loc">Lyski, Sumina</div>
+    <p style="margin-bottom:20px;color:var(--text-secondary);max-width:700px">
+      Po kliknieciu "Pokaz na mapie" otwiera sie pelnoekranowy overlay z mapa i lista kart.
+      Kazda dzialka ma pin z cena — zielone dla dostepnych, zlote dla rezerwacji.
+    </p>
+
+    <!-- Full-width mockup -->
+    <div class="mockup-browser" style="margin-bottom:24px">
+      <div class="mockup-toolbar">
+        <span class="mockup-dot r"></span>
+        <span class="mockup-dot y"></span>
+        <span class="mockup-dot g"></span>
+        <span class="mockup-url">coreltb.pl/dzialki — tryb mapy (fullscreen)</span>
+      </div>
+      <div style="padding:0">
+        <div class="mock-split" style="height:340px">
+          <div class="mock-sidebar-area" style="width:30%">
+            <div class="mock-sidebar-card" style="padding:12px">
+              <div class="mock-sidebar-price" style="font-size:13px">225 000 zl</div>
+              <div class="mock-sidebar-loc" style="font-size:10px">Godow, Skrzyszow</div>
+              <div style="display:flex;gap:4px;margin-top:4px">
+                <span style="font-size:8px;background:rgba(255,255,255,0.05);padding:1px 5px;border-radius:3px;color:#666">2 780 m2</span>
+                <span style="font-size:8px;background:rgba(34,197,94,0.1);padding:1px 5px;border-radius:3px;color:var(--green)">MPZP</span>
               </div>
             </div>
-            <div class="mock-map-area">
-              <div class="mock-pin" style="top:25%;left:35%">225k</div>
-              <div class="mock-pin gold" style="top:55%;left:20%">77k</div>
-              <div class="mock-pin" style="top:40%;left:60%">180k</div>
-              <div class="mock-cluster" style="top:15%;left:70%">5</div>
+            <div class="mock-sidebar-card" style="border-left:3px solid var(--gold);background:rgba(223,187,104,0.05);padding:12px">
+              <div class="mock-sidebar-price" style="font-size:13px">77 000 zl</div>
+              <div class="mock-sidebar-loc" style="font-size:10px">Wodzislaw Slaski</div>
+              <div style="display:flex;gap:4px;margin-top:4px">
+                <span style="font-size:8px;background:rgba(255,255,255,0.05);padding:1px 5px;border-radius:3px;color:#666">545 m2</span>
+              </div>
+            </div>
+            <div class="mock-sidebar-card" style="padding:12px">
+              <div class="mock-sidebar-price" style="font-size:13px">180 000 zl</div>
+              <div class="mock-sidebar-loc" style="font-size:10px">Gorzyce, Turza Sl.</div>
+              <div style="display:flex;gap:4px;margin-top:4px">
+                <span style="font-size:8px;background:rgba(255,255,255,0.05);padding:1px 5px;border-radius:3px;color:#666">1 200 m2</span>
+                <span style="font-size:8px;background:rgba(34,197,94,0.1);padding:1px 5px;border-radius:3px;color:var(--green)">MPZP</span>
+              </div>
+            </div>
+            <div class="mock-sidebar-card" style="padding:12px">
+              <div class="mock-sidebar-price" style="font-size:13px">145 000 zl</div>
+              <div class="mock-sidebar-loc" style="font-size:10px">Lyski, Sumina</div>
+              <div style="display:flex;gap:4px;margin-top:4px">
+                <span style="font-size:8px;background:rgba(255,255,255,0.05);padding:1px 5px;border-radius:3px;color:#666">980 m2</span>
+              </div>
+            </div>
+            <div class="mock-sidebar-card" style="padding:12px">
+              <div class="mock-sidebar-price" style="font-size:13px">310 000 zl</div>
+              <div class="mock-sidebar-loc" style="font-size:10px">Rybnik, Ligota</div>
+              <div style="display:flex;gap:4px;margin-top:4px">
+                <span style="font-size:8px;background:rgba(255,255,255,0.05);padding:1px 5px;border-radius:3px;color:#666">1 500 m2</span>
+                <span style="font-size:8px;background:rgba(34,197,94,0.1);padding:1px 5px;border-radius:3px;color:var(--green)">MPZP</span>
+              </div>
+            </div>
+          </div>
+          <div class="mock-map-area">
+            <!-- Map pins -->
+            <div class="mock-pin" style="top:18%;left:30%">225k</div>
+            <div class="mock-pin gold" style="top:50%;left:15%">77k</div>
+            <div class="mock-pin" style="top:35%;left:55%">180k</div>
+            <div class="mock-pin" style="top:65%;left:45%">145k</div>
+            <div class="mock-pin" style="top:28%;left:72%">310k</div>
+            <div class="mock-cluster" style="top:12%;left:80%">5</div>
+            <div class="mock-cluster" style="top:72%;left:70%;width:24px;height:24px;font-size:10px">3</div>
+            <!-- Boundary overlay hint -->
+            <div style="position:absolute;bottom:10px;right:10px;font-size:9px;color:#556;background:rgba(0,0,0,0.4);padding:3px 8px;border-radius:4px">Granice gmin</div>
+            <!-- Popup hint -->
+            <div style="position:absolute;top:30%;left:48%;background:#222;border:1px solid var(--gold);border-radius:8px;padding:6px 10px;font-size:9px;color:#ccc;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,0.4)">
+              <div style="color:var(--gold);font-weight:700;font-size:10px">180 000 zl</div>
+              <div style="color:#888;margin-top:1px">Gorzyce &middot; 1 200 m2</div>
+              <div style="color:var(--gold);font-size:8px;margin-top:3px;font-weight:600">Zobacz dzialke &rarr;</div>
             </div>
           </div>
         </div>
       </div>
-      <div>
-        <p style="margin-bottom:16px;color:var(--text-secondary)">
-          Po kliknieciu "Pokaz na mapie" otwiera sie fullscreen overlay z mapa i lista kart.
-          Kazda dzialka ma pin z cena — zielone dla dostepnych, zlote dla rezerwacji.
-        </p>
-        <ul class="check-list">
-          <li><strong>Split view</strong> — sidebar z kartami + mapa obok</li>
-          <li><strong>Piny cen</strong> — cena bezposrednio na mapie</li>
-          <li><strong>Clustering</strong> — grupowanie w zlote kolka</li>
-          <li><strong>Popup z galeria</strong> — zdjecia, cena, parametry</li>
-          <li><strong>Synchronizacja</strong> — hover na karcie podswietla pin</li>
-          <li><strong>Boundary overlay</strong> — granice gminy/miasta</li>
-          <li><strong>Ctrl+scroll zoom</strong> — zapobiega przypadkowemu zoomowi</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== INTERLINKING & INDEXING ===== -->
-<section>
-  <div class="container">
-    <h2 class="section-title">
-      <span class="icon">&#128279;</span>
-      Interlinking &amp; Indeksacja — 73 URLe
-    </h2>
-
-    <div class="insight-box" style="margin-bottom:24px">
-      <h3>Kluczowy problem (naprawiony)</h3>
-      <p>
-        System dzialek generowal 73 unikalne URLe, ale <strong>ZADNA</strong> nie byla w sitemapie.
-        Google nie mogl ich odkryc. Teraz wszystkie 73 sa w <code>sitemap.xml</code> + wewnetrzne linkowanie
-        miedzy lokalizacjami zapewnia crawlowanie.
-      </p>
     </div>
 
-    <h3 style="font-size:16px;font-weight:700;margin-bottom:16px">Struktura 73 URLi</h3>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Typ strony</th>
-            <th class="text-center">Ile</th>
-            <th>Przykladowy URL</th>
-            <th class="text-center">Priority</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="badge badge-gold">Glowna</span> /dzialki</td>
-            <td class="text-center"><strong>1</strong></td>
-            <td class="text-muted">/dzialki</td>
-            <td class="text-center">0.8</td>
-          </tr>
-          <tr>
-            <td><span class="badge badge-blue">Powiat</span> listing</td>
-            <td class="text-center"><strong>4</strong></td>
-            <td class="text-muted">/dzialki/powiat-wodzislawski</td>
-            <td class="text-center">0.7</td>
-          </tr>
-          <tr>
-            <td><span class="badge badge-green">Gmina</span> listing</td>
-            <td class="text-center"><strong>13</strong></td>
-            <td class="text-muted">/dzialki/powiat-wodzislawski/wodzislaw-slaski</td>
-            <td class="text-center">0.7</td>
-          </tr>
-          <tr>
-            <td><span class="badge badge-green">Miejscowosc</span> listing</td>
-            <td class="text-center"><strong>17</strong></td>
-            <td class="text-muted">/dzialki/powiat-wodzislawski/wodzislaw-slaski/kokoszyce</td>
-            <td class="text-center">0.7</td>
-          </tr>
-          <tr style="border-top:2px solid #eee">
-            <td><span class="badge badge-gold">Dzialka</span> detail</td>
-            <td class="text-center"><strong>38</strong></td>
-            <td class="text-muted">/dzialki/godow-1022329</td>
-            <td class="text-center">0.6</td>
-          </tr>
-          <tr style="background:var(--gold-pale)">
-            <td colspan="2" style="font-weight:700;color:var(--gold-dark);text-align:right">RAZEM</td>
-            <td colspan="2" style="font-weight:800;font-size:18px;color:var(--gold-dark)">73 URLe w sitemap</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h3 style="font-size:16px;font-weight:700;margin:24px 0 16px">System interlinkingu</h3>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <h4><span class="icon-box icon-gold">&#8593;</span> Parent link</h4>
-        <p>Kazda gmina linkuje do powiatu. Kazda miejscowosc linkuje do gminy. Googlebot widzi pelna hierarchie.</p>
-      </div>
-      <div class="feature-card">
-        <h4><span class="icon-box icon-green">&#8596;</span> Sibling links</h4>
-        <p>Gorzyce linkuje do Radlina, Mszany itd. Miejscowosci linkuja do sasiadow w gminie. Max cross-linking.</p>
-      </div>
-      <div class="feature-card">
-        <h4><span class="icon-box icon-blue">&#8595;</span> Children links</h4>
-        <p>Powiat linkuje do gmin. Gmina linkuje do miejscowosci. Crawl depth max 3 klikniecia od strony glownej.</p>
-      </div>
-      <div class="feature-card">
-        <h4><span class="icon-box icon-amber">&#128203;</span> Breadcrumbs</h4>
-        <p>Schema.org BreadcrumbList na kazdej stronie. Slaskie > Powiat > Gmina > Miejscowosc. Google rozumie hierarchie.</p>
-      </div>
-    </div>
-
-    <h3 style="font-size:16px;font-weight:700;margin:24px 0 16px">Pelna mapa lokalizacji (4 powiaty &rarr; 13 gmin &rarr; 17 miejscowosci)</h3>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Powiat</th>
-            <th>Gminy / Miasta</th>
-            <th>Miejscowosci</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>wodzislawski</strong></td>
-            <td>Wodzislaw Sl., Gorzyce, Radlin, Mszana, Marklowice, Lubomia, Godow</td>
-            <td>Kokoszyce, Turzyczka, Wilchwy, Czyzowice, Turza Sl., Biertultowy, Gogolowa, Skrzyszow</td>
-          </tr>
-          <tr>
-            <td><strong>rybnicki</strong></td>
-            <td>Rybnik, Gaszowice, Lyski</td>
-            <td>Ligota, Popielow, Czernica, Szczerbice, Pstrazna, Sumina, Zytna</td>
-          </tr>
-          <tr>
-            <td><strong>raciborski</strong></td>
-            <td>Nedza, Pietrowice Wielkie</td>
-            <td>Gorki Slaskie, Cyprzanow</td>
-          </tr>
-          <tr>
-            <td><strong>mikolowski</strong></td>
-            <td>Ornontowice</td>
-            <td>&mdash;</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="note-box-green note-box">
-      <h4>Jak dodac nowa lokalizacje?</h4>
-      <p>1. Dodaj wpis do <code>data/plots/locations.ts</code> z parentSlug, matchCities, nominatimQuery.<br>
-         2. Opcjonalnie dodaj SEO config w <code>data/plots/seo.ts</code> (metaTitle, description, seoContent).<br>
-         3. URL automatycznie pojawi sie w sitemapie, interlinkingu i wyszukiwarce.</p>
+    <!-- Checkmarks below in 2 columns -->
+    <div class="two-col">
+      <ul class="check-list">
+        <li><strong>Split view</strong> — sidebar z kartami + mapa obok</li>
+        <li><strong>Piny cen</strong> — cena bezposrednio na mapie</li>
+        <li><strong>Clustering</strong> — grupowanie w zlote kolka</li>
+        <li><strong>Popup z galeria</strong> — zdjecia, cena, parametry</li>
+      </ul>
+      <ul class="check-list">
+        <li><strong>Synchronizacja</strong> — hover na karcie podswietla pin</li>
+        <li><strong>Boundary overlay</strong> — granice gminy/miasta</li>
+        <li><strong>Ctrl+scroll zoom</strong> — zapobiega przypadkowemu zoomowi</li>
+        <li><strong>Mobile bottom drawer</strong> — pelna obsluga dotykowa</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -1063,9 +1010,22 @@
   </div>
 </section>
 
-<footer class="footer">
-  <p>System Dzialek Budowlanych &mdash; CoreLTB Builders</p>
-  <p style="margin-top:4px;font-size:12px">Przygotowane przez Dawida &middot; Kwiecien 2026</p>
+<footer style="background:var(--bg-dark);padding:48px 0 36px;margin-top:60px;text-align:center">
+  <div class="container">
+    <div style="font-size:22px;font-weight:800;color:#fff;margin-bottom:4px">Core<span style="color:var(--gold)">LTB</span></div>
+    <div style="font-size:12px;color:#666;margin-bottom:20px">Builders</div>
+    <a href="https://coreltb.pl/dzialki" target="_blank" rel="noopener"
+       style="display:inline-block;padding:10px 28px;background:var(--gold);color:#000;font-weight:700;font-size:13px;border-radius:24px;text-decoration:none;margin-bottom:20px">
+      Zobacz system dzialek &rarr;
+    </a>
+    <div style="font-size:12px;color:#555;line-height:1.8">
+      <a href="https://coreltb.pl" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none">coreltb.pl</a>
+      &nbsp;&middot;&nbsp; biuro@coreltb.pl &nbsp;&middot;&nbsp; +48 664 123 757
+    </div>
+    <div style="margin-top:16px;padding-top:16px;border-top:1px solid #333;font-size:11px;color:#444">
+      Raport wygenerowany &middot; Kwiecien 2026
+    </div>
+  </div>
 </footer>
 
 </body>
