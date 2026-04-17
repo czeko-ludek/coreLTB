@@ -154,7 +154,7 @@ export function PlotDetailMap({ plot }: PlotDetailMapProps) {
             {locationLabel}
             <span className="text-xs bg-zinc-100 px-2 py-0.5 rounded-full">przyblizona</span>
           </p>
-          <div className="h-[350px] md:h-[450px] rounded-xl overflow-hidden border border-zinc-200/60">
+          <div className="relative z-0 h-[350px] md:h-[450px] rounded-xl overflow-hidden border border-zinc-200/60">
             {!isFullscreen && mapContent}
           </div>
         </div>
