@@ -168,6 +168,73 @@ Lead generation landing page with cost calculator at `app/wycena/page.tsx`.
 - `components/sections/contact/ContactRoutingCards.tsx` — 3 routing cards directing to LPs: "Chcę wycenę" → /wycena, "Chcę porozmawiać" → /umow-konsultacje, "Mam działkę" → /analiza-dzialki
 - Correct phone: +48 664 123 757, email: biuro@coreltb.pl
 
+## Plots System (`/dzialki`)
+Scalable system for plot (land) listings at `/dzialki` with hierarchical location pages.
+
+**Architecture:**
+```
+data/plots/
+├── types.ts              — Plot, PlotFilters, PlotSortBy, PlotSource, PlotMedia
+├── real-data.ts          — all plot data (~120 plots from 3 agencies)
+├── locations.ts          — hierarchical location tree (wojewodztwo > powiat > gmina > miejscowosc)
+├── index.ts              — public API: allPlots, filterAndSortPlots(), getPlotsByLocation()
+├── seo.ts                — per-city SEO config (meta titles, FAQ generator)
+├── seo-regions.ts        — 40 unique regional data entries (geology, transport, mining, advice)
+├── seo-content-generator.ts — intelligent SEO content combining regional data + dynamic stats
+└── helpers.ts            — price formatting, description cleaning, address extraction
+```
+
+**Data sources (3 agencies):**
+- `l-r` — L-R Nieruchomosci
+- `optima` — Optima Nieruchomosci
+- `dom-ex` — Domex Nieruchomosci
+
+**URL structure:** `/dzialki/[powiat]/[gmina]/[miejscowosc]` or `/dzialki/[plot-slug]` for detail pages
+
+**Location hierarchy:** ~87 indexable locations across Slaskie (powiat wodzislawski, rybnicki, raciborski, mikolowski, pszczynski, cieszynski, bielski, zywiecki) + Bielsko-Biala, Jastrzebie-Zdroj, Zory
+
+**Components** in `components/sections/plots/`:
+- `PlotsListingSection.tsx` — main orchestrator (filters, grid, pagination, fullscreen map, mobile drawer)
+- `FilterDropdown.tsx` — generic dropdown with WCAG keyboard nav (ArrowUp/Down, Enter/Space, Escape, role=listbox)
+- `PlotsFAQ.tsx` — FAQ accordion section
+- `PlotsSeoContent.tsx` — styled SEO content HTML renderer
+- `PlotsInterlinking.tsx` — "Dzialki w okolicy" related locations grid (parent/children/siblings)
+- `PlotCard.tsx` — plot listing card with image, price, area, media badges
+- `PlotMap.tsx` — Leaflet map with markers, clustering, boundary overlay (dynamic import, no SSR)
+- `PlotDetailPage.tsx` — individual plot detail page
+- `LocationSearch.tsx` — autocomplete location search with popular suggestions
+- `ProjectPlotsCrossLink.tsx` — cross-link from projects to matching plots
+- `PlotProjectsCrossLink.tsx` — cross-link from plots to matching projects
+
+**Sorting:** Default is `mixed` (round-robin interleave by source agency for diverse listings). Options: mixed, newest, price-asc/desc, area-asc/desc.
+
+**Images:** All plot images in `public/images/dzialki/` as optimized WebP (thumbs 400px, full 1200px). Optimization script: `scripts/optimize-plot-images.mjs`
+
+### SEO Content System
+Intelligent, unique SEO descriptions for all ~87 location listing pages.
+
+**How it works:**
+1. `seo-regions.ts` — 40 hand-written regional data entries with: terrain (type, geology, miningInfluence, constructionNotes, soilType, floodRisk), transport (majorRoads, highways, distances, rail), character (type: urban/periurban/rural/mountain, residentialAreas), infrastructure, buildingAdvice[], priceContext
+2. `seo-content-generator.ts` — combines regional data with dynamic plot statistics (prices, areas, MPZP %, media coverage) computed at build time
+3. Fallback hierarchy: location slug -> parentSlug (e.g., Kokoszyce inherits from Wodzislaw Slaski)
+4. Generated content targets SEO phrases: "dzialki [miasto]", "ceny dzialek [miasto]", "ile kosztuje dzialka [miasto]", "dzialka budowlana co sprawdzic"
+
+**6 content sections per page:**
+- H2: "Dzialki {lokalizacja} — lokalizacja i otoczenie" (transport, character, residential areas)
+- H2: "Warunki gruntowe i budowlane" (terrain, geology, mining influence — CoreLTB expertise differentiator)
+- H2: "Ile kosztuje dzialka budowlana?" (dynamic prices, areas from real data)
+- H2: "Na co zwrocic uwage przy zakupie?" (MPZP, media, geotechnika, dojazd — checklist cards)
+- H3: "Porady budowlane" (region-specific construction tips)
+- H2: "Od dzialki do gotowego domu" (CTA with links to /wycena and /analiza-dzialki)
+
+**Styling:** `.seo-rich-content` in `app/globals.css` — gold accent bars on H2, card-based checklist items with gold left border, 2-column grid on desktop, max-width 56rem for readability
+
+**Schema.org:** BreadcrumbList + WebPage + Product/AggregateOffer (listing) or RealEstateListing (detail) + FAQPage
+
+**Sitemap:** 205 /dzialki URLs (87 location + 116 detail + 2 main), priority 0.6-0.7, weekly
+
+**Navigation:** "Dzialki" in main header nav + "Dzialki budowlane" in footer
+
 ## Local Pages System (data/local/)
 Scalable system for city-specific landing pages at `/obszar-dzialania/[slug]`.
 
@@ -374,6 +441,13 @@ Scalable system for construction case studies (build diaries) at `/realizacje` a
 - `data/realizacje/index.ts` — realizacje public API (listings, slugs, getBySlug)
 - `data/realizacje/types.ts` — all realizacje types
 - `data/realizacje/projects/zabrze-2024.ts` — first real realization (200m2, Zabrze)
+- `app/dzialki/[...slug]/page.tsx` — plot listing/detail page (hierarchical slugs)
+- `app/dzialki/page.tsx` — main plots listing
+- `data/plots/seo-regions.ts` — 40 regional SEO data entries
+- `data/plots/seo-content-generator.ts` — dynamic SEO content generator
+- `data/plots/locations.ts` — hierarchical location tree
+- `data/plots/real-data.ts` — all plot data
+- `components/sections/plots/PlotsListingSection.tsx` — main plots orchestrator
 - `app/obszar-dzialania/[slug]/page.tsx` — local page route
 - `components/sections/shared/` — LPTrustBar, LPTestimonials, LPSteps
 - `components/sections/consultation/ConsultationForm.tsx` — consultation form

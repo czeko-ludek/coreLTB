@@ -90,9 +90,9 @@ export function FilterDropdown({
         aria-expanded={open}
         aria-haspopup="listbox"
         className={clsx(
-          'flex items-center justify-between gap-1.5 px-3 py-2 bg-white rounded-lg text-sm font-medium border transition-all whitespace-nowrap',
+          'flex items-center justify-between gap-1.5 px-4 py-2 bg-white rounded-full text-sm font-medium border transition-all whitespace-nowrap',
           isFiltered
-            ? 'border-zinc-900 text-zinc-900'
+            ? 'border-primary text-zinc-900 shadow-sm'
             : 'border-zinc-200 text-text-secondary hover:border-zinc-400'
         )}
       >
@@ -105,7 +105,7 @@ export function FilterDropdown({
           <div
             role="listbox"
             className={clsx(
-              'absolute top-full mt-1 w-52 bg-white rounded-xl shadow-xl border border-zinc-200 py-1 z-30',
+              'absolute top-full mt-1.5 w-52 bg-white rounded-2xl shadow-xl border border-zinc-200 p-1.5 z-30',
               align === 'right' ? 'right-0' : 'left-0'
             )}
           >
@@ -117,11 +117,11 @@ export function FilterDropdown({
                 aria-selected={activeIndex === i}
                 onClick={() => { onSelect(i); setOpen(false); }}
                 className={clsx(
-                  'w-full text-left px-4 py-2.5 text-sm transition-colors',
+                  'w-full text-left px-4 py-2.5 text-sm transition-colors rounded-lg',
                   activeIndex === i
                     ? 'bg-primary/10 text-primary font-medium'
                     : 'text-text-secondary hover:bg-zinc-50',
-                  focusedIndex === i && 'ring-2 ring-primary/50'
+                  focusedIndex === i && 'ring-2 ring-primary/50 ring-inset'
                 )}
               >
                 {opt.label}
