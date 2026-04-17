@@ -33,7 +33,6 @@ export const PLOT_CITY_SEO: Record<string, PlotCitySEO> = {
     h1: 'Działki budowlane',
     h1Highlight: 'w Wodzisławiu Śląskim',
     description: 'Sprawdzone działki pod budowę domu jednorodzinnego w Wodzisławiu Śląskim i okolicach. Każda z informacją o mediach, MPZP i warunkach gruntowych.',
-    seoContent: '<h2>Działki budowlane w Wodzisławiu Śląskim — na co zwrócić uwagę</h2><p>Wodzisław Śląski to jedno z najchętniej wybieranych miast do budowy domu w powiecie wodzisławskim. Miasto oferuje dobrą infrastrukturę komunikacyjną — bliskość autostrady A1, rozbudowaną sieć dróg gminnych oraz komunikację publiczną. Dzielnice takie jak <strong>Kokoszyce</strong>, <strong>Wilchwy</strong> czy <strong>Turzyczka</strong> charakteryzują się luźną zabudową jednorodzinną i dostępem do terenów zielonych.</p><p>Przy wyborze działki w Wodzisławiu Śląskim warto zwrócić uwagę na:</p><ul><li><strong>MPZP</strong> — większość działek w naszej ofercie jest objęta Miejscowym Planem Zagospodarowania Przestrzennego, co przyspiesza proces uzyskania pozwolenia na budowę.</li><li><strong>Uzbrojenie terenu</strong> — dostępność wody, prądu, gazu i kanalizacji miejskiej znacząco wpływa na koszt i czas realizacji inwestycji.</li><li><strong>Ukształtowanie terenu</strong> — działki płaskie minimalizują koszty fundamentów i prac ziemnych.</li><li><strong>Dojazd</strong> — nawierzchnia drogi dojazdowej (asfalt vs gruntowa) wpływa na komfort codziennego użytkowania.</li></ul>',
   },
   gorzyce: {
     slug: 'gorzyce',
@@ -44,7 +43,6 @@ export const PLOT_CITY_SEO: Record<string, PlotCitySEO> = {
     h1: 'Działki budowlane',
     h1Highlight: 'w Gorzycach',
     description: 'Sprawdzone działki pod budowę domu jednorodzinnego w gminie Gorzyce. Każda z informacją o mediach, MPZP i warunkach gruntowych.',
-    seoContent: '<h2>Działki budowlane w Gorzycach — gmina z potencjałem</h2><p>Gmina Gorzyce to atrakcyjna lokalizacja dla osób szukających działki budowlanej w powiecie wodzisławskim. Miejscowości takie jak <strong>Turza Śląska</strong> i <strong>Czyżowice</strong> oferują spokojne otoczenie przy zachowaniu dobrej komunikacji z Wodzisławiem Śląskim i Rybnikiem. Ceny działek są tu konkurencyjne w stosunku do miast powiatowych.</p>',
   },
   lyski: {
     slug: 'lyski',
@@ -85,7 +83,6 @@ export const PLOT_CITY_SEO: Record<string, PlotCitySEO> = {
     h1: 'Działki budowlane',
     h1Highlight: 'w Rybniku',
     description: 'Sprawdzone działki pod budowę domu jednorodzinnego w Rybniku i okolicach. Każda z informacją o mediach, MPZP i warunkach gruntowych.',
-    seoContent: '<h2>Działki budowlane w Rybniku — co warto wiedzieć</h2><p>Rybnik to trzecie co do wielkości miasto w subregionie zachodnim województwa śląskiego. Dzielnice takie jak <strong>Ligota</strong> czy <strong>Popielów</strong> oferują tereny pod zabudowę jednorodzinną z dobrym dostępem do infrastruktury miejskiej. Bliskość autostrady A1 i drogi krajowej DK78 zapewnia sprawną komunikację z Katowicami, Gliwicami i Ostrawą.</p>',
   },
   mszana: {
     slug: 'mszana',

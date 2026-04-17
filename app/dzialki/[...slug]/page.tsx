@@ -20,6 +20,7 @@ import { ContactCTASection } from '@/components/sections';
 import { PlotsListingSection } from '@/components/sections/plots/PlotsListingSection';
 import { PlotDetailPage } from '@/components/sections/plots/PlotDetailPage';
 import { getPlotCitySEO } from '@/data/plots/seo';
+import { generateLocationSeoContent } from '@/data/plots/seo-content-generator';
 import type { Plot } from '@/data/plots/types';
 
 interface PageProps {
@@ -465,7 +466,7 @@ export default async function DzialkiSlugPage({ params }: PageProps) {
         description={description}
         faq={faq}
         breadcrumbs={uiBreadcrumbs}
-        seoContent={citySeo?.seoContent}
+        seoContent={citySeo?.seoContent || generateLocationSeoContent(loc.slug, plots)}
       />
 
       <ContactCTASection

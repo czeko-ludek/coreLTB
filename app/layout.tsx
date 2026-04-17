@@ -67,6 +67,7 @@ const headerData = {
     { label: "O nas", href: "/o-nas" },
     { label: "Oferta", href: "/oferta" },
     { label: "Projekty", href: "/projekty" },
+    { label: "Działki", href: "/dzialki" },
     { label: "Baza wiedzy", href: "/baza-wiedzy" },
     { label: "Kontakt", href: "/kontakt" },
   ],
@@ -125,6 +126,7 @@ const footerData = {
   companyLinks: [
     { label: "O nas", href: "/o-nas" },
     { label: "Realizacje", href: "/projekty" },
+    { label: "Działki budowlane", href: "/dzialki" },
     { label: "Obszar działania", href: "/obszar-dzialania" },
     { label: "Partnerzy", href: "/partnerzy" },
     { label: "Kontakt", href: "/kontakt" },

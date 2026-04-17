@@ -126,7 +126,7 @@ export const PlotMap = forwardRef<PlotMapHandle, PlotMapProps>(
 
       const map = L.map(mapRef.current, {
         center: [50.05, 18.45],
-        zoom: 10,
+        zoom: 11,
         zoomControl: false,
         attributionControl: false,
         dragging: true,
@@ -392,7 +392,7 @@ export const PlotMap = forwardRef<PlotMapHandle, PlotMapProps>(
       // Fit bounds with padding
       if (availablePlots.length > 0) {
         const bounds = L.latLngBounds(availablePlots.map((p: Plot) => [p.coordinates.lat, p.coordinates.lng]));
-        map.fitBounds(bounds, { padding: [60, 60], maxZoom: 12 });
+        map.fitBounds(bounds, { padding: [40, 40], maxZoom: 13 });
       }
     }, [plots, createPinIcon]);
 

@@ -4,10 +4,10 @@ import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react'
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { clsx } from 'clsx';
-// useInView removed — content must always be visible on mobile (no animation gating)
 import { Icon } from '@/components/ui';
 import { useRouter } from 'next/navigation';
-import type { Plot, PlotFilters, PlotSortBy } from '@/data/plots/types';
+import type { Plot, PlotFilters, PlotSortBy, PlotSource } from '@/data/plots/types';
+import { plotSources } from '@/data/plots/types';
 import { filterAndSortPlots, slugifyCity } from '@/data/plots';
 import type { PlotFAQItem } from '@/data/plots/seo';
 import { PlotCard } from './PlotCard';
@@ -30,6 +30,8 @@ const breadcrumbs = [
   { label: 'Działki budowlane' },
 ];
 
+const PLOTS_PER_PAGE = 24;
+
 const PRICE_RANGES = [
   { label: 'Wszystkie ceny', min: undefined, max: undefined },
   { label: 'do 150 tys.', min: undefined, max: 150000 },
@@ -40,10 +42,10 @@ const PRICE_RANGES = [
 
 const AREA_RANGES = [
   { label: 'Każda pow.', min: undefined, max: undefined },
-  { label: 'do 800 m2', min: undefined, max: 800 },
-  { label: '800–1200 m2', min: 800, max: 1200 },
-  { label: '1200–2000 m2', min: 1200, max: 2000 },
-  { label: '2000+ m2', min: 2000, max: undefined },
+  { label: 'do 800 m²', min: undefined, max: 800 },
+  { label: '800–1500 m²', min: 800, max: 1500 },
+  { label: '1500–3000 m²', min: 1500, max: 3000 },
+  { label: '3000+ m²', min: 3000, max: undefined },
 ];
 
 const SORT_OPTIONS: { id: PlotSortBy; label: string }[] = [
@@ -53,6 +55,70 @@ const SORT_OPTIONS: { id: PlotSortBy; label: string }[] = [
   { id: 'area-asc', label: 'Powierzchnia rosnąco' },
   { id: 'area-desc', label: 'Powierzchnia malejąco' },
 ];
+
+const SOURCE_OPTIONS: { id: PlotSource | 'all'; label: string }[] = [
+  { id: 'all', label: 'Wszystkie biura' },
+  ...plotSources.map((s) => ({ id: s.id, label: s.label })),
+];
+
+/** Generic dropdown component */
+function FilterDropdown({
+  label,
+  options,
+  activeIndex,
+  onSelect,
+  align = 'left',
+}: {
+  label: string;
+  options: { label: string }[];
+  activeIndex: number;
+  onSelect: (index: number) => void;
+  align?: 'left' | 'right';
+}) {
+  const [open, setOpen] = useState(false);
+  const isFiltered = activeIndex > 0;
+
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setOpen(!open)}
+        className={clsx(
+          'flex items-center justify-between gap-1.5 px-3 py-2 bg-white rounded-lg text-sm font-medium border transition-all whitespace-nowrap',
+          isFiltered
+            ? 'border-zinc-900 text-zinc-900'
+            : 'border-zinc-200 text-text-secondary hover:border-zinc-400'
+        )}
+      >
+        <span>{options[activeIndex]?.label || label}</span>
+        <Icon name={open ? 'chevronUp' : 'chevronDown'} size="sm" />
+      </button>
+      {open && (
+        <>
+          <div className="fixed inset-0 z-20" onClick={() => setOpen(false)} />
+          <div className={clsx(
+            'absolute top-full mt-1 w-52 bg-white rounded-xl shadow-xl border border-zinc-200 py-1 z-30',
+            align === 'right' ? 'right-0' : 'left-0'
+          )}>
+            {options.map((opt, i) => (
+              <button
+                key={i}
+                onClick={() => { onSelect(i); setOpen(false); }}
+                className={clsx(
+                  'w-full text-left px-4 py-2.5 text-sm transition-colors',
+                  activeIndex === i
+                    ? 'bg-primary/10 text-primary font-medium'
+                    : 'text-text-secondary hover:bg-zinc-50'
+                )}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
 
 interface BreadcrumbItem {
   label: string;
@@ -106,16 +172,15 @@ export function PlotsListingSection({
   const [filters, setFilters] = useState<PlotFilters>({
     sortBy: 'newest',
   });
+  const [page, setPage] = useState(1);
   const [highlightedSlug, setHighlightedSlug] = useState<string | null>(null);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
-  const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
-  const [priceDropdownOpen, setPriceDropdownOpen] = useState(false);
-  const [areaDropdownOpen, setAreaDropdownOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   /** Slugs visible in map viewport — null means show all (no map-based filter) */
   const [mapVisibleSlugs, setMapVisibleSlugs] = useState<string[] | null>(null);
 
   const fullscreenMapHandleRef = useRef<PlotMapHandle>(null);
+  const listingRef = useRef<HTMLDivElement>(null);
 
   // Escape zamyka fullscreen
   useEffect(() => {
@@ -130,10 +195,6 @@ export function PlotsListingSection({
       document.body.style.overflow = '';
     };
   }, [isFullscreen]);
-
-  // NOTE: removed useInView gating — content must always be visible.
-  // animation-fill-mode:both + animationDelay caused mobile content to stay
-  // at opacity:0 (the "from" keyframe) during hydration/re-render cycles.
 
   // Top city slugs by plot count — fed to LocationSearch as popular suggestions
   const topCitySlugs = useMemo(() => {
@@ -154,10 +215,36 @@ export function PlotsListingSection({
       .map((c) => c.slug);
   }, [plots]);
 
-  // Filter & sort plots (data already pre-filtered by location on server)
+  // Filter & sort plots — also filter by selected location in fullscreen map
   const filteredPlots = useMemo(() => {
-    return filterAndSortPlots(plots, filters);
-  }, [plots, filters]);
+    let base = filterAndSortPlots(plots, filters);
+
+    // When a location is selected (fullscreen map or search without subpage nav), filter by cities/districts
+    if (locationSelection) {
+      const citySet = new Set(locationSelection.cities);
+      const districts = locationSelection.districts;
+      base = base.filter((p) => {
+        if (!citySet.has(p.city)) return false;
+        // For miejscowosc-level: also check district
+        if (districts && districts.length > 0) {
+          return p.district ? districts.includes(p.district) : false;
+        }
+        return true;
+      });
+    }
+
+    return base;
+  }, [plots, filters, locationSelection]);
+
+  // Pagination
+  const totalPages = Math.max(1, Math.ceil(filteredPlots.length / PLOTS_PER_PAGE));
+  const paginatedPlots = useMemo(() => {
+    const start = (page - 1) * PLOTS_PER_PAGE;
+    return filteredPlots.slice(start, start + PLOTS_PER_PAGE);
+  }, [filteredPlots, page]);
+
+  // Reset page when filters change
+  useEffect(() => { setPage(1); }, [filters]);
 
   // Sidebar plots in fullscreen: filtered by map viewport
   const sidebarPlots = useMemo(() => {
@@ -165,12 +252,6 @@ export function PlotsListingSection({
     const slugSet = new Set(mapVisibleSlugs);
     return filteredPlots.filter((p) => slugSet.has(p.slug));
   }, [filteredPlots, mapVisibleSlugs]);
-
-  const availableCount = useMemo(
-    () => plots.filter((p) => p.availability !== 'sprzedana').length,
-    [plots]
-  );
-
 
   const handleLocationChange = useCallback((selection: LocationSelection | null) => {
     setLocationSelection(selection);
@@ -186,7 +267,10 @@ export function PlotsListingSection({
 
   const handleSortChange = useCallback((sortBy: PlotSortBy) => {
     setFilters((prev) => ({ ...prev, sortBy }));
-    setSortDropdownOpen(false);
+  }, []);
+
+  const handleSourceChange = useCallback((source: PlotSource | undefined) => {
+    setFilters((prev) => ({ ...prev, source }));
   }, []);
 
   const handlePlotHover = useCallback((slug: string | null) => {
@@ -204,10 +288,19 @@ export function PlotsListingSection({
   const handleSidebarPlotClick = useCallback((slug: string) => {
     setHighlightedSlug(slug);
     fullscreenMapHandleRef.current?.focusPlot(slug);
-    // Close mobile drawer after selection
     setMobileDrawerOpen(false);
   }, []);
 
+  const handlePageChange = useCallback((newPage: number) => {
+    setPage(newPage);
+    listingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, []);
+
+  // Active dropdown indices
+  const activePriceIdx = PRICE_RANGES.findIndex((r) => r.min === filters.priceMin && r.max === filters.priceMax);
+  const activeAreaIdx = AREA_RANGES.findIndex((r) => r.min === filters.areaMin && r.max === filters.areaMax);
+  const activeSortIdx = SORT_OPTIONS.findIndex((o) => o.id === filters.sortBy);
+  const activeSourceIdx = SOURCE_OPTIONS.findIndex((o) => o.id === (filters.source || 'all'));
   const currentSort = SORT_OPTIONS.find((o) => o.id === filters.sortBy) || SORT_OPTIONS[0];
 
   return (
@@ -216,9 +309,7 @@ export function PlotsListingSection({
         <div className="container mx-auto px-4 md:px-6">
 
           {/* ── Header ── */}
-          <div
-            className="max-w-3xl mb-6"
-          >
+          <div className="max-w-3xl mb-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-text-primary mb-4">
               {h1}{' '}
               <span className="text-primary">{h1Highlight}</span>
@@ -229,12 +320,9 @@ export function PlotsListingSection({
           </div>
 
           {/* ── Toolbar ── */}
-          <div
-            className="relative z-[50] flex flex-col gap-3 mb-6"
-          >
+          <div className="relative z-30 flex flex-col gap-3 mb-6">
             {/* Row 1: Location search + map button */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
-              {/* Location search — prominent bar */}
               <LocationSearch
                 value={locationSelection}
                 onChange={handleLocationChange}
@@ -244,9 +332,7 @@ export function PlotsListingSection({
                 className="flex-1 max-w-xl"
               />
 
-              {/* Map + Usuń filtry — stacked on mobile, inline on sm+ */}
               <div className="flex items-center gap-2">
-                {/* Map button — opens fullscreen */}
                 <button
                   onClick={() => setIsFullscreen(true)}
                   className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-semibold bg-white text-text-primary border border-zinc-200 hover:border-primary hover:text-primary transition-all shrink-0"
@@ -255,7 +341,6 @@ export function PlotsListingSection({
                   Mapa
                 </button>
 
-                {/* "Usuń filtry" link when on city subpage */}
                 {activeCity && (
                   <button
                     onClick={() => router.push('/dzialki')}
@@ -268,205 +353,47 @@ export function PlotsListingSection({
               </div>
             </div>
 
-            {/* Row 2: Filters — dropdowns on mobile, chip row on desktop */}
+            {/* Row 2: Filter dropdowns */}
+            <div className="flex flex-wrap items-center gap-2">
+              <FilterDropdown
+                label="Cena"
+                options={PRICE_RANGES.map((r) => ({ label: r.label }))}
+                activeIndex={activePriceIdx >= 0 ? activePriceIdx : 0}
+                onSelect={(i) => handlePriceRange(PRICE_RANGES[i].min, PRICE_RANGES[i].max)}
+              />
 
-            {/* ── Mobile: 3 dropdown boxes ── */}
-            <div className="flex items-center gap-2 md:hidden">
-              {/* Price dropdown */}
-              <div className="relative flex-1">
-                <button
-                  onClick={() => { setPriceDropdownOpen(!priceDropdownOpen); setAreaDropdownOpen(false); setSortDropdownOpen(false); }}
-                  className={clsx(
-                    'w-full flex items-center justify-between gap-1 px-3 py-2.5 bg-white rounded-lg text-xs font-medium border transition-all',
-                    filters.priceMin || filters.priceMax
-                      ? 'border-zinc-900 text-zinc-900'
-                      : 'border-zinc-200 text-text-secondary'
-                  )}
-                >
-                  <span>{PRICE_RANGES.find(r => r.min === filters.priceMin && r.max === filters.priceMax)?.label || 'Cena'}</span>
-                  <Icon name={priceDropdownOpen ? 'chevronUp' : 'chevronDown'} size="sm" />
-                </button>
-                {priceDropdownOpen && (
-                  <>
-                    <div className="fixed inset-0 z-20" onClick={() => setPriceDropdownOpen(false)} />
-                    <div className="absolute left-0 top-full mt-1 w-48 bg-white rounded-xl shadow-xl border border-zinc-200 py-1 z-30">
-                      {PRICE_RANGES.map((range, i) => (
-                        <button
-                          key={i}
-                          onClick={() => { handlePriceRange(range.min, range.max); setPriceDropdownOpen(false); }}
-                          className={clsx(
-                            'w-full text-left px-4 py-2.5 text-sm transition-colors',
-                            filters.priceMin === range.min && filters.priceMax === range.max
-                              ? 'bg-primary/10 text-primary font-medium'
-                              : 'text-text-secondary hover:bg-zinc-50'
-                          )}
-                        >
-                          {range.label}
-                        </button>
-                      ))}
-                    </div>
-                  </>
-                )}
-              </div>
+              <FilterDropdown
+                label="Powierzchnia"
+                options={AREA_RANGES.map((r) => ({ label: r.label }))}
+                activeIndex={activeAreaIdx >= 0 ? activeAreaIdx : 0}
+                onSelect={(i) => handleAreaRange(AREA_RANGES[i].min, AREA_RANGES[i].max)}
+              />
 
-              {/* Area dropdown */}
-              <div className="relative flex-1">
-                <button
-                  onClick={() => { setAreaDropdownOpen(!areaDropdownOpen); setPriceDropdownOpen(false); setSortDropdownOpen(false); }}
-                  className={clsx(
-                    'w-full flex items-center justify-between gap-1 px-3 py-2.5 bg-white rounded-lg text-xs font-medium border transition-all',
-                    filters.areaMin || filters.areaMax
-                      ? 'border-zinc-900 text-zinc-900'
-                      : 'border-zinc-200 text-text-secondary'
-                  )}
-                >
-                  <span>{AREA_RANGES.find(r => r.min === filters.areaMin && r.max === filters.areaMax)?.label || 'Powierzchnia'}</span>
-                  <Icon name={areaDropdownOpen ? 'chevronUp' : 'chevronDown'} size="sm" />
-                </button>
-                {areaDropdownOpen && (
-                  <>
-                    <div className="fixed inset-0 z-20" onClick={() => setAreaDropdownOpen(false)} />
-                    <div className="absolute left-0 top-full mt-1 w-48 bg-white rounded-xl shadow-xl border border-zinc-200 py-1 z-30">
-                      {AREA_RANGES.map((range, i) => (
-                        <button
-                          key={i}
-                          onClick={() => { handleAreaRange(range.min, range.max); setAreaDropdownOpen(false); }}
-                          className={clsx(
-                            'w-full text-left px-4 py-2.5 text-sm transition-colors',
-                            filters.areaMin === range.min && filters.areaMax === range.max
-                              ? 'bg-primary/10 text-primary font-medium'
-                              : 'text-text-secondary hover:bg-zinc-50'
-                          )}
-                        >
-                          {range.label}
-                        </button>
-                      ))}
-                    </div>
-                  </>
-                )}
-              </div>
+              <FilterDropdown
+                label="Biuro"
+                options={SOURCE_OPTIONS.map((s) => ({ label: s.label }))}
+                activeIndex={activeSourceIdx >= 0 ? activeSourceIdx : 0}
+                onSelect={(i) => {
+                  const src = SOURCE_OPTIONS[i].id;
+                  handleSourceChange(src === 'all' ? undefined : src as PlotSource);
+                }}
+              />
 
-              {/* Sort dropdown */}
-              <div className="relative flex-1">
-                <button
-                  onClick={() => { setSortDropdownOpen(!sortDropdownOpen); setPriceDropdownOpen(false); setAreaDropdownOpen(false); }}
-                  className="w-full flex items-center justify-between gap-1 px-3 py-2.5 bg-white rounded-lg text-xs font-medium text-text-secondary border border-zinc-200 transition-all"
-                >
-                  <span>{currentSort.label}</span>
-                  <Icon name={sortDropdownOpen ? 'chevronUp' : 'chevronDown'} size="sm" />
-                </button>
-                {sortDropdownOpen && (
-                  <>
-                    <div className="fixed inset-0 z-20" onClick={() => setSortDropdownOpen(false)} />
-                    <div className="absolute right-0 top-full mt-1 w-48 bg-white rounded-xl shadow-xl border border-zinc-200 py-1 z-30">
-                      {SORT_OPTIONS.map((option) => (
-                        <button
-                          key={option.id}
-                          onClick={() => handleSortChange(option.id)}
-                          className={clsx(
-                            'w-full text-left px-4 py-2.5 text-sm transition-colors',
-                            filters.sortBy === option.id
-                              ? 'bg-primary/10 text-primary font-medium'
-                              : 'text-text-secondary hover:bg-zinc-50'
-                          )}
-                        >
-                          {option.label}
-                        </button>
-                      ))}
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-
-            {/* ── Desktop: chip row (unchanged) ── */}
-            <div className="hidden md:flex flex-wrap items-center gap-2">
-              {/* Price range chips */}
-              <div className="flex items-center gap-1">
-                {PRICE_RANGES.map((range, i) => {
-                  const isActive = filters.priceMin === range.min && filters.priceMax === range.max;
-                  return (
-                    <button
-                      key={i}
-                      onClick={() => handlePriceRange(range.min, range.max)}
-                      className={clsx(
-                        'px-3 py-1.5 rounded-md text-xs font-medium transition-all',
-                        isActive
-                          ? 'bg-zinc-900 text-white'
-                          : 'bg-white text-text-secondary border border-zinc-200 hover:border-zinc-400'
-                      )}
-                    >
-                      {range.label}
-                    </button>
-                  );
-                })}
-              </div>
-
-              <div className="w-px h-6 bg-zinc-200 mx-1" />
-
-              {/* Area range chips */}
-              <div className="flex items-center gap-1">
-                {AREA_RANGES.map((range, i) => {
-                  const isActive = filters.areaMin === range.min && filters.areaMax === range.max;
-                  return (
-                    <button
-                      key={i}
-                      onClick={() => handleAreaRange(range.min, range.max)}
-                      className={clsx(
-                        'px-3 py-1.5 rounded-md text-xs font-medium transition-all',
-                        isActive
-                          ? 'bg-zinc-900 text-white'
-                          : 'bg-white text-text-secondary border border-zinc-200 hover:border-zinc-400'
-                      )}
-                    >
-                      {range.label}
-                    </button>
-                  );
-                })}
-              </div>
-
-              <div className="w-px h-6 bg-zinc-200 mx-1" />
-
-              {/* Sort dropdown */}
-              <div className="relative ml-auto">
-                <button
-                  onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-                  className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-md text-xs font-medium text-text-secondary border border-zinc-200 hover:border-zinc-400 transition-all"
-                >
-                  <Icon name="arrowUpDown" size="sm" />
-                  {currentSort.label}
-                  <Icon name={sortDropdownOpen ? 'chevronUp' : 'chevronDown'} size="sm" />
-                </button>
-                {sortDropdownOpen && (
-                  <>
-                    <div className="fixed inset-0 z-20" onClick={() => setSortDropdownOpen(false)} />
-                    <div className="absolute right-0 top-full mt-1 w-48 bg-white rounded-xl shadow-xl border border-zinc-200 py-1 z-30">
-                      {SORT_OPTIONS.map((option) => (
-                        <button
-                          key={option.id}
-                          onClick={() => handleSortChange(option.id)}
-                          className={clsx(
-                            'w-full text-left px-4 py-2 text-sm transition-colors',
-                            filters.sortBy === option.id
-                              ? 'bg-primary/10 text-primary font-medium'
-                              : 'text-text-secondary hover:bg-zinc-50'
-                          )}
-                        >
-                          {option.label}
-                        </button>
-                      ))}
-                    </div>
-                  </>
-                )}
+              {/* Sort — pushed to the right */}
+              <div className="ml-auto">
+                <FilterDropdown
+                  label="Sortowanie"
+                  options={SORT_OPTIONS.map((s) => ({ label: s.label }))}
+                  activeIndex={activeSortIdx >= 0 ? activeSortIdx : 0}
+                  onSelect={(i) => handleSortChange(SORT_OPTIONS[i].id)}
+                  align="right"
+                />
               </div>
             </div>
           </div>
 
-          {/* ── Breadcrumbs (below search bar) ── */}
-          <nav
-            aria-label="Breadcrumb"
-            className="mb-4 overflow-x-auto scrollbar-hide"
-          >
+          {/* ── Breadcrumbs ── */}
+          <nav aria-label="Breadcrumb" className="mb-4 overflow-x-auto scrollbar-hide">
             <ol className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm whitespace-nowrap">
               {(customBreadcrumbs ?? breadcrumbs).map((crumb, index) => (
                 <li key={index} className="flex items-center gap-1.5 sm:gap-2 shrink-0">
@@ -484,36 +411,93 @@ export function PlotsListingSection({
           </nav>
 
           {/* ── Content ── */}
-          <div>
-            {/* === LIST VIEW (only view on page — map is always fullscreen) === */}
-            <>
-              {/* Result count */}
-              <p className="text-sm text-text-muted mb-4">
-                {filteredPlots.length} {filteredPlots.length === 1 ? 'działka' : 'działek'}
-              </p>
-              {filteredPlots.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {filteredPlots.map((plot, index) => (
-                    <PlotCard
-                      key={plot.slug}
-                      plot={plot}
-                      isHighlighted={plot.slug === highlightedSlug}
-                      onHover={handlePlotHover}
-                      inView={true}
-                      delay={index < 6 ? 0.3 + index * 0.08 : 0}
-                    />
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-16">
-                  <Icon name="mapPin" size="xl" className="text-text-muted mx-auto mb-4" />
-                  <p className="text-text-secondary text-lg">Brak działek w tej lokalizacji.</p>
-                </div>
+          <div ref={listingRef}>
+            {/* Result count */}
+            <p className="text-sm text-text-muted mb-4">
+              {filteredPlots.length} {filteredPlots.length === 1 ? 'działka' : filteredPlots.length < 5 ? 'działki' : 'działek'}
+              {totalPages > 1 && (
+                <span> &middot; strona {page} z {totalPages}</span>
               )}
-            </>
+            </p>
+            {paginatedPlots.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {paginatedPlots.map((plot, index) => (
+                  <PlotCard
+                    key={plot.slug}
+                    plot={plot}
+                    isHighlighted={plot.slug === highlightedSlug}
+                    onHover={handlePlotHover}
+                    inView={true}
+                    delay={index < 6 ? 0.1 + index * 0.05 : 0}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-16">
+                <Icon name="mapPin" size="xl" className="text-text-muted mx-auto mb-4" />
+                <p className="text-text-secondary text-lg">Brak działek dla wybranych filtrów.</p>
+              </div>
+            )}
+
+            {/* ── Pagination ── */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-10">
+                <button
+                  onClick={() => handlePageChange(page - 1)}
+                  disabled={page <= 1}
+                  className={clsx(
+                    'w-10 h-10 rounded-lg flex items-center justify-center transition-all',
+                    page <= 1
+                      ? 'text-zinc-300 cursor-not-allowed'
+                      : 'text-text-secondary hover:bg-zinc-100'
+                  )}
+                >
+                  <Icon name="chevronLeft" size="sm" />
+                </button>
+
+                {Array.from({ length: totalPages }, (_, i) => i + 1)
+                  .filter((p) => p === 1 || p === totalPages || Math.abs(p - page) <= 2)
+                  .reduce<(number | 'dots')[]>((acc, p, i, arr) => {
+                    if (i > 0 && p - (arr[i - 1] as number) > 1) acc.push('dots');
+                    acc.push(p);
+                    return acc;
+                  }, [])
+                  .map((item, i) =>
+                    item === 'dots' ? (
+                      <span key={`dots-${i}`} className="px-1 text-text-muted">...</span>
+                    ) : (
+                      <button
+                        key={item}
+                        onClick={() => handlePageChange(item as number)}
+                        className={clsx(
+                          'w-10 h-10 rounded-lg text-sm font-medium transition-all',
+                          page === item
+                            ? 'bg-zinc-900 text-white'
+                            : 'text-text-secondary hover:bg-zinc-100'
+                        )}
+                      >
+                        {item}
+                      </button>
+                    )
+                  )}
+
+                <button
+                  onClick={() => handlePageChange(page + 1)}
+                  disabled={page >= totalPages}
+                  className={clsx(
+                    'w-10 h-10 rounded-lg flex items-center justify-center transition-all',
+                    page >= totalPages
+                      ? 'text-zinc-300 cursor-not-allowed'
+                      : 'text-text-secondary hover:bg-zinc-100'
+                  )}
+                >
+                  <Icon name="chevronRight" size="sm" />
+                </button>
+              </div>
+            )}
           </div>
 
-          {/* ── FAQ Section (dynamic, SEO) ── */}
+          {/* ── FAQ Section ── */}
           {faq && faq.length > 0 && (
             <div className="mt-12 md:mt-16">
               <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-6">
@@ -544,12 +528,19 @@ export function PlotsListingSection({
             </div>
           )}
 
-          {/* ── SEO Content Block (unique per city) ── */}
+          {/* ── SEO Content ── */}
           {seoContent && (
-            <div
-              className="mt-12 md:mt-16 prose prose-zinc max-w-none prose-h2:text-2xl prose-h2:font-bold prose-h2:mb-4 prose-p:text-text-secondary prose-p:leading-relaxed prose-ul:mt-3 prose-li:text-text-secondary prose-strong:text-text-primary"
-              dangerouslySetInnerHTML={{ __html: seoContent }}
-            />
+            <div className="mt-16 md:mt-20">
+              {/* Subtle separator */}
+              <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-12" />
+
+              <div className="seo-content-grid">
+                <div
+                  className="seo-rich-content"
+                  dangerouslySetInnerHTML={{ __html: seoContent }}
+                />
+              </div>
+            </div>
           )}
 
           {/* ── Interlinking — related locations ── */}
@@ -557,26 +548,18 @@ export function PlotsListingSection({
             const loc = LOCATIONS[activeCity];
             if (!loc) return null;
 
-            // Build link URL for a location slug
             const buildLocUrl = (slug: string) => {
               const bc = getLocationBreadcrumb(slug);
               const parts = bc.filter((b) => b.level !== 'wojewodztwo').map((b) => b.slug);
               return `/dzialki/${parts.join('/')}`;
             };
 
-            // Parent location
             const parent = loc.parentSlug ? LOCATIONS[loc.parentSlug] : null;
             const showParent = parent && parent.level !== 'wojewodztwo';
-
-            // Sibling locations (same parent, excluding self)
             const siblings = parent?.children
               ?.map((s) => LOCATIONS[s])
               .filter((s) => s && s.slug !== loc.slug) || [];
-
-            // Children locations
             const children = loc.children?.map((c) => LOCATIONS[c]).filter(Boolean) || [];
-
-            // All plots main page link (always show)
             const hasLinks = showParent || siblings.length > 0 || children.length > 0;
             if (!hasLinks) return null;
 
@@ -586,7 +569,6 @@ export function PlotsListingSection({
                   Działki w okolicy
                 </h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                  {/* Parent */}
                   {showParent && (
                     <Link
                       href={buildLocUrl(parent.slug)}
@@ -598,7 +580,6 @@ export function PlotsListingSection({
                       </span>
                     </Link>
                   )}
-                  {/* Children */}
                   {children.map((child) => (
                     <Link
                       key={child.slug}
@@ -611,7 +592,6 @@ export function PlotsListingSection({
                       </span>
                     </Link>
                   ))}
-                  {/* Siblings */}
                   {siblings.map((sib) => (
                     <Link
                       key={sib.slug}
@@ -624,7 +604,6 @@ export function PlotsListingSection({
                       </span>
                     </Link>
                   ))}
-                  {/* All plots link */}
                   <Link
                     href="/dzialki"
                     className="group flex items-center gap-2 bg-zinc-50 rounded-xl border border-zinc-200/60 px-4 py-3.5 hover:border-primary/40 hover:shadow-sm transition-all"
@@ -648,7 +627,6 @@ export function PlotsListingSection({
           {/* Fullscreen toolbar */}
           <div className="shrink-0 border-b border-zinc-200 bg-white px-4 py-3 relative z-[1200]">
             <div className="flex items-center gap-3">
-              {/* Close button */}
               <button
                 onClick={() => { setIsFullscreen(false); setMapVisibleSlugs(null); }}
                 className="w-9 h-9 rounded-lg bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center transition-colors shrink-0"
@@ -657,7 +635,6 @@ export function PlotsListingSection({
                 <Icon name="x" size="sm" className="text-zinc-600" />
               </button>
 
-              {/* Location search — no navigateToSubpage in map mode, filter in place */}
               <LocationSearch
                 value={locationSelection}
                 onChange={handleLocationChange}
@@ -666,7 +643,6 @@ export function PlotsListingSection({
                 className="w-72 md:w-96 shrink-0"
               />
 
-              {/* Secondary filters */}
               <div className="hidden md:flex items-center gap-1">
                 {PRICE_RANGES.map((range, i) => {
                   const isActive = filters.priceMin === range.min && filters.priceMax === range.max;
@@ -687,43 +663,20 @@ export function PlotsListingSection({
                 })}
               </div>
 
-              {/* Sort */}
               <div className="relative hidden md:block">
-                <button
-                  onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-100 rounded-md text-[11px] font-medium text-text-secondary hover:bg-zinc-200 transition-all whitespace-nowrap"
-                >
-                  <Icon name="arrowUpDown" size="sm" />
-                  {currentSort.label}
-                </button>
-                {sortDropdownOpen && (
-                  <>
-                    <div className="fixed inset-0 z-20" onClick={() => setSortDropdownOpen(false)} />
-                    <div className="absolute right-0 top-full mt-1 w-48 bg-white rounded-xl shadow-xl border border-zinc-200 py-1 z-30">
-                      {SORT_OPTIONS.map((option) => (
-                        <button
-                          key={option.id}
-                          onClick={() => handleSortChange(option.id)}
-                          className={clsx(
-                            'w-full text-left px-4 py-2 text-sm transition-colors',
-                            filters.sortBy === option.id
-                              ? 'bg-primary/10 text-primary font-medium'
-                              : 'text-text-secondary hover:bg-zinc-50'
-                          )}
-                        >
-                          {option.label}
-                        </button>
-                      ))}
-                    </div>
-                  </>
-                )}
+                <FilterDropdown
+                  label="Sortowanie"
+                  options={SORT_OPTIONS.map((s) => ({ label: s.label }))}
+                  activeIndex={activeSortIdx >= 0 ? activeSortIdx : 0}
+                  onSelect={(i) => handleSortChange(SORT_OPTIONS[i].id)}
+                  align="right"
+                />
               </div>
             </div>
           </div>
 
           {/* Fullscreen content — sidebar + map */}
           <div className="flex-1 flex overflow-hidden">
-            {/* Sidebar — only on large screens (1024px+), tablets get mobile drawer */}
             <div className="w-[480px] shrink-0 overflow-y-auto border-r border-zinc-200 bg-white hidden lg:block">
               <div className="sticky top-0 bg-white z-10 px-4 py-3 border-b border-zinc-100">
                 <p className="text-sm font-semibold text-text-primary">
@@ -751,7 +704,6 @@ export function PlotsListingSection({
               )}
             </div>
 
-            {/* Map */}
             <div className="flex-1 relative">
               <PlotMap
                 ref={fullscreenMapHandleRef}
@@ -763,7 +715,6 @@ export function PlotsListingSection({
                 onVisiblePlotsChange={handleVisiblePlotsChange}
               />
 
-              {/* Mobile: bottom drawer trigger in fullscreen */}
               <button
                 onClick={() => setMobileDrawerOpen(true)}
                 className="absolute bottom-4 left-4 right-4 bg-white rounded-2xl shadow-lg border border-zinc-200/60 px-5 py-3.5 flex items-center justify-between z-[1100] lg:hidden"
@@ -786,7 +737,7 @@ export function PlotsListingSection({
         </div>
       )}
 
-      {/* ── Floating "Pokaż na mapie" button — opens fullscreen map ── */}
+      {/* ── Floating "Pokaż na mapie" button ── */}
       {!isFullscreen && (
         <button
           onClick={() => setIsFullscreen(true)}
@@ -800,15 +751,12 @@ export function PlotsListingSection({
       {/* ── Mobile Bottom Drawer (Uber-style) ── */}
       {mobileDrawerOpen && (
         <div className="fixed inset-0 z-[1200] lg:hidden">
-          {/* Backdrop */}
           <div
             className="absolute inset-0 bg-black/40 backdrop-blur-sm"
             onClick={() => setMobileDrawerOpen(false)}
           />
 
-          {/* Drawer */}
           <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl max-h-[75vh] flex flex-col animate-slide-up">
-            {/* Handle + header */}
             <div className="sticky top-0 bg-white rounded-t-3xl z-10 pt-3 pb-2 px-5 border-b border-zinc-100">
               <div className="w-10 h-1 rounded-full bg-zinc-300 mx-auto mb-3" />
               <div className="flex items-center justify-between">
@@ -823,7 +771,6 @@ export function PlotsListingSection({
                 </button>
               </div>
 
-              {/* Mobile secondary filters */}
               <div className="flex gap-2 mt-3 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-hide">
                 {PRICE_RANGES.slice(1).map((range, i) => {
                   const isActive = filters.priceMin === range.min && filters.priceMax === range.max;
@@ -868,7 +815,6 @@ export function PlotsListingSection({
               </div>
             </div>
 
-            {/* Scrollable card list */}
             <div className="flex-1 overflow-y-auto">
               {sidebarPlots.length > 0 ? (
                 sidebarPlots.map((plot) => (

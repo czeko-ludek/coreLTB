@@ -1002,3 +1002,112 @@
   background: #fafafa !important;
   color: #18181b !important;
 }
+
+/* ======================================================================
+   SEO CONTENT — Rich styled content for plot listing pages
+   ====================================================================== */
+
+.seo-content-grid {
+  max-width: 100%;
+}
+
+.seo-rich-content h2 {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: #18181b;
+  margin-bottom: 0.75rem;
+  margin-top: 2.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f4f4f5;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.seo-rich-content h2::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 1.375rem;
+  background: var(--color-primary);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.seo-rich-content h2:first-child {
+  margin-top: 0;
+}
+
+.seo-rich-content h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #27272a;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.seo-rich-content p {
+  color: #52525b;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+  font-size: 0.9375rem;
+}
+
+.seo-rich-content strong {
+  color: #18181b;
+  font-weight: 600;
+}
+
+.seo-rich-content a {
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.seo-rich-content a:hover {
+  color: #18181b;
+}
+
+.seo-rich-content ul {
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.seo-rich-content ul li {
+  position: relative;
+  padding: 0.875rem 1rem 0.875rem 1.25rem;
+  background: #fafaf9;
+  border: 1px solid #f4f4f5;
+  border-radius: 0.5rem;
+  color: #52525b;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  border-left: 3px solid var(--color-primary);
+}
+
+.seo-rich-content ul li strong:first-child {
+  display: inline;
+  color: #18181b;
+}
+
+/* Two-column layout on desktop for the checklist */
+@media (min-width: 768px) {
+  .seo-content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .seo-rich-content ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+}
