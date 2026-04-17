@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { AboutIntroSection } from "@/components/sections/AboutIntroSection";
 import { BusinessResponsibilitySection } from "@/components/sections/BusinessResponsibilitySection";
 import { CompetenciesSection } from "@/components/sections/CompetenciesSection";
+import { FounderSection } from "@/components/sections/FounderSection";
 import { PageHeader, Breadcrumbs } from "@/components/shared";
 
 export const metadata: Metadata = {
 	title: "O firmie – Budowa Domów Śląsk i Małopolska | CoreLTB Builders",
 	description:
-		"Poznaj inżynierów stojących za marką CoreLTB. 15 lat doświadczenia w budownictwie na Śląsku i w Małopolsce, własne zaplecze sprzętowe i transparentny model Design & Build.",
+		"Poznaj Tomasza Lędzkiego i zespół inżynierów CoreLTB Builders. Od nadzoru budowlanego i wieżowców po domy jednorodzinne — 15 lat doświadczenia na Śląsku, własne zaplecze sprzętowe i model Design & Build.",
 	alternates: { canonical: "https://coreltb.pl/o-nas" },
 };
 
@@ -137,6 +138,7 @@ export default function AboutPage() {
 
 			<PageHeader {...pageHeaderData} />
 			<AboutIntroSection {...aboutIntroData} />
+			<FounderSection />
 			<CompetenciesSection {...competenciesData} />
 			<BusinessResponsibilitySection {...businessResponsibilityData} />
 		</main>

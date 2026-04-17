@@ -175,7 +175,7 @@ Scalable system for plot (land) listings at `/dzialki` with hierarchical locatio
 ```
 data/plots/
 ├── types.ts              — Plot, PlotFilters, PlotSortBy, PlotSource, PlotMedia
-├── real-data.ts          — all plot data (~120 plots from 3 agencies)
+├── real-data.ts          — all plot data (129 plots from 4 agencies)
 ├── locations.ts          — hierarchical location tree (wojewodztwo > powiat > gmina > miejscowosc)
 ├── index.ts              — public API: allPlots, filterAndSortPlots(), getPlotsByLocation()
 ├── seo.ts                — per-city SEO config (meta titles, FAQ generator)
@@ -184,10 +184,48 @@ data/plots/
 └── helpers.ts            — price formatting, description cleaning, address extraction
 ```
 
-**Data sources (3 agencies):**
-- `l-r` — L-R Nieruchomosci
-- `optima` — Optima Nieruchomosci
-- `dom-ex` — Domex Nieruchomosci
+**Data sources (4 agencies, 129 plots):**
+| Agency | Source ID | Plots | Scraper | Notes |
+|--------|-----------|-------|---------|-------|
+| L-R Nieruchomości | `l-r` | 37 | `scrape-malachit.mjs` | Sitemap-based, paginated listing |
+| Domex Nieruchomości | `dom-ex` | 79 | `scrape-plots.mjs` | Galactica Virgo CMS, API-like listing |
+| Optima Nieruchomości | `optima` | 8 | `scrape-plots.mjs` (WordPress) | WordPress Estate plugin, REST-like |
+| VipHouse Nieruchomości | `viphouse` | 5 | `add-viphouse.mjs` | Manual HTML parsing, SSL expired (--insecure) |
+
+### Data Pipeline (scrape → geocode → images → AI → TypeScript)
+
+**Full pipeline for adding/updating plots:**
+```
+1. SCRAPE        → scripts/scrape-malachit.mjs (L-R) or scrape-plots.mjs (Domex/Optima) or add-viphouse.mjs
+                   Output: scripts/plots-raw.json or plots-scraped.json
+2. GEOCODE       → scripts/geocode-plots.mjs or geocode-plots-v2.mjs
+                   Google Maps Geocoding API, output: plots-geocoded-v2.json
+3. DOWNLOAD IMG  → scripts/download-plot-images.mjs
+                   Downloads original JPGs from agency websites
+4. OPTIMIZE IMG  → scripts/optimize-plot-images.mjs (sharp)
+                   JPG → WebP: thumbs 600px q82, full 1200px q80
+                   Output: public/images/dzialki/{slug}/thumb-*.webp, *.webp
+5. GENERATE TS   → scripts/generate-plots-ts.mjs
+                   Outputs TypeScript entries for real-data.ts
+6. AI ENRICH     → scripts/rewrite-descriptions.mjs (Gemini API)
+                   Rewrites raw descriptions to structured 4-section HTML
+                   Model: gemini-3-flash-preview, temp 0.4
+                   Sections: Lokalizacja, Charakterystyka, Media, Dojazd
+                   Flags: --slug=X, --prefix=X, --dry-run
+                   CRLF-safe (handles both \r\n and \n line endings)
+```
+
+**Key scripts in `scripts/`:**
+- `scrape-malachit.mjs` — L-R scraper (sitemap → listing pages → detail pages)
+- `scrape-plots.mjs` — Domex + Optima scraper (handles both CMS types)
+- `add-viphouse.mjs` — VipHouse scraper + image downloader (sharp WebP conversion)
+- `download-plot-images.mjs` — batch image downloader from source URLs
+- `optimize-plot-images.mjs` — sharp JPG→WebP optimizer (thumbs + full)
+- `geocode-plots.mjs` / `geocode-plots-v2.mjs` — Google Maps Geocoding
+- `generate-plots-ts.mjs` — JSON → TypeScript data file generator
+- `rewrite-descriptions.mjs` — Gemini API description rewriter (structured HTML)
+- `enrich-plots.mjs` / `enrich-plots-v2.mjs` — metadata enrichment scripts
+- `rebuild-real-data.mjs` — full rebuild of real-data.ts from scraped sources
 
 **URL structure:** `/dzialki/[powiat]/[gmina]/[miejscowosc]` or `/dzialki/[plot-slug]` for detail pages
 
@@ -195,20 +233,22 @@ data/plots/
 
 **Components** in `components/sections/plots/`:
 - `PlotsListingSection.tsx` — main orchestrator (filters, grid, pagination, fullscreen map, mobile drawer)
-- `FilterDropdown.tsx` — generic dropdown with WCAG keyboard nav (ArrowUp/Down, Enter/Space, Escape, role=listbox)
+- `FilterDropdown.tsx` — shared dropdown with WCAG keyboard nav (ArrowUp/Down, Enter/Space, Escape, role=listbox). Also used by `ProjectsListingSection.tsx` for sort dropdown.
 - `PlotsFAQ.tsx` — FAQ accordion section
 - `PlotsSeoContent.tsx` — styled SEO content HTML renderer
 - `PlotsInterlinking.tsx` — "Dzialki w okolicy" related locations grid (parent/children/siblings)
 - `PlotCard.tsx` — plot listing card with image, price, area, media badges
 - `PlotMap.tsx` — Leaflet map with markers, clustering, boundary overlay (dynamic import, no SSR)
 - `PlotDetailPage.tsx` — individual plot detail page
+- `PlotDetailMap.tsx` — detail page map with approximate location circle + fullscreen toggle. Map container uses `relative z-0` to create stacking context (prevents Leaflet z-index 400+ from overlapping sticky header).
+- `PlotDetails.tsx` — detail page body with GA4 analytics tracking on all CTA buttons (`trackPlotView`, `trackPlotCalculatorClick`, `trackPlotAnalysisClick`, `trackPlotContactClick`)
 - `LocationSearch.tsx` — autocomplete location search with popular suggestions
 - `ProjectPlotsCrossLink.tsx` — cross-link from projects to matching plots
 - `PlotProjectsCrossLink.tsx` — cross-link from plots to matching projects
 
 **Sorting:** Default is `mixed` (round-robin interleave by source agency for diverse listings). Options: mixed, newest, price-asc/desc, area-asc/desc.
 
-**Images:** All plot images in `public/images/dzialki/` as optimized WebP (thumbs 400px, full 1200px). Optimization script: `scripts/optimize-plot-images.mjs`
+**Images:** All plot images in `public/images/dzialki/` as optimized WebP (thumbs 600px q82, full 1200px q80). Pipeline: download → sharp optimize → WebP.
 
 ### SEO Content System
 Intelligent, unique SEO descriptions for all ~87 location listing pages.
@@ -231,7 +271,9 @@ Intelligent, unique SEO descriptions for all ~87 location listing pages.
 
 **Schema.org:** BreadcrumbList + WebPage + Product/AggregateOffer (listing) or RealEstateListing (detail) + FAQPage
 
-**Sitemap:** 205 /dzialki URLs (87 location + 116 detail + 2 main), priority 0.6-0.7, weekly
+**Sitemap:** 217 /dzialki URLs (87 location + 129 detail + 1 main), priority 0.6-0.7, weekly
+
+**Google Indexing:** `scripts/submit-indexing.mjs` — batch submission to Google Indexing API (200/day). Tracks history in `scripts/indexing-history.json`. Flags: `--filter`, `--limit`, `--dry-run`, `--status`, `--all`, `--reset`.
 
 **Navigation:** "Dzialki" in main header nav + "Dzialki budowlane" in footer
 
