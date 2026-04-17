@@ -72,7 +72,7 @@ export interface Plot {
   source?: PlotSource;
 }
 
-export type PlotSortBy = 'newest' | 'price-asc' | 'price-desc' | 'area-asc' | 'area-desc';
+export type PlotSortBy = 'mixed' | 'newest' | 'price-asc' | 'price-desc' | 'area-asc' | 'area-desc';
 
 export interface PlotFilters {
   city?: string;

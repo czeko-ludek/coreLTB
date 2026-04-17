@@ -53,6 +53,7 @@ const AREA_RANGES = [
 ];
 
 const SORT_OPTIONS: { id: PlotSortBy; label: string }[] = [
+  { id: 'mixed', label: 'Polecane' },
   { id: 'newest', label: 'Najnowsze' },
   { id: 'price-asc', label: 'Cena rosnąco' },
   { id: 'price-desc', label: 'Cena malejąco' },
@@ -115,7 +116,7 @@ export function PlotsListingSection({
   const [locationSelection, setLocationSelection] = useState<LocationSelection | null>(initialSelection);
 
   const [filters, setFilters] = useState<PlotFilters>({
-    sortBy: 'newest',
+    sortBy: 'mixed',
   });
   const [page, setPage] = useState(1);
   const [highlightedSlug, setHighlightedSlug] = useState<string | null>(null);

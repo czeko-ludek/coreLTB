@@ -86,9 +86,40 @@ export function filterAndSortPlots(plots: Plot[], filters: PlotFilters): Plot[] 
       result.sort((a, b) => b.area - a.area);
       break;
     case 'newest':
-    default:
       result.sort((a, b) => b.dateAdded - a.dateAdded);
       break;
+    case 'mixed':
+    default: {
+      // Deterministic shuffle — mix sources evenly so listings look diverse
+      // Uses seeded pseudo-random based on slug to keep order stable across renders
+      const sources = [...new Set(result.map((p) => p.source || 'unknown'))];
+      if (sources.length > 1) {
+        // Round-robin by source, then by dateAdded within each source
+        const buckets = new Map<string, typeof result>();
+        for (const s of sources) buckets.set(s, []);
+        for (const p of result) buckets.get(p.source || 'unknown')!.push(p);
+        // Sort each bucket by newest first
+        for (const bucket of buckets.values()) bucket.sort((a, b) => b.dateAdded - a.dateAdded);
+        // Interleave
+        const interleaved: typeof result = [];
+        let added = true;
+        let idx = 0;
+        while (added) {
+          added = false;
+          for (const bucket of buckets.values()) {
+            if (idx < bucket.length) {
+              interleaved.push(bucket[idx]);
+              added = true;
+            }
+          }
+          idx++;
+        }
+        result = interleaved;
+      } else {
+        result.sort((a, b) => b.dateAdded - a.dateAdded);
+      }
+      break;
+    }
   }
 
   return result;
