@@ -1,3 +1,12 @@
+/** Source agency/portal for the plot listing */
+export type PlotSource = 'l-r' | 'optima' | 'dom-ex';
+
+export const plotSources: { id: PlotSource; label: string; color: string }[] = [
+  { id: 'l-r', label: 'L-R Nieruchomości', color: '#2563eb' },
+  { id: 'optima', label: 'Optima Nieruchomości', color: '#7c3aed' },
+  { id: 'dom-ex', label: 'Domex Nieruchomości', color: '#059669' },
+];
+
 export interface PlotMedia {
   water: boolean;
   electricity: boolean;
@@ -59,6 +68,8 @@ export interface Plot {
   sourceUrl?: string;
   /** Reference ID from source (e.g. BPP-GS-XXX) */
   refId?: string;
+  /** Source agency/portal */
+  source?: PlotSource;
 }
 
 export type PlotSortBy = 'newest' | 'price-asc' | 'price-desc' | 'area-asc' | 'area-desc';
@@ -70,5 +81,6 @@ export interface PlotFilters {
   areaMin?: number;
   areaMax?: number;
   availability?: 'dostepna' | 'rezerwacja' | 'sprzedana';
+  source?: PlotSource;
   sortBy?: PlotSortBy;
 }

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Icon } from '@/components/ui';
 import type { IconName } from '@/components/ui/Icon';
 import type { Plot } from '@/data/plots/types';
+import { plotSources } from '@/data/plots/types';
 import {
   extractAddress,
   extractDistrict,
@@ -174,6 +175,15 @@ export function PlotDetails({ plot }: PlotDetailsProps) {
         <p className="text-zinc-400 text-sm md:text-base mt-1">
           {plot.pricePerM2} zł/m<sup className="text-xs">2</sup> &middot; {plot.area.toLocaleString('pl-PL')} m<sup className="text-xs">2</sup>
         </p>
+        {(() => {
+          const src = plot.source ? plotSources.find((s) => s.id === plot.source) : undefined;
+          if (!src) return null;
+          return (
+            <p className="text-zinc-500 text-xs mt-3 pt-3 border-t border-zinc-700/50">
+              Oferta: {src.label}
+            </p>
+          );
+        })()}
       </div>
 
       {/* Quick specs in sidebar */}

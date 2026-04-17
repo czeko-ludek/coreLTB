@@ -14,7 +14,7 @@
 import type { Plot } from './types';
 import type { LocationEntry } from './locations';
 import { LOCATIONS } from './locations';
-import { getRegionData, getRegionDataWithFallback, type RegionData } from './seo-regions';
+import { getRegionDataWithFallback, type RegionData } from './seo-regions';
 
 // ── Dynamic stats from plot data ──
 
@@ -48,10 +48,16 @@ function computeStats(plots: Plot[]): PlotStats {
   const prices = available.map((p) => p.price);
   const areas = available.map((p) => p.area);
   const pricesPerM2 = available.map((p) => p.pricePerM2);
+  const len = available.length;
+
+  // Pre-compute counts to avoid duplicate iterations
+  const mpzpCount = available.filter((p) => p.mpzp === 'tak').length;
+  const fullMediaCount = available.filter((p) => p.media.water && p.media.electricity && p.media.gas && p.media.sewer).length;
+  const flatTerrainCount = available.filter((p) => p.terrain?.toLowerCase().includes('płaski') || p.terrain?.toLowerCase().includes('plaski')).length;
 
   return {
     total: plots.length,
-    available: available.length,
+    available: len,
     minPrice: prices.length > 0 ? Math.min(...prices) : 0,
     maxPrice: prices.length > 0 ? Math.max(...prices) : 0,
     avgPrice: prices.length > 0 ? Math.round(prices.reduce((a, b) => a + b, 0) / prices.length) : 0,
@@ -59,16 +65,16 @@ function computeStats(plots: Plot[]): PlotStats {
     minArea: areas.length > 0 ? Math.min(...areas) : 0,
     maxArea: areas.length > 0 ? Math.max(...areas) : 0,
     avgArea: areas.length > 0 ? Math.round(areas.reduce((a, b) => a + b, 0) / areas.length) : 0,
-    mpzpCount: available.filter((p) => p.mpzp === 'tak').length,
-    mpzpPercent: available.length > 0 ? Math.round((available.filter((p) => p.mpzp === 'tak').length / available.length) * 100) : 0,
-    fullMediaCount: available.filter((p) => p.media.water && p.media.electricity && p.media.gas && p.media.sewer).length,
-    fullMediaPercent: available.length > 0 ? Math.round((available.filter((p) => p.media.water && p.media.electricity && p.media.gas && p.media.sewer).length / available.length) * 100) : 0,
+    mpzpCount,
+    mpzpPercent: len > 0 ? Math.round((mpzpCount / len) * 100) : 0,
+    fullMediaCount,
+    fullMediaPercent: len > 0 ? Math.round((fullMediaCount / len) * 100) : 0,
     waterCount: available.filter((p) => p.media.water).length,
     electricityCount: available.filter((p) => p.media.electricity).length,
     gasCount: available.filter((p) => p.media.gas).length,
     sewerCount: available.filter((p) => p.media.sewer).length,
-    flatTerrainCount: available.filter((p) => p.terrain?.toLowerCase().includes('płaski') || p.terrain?.toLowerCase().includes('plaski')).length,
-    flatTerrainPercent: available.length > 0 ? Math.round((available.filter((p) => p.terrain?.toLowerCase().includes('płaski') || p.terrain?.toLowerCase().includes('plaski')).length / available.length) * 100) : 0,
+    flatTerrainCount,
+    flatTerrainPercent: len > 0 ? Math.round((flatTerrainCount / len) * 100) : 0,
     asphaltAccessCount: available.filter((p) => p.access?.toLowerCase().includes('asfalt')).length,
     cities: [...new Set(available.map((p) => p.city))],
     sources: [...new Set(available.filter((p) => p.source).map((p) => p.source!))],

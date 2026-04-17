@@ -1008,7 +1008,7 @@
    ====================================================================== */
 
 .seo-content-grid {
-  max-width: 100%;
+  max-width: 56rem;
 }
 
 .seo-rich-content h2 {
@@ -1099,12 +1099,6 @@
 
 /* Two-column layout on desktop for the checklist */
 @media (min-width: 768px) {
-  .seo-content-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
   .seo-rich-content ul {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

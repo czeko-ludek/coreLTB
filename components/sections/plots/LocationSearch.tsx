@@ -268,7 +268,7 @@ export const LocationSearch = React.memo(function LocationSearch({
   const showPopular = isOpen && debouncedQuery.length < 2;
 
   return (
-    <div ref={wrapperRef} className={clsx('relative z-[100]', className)}>
+    <div ref={wrapperRef} className={clsx('relative z-30', className)}>
       {/* ── Input area ── */}
       <div
         className={clsx(
@@ -350,7 +350,7 @@ export const LocationSearch = React.memo(function LocationSearch({
       {(showDropdown || showPopular) && (
         <div
           ref={dropdownRef}
-          className="absolute left-0 top-full mt-1.5 bg-white rounded-xl shadow-xl border border-zinc-200 overflow-hidden z-[200] max-h-[320px] overflow-y-auto min-w-[320px] w-full"
+          className="absolute left-0 top-full mt-1.5 bg-white rounded-xl shadow-xl border border-zinc-200 overflow-hidden z-40 max-h-[320px] overflow-y-auto min-w-[320px] w-full"
           role="listbox"
         >
           {/* Popular locations (no query) */}

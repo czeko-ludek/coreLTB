@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { clsx } from 'clsx';
 import { Icon } from '@/components/ui';
 import type { Plot } from '@/data/plots/types';
+import { plotSources } from '@/data/plots/types';
 
 interface PlotCardProps {
   plot: Plot;
@@ -19,12 +20,6 @@ interface PlotCardProps {
   /** Stagger delay in seconds */
   delay?: number;
 }
-
-const AVAILABILITY_BADGE: Record<string, { label: string; color: string }> = {
-  dostepna: { label: 'Dostepna', color: '#22c55e' },
-  rezerwacja: { label: 'Rezerwacja', color: '#dfbb68' },
-  sprzedana: { label: 'Sprzedana', color: '#71717a' },
-};
 
 function formatPrice(price: number): string {
   return price.toLocaleString('pl-PL');
@@ -44,7 +39,7 @@ export const PlotCard = React.memo(function PlotCard({
   inView = true,
   delay = 0,
 }: PlotCardProps) {
-  const badge = AVAILABILITY_BADGE[plot.availability];
+  const sourceMeta = plot.source ? plotSources.find((s) => s.id === plot.source) : undefined;
   const mediaLabels: string[] = [];
   if (plot.media.water) mediaLabels.push('Woda');
   if (plot.media.electricity) mediaLabels.push('Prad');
@@ -81,16 +76,6 @@ export const PlotCard = React.memo(function PlotCard({
               <Icon name="mapPin" size="lg" className="text-zinc-300" />
             </div>
           )}
-
-          {/* Badges on image */}
-          <div className="absolute top-2.5 left-2.5 flex gap-1.5">
-            <span
-              className="text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-md shadow-sm"
-              style={{ backgroundColor: badge.color, color: '#fff' }}
-            >
-              {badge.label}
-            </span>
-          </div>
 
           {/* Image count */}
           {plot.images.length > 0 && (
@@ -144,6 +129,13 @@ export const PlotCard = React.memo(function PlotCard({
               </span>
             ))}
           </div>
+
+          {/* Source label */}
+          {sourceMeta && (
+            <p className="text-[10px] text-text-muted">
+              {sourceMeta.label}
+            </p>
+          )}
         </div>
       </div>
     );
@@ -178,16 +170,6 @@ export const PlotCard = React.memo(function PlotCard({
             <Icon name="mapPin" size="xl" className="text-zinc-200" />
           </div>
         )}
-
-        {/* Availability badge — top left */}
-        <div className="absolute top-3 left-3 z-10">
-          <span
-            className="text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-md shadow-sm"
-            style={{ backgroundColor: badge.color, color: '#fff' }}
-          >
-            {badge.label}
-          </span>
-        </div>
 
         {/* Image count */}
         {plot.images.length > 0 && (
@@ -260,8 +242,13 @@ export const PlotCard = React.memo(function PlotCard({
           </span>
         </div>
 
-        {/* Arrow indicator */}
-        <div className="flex items-center justify-end mt-4 pt-4 border-t border-zinc-100">
+        {/* Footer — source + arrow */}
+        <div className="flex items-center justify-between mt-4 pt-4 border-t border-zinc-100">
+          {sourceMeta ? (
+            <span className="text-[11px] text-text-muted">
+              {sourceMeta.label}
+            </span>
+          ) : <span />}
           <span className="w-8 h-8 rounded-full border border-zinc-200 flex items-center justify-center text-text-muted group-hover:bg-primary group-hover:border-primary group-hover:text-white transition-all duration-300">
             <Icon name="arrowRight" size="sm" />
           </span>

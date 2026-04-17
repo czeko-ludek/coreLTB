@@ -13,7 +13,11 @@ import type { PlotFAQItem } from '@/data/plots/seo';
 import { PlotCard } from './PlotCard';
 import { LocationSearch, type LocationSelection } from './LocationSearch';
 import type { PlotMapHandle } from './PlotMap';
-import { LOCATIONS, getLocationCities, getLocationDistricts, getLocationBreadcrumb } from '@/data/plots/locations';
+import { LOCATIONS, getLocationCities, getLocationDistricts } from '@/data/plots/locations';
+import { FilterDropdown } from './FilterDropdown';
+import { PlotsFAQ } from './PlotsFAQ';
+import { PlotsSeoContent } from './PlotsSeoContent';
+import { PlotsInterlinking } from './PlotsInterlinking';
 
 // Dynamic import — Leaflet doesn't support SSR
 const PlotMap = dynamic(() => import('./PlotMap').then((m) => m.PlotMap), {
@@ -60,65 +64,6 @@ const SOURCE_OPTIONS: { id: PlotSource | 'all'; label: string }[] = [
   { id: 'all', label: 'Wszystkie biura' },
   ...plotSources.map((s) => ({ id: s.id, label: s.label })),
 ];
-
-/** Generic dropdown component */
-function FilterDropdown({
-  label,
-  options,
-  activeIndex,
-  onSelect,
-  align = 'left',
-}: {
-  label: string;
-  options: { label: string }[];
-  activeIndex: number;
-  onSelect: (index: number) => void;
-  align?: 'left' | 'right';
-}) {
-  const [open, setOpen] = useState(false);
-  const isFiltered = activeIndex > 0;
-
-  return (
-    <div className="relative">
-      <button
-        onClick={() => setOpen(!open)}
-        className={clsx(
-          'flex items-center justify-between gap-1.5 px-3 py-2 bg-white rounded-lg text-sm font-medium border transition-all whitespace-nowrap',
-          isFiltered
-            ? 'border-zinc-900 text-zinc-900'
-            : 'border-zinc-200 text-text-secondary hover:border-zinc-400'
-        )}
-      >
-        <span>{options[activeIndex]?.label || label}</span>
-        <Icon name={open ? 'chevronUp' : 'chevronDown'} size="sm" />
-      </button>
-      {open && (
-        <>
-          <div className="fixed inset-0 z-20" onClick={() => setOpen(false)} />
-          <div className={clsx(
-            'absolute top-full mt-1 w-52 bg-white rounded-xl shadow-xl border border-zinc-200 py-1 z-30',
-            align === 'right' ? 'right-0' : 'left-0'
-          )}>
-            {options.map((opt, i) => (
-              <button
-                key={i}
-                onClick={() => { onSelect(i); setOpen(false); }}
-                className={clsx(
-                  'w-full text-left px-4 py-2.5 text-sm transition-colors',
-                  activeIndex === i
-                    ? 'bg-primary/10 text-primary font-medium'
-                    : 'text-text-secondary hover:bg-zinc-50'
-                )}
-              >
-                {opt.label}
-              </button>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
 
 interface BreadcrumbItem {
   label: string;
@@ -277,8 +222,8 @@ export function PlotsListingSection({
     setHighlightedSlug(slug);
   }, []);
 
-  const handlePlotClick = useCallback((slug: string) => {
-    console.log('Plot clicked:', slug);
+  const handlePlotClick = useCallback((_slug: string) => {
+    // Future: navigate to plot detail or show preview
   }, []);
 
   const handleVisiblePlotsChange = useCallback((slugs: string[]) => {
@@ -498,125 +443,13 @@ export function PlotsListingSection({
           </div>
 
           {/* ── FAQ Section ── */}
-          {faq && faq.length > 0 && (
-            <div className="mt-12 md:mt-16">
-              <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-6">
-                Najczęściej zadawane pytania
-              </h2>
-              <div className="space-y-4">
-                {faq.map((item, i) => (
-                  <details
-                    key={i}
-                    className="group bg-white rounded-2xl border border-zinc-200/60 overflow-hidden"
-                  >
-                    <summary className="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
-                      <h3 className="text-base font-semibold text-text-primary pr-4">
-                        {item.question}
-                      </h3>
-                      <Icon
-                        name="chevronDown"
-                        size="sm"
-                        className="text-text-muted shrink-0 transition-transform duration-300 group-open:rotate-180"
-                      />
-                    </summary>
-                    <div className="px-6 pb-5 text-text-secondary leading-relaxed">
-                      {item.answer}
-                    </div>
-                  </details>
-                ))}
-              </div>
-            </div>
-          )}
+          {faq && faq.length > 0 && <PlotsFAQ faq={faq} />}
 
           {/* ── SEO Content ── */}
-          {seoContent && (
-            <div className="mt-16 md:mt-20">
-              {/* Subtle separator */}
-              <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-12" />
-
-              <div className="seo-content-grid">
-                <div
-                  className="seo-rich-content"
-                  dangerouslySetInnerHTML={{ __html: seoContent }}
-                />
-              </div>
-            </div>
-          )}
+          {seoContent && <PlotsSeoContent content={seoContent} />}
 
           {/* ── Interlinking — related locations ── */}
-          {activeCity && (() => {
-            const loc = LOCATIONS[activeCity];
-            if (!loc) return null;
-
-            const buildLocUrl = (slug: string) => {
-              const bc = getLocationBreadcrumb(slug);
-              const parts = bc.filter((b) => b.level !== 'wojewodztwo').map((b) => b.slug);
-              return `/dzialki/${parts.join('/')}`;
-            };
-
-            const parent = loc.parentSlug ? LOCATIONS[loc.parentSlug] : null;
-            const showParent = parent && parent.level !== 'wojewodztwo';
-            const siblings = parent?.children
-              ?.map((s) => LOCATIONS[s])
-              .filter((s) => s && s.slug !== loc.slug) || [];
-            const children = loc.children?.map((c) => LOCATIONS[c]).filter(Boolean) || [];
-            const hasLinks = showParent || siblings.length > 0 || children.length > 0;
-            if (!hasLinks) return null;
-
-            return (
-              <div className="mt-12 md:mt-16">
-                <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-6">
-                  Działki w okolicy
-                </h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                  {showParent && (
-                    <Link
-                      href={buildLocUrl(parent.slug)}
-                      className="group flex items-center gap-2 bg-white rounded-xl border border-zinc-200/60 px-4 py-3.5 hover:border-primary/40 hover:shadow-sm transition-all"
-                    >
-                      <Icon name="chevronLeft" size="sm" className="text-text-muted group-hover:text-primary shrink-0" />
-                      <span className="text-sm font-medium text-text-primary group-hover:text-primary truncate">
-                        {parent.name}
-                      </span>
-                    </Link>
-                  )}
-                  {children.map((child) => (
-                    <Link
-                      key={child.slug}
-                      href={buildLocUrl(child.slug)}
-                      className="group flex items-center gap-2 bg-white rounded-xl border border-zinc-200/60 px-4 py-3.5 hover:border-primary/40 hover:shadow-sm transition-all"
-                    >
-                      <Icon name="mapPin" size="sm" className="text-primary/60 group-hover:text-primary shrink-0" />
-                      <span className="text-sm font-medium text-text-primary group-hover:text-primary truncate">
-                        {child.name}
-                      </span>
-                    </Link>
-                  ))}
-                  {siblings.map((sib) => (
-                    <Link
-                      key={sib.slug}
-                      href={buildLocUrl(sib.slug)}
-                      className="group flex items-center gap-2 bg-white rounded-xl border border-zinc-200/60 px-4 py-3.5 hover:border-primary/40 hover:shadow-sm transition-all"
-                    >
-                      <Icon name="mapPin" size="sm" className="text-text-muted group-hover:text-primary shrink-0" />
-                      <span className="text-sm font-medium text-text-primary group-hover:text-primary truncate">
-                        {sib.name}
-                      </span>
-                    </Link>
-                  ))}
-                  <Link
-                    href="/dzialki"
-                    className="group flex items-center gap-2 bg-zinc-50 rounded-xl border border-zinc-200/60 px-4 py-3.5 hover:border-primary/40 hover:shadow-sm transition-all"
-                  >
-                    <Icon name="list" size="sm" className="text-text-muted group-hover:text-primary shrink-0" />
-                    <span className="text-sm font-medium text-text-secondary group-hover:text-primary truncate">
-                      Wszystkie działki
-                    </span>
-                  </Link>
-                </div>
-              </div>
-            );
-          })()}
+          {activeCity && <PlotsInterlinking activeCity={activeCity} />}
 
         </div>
       </section>

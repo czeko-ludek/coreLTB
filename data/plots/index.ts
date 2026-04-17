@@ -68,6 +68,9 @@ export function filterAndSortPlots(plots: Plot[], filters: PlotFilters): Plot[] 
   if (filters.availability) {
     result = result.filter((p) => p.availability === filters.availability);
   }
+  if (filters.source) {
+    result = result.filter((p) => p.source === filters.source);
+  }
 
   switch (filters.sortBy) {
     case 'price-asc':
