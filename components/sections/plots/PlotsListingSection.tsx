@@ -246,7 +246,6 @@ export function PlotsListingSection({
   const activeAreaIdx = AREA_RANGES.findIndex((r) => r.min === filters.areaMin && r.max === filters.areaMax);
   const activeSortIdx = SORT_OPTIONS.findIndex((o) => o.id === filters.sortBy);
   const activeSourceIdx = SOURCE_OPTIONS.findIndex((o) => o.id === (filters.source || 'all'));
-  const currentSort = SORT_OPTIONS.find((o) => o.id === filters.sortBy) || SORT_OPTIONS[0];
 
   return (
     <>
