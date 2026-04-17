@@ -1,10 +1,11 @@
 /** Source agency/portal for the plot listing */
-export type PlotSource = 'l-r' | 'optima' | 'dom-ex';
+export type PlotSource = 'l-r' | 'optima' | 'dom-ex' | 'viphouse';
 
 export const plotSources: { id: PlotSource; label: string; color: string }[] = [
   { id: 'l-r', label: 'L-R Nieruchomości', color: '#2563eb' },
   { id: 'optima', label: 'Optima Nieruchomości', color: '#7c3aed' },
   { id: 'dom-ex', label: 'Domex Nieruchomości', color: '#059669' },
+  { id: 'viphouse', label: 'VipHouse Nieruchomości', color: '#dc2626' },
 ];
 
 export interface PlotMedia {
