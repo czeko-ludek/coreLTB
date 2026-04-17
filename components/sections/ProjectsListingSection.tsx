@@ -10,6 +10,7 @@ import { Icon, SectionLabel } from '@/components/ui';
 import { ProjectListingCard } from '@/components/shared/ProjectListingCard';
 import { ProjectFilterSidebar } from '@/components/shared/ProjectFilterSidebar';
 import { MobileFilterDrawer } from '@/components/shared/MobileFilterDrawer';
+import { FilterDropdown } from '@/components/sections/plots/FilterDropdown';
 import { useToggle } from '@/hooks/useToggle';
 import {
   filterProjects,
@@ -123,7 +124,7 @@ export function ProjectsListingSection({
   const [currentPage, setCurrentPage] = useState(urlState?.page ?? initialPage);
   const [searchQuery, setSearchQuery] = useState(searchParams?.get('q') ?? '');
   const [isMobileFilterOpen, , setIsMobileFilterOpen] = useToggle(false);
-  const [isSortDropdownOpen, toggleSortDropdown, setIsSortDropdownOpen] = useToggle(false);
+  // Sort dropdown state now handled by FilterDropdown internally
 
   // Debounced URL sync for search (avoid spamming router on every keystroke)
   const searchTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -171,9 +172,6 @@ export function ProjectsListingSection({
     setCurrentPage(1);
     router.replace(pathname, { scroll: false }); // czyste URL bez parametrów
   }, [pathname, router]);
-
-  // Aktualnie wybrana opcja sortowania
-  const currentSortOption = sortOptions.find(opt => opt.id === sortBy);
 
   // Scroll-triggered animations — threshold: 0 bo sekcja z 300+ kartami jest olbrzymia
   const { ref, inView } = useInView({
@@ -346,37 +344,13 @@ export function ProjectsListingSection({
               )}
             </button>
             {/* Mobile Sort Dropdown */}
-            <div className="relative">
-              <button
-                onClick={toggleSortDropdown}
-                className="flex items-center gap-2 py-3 px-4 bg-white rounded-xl border border-zinc-200 text-sm font-medium text-text-primary hover:border-primary transition-colors"
-              >
-                <Icon name="arrowUpDown" size="sm" />
-                <span className="hidden sm:inline">{currentSortOption?.label}</span>
-                <Icon name={isSortDropdownOpen ? 'chevronUp' : 'chevronDown'} size="sm" />
-              </button>
-              {isSortDropdownOpen && (
-                <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-lg border border-zinc-200 py-2 z-30">
-                  {sortOptions.map((option) => (
-                    <button
-                      key={option.id}
-                      onClick={() => {
-                        handleSortChange(option.id as SortOption);
-                        setIsSortDropdownOpen(false);
-                      }}
-                      className={clsx(
-                        'w-full text-left px-4 py-2 text-sm transition-colors',
-                        sortBy === option.id
-                          ? 'bg-primary/10 text-primary font-medium'
-                          : 'text-text-secondary hover:bg-zinc-50'
-                      )}
-                    >
-                      {option.label}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+            <FilterDropdown
+              label="Sortowanie"
+              options={sortOptions.map((o) => ({ label: o.label }))}
+              activeIndex={sortOptions.findIndex((o) => o.id === sortBy)}
+              onSelect={(i) => handleSortChange(sortOptions[i].id as SortOption)}
+              align="right"
+            />
           </div>
         </div>
 
@@ -425,37 +399,13 @@ export function ProjectsListingSection({
               </div>
 
               {/* Sort dropdown */}
-              <div className="relative">
-                <button
-                  onClick={toggleSortDropdown}
-                  className="flex items-center gap-2 py-2.5 px-4 bg-white rounded-xl border border-zinc-200 text-sm font-medium text-text-primary hover:border-primary transition-colors shadow-sm"
-                >
-                  <Icon name="arrowUpDown" size="sm" />
-                  Sortuj: {currentSortOption?.label}
-                  <Icon name={isSortDropdownOpen ? 'chevronUp' : 'chevronDown'} size="sm" />
-                </button>
-                {isSortDropdownOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-52 bg-white rounded-xl shadow-xl border border-zinc-200 py-2 z-50">
-                    {sortOptions.map((option) => (
-                      <button
-                        key={option.id}
-                        onClick={() => {
-                          handleSortChange(option.id as SortOption);
-                          setIsSortDropdownOpen(false);
-                        }}
-                        className={clsx(
-                          'w-full text-left px-4 py-2.5 text-sm transition-colors',
-                          sortBy === option.id
-                            ? 'bg-primary/10 text-primary font-medium'
-                            : 'text-text-secondary hover:bg-zinc-50'
-                        )}
-                      >
-                        {option.label}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <FilterDropdown
+                label="Sortowanie"
+                options={sortOptions.map((o) => ({ label: o.label }))}
+                activeIndex={sortOptions.findIndex((o) => o.id === sortBy)}
+                onSelect={(i) => handleSortChange(sortOptions[i].id as SortOption)}
+                align="right"
+              />
             </div>
 
             {filteredProjects.length === 0 ? (
@@ -671,13 +621,6 @@ export function ProjectsListingSection({
         totalResults={filteredProjects.length}
       />
 
-      {/* Click outside to close sort dropdown */}
-      {isSortDropdownOpen && (
-        <div
-          className="fixed inset-0 z-20"
-          onClick={() => setIsSortDropdownOpen(false)}
-        />
-      )}
     </section>
   );
 }
