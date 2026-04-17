@@ -29,8 +29,10 @@ export function PlotGalleryHero({ plot }: PlotGalleryHeroProps) {
   const thumbsContainerRef = React.useRef<HTMLDivElement>(null);
 
   const allImages = useMemo(() => {
-    const imgs = [plot.thumbnailSrc, ...plot.images].filter(Boolean);
-    // Deduplicate
+    // Use full-resolution images only — thumbnail is for listing cards, not gallery
+    const imgs = plot.images.length > 0
+      ? plot.images.filter(Boolean)
+      : [plot.thumbnailSrc].filter(Boolean); // fallback if no images array
     return [...new Set(imgs)];
   }, [plot.thumbnailSrc, plot.images]);
 
