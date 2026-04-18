@@ -580,7 +580,11 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     // ── INTRO ──────────────────────────────────────────────────
     {
       type: 'paragraph',
-      content: '<strong>Ile kosztuje budowa domu w 2026 roku?</strong> Odpowiedź zależy od dziesiątek zmiennych - powierzchni, technologii ściennej, typu dachu, fundamentu i standardu wykończenia. W tym artykule rozbijamy koszty budowy na poszczególne etapy, podajemy <strong>realne stawki za m²</strong> aktualne na Śląsku i pokazujemy, jak samodzielnie oszacować budżet. Bez „widełek od–do" - z konkretnymi liczbami.',
+      content: '<strong>Ile kosztuje budowa domu w 2026 roku?</strong> Odpowiedź zależy od dziesiątek zmiennych - powierzchni, technologii ściennej, typu dachu, fundamentu i standardu wykończenia. W tym artykule rozbijamy koszty budowy na poszczególne etapy, podajemy <strong>realne stawki za m²</strong> aktualne na Śląsku i pokazujemy, jak samodzielnie oszacować budżet. Bez „widełek od-do" - z konkretnymi liczbami.',
+    },
+    {
+      type: 'paragraph',
+      content: 'Dane pochodzą z naszych realizacji jako <a href="/oferta/kompleksowa-budowa-domow">generalnego wykonawcy</a> na Śląsku - budujemy domy w <a href="/obszar-dzialania/rybnik">Rybniku</a>, <a href="/obszar-dzialania/katowice">Katowicach</a>, <a href="/obszar-dzialania/gliwice">Gliwicach</a>, <a href="/obszar-dzialania/tychy">Tychach</a> i okolicznych powiatach. Stawki są aktualne na kwiecień 2026 r.',
     },
 
     // ── SEKCJA 1 - Etapy budowy z kosztami ──────────────────────
@@ -591,12 +595,12 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'Budowę domu dzielimy na 5 etapów. Każdy kolejny zawiera poprzedni - „stan deweloperski" oznacza wykonanie etapów 1–4. Poniżej podajemy stawki netto za m² powierzchni użytkowej (materiały + robocizna), aktualne na kwiecień 2026 r.',
+      content: 'Budowę domu dzielimy na 5 etapów. Każdy kolejny zawiera poprzedni - „stan deweloperski" oznacza wykonanie etapów 1-4. Poniżej podajemy stawki netto za m² powierzchni użytkowej (materiały + robocizna), aktualne na kwiecień 2026 r.',
     },
     {
       type: 'heading',
       level: 3,
-      content: '1. Stan zero - fundamenty (15–20% budżetu)',
+      content: '1. Stan zero - fundamenty (15-20% budżetu)',
     },
     {
       type: 'list',
@@ -609,12 +613,12 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'Obejmuje: nadzór kierownika budowy, geodetę, geotechnika, fundament, kanalizację podposadzkową, hydroizolację i podsypkę żwirową.',
+      content: 'Obejmuje: nadzór <a href="/baza-wiedzy/ile-kosztuje-kierownik-budowy">kierownika budowy</a>, geodetę, geotechnika, fundament, kanalizację podposadzkową, hydroizolację i podsypkę żwirową.',
     },
     {
       type: 'heading',
       level: 3,
-      content: '2. Stan surowy otwarty (SSO) - ściany i dach (40–50%)',
+      content: '2. Stan surowy otwarty (SSO) - ściany i dach (40-50%)',
     },
     {
       type: 'list',
@@ -631,7 +635,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'heading',
       level: 3,
-      content: '3. Stan surowy zamknięty (SSZ) - okna, drzwi, instalacje (8–12%)',
+      content: '3. Stan surowy zamknięty (SSZ) - okna, drzwi, instalacje (8-12%)',
     },
     {
       type: 'list',
@@ -644,7 +648,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'heading',
       level: 3,
-      content: '4. Stan deweloperski - ogrzewanie, tynki, elewacja (10–15%)',
+      content: '4. Stan deweloperski - ogrzewanie, tynki, elewacja (10-15%)',
     },
     {
       type: 'list',
@@ -661,7 +665,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'heading',
       level: 3,
-      content: '5. Pod klucz - wykończenie wnętrz (10–12%)',
+      content: '5. Pod klucz - wykończenie wnętrz (10-12%)',
     },
     {
       type: 'list',
@@ -675,11 +679,26 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
       content: '<strong>Wszystkie stawki powyżej to ceny netto za m²,</strong> obejmujące materiały i robociznę. Do ceny netto dolicza się <strong>8% VAT</strong> (stawka na budowę domów mieszkalnych do 300 m²). Podane zakresy uwzględniają ±6% tolerancji na zmienność cen materiałów.',
     },
 
+    // ── CTA 1 - po etapach, naturalny moment decyzyjny ────────
+    {
+      type: 'cta-inline',
+      caption: 'Chcesz poznać dokładny koszt?',
+      ctaLabel: 'Kalkulator budowy domu 2026',
+      ctaDescription: 'Wybierz powierzchnię, technologię, dach i ogrzewanie - otrzymasz wycenę z podziałem na etapy w 2 minuty.',
+      ctaHref: '/wycena',
+      ctaIcon: 'calculator',
+      content: 'Oblicz wycenę online',
+    },
+
     // ── SEKCJA 2 - Przykładowe kosztorysy ──────────────────────
     {
       type: 'heading',
       level: 2,
       content: 'Kosztorys budowy domu 100 m² i 120 m² - przykłady',
+    },
+    {
+      type: 'paragraph',
+      content: 'Poniżej dwa realistyczne kosztorysy dla najpopularniejszych metraży na Śląsku. Konfiguracja: silikat (nasz standard), dach płaski, płyta fundamentowa, ogrzewanie gazowe.',
     },
     {
       type: 'heading',
@@ -689,7 +708,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'callout',
       variant: 'info',
-      content: '<strong>1. Stan zero:</strong> 141 000–159 000 zł<br><strong>2. SSO (ściany + dach):</strong> 282 000–318 000 zł<br><strong>3. SSZ (okna, drzwi, instalacje):</strong> 47 000–53 000 zł<br><strong>4. Deweloperski (ogrzewanie, tynki):</strong> 66 000–74 000 zł<br><strong>5. Pod klucz (wykończenie):</strong> 80 000–90 000 zł<br><br><strong>RAZEM netto: ~615 000–695 000 zł</strong><br><strong>RAZEM brutto (8% VAT): ~664 000–751 000 zł</strong><br><strong>Za m² netto: ~6 150–6 950 zł/m²</strong>',
+      content: '<strong>1. Stan zero:</strong> 141 000-159 000 zł<br><strong>2. SSO (ściany + dach):</strong> 282 000-318 000 zł<br><strong>3. SSZ (okna, drzwi, instalacje):</strong> 47 000-53 000 zł<br><strong>4. Deweloperski (ogrzewanie, tynki):</strong> 66 000-74 000 zł<br><strong>5. Pod klucz (wykończenie):</strong> 80 000-90 000 zł<br><br><strong>RAZEM netto: ~615 000-695 000 zł</strong><br><strong>RAZEM brutto (8% VAT): ~664 000-751 000 zł</strong><br><strong>Za m² netto: ~6 150-6 950 zł/m²</strong>',
     },
     {
       type: 'heading',
@@ -699,17 +718,19 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'callout',
       variant: 'info',
-      content: '<strong>1. Stan zero:</strong> 169 000–191 000 zł<br><strong>2. SSO:</strong> 338 000–382 000 zł<br><strong>3. SSZ:</strong> 56 000–64 000 zł<br><strong>4. Deweloperski:</strong> 79 000–89 000 zł<br><strong>5. Pod klucz:</strong> 96 000–108 000 zł<br><br><strong>RAZEM netto: ~740 000–835 000 zł</strong><br><strong>RAZEM brutto: ~799 000–902 000 zł</strong><br><strong>Za m²: ~6 170–6 960 zł/m²</strong><br><strong>Czas realizacji: ~12–16 miesięcy</strong>',
+      content: '<strong>1. Stan zero:</strong> 169 000-191 000 zł<br><strong>2. SSO:</strong> 338 000-382 000 zł<br><strong>3. SSZ:</strong> 56 000-64 000 zł<br><strong>4. Deweloperski:</strong> 79 000-89 000 zł<br><strong>5. Pod klucz:</strong> 96 000-108 000 zł<br><br><strong>RAZEM netto: ~740 000-835 000 zł</strong><br><strong>RAZEM brutto: ~799 000-902 000 zł</strong><br><strong>Za m²: ~6 170-6 960 zł/m²</strong><br><strong>Czas realizacji: ~12-16 miesięcy</strong>',
     },
     {
       type: 'paragraph',
-      content: 'Ceny obejmują materiały, robociznę, kierownika budowy i nadzór inżynierski. <strong>Nie obejmują:</strong> projektu budowlanego, przyłączy mediów, ogrodzenia, zagospodarowania terenu. Chcesz zobaczyć, jak wygląda realizacja takiego budżetu w praktyce? Zobacz naszą <a href="/realizacje/dom-jednorodzinny-zabrze-gwiazdy-polarnej">budowę domu 200 m² w Zabrzu</a> - dokumentujemy koszty i technologie na każdym etapie.',
+      content: 'Ceny obejmują materiały, robociznę, <a href="/baza-wiedzy/ile-kosztuje-kierownik-budowy">kierownika budowy</a> i nadzór inżynierski. <strong>Nie obejmują:</strong> projektu budowlanego, przyłączy mediów, ogrodzenia, zagospodarowania terenu. Chcesz zobaczyć, jak wygląda realizacja takiego budżetu w praktyce? Zobacz naszą <a href="/realizacje/dom-jednorodzinny-zabrze-gwiazdy-polarnej">budowę domu 200 m² w Zabrzu</a> - dokumentujemy koszty i technologie na każdym etapie.',
     },
+
+    // ── ZDJĘCIE 1 - Budowa w trakcie ──────────────────────────
     {
-      type: 'cta',
-      ctaHref: '/wycena',
-      ctaIcon: 'calculator',
-      ctaLabel: 'Oblicz dokładny koszt dla swojego domu',
+      type: 'image',
+      src: '/images/blog/kosztorys-budowy/hero.webp',
+      alt: 'Kosztorys budowy domu - dokumentacja projektowa, kalkulator i plany budowlane na biurku inżyniera',
+      caption: 'Kosztorys budowy domu to podstawa planowania budżetu - rozbijamy go na 5 etapów z konkretnymi stawkami za m²',
     },
 
     // ── SEKCJA 3 - Co wpływa na cenę ──────────────────────────
@@ -743,7 +764,27 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'Na <strong>terenach górniczych</strong> (Katowice, Zabrze, Bytom, Jastrzębie-Zdrój, Rybnik) fundament wymaga płyty żelbetowej ze stalą B500SP i warstwą poślizgową - to <strong>dodatkowe 15–25%</strong> kosztów stanu zero. Nie każda firma ma doświadczenie w budowie na szkodach górniczych III–IV kategorii. Więcej: <a href="/baza-wiedzy/plyta-fundamentowa-tereny-gornicze">Płyta fundamentowa na terenach górniczych</a>.',
+      content: 'Na <strong>terenach górniczych</strong> (<a href="/obszar-dzialania/katowice">Katowice</a>, <a href="/obszar-dzialania/zabrze">Zabrze</a>, <a href="/obszar-dzialania/jastrzebie-zdroj">Jastrzębie-Zdrój</a>, <a href="/obszar-dzialania/rybnik">Rybnik</a>) fundament wymaga płyty żelbetowej ze stalą B500SP i warstwą poślizgową - to <strong>dodatkowe 15-25%</strong> kosztów stanu zero. Nie każda firma ma doświadczenie w budowie na szkodach górniczych III-IV kategorii. Więcej: <a href="/baza-wiedzy/plyta-fundamentowa-tereny-gornicze">Płyta fundamentowa na terenach górniczych</a>.',
+    },
+    {
+      type: 'heading',
+      level: 3,
+      content: 'Czas budowy a koszty',
+    },
+    {
+      type: 'paragraph',
+      content: 'Budowa domu jednorodzinnego trwa <strong>12-16 miesięcy</strong> (pod klucz). Sam <a href="/baza-wiedzy/stan-surowy-otwarty-poradnik">stan surowy otwarty</a> to 3-4 miesiące. Przedłużanie budowy = wyższe koszty: inflacja materiałów, dłuższy wynajem sprzętu, opóźnienie w przeprowadzce (kredyt + wynajem mieszkania). Stała cena w umowie z GW chroni przed tym ryzykiem.',
+    },
+
+    // ── CTA 2 - po sekcji o czynnikach cenowych ────────────────
+    {
+      type: 'cta-inline',
+      caption: 'Masz działkę na Śląsku?',
+      ctaLabel: 'Bezpłatna analiza działki budowlanej',
+      ctaDescription: 'Sprawdzimy MPZP, warunki gruntowe, szkody górnicze i dostępność mediów - zanim zaczniesz liczyć koszty budowy.',
+      ctaHref: '/analiza-dzialki',
+      ctaIcon: 'mapPin',
+      content: 'Zamów analizę działki',
     },
 
     // ── SEKCJA 4 - Ukryte koszty ──────────────────────────────
@@ -753,19 +794,29 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
       content: 'Ukryte koszty budowy domu - o czym zapominają kosztorysy',
     },
     {
+      type: 'paragraph',
+      content: 'Nawet najlepszy kosztorys nie uwzględnia wszystkich wydatków. Poniższe pozycje nie wchodzą w cenę budowy domu, ale musisz je zabudżetować osobno:',
+    },
+    {
       type: 'list',
       items: [
-        '<strong>Projekt budowlany z adaptacją:</strong> 8 000–25 000 zł',
-        '<strong>Przyłącza mediów (woda, kanalizacja, prąd, gaz):</strong> 10 000–30 000 zł',
-        '<strong>Badania geotechniczne:</strong> 1 500–3 000 zł',
-        '<strong>Pozwolenie na budowę i formalności:</strong> 500–2 000 zł',
-        '<strong>Zagospodarowanie terenu (podjazd, chodniki, ogrodzenie):</strong> 15 000–50 000 zł',
+        '<strong>Projekt budowlany z adaptacją:</strong> 8 000-25 000 zł (projekt gotowy + adaptacja do działki i warunków gruntowych)',
+        '<strong>Przyłącza mediów (woda, kanalizacja, prąd, gaz):</strong> 10 000-30 000 zł (zależy od odległości od sieci)',
+        '<strong>Badania geotechniczne:</strong> 1 500-3 000 zł (obowiązkowe na <a href="/baza-wiedzy/plyta-fundamentowa-tereny-gornicze">terenach górniczych</a>)',
+        '<strong>Pozwolenie na budowę i formalności:</strong> 500-2 000 zł',
+        '<strong>Zagospodarowanie terenu (podjazd, chodniki, ogrodzenie):</strong> 15 000-50 000 zł',
+        '<strong>Meble i sprzęt AGD:</strong> 20 000-80 000 zł (często pomijane w planowaniu)',
       ],
     },
     {
       type: 'callout',
       variant: 'warning',
-      content: '<strong>Budżetuj z buforem 10–15%.</strong> Nawet przy stałej cenie w umowie z generalnym wykonawcą, koszty „okołobudowlane" mogą zaskoczyć. Przyłącza, zagospodarowanie terenu, meble - to osobne pozycje, które potrafią dodać 50 000–100 000 zł do budżetu.',
+      content: '<strong>Budżetuj z buforem 10-15%.</strong> Nawet przy stałej cenie w umowie z generalnym wykonawcą, koszty „okołobudowlane" mogą zaskoczyć. Przyłącza, zagospodarowanie terenu, meble - to osobne pozycje, które potrafią dodać 50 000-100 000 zł do budżetu.',
+    },
+    {
+      type: 'callout',
+      variant: 'tip',
+      content: '<strong>W CoreLTB podajemy stałą cenę w umowie.</strong> Kosztorys, który otrzymujesz po <a href="/wycena">wycenie online</a>, zawiera szczegółowy zakres prac na każdym etapie. Cena nie zmienia się w trakcie budowy - ryzyko inflacji materiałów bierzemy na siebie.',
     },
 
     // ── SEKCJA 5 - WT 2026 wpływ ──────────────────────────────
@@ -776,38 +827,77 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'Od <strong>20 września 2026</strong> wchodzą nowe Warunki Techniczne z zaostrzonym wskaźnikiem EP (~55 kWh/m²·rok) i współczynnikiem U ścian (~0,17). Branża szacuje wzrost kosztów o <strong>10–15%</strong> - grubsza izolacja, lepsza stolarka, rekuperacja. Szczegóły: <a href="/baza-wiedzy/dom-energooszczedny-slask">Dom energooszczędny - przewodnik 2026</a>.',
+      content: 'Od <strong>20 września 2026</strong> wchodzą nowe Warunki Techniczne z zaostrzonym wskaźnikiem EP (~55 kWh/m²/rok) i współczynnikiem U ścian (~0,17). Branża szacuje wzrost kosztów o <strong>10-15%</strong> - grubsza izolacja, lepsza stolarka, rekuperacja. Szczegóły: <a href="/baza-wiedzy/dom-energooszczedny-slask">Dom energooszczędny - przewodnik 2026</a>.',
     },
     {
       type: 'callout',
       variant: 'warning',
-      content: '<strong>Kluczowa data: 20 września 2026.</strong> Liczy się data złożenia kompletnego wniosku o pozwolenie na budowę. Przed tą datą = budujesz po obecnych przepisach. Po niej = nowe, droższe wymagania.',
+      content: '<strong>Kluczowa data: 20 września 2026.</strong> Liczy się data złożenia kompletnego wniosku o pozwolenie na budowę. Przed tą datą = budujesz po obecnych przepisach. Po niej = nowe, droższe wymagania. Jeśli planujesz budowę - nie zwlekaj z <a href="/oferta/projektowanie">projektem</a>.',
     },
 
-    // ── CTA ──────────────────────────────────────────────────────
+    // ── SEKCJA 6 - Budowa z kredytem ──────────────────────────
     {
       type: 'heading',
       level: 2,
-      content: 'Nie zgaduj - oblicz',
+      content: 'Budowa domu z kredytem hipotecznym - jak planować transze?',
     },
     {
       type: 'paragraph',
-      content: 'Nasz <a href="/wycena">kalkulator wyceny</a> uwzględnia wszystkie zmienne: powierzchnię, technologię, typ dachu, fundament, ogrzewanie i standard wykończenia. W kilka minut otrzymasz wycenę z podziałem na etapy i szczegółowym zakresem prac.',
+      content: 'Większość inwestorów finansuje budowę <strong>kredytem hipotecznym</strong>. Bank wypłaca środki w transzach, powiązanych z etapami budowy. Harmonogram transz musi pokrywać się z kosztorysem:',
     },
     {
-      type: 'cta',
-      ctaHref: '/wycena',
-      ctaIcon: 'calculator',
-      ctaLabel: 'Oblicz koszt budowy domu',
+      type: 'list',
+      items: [
+        '<strong>Transza 1 (15-20%):</strong> po zakończeniu stanu zero (fundamenty) - bank weryfikuje postęp z inspektorem',
+        '<strong>Transza 2 (40-50%):</strong> po SSO (ściany, dach) - najwyższa transza, bo najdroższy etap',
+        '<strong>Transza 3 (8-12%):</strong> po SSZ (okna, instalacje) - dom zamknięty, można kontynuować zimą',
+        '<strong>Transza 4 (10-15%):</strong> po stanie deweloperskim (tynki, ogrzewanie, elewacja)',
+        '<strong>Transza 5 (10-12%):</strong> po wykończeniu pod klucz - odbiór końcowy',
+      ],
     },
     {
-      type: 'cta',
-      ctaHref: '/umow-konsultacje',
-      ctaIcon: 'phone',
-      ctaLabel: 'Umów konsultację z inżynierem',
+      type: 'callout',
+      variant: 'info',
+      content: '<strong>Umowa z generalnym wykonawcą ułatwia kredyt.</strong> Banki preferują kosztorysy od firm z doświadczeniem. Nasz kosztorys z podziałem na etapy jest akceptowany przez większość banków bez dodatkowych wycen rzeczoznawcy.',
     },
 
-    // ── FAQ (z DataForSEO PAA) ──────────────────────────────────
+    // ── SEKCJA 7 - Jak budujemy w CoreLTB ──────────────────────
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Jak wygląda kosztorys i budowa w CoreLTB?',
+    },
+    {
+      type: 'paragraph',
+      content: 'W modelu <a href="/oferta/kompleksowa-budowa-domow">generalnego wykonawstwa</a> otrzymujesz <strong>stałą cenę w umowie</strong> z pełnym zakresem prac na każdym etapie. Bez niespodzianek, bez „robót dodatkowych" w trakcie budowy:',
+    },
+    {
+      type: 'list',
+      items: [
+        '<strong>Kosztorys z podziałem na 5 etapów</strong> - materiały, robocizna, sprzęt wyspecyfikowane osobno',
+        '<strong><a href="/baza-wiedzy/ile-kosztuje-kierownik-budowy">Kierownik budowy</a> i inżynier budowy wliczeni w cenę</strong> - nie płacisz za nadzór osobno',
+        '<strong>Cotygodniowe raporty ze zdjęciami</strong> - widzisz postęp prac bez wizyt na budowie',
+        '<strong>Harmonogram powiązany z transzami kredytu</strong> - bank dostaje dokumentację na czas',
+        '<strong>Gwarancja terminowa</strong> - przekroczenie terminu = kary umowne po naszej stronie',
+      ],
+    },
+    {
+      type: 'paragraph',
+      content: 'Zobacz, jak ten model wygląda w praktyce - na naszej <a href="/realizacje/dom-jednorodzinny-zabrze-gwiazdy-polarnej">budowie domu 200 m² w Zabrzu</a> dokumentujemy każdy etap ze zdjęciami, kosztami i opisami technicznymi.',
+    },
+
+    // ── CTA 3 - po sekcji o CoreLTB ──────────────────────────────
+    {
+      type: 'cta-inline',
+      caption: 'Planujesz budowę domu?',
+      ctaLabel: 'Umów bezpłatną konsultację z inżynierem',
+      ctaDescription: 'Omówimy Twój projekt, działkę i optymalną technologię. Przygotujemy wstępny kosztorys dopasowany do Twojego budżetu.',
+      ctaHref: '/umow-konsultacje',
+      ctaIcon: 'messageCircle',
+      content: 'Umów konsultację',
+    },
+
+    // ── FAQ (rozszerzony z DataForSEO PAA) ─────────────────────
     {
       type: 'heading',
       level: 2,
@@ -818,11 +908,11 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
       faqItems: [
         {
           question: 'Ile kosztuje budowa domu 100 m² w 2026 roku?',
-          answer: 'Dom 100 m² pod klucz na Śląsku kosztuje orientacyjnie <strong>664 000–751 000 zł brutto</strong> (z 8% VAT) przy technologii silikatowej, dachu płaskim i ogrzewaniu gazowym. Sam stan surowy otwarty to ok. 459 000–513 000 zł brutto. Dokładną wycenę sprawdzisz w <a href="/wycena">kalkulatorze</a>.',
+          answer: 'Dom 100 m² pod klucz na Śląsku kosztuje orientacyjnie <strong>664 000-751 000 zł brutto</strong> (z 8% VAT) przy technologii silikatowej, dachu płaskim i ogrzewaniu gazowym. Sam stan surowy otwarty to ok. 459 000-513 000 zł brutto. Dokładną wycenę sprawdzisz w <a href="/wycena">kalkulatorze</a>.',
         },
         {
           question: 'Ile kosztuje budowa domu za m² w 2026?',
-          answer: 'Średni koszt pod klucz na Śląsku: <strong>6 150–6 950 zł netto za m²</strong> (ok. 6 640–7 510 zł brutto). SSO to ok. 4 250–4 750 zł/m², deweloperski ~5 200–5 800 zł/m². Stawki zależą od technologii, lokalizacji i gruntu.',
+          answer: 'Średni koszt pod klucz na Śląsku: <strong>6 150-6 950 zł netto za m²</strong> (ok. 6 640-7 510 zł brutto). SSO to ok. 4 250-4 750 zł/m², deweloperski ~5 200-5 800 zł/m². Stawki zależą od technologii, lokalizacji i gruntu.',
         },
         {
           question: 'Jak zrobić kosztorys budowy domu?',
@@ -830,15 +920,31 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
         },
         {
           question: 'Ile kosztuje kosztorys budowy domu?',
-          answer: 'Profesjonalny kosztorys inwestorski kosztuje <strong>1 500–5 000 zł</strong> w zależności od szczegółowości. W CoreLTB wycenę z podziałem na etapy i zakresem prac przygotowujemy <strong>bezpłatnie</strong> w ramach <a href="/wycena">kalkulatora online</a> - wystarczy podać parametry domu.',
+          answer: 'Profesjonalny kosztorys inwestorski kosztuje <strong>1 500-5 000 zł</strong> w zależności od szczegółowości. W CoreLTB wycenę z podziałem na etapy i zakresem prac przygotowujemy <strong>bezpłatnie</strong> w ramach <a href="/wycena">kalkulatora online</a> - wystarczy podać parametry domu.',
+        },
+        {
+          question: 'Ile czasu trwa budowa domu jednorodzinnego?',
+          answer: 'Budowa domu pod klucz trwa <strong>12-16 miesięcy</strong>. Sam <a href="/baza-wiedzy/stan-surowy-otwarty-poradnik">stan surowy otwarty (SSO)</a> to 3-4 miesiące, SSZ kolejne 1-2 miesiące. Stan deweloperski osiągniesz w ok. 8-10 miesięcy od wbicia łopaty. Czas zależy od wielkości domu, technologii i warunków pogodowych.',
+        },
+        {
+          question: 'Jaka jest różnica między SSO a SSZ?',
+          answer: '<strong>Stan surowy otwarty (SSO)</strong> to ściany, strop i dach - dom bez okien i drzwi. <strong>Stan surowy zamknięty (SSZ)</strong> to SSO plus okna, drzwi zewnętrzne i podstawowe instalacje (elektryka, wod-kan). SSZ pozwala kontynuować prace wewnątrz niezależnie od pogody. Różnica w cenie: <strong>500-1 000 zł/m²</strong>.',
+        },
+        {
+          question: 'Czy warto budować dom w 2026 roku?',
+          answer: 'Tak, pod warunkiem że złożysz wniosek o pozwolenie <strong>przed 20 września 2026</strong> - po tej dacie wchodzą nowe WT (Warunki Techniczne), które podniosą koszty o 10-15%. Ceny materiałów są stabilne po korekcie z lat 2023-2024. Kluczowe: zabezpiecz <a href="/analiza-dzialki">działkę</a> i <a href="/oferta/projektowanie">projekt</a> jak najszybciej.',
         },
         {
           question: 'Czy ceny materiałów budowlanych rosną w 2026?',
-          answer: 'Ceny materiałów w 2026 roku są relatywnie stabilne po korekcie z lat 2023–2024. Główne zmienne: stal zbrojeniowa (wahania ±10%), stolarka okienna (lekki wzrost +5%). Największy wpływ na budżet będą miały <strong>nowe WT 2026 od września</strong>, wymuszające droższą izolację i stolarkę.',
+          answer: 'Ceny materiałów w 2026 roku są relatywnie stabilne po korekcie z lat 2023-2024. Główne zmienne: stal zbrojeniowa (wahania ±10%), stolarka okienna (lekki wzrost +5%). Największy wpływ na budżet będą miały <strong>nowe WT 2026 od września</strong>, wymuszające droższą izolację i stolarkę.',
         },
         {
           question: 'Ile kosztuje budowa domu na terenach górniczych?',
-          answer: 'Na terenach górniczych Śląska fundament kosztuje <strong>15–25% więcej</strong> (płyta ze stalą B500SP, warstwa poślizgowa). Dla domu 120 m² to dodatkowe 25 000–40 000 zł na etapie stanu zero. Szczegóły: <a href="/baza-wiedzy/plyta-fundamentowa-tereny-gornicze">Płyta fundamentowa na terenach górniczych</a>.',
+          answer: 'Na terenach górniczych Śląska fundament kosztuje <strong>15-25% więcej</strong> (płyta ze stalą B500SP, warstwa poślizgowa). Dla domu 120 m² to dodatkowe 25 000-40 000 zł na etapie stanu zero. Szczegóły: <a href="/baza-wiedzy/plyta-fundamentowa-tereny-gornicze">Płyta fundamentowa na terenach górniczych</a>.',
+        },
+        {
+          question: 'Jak wybrać generalnego wykonawcę budowy domu?',
+          answer: 'Kluczowe kryteria: <strong>stała cena w umowie</strong> (nie kosztorys otwarty), <a href="/baza-wiedzy/ile-kosztuje-kierownik-budowy">kierownik budowy z uprawnieniami</a>, harmonogram powiązany z transzami kredytu, polisa OC, referencje z realizacji. Sprawdź <a href="/realizacje/dom-jednorodzinny-zabrze-gwiazdy-polarnej">nasze realizacje</a> - dokumentujemy każdy etap.',
         },
       ],
     },
@@ -846,7 +952,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     // ── PODSUMOWANIE ─────────────────────────────────────────────
     {
       type: 'quote',
-      content: 'Kosztorys budowy domu to nie jednorazowy dokument - to plan, który weryfikujesz na każdym etapie. Najlepsza ochrona przed niespodziankami? Stała cena w umowie z generalnym wykonawcą i bufor 10–15% na koszty towarzyszące.',
+      content: 'Kosztorys budowy domu to nie jednorazowy dokument - to plan, który weryfikujesz na każdym etapie. Najlepsza ochrona przed niespodziankami? Stała cena w umowie z generalnym wykonawcą i bufor 10-15% na koszty towarzyszące.',
       caption: 'Michał Krawczyk, Inżynier Konstrukcji CoreLTB Builders',
     },
   ],

@@ -10,9 +10,9 @@ import { ContactCTASection } from '@/components/sections/ContactCTASection';
 import { companyData } from '@/data/company-data';
 
 export const metadata: Metadata = {
-  title: 'Bezpłatna Wycena Budowy Domu – Kalkulator Online | CoreLTB Builders',
+  title: 'Kalkulator Budowy Domu 2026 – Wycena Online za Darmo | CoreLTB',
   description:
-    'Skonfiguruj parametry domu i otrzymaj wstępną wycenę budowy. Powierzchnia, materiał, dach, kondygnacje — wyceń w 60 sekund. Oddzwonimy z dokładną kalkulacją.',
+    'Kalkulator budowy domu 2026: oblicz koszt budowy w 60 sekund. Wybierz metraż, technologię, dach i ogrzewanie — otrzymaj wycenę z podziałem na etapy. Aktualne ceny na Śląsku.',
   alternates: {
     canonical: `${companyData.url}/wycena`,
   },
@@ -28,6 +28,48 @@ export default function WycenaPage() {
       <CalculatorTrustBar />
       <CalculatorTestimonials />
       <CalculatorSteps />
+      {/* SEO Content Section */}
+      <section className="bg-white py-12 md:py-16">
+        <div className="container mx-auto px-4 md:px-6 max-w-3xl">
+          <h2 className="text-2xl md:text-3xl font-bold font-heading mb-6 text-center">
+            Kalkulator budowy domu 2026 — <span className="text-primary">jak działa?</span>
+          </h2>
+          <div className="prose prose-zinc max-w-none text-base leading-relaxed space-y-4">
+            <p>
+              Nasz <strong>kalkulator budowy domu</strong> oblicza koszt budowy na podstawie 9 parametrów: powierzchni użytkowej, liczby kondygnacji, technologii ściennej, typu dachu, rodzaju fundamentu, garażu, ogrzewania, piwnicy i standardu wykończenia. Stawki są aktualne na <strong>kwiecień 2026 r.</strong> i oparte na realnych kosztach z naszych budów na Śląsku.
+            </p>
+            <p>
+              Wycena uwzględnia <strong>materiały, robociznę i nadzór inżynierski</strong> na każdym z 5 etapów: stan zero (fundamenty), stan surowy otwarty (SSO), stan surowy zamknięty (SSZ), stan deweloperski i wykończenie pod klucz. Szczegółowy opis etapów znajdziesz w artykule{' '}
+              <a href="/baza-wiedzy/kosztorys-budowy-domu-2026" className="text-primary hover:underline font-medium">
+                Kosztorys budowy domu 2026 — aktualny cennik
+              </a>.
+            </p>
+            <h3 className="text-lg font-semibold mt-6">Ile kosztuje budowa domu w 2026?</h3>
+            <p>
+              Średni koszt budowy domu pod klucz na Śląsku wynosi <strong>6 150–6 950 zł netto za m²</strong> (ok. 6 640–7 510 zł brutto z 8% VAT). Dom 100 m² to ok. 664 000–751 000 zł brutto, dom 120 m² — ok. 799 000–902 000 zł. Sam{' '}
+              <a href="/baza-wiedzy/stan-surowy-otwarty-poradnik" className="text-primary hover:underline font-medium">
+                stan surowy otwarty
+              </a>{' '}
+              to ok. 4 250–4 750 zł/m².
+            </p>
+            <h3 className="text-lg font-semibold mt-6">Dlaczego warto użyć kalkulatora?</h3>
+            <ul className="list-disc pl-5 space-y-1">
+              <li><strong>Konkretne kwoty</strong> — nie &quot;od ... do&quot;, lecz wycena dopasowana do Twojej konfiguracji</li>
+              <li><strong>Podział na etapy</strong> — wiesz, ile kosztuje każdy etap budowy z osobna</li>
+              <li><strong>Aktualne ceny</strong> — stawki z realizacji CoreLTB, nie ze starych katalogów</li>
+              <li><strong>Bezpłatnie i bez zobowiązań</strong> — nie musisz podawać danych, żeby zobaczyć wycenę</li>
+            </ul>
+            <p className="text-sm text-zinc-500 mt-4">
+              Po konfiguracji możesz zostawić dane kontaktowe — nasz inżynier oddzwoni w 24h z dokładną kalkulacją uwzględniającą specyfikę Twojej działki i regionu. Budujemy na terenie całego{' '}
+              <a href="/obszar-dzialania/rybnik" className="text-primary hover:underline">Śląska</a>
+              {' '}— od{' '}
+              <a href="/obszar-dzialania/katowice" className="text-primary hover:underline">Katowic</a>
+              {' '}po{' '}
+              <a href="/obszar-dzialania/wodzislaw-slaski" className="text-primary hover:underline">Wodzisław Śl.</a>
+            </p>
+          </div>
+        </div>
+      </section>
       <FAQTwoColumnsSection
         header={{
           label: 'FAQ',
@@ -36,24 +78,40 @@ export default function WycenaPage() {
         }}
         items={[
           {
-            question: 'Czy wycena jest zobowiązująca?',
-            content: [{ type: 'paragraph', value: 'Nie — wycena jest całkowicie bezpłatna i niezobowiązująca. To wstępna kalkulacja, która pomoże Ci zaplanować budżet. Dokładną wycenę przygotowujemy po analizie projektu i warunków gruntowych.' }],
+            question: 'Czy wycena z kalkulatora jest zobowiązująca?',
+            content: [{ type: 'paragraph', value: 'Nie — wycena jest całkowicie bezpłatna i niezobowiązująca. To wstępna kalkulacja, która pomoże Ci zaplanować budżet. Dokładną wycenę przygotowujemy po analizie projektu i warunków gruntowych na Twojej działce.' }],
+          },
+          {
+            question: 'Ile kosztuje budowa domu 100 m² w 2026 roku?',
+            content: [{ type: 'paragraph', value: 'Dom 100 m² pod klucz na Śląsku kosztuje orientacyjnie 664 000–751 000 zł brutto (z 8% VAT) przy technologii silikatowej, dachu płaskim i ogrzewaniu gazowym. Sam stan surowy otwarty to ok. 459 000–513 000 zł. Dokładną kwotę obliczysz w kalkulatorze powyżej.' }],
+          },
+          {
+            question: 'Ile kosztuje budowa domu za m² w 2026?',
+            content: [{ type: 'paragraph', value: 'Średni koszt budowy pod klucz na Śląsku: 6 150–6 950 zł netto za m² (ok. 6 640–7 510 zł brutto). Stawka zależy od technologii ściennej, typu dachu, ogrzewania i lokalizacji. Na terenach górniczych koszty fundamentów są o 15–25% wyższe.' }],
           },
           {
             question: 'Jak długo trwa budowa domu?',
-            content: [{ type: 'paragraph', value: 'Czas realizacji zależy od metrażu i standardu wykończenia. Dom parterowy 120 m² w stanie deweloperskim budujemy w 10–12 miesięcy. Dom piętrowy 180 m² pod klucz — 12–16 miesięcy. Dokładny harmonogram podajemy w umowie.' }],
+            content: [{ type: 'paragraph', value: 'Czas realizacji zależy od metrażu i standardu wykończenia. Dom parterowy 120 m² w stanie deweloperskim budujemy w 10–12 miesięcy. Dom piętrowy 180 m² pod klucz — 12–16 miesięcy. Dokładny harmonogram z kamieniami milowymi podajemy w umowie.' }],
           },
           {
-            question: 'Co zawiera cena budowy?',
+            question: 'Co zawiera cena budowy domu?',
             content: [
               { type: 'paragraph', value: 'Cena obejmuje materiały, robociznę, nadzór kierownika budowy i koordynację podwykonawców. Nie zawiera:' },
-              { type: 'list', items: ['Projektu architektonicznego', 'Przyłączy mediów', 'Opłat administracyjnych (pozwolenie na budowę)'] },
-              { type: 'paragraph', value: 'Wszystko omawiamy transparentnie przed podpisaniem umowy.' },
+              { type: 'list', items: ['Projektu architektonicznego (8 000–25 000 zł)', 'Przyłączy mediów (10 000–30 000 zł)', 'Opłat administracyjnych (pozwolenie na budowę)', 'Zagospodarowania terenu (ogrodzenie, podjazd)'] },
+              { type: 'paragraph', value: 'Wszystko omawiamy transparentnie przed podpisaniem umowy. Szczegóły w artykule: Kosztorys budowy domu 2026.' },
             ],
           },
           {
             question: 'Czy cena może się zmienić po podpisaniu umowy?',
             content: [{ type: 'paragraph', value: 'Nie. Podpisujemy umowę ryczałtową ze stałą ceną. Jedyne co może zmienić cenę to Twoja decyzja o zmianie zakresu prac (np. dodanie garażu, zmiana materiałów). Każda taka zmiana wymaga pisemnego aneksu z nową wyceną.' }],
+          },
+          {
+            question: 'Jak nowe Warunki Techniczne 2026 wpłyną na cenę budowy?',
+            content: [{ type: 'paragraph', value: 'Od 20 września 2026 r. wchodzą zaostrzone wymagania energetyczne (EP ~55 kWh/m²·rok). Branża szacuje wzrost kosztów o 10–15% — grubsza izolacja, lepsza stolarka, obowiązkowa rekuperacja. Jeśli złożysz wniosek o pozwolenie przed tą datą, budujesz po obecnych, tańszych przepisach.' }],
+          },
+          {
+            question: 'Czy budujecie na terenach górniczych?',
+            content: [{ type: 'paragraph', value: 'Tak — tereny górnicze to nasza specjalizacja. Budujemy na szkodach górniczych kategorii I–IV (Rybnik, Jastrzębie-Zdrój, Wodzisław Śl., Zabrze, Katowice). Fundamenty na tych terenach wymagają płyty żelbetowej ze stalą B500SP i warstwą poślizgową — kalkulator uwzględnia ten koszt automatycznie.' }],
           },
         ]}
       />
