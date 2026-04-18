@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
+import Link from 'next/link';
 import { HideHeader } from '@/components/sections/calculator/HideHeader';
 import { CalculatorForm } from '@/components/sections/calculator/CalculatorForm';
 import { CalculatorTrustBar } from '@/components/sections/calculator/CalculatorTrustBar';
@@ -40,16 +41,16 @@ export default function WycenaPage() {
             </p>
             <p>
               Wycena uwzględnia <strong>materiały, robociznę i nadzór inżynierski</strong> na każdym z 5 etapów: stan zero (fundamenty), stan surowy otwarty (SSO), stan surowy zamknięty (SSZ), stan deweloperski i wykończenie pod klucz. Szczegółowy opis etapów znajdziesz w artykule{' '}
-              <a href="/baza-wiedzy/kosztorys-budowy-domu-2026" className="text-primary hover:underline font-medium">
+              <Link href="/baza-wiedzy/kosztorys-budowy-domu-2026" className="text-primary hover:underline font-medium">
                 Kosztorys budowy domu 2026 — aktualny cennik
-              </a>.
+              </Link>.
             </p>
             <h3 className="text-lg font-semibold mt-6">Ile kosztuje budowa domu w 2026?</h3>
             <p>
               Średni koszt budowy domu pod klucz na Śląsku wynosi <strong>6 150–6 950 zł netto za m²</strong> (ok. 6 640–7 510 zł brutto z 8% VAT). Dom 100 m² to ok. 664 000–751 000 zł brutto, dom 120 m² — ok. 799 000–902 000 zł. Sam{' '}
-              <a href="/baza-wiedzy/stan-surowy-otwarty-poradnik" className="text-primary hover:underline font-medium">
+              <Link href="/baza-wiedzy/stan-surowy-otwarty-poradnik" className="text-primary hover:underline font-medium">
                 stan surowy otwarty
-              </a>{' '}
+              </Link>{' '}
               to ok. 4 250–4 750 zł/m².
             </p>
             <h3 className="text-lg font-semibold mt-6">Dlaczego warto użyć kalkulatora?</h3>
@@ -61,11 +62,11 @@ export default function WycenaPage() {
             </ul>
             <p className="text-sm text-zinc-500 mt-4">
               Po konfiguracji możesz zostawić dane kontaktowe — nasz inżynier oddzwoni w 24h z dokładną kalkulacją uwzględniającą specyfikę Twojej działki i regionu. Budujemy na terenie całego{' '}
-              <a href="/obszar-dzialania/rybnik" className="text-primary hover:underline">Śląska</a>
+              <Link href="/obszar-dzialania/rybnik" className="text-primary hover:underline">Śląska</Link>
               {' '}— od{' '}
-              <a href="/obszar-dzialania/katowice" className="text-primary hover:underline">Katowic</a>
+              <Link href="/obszar-dzialania/katowice" className="text-primary hover:underline">Katowic</Link>
               {' '}po{' '}
-              <a href="/obszar-dzialania/wodzislaw-slaski" className="text-primary hover:underline">Wodzisław Śl.</a>
+              <Link href="/obszar-dzialania/wodzislaw-slaski" className="text-primary hover:underline">Wodzisław Śl.</Link>
             </p>
           </div>
         </div>

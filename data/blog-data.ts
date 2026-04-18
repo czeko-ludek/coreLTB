@@ -97,7 +97,7 @@ export const blogPosts: BlogPost[] = [
     id: 'kosztorys-budowy-domu-2026',
     image: {
       src: '/images/blog/kosztorys-budowy/hero.webp',
-      alt: 'Kosztorys budowy domu - kalkulator, dokumenty i plany budowlane na biurku',
+      alt: 'Budowa domu jednorodzinnego w stanie surowym zamkniętym - realizacja CoreLTB w Zabrzu',
     },
     category: 'Porady',
     categoryId: 'porady',
@@ -616,6 +616,12 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
       content: 'Obejmuje: nadzór <a href="/baza-wiedzy/ile-kosztuje-kierownik-budowy">kierownika budowy</a>, geodetę, geotechnika, fundament, kanalizację podposadzkową, hydroizolację i podsypkę żwirową.',
     },
     {
+      type: 'image',
+      src: '/images/blog/kosztorys-budowy/fundamenty.webp',
+      alt: 'Zbrojenie ław fundamentowych na budowie domu jednorodzinnego - realizacja CoreLTB',
+      caption: 'Etap 1: Fundamenty — zbrojenie ław przed zalaniem betonem. Realizacja CoreLTB w Zabrzu.',
+    },
+    {
       type: 'heading',
       level: 3,
       content: '2. Stan surowy otwarty (SSO) - ściany i dach (40-50%)',
@@ -631,6 +637,12 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'paragraph',
       content: 'Obejmuje: ściany nośne i działowe, strop (dom piętrowy), konstrukcję i pokrycie dachu, kominy, ocieplenie dachu pianą PUR, rynny, podbitkę. Szczegóły: <a href="/baza-wiedzy/stan-surowy-otwarty-poradnik">Stan surowy otwarty - co zawiera?</a>',
+    },
+    {
+      type: 'image',
+      src: '/images/blog/kosztorys-budowy/sciany-budowa.webp',
+      alt: 'Ściany nośne z ceramiki szlifowanej - stan surowy otwarty domu jednorodzinnego',
+      caption: 'Etap 2: Stan surowy otwarty — ściany nośne z ceramiki szlifowanej 24,5 cm. Realizacja CoreLTB.',
     },
     {
       type: 'heading',
@@ -725,12 +737,12 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
       content: 'Ceny obejmują materiały, robociznę, <a href="/baza-wiedzy/ile-kosztuje-kierownik-budowy">kierownika budowy</a> i nadzór inżynierski. <strong>Nie obejmują:</strong> projektu budowlanego, przyłączy mediów, ogrodzenia, zagospodarowania terenu. Chcesz zobaczyć, jak wygląda realizacja takiego budżetu w praktyce? Zobacz naszą <a href="/realizacje/dom-jednorodzinny-zabrze-gwiazdy-polarnej">budowę domu 200 m² w Zabrzu</a> - dokumentujemy koszty i technologie na każdym etapie.',
     },
 
-    // ── ZDJĘCIE 1 - Budowa w trakcie ──────────────────────────
+    // ── ZDJĘCIE 3 - Dom gotowy (render) ──────────────────────
     {
       type: 'image',
-      src: '/images/blog/kosztorys-budowy/hero.webp',
-      alt: 'Kosztorys budowy domu - dokumentacja projektowa, kalkulator i plany budowlane na biurku inżyniera',
-      caption: 'Kosztorys budowy domu to podstawa planowania budżetu - rozbijamy go na 5 etapów z konkretnymi stawkami za m²',
+      src: '/images/blog/kosztorys-budowy/dom-pod-klucz.webp',
+      alt: 'Nowoczesny dom jednorodzinny pod klucz - wizualizacja gotowego projektu z garażem',
+      caption: 'Efekt końcowy: nowoczesny dom jednorodzinny pod klucz. Koszt budowy 120 m² na Śląsku: ok. 799 000-902 000 zł brutto.',
     },
 
     // ── SEKCJA 3 - Co wpływa na cenę ──────────────────────────

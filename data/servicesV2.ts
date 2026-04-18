@@ -514,7 +514,7 @@ servicesAccordion: {
             content: [
               {
                 type: 'paragraph',
-                value: 'Zakup działki na Śląsku bez sprawdzenia gruntu to ryzyko. Grunty wysadzinowe (gliny) i **szkody górnicze** (kategorie I-IV) wpływają na koszty. Analizujemy grunt przed startem, bo różnica w cenie między ławą a **[płytą fundamentową](/baza-wiedzy/plyta-fundamentowa-tereny-gornicze)** jest znacząca.'
+                value: 'Zakup działki na Śląsku bez sprawdzenia gruntu to ryzyko. Grunty wysadzinowe (gliny) i **szkody górnicze** (kategorie I-IV) wpływają na koszty. Analizujemy grunt przed startem, bo różnica w cenie między ławą a [płytą fundamentową](/baza-wiedzy/plyta-fundamentowa-tereny-gornicze) jest znacząca.'
               },
               {
                 type: 'list',
