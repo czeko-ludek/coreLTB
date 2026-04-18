@@ -16,9 +16,15 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REAL_DATA_PATH = resolve(__dirname, '..', 'data', 'plots', 'real-data.ts');
-const GEMINI_API_KEY = 'AIzaSyCRMZcz5wWLo4arFdZia_AoVu4vvanh90g';
-const GEMINI_MODEL = 'gemini-3-flash-preview';
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+import 'dotenv/config';
+
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+if (!GEMINI_API_KEY) {
+  console.error('GEMINI_API_KEY not found. Add it to .env file in project root.');
+  process.exit(1);
+}
+const GEMINI_MODEL = 'gemini-2.5-flash-lite';
+const GEMINI_URL = `https://aiplatform.googleapis.com/v1/publishers/google/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
 
 const dryRun = process.argv.includes('--dry-run');
 const singleSlug = process.argv.find(a => a.startsWith('--slug='))?.split('=')[1];
