@@ -127,6 +127,9 @@ export function PlotsListingSection({
 
   const fullscreenMapHandleRef = useRef<PlotMapHandle>(null);
   const listingRef = useRef<HTMLDivElement>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const dragStartY = useRef<number | null>(null);
+  const dragCurrentY = useRef<number>(0);
 
   // Escape zamyka fullscreen
   useEffect(() => {
@@ -476,27 +479,31 @@ export function PlotsListingSection({
                 className="w-72 md:w-96 shrink-0"
               />
 
-              <div className="hidden md:flex items-center gap-1">
-                {PRICE_RANGES.map((range, i) => {
-                  const isActive = filters.priceMin === range.min && filters.priceMax === range.max;
-                  return (
-                    <button
-                      key={i}
-                      onClick={() => handlePriceRange(range.min, range.max)}
-                      className={clsx(
-                        'px-2.5 py-1.5 rounded-md text-[11px] font-medium transition-all whitespace-nowrap',
-                        isActive
-                          ? 'bg-zinc-900 text-white'
-                          : 'bg-zinc-100 text-text-secondary hover:bg-zinc-200'
-                      )}
-                    >
-                      {range.label}
-                    </button>
-                  );
-                })}
+              <div className="hidden md:flex items-center gap-1.5">
+                <FilterDropdown
+                  label="Cena"
+                  options={PRICE_RANGES.map((r) => ({ label: r.label }))}
+                  activeIndex={activePriceIdx >= 0 ? activePriceIdx : 0}
+                  onSelect={(i) => handlePriceRange(PRICE_RANGES[i].min, PRICE_RANGES[i].max)}
+                />
+                <FilterDropdown
+                  label="Powierzchnia"
+                  options={AREA_RANGES.map((r) => ({ label: r.label }))}
+                  activeIndex={activeAreaIdx >= 0 ? activeAreaIdx : 0}
+                  onSelect={(i) => handleAreaRange(AREA_RANGES[i].min, AREA_RANGES[i].max)}
+                />
+                <FilterDropdown
+                  label="Biuro"
+                  options={SOURCE_OPTIONS.map((s) => ({ label: s.label }))}
+                  activeIndex={activeSourceIdx >= 0 ? activeSourceIdx : 0}
+                  onSelect={(i) => {
+                    const src = SOURCE_OPTIONS[i].id;
+                    handleSourceChange(src === 'all' ? undefined : src as PlotSource);
+                  }}
+                />
               </div>
 
-              <div className="relative hidden md:block">
+              <div className="relative hidden md:block ml-auto">
                 <FilterDropdown
                   label="Sortowanie"
                   options={SORT_OPTIONS.map((s) => ({ label: s.label }))}
@@ -581,17 +588,71 @@ export function PlotsListingSection({
         </button>
       )}
 
-      {/* ── Mobile Bottom Drawer (Uber-style) ── */}
+      {/* ── Mobile Bottom Drawer (swipe-to-dismiss) ── */}
       {mobileDrawerOpen && (
         <div className="fixed inset-0 z-[1200] lg:hidden">
           <div
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
             onClick={() => setMobileDrawerOpen(false)}
           />
 
-          <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl max-h-[75vh] flex flex-col animate-slide-up">
+          <div
+            ref={drawerRef}
+            className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl max-h-[75vh] flex flex-col animate-slide-up"
+            style={{ touchAction: 'none' }}
+            onTouchStart={(e) => {
+              // Only track drag on the handle area or when scrolled to top
+              const scrollContainer = drawerRef.current?.querySelector('[data-drawer-scroll]') as HTMLElement | null;
+              const isAtTop = !scrollContainer || scrollContainer.scrollTop <= 0;
+              const touch = e.touches[0];
+              // Start drag if touching handle zone (first 48px) or content is scrolled to top
+              const rect = drawerRef.current?.getBoundingClientRect();
+              const touchRelativeY = rect ? touch.clientY - rect.top : 0;
+              if (touchRelativeY < 48 || isAtTop) {
+                dragStartY.current = touch.clientY;
+                dragCurrentY.current = 0;
+              }
+            }}
+            onTouchMove={(e) => {
+              if (dragStartY.current === null) return;
+              const touch = e.touches[0];
+              const dy = touch.clientY - dragStartY.current;
+              // Only allow dragging down (positive dy)
+              if (dy < 0) {
+                dragCurrentY.current = 0;
+                if (drawerRef.current) drawerRef.current.style.transform = 'translateY(0)';
+                return;
+              }
+              dragCurrentY.current = dy;
+              if (drawerRef.current) {
+                drawerRef.current.style.transform = `translateY(${dy}px)`;
+                drawerRef.current.style.transition = 'none';
+              }
+            }}
+            onTouchEnd={() => {
+              if (dragStartY.current === null) return;
+              const dy = dragCurrentY.current;
+              dragStartY.current = null;
+              dragCurrentY.current = 0;
+              // If dragged more than 100px down, dismiss
+              if (dy > 100) {
+                if (drawerRef.current) {
+                  drawerRef.current.style.transition = 'transform 0.25s ease-out';
+                  drawerRef.current.style.transform = 'translateY(100%)';
+                }
+                setTimeout(() => setMobileDrawerOpen(false), 250);
+              } else {
+                // Snap back
+                if (drawerRef.current) {
+                  drawerRef.current.style.transition = 'transform 0.2s ease-out';
+                  drawerRef.current.style.transform = 'translateY(0)';
+                }
+              }
+            }}
+          >
+            {/* Drag handle */}
             <div className="sticky top-0 bg-white rounded-t-3xl z-10 pt-3 pb-2 px-5 border-b border-zinc-100">
-              <div className="w-10 h-1 rounded-full bg-zinc-300 mx-auto mb-3" />
+              <div className="w-10 h-1.5 rounded-full bg-zinc-300 mx-auto mb-3 cursor-grab" />
               <div className="flex items-center justify-between">
                 <p className="text-base font-bold text-text-primary">
                   {sidebarPlots.length} {sidebarPlots.length === 1 ? 'działka' : 'działek'}
@@ -648,7 +709,7 @@ export function PlotsListingSection({
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto" data-drawer-scroll>
               {sidebarPlots.length > 0 ? (
                 sidebarPlots.map((plot) => (
                   <PlotCard
