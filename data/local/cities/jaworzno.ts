@@ -205,7 +205,7 @@ export const jaworznoData: CityData = {
       {
         question: 'Ile kosztuje budowa domu 100–150 m² w Jaworznie i od czego zależy ostateczna cena?',
         content: [
-          { type: 'paragraph', value: 'Realizacja domu **100–150 m²** w Jaworznie w stanie deweloperskim to wydatek rzędu **4 500–6 000 zł/m²**, a [pod klucz](/oferta/kompleksowa-budowa-domow) — **6 500–8 500 zł/m²**. Finalną cenę kształtują trzy czynniki: warunki gruntowe (na terenach pogórniczych KWK Sobieski zbrojona płyta fundamentowa kosztuje więcej niż tradycyjne ławy), złożoność bryły domu oraz standard wykończenia. W CoreLTB pracujemy w modelu ryczałtowym — podpisujesz umowę ze **stałą ceną**, która nie rośnie w trakcie budowy.' },
+          { type: 'paragraph', value: 'Stawki wg naszego [kalkulatora](/wycena): SSO **3 000–4 000 zł/m²**, [stan deweloperski](/oferta/kompleksowa-budowa-domow) **3 960–5 520 zł/m²**, pod klucz **4 640–6 200 zł/m²** netto (zależnie od konfiguracji). Na terenach pogórniczych KWK Sobieski zbrojona płyta fundamentowa podnosi koszt fundamentu o **15–25%** — to jedyny narzut regionalny. W CoreLTB pracujemy w modelu ryczałtowym — podpisujesz umowę ze **stałą ceną**, która nie rośnie w trakcie budowy.' },
         ],
       },
       {

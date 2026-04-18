@@ -8,7 +8,7 @@ export const krakowData: CityData = {
   meta: {
     title: 'Budowa Domów Kraków – Pod Klucz 2026 | CoreLTB Builders',
     description:
-      'Budowa domu jednorodzinnego w Krakowie. Znamy specyfikę południowych dzielnic — MPZP, warunki gruntowe, procedury konserwatorskie. ✓ Stan deweloperski od 6 000 zł/m² ✓ Gwarancja stałej ceny ✓ 10-16 miesięcy',
+      'Budowa domu jednorodzinnego w Krakowie. Znamy specyfikę południowych dzielnic — MPZP, warunki gruntowe, procedury konserwatorskie. ✓ Stan deweloperski od 3 960 zł/m² netto ✓ Gwarancja stałej ceny ✓ 10-16 miesięcy',
   },
 
   pageHeader: {
@@ -22,7 +22,7 @@ export const krakowData: CityData = {
     subtitle:
       'Budujemy domy jednorodzinne w południowych i zachodnich dzielnicach Krakowa — od Swoszowic po Wolę Justowską. Znamy lokalne MPZP, warunki gruntowe i procedury. Realizacja w 10-16 miesięcy ze stałą ceną w umowie.',
     benefits: [
-      'Stan deweloperski od 6 000–7 000 zł/m² netto (2026)',
+      'Stan deweloperski wg [kalkulatora](/wycena): od 3 960 zł/m² netto + narzut krakowski 5-15%',
       'Znajomość krakowskich MPZP i procedur konserwatorskich',
       'Stała cena w umowie — bez niespodzianek w trakcie budowy',
     ],
@@ -160,7 +160,7 @@ export const krakowData: CityData = {
           {
             type: 'paragraph',
             value:
-              'Stan surowy otwarty (SSO) to **3 000–3 800 zł/m²**, [stan deweloperski](/oferta/kompleksowa-budowa-domow) — **6 000–7 000 zł/m²**, realizacja pod klucz — **7 500–9 500 zł/m²**. Ceny w Krakowie są wyższe niż na Śląsku o **5-15%** — głównie przez droższy transport i logistykę (korki, ograniczenia tonażowe, strefy czystego transportu). Na działkach w dolinie Wisły dolicz **10-18 tys. zł** na hydroizolację i drenaż.',
+              'Stawki wg naszego [kalkulatora](/wycena): SSO **3 000–4 000 zł/m²**, [stan deweloperski](/oferta/kompleksowa-budowa-domow) **3 960–5 520 zł/m²**, pod klucz **4 640–6 200 zł/m²** netto (zależnie od konfiguracji). **Kraków: +5-15% narzutu logistycznego** — droższy transport (korki, ograniczenia tonażowe, strefy czystego transportu). Na działkach w dolinie Wisły dolicz **10-18 tys. zł** na hydroizolację i drenaż.',
           },
         ],
       },

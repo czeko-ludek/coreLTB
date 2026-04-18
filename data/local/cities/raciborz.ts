@@ -154,7 +154,7 @@ export const raciborzData: CityData = {
           {
             type: 'paragraph',
             value:
-              'Stan surowy otwarty (SSO) to **2 800–3 500 zł/m²**, [stan deweloperski](/oferta/kompleksowa-budowa-domow) — **5 500–6 500 zł/m²**, realizacja pod klucz — **7 000–8 500 zł/m²**. W dzielnicach nadrzecznych (Ostróg, Płonia, Studzienna) dolicz **12–18 tys. zł** na hydroizolację ciężką i drenaż opaskowy. Na gruntach z warstwami organicznymi koszt fundamentu może wzrosnąć o 20–30% (wymiana gruntu lub płyta).',
+              'Stawki wg naszego [kalkulatora](/wycena): SSO **3 000–4 000 zł/m²**, [stan deweloperski](/oferta/kompleksowa-budowa-domow) **3 960–5 520 zł/m²**, pod klucz **4 640–6 200 zł/m²** netto (zależnie od konfiguracji). W dzielnicach nadrzecznych (Ostróg, Płonia, Studzienna) dolicz **12–18 tys. zł** na hydroizolację ciężką i drenaż opaskowy. Na gruntach z warstwami organicznymi koszt fundamentu może wzrosnąć o 20–30% (wymiana gruntu lub płyta).',
           },
         ],
       },

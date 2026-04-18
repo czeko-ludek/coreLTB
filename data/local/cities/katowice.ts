@@ -7,7 +7,7 @@ export const katowiceData: CityData = {
 
   meta: {
     title: 'Budowa Domów Katowice – Pod Klucz 2026 | CoreLTB Builders',
-    description: 'Budowa domu jednorodzinnego w Katowicach. Koszt stanu deweloperskiego od 5500-6500 zł/m². Specjalizacja w terenach górniczych. ✓ Lokalna baza logistyczna ✓ Gwarancja stałej ceny ✓ 12-18 miesięcy realizacji',
+    description: 'Budowa domu jednorodzinnego w Katowicach. Stan deweloperski od 3 960 zł/m² netto wg kalkulatora + narzut górniczy 15-25%. Specjalizacja w terenach górniczych. ✓ Lokalna baza logistyczna ✓ Gwarancja stałej ceny ✓ 12-18 miesięcy realizacji',
   },
 
   pageHeader: {
@@ -20,7 +20,7 @@ export const katowiceData: CityData = {
     headline: ['Budujesz dom w Katowicach?', 'Mamy bazę logistyczną tuż obok'],
     subtitle: 'Budujemy domy jednorodzinne w Katowicach — od Podlesia po Zarzecze. Nasza baza jest kilkanaście minut stąd, co oznacza szybką reakcję na budowie i zero kosztów dojazdu. Realizacja w 12-18 miesięcy ze stałą ceną w umowie.',
     benefits: [
-      'Stan deweloperski od 5 500–6 500 zł/m² netto (2026)',
+      'Stan deweloperski wg [kalkulatora](/wycena): od 3 960 zł/m² netto + narzut górniczy na fundament',
       'Lokalna baza logistyczna = szybka reakcja na budowie',
       'Technologia dobrana do warunków gruntowych Twojej działki',
     ],
@@ -191,7 +191,7 @@ export const katowiceData: CityData = {
       {
         question: 'Ile kosztuje budowa domu 100–150 m² w Katowicach w 2026 roku?',
         content: [
-          { type: 'paragraph', value: 'Koszt stanu deweloperskiego startuje od **5500-6500 zł netto za m²**. Realizacja domu 100–150 m² w standardzie pod klucz zazwyczaj wynosi od 750 tys. zł wzwyż. Budżet 450–650 tys. zł pozwoli na doprowadzenie inwestycji do stanu deweloperskiego. Dokładny kosztorys przygotowujemy po analizie projektu.' },
+          { type: 'paragraph', value: 'Stawki wg naszego [kalkulatora](/wycena): SSO **3 000–4 000 zł/m²**, [stan deweloperski](/oferta/kompleksowa-budowa-domow) **3 960–5 520 zł/m²**, pod klucz **4 640–6 200 zł/m²** netto (zależnie od konfiguracji). Na terenach górniczych Katowic koszt fundamentu wzrasta o **15–25%** (zbrojona płyta zamiast ław) — to jedyny narzut regionalny. Dokładny kosztorys przygotowujemy po analizie projektu i badaniach geotechnicznych.' },
         ],
       },
       {

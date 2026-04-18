@@ -233,7 +233,7 @@ export const tychyData: CityData = {
       {
         question: 'Ile kosztuje budowa domu 100–150 m² w Tychach w 2026 roku?',
         content: [
-          { type: 'paragraph', value: 'Dom jednorodzinny **100–150 m²** w stanie deweloperskim to w Tychach wydatek rzędu **4 500–6 000 zł/m²**, natomiast [realizacja pod klucz](/oferta/kompleksowa-budowa-domow) zamyka się w przedziale **6 500–8 500 zł/m²**. Na cenę wpływa przede wszystkim rodzaj fundamentu (na terenach z kategorią szkód górniczych płyta fundamentowa jest droższa niż ławy), standard materiałów wykończeniowych oraz złożoność bryły. W CoreLTB podpisujemy umowę ryczałtową — znasz ostateczny koszt przed wbiciem pierwszej łopaty.' },
+          { type: 'paragraph', value: 'Stawki wg naszego [kalkulatora](/wycena): SSO **3 000–4 000 zł/m²**, [stan deweloperski](/oferta/kompleksowa-budowa-domow) **3 960–5 520 zł/m²**, pod klucz **4 640–6 200 zł/m²** netto (zależnie od konfiguracji). Na terenach z kategorią szkód górniczych (Urbanowice, Czułów) koszt fundamentu wzrasta o **15–25%** (zbrojona płyta zamiast ław) — to jedyny narzut regionalny. W CoreLTB podpisujemy umowę ryczałtową — znasz ostateczny koszt przed wbiciem pierwszej łopaty.' },
         ],
       },
       {

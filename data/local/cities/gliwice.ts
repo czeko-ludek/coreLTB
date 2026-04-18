@@ -148,7 +148,7 @@ export const gliwiceData: CityData = {
       {
         question: 'Ile kosztuje budowa domu 100–150 m² w Gliwicach w 2026 roku?',
         content: [
-          { type: 'paragraph', value: 'Dom jednorodzinny **100–150 m²** w stanie deweloperskim to w Gliwicach wydatek **4 500–6 200 zł/m²**, a [realizacja pod klucz](/oferta/kompleksowa-budowa-domow) zamyka się w przedziale **6 500–8 500 zł/m²**. Na ostateczną cenę wpływa rodzaj fundamentu — na terenach po KWK Sośnica czy Gliwice zbrojona płyta fundamentowa podnosi koszt o **15–25%** względem tradycyjnych ław. W CoreLTB pracujemy w modelu ryczałtowym ze **stałą ceną w umowie**, niezależnie od wahań cen materiałów.' },
+          { type: 'paragraph', value: 'Stawki wg naszego [kalkulatora](/wycena): SSO **3 000–4 000 zł/m²**, [stan deweloperski](/oferta/kompleksowa-budowa-domow) **3 960–5 520 zł/m²**, pod klucz **4 640–6 200 zł/m²** netto (zależnie od konfiguracji). Na terenach po KWK Sośnica czy Gliwice zbrojona płyta fundamentowa podnosi koszt fundamentu o **15–25%** względem tradycyjnych ław — to jedyny narzut regionalny. W CoreLTB pracujemy w modelu ryczałtowym ze **stałą ceną w umowie**, niezależnie od wahań cen materiałów.' },
         ],
       },
       {

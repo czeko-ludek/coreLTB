@@ -218,7 +218,7 @@ export const wodzislawData: CityData = {
       {
         question: 'Ile kosztuje budowa domu w Wodzisławiu Śląskim w 2026 roku?',
         content: [
-          { type: 'paragraph', value: 'Dom jednorodzinny **100–150 m²** w stanie deweloperskim to w Wodzisławiu wydatek rzędu **4 300–5 800 zł/m²**, a [realizacja pod klucz](/oferta/kompleksowa-budowa-domow) zamyka się w **6 500–8 500 zł/m²**. Region ROW ma nieco niższe ceny robocizny niż aglomeracja katowicka, ale specyfika gruntowa (gliny, kurzawka) może wymagać droższego fundamentu. W CoreLTB Builders pracujemy na **stałej cenie ryczałtowej** — koszt nie rośnie nawet gdy ceny stali pójdą w górę.' },
+          { type: 'paragraph', value: 'Stawki wg naszego [kalkulatora](/wycena): SSO **3 000–4 000 zł/m²**, [stan deweloperski](/oferta/kompleksowa-budowa-domow) **3 960–5 520 zł/m²**, pod klucz **4 640–6 200 zł/m²** netto (zależnie od konfiguracji). Specyfika gruntowa ROW (gliny, kurzawka) może wymagać droższego fundamentu (+10-15%), ale brak narzutów logistycznych — nasza baza jest w Wodzisławiu. W CoreLTB Builders pracujemy na **stałej cenie ryczałtowej** — koszt nie rośnie nawet gdy ceny stali pójdą w górę.' },
         ],
       },
       {

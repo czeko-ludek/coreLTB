@@ -155,7 +155,7 @@ export const zoryData: CityData = {
           {
             type: 'paragraph',
             value:
-              'Stan surowy otwarty (SSO) to orientacyjnie **2 800–3 500 zł/m²** w zależności od technologii i warunków gruntowych. [Stan deweloperski](/oferta/kompleksowa-budowa-domow) zamyka się w **5 500–6 500 zł/m²**, a realizacja pod klucz — **7 000–8 500 zł/m²**. Dla domu 130 m² w standardzie deweloperskim budżet wynosi więc **715–845 tys. zł**. Na terenach pogórniczych (Osiny, os. Gwarków) dolicz 15–25% na wzmocniony fundament.',
+              'Stawki wg naszego [kalkulatora](/wycena): SSO **3 000–4 000 zł/m²**, [stan deweloperski](/oferta/kompleksowa-budowa-domow) **3 960–5 520 zł/m²**, pod klucz **4 640–6 200 zł/m²** netto (zależnie od konfiguracji). Dla domu 130 m² (silikat, dach płaski, płyta, gaz) w standardzie deweloperskim budżet to ok. **594 000 zł netto**. Na terenach pogórniczych (Osiny, os. Gwarków) dolicz 15–25% na wzmocniony fundament.',
           },
         ],
       },

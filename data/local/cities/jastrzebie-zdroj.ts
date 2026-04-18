@@ -156,7 +156,7 @@ export const jastrzebieData: CityData = {
           {
             type: 'paragraph',
             value:
-              'Stan surowy otwarty (SSO) to **3 000–3 800 zł/m²** — wyższa widełka niż średnia śląska, bo aktywne szkody górnicze wymagają płyty fundamentowej i wzmocnionej konstrukcji. [Stan deweloperski](/oferta/kompleksowa-budowa-domow) zamyka się w **5 800–6 800 zł/m²**, realizacja pod klucz — **7 500–9 000 zł/m²**. Dla domu 130 m² w standardzie deweloperskim budżet to **755–885 tys. zł**.',
+              'Stawki wg naszego [kalkulatora](/wycena): SSO **3 000–4 000 zł/m²**, [stan deweloperski](/oferta/kompleksowa-budowa-domow) **3 960–5 520 zł/m²**, pod klucz **4 640–6 200 zł/m²** netto. W Jastrzębiu-Zdroju aktywne szkody górnicze wymagają płyty fundamentowej ze stalą B500SP i warstwą poślizgową — dolicz **15–25%** do etapu stan zero. Dla domu 130 m² (silikat, dach płaski, płyta, gaz) w standardzie deweloperskim budżet bazowy to ok. **594 000 zł netto** + narzut górniczy na fundament.',
           },
         ],
       },

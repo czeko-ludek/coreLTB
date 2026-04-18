@@ -7,7 +7,7 @@ export const mikolowData: CityData = {
 
   meta: {
     title: 'Budowa Domów Mikołów – Pod Klucz 2026 | CoreLTB Builders',
-    description: 'Budowa domu jednorodzinnego w Mikołowie. Koszt stanu deweloperskiego od 5500-7200 zł/m². Specjalizacja w szkodach górniczych (KWK Bolesław Śmiały). ✓ Lokalna firma ✓ Gwarancja stałej ceny ✓ 8-12 miesięcy realizacji',
+    description: 'Budowa domu jednorodzinnego w Mikołowie. Stan deweloperski od 3 960 zł/m² netto wg kalkulatora + narzut górniczy 15-25%. Specjalizacja w szkodach górniczych (KWK Bolesław Śmiały). ✓ Lokalna firma ✓ Gwarancja stałej ceny ✓ 8-12 miesięcy realizacji',
   },
 
   pageHeader: {
@@ -18,9 +18,9 @@ export const mikolowData: CityData = {
   emotionalHero: {
     label: 'BUDOWA DOMÓW MIKOŁÓW',
     headline: ['Budujesz dom w Mikołowie?', 'Solidna budowa od lokalnego wykonawcy'],
-    subtitle: 'Budujemy domy w Mikołowie i powiecie mikołowskim — od centrum po sołectwa. Znamy lokalny teren i dobieramy technologię do warunków Twojej działki. Stan deweloperski od 5 500 zł/m², realizacja w 8-12 miesięcy.',
+    subtitle: 'Budujemy domy w Mikołowie i powiecie mikołowskim — od centrum po sołectwa. Znamy lokalny teren i dobieramy technologię do warunków Twojej działki. Stan deweloperski od 3 960 zł/m² netto wg kalkulatora, realizacja w 8-12 miesięcy.',
     benefits: [
-      'Stan deweloperski od 5 500–7 200 zł/m² netto (2026)',
+      'Stan deweloperski wg [kalkulatora](/wycena): od 3 960 zł/m² netto + narzut górniczy na fundament',
       'Znajomość warunków gruntowych w całym powiecie mikołowskim',
       'Pełna odpowiedzialność logistyczna, prawna i techniczna',
     ],
@@ -189,7 +189,7 @@ export const mikolowData: CityData = {
       {
         question: 'Ile kosztuje budowa domu w 2026 roku i czy budżet 350-500 tys. zł wystarczy na realizację pod klucz?',
         content: [
-          { type: 'paragraph', value: 'Koszt budowy domu pod klucz w 2026 roku oscyluje w granicach **6000–8500 zł za m²**. Budżet 350–500 tys. zł jest sporym wyzwaniem i zazwyczaj pozwala na realizację mniejszego budynku lub doprowadzenie inwestycji jedynie do stanu deweloperskiego. W CORE LTB Builders pomagamy optymalizować projekty (prosta bryła, dach dwuspadowy), jednak przy tej kwocie pełne wykończenie standardowego metrażu może być niemożliwe.' },
+          { type: 'paragraph', value: 'Stawki wg naszego [kalkulatora](/wycena): SSO **3 000–4 000 zł/m²**, [stan deweloperski](/oferta/kompleksowa-budowa-domow) **3 960–5 520 zł/m²**, pod klucz **4 640–6 200 zł/m²** netto (zależnie od konfiguracji). Na terenach górniczych (KWK Bolesław Śmiały) koszt fundamentu wzrasta o **15–25%** (zbrojona płyta zamiast ław). Budżet 350–500 tys. zł pozwala na dom do ~100 m² w stanie deweloperskim w konfiguracji budżetowej. W CORE LTB Builders pomagamy optymalizować projekty (prosta bryła, dach dwuspadowy).' },
         ],
       },
       {

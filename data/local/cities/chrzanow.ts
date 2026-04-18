@@ -157,7 +157,7 @@ export const chrzanowData: CityData = {
           {
             type: 'paragraph',
             value:
-              'Stan surowy otwarty (SSO) to **2 800–3 400 zł/m²**, [stan deweloperski](/oferta/kompleksowa-budowa-domow) — **5 500–6 500 zł/m²**, realizacja pod klucz — **7 000–8 500 zł/m²**. Ceny są zbliżone do jaworznickich. Na działkach z podłożem krasowym lub pogórniczym koszt fundamentu może wzrosnąć o **10–20%** (wzmocnione ławy lub płyta zamiast standardowych ław).',
+              'Stawki wg naszego [kalkulatora](/wycena): SSO **3 000–4 000 zł/m²**, [stan deweloperski](/oferta/kompleksowa-budowa-domow) **3 960–5 520 zł/m²**, pod klucz **4 640–6 200 zł/m²** netto (zależnie od konfiguracji). Ceny są zbliżone do jaworznickich. Na działkach z podłożem krasowym lub pogórniczym koszt fundamentu może wzrosnąć o **10–20%** (wzmocnione ławy lub płyta zamiast standardowych ław).',
           },
         ],
       },

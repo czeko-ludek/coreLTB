@@ -7,7 +7,7 @@ export const zabrzeData: CityData = {
 
   meta: {
     title: 'Budowa Domów Zabrze – Pod Klucz 2026 | CoreLTB Builders',
-    description: 'Budowa domu jednorodzinnego w Zabrzu. Specjalizacja w terenach pogórniczych (KWK Makoszowy, Sośnica). Stan deweloperski od 5500 zł/m². ✓ Technologia murowana ✓ Gwarancja stałej ceny ✓ 12-18 miesięcy',
+    description: 'Budowa domu jednorodzinnego w Zabrzu. Specjalizacja w terenach pogórniczych (KWK Makoszowy, Sośnica). Stan deweloperski od 3 960 zł/m² netto wg kalkulatora + narzut górniczy. ✓ Technologia murowana ✓ Gwarancja stałej ceny ✓ 12-18 miesięcy',
   },
 
   pageHeader: {
@@ -18,9 +18,9 @@ export const zabrzeData: CityData = {
   emotionalHero: {
     label: 'BUDOWA DOMÓW ZABRZE',
     headline: ['Budujesz dom w Zabrzu?', 'Solidna budowa ze stałą ceną'],
-    subtitle: 'Budujemy domy murowane w Zabrzu — od Biskupic po Rokitnicę. Znamy lokalne warunki gruntowe i dobieramy konstrukcję do Twojej działki. Stan deweloperski od 5 500 zł/m², realizacja w 12-18 miesięcy ze stałą ceną w umowie.',
+    subtitle: 'Budujemy domy murowane w Zabrzu — od Biskupic po Rokitnicę. Znamy lokalne warunki gruntowe i dobieramy konstrukcję do Twojej działki. Stan deweloperski od 3 960 zł/m² netto wg kalkulatora, realizacja w 12-18 miesięcy ze stałą ceną w umowie.',
     benefits: [
-      'Stan deweloperski od 5 500–6 500 zł/m² netto (2026)',
+      'Stan deweloperski wg [kalkulatora](/wycena): od 3 960 zł/m² netto + narzut górniczy na fundament',
       'Doświadczenie w zabrzańskich warunkach gruntowych',
       'Gwarancja stałej ceny — zabezpieczenie przed inflacją materiałów',
     ],
@@ -231,7 +231,7 @@ export const zabrzeData: CityData = {
       {
         question: 'Ile kosztuje budowa domu 100-150 m² w Zabrzu w 2026 roku?',
         content: [
-          { type: 'paragraph', value: 'Koszt stanu deweloperskiego startuje od **5500-6500 zł netto za m²**. Realizacja domu 120 m² w standardzie pod klucz zazwyczaj wynosi od **750 tys. zł wzwyż**. Na terenach pogórniczych (Makoszowy, Mikulczyce) koszt fundamentów jest o **10-15% wyższy** ze względu na wzmocnione zbrojenie. Dokładny kosztorys przygotowujemy po analizie projektu i badaniach geotechnicznych.' },
+          { type: 'paragraph', value: 'Stawki wg naszego [kalkulatora](/wycena): SSO **3 000–4 000 zł/m²**, [stan deweloperski](/oferta/kompleksowa-budowa-domow) **3 960–5 520 zł/m²**, pod klucz **4 640–6 200 zł/m²** netto (zależnie od konfiguracji). Na terenach pogórniczych (Makoszowy, Mikulczyce) koszt fundamentu wzrasta o **10-15%** ze względu na wzmocnione zbrojenie — to jedyny narzut regionalny. Dokładny kosztorys przygotowujemy po analizie projektu i badaniach geotechnicznych.' },
         ],
       },
       {
