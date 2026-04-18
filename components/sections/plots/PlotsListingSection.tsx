@@ -599,59 +599,50 @@ export function PlotsListingSection({
           <div
             ref={drawerRef}
             className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl max-h-[75vh] flex flex-col animate-slide-up"
-            style={{ touchAction: 'none' }}
-            onTouchStart={(e) => {
-              // Only track drag on the handle area or when scrolled to top
-              const scrollContainer = drawerRef.current?.querySelector('[data-drawer-scroll]') as HTMLElement | null;
-              const isAtTop = !scrollContainer || scrollContainer.scrollTop <= 0;
-              const touch = e.touches[0];
-              // Start drag if touching handle zone (first 48px) or content is scrolled to top
-              const rect = drawerRef.current?.getBoundingClientRect();
-              const touchRelativeY = rect ? touch.clientY - rect.top : 0;
-              if (touchRelativeY < 48 || isAtTop) {
+          >
+            {/* Drag handle — swipe zone */}
+            <div
+              className="sticky top-0 bg-white rounded-t-3xl z-10 pt-3 pb-2 px-5 border-b border-zinc-100"
+              style={{ touchAction: 'none' }}
+              onTouchStart={(e) => {
+                const touch = e.touches[0];
                 dragStartY.current = touch.clientY;
                 dragCurrentY.current = 0;
-              }
-            }}
-            onTouchMove={(e) => {
-              if (dragStartY.current === null) return;
-              const touch = e.touches[0];
-              const dy = touch.clientY - dragStartY.current;
-              // Only allow dragging down (positive dy)
-              if (dy < 0) {
+              }}
+              onTouchMove={(e) => {
+                if (dragStartY.current === null) return;
+                const touch = e.touches[0];
+                const dy = touch.clientY - dragStartY.current;
+                if (dy < 0) {
+                  dragCurrentY.current = 0;
+                  if (drawerRef.current) drawerRef.current.style.transform = 'translateY(0)';
+                  return;
+                }
+                dragCurrentY.current = dy;
+                if (drawerRef.current) {
+                  drawerRef.current.style.transform = `translateY(${dy}px)`;
+                  drawerRef.current.style.transition = 'none';
+                }
+              }}
+              onTouchEnd={() => {
+                if (dragStartY.current === null) return;
+                const dy = dragCurrentY.current;
+                dragStartY.current = null;
                 dragCurrentY.current = 0;
-                if (drawerRef.current) drawerRef.current.style.transform = 'translateY(0)';
-                return;
-              }
-              dragCurrentY.current = dy;
-              if (drawerRef.current) {
-                drawerRef.current.style.transform = `translateY(${dy}px)`;
-                drawerRef.current.style.transition = 'none';
-              }
-            }}
-            onTouchEnd={() => {
-              if (dragStartY.current === null) return;
-              const dy = dragCurrentY.current;
-              dragStartY.current = null;
-              dragCurrentY.current = 0;
-              // If dragged more than 100px down, dismiss
-              if (dy > 100) {
-                if (drawerRef.current) {
-                  drawerRef.current.style.transition = 'transform 0.25s ease-out';
-                  drawerRef.current.style.transform = 'translateY(100%)';
+                if (dy > 100) {
+                  if (drawerRef.current) {
+                    drawerRef.current.style.transition = 'transform 0.25s ease-out';
+                    drawerRef.current.style.transform = 'translateY(100%)';
+                  }
+                  setTimeout(() => setMobileDrawerOpen(false), 250);
+                } else {
+                  if (drawerRef.current) {
+                    drawerRef.current.style.transition = 'transform 0.2s ease-out';
+                    drawerRef.current.style.transform = 'translateY(0)';
+                  }
                 }
-                setTimeout(() => setMobileDrawerOpen(false), 250);
-              } else {
-                // Snap back
-                if (drawerRef.current) {
-                  drawerRef.current.style.transition = 'transform 0.2s ease-out';
-                  drawerRef.current.style.transform = 'translateY(0)';
-                }
-              }
-            }}
-          >
-            {/* Drag handle */}
-            <div className="sticky top-0 bg-white rounded-t-3xl z-10 pt-3 pb-2 px-5 border-b border-zinc-100">
+              }}
+            >
               <div className="w-10 h-1.5 rounded-full bg-zinc-300 mx-auto mb-3 cursor-grab" />
               <div className="flex items-center justify-between">
                 <p className="text-base font-bold text-text-primary">
@@ -665,51 +656,83 @@ export function PlotsListingSection({
                 </button>
               </div>
 
-              <div className="flex gap-2 mt-3 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-hide">
-                {PRICE_RANGES.slice(1).map((range, i) => {
-                  const isActive = filters.priceMin === range.min && filters.priceMax === range.max;
-                  return (
-                    <button
-                      key={i}
-                      onClick={() => handlePriceRange(
-                        isActive ? undefined : range.min,
-                        isActive ? undefined : range.max
-                      )}
-                      className={clsx(
-                        'px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all shrink-0',
-                        isActive
-                          ? 'bg-zinc-900 text-white'
-                          : 'bg-zinc-100 text-text-secondary'
-                      )}
-                    >
-                      {range.label}
-                    </button>
-                  );
-                })}
-                {AREA_RANGES.slice(1).map((range, i) => {
-                  const isActive = filters.areaMin === range.min && filters.areaMax === range.max;
-                  return (
-                    <button
-                      key={`a${i}`}
-                      onClick={() => handleAreaRange(
-                        isActive ? undefined : range.min,
-                        isActive ? undefined : range.max
-                      )}
-                      className={clsx(
-                        'px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all shrink-0',
-                        isActive
-                          ? 'bg-zinc-900 text-white'
-                          : 'bg-zinc-100 text-text-secondary'
-                      )}
-                    >
-                      {range.label}
-                    </button>
-                  );
-                })}
+              <div className="flex gap-1.5 mt-3 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-hide">
+                <FilterDropdown
+                  label="Cena"
+                  options={PRICE_RANGES.map((r) => ({ label: r.label }))}
+                  activeIndex={activePriceIdx >= 0 ? activePriceIdx : 0}
+                  onSelect={(i) => handlePriceRange(PRICE_RANGES[i].min, PRICE_RANGES[i].max)}
+                />
+                <FilterDropdown
+                  label="Powierzchnia"
+                  options={AREA_RANGES.map((r) => ({ label: r.label }))}
+                  activeIndex={activeAreaIdx >= 0 ? activeAreaIdx : 0}
+                  onSelect={(i) => handleAreaRange(AREA_RANGES[i].min, AREA_RANGES[i].max)}
+                />
+                <FilterDropdown
+                  label="Biuro"
+                  options={SOURCE_OPTIONS.map((s) => ({ label: s.label }))}
+                  activeIndex={activeSourceIdx >= 0 ? activeSourceIdx : 0}
+                  onSelect={(i) => {
+                    const src = SOURCE_OPTIONS[i].id;
+                    handleSourceChange(src === 'all' ? undefined : src as PlotSource);
+                  }}
+                />
+                <FilterDropdown
+                  label="Sortuj"
+                  options={SORT_OPTIONS.map((s) => ({ label: s.label }))}
+                  activeIndex={activeSortIdx >= 0 ? activeSortIdx : 0}
+                  onSelect={(i) => handleSortChange(SORT_OPTIONS[i].id)}
+                />
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto" data-drawer-scroll>
+            <div
+              className="flex-1 overflow-y-auto"
+              data-drawer-scroll
+              onTouchStart={(e) => {
+                const el = e.currentTarget;
+                if (el.scrollTop <= 0) {
+                  dragStartY.current = e.touches[0].clientY;
+                  dragCurrentY.current = 0;
+                }
+              }}
+              onTouchMove={(e) => {
+                if (dragStartY.current === null) return;
+                const dy = e.touches[0].clientY - dragStartY.current;
+                if (dy < 0) {
+                  // Scrolling up — release drag, let native scroll handle it
+                  dragStartY.current = null;
+                  dragCurrentY.current = 0;
+                  return;
+                }
+                // Prevent native scroll while dragging drawer down
+                e.preventDefault();
+                dragCurrentY.current = dy;
+                if (drawerRef.current) {
+                  drawerRef.current.style.transform = `translateY(${dy}px)`;
+                  drawerRef.current.style.transition = 'none';
+                }
+              }}
+              onTouchEnd={() => {
+                if (dragStartY.current === null) return;
+                const dy = dragCurrentY.current;
+                dragStartY.current = null;
+                dragCurrentY.current = 0;
+                if (dy > 100) {
+                  if (drawerRef.current) {
+                    drawerRef.current.style.transition = 'transform 0.25s ease-out';
+                    drawerRef.current.style.transform = 'translateY(100%)';
+                  }
+                  setTimeout(() => setMobileDrawerOpen(false), 250);
+                } else if (dy > 0) {
+                  if (drawerRef.current) {
+                    drawerRef.current.style.transition = 'transform 0.2s ease-out';
+                    drawerRef.current.style.transform = 'translateY(0)';
+                  }
+                }
+              }}
+            >
               {sidebarPlots.length > 0 ? (
                 sidebarPlots.map((plot) => (
                   <PlotCard
