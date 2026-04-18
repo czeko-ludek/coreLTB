@@ -47,11 +47,11 @@ export default function WycenaPage() {
             </p>
             <h3 className="text-lg font-semibold mt-6">Ile kosztuje budowa domu w 2026?</h3>
             <p>
-              Średni koszt budowy domu pod klucz na Śląsku wynosi <strong>6 150–6 950 zł netto za m²</strong> (ok. 6 640–7 510 zł brutto z 8% VAT). Dom 100 m² to ok. 664 000–751 000 zł brutto, dom 120 m² — ok. 799 000–902 000 zł. Sam{' '}
+              Koszt budowy domu pod klucz na Śląsku wynosi <strong>4 640–6 200 zł netto za m²</strong> (5 011–6 696 zł brutto z 8% VAT) w zależności od konfiguracji. Nasz standard (silikat, dach płaski, płyta, gaz): <strong>5 240 zł/m² netto</strong>. Dom 100 m² to 565 920 zł brutto, dom 120 m² — 679 104 zł brutto. Sam{' '}
               <Link href="/baza-wiedzy/stan-surowy-otwarty-poradnik" className="text-primary hover:underline font-medium">
                 stan surowy otwarty
               </Link>{' '}
-              to ok. 4 250–4 750 zł/m².
+              to 3 000–4 000 zł/m².
             </p>
             <h3 className="text-lg font-semibold mt-6">Dlaczego warto użyć kalkulatora?</h3>
             <ul className="list-disc pl-5 space-y-1">
@@ -84,11 +84,11 @@ export default function WycenaPage() {
           },
           {
             question: 'Ile kosztuje budowa domu 100 m² w 2026 roku?',
-            content: [{ type: 'paragraph', value: 'Dom 100 m² pod klucz na Śląsku kosztuje orientacyjnie 664 000–751 000 zł brutto (z 8% VAT) przy technologii silikatowej, dachu płaskim i ogrzewaniu gazowym. Sam stan surowy otwarty to ok. 459 000–513 000 zł. Dokładną kwotę obliczysz w kalkulatorze powyżej.' }],
+            content: [{ type: 'paragraph', value: 'Dom 100 m² parterowy pod klucz (silikat, dach płaski, płyta, gaz, bez garażu) kosztuje 565 920 zł brutto (524 000 zł netto + 8% VAT). Sam stan surowy otwarty to 388 800 zł brutto. Dokładną kwotę dla Twojej konfiguracji obliczysz w kalkulatorze powyżej.' }],
           },
           {
             question: 'Ile kosztuje budowa domu za m² w 2026?',
-            content: [{ type: 'paragraph', value: 'Średni koszt budowy pod klucz na Śląsku: 6 150–6 950 zł netto za m² (ok. 6 640–7 510 zł brutto). Stawka zależy od technologii ściennej, typu dachu, ogrzewania i lokalizacji. Na terenach górniczych koszty fundamentów są o 15–25% wyższe.' }],
+            content: [{ type: 'paragraph', value: 'Koszt pod klucz na Śląsku: 4 640–6 200 zł netto za m² (5 011–6 696 zł brutto) w zależności od konfiguracji. Nasz standard (silikat, dach płaski, płyta, gaz): 5 240 zł/m² netto. Na terenach górniczych koszty fundamentów są o 15–25% wyższe.' }],
           },
           {
             question: 'Jak długo trwa budowa domu?',

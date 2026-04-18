@@ -460,6 +460,7 @@ Scalable system for construction case studies (build diaries) at `/realizacje` a
 - **Sections:** KPI summary, daily breakdown, channels, landing pages, search terms (with category cards), devices/hours/days, funnel, SEO comparison, GBP, learning phase, campaign strategy, business value, recommendations
 
 ## Business & Pricing
+- **`docs/PRICING-RULES.md`** — **ZASADY CENOWE:** jedyne zrodlo prawdy to `data/pricing.ts`. Wszystkie ceny na stronie, w artykulach, FAQ i local pages MUSZA byc weryfikowane z kalkulatorem. Zawiera stawki, konfiguracje referencyjne, zakresy i wzory obliczen. CZYTAJ PRZED PISANIEM TRESCI Z CENAMI.
 - **`docs/BIBLIA-CEN-PROJEKTU.md`** — cennik, zakres uslug, model pracy, plan rozwoju, etapowanie systemu dzialek, abonament 3k/msc, timeline
 - **`docs/SYSTEM-DZIALEK.md`** — specyfikacja techniczna systemu dzialek (`/dzialki`), typy danych, architektura, etapowanie MVP/Rozszerzenie/Premium
 

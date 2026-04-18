@@ -281,9 +281,9 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'list',
       items: [
-        '<strong>Bloczki silikatowe (Silka)</strong> - nasza preferowana technologia. Najlepsza akumulacja ciepła i izolacyjność akustyczna. Ściana nośna 18 cm + ocieplenie. Stawka: <strong>~1 300 zł/m²</strong>.',
-        '<strong>Ceramika szlifowana (Porotherm, Leier)</strong> - popularna, dobra akumulacja ciepła. Stawka: <strong>~1 100 zł/m²</strong>.',
-        '<strong>Beton komórkowy (Ytong, Solbet, H+H)</strong> - lekki, szybki w murowanie, ale niższa akumulacja ciepła i gorsza akustyka. Stawka: <strong>~900 zł/m²</strong>.',
+        '<strong>Bloczki silikatowe (Silka)</strong> - nasza preferowana technologia. Najlepsza akumulacja ciepła i izolacyjność akustyczna. Ściana nośna 18 cm + ocieplenie. Stawka: <strong>1 040 zł/m²</strong>.',
+        '<strong>Ceramika szlifowana (Porotherm, Leier)</strong> - popularna, dobra akumulacja ciepła. Stawka: <strong>880 zł/m²</strong>.',
+        '<strong>Beton komórkowy (Ytong, Solbet, H+H)</strong> - lekki, szybki w murowanie, ale niższa akumulacja ciepła i gorsza akustyka. Stawka: <strong>720 zł/m²</strong>.',
       ],
     },
     {
@@ -298,14 +298,14 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'list',
       items: [
-        '<strong>Dach płaski</strong> (membrana PVC / papa termozgrzewalna) - prostszy, nowoczesny. Stawka: <strong>~900 zł/m²</strong>.',
-        '<strong>Dach dwuspadowy</strong> (konstrukcja drewniana + dachówka betonowa) - klasyczny, umiarkowany koszt. Stawka: <strong>~800 zł/m²</strong>.',
-        '<strong>Dach wielospadowy</strong> (konstrukcja drewniana z obróbkami) - najdroższy ze względu na złożoność geometrii. Stawka: <strong>~1 000 zł/m²</strong>.',
+        '<strong>Dach płaski</strong> (membrana PVC / papa termozgrzewalna) - prostszy, nowoczesny. Stawka: <strong>720 zł/m²</strong>.',
+        '<strong>Dach dwuspadowy</strong> (konstrukcja drewniana + dachówka betonowa) - klasyczny, umiarkowany koszt. Stawka: <strong>640 zł/m²</strong>.',
+        '<strong>Dach wielospadowy</strong> (konstrukcja drewniana z obróbkami) - najdroższy ze względu na złożoność geometrii. Stawka: <strong>800 zł/m²</strong>.',
       ],
     },
     {
       type: 'paragraph',
-      content: 'W domach piętrowych lub z poddaszem użytkowym etap SSO obejmuje również <strong>strop monolityczny żelbetowy</strong>. To dodaje ~150–400 zł/m² do kosztu w zależności od rozpiętości.',
+      content: 'W domach piętrowych lub z poddaszem użytkowym etap SSO obejmuje również <strong>strop monolityczny żelbetowy</strong>. To dodaje 120–320 zł/m² do kosztu w zależności od liczby kondygnacji (poddasze +120 zł/m², piętrowy +320 zł/m²).',
     },
     {
       type: 'image',
@@ -361,9 +361,9 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'list',
       items: [
-        '<strong>Ściany:</strong> beton komórkowy ~900 zł/m² | ceramika ~1 100 zł/m² | silikat ~1 300 zł/m²',
-        '<strong>Dach:</strong> płaski ~900 zł/m² | dwuspadowy ~800 zł/m² | wielospadowy ~1 000 zł/m²',
-        '<strong>Kondygnacja:</strong> parterowy ~800 zł/m² | z poddaszem ~950 zł/m² | piętrowy ~1 200 zł/m²',
+        '<strong>Ściany:</strong> beton komórkowy 720 zł/m² | ceramika 880 zł/m² | silikat 1 040 zł/m²',
+        '<strong>Dach:</strong> płaski 720 zł/m² | dwuspadowy 640 zł/m² | wielospadowy 800 zł/m²',
+        '<strong>Kondygnacja:</strong> parterowy 640 zł/m² | z poddaszem 760 zł/m² | piętrowy 960 zł/m²',
       ],
     },
     {
@@ -389,7 +389,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'Dla domu <strong>100 m²</strong> parterowego z bloczków silikatowych, dachem płaskim i płytą fundamentową, koszt SSO wynosi orientacyjnie <strong>425 000–475 000 zł netto</strong> (ok. 459 000–513 000 zł brutto). Przy tańszej technologii (beton komórkowy, ławy, dach dwuspadowy) koszt spada do ok. <strong>355 000–400 000 zł netto</strong>.',
+      content: 'Dla domu <strong>100 m²</strong> parterowego z bloczków silikatowych, dachem płaskim i płytą fundamentową, koszt SSO wynosi <strong>360 000 zł netto</strong> (388 800 zł brutto). Przy tańszej technologii (beton komórkowy, ławy, dach dwuspadowy) koszt spada do <strong>300 000 zł netto</strong> (324 000 zł brutto). Dokładną wycenę obliczysz w naszym <a href="/wycena">kalkulatorze</a>.',
     },
     {
       type: 'heading',
@@ -398,7 +398,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'Dla domu <strong>150 m²</strong> parterowego (silikat, dach płaski, płyta fundamentowa) koszt SSO to ok. <strong>640 000–710 000 zł netto</strong> (690 000–767 000 zł brutto). Wariant ekonomiczny (beton komórkowy, ławy, dach dwuspadowy) obniża koszt do ok. <strong>530 000–600 000 zł netto</strong>. Przy większych metrażach stawka za m² nieznacznie spada dzięki rozłożeniu kosztów stałych (geodeta, kierownik budowy, mobilizacja sprzętu).',
+      content: 'Dla domu <strong>150 m²</strong> parterowego (silikat, dach płaski, płyta fundamentowa) koszt SSO to <strong>540 000 zł netto</strong> (583 200 zł brutto). Wariant ekonomiczny (beton komórkowy, ławy, dach dwuspadowy) obniża koszt do <strong>450 000 zł netto</strong> (486 000 zł brutto).',
     },
 
     // ── SEKCJA 4 - SSO vs SSZ (kw: a zamknięty, różnica) ──────
@@ -422,11 +422,11 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: '<table style="width:100%;border-collapse:collapse;font-size:0.95em;"><thead><tr style="background:#1a1a1a;color:#fff;"><th style="padding:10px 12px;text-align:left;border:1px solid #333;">Parametr</th><th style="padding:10px 12px;text-align:center;border:1px solid #333;">SSO</th><th style="padding:10px 12px;text-align:center;border:1px solid #333;">SSZ</th></tr></thead><tbody><tr><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Fundamenty</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr style="background:#fafaf9;"><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Ściany nośne i działowe</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Strop (dom piętrowy)</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr style="background:#fafaf9;"><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Dach (konstrukcja + pokrycie)</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Okna i drzwi zewnętrzne</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#a3a3a3;">—</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr style="background:#fafaf9;"><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Instalacja elektryczna</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#a3a3a3;">—</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Instalacja wod-kan</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#a3a3a3;">—</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr style="background:#fafaf9;"><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Parapety</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#a3a3a3;">—</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Ochrona przed warunkami atmosf.</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#a3a3a3;">—</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr style="background:#fafaf9;"><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Koszt za m² (dom 120 m²)</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;">4 250–4 750 zł</td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;">4 750–5 750 zł</td></tr></tbody></table>',
+      content: '<table style="width:100%;border-collapse:collapse;font-size:0.95em;"><thead><tr style="background:#1a1a1a;color:#fff;"><th style="padding:10px 12px;text-align:left;border:1px solid #333;">Parametr</th><th style="padding:10px 12px;text-align:center;border:1px solid #333;">SSO</th><th style="padding:10px 12px;text-align:center;border:1px solid #333;">SSZ</th></tr></thead><tbody><tr><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Fundamenty</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr style="background:#fafaf9;"><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Ściany nośne i działowe</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Strop (dom piętrowy)</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr style="background:#fafaf9;"><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Dach (konstrukcja + pokrycie)</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Okna i drzwi zewnętrzne</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#a3a3a3;">—</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr style="background:#fafaf9;"><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Instalacja elektryczna</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#a3a3a3;">—</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Instalacja wod-kan</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#a3a3a3;">—</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr style="background:#fafaf9;"><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Parapety</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#a3a3a3;">—</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Ochrona przed warunkami atmosf.</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#a3a3a3;">—</span></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;"><span style="color:#dfbb68;font-size:1.2em;font-weight:700;">&#9679;</span></td></tr><tr style="background:#fafaf9;"><td style="padding:8px 12px;border:1px solid #e5e5e5;"><strong>Koszt za m² (dom 120 m²)</strong></td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;">3 600 zł</td><td style="padding:8px 12px;text-align:center;border:1px solid #e5e5e5;">4 000 zł</td></tr></tbody></table>',
     },
     {
       type: 'paragraph',
-      content: 'Dla domu 120 m² bez garażu różnica między SSO a SSZ wynosi ok. <strong>56 000–64 000 zł netto</strong>. To koszt okien trzyszybowych (Oknoplast / Eko-Okna), drzwi antywłamaniowych Gerda, kompletnej instalacji elektrycznej i wod-kan. Z garażem jednostanowiskowym dopłata rośnie do ~750 zł/m², z dwustanowiskowym - do ~1 000 zł/m².',
+      content: 'Dla domu 120 m² bez garażu różnica między SSO a SSZ wynosi <strong>48 000 zł netto</strong> (400 zł/m²). To koszt okien trzyszybowych (Oknoplast / Eko-Okna), drzwi antywłamaniowych Gerda, kompletnej instalacji elektrycznej i wod-kan. Z garażem jednostanowiskowym stawka SSZ rośnie do 600 zł/m², z dwustanowiskowym — do 800 zł/m².',
     },
     {
       type: 'callout',
@@ -446,7 +446,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'Dla przykładowego domu 120 m² pod klucz (ok. 800 000–900 000 zł brutto): <strong>sam SSO</strong> (ściany, dach, strop — bez fundamentów) to ok. 338 000–382 000 zł netto, czyli <strong>~44%</strong> budżetu. Razem z fundamentami (stan zero + SSO) — ok. 510 000–570 000 zł netto, czyli <strong>~63%</strong>.',
+      content: 'Dla przykładowego domu 120 m² pod klucz (628 800 zł netto / 679 104 zł brutto): <strong>sam SSO</strong> (ściany, dach, strop — bez fundamentów) to 288 000 zł netto, czyli <strong>~46%</strong> budżetu. Razem z fundamentami (stan zero + SSO) — 432 000 zł netto, czyli <strong>~69%</strong>.',
     },
     {
       type: 'callout',
@@ -542,15 +542,15 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
         },
         {
           question: 'Ile kosztuje stan surowy otwarty za m² w 2026?',
-          answer: 'Koszt SSO na Śląsku w 2026 roku wynosi <strong>3 550–4 750 zł netto za m²</strong> powierzchni użytkowej, zależnie od technologii ściennej, typu dachu i fundamentu. Najtaniej: beton komórkowy + ławy + dach dwuspadowy (~3 550 zł/m²). Najdrożej: silikat + płyta fundamentowa + dach wielospadowy (~4 750 zł/m²). Sprawdź dokładną wycenę w naszym <a href="/wycena">kalkulatorze</a>.',
+          answer: 'Koszt SSO na Śląsku w 2026 roku wynosi <strong>3 000–4 000 zł netto za m²</strong> powierzchni użytkowej, zależnie od technologii ściennej, typu dachu i fundamentu. Najtaniej: beton komórkowy + ławy + dach dwuspadowy (3 000 zł/m²). Najdrożej: silikat + płyta fundamentowa + dach wielospadowy (4 000 zł/m²). Sprawdź dokładną wycenę w naszym <a href="/wycena">kalkulatorze</a>.',
         },
         {
           question: 'Ile kosztuje stan surowy otwarty domu 100 m²?',
-          answer: 'Dla domu 100 m² parterowego ze ścianami z bloczków silikatowych, dachem płaskim i płytą fundamentową, koszt SSO wynosi ok. <strong>425 000–475 000 zł netto</strong> (459 000–513 000 zł brutto z 8% VAT). Przy tańszej technologii (beton komórkowy, ławy, dach dwuspadowy) koszt spada do ok. 355 000–400 000 zł netto.',
+          answer: 'Dla domu 100 m² parterowego ze ścianami z bloczków silikatowych, dachem płaskim i płytą fundamentową, koszt SSO wynosi <strong>360 000 zł netto</strong> (388 800 zł brutto z 8% VAT). Przy tańszej technologii (beton komórkowy, ławy, dach dwuspadowy) koszt spada do 300 000 zł netto (324 000 zł brutto).',
         },
         {
           question: 'Czym się różni stan surowy otwarty od zamkniętego?',
-          answer: 'Stan surowy zamknięty (SSZ) to SSO plus okna trzyszybowe, drzwi zewnętrzne antywłamaniowe, instalacja elektryczna i wod-kan, parapety. SSZ „zamyka" budynek - chroni przed deszczem i włamaniami. Różnica w cenie: <strong>500–1 000 zł/m²</strong> w zależności od standardu stolarki i garażu.',
+          answer: 'Stan surowy zamknięty (SSZ) to SSO plus okna trzyszybowe, drzwi zewnętrzne antywłamaniowe, instalacja elektryczna i wod-kan, parapety. SSZ „zamyka" budynek - chroni przed deszczem i włamaniami. Różnica w cenie: <strong>400–800 zł/m²</strong> w zależności od garażu (brak garażu: 400 zł/m², z garażem dwustanowiskowym: 800 zł/m²).',
         },
         {
           question: 'Stan surowy otwarty - ile to procent budowy?',
@@ -605,10 +605,10 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'list',
       items: [
-        '<strong>Płyta fundamentowa żelbetowa z izolacją:</strong> ~1 000 zł/m²',
-        '<strong>Ławy fundamentowe z izolacją:</strong> ~750 zł/m²',
-        '<strong>Piwnica (częściowa):</strong> dodaje ~250 zł/m²',
-        '<strong>Piwnica (cała):</strong> dodaje ~500 zł/m²',
+        '<strong>Płyta fundamentowa żelbetowa z izolacją:</strong> 1 200 zł/m²',
+        '<strong>Ławy fundamentowe z izolacją:</strong> 1 000 zł/m²',
+        '<strong>Piwnica (częściowa):</strong> dodaje 200 zł/m²',
+        '<strong>Piwnica (cała):</strong> dodaje 400 zł/m²',
       ],
     },
     {
@@ -629,9 +629,9 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'list',
       items: [
-        '<strong>Ściany:</strong> beton komórkowy ~900 zł/m² | ceramika ~1 100 zł/m² | silikat ~1 300 zł/m²',
-        '<strong>Dach:</strong> płaski ~900 zł/m² | dwuspadowy ~800 zł/m² | wielospadowy ~1 000 zł/m²',
-        '<strong>Kondygnacja:</strong> parterowy ~800 zł/m² | z poddaszem ~950 zł/m² | piętrowy ~1 200 zł/m²',
+        '<strong>Ściany:</strong> beton komórkowy 720 zł/m² | ceramika 880 zł/m² | silikat 1 040 zł/m²',
+        '<strong>Dach:</strong> płaski 720 zł/m² | dwuspadowy 640 zł/m² | wielospadowy 800 zł/m²',
+        '<strong>Kondygnacja:</strong> parterowy 640 zł/m² | z poddaszem 760 zł/m² | piętrowy 960 zł/m²',
       ],
     },
     {
@@ -652,9 +652,9 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'list',
       items: [
-        '<strong>Bez garażu:</strong> ~500 zł/m² (okna PCV trzyszybowe, drzwi antywłamaniowe Gerda, elektr., wod-kan, parapety)',
-        '<strong>Z garażem jednostanowiskowym:</strong> ~750 zł/m²',
-        '<strong>Z garażem dwustanowiskowym:</strong> ~1 000 zł/m²',
+        '<strong>Bez garażu:</strong> 400 zł/m² (okna PCV trzyszybowe, drzwi antywłamaniowe Gerda, elektr., wod-kan, parapety)',
+        '<strong>Z garażem jednostanowiskowym:</strong> 600 zł/m²',
+        '<strong>Z garażem dwustanowiskowym:</strong> 800 zł/m²',
       ],
     },
     {
@@ -665,9 +665,9 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'list',
       items: [
-        '<strong>Ogrzewanie gazowe</strong> (kocioł kondensacyjny + podłogówka): ~700 zł/m²',
-        '<strong>Pompa ciepła</strong> (powietrze-woda + podłogówka): ~900 zł/m²',
-        '<strong>Pelet</strong> (kocioł z podajnikiem + podłogówka): ~800 zł/m²',
+        '<strong>Ogrzewanie gazowe</strong> (kocioł kondensacyjny + podłogówka): 560 zł/m²',
+        '<strong>Pompa ciepła</strong> (powietrze-woda + podłogówka): 720 zł/m²',
+        '<strong>Pelet</strong> (kocioł z podajnikiem + podłogówka): 640 zł/m²',
       ],
     },
     {
@@ -682,7 +682,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'list',
       items: [
-        '<strong>Wykończenie:</strong> ~850 zł/m² (podłogi panele/gres, glazura łazienki, malowanie 2 warstwy, biały montaż, drzwi wewnętrzne z ościeżnicą)',
+        '<strong>Wykończenie:</strong> 680 zł/m² (podłogi panele/gres, glazura łazienki, malowanie 2 warstwy, biały montaż, drzwi wewnętrzne z ościeżnicą)',
       ],
     },
     {
@@ -720,7 +720,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'callout',
       variant: 'info',
-      content: '<strong>1. Stan zero:</strong> 141 000-159 000 zł<br><strong>2. SSO (ściany + dach):</strong> 282 000-318 000 zł<br><strong>3. SSZ (okna, drzwi, instalacje):</strong> 47 000-53 000 zł<br><strong>4. Deweloperski (ogrzewanie, tynki):</strong> 66 000-74 000 zł<br><strong>5. Pod klucz (wykończenie):</strong> 80 000-90 000 zł<br><br><strong>RAZEM netto: ~615 000-695 000 zł</strong><br><strong>RAZEM brutto (8% VAT): ~664 000-751 000 zł</strong><br><strong>Za m² netto: ~6 150-6 950 zł/m²</strong>',
+      content: '<strong>1. Stan zero:</strong> 120 000 zł<br><strong>2. SSO (ściany + dach):</strong> 240 000 zł<br><strong>3. SSZ (okna, drzwi, instalacje):</strong> 40 000 zł<br><strong>4. Deweloperski (ogrzewanie, tynki):</strong> 56 000 zł<br><strong>5. Pod klucz (wykończenie):</strong> 68 000 zł<br><br><strong>RAZEM netto: 524 000 zł</strong><br><strong>RAZEM brutto (8% VAT): 565 920 zł</strong><br><strong>Za m² netto: 5 240 zł/m²</strong>',
     },
     {
       type: 'heading',
@@ -730,7 +730,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'callout',
       variant: 'info',
-      content: '<strong>1. Stan zero:</strong> 169 000-191 000 zł<br><strong>2. SSO:</strong> 338 000-382 000 zł<br><strong>3. SSZ:</strong> 56 000-64 000 zł<br><strong>4. Deweloperski:</strong> 79 000-89 000 zł<br><strong>5. Pod klucz:</strong> 96 000-108 000 zł<br><br><strong>RAZEM netto: ~740 000-835 000 zł</strong><br><strong>RAZEM brutto: ~799 000-902 000 zł</strong><br><strong>Za m²: ~6 170-6 960 zł/m²</strong><br><strong>Czas realizacji: ~12-16 miesięcy</strong>',
+      content: '<strong>1. Stan zero:</strong> 144 000 zł<br><strong>2. SSO:</strong> 288 000 zł<br><strong>3. SSZ:</strong> 48 000 zł<br><strong>4. Deweloperski:</strong> 67 200 zł<br><strong>5. Pod klucz:</strong> 81 600 zł<br><br><strong>RAZEM netto: 628 800 zł</strong><br><strong>RAZEM brutto (8% VAT): 679 104 zł</strong><br><strong>Za m² netto: 5 240 zł/m²</strong><br><strong>Czas realizacji: ~10-14 miesięcy</strong>',
     },
     {
       type: 'paragraph',
@@ -742,7 +742,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
       type: 'image',
       src: '/images/blog/kosztorys-budowy/dom-pod-klucz.webp',
       alt: 'Nowoczesny dom jednorodzinny pod klucz - wizualizacja gotowego projektu z garażem',
-      caption: 'Efekt końcowy: nowoczesny dom jednorodzinny pod klucz. Koszt budowy 120 m² na Śląsku: ok. 799 000-902 000 zł brutto.',
+      caption: 'Efekt końcowy: nowoczesny dom jednorodzinny pod klucz. Koszt budowy 120 m² na Śląsku: 679 104 zł brutto (silikat, dach płaski, płyta, gaz).',
     },
 
     // ── SEKCJA 3 - Co wpływa na cenę ──────────────────────────
@@ -758,7 +758,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'Większy dom kosztuje więcej w sumie, ale <strong>mniej za m²</strong>. Koszty stałe (kierownik budowy, geodeta, przyłącza, transport) rozkładają się na większą powierzchnię. Dom 80 m² może kosztować 7 200 zł/m², a dom 200 m² - 5 800 zł/m².',
+      content: 'Większy dom kosztuje więcej w sumie, ale <strong>mniej za m²</strong>. Koszty stałe (kierownik budowy, geodeta, przyłącza, transport) rozkładają się na większą powierzchnię. W naszym kalkulatorze stawka za m² jest stała dla danej konfiguracji — np. 5 240 zł/m² netto pod klucz (silikat, dach płaski, gaz).',
     },
     {
       type: 'heading',
@@ -767,7 +767,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     },
     {
       type: 'paragraph',
-      content: 'Różnica między betonem komórkowym a silikatem to <strong>~400 zł/m²</strong>, czyli <strong>~48 000 zł</strong> dla domu 120 m². Silikat daje lepszą akustykę (ważne w gęstej zabudowie), lepszą akumulację ciepła i wyższą wartość nieruchomości. W CoreLTB silikat jest naszym standardem.',
+      content: 'Różnica między betonem komórkowym a silikatem to <strong>320 zł/m²</strong>, czyli <strong>38 400 zł</strong> dla domu 120 m². Silikat daje lepszą akustykę (ważne w gęstej zabudowie), lepszą akumulację ciepła i wyższą wartość nieruchomości. W CoreLTB silikat jest naszym standardem.',
     },
     {
       type: 'heading',
@@ -920,11 +920,11 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
       faqItems: [
         {
           question: 'Ile kosztuje budowa domu 100 m² w 2026 roku?',
-          answer: 'Dom 100 m² pod klucz na Śląsku kosztuje orientacyjnie <strong>664 000-751 000 zł brutto</strong> (z 8% VAT) przy technologii silikatowej, dachu płaskim i ogrzewaniu gazowym. Sam stan surowy otwarty to ok. 459 000-513 000 zł brutto. Dokładną wycenę sprawdzisz w <a href="/wycena">kalkulatorze</a>.',
+          answer: 'Dom 100 m² parterowy pod klucz na Śląsku kosztuje <strong>565 920 zł brutto</strong> (524 000 zł netto + 8% VAT) przy konfiguracji: silikat, dach płaski, płyta fundamentowa, ogrzewanie gazowe, bez garażu. Sam stan surowy otwarty to 388 800 zł brutto. Dokładną wycenę sprawdzisz w <a href="/wycena">kalkulatorze</a>.',
         },
         {
           question: 'Ile kosztuje budowa domu za m² w 2026?',
-          answer: 'Średni koszt pod klucz na Śląsku: <strong>6 150-6 950 zł netto za m²</strong> (ok. 6 640-7 510 zł brutto). SSO to ok. 4 250-4 750 zł/m², deweloperski ~5 200-5 800 zł/m². Stawki zależą od technologii, lokalizacji i gruntu.',
+          answer: 'Koszt pod klucz na Śląsku: <strong>4 640–6 200 zł netto za m²</strong> (5 011–6 696 zł brutto) w zależności od konfiguracji. SSO to 3 000–4 000 zł/m², deweloperski 3 960–5 520 zł/m². Nasz standard (silikat, dach płaski, płyta, gaz): <strong>5 240 zł/m² netto</strong>. Sprawdź w <a href="/wycena">kalkulatorze</a>.',
         },
         {
           question: 'Jak zrobić kosztorys budowy domu?',
@@ -940,7 +940,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
         },
         {
           question: 'Jaka jest różnica między SSO a SSZ?',
-          answer: '<strong>Stan surowy otwarty (SSO)</strong> to ściany, strop i dach - dom bez okien i drzwi. <strong>Stan surowy zamknięty (SSZ)</strong> to SSO plus okna, drzwi zewnętrzne i podstawowe instalacje (elektryka, wod-kan). SSZ pozwala kontynuować prace wewnątrz niezależnie od pogody. Różnica w cenie: <strong>500-1 000 zł/m²</strong>.',
+          answer: '<strong>Stan surowy otwarty (SSO)</strong> to ściany, strop i dach - dom bez okien i drzwi. <strong>Stan surowy zamknięty (SSZ)</strong> to SSO plus okna, drzwi zewnętrzne i podstawowe instalacje (elektryka, wod-kan). SSZ pozwala kontynuować prace wewnątrz niezależnie od pogody. Różnica w cenie: <strong>400–800 zł/m²</strong> (bez garażu 400 zł/m², z garażem dwustanowiskowym 800 zł/m²).',
         },
         {
           question: 'Czy warto budować dom w 2026 roku?',
@@ -1840,7 +1840,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
     {
       type: 'callout',
       variant: 'info',
-      content: '<strong>Orientacyjne koszty budowy domu energooszczędnego 120 m² (2026):</strong><br>Stan surowy otwarty: <strong>250 000–320 000 zł</strong><br>Stan surowy zamknięty: <strong>350 000–430 000 zł</strong><br>Stan deweloperski: <strong>450 000–560 000 zł</strong><br>Pod klucz: <strong>550 000–700 000 zł</strong><br><br><em>Ceny dla domu parterowego z pompą ciepła i rekuperacją. Zależą od lokalizacji, gruntu i standardu wykończenia.</em>',
+      content: '<strong>Koszty budowy domu energooszczędnego 120 m² (2026, silikat, dach płaski, płyta, pompa ciepła):</strong><br>Stan surowy otwarty: <strong>432 000 zł netto</strong><br>Stan surowy zamknięty: <strong>480 000 zł netto</strong><br>Stan deweloperski: <strong>566 400 zł netto</strong><br>Pod klucz: <strong>648 000 zł netto (699 840 zł brutto)</strong><br><br><em>Konfiguracja: dom parterowy z pompą ciepła. Oblicz dokładną wycenę w <a href="/wycena">kalkulatorze</a>.</em>',
     },
     {
       type: 'cta',
@@ -1986,7 +1986,7 @@ export const blogPostContents: Record<string, BlogContentBlock[]> = {
         },
         {
           question: 'Ile kosztuje budowa domu energooszczędnego w 2026 roku?',
-          answer: 'Budowa domu energooszczędnego o powierzchni 120 m² kosztuje orientacyjnie <strong>550 000–700 000 zł pod klucz</strong> (z pompą ciepła i rekuperacją). To o ok. 10–15% więcej niż dom standardowy, ale niższe rachunki za ogrzewanie (ok. 2 000–3 000 zł/rok zamiast 5 000–7 000 zł) zwracają różnicę w <strong>5–8 lat</strong>.',
+          answer: 'Budowa domu energooszczędnego 120 m² kosztuje <strong>648 000 zł netto pod klucz</strong> (699 840 zł brutto) w konfiguracji: silikat, dach płaski, płyta, pompa ciepła. To o ok. 19 200 zł więcej niż z ogrzewaniem gazowym (różnica wynika z pompy ciepła vs gaz: 720 vs 560 zł/m²), ale niższe rachunki za ogrzewanie zwracają różnicę w <strong>5–8 lat</strong>.',
         },
         {
           question: 'Z czego najlepiej budować dom energooszczędny?',
