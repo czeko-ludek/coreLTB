@@ -1394,7 +1394,7 @@ philosophyTimeline: {
           {
             // LINK SEO (Silos Tematyczny)
             type: 'paragraph',
-            value: '**Wciąż nie masz pewności kogo potrzebujesz?** Przeczytaj analizę: Kiedy warto zatrudnić Inspektora Nadzoru i ile to kosztuje?'
+            value: '**Wciąż nie masz pewności kogo potrzebujesz?** Przeczytaj: [Ile kosztuje kierownik budowy w 2026?](/baza-wiedzy/ile-kosztuje-kierownik-budowy) — stawki, obowiązki i porównanie z inspektorem nadzoru.'
           }
         ],
         imageSrc: '/images/uslugi/nadzor-i-doradztwo/etapy/kierownik-vs-inspektor.webp',

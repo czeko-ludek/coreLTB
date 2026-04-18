@@ -112,7 +112,6 @@ export const blogPosts: BlogPost[] = [
       avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
     href: '/baza-wiedzy/kosztorys-budowy-domu-2026',
-    hidden: true,
   },
   {
     id: 'ile-kosztuje-kierownik-budowy',
