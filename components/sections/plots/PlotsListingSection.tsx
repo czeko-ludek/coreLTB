@@ -599,6 +599,13 @@ export function PlotsListingSection({
           <div
             ref={drawerRef}
             className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl max-h-[75vh] flex flex-col animate-slide-up"
+            onAnimationEnd={() => {
+              // Remove CSS animation fill-mode so JS transform can take over
+              if (drawerRef.current) {
+                drawerRef.current.style.animation = 'none';
+                drawerRef.current.style.transform = 'translateY(0)';
+              }
+            }}
           >
             {/* Drag handle — swipe zone */}
             <div
