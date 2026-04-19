@@ -602,7 +602,7 @@ export function PlotsListingSection({
           >
             {/* Drag handle — swipe zone */}
             <div
-              className="sticky top-0 bg-white rounded-t-3xl z-10 pt-3 pb-2 px-5 border-b border-zinc-100"
+              className="sticky top-0 bg-white rounded-t-3xl z-30 pt-3 pb-2 px-5 border-b border-zinc-100"
               style={{ touchAction: 'none' }}
               onTouchStart={(e) => {
                 const touch = e.touches[0];
@@ -656,7 +656,7 @@ export function PlotsListingSection({
                 </button>
               </div>
 
-              <div className="flex gap-1.5 mt-3 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-hide">
+              <div className="flex gap-1.5 mt-3 flex-wrap pb-2">
                 <FilterDropdown
                   label="Cena"
                   options={PRICE_RANGES.map((r) => ({ label: r.label }))}
@@ -688,7 +688,7 @@ export function PlotsListingSection({
             </div>
 
             <div
-              className="flex-1 overflow-y-auto"
+              className="flex-1 overflow-y-auto relative z-10"
               data-drawer-scroll
               onTouchStart={(e) => {
                 const el = e.currentTarget;
