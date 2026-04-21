@@ -196,15 +196,18 @@ function plotAnalysisEmail(d: Record<string, string>): { subject: string; html: 
 
 function plotInquiryEmail(d: Record<string, string>): { subject: string; html: string } {
   const utmTag = d.utm_source ? ` [${d.utm_source}/${d.utm_medium || '?'}]` : '';
+  const plotUrl = d.plotSlug ? `https://coreltb.pl/dzialki/${d.plotSlug}` : '';
+  const plotLink = plotUrl ? `<a href="${plotUrl}" style="color:${BRAND_GOLD};text-decoration:underline">${plotUrl}</a>` : '';
   return {
     subject: `[Działka] ${d.name} — ${d.plotCity || ''}${utmTag}`.trim(),
     html: baseTemplate('Zapytanie o działkę', [
       ['Imię i nazwisko', d.name],
       ['Telefon', d.phone],
       ['Działka', d.plotTitle],
-      ['Slug', d.plotSlug],
+      ['Link do działki', plotLink],
       ['Miasto', d.plotCity],
       ['Wiadomość', d.message],
+      ['Referer', d.referrer || d.landing_page || ''],
       ...utmRows(d),
     ]),
   };
