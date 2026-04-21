@@ -102,7 +102,7 @@ export function trackEvent(
 
 // ─── Lead Tracking ────────────────────────────────────────
 
-type LeadSource = 'calculator' | 'consultation' | 'plot_analysis';
+type LeadSource = 'calculator' | 'consultation' | 'plot_analysis' | 'plot_inquiry';
 
 /**
  * Track a lead conversion. Includes UTM data for attribution.
@@ -118,6 +118,7 @@ export function trackLead(
     calculator: 'calculator_lead',
     consultation: 'consultation_lead',
     plot_analysis: 'plot_analysis_lead',
+    plot_inquiry: 'plot_inquiry_lead',
   };
 
   trackEvent(eventMap[source], {

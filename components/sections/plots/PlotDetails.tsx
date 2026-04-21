@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useEffect, useCallback } from 'react';
+import React, { useMemo, useEffect, useCallback, useState } from 'react';
 import Link from 'next/link';
 import { Icon } from '@/components/ui';
 import type { IconName } from '@/components/ui/Icon';
@@ -19,7 +19,10 @@ import {
   trackPlotCalculatorClick,
   trackPlotAnalysisClick,
   trackPlotContactClick,
+  trackPhoneClick,
 } from '@/lib/analytics';
+import { companyData } from '@/data/company-data';
+import { PlotInquiryForm } from './PlotInquiryForm';
 
 interface PlotDetailsProps {
   plot: Plot;
@@ -129,6 +132,13 @@ function buildDetailRows(plot: Plot, locationDisplay: string) {
   return rows;
 }
 
+// ── Custom hook: useToggle ──
+function useToggle(initialValue = false): [boolean, () => void] {
+  const [value, setValue] = useState(initialValue);
+  const toggle = useCallback(() => setValue(v => !v), []);
+  return [value, toggle];
+}
+
 export function PlotDetails({ plot }: PlotDetailsProps) {
   const district = useMemo(() => extractDistrict(plot.title) || plot.district, [plot.title, plot.district]);
   const address = useMemo(() => extractAddress(plot), [plot]);
@@ -146,6 +156,22 @@ export function PlotDetails({ plot }: PlotDetailsProps) {
 
   const detailRows = useMemo(() => buildDetailRows(plot, locationDisplay), [plot, locationDisplay]);
 
+  // ── Toggle for inline inquiry form ──
+  const [isFormOpen, toggleForm] = useToggle(false);
+
+  // Plot title for form display
+  const plotDisplayTitle = useMemo(() => {
+    const purposeLabel = plot.purpose?.includes('budowlan') ? 'budowlana ' : '';
+    return `Działka ${purposeLabel}${plot.area.toLocaleString('pl-PL')} m² — ${locationDisplay}`;
+  }, [plot.purpose, plot.area, locationDisplay]);
+
+  // Formatted phone for display
+  const phoneDisplay = useMemo(() => {
+    const digits = companyData.telephone.replace(/\D/g, '');
+    const num = digits.startsWith('48') ? digits.slice(2) : digits;
+    return `+48 ${num.slice(0, 3)} ${num.slice(3, 6)} ${num.slice(6)}`;
+  }, []);
+
   // ── GA4 tracking ──
   useEffect(() => {
     trackPlotView(plot.slug, plot.city, plot.price, plot.area);
@@ -161,12 +187,17 @@ export function PlotDetails({ plot }: PlotDetailsProps) {
 
   const onContactClick = useCallback(() => {
     trackPlotContactClick(plot.slug, plot.city);
-  }, [plot.slug, plot.city]);
+    toggleForm();
+  }, [plot.slug, plot.city, toggleForm]);
 
-  // ── Reusable CTA card ──
+  const onPhoneClick = useCallback(() => {
+    trackPhoneClick('plot_detail_sidebar');
+  }, []);
+
+  // ── Reusable CTA card with crossfade form ──
   const ctaCard = (
     <div className="bg-white border border-zinc-200/60 rounded-2xl shadow-lg overflow-hidden">
-      {/* Price header */}
+      {/* Price header — always visible */}
       <div className="bg-zinc-900 px-6 py-6">
         <p className="text-primary font-bold text-xs uppercase tracking-[0.15em] mb-1">Cena</p>
         <p className="text-3xl md:text-4xl font-black text-white">
@@ -186,67 +217,105 @@ export function PlotDetails({ plot }: PlotDetailsProps) {
         })()}
       </div>
 
-      {/* Quick specs in sidebar */}
-      <div className="border-b border-zinc-100 px-6 py-4 space-y-2">
-        {(() => {
-          const items: { icon: IconName; text: string }[] = [];
-          if (plot.dimensions) items.push({ icon: 'ruler', text: `Wymiary: ${plot.dimensions}` });
-          if (plot.plotShape) items.push({ icon: 'layers', text: `Kształt: ${plot.plotShape}` });
-          if (plot.legalStatus) items.push({ icon: 'fileBadge', text: `Stan prawny: ${plot.legalStatus}` });
-          if (plot.purpose) items.push({ icon: 'landmark', text: `Przeznaczenie: ${plot.purpose}` });
-          return items.map((item, i) => (
-            <div key={i} className="flex items-center gap-2 text-sm text-text-secondary">
-              <Icon name={item.icon} size="sm" className="text-text-muted/60 shrink-0" />
-              <span className="truncate">{item.text}</span>
-            </div>
-          ));
-        })()}
-      </div>
-
-      {/* CTA buttons */}
-      <div className="p-6 space-y-3">
-        <Link
-          href={calculatorUrl}
-          onClick={onCalculatorClick}
-          className="group w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-zinc-900 font-bold text-sm md:text-base px-6 py-3.5 rounded-lg transition-all duration-300 uppercase tracking-wider"
+      {/* ── Crossfade container: CTA content vs Inquiry form ── */}
+      <div className="relative">
+        {/* Default CTA content */}
+        <div
+          className={`transition-all duration-300 ease-in-out ${
+            isFormOpen
+              ? 'opacity-0 pointer-events-none absolute inset-0'
+              : 'opacity-100'
+          }`}
         >
-          <Icon name="calculator" size="md" />
-          Sprawdź koszt budowy
-        </Link>
-
-        <Link
-          href={analysisUrl}
-          onClick={onAnalysisClick}
-          className="group w-full flex items-center justify-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-sm md:text-base px-6 py-3.5 rounded-lg transition-all duration-300 uppercase tracking-wider"
-        >
-          <Icon name="search" size="md" />
-          Zamów analizę działki
-        </Link>
-
-        <Link
-          href="/umow-konsultacje?usluga=budowa"
-          onClick={onContactClick}
-          className="group w-full flex items-center justify-center gap-2 bg-white hover:bg-zinc-50 text-text-primary font-semibold text-sm md:text-base px-6 py-3.5 rounded-lg border border-zinc-200 transition-all duration-300"
-        >
-          <Icon name="phone" size="md" />
-          Zapytaj o działkę
-        </Link>
-      </div>
-
-      {/* Trust points */}
-      <div className="border-t border-zinc-100 px-6 py-5 space-y-3">
-        {[
-          'Bezpłatna analiza przy podpisaniu umowy',
-          'Stała cena w umowie ryczałtowej',
-          'Pomoc z formalnościami budowlanymi',
-        ].map((point, i) => (
-          <div key={i} className="flex items-start gap-2.5">
-            <div className="w-5 h-5 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5">
-              <Icon name="check" size="sm" className="text-green-600" />
-            </div>
-            <span className="text-sm text-text-secondary leading-relaxed">{point}</span>
+          {/* Quick specs in sidebar */}
+          <div className="border-b border-zinc-100 px-6 py-4 space-y-2">
+            {(() => {
+              const items: { icon: IconName; text: string }[] = [];
+              if (plot.dimensions) items.push({ icon: 'ruler', text: `Wymiary: ${plot.dimensions}` });
+              if (plot.plotShape) items.push({ icon: 'layers', text: `Kształt: ${plot.plotShape}` });
+              if (plot.legalStatus) items.push({ icon: 'fileBadge', text: `Stan prawny: ${plot.legalStatus}` });
+              if (plot.purpose) items.push({ icon: 'landmark', text: `Przeznaczenie: ${plot.purpose}` });
+              return items.map((item, i) => (
+                <div key={i} className="flex items-center gap-2 text-sm text-text-secondary">
+                  <Icon name={item.icon} size="sm" className="text-text-muted/60 shrink-0" />
+                  <span className="truncate">{item.text}</span>
+                </div>
+              ));
+            })()}
           </div>
-        ))}
+
+          {/* CTA buttons */}
+          <div className="p-6 space-y-3">
+            <Link
+              href={calculatorUrl}
+              onClick={onCalculatorClick}
+              className="group w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-zinc-900 font-bold text-sm md:text-base px-6 py-3.5 rounded-lg transition-all duration-300 uppercase tracking-wider"
+            >
+              <Icon name="calculator" size="md" />
+              Sprawdź koszt budowy
+            </Link>
+
+            <Link
+              href={analysisUrl}
+              onClick={onAnalysisClick}
+              className="group w-full flex items-center justify-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-sm md:text-base px-6 py-3.5 rounded-lg transition-all duration-300 uppercase tracking-wider"
+            >
+              <Icon name="search" size="md" />
+              Zamów analizę działki
+            </Link>
+
+            {/* Zapytaj o działkę — opens inline form */}
+            <button
+              onClick={onContactClick}
+              className="group w-full flex items-center justify-center gap-2 bg-white hover:bg-zinc-50 text-text-primary font-semibold text-sm md:text-base px-6 py-3.5 rounded-lg border border-zinc-200 transition-all duration-300"
+            >
+              <Icon name="mail" size="md" />
+              Zapytaj o działkę
+            </button>
+
+            {/* Zadzwoń — phone CTA */}
+            <a
+              href={`tel:${companyData.telephone}`}
+              onClick={onPhoneClick}
+              className="group w-full flex items-center justify-center gap-2 text-text-secondary hover:text-primary font-medium text-sm px-6 py-2 transition-colors"
+            >
+              <Icon name="phone" size="sm" />
+              {phoneDisplay}
+            </a>
+          </div>
+
+          {/* Trust points */}
+          <div className="border-t border-zinc-100 px-6 py-5 space-y-3">
+            {[
+              'Bezpłatna analiza przy podpisaniu umowy',
+              'Stała cena w umowie ryczałtowej',
+              'Pomoc z formalnościami budowlanymi',
+            ].map((point, i) => (
+              <div key={i} className="flex items-start gap-2.5">
+                <div className="w-5 h-5 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5">
+                  <Icon name="check" size="sm" className="text-green-600" />
+                </div>
+                <span className="text-sm text-text-secondary leading-relaxed">{point}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Inquiry form — shown on toggle */}
+        <div
+          className={`transition-all duration-300 ease-in-out ${
+            isFormOpen
+              ? 'opacity-100'
+              : 'opacity-0 pointer-events-none absolute inset-0'
+          }`}
+        >
+          <PlotInquiryForm
+            plotTitle={plotDisplayTitle}
+            plotSlug={plot.slug}
+            plotCity={plot.city}
+            onClose={toggleForm}
+          />
+        </div>
       </div>
     </div>
   );

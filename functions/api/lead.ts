@@ -194,6 +194,22 @@ function plotAnalysisEmail(d: Record<string, string>): { subject: string; html: 
   };
 }
 
+function plotInquiryEmail(d: Record<string, string>): { subject: string; html: string } {
+  const utmTag = d.utm_source ? ` [${d.utm_source}/${d.utm_medium || '?'}]` : '';
+  return {
+    subject: `[Działka] ${d.name} — ${d.plotCity || ''}${utmTag}`.trim(),
+    html: baseTemplate('Zapytanie o działkę', [
+      ['Imię i nazwisko', d.name],
+      ['Telefon', d.phone],
+      ['Działka', d.plotTitle],
+      ['Slug', d.plotSlug],
+      ['Miasto', d.plotCity],
+      ['Wiadomość', d.message],
+      ...utmRows(d),
+    ]),
+  };
+}
+
 // ─── Handler ─────────────────────────────────────────────
 
 export const onRequestPost: CFHandler = async (context) => {
@@ -255,7 +271,7 @@ export const onRequestPost: CFHandler = async (context) => {
   }
 
   // 5. Basic validation
-  if (!['calculator', 'consultation', 'plot_analysis'].includes(source)) {
+  if (!['calculator', 'consultation', 'plot_analysis', 'plot_inquiry'].includes(source)) {
     return new Response(
       JSON.stringify({ error: 'Nieprawidłowe źródło formularza' }),
       { status: 400, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
@@ -288,6 +304,9 @@ export const onRequestPost: CFHandler = async (context) => {
       break;
     case 'plot_analysis':
       emailContent = plotAnalysisEmail(data);
+      break;
+    case 'plot_inquiry':
+      emailContent = plotInquiryEmail(data);
       break;
     default:
       return new Response(JSON.stringify({ error: 'Unknown source' }), {
